@@ -44,6 +44,15 @@ public class Background extends javax.swing.JFrame {
         });
 
         jLabel1.setText("jLabel1");
+        jLabel1.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jLabel1AncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -116,6 +125,11 @@ public class Background extends javax.swing.JFrame {
     private void textField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textField2ActionPerformed
+
+    private void jLabel1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabel1AncestorAdded
+        // TODO add your handling code here:
+        System.err.println("Nguyễn Quân");
+    }//GEN-LAST:event_jLabel1AncestorAdded
 
     /**
      * @param args the command line arguments
