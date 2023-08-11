@@ -128,7 +128,13 @@ public class Background extends javax.swing.JFrame {
 
     private void jLabel1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabel1AncestorAdded
         // TODO add your handling code here:
+
         System.err.println("Nguyễn Quân");
+
+        System.out.println("Chan gi dau");
+        
+        System.out.println("Viet ne");
+
     }//GEN-LAST:event_jLabel1AncestorAdded
 
     /**
