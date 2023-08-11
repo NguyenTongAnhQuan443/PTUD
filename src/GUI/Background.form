@@ -77,8 +77,11 @@
       <SubComponents>
         <Component class="GUI.TextField" name="textField2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="textField2"/>
+            <Property name="text" type="java.lang.String" value="user name"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textField2ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
