@@ -34,6 +34,7 @@ public class HomeManager extends javax.swing.JFrame {
         jlLogo = new javax.swing.JLabel();
         lbNameShop = new javax.swing.JLabel();
         jpCenter = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -223,17 +224,25 @@ public class HomeManager extends javax.swing.JFrame {
 
         jpMain.add(jpTop, java.awt.BorderLayout.PAGE_START);
 
-        jpCenter.setBackground(new java.awt.Color(255, 255, 255));
+        jpCenter.setBackground(new java.awt.Color(204, 204, 255));
+
+        jButton1.setText("jButton1");
 
         javax.swing.GroupLayout jpCenterLayout = new javax.swing.GroupLayout(jpCenter);
         jpCenter.setLayout(jpCenterLayout);
         jpCenterLayout.setHorizontalGroup(
             jpCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1236, Short.MAX_VALUE)
+            .addGroup(jpCenterLayout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addComponent(jButton1)
+                .addContainerGap(1102, Short.MAX_VALUE))
         );
         jpCenterLayout.setVerticalGroup(
             jpCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 679, Short.MAX_VALUE)
+            .addGroup(jpCenterLayout.createSequentialGroup()
+                .addGap(84, 84, 84)
+                .addComponent(jButton1)
+                .addContainerGap(572, Short.MAX_VALUE))
         );
 
         jpMain.add(jpCenter, java.awt.BorderLayout.CENTER);
@@ -281,6 +290,7 @@ public class HomeManager extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.Combobox cbDisplay;
     private GUI.Combobox cbLanguage;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jlBill;
     private javax.swing.JLabel jlChangePass;
     private javax.swing.JLabel jlCustomer;
