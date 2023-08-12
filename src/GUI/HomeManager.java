@@ -293,7 +293,7 @@ public class HomeManager extends javax.swing.JFrame {
         jlHistory.setText(Utils.lichSu);
         jlSale.setText(Utils.khuyenMai);
         jlChangePass.setText(Utils.doiMK);
-        
+        cbDisplay.setItemAt(0, "3333");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
