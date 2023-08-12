@@ -71,6 +71,10 @@ public class Combobox<E> extends JComboBox<E> {
         });
     }
 
+    void setItemAt(int i, String giaoDien) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     private class ComboUI extends BasicComboBoxUI {
 
         private final Animator animator;

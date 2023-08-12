@@ -3,6 +3,7 @@ package GUI;
 import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import utils.Utils;
 public class HomeManager extends javax.swing.JFrame {
 
     public HomeManager() {
@@ -34,7 +35,6 @@ public class HomeManager extends javax.swing.JFrame {
         jlLogo = new javax.swing.JLabel();
         lbNameShop = new javax.swing.JLabel();
         jpCenter = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -224,25 +224,17 @@ public class HomeManager extends javax.swing.JFrame {
 
         jpMain.add(jpTop, java.awt.BorderLayout.PAGE_START);
 
-        jpCenter.setBackground(new java.awt.Color(204, 204, 255));
-
-        jButton1.setText("jButton1");
+        jpCenter.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jpCenterLayout = new javax.swing.GroupLayout(jpCenter);
         jpCenter.setLayout(jpCenterLayout);
         jpCenterLayout.setHorizontalGroup(
             jpCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpCenterLayout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(jButton1)
-                .addContainerGap(1102, Short.MAX_VALUE))
+            .addGap(0, 1236, Short.MAX_VALUE)
         );
         jpCenterLayout.setVerticalGroup(
             jpCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpCenterLayout.createSequentialGroup()
-                .addGap(84, 84, 84)
-                .addComponent(jButton1)
-                .addContainerGap(572, Short.MAX_VALUE))
+            .addGap(0, 679, Short.MAX_VALUE)
         );
 
         jpMain.add(jpCenter, java.awt.BorderLayout.CENTER);
@@ -262,7 +254,13 @@ public class HomeManager extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbLanguageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbLanguageActionPerformed
-        // TODO add your handling code here:
+        if(cbLanguage.getSelectedIndex() == 1){
+               Utils.dd(0);
+               setText();
+        }else if(cbLanguage.getSelectedIndex()==2){
+            Utils.dd(1);
+              setText();
+        }
     }//GEN-LAST:event_cbLanguageActionPerformed
 
     private void cbDisplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDisplayActionPerformed
@@ -286,11 +284,21 @@ public class HomeManager extends javax.swing.JFrame {
             }
         });
     }
+    public void setText(){
+        lbStatistical.setText(Utils.thongKe);
+        jlProduct.setText(Utils.sanPham);
+        jlStaff.setText(Utils.nhanVien);
+        jlBill.setText(Utils.hoaDon);
+        jlCustomer.setText(Utils.khachHang);
+        jlHistory.setText(Utils.lichSu);
+        jlSale.setText(Utils.khuyenMai);
+        jlChangePass.setText(Utils.doiMK);
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.Combobox cbDisplay;
     private GUI.Combobox cbLanguage;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jlBill;
     private javax.swing.JLabel jlChangePass;
     private javax.swing.JLabel jlCustomer;
