@@ -23,6 +23,10 @@ public class Utils {
     public static String dangXuat= "Đăng Xuất";
     public static String giaoDien= "Giao Diện";
     public static String ngonNgu= "Ngôn Ngữ";
+    public static String sang = "Sáng";
+    public static String toi = "Tối";
+    public static String vietNam = "Việt Nam";
+    public static String english = "English";
 
     public static void dd(int so) {
         ResourceBundle mybundle;
@@ -45,5 +49,9 @@ public class Utils {
         dangXuat = mybundle.getString("dangXuat");
         giaoDien = mybundle.getString("giaoDien");
         ngonNgu = mybundle.getString("ngonNgu");
+        sang = mybundle.getString("sang");
+        toi = mybundle.getString("toi");
+        vietNam = mybundle.getString("vietNam");
+        english = mybundle.getString("english");
     }
 }
