@@ -1,13 +1,26 @@
 package GUI;
 
+/*
+Thống kê :
++ Tổng số đơn hàng mặc định là đơn hàng trong ngày, nếu lọc thì sẽ từ ngày A -> ngày B
++ Tổng doanh thu ngày mặc định là doanh thu của ngày đó, nếu lọc thì sẽ từ ngày A -> ngày B
++ Tổng doanh thu tháng mặc định là doanh thu của tháng đó, nếu lọc thì sẽ từ tháng A -> tháng B
++ Tổng doanh thu năm mặc định là doanh thu của năm đó, nếu lọc thì sẽ từ năm A -> năm B
++ Biến jlNumOrder để gắn giá trị đơn hàng
++ Biến jlDayMoney để gắn giá trị doanh thu ngày
++ Biến jlMonthMoney để gắn giá trị doanh thu tháng
++ Biến jlYearMoney để gắn giá trị doanh thu năm
+ */
+import com.raven.datechooser.DateChooser;
 import java.awt.Color;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import utils.Utils;
-public class HomeManager extends javax.swing.JFrame {
 
-    public HomeManager() {
+public class HomeManager_GUITest extends javax.swing.JFrame {
+
+    public HomeManager_GUITest() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -36,10 +49,7 @@ public class HomeManager extends javax.swing.JFrame {
         jlLogo = new javax.swing.JLabel();
         lbNameShop = new javax.swing.JLabel();
         jpCenter = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
+        jpThongke = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -158,7 +168,7 @@ public class HomeManager extends javax.swing.JFrame {
                         .addComponent(jlSale, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jlCustomer, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jlExit))
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         jpLeftLayout.setVerticalGroup(
             jpLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,7 +188,7 @@ public class HomeManager extends javax.swing.JFrame {
                 .addComponent(jlSale)
                 .addGap(18, 18, 18)
                 .addComponent(jlChangePass)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jpLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlDisplay, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cbDisplay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -212,7 +222,7 @@ public class HomeManager extends javax.swing.JFrame {
                 .addComponent(jlLogo)
                 .addGap(18, 18, 18)
                 .addComponent(lbNameShop, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1212, Short.MAX_VALUE))
+                .addContainerGap(1004, Short.MAX_VALUE))
         );
         jpTopLayout.setVerticalGroup(
             jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,86 +239,22 @@ public class HomeManager extends javax.swing.JFrame {
 
         jpMain.add(jpTop, java.awt.BorderLayout.PAGE_START);
 
-        jpCenter.setBackground(new java.awt.Color(255, 255, 255));
+        jpCenter.setBackground(new java.awt.Color(255, 102, 51));
+        jpCenter.setLayout(new java.awt.BorderLayout());
+        jpMain.add(jpCenter, java.awt.BorderLayout.LINE_END);
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 270, Short.MAX_VALUE)
+        javax.swing.GroupLayout jpThongkeLayout = new javax.swing.GroupLayout(jpThongke);
+        jpThongke.setLayout(jpThongkeLayout);
+        jpThongkeLayout.setHorizontalGroup(
+            jpThongkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1082, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        jPanel2.setBackground(new java.awt.Color(255, 204, 255));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 270, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 130, Short.MAX_VALUE)
+        jpThongkeLayout.setVerticalGroup(
+            jpThongkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 613, Short.MAX_VALUE)
         );
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 204));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 270, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 270, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jpCenterLayout = new javax.swing.GroupLayout(jpCenter);
-        jpCenter.setLayout(jpCenterLayout);
-        jpCenterLayout.setHorizontalGroup(
-            jpCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpCenterLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
-        );
-        jpCenterLayout.setVerticalGroup(
-            jpCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpCenterLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(jpCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(533, Short.MAX_VALUE))
-        );
-
-        jpMain.add(jpCenter, java.awt.BorderLayout.CENTER);
+        jpMain.add(jpThongke, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -325,17 +271,17 @@ public class HomeManager extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbLanguageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbLanguageActionPerformed
-        if(cbLanguage.getSelectedIndex() == 1){
-               Utils.dd(0);
-               setText();
-        }else if(cbLanguage.getSelectedIndex()==2){
+        if (cbLanguage.getSelectedIndex() == 1) {
+            Utils.dd(0);
+            setText();
+        } else if (cbLanguage.getSelectedIndex() == 2) {
             Utils.dd(1);
-              setText();
+            setText();
         }
     }//GEN-LAST:event_cbLanguageActionPerformed
 
     private void cbDisplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDisplayActionPerformed
-        if(cbDisplay.getSelectedIndex() == 1){
+        if (cbDisplay.getSelectedIndex() == 1) {
             jpCenter.setBackground(Color.BLACK);
             System.out.println("đen nè");
             JOptionPane.showMessageDialog(this, "đen nè");
@@ -351,11 +297,12 @@ public class HomeManager extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new HomeManager().setVisible(true);
+                new HomeManager_GUITest().setVisible(true);
             }
         });
     }
-    public void setText(){
+
+    public void setText() {
         lbStatistical.setText(Utils.thongKe);
         jlProduct.setText(Utils.sanPham);
         jlStaff.setText(Utils.nhanVien);
@@ -365,11 +312,11 @@ public class HomeManager extends javax.swing.JFrame {
         jlSale.setText(Utils.khuyenMai);
         jlChangePass.setText(Utils.doiMK);
         jlLogout.setText(Utils.dangXuat);
-        String obj [] = {Utils.giaoDien,Utils.toi,Utils.sang};
+        String obj[] = {Utils.giaoDien, Utils.toi, Utils.sang};
         DefaultComboBoxModel model = new DefaultComboBoxModel(obj);
         cbDisplay.setModel(model);
-        
-        String objEnglish [] = {Utils.ngonNgu,Utils.vietNam,Utils.english};
+
+        String objEnglish[] = {Utils.ngonNgu, Utils.vietNam, Utils.english};
         DefaultComboBoxModel modelEnglish = new DefaultComboBoxModel(objEnglish);
         cbLanguage.setModel(modelEnglish);
     }
@@ -377,10 +324,6 @@ public class HomeManager extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.Combobox cbDisplay;
     private GUI.Combobox cbLanguage;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel jlBill;
     private javax.swing.JLabel jlChangePass;
     private javax.swing.JLabel jlCustomer;
@@ -396,6 +339,7 @@ public class HomeManager extends javax.swing.JFrame {
     private javax.swing.JPanel jpCenter;
     private javax.swing.JPanel jpLeft;
     private javax.swing.JPanel jpMain;
+    private javax.swing.JPanel jpThongke;
     private javax.swing.JPanel jpTop;
     private javax.swing.JLabel lbNameShop;
     private javax.swing.JLabel lbStatistical;
