@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.Color;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import utils.Utils;
@@ -363,7 +364,14 @@ public class HomeManager extends javax.swing.JFrame {
         jlHistory.setText(Utils.lichSu);
         jlSale.setText(Utils.khuyenMai);
         jlChangePass.setText(Utils.doiMK);
+        jlLogout.setText(Utils.dangXuat);
+        String obj [] = {Utils.giaoDien,Utils.toi,Utils.sang};
+        DefaultComboBoxModel model = new DefaultComboBoxModel(obj);
+        cbDisplay.setModel(model);
         
+        String objEnglish [] = {Utils.ngonNgu,Utils.vietNam,Utils.english};
+        DefaultComboBoxModel modelEnglish = new DefaultComboBoxModel(objEnglish);
+        cbLanguage.setModel(modelEnglish);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
