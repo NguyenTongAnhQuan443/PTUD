@@ -12,7 +12,9 @@ Thống kê :
 + Biến jlYearMoney để gắn giá trị doanh thu năm
  */
 import com.raven.datechooser.DateChooser;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -20,6 +22,7 @@ import utils.Utils;
 
 public class HomeManager_GUI extends javax.swing.JFrame {
 
+    private Revenue_GUI revenue_GUI;
     public HomeManager_GUI() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -49,37 +52,43 @@ public class HomeManager_GUI extends javax.swing.JFrame {
         jlLogo = new javax.swing.JLabel();
         lbNameShop = new javax.swing.JLabel();
         jpCenter = new javax.swing.JPanel();
-        jpStatistical = new javax.swing.JPanel();
-        jpOrder = new javax.swing.JPanel();
-        jlTitleOrder = new javax.swing.JLabel();
-        jlNumOrder = new javax.swing.JLabel();
-        jlUnitOrder = new javax.swing.JLabel();
-        jlIconOrder = new javax.swing.JLabel();
-        jpRevenueDay = new javax.swing.JPanel();
-        jlTitleRevenueDay = new javax.swing.JLabel();
-        jlDayMoney = new javax.swing.JLabel();
-        jlVND1 = new javax.swing.JLabel();
-        jlIconDay = new javax.swing.JLabel();
-        jpRevenueMonth = new javax.swing.JPanel();
-        jlTitleRevenueMonth = new javax.swing.JLabel();
-        jlVND2 = new javax.swing.JLabel();
-        jlMonthMoney = new javax.swing.JLabel();
-        jlIconMonthMoney = new javax.swing.JLabel();
-        jpRevenueYear = new javax.swing.JPanel();
-        jlTitleRevenueYear = new javax.swing.JLabel();
-        jlYearMoney = new javax.swing.JLabel();
-        jlVND3 = new javax.swing.JLabel();
-        jlIconYear = new javax.swing.JLabel();
-        jlSearch = new javax.swing.JLabel();
-        jtfStartDay = new javax.swing.JTextField();
-        jlStartDay = new javax.swing.JLabel();
-        jlEndDay = new javax.swing.JLabel();
-        jtfEndDay = new javax.swing.JTextField();
-        jlIconStartDay = new javax.swing.JLabel();
-        jlIconEndDay = new javax.swing.JLabel();
-        btnSearch = new GUI.Button();
+        jpStatistical1 = new javax.swing.JPanel();
+        jpOrder1 = new javax.swing.JPanel();
+        jlTitleOrder1 = new javax.swing.JLabel();
+        jlNumOrder1 = new javax.swing.JLabel();
+        jlUnitOrder1 = new javax.swing.JLabel();
+        jlIconOrder1 = new javax.swing.JLabel();
+        jpRevenueDay1 = new javax.swing.JPanel();
+        jlTitleRevenueDay1 = new javax.swing.JLabel();
+        jlDayMoney1 = new javax.swing.JLabel();
+        jlVND4 = new javax.swing.JLabel();
+        jlIconDay1 = new javax.swing.JLabel();
+        jpRevenueMonth1 = new javax.swing.JPanel();
+        jlTitleRevenueMonth1 = new javax.swing.JLabel();
+        jlVND5 = new javax.swing.JLabel();
+        jlMonthMoney1 = new javax.swing.JLabel();
+        jlIconMonthMoney1 = new javax.swing.JLabel();
+        jpRevenueYear1 = new javax.swing.JPanel();
+        jlTitleRevenueYear1 = new javax.swing.JLabel();
+        jlYearMoney1 = new javax.swing.JLabel();
+        jlVND6 = new javax.swing.JLabel();
+        jlIconYear1 = new javax.swing.JLabel();
+        jlSearch1 = new javax.swing.JLabel();
+        jtfStartDay1 = new javax.swing.JTextField();
+        jlStartDay1 = new javax.swing.JLabel();
+        jlEndDay1 = new javax.swing.JLabel();
+        jtfEndDay1 = new javax.swing.JTextField();
+        jlIconStartDay1 = new javax.swing.JLabel();
+        jlIconEndDay1 = new javax.swing.JLabel();
+        btnSearch1 = new GUI.Button();
+        jpStatistical2 = new javax.swing.JPanel();
+        btnRevenue = new GUI.Button();
+        btnProduct = new GUI.Button();
+        jpTMP = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Fley shop quản lý bán hàng");
+        setResizable(false);
 
         jpMain.setBackground(new java.awt.Color(204, 255, 255));
         jpMain.setLayout(new java.awt.BorderLayout());
@@ -250,7 +259,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
                 .addComponent(jlLogo)
                 .addGap(18, 18, 18)
                 .addComponent(lbNameShop, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1004, Short.MAX_VALUE))
+                .addContainerGap(1001, Short.MAX_VALUE))
         );
         jpTopLayout.setVerticalGroup(
             jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,341 +276,406 @@ public class HomeManager_GUI extends javax.swing.JFrame {
 
         jpMain.add(jpTop, java.awt.BorderLayout.PAGE_START);
 
-        jpCenter.setBackground(new java.awt.Color(0, 255, 0));
+        jpCenter.setBackground(new java.awt.Color(255, 255, 255));
 
-        jpStatistical.setBackground(new java.awt.Color(255, 255, 255));
-        jpStatistical.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thống kê", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        jpStatistical1.setBackground(new java.awt.Color(255, 255, 255));
+        jpStatistical1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thống kê", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
-        jpOrder.setBackground(new java.awt.Color(204, 204, 255));
+        jpOrder1.setBackground(new java.awt.Color(204, 204, 255));
 
-        jlTitleOrder.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jlTitleOrder.setForeground(new java.awt.Color(255, 255, 255));
-        jlTitleOrder.setText("Tổng số đơn hàng");
+        jlTitleOrder1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jlTitleOrder1.setForeground(new java.awt.Color(255, 255, 255));
+        jlTitleOrder1.setText("Tổng số đơn hàng");
 
-        jlNumOrder.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jlNumOrder.setForeground(new java.awt.Color(255, 255, 255));
-        jlNumOrder.setText("0");
+        jlNumOrder1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jlNumOrder1.setForeground(new java.awt.Color(255, 255, 255));
+        jlNumOrder1.setText("0");
 
-        jlUnitOrder.setBackground(new java.awt.Color(255, 255, 255));
-        jlUnitOrder.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jlUnitOrder.setForeground(new java.awt.Color(255, 255, 255));
-        jlUnitOrder.setText("đơn hàng");
+        jlUnitOrder1.setBackground(new java.awt.Color(255, 255, 255));
+        jlUnitOrder1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jlUnitOrder1.setForeground(new java.awt.Color(255, 255, 255));
+        jlUnitOrder1.setText("đơn hàng");
 
-        jlIconOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/market64.png"))); // NOI18N
+        jlIconOrder1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/market64.png"))); // NOI18N
 
-        javax.swing.GroupLayout jpOrderLayout = new javax.swing.GroupLayout(jpOrder);
-        jpOrder.setLayout(jpOrderLayout);
-        jpOrderLayout.setHorizontalGroup(
-            jpOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpOrderLayout.createSequentialGroup()
+        javax.swing.GroupLayout jpOrder1Layout = new javax.swing.GroupLayout(jpOrder1);
+        jpOrder1.setLayout(jpOrder1Layout);
+        jpOrder1Layout.setHorizontalGroup(
+            jpOrder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpOrder1Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(jlNumOrder, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
+                .addComponent(jlNumOrder1, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jlUnitOrder)
+                .addComponent(jlUnitOrder1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jlIconOrder)
+                .addComponent(jlIconOrder1)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpOrderLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpOrder1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jlTitleOrder)
+                .addComponent(jlTitleOrder1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jpOrderLayout.setVerticalGroup(
-            jpOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpOrderLayout.createSequentialGroup()
+        jpOrder1Layout.setVerticalGroup(
+            jpOrder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpOrder1Layout.createSequentialGroup()
                 .addGap(8, 8, 8)
-                .addComponent(jlTitleOrder)
+                .addComponent(jlTitleOrder1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlNumOrder)
-                    .addComponent(jlUnitOrder))
+                .addGroup(jpOrder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlNumOrder1)
+                    .addComponent(jlUnitOrder1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpOrderLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpOrder1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jlIconOrder)
+                .addComponent(jlIconOrder1)
                 .addContainerGap())
         );
 
-        jpRevenueDay.setBackground(new java.awt.Color(255, 204, 255));
+        jpRevenueDay1.setBackground(new java.awt.Color(255, 204, 255));
 
-        jlTitleRevenueDay.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jlTitleRevenueDay.setForeground(new java.awt.Color(255, 255, 255));
-        jlTitleRevenueDay.setText("Tổng doanh thu ngày");
+        jlTitleRevenueDay1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jlTitleRevenueDay1.setForeground(new java.awt.Color(255, 255, 255));
+        jlTitleRevenueDay1.setText("Tổng doanh thu ngày");
 
-        jlDayMoney.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jlDayMoney.setForeground(new java.awt.Color(255, 255, 255));
-        jlDayMoney.setText("0");
+        jlDayMoney1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jlDayMoney1.setForeground(new java.awt.Color(255, 255, 255));
+        jlDayMoney1.setText("0");
 
-        jlVND1.setBackground(new java.awt.Color(255, 255, 255));
-        jlVND1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jlVND1.setForeground(new java.awt.Color(255, 255, 255));
-        jlVND1.setText("VND");
+        jlVND4.setBackground(new java.awt.Color(255, 255, 255));
+        jlVND4.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jlVND4.setForeground(new java.awt.Color(255, 255, 255));
+        jlVND4.setText("VND");
 
-        jlIconDay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/day64.png"))); // NOI18N
+        jlIconDay1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/day64.png"))); // NOI18N
 
-        javax.swing.GroupLayout jpRevenueDayLayout = new javax.swing.GroupLayout(jpRevenueDay);
-        jpRevenueDay.setLayout(jpRevenueDayLayout);
-        jpRevenueDayLayout.setHorizontalGroup(
-            jpRevenueDayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpRevenueDayLayout.createSequentialGroup()
+        javax.swing.GroupLayout jpRevenueDay1Layout = new javax.swing.GroupLayout(jpRevenueDay1);
+        jpRevenueDay1.setLayout(jpRevenueDay1Layout);
+        jpRevenueDay1Layout.setHorizontalGroup(
+            jpRevenueDay1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpRevenueDay1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(jpRevenueDayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jpRevenueDayLayout.createSequentialGroup()
-                        .addComponent(jlTitleRevenueDay)
+                .addGroup(jpRevenueDay1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jpRevenueDay1Layout.createSequentialGroup()
+                        .addComponent(jlTitleRevenueDay1)
                         .addGap(49, 49, 49))
-                    .addGroup(jpRevenueDayLayout.createSequentialGroup()
-                        .addComponent(jlDayMoney, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jpRevenueDay1Layout.createSequentialGroup()
+                        .addComponent(jlDayMoney1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jlVND1)
+                        .addComponent(jlVND4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jlIconDay)
+                        .addComponent(jlIconDay1)
                         .addContainerGap())))
         );
-        jpRevenueDayLayout.setVerticalGroup(
-            jpRevenueDayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpRevenueDayLayout.createSequentialGroup()
+        jpRevenueDay1Layout.setVerticalGroup(
+            jpRevenueDay1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpRevenueDay1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jlTitleRevenueDay)
-                .addGroup(jpRevenueDayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpRevenueDayLayout.createSequentialGroup()
+                .addComponent(jlTitleRevenueDay1)
+                .addGroup(jpRevenueDay1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpRevenueDay1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jpRevenueDayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlDayMoney)
-                            .addComponent(jlVND1))
+                        .addGroup(jpRevenueDay1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlDayMoney1)
+                            .addComponent(jlVND4))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpRevenueDayLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpRevenueDay1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jlIconDay)
+                        .addComponent(jlIconDay1)
                         .addContainerGap())))
         );
 
-        jpRevenueMonth.setBackground(new java.awt.Color(153, 204, 255));
+        jpRevenueMonth1.setBackground(new java.awt.Color(153, 204, 255));
 
-        jlTitleRevenueMonth.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jlTitleRevenueMonth.setForeground(new java.awt.Color(255, 255, 255));
-        jlTitleRevenueMonth.setText("Tổng doanh thu tháng");
+        jlTitleRevenueMonth1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jlTitleRevenueMonth1.setForeground(new java.awt.Color(255, 255, 255));
+        jlTitleRevenueMonth1.setText("Tổng doanh thu tháng");
 
-        jlVND2.setBackground(new java.awt.Color(255, 255, 255));
-        jlVND2.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jlVND2.setForeground(new java.awt.Color(255, 255, 255));
-        jlVND2.setText("VND");
+        jlVND5.setBackground(new java.awt.Color(255, 255, 255));
+        jlVND5.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jlVND5.setForeground(new java.awt.Color(255, 255, 255));
+        jlVND5.setText("VND");
 
-        jlMonthMoney.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jlMonthMoney.setForeground(new java.awt.Color(255, 255, 255));
-        jlMonthMoney.setText("0");
+        jlMonthMoney1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jlMonthMoney1.setForeground(new java.awt.Color(255, 255, 255));
+        jlMonthMoney1.setText("0");
 
-        jlIconMonthMoney.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mounth64.png"))); // NOI18N
+        jlIconMonthMoney1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mounth64.png"))); // NOI18N
 
-        javax.swing.GroupLayout jpRevenueMonthLayout = new javax.swing.GroupLayout(jpRevenueMonth);
-        jpRevenueMonth.setLayout(jpRevenueMonthLayout);
-        jpRevenueMonthLayout.setHorizontalGroup(
-            jpRevenueMonthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpRevenueMonthLayout.createSequentialGroup()
+        javax.swing.GroupLayout jpRevenueMonth1Layout = new javax.swing.GroupLayout(jpRevenueMonth1);
+        jpRevenueMonth1.setLayout(jpRevenueMonth1Layout);
+        jpRevenueMonth1Layout.setHorizontalGroup(
+            jpRevenueMonth1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpRevenueMonth1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpRevenueMonthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpRevenueMonthLayout.createSequentialGroup()
-                        .addComponent(jlTitleRevenueMonth)
-                        .addGap(0, 44, Short.MAX_VALUE))
-                    .addGroup(jpRevenueMonthLayout.createSequentialGroup()
-                        .addComponent(jlMonthMoney, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jpRevenueMonth1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpRevenueMonth1Layout.createSequentialGroup()
+                        .addComponent(jlTitleRevenueMonth1)
+                        .addGap(0, 46, Short.MAX_VALUE))
+                    .addGroup(jpRevenueMonth1Layout.createSequentialGroup()
+                        .addComponent(jlMonthMoney1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jlVND2)
+                        .addComponent(jlVND5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jlIconMonthMoney)))
+                        .addComponent(jlIconMonthMoney1)))
                 .addContainerGap())
         );
-        jpRevenueMonthLayout.setVerticalGroup(
-            jpRevenueMonthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpRevenueMonthLayout.createSequentialGroup()
+        jpRevenueMonth1Layout.setVerticalGroup(
+            jpRevenueMonth1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpRevenueMonth1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jlTitleRevenueMonth)
+                .addComponent(jlTitleRevenueMonth1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpRevenueMonthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpRevenueMonthLayout.createSequentialGroup()
+                .addGroup(jpRevenueMonth1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpRevenueMonth1Layout.createSequentialGroup()
                         .addGap(0, 8, Short.MAX_VALUE)
-                        .addComponent(jlIconMonthMoney))
-                    .addGroup(jpRevenueMonthLayout.createSequentialGroup()
-                        .addGroup(jpRevenueMonthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlVND2)
-                            .addComponent(jlMonthMoney))
+                        .addComponent(jlIconMonthMoney1))
+                    .addGroup(jpRevenueMonth1Layout.createSequentialGroup()
+                        .addGroup(jpRevenueMonth1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlVND5)
+                            .addComponent(jlMonthMoney1))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
-        jpRevenueYear.setBackground(new java.awt.Color(0, 204, 204));
+        jpRevenueYear1.setBackground(new java.awt.Color(0, 204, 204));
 
-        jlTitleRevenueYear.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jlTitleRevenueYear.setForeground(new java.awt.Color(255, 255, 255));
-        jlTitleRevenueYear.setText("Tổng doanh thu năm");
+        jlTitleRevenueYear1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jlTitleRevenueYear1.setForeground(new java.awt.Color(255, 255, 255));
+        jlTitleRevenueYear1.setText("Tổng doanh thu năm");
 
-        jlYearMoney.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jlYearMoney.setForeground(new java.awt.Color(255, 255, 255));
-        jlYearMoney.setText("0");
+        jlYearMoney1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jlYearMoney1.setForeground(new java.awt.Color(255, 255, 255));
+        jlYearMoney1.setText("0");
 
-        jlVND3.setBackground(new java.awt.Color(255, 255, 255));
-        jlVND3.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jlVND3.setForeground(new java.awt.Color(255, 255, 255));
-        jlVND3.setText("VND");
+        jlVND6.setBackground(new java.awt.Color(255, 255, 255));
+        jlVND6.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jlVND6.setForeground(new java.awt.Color(255, 255, 255));
+        jlVND6.setText("VND");
 
-        jlIconYear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/year64.png"))); // NOI18N
+        jlIconYear1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/year64.png"))); // NOI18N
 
-        javax.swing.GroupLayout jpRevenueYearLayout = new javax.swing.GroupLayout(jpRevenueYear);
-        jpRevenueYear.setLayout(jpRevenueYearLayout);
-        jpRevenueYearLayout.setHorizontalGroup(
-            jpRevenueYearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpRevenueYearLayout.createSequentialGroup()
+        javax.swing.GroupLayout jpRevenueYear1Layout = new javax.swing.GroupLayout(jpRevenueYear1);
+        jpRevenueYear1.setLayout(jpRevenueYear1Layout);
+        jpRevenueYear1Layout.setHorizontalGroup(
+            jpRevenueYear1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpRevenueYear1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpRevenueYearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpRevenueYearLayout.createSequentialGroup()
-                        .addComponent(jlTitleRevenueYear)
-                        .addGap(0, 40, Short.MAX_VALUE))
-                    .addGroup(jpRevenueYearLayout.createSequentialGroup()
-                        .addComponent(jlYearMoney, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jpRevenueYear1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpRevenueYear1Layout.createSequentialGroup()
+                        .addComponent(jlTitleRevenueYear1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jpRevenueYear1Layout.createSequentialGroup()
+                        .addComponent(jlYearMoney1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jlVND3)
+                        .addComponent(jlVND6)
                         .addGap(18, 18, 18)
-                        .addComponent(jlIconYear)))
+                        .addComponent(jlIconYear1)))
                 .addContainerGap())
         );
-        jpRevenueYearLayout.setVerticalGroup(
-            jpRevenueYearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpRevenueYearLayout.createSequentialGroup()
+        jpRevenueYear1Layout.setVerticalGroup(
+            jpRevenueYear1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpRevenueYear1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jlTitleRevenueYear)
-                .addGroup(jpRevenueYearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpRevenueYearLayout.createSequentialGroup()
+                .addComponent(jlTitleRevenueYear1)
+                .addGroup(jpRevenueYear1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpRevenueYear1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jpRevenueYearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlVND3)
-                            .addComponent(jlYearMoney))
+                        .addGroup(jpRevenueYear1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlVND6)
+                            .addComponent(jlYearMoney1))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpRevenueYearLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpRevenueYear1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jlIconYear)
+                        .addComponent(jlIconYear1)
                         .addContainerGap())))
         );
 
-        jlSearch.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        jlSearch.setText("Lọc theo thời gian :");
+        jlSearch1.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jlSearch1.setText("Lọc theo thời gian :");
 
-        jtfStartDay.setEditable(false);
-        jtfStartDay.addActionListener(new java.awt.event.ActionListener() {
+        jtfStartDay1.setEditable(false);
+        jtfStartDay1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfStartDayActionPerformed(evt);
+                jtfStartDay1ActionPerformed(evt);
             }
         });
 
-        jlStartDay.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jlStartDay.setText("Ngày bắt đầu :");
+        jlStartDay1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jlStartDay1.setText("Ngày bắt đầu :");
 
-        jlEndDay.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jlEndDay.setText("Ngày kết thúc :");
+        jlEndDay1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jlEndDay1.setText("Ngày kết thúc :");
 
-        jtfEndDay.setEditable(false);
-        jtfEndDay.addActionListener(new java.awt.event.ActionListener() {
+        jtfEndDay1.setEditable(false);
+        jtfEndDay1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfEndDayActionPerformed(evt);
+                jtfEndDay1ActionPerformed(evt);
             }
         });
 
-        jlIconStartDay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/calendar24.png"))); // NOI18N
-        jlIconStartDay.addMouseListener(new java.awt.event.MouseAdapter() {
+        jlIconStartDay1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/calendar24.png"))); // NOI18N
+        jlIconStartDay1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jlIconStartDayMouseClicked(evt);
+                jlIconStartDay1MouseClicked(evt);
             }
         });
 
-        jlIconEndDay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/calendar24.png"))); // NOI18N
-        jlIconEndDay.addMouseListener(new java.awt.event.MouseAdapter() {
+        jlIconEndDay1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/calendar24.png"))); // NOI18N
+        jlIconEndDay1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jlIconEndDayMouseClicked(evt);
+                jlIconEndDay1MouseClicked(evt);
             }
         });
 
-        btnSearch.setBackground(new java.awt.Color(255, 204, 204));
-        btnSearch.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search24.png"))); // NOI18N
-        btnSearch.setText("Tìm kiếm");
-        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch1.setBackground(new java.awt.Color(255, 204, 204));
+        btnSearch1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnSearch1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search24.png"))); // NOI18N
+        btnSearch1.setText("Tìm kiếm");
+        btnSearch1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchActionPerformed(evt);
+                btnSearch1ActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jpStatisticalLayout = new javax.swing.GroupLayout(jpStatistical);
-        jpStatistical.setLayout(jpStatisticalLayout);
-        jpStatisticalLayout.setHorizontalGroup(
-            jpStatisticalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpStatisticalLayout.createSequentialGroup()
+        javax.swing.GroupLayout jpStatistical1Layout = new javax.swing.GroupLayout(jpStatistical1);
+        jpStatistical1.setLayout(jpStatistical1Layout);
+        jpStatistical1Layout.setHorizontalGroup(
+            jpStatistical1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpStatistical1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpStatisticalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jpStatisticalLayout.createSequentialGroup()
-                        .addComponent(jpOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jpRevenueDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpStatisticalLayout.createSequentialGroup()
-                        .addComponent(jlSearch)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jlStartDay)
+                .addGroup(jpStatistical1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jpStatistical1Layout.createSequentialGroup()
+                        .addComponent(jlSearch1)
+                        .addGap(143, 143, 143)
+                        .addComponent(jlStartDay1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jtfStartDay, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtfStartDay1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jlIconStartDay)))
-                .addGap(40, 40, 40)
-                .addGroup(jpStatisticalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jpStatisticalLayout.createSequentialGroup()
-                        .addComponent(jlEndDay)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfEndDay)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jlIconEndDay))
-                    .addComponent(jpRevenueMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jpStatisticalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpStatisticalLayout.createSequentialGroup()
+                        .addComponent(jlIconStartDay1))
+                    .addGroup(jpStatistical1Layout.createSequentialGroup()
+                        .addComponent(jpOrder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jpRevenueYear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpStatisticalLayout.createSequentialGroup()
+                        .addComponent(jpRevenueDay1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jpStatistical1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpStatistical1Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jlEndDay1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfEndDay1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jlIconEndDay1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(16, 16, 16))))
+                        .addComponent(btnSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16))
+                    .addGroup(jpStatistical1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jpRevenueMonth1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jpRevenueYear1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
-        jpStatisticalLayout.setVerticalGroup(
-            jpStatisticalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpStatisticalLayout.createSequentialGroup()
-                .addGroup(jpStatisticalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jpRevenueMonth, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpRevenueYear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpRevenueDay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        jpStatistical1Layout.setVerticalGroup(
+            jpStatistical1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpStatistical1Layout.createSequentialGroup()
+                .addGroup(jpStatistical1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jpRevenueMonth1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpRevenueYear1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpRevenueDay1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpOrder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(jpStatisticalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpStatisticalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jpStatisticalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlEndDay)
-                            .addComponent(jtfEndDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jpStatisticalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlIconStartDay)
-                            .addGroup(jpStatisticalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jlSearch)
-                                .addComponent(jlStartDay)
-                                .addComponent(jtfStartDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jpStatisticalLayout.createSequentialGroup()
+                .addGroup(jpStatistical1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpStatistical1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jpStatistical1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlEndDay1)
+                            .addComponent(jtfEndDay1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jpStatistical1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlIconStartDay1)
+                            .addGroup(jpStatistical1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jlSearch1)
+                                .addComponent(jlStartDay1)
+                                .addComponent(jtfStartDay1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(btnSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jpStatistical1Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
-                        .addComponent(jlIconEndDay)))
-                .addContainerGap(431, Short.MAX_VALUE))
+                        .addComponent(jlIconEndDay1))))
+        );
+
+        jpStatistical2.setBackground(new java.awt.Color(255, 255, 255));
+
+        btnRevenue.setBackground(new java.awt.Color(204, 204, 255));
+        btnRevenue.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnRevenue.setText("Doanh thu");
+        btnRevenue.setEffectColor(new java.awt.Color(0, 0, 0));
+        btnRevenue.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnRevenue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRevenueActionPerformed(evt);
+            }
+        });
+
+        btnProduct.setBackground(new java.awt.Color(204, 204, 255));
+        btnProduct.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnProduct.setText("Sản phẩm");
+        btnProduct.setEffectColor(new java.awt.Color(0, 0, 0));
+        btnProduct.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProductActionPerformed(evt);
+            }
+        });
+
+        jpTMP.setBackground(new java.awt.Color(255, 255, 255));
+        jpTMP.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        javax.swing.GroupLayout jpTMPLayout = new javax.swing.GroupLayout(jpTMP);
+        jpTMP.setLayout(jpTMPLayout);
+        jpTMPLayout.setHorizontalGroup(
+            jpTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jpTMPLayout.setVerticalGroup(
+            jpTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 368, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jpStatistical2Layout = new javax.swing.GroupLayout(jpStatistical2);
+        jpStatistical2.setLayout(jpStatistical2Layout);
+        jpStatistical2Layout.setHorizontalGroup(
+            jpStatistical2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpStatistical2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnRevenue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(931, Short.MAX_VALUE))
+            .addComponent(jpTMP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jpStatistical2Layout.setVerticalGroup(
+            jpStatistical2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpStatistical2Layout.createSequentialGroup()
+                .addGroup(jpStatistical2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRevenue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpTMP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jpCenterLayout = new javax.swing.GroupLayout(jpCenter);
         jpCenter.setLayout(jpCenterLayout);
         jpCenterLayout.setHorizontalGroup(
             jpCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpStatistical, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCenterLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jpCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jpStatistical1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpStatistical2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jpCenterLayout.setVerticalGroup(
             jpCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpStatistical, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jpCenterLayout.createSequentialGroup()
+                .addComponent(jpStatistical1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpStatistical2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jpMain.add(jpCenter, java.awt.BorderLayout.LINE_END);
@@ -614,7 +688,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpMain, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE)
         );
 
         pack();
@@ -643,31 +717,41 @@ public class HomeManager_GUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jlChangePassMouseClicked
 
-    private void jtfEndDayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfEndDayActionPerformed
+    private void btnSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtfEndDayActionPerformed
+    }//GEN-LAST:event_btnSearch1ActionPerformed
 
-    private void jtfStartDayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfStartDayActionPerformed
-
-    }//GEN-LAST:event_jtfStartDayActionPerformed
-
-    private void jlIconStartDayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlIconStartDayMouseClicked
-//        Sự kiện mở DateChooser
-        DateChooser dateChoose = new DateChooser();
-        dateChoose.setDateFormat("dd/MM/yyyy");
-        dateChoose.setTextRefernce(jtfStartDay);
-    }//GEN-LAST:event_jlIconStartDayMouseClicked
-
-    private void jlIconEndDayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlIconEndDayMouseClicked
-        //        Sự kiện mở DateChooser
-        DateChooser dateChoose = new DateChooser();
-        dateChoose.setDateFormat("dd/MM/yyyy");
-        dateChoose.setTextRefernce(jtfEndDay);
-    }//GEN-LAST:event_jlIconEndDayMouseClicked
-
-    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+    private void jlIconEndDay1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlIconEndDay1MouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSearchActionPerformed
+    }//GEN-LAST:event_jlIconEndDay1MouseClicked
+
+    private void jlIconStartDay1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlIconStartDay1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jlIconStartDay1MouseClicked
+
+    private void jtfEndDay1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfEndDay1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfEndDay1ActionPerformed
+
+    private void jtfStartDay1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfStartDay1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfStartDay1ActionPerformed
+
+    private void btnRevenueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevenueActionPerformed
+//        Show panel doanh thu
+revenue_GUI = new Revenue_GUI();
+    jpTMP.removeAll();
+
+    jpTMP.setLayout(new FlowLayout());
+    jpTMP.add(revenue_GUI);
+
+    jpTMP.revalidate();
+    jpTMP.repaint();
+    }//GEN-LAST:event_btnRevenueActionPerformed
+
+    private void btnProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnProductActionPerformed
 
     public static void main(String args[]) {
 
@@ -698,53 +782,57 @@ public class HomeManager_GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private GUI.Button btnSearch;
+    private GUI.Button btnProduct;
+    private GUI.Button btnRevenue;
+    private GUI.Button btnSearch1;
     private GUI.Combobox cbDisplay;
     private GUI.Combobox cbLanguage;
     private javax.swing.JLabel jlBill;
     private javax.swing.JLabel jlChangePass;
     private javax.swing.JLabel jlCustomer;
-    private javax.swing.JLabel jlDayMoney;
+    private javax.swing.JLabel jlDayMoney1;
     private javax.swing.JLabel jlDisplay;
-    private javax.swing.JLabel jlEndDay;
+    private javax.swing.JLabel jlEndDay1;
     private javax.swing.JLabel jlExit;
     private javax.swing.JLabel jlHistory;
-    private javax.swing.JLabel jlIconDay;
-    private javax.swing.JLabel jlIconEndDay;
-    private javax.swing.JLabel jlIconMonthMoney;
-    private javax.swing.JLabel jlIconOrder;
-    private javax.swing.JLabel jlIconStartDay;
-    private javax.swing.JLabel jlIconYear;
+    private javax.swing.JLabel jlIconDay1;
+    private javax.swing.JLabel jlIconEndDay1;
+    private javax.swing.JLabel jlIconMonthMoney1;
+    private javax.swing.JLabel jlIconOrder1;
+    private javax.swing.JLabel jlIconStartDay1;
+    private javax.swing.JLabel jlIconYear1;
     private javax.swing.JLabel jlLanguage;
     private javax.swing.JLabel jlLogo;
     private javax.swing.JLabel jlLogout;
-    private javax.swing.JLabel jlMonthMoney;
-    private javax.swing.JLabel jlNumOrder;
+    private javax.swing.JLabel jlMonthMoney1;
+    private javax.swing.JLabel jlNumOrder1;
     private javax.swing.JLabel jlProduct;
     private javax.swing.JLabel jlSale;
-    private javax.swing.JLabel jlSearch;
+    private javax.swing.JLabel jlSearch1;
     private javax.swing.JLabel jlStaff;
-    private javax.swing.JLabel jlStartDay;
-    private javax.swing.JLabel jlTitleOrder;
-    private javax.swing.JLabel jlTitleRevenueDay;
-    private javax.swing.JLabel jlTitleRevenueMonth;
-    private javax.swing.JLabel jlTitleRevenueYear;
-    private javax.swing.JLabel jlUnitOrder;
-    private javax.swing.JLabel jlVND1;
-    private javax.swing.JLabel jlVND2;
-    private javax.swing.JLabel jlVND3;
-    private javax.swing.JLabel jlYearMoney;
+    private javax.swing.JLabel jlStartDay1;
+    private javax.swing.JLabel jlTitleOrder1;
+    private javax.swing.JLabel jlTitleRevenueDay1;
+    private javax.swing.JLabel jlTitleRevenueMonth1;
+    private javax.swing.JLabel jlTitleRevenueYear1;
+    private javax.swing.JLabel jlUnitOrder1;
+    private javax.swing.JLabel jlVND4;
+    private javax.swing.JLabel jlVND5;
+    private javax.swing.JLabel jlVND6;
+    private javax.swing.JLabel jlYearMoney1;
     private javax.swing.JPanel jpCenter;
     private javax.swing.JPanel jpLeft;
     private javax.swing.JPanel jpMain;
-    private javax.swing.JPanel jpOrder;
-    private javax.swing.JPanel jpRevenueDay;
-    private javax.swing.JPanel jpRevenueMonth;
-    private javax.swing.JPanel jpRevenueYear;
-    private javax.swing.JPanel jpStatistical;
+    private javax.swing.JPanel jpOrder1;
+    private javax.swing.JPanel jpRevenueDay1;
+    private javax.swing.JPanel jpRevenueMonth1;
+    private javax.swing.JPanel jpRevenueYear1;
+    private javax.swing.JPanel jpStatistical1;
+    private javax.swing.JPanel jpStatistical2;
+    private javax.swing.JPanel jpTMP;
     private javax.swing.JPanel jpTop;
-    private javax.swing.JTextField jtfEndDay;
-    private javax.swing.JTextField jtfStartDay;
+    private javax.swing.JTextField jtfEndDay1;
+    private javax.swing.JTextField jtfStartDay1;
     private javax.swing.JLabel lbNameShop;
     private javax.swing.JLabel lbStatistical;
     // End of variables declaration//GEN-END:variables

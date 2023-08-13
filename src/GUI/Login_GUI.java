@@ -3,9 +3,8 @@ package GUI;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 public class Login_GUI extends javax.swing.JFrame {
-    
-    private HomeManager_GUI HomeManagerGUI;
-    private HomeManager_GUITest HomeManagerGUI1;
+    private HomeManager_GUI1 HomeManager_GUI1;
+    private HomeManager_GUI HomeManager_GUI;
     public Login_GUI() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -213,13 +212,15 @@ public class Login_GUI extends javax.swing.JFrame {
             jpfPass.setHelperText(null);
             JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
             this.dispose();
-            HomeManagerGUI = (HomeManager_GUI) SwingUtilities.getWindowAncestor(Login_GUI.this);
-            HomeManagerGUI = new HomeManager_GUI();
-            HomeManagerGUI.setVisible(true);
+ 
+            HomeManager_GUI = (HomeManager_GUI) SwingUtilities.getWindowAncestor(Login_GUI.this);
+            HomeManager_GUI = new HomeManager_GUI();
+            HomeManager_GUI.setVisible(true);
+
+//            HomeManager_GUI1 = (HomeManager_GUI1) SwingUtilities.getWindowAncestor(Login_GUI.this);
+//            HomeManager_GUI1 = new HomeManager_GUI1();
+//            HomeManager_GUI1.setVisible(true);
             
-//            HomeManagerGUI1 = (HomeManager_GUITest) SwingUtilities.getWindowAncestor(Login_GUI.this);
-//            HomeManagerGUI1 = new HomeManager_GUITest();
-//            HomeManagerGUI1.setVisible(true);
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
