@@ -228,7 +228,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="GUI.Button" name="btnLogin">
+            <Component class="Customs.Button" name="btnLogin">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="80" green="80" red="0" type="rgb"/>
@@ -245,12 +245,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLoginActionPerformed"/>
               </Events>
             </Component>
-            <Component class="GUI.PasswordField" name="jpfPass">
+            <Component class="Customs.PasswordField" name="jpfPass">
               <Properties>
                 <Property name="labelText" type="java.lang.String" value="M&#x1ead;t Kh&#x1ea9;u"/>
               </Properties>
             </Component>
-            <Component class="GUI.TextField" name="jtfUser">
+            <Component class="Customs.TextField" name="jtfUser">
               <Properties>
                 <Property name="labelText" type="java.lang.String" value="T&#xe0;i Kho&#x1ea3;n"/>
               </Properties>

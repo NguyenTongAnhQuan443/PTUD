@@ -10,13 +10,20 @@ import javax.swing.JRadioButton;
 
 public class Revenue_GUI extends javax.swing.JPanel {
 
-
     public Revenue_GUI() {
         initComponents();
+
+        TableRevenueDetails_GUI tableRevenueDetails_GUI = new TableRevenueDetails_GUI();
+        jpRight.removeAll();
+
+        jpRight.setLayout(new FlowLayout());
+        jpRight.add(tableRevenueDetails_GUI);
+
+        jpRight.revalidate();
+        jpRight.repaint();
     }
 
     ButtonGroup buttonGroup = new ButtonGroup();
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -27,7 +34,7 @@ public class Revenue_GUI extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
-        comboBoxSuggestion1 = new GUI.ComboBoxSuggestion();
+        comboBoxSuggestion1 = new Customs.ComboBoxSuggestion();
         jpRight = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -44,6 +51,7 @@ public class Revenue_GUI extends javax.swing.JPanel {
         jRadioButton1.setText("Dạng bảng");
         buttonGroup.add(jRadioButton1);
         buttonGroup.add(jRadioButton2);
+        jRadioButton1.setSelected(true);
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton1ActionPerformed(evt);
@@ -87,7 +95,7 @@ public class Revenue_GUI extends javax.swing.JPanel {
                 .addGroup(jpLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton1)
                     .addComponent(jRadioButton2))
-                .addContainerGap(210, Short.MAX_VALUE))
+                .addContainerGap(209, Short.MAX_VALUE))
         );
 
         jpRight.setBackground(new java.awt.Color(255, 255, 255));
@@ -105,7 +113,7 @@ public class Revenue_GUI extends javax.swing.JPanel {
         jpRight.setLayout(jpRightLayout);
         jpRightLayout.setHorizontalGroup(
             jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 814, Short.MAX_VALUE)
+            .addGap(0, 807, Short.MAX_VALUE)
         );
         jpRightLayout.setVerticalGroup(
             jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,31 +137,32 @@ public class Revenue_GUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-    TableRevenueDetails_GUI tableRevenueDetails_GUI = new TableRevenueDetails_GUI();
-    jpRight.removeAll();
 
-    jpRight.setLayout(new FlowLayout());
-    jpRight.add(tableRevenueDetails_GUI);
+        TableRevenueDetails_GUI tableRevenueDetails_GUI = new TableRevenueDetails_GUI();
+        jpRight.removeAll();
 
-    jpRight.revalidate();
-    jpRight.repaint();
+        jpRight.setLayout(new FlowLayout());
+        jpRight.add(tableRevenueDetails_GUI);
+
+        jpRight.revalidate();
+        jpRight.repaint();
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
 
-    ChartRevenue_GUI chartRevenue_GUI = new ChartRevenue_GUI();
-    jpRight.removeAll();
+        ChartRevenue_GUI chartRevenue_GUI = new ChartRevenue_GUI();
+        jpRight.removeAll();
 
-    jpRight.setLayout(new FlowLayout());
-    jpRight.add(chartRevenue_GUI);
+        jpRight.setLayout(new FlowLayout());
+        jpRight.add(chartRevenue_GUI);
 
-    jpRight.revalidate();
-    jpRight.repaint();
+        jpRight.revalidate();
+        jpRight.repaint();
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private GUI.ComboBoxSuggestion comboBoxSuggestion1;
+    private Customs.ComboBoxSuggestion comboBoxSuggestion1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JRadioButton jRadioButton1;

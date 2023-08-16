@@ -81,7 +81,7 @@
                       <Component id="jRadioButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jRadioButton2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="210" max="32767" attributes="0"/>
+                  <EmptySpace pref="209" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -111,7 +111,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButton1ActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="buttonGroup.add(jRadioButton1);&#xa;buttonGroup.add(jRadioButton2);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="buttonGroup.add(jRadioButton1);&#xa;buttonGroup.add(jRadioButton2);&#xa;jRadioButton1.setSelected(true);"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JRadioButton" name="jRadioButton2">
@@ -125,7 +125,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButton2ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="GUI.ComboBoxSuggestion" name="comboBoxSuggestion1">
+        <Component class="Customs.ComboBoxSuggestion" name="comboBoxSuggestion1">
         </Component>
       </SubComponents>
     </Container>
@@ -147,7 +147,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="814" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="807" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">

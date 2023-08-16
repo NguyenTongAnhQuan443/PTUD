@@ -1,49 +1,54 @@
 package GUI;
 
+import Customs.ModelChart;
+import java.awt.Color;
+import Customs.Chart;
+
 public class ChartRevenue_GUI extends javax.swing.JPanel {
 
     public ChartRevenue_GUI() {
         initComponents();
+        
+        chart.addLegend("Income", new Color(245, 189, 135));
+        chart.addLegend("Expense", new Color(135, 189, 245));
+        chart.addLegend("Profit", new Color(189, 135, 245));
+        chart.addLegend("Cost", new Color(139, 229, 222));
+        chart.addData(new ModelChart("January", new double[]{500, 200, 80,89}));
+        chart.addData(new ModelChart("February", new double[]{600, 750, 90,150}));
+        chart.addData(new ModelChart("March", new double[]{200, 350, 460,900}));
+        chart.addData(new ModelChart("April", new double[]{480, 150, 750,700}));
+        chart.addData(new ModelChart("May", new double[]{350, 540, 300,150}));
+        chart.addData(new ModelChart("June", new double[]{190, 280, 81,200}));
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        chart = new Customs.Chart();
 
         setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel1.setText("jLabel1");
-
-        jToggleButton1.setText("jToggleButton1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(321, 321, 321)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jToggleButton1)
-                    .addComponent(jLabel1))
-                .addContainerGap(368, Short.MAX_VALUE))
+                .addGap(98, 98, 98)
+                .addComponent(chart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(97, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(135, 135, 135)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jToggleButton1)
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JToggleButton jToggleButton1;
+    private Customs.Chart chart;
     // End of variables declaration//GEN-END:variables
 }

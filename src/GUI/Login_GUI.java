@@ -3,7 +3,6 @@ package GUI;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 public class Login_GUI extends javax.swing.JFrame {
-    private HomeManager_GUI1 HomeManager_GUI1;
     private HomeManager_GUI HomeManager_GUI;
     public Login_GUI() {
         initComponents();
@@ -21,9 +20,9 @@ public class Login_GUI extends javax.swing.JFrame {
         jlContent2 = new javax.swing.JLabel();
         jpRight = new javax.swing.JPanel();
         jpFormLogin = new javax.swing.JPanel();
-        btnLogin = new GUI.Button();
-        jpfPass = new GUI.PasswordField();
-        jtfUser = new GUI.TextField();
+        btnLogin = new Customs.Button();
+        jpfPass = new Customs.PasswordField();
+        jtfUser = new Customs.TextField();
         jlTitle = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -215,12 +214,7 @@ public class Login_GUI extends javax.swing.JFrame {
  
             HomeManager_GUI = (HomeManager_GUI) SwingUtilities.getWindowAncestor(Login_GUI.this);
             HomeManager_GUI = new HomeManager_GUI();
-            HomeManager_GUI.setVisible(true);
-
-//            HomeManager_GUI1 = (HomeManager_GUI1) SwingUtilities.getWindowAncestor(Login_GUI.this);
-//            HomeManager_GUI1 = new HomeManager_GUI1();
-//            HomeManager_GUI1.setVisible(true);
-            
+            HomeManager_GUI.setVisible(true);         
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
@@ -234,7 +228,7 @@ public class Login_GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private GUI.Button btnLogin;
+    private Customs.Button btnLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jlContent1;
     private javax.swing.JLabel jlContent2;
@@ -244,7 +238,7 @@ public class Login_GUI extends javax.swing.JFrame {
     private javax.swing.JPanel jpFormLogin;
     private javax.swing.JPanel jpLeft;
     private javax.swing.JPanel jpRight;
-    private GUI.PasswordField jpfPass;
-    private GUI.TextField jtfUser;
+    private Customs.PasswordField jpfPass;
+    private Customs.TextField jtfUser;
     // End of variables declaration//GEN-END:variables
 }
