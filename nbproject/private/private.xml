@@ -3,8 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/GUI/Revenue_GUI.java</file>
-            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/GUI/Login_GUI.java</file>
+            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/GUI/SRevenue_GUI.java</file>
+            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/GUI/RevenueDetailsTable_GUI.java</file>
+            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/GUI/RevenueProductDetails_GUI.java</file>
+            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/GUI/RevenueChart_GUI.java</file>
+            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/GUI/Statistical_GUI.java</file>
             <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/GUI/HomeManager_GUI.java</file>
         </group>
     </open-files>

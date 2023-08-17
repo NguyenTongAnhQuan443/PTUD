@@ -54,14 +54,14 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlChooserYear" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlChooserDisplay" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jRadioButton1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jrbTable" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-                          <Component id="jRadioButton2" min="-2" max="-2" attributes="0"/>
+                          <Component id="jrbChart" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="comboBoxSuggestion1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="cbChooserYear" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="20" max="32767" attributes="0"/>
               </Group>
@@ -71,23 +71,23 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlChooserYear" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                  <Component id="comboBoxSuggestion1" min="-2" pref="26" max="-2" attributes="0"/>
+                  <Component id="cbChooserYear" min="-2" pref="26" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlChooserDisplay" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jRadioButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jrbTable" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jrbChart" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="209" max="32767" attributes="0"/>
+                  <EmptySpace pref="200" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="jlChooserYear">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
@@ -95,12 +95,12 @@
             <Property name="text" type="java.lang.String" value="H&#xe3;y ch&#x1ecd;n n&#x103;m"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
+        <Component class="javax.swing.JLabel" name="jlChooserDisplay">
           <Properties>
             <Property name="text" type="java.lang.String" value="H&#xe3;y ch&#x1ecd;n ki&#x1ec3;u hi&#x1ec3;n th&#x1ecb;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+        <Component class="javax.swing.JRadioButton" name="jrbTable">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -108,13 +108,13 @@
             <Property name="text" type="java.lang.String" value="D&#x1ea1;ng b&#x1ea3;ng"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButton1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jrbTableActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="buttonGroup.add(jRadioButton1);&#xa;buttonGroup.add(jRadioButton2);&#xa;jRadioButton1.setSelected(true);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="buttonGroup.add(jrbTable);&#xa;buttonGroup.add(jrbChart);&#xa;jrbTable.setSelected(true);"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="jRadioButton2">
+        <Component class="javax.swing.JRadioButton" name="jrbChart">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -122,10 +122,10 @@
             <Property name="text" type="java.lang.String" value="D&#x1ea1;ng bi&#x1ec3;u &#x111;&#x1ed3;"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButton2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jrbChartActionPerformed"/>
           </Events>
         </Component>
-        <Component class="Customs.ComboBoxSuggestion" name="comboBoxSuggestion1">
+        <Component class="Customs.ComboBoxSuggestion" name="cbChooserYear">
         </Component>
       </SubComponents>
     </Container>
@@ -141,13 +141,13 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="TableRevenueDetails_GUI tableRevenueDetails_GUI = new TableRevenueDetails_GUI();&#xa;    jpRight.removeAll();&#xa;&#xa;    jpRight.setLayout(new FlowLayout());&#xa;    jpRight.add(tableRevenueDetails_GUI);&#xa;&#xa;    jpRight.revalidate();&#xa;    jpRight.repaint();"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="GUI.SRTable_GUI tableRevenueDetails_GUI = new GUI.SRTable_GUI();&#xa;    jpRight.removeAll();&#xa;&#xa;    jpRight.setLayout(new FlowLayout());&#xa;    jpRight.add(tableRevenueDetails_GUI);&#xa;&#xa;    jpRight.revalidate();&#xa;    jpRight.repaint();"/>
       </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="807" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="740" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">

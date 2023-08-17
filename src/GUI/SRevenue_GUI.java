@@ -8,12 +8,12 @@ import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
-public class Revenue_GUI extends javax.swing.JPanel {
+public class SRevenue_GUI extends javax.swing.JPanel {
 
-    public Revenue_GUI() {
+    public SRevenue_GUI() {
         initComponents();
 
-        TableRevenueDetails_GUI tableRevenueDetails_GUI = new TableRevenueDetails_GUI();
+        SRTable_GUI tableRevenueDetails_GUI = new SRTable_GUI();
         jpRight.removeAll();
 
         jpRight.setLayout(new FlowLayout());
@@ -30,11 +30,11 @@ public class Revenue_GUI extends javax.swing.JPanel {
     private void initComponents() {
 
         jpLeft = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        comboBoxSuggestion1 = new Customs.ComboBoxSuggestion();
+        jlChooserYear = new javax.swing.JLabel();
+        jlChooserDisplay = new javax.swing.JLabel();
+        jrbTable = new javax.swing.JRadioButton();
+        jrbChart = new javax.swing.JRadioButton();
+        cbChooserYear = new Customs.ComboBoxSuggestion();
         jpRight = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -42,27 +42,27 @@ public class Revenue_GUI extends javax.swing.JPanel {
         jpLeft.setBackground(new java.awt.Color(255, 255, 255));
         jpLeft.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel1.setText("Hãy chọn năm");
+        jlChooserYear.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jlChooserYear.setText("Hãy chọn năm");
 
-        jLabel2.setText("Hãy chọn kiểu hiển thị");
+        jlChooserDisplay.setText("Hãy chọn kiểu hiển thị");
 
-        jRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jRadioButton1.setText("Dạng bảng");
-        buttonGroup.add(jRadioButton1);
-        buttonGroup.add(jRadioButton2);
-        jRadioButton1.setSelected(true);
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        jrbTable.setBackground(new java.awt.Color(255, 255, 255));
+        jrbTable.setText("Dạng bảng");
+        buttonGroup.add(jrbTable);
+        buttonGroup.add(jrbChart);
+        jrbTable.setSelected(true);
+        jrbTable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                jrbTableActionPerformed(evt);
             }
         });
 
-        jRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jRadioButton2.setText("Dạng biểu đồ");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        jrbChart.setBackground(new java.awt.Color(255, 255, 255));
+        jrbChart.setText("Dạng biểu đồ");
+        jrbChart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                jrbChartActionPerformed(evt);
             }
         });
 
@@ -73,34 +73,34 @@ public class Revenue_GUI extends javax.swing.JPanel {
             .addGroup(jpLeftLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
+                    .addComponent(jlChooserYear)
+                    .addComponent(jlChooserDisplay)
                     .addGroup(jpLeftLayout.createSequentialGroup()
-                        .addComponent(jRadioButton1)
+                        .addComponent(jrbTable)
                         .addGap(57, 57, 57)
-                        .addComponent(jRadioButton2))
-                    .addComponent(comboBoxSuggestion1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jrbChart))
+                    .addComponent(cbChooserYear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         jpLeftLayout.setVerticalGroup(
             jpLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpLeftLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel1)
+                .addComponent(jlChooserYear)
                 .addGap(14, 14, 14)
-                .addComponent(comboBoxSuggestion1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbChooserYear, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
+                .addComponent(jlChooserDisplay)
                 .addGap(18, 18, 18)
                 .addGroup(jpLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
-                .addContainerGap(209, Short.MAX_VALUE))
+                    .addComponent(jrbTable)
+                    .addComponent(jrbChart))
+                .addContainerGap(200, Short.MAX_VALUE))
         );
 
         jpRight.setBackground(new java.awt.Color(255, 255, 255));
         jpRight.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        TableRevenueDetails_GUI tableRevenueDetails_GUI = new TableRevenueDetails_GUI();
+        GUI.SRTable_GUI tableRevenueDetails_GUI = new GUI.SRTable_GUI();
         jpRight.removeAll();
 
         jpRight.setLayout(new FlowLayout());
@@ -113,7 +113,7 @@ public class Revenue_GUI extends javax.swing.JPanel {
         jpRight.setLayout(jpRightLayout);
         jpRightLayout.setHorizontalGroup(
             jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 807, Short.MAX_VALUE)
+            .addGap(0, 740, Short.MAX_VALUE)
         );
         jpRightLayout.setVerticalGroup(
             jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,9 +136,9 @@ public class Revenue_GUI extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void jrbTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbTableActionPerformed
 
-        TableRevenueDetails_GUI tableRevenueDetails_GUI = new TableRevenueDetails_GUI();
+        SRTable_GUI tableRevenueDetails_GUI = new SRTable_GUI();
         jpRight.removeAll();
 
         jpRight.setLayout(new FlowLayout());
@@ -146,11 +146,11 @@ public class Revenue_GUI extends javax.swing.JPanel {
 
         jpRight.revalidate();
         jpRight.repaint();
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_jrbTableActionPerformed
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    private void jrbChartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbChartActionPerformed
 
-        ChartRevenue_GUI chartRevenue_GUI = new ChartRevenue_GUI();
+        SRChart_GUI chartRevenue_GUI = new SRChart_GUI();
         jpRight.removeAll();
 
         jpRight.setLayout(new FlowLayout());
@@ -158,16 +158,16 @@ public class Revenue_GUI extends javax.swing.JPanel {
 
         jpRight.revalidate();
         jpRight.repaint();
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    }//GEN-LAST:event_jrbChartActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Customs.ComboBoxSuggestion comboBoxSuggestion1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
+    private Customs.ComboBoxSuggestion cbChooserYear;
+    private javax.swing.JLabel jlChooserDisplay;
+    private javax.swing.JLabel jlChooserYear;
     private javax.swing.JPanel jpLeft;
     private javax.swing.JPanel jpRight;
+    private javax.swing.JRadioButton jrbChart;
+    private javax.swing.JRadioButton jrbTable;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,13 +1,22 @@
-// 1081, 600
+//1013, 549
 package GUI;
+
+import java.awt.FlowLayout;
+import java.awt.Panel;
+import javax.swing.JOptionPane;
 
 public class Statistical_GUI extends javax.swing.JPanel {
 
+    SRevenue_GUI revenue_GUI = new SRevenue_GUI();
+    SProduct_GUI productDetails_GUI = new SProduct_GUI();
+
     public Statistical_GUI() {
         initComponents();
-        
-        Revenue_GUI revenue_GUI = new Revenue_GUI();
-        add(revenue_GUI);
+
+        jpTmp.setLayout(new FlowLayout());
+        jpTmp.add(revenue_GUI);
+        jpTmp.revalidate();
+        jpTmp.repaint();
     }
 
     @SuppressWarnings("unchecked")
@@ -37,7 +46,9 @@ public class Statistical_GUI extends javax.swing.JPanel {
         jlCard4Unit = new javax.swing.JLabel();
         jlMoneyYear = new javax.swing.JLabel();
         jpTopBottom = new javax.swing.JPanel();
+        jpBtnSearch = new javax.swing.JPanel();
         jpSearchTime = new javax.swing.JPanel();
+        btnSearch = new Customs.Button();
         jlTitleSearch = new javax.swing.JLabel();
         jpBeginTime = new javax.swing.JPanel();
         jlStartDay = new javax.swing.JLabel();
@@ -47,12 +58,10 @@ public class Statistical_GUI extends javax.swing.JPanel {
         jlEndDay = new javax.swing.JLabel();
         jtfEndDay = new javax.swing.JTextField();
         jlIconEndDay = new javax.swing.JLabel();
-        jpButtomS = new javax.swing.JPanel();
-        btnSearch = new Customs.Button();
-        jpBottom = new javax.swing.JPanel();
-        jPanel14 = new javax.swing.JPanel();
+        jpMainSearch = new javax.swing.JPanel();
         button1 = new Customs.Button();
         button2 = new Customs.Button();
+        jpTmp = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
@@ -62,6 +71,7 @@ public class Statistical_GUI extends javax.swing.JPanel {
 
         jpToptop.setBackground(new java.awt.Color(255, 255, 255));
         jpToptop.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thống kê", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        jpToptop.setLayout(new javax.swing.BoxLayout(jpToptop, javax.swing.BoxLayout.X_AXIS));
 
         jpCard1.setBackground(new java.awt.Color(204, 204, 255));
         jpCard1.setForeground(new java.awt.Color(255, 255, 255));
@@ -91,13 +101,15 @@ public class Statistical_GUI extends javax.swing.JPanel {
             .addGroup(jpCard1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpCard1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlCard1Title)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCard1Layout.createSequentialGroup()
-                        .addComponent(jlNumOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jpCard1Layout.createSequentialGroup()
+                        .addComponent(jlNumOrder, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jlCard1Unit)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addComponent(jlIconOrder)
+                        .addComponent(jlCard1Unit)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jlIconOrder))
+                    .addGroup(jpCard1Layout.createSequentialGroup()
+                        .addComponent(jlCard1Title)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jpCard1Layout.setVerticalGroup(
@@ -105,13 +117,15 @@ public class Statistical_GUI extends javax.swing.JPanel {
             .addGroup(jpCard1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jlCard1Title)
-                .addGap(18, 18, 18)
-                .addGroup(jpCard1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpCard1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jlNumOrder)
-                        .addComponent(jlCard1Unit))
-                    .addComponent(jlIconOrder))
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpCard1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlNumOrder)
+                    .addComponent(jlCard1Unit))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCard1Layout.createSequentialGroup()
+                .addContainerGap(37, Short.MAX_VALUE)
+                .addComponent(jlIconOrder)
+                .addContainerGap())
         );
 
         jpToptop.add(jpCard1);
@@ -143,28 +157,32 @@ public class Statistical_GUI extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jpCard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpCard2Layout.createSequentialGroup()
+                        .addComponent(jlCard2Title)
+                        .addGap(0, 50, Short.MAX_VALUE))
+                    .addGroup(jpCard2Layout.createSequentialGroup()
                         .addComponent(jlMoneyDay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jlCard2Unit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jlIconMoneyDay))
-                    .addGroup(jpCard2Layout.createSequentialGroup()
-                        .addComponent(jlCard2Title)
-                        .addGap(0, 54, Short.MAX_VALUE)))
+                        .addComponent(jlIconMoneyDay)))
                 .addContainerGap())
         );
         jpCard2Layout.setVerticalGroup(
             jpCard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCard2Layout.createSequentialGroup()
+            .addGroup(jpCard2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jlCard2Title)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(jpCard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlIconMoneyDay)
-                    .addGroup(jpCard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jlMoneyDay)
-                        .addComponent(jlCard2Unit)))
-                .addContainerGap())
+                    .addGroup(jpCard2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpCard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlMoneyDay)
+                            .addComponent(jlCard2Unit))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCard2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jlIconMoneyDay)
+                        .addContainerGap())))
         );
 
         jpToptop.add(jpCard2);
@@ -196,14 +214,14 @@ public class Statistical_GUI extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jpCard3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpCard3Layout.createSequentialGroup()
+                        .addComponent(jlCard3Title)
+                        .addGap(0, 50, Short.MAX_VALUE))
+                    .addGroup(jpCard3Layout.createSequentialGroup()
                         .addComponent(jlMoneyMonth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jlCard3Unit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jlIconMoneyMonth))
-                    .addGroup(jpCard3Layout.createSequentialGroup()
-                        .addComponent(jlCard3Title)
-                        .addGap(0, 54, Short.MAX_VALUE)))
+                        .addComponent(jlIconMoneyMonth)))
                 .addContainerGap())
         );
         jpCard3Layout.setVerticalGroup(
@@ -211,13 +229,17 @@ public class Statistical_GUI extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCard3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jlCard3Title)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(jpCard3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlIconMoneyMonth)
-                    .addGroup(jpCard3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jlMoneyMonth)
-                        .addComponent(jlCard3Unit)))
-                .addContainerGap())
+                    .addGroup(jpCard3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpCard3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlMoneyMonth)
+                            .addComponent(jlCard3Unit))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCard3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jlIconMoneyMonth)
+                        .addContainerGap())))
         );
 
         jpToptop.add(jpCard3);
@@ -249,12 +271,14 @@ public class Statistical_GUI extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jpCard4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpCard4Layout.createSequentialGroup()
-                        .addComponent(jlMoneyYear, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jlCard14Title)
+                        .addGap(0, 51, Short.MAX_VALUE))
+                    .addGroup(jpCard4Layout.createSequentialGroup()
+                        .addComponent(jlMoneyYear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jlCard4Unit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jlIconMoneyYear))
-                    .addComponent(jlCard14Title))
+                        .addComponent(jlIconMoneyYear)))
                 .addContainerGap())
         );
         jpCard4Layout.setVerticalGroup(
@@ -262,44 +286,58 @@ public class Statistical_GUI extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCard4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jlCard14Title)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(jpCard4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlIconMoneyYear)
-                    .addGroup(jpCard4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jlCard4Unit)
-                        .addComponent(jlMoneyYear)))
-                .addContainerGap())
+                    .addGroup(jpCard4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpCard4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlMoneyYear)
+                            .addComponent(jlCard4Unit))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCard4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jlIconMoneyYear)
+                        .addContainerGap())))
         );
 
         jpToptop.add(jpCard4);
 
         jpTop.add(jpToptop);
 
+        add(jpTop);
+
         jpTopBottom.setBackground(new java.awt.Color(255, 255, 255));
         jpTopBottom.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 204, 204), null));
-        jpTopBottom.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 40, 5));
+        jpTopBottom.setLayout(new javax.swing.BoxLayout(jpTopBottom, javax.swing.BoxLayout.X_AXIS));
+
+        jpBtnSearch.setBackground(new java.awt.Color(255, 255, 255));
 
         jpSearchTime.setBackground(new java.awt.Color(255, 255, 255));
 
-        jlTitleSearch.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        jlTitleSearch.setText("Lọc theo thời gian :");
+        btnSearch.setBackground(new java.awt.Color(255, 204, 204));
+        btnSearch.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search24.png"))); // NOI18N
+        btnSearch.setText("Tìm kiếm");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpSearchTimeLayout = new javax.swing.GroupLayout(jpSearchTime);
         jpSearchTime.setLayout(jpSearchTimeLayout);
         jpSearchTimeLayout.setHorizontalGroup(
             jpSearchTimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpSearchTimeLayout.createSequentialGroup()
-                .addComponent(jlTitleSearch)
-                .addGap(0, 20, Short.MAX_VALUE))
+                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 25, Short.MAX_VALUE))
         );
         jpSearchTimeLayout.setVerticalGroup(
             jpSearchTimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpSearchTimeLayout.createSequentialGroup()
-                .addComponent(jlTitleSearch)
-                .addGap(0, 6, Short.MAX_VALUE))
+            .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jpTopBottom.add(jpSearchTime);
+        jlTitleSearch.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jlTitleSearch.setText("Lọc theo thời gian :");
 
         jpBeginTime.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -330,25 +368,20 @@ public class Statistical_GUI extends javax.swing.JPanel {
                 .addComponent(jtfStartDay, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlIconStartDay)
-                .addGap(0, 50, Short.MAX_VALUE))
+                .addGap(0, 70, Short.MAX_VALUE))
         );
         jpBeginTimeLayout.setVerticalGroup(
             jpBeginTimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpBeginTimeLayout.createSequentialGroup()
-                .addGroup(jpBeginTimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpBeginTimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jlStartDay)
-                        .addComponent(jtfStartDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jlIconStartDay))
-                .addGap(0, 6, Short.MAX_VALUE))
+            .addGroup(jpBeginTimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jlStartDay)
+                .addComponent(jtfStartDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jlIconStartDay)
         );
-
-        jpTopBottom.add(jpBeginTime);
 
         jpEndTime.setBackground(new java.awt.Color(255, 255, 255));
 
         jlEndDay.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jlEndDay.setText("Ngày kết thúc :");
+        jlEndDay.setText("Ngày bắt đầu :");
 
         jtfEndDay.setEditable(false);
         jtfEndDay.addActionListener(new java.awt.event.ActionListener() {
@@ -371,62 +404,51 @@ public class Statistical_GUI extends javax.swing.JPanel {
             .addGroup(jpEndTimeLayout.createSequentialGroup()
                 .addComponent(jlEndDay)
                 .addGap(18, 18, 18)
-                .addComponent(jtfEndDay, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtfEndDay, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlIconEndDay)
-                .addGap(0, 50, Short.MAX_VALUE))
+                .addGap(0, 70, Short.MAX_VALUE))
         );
         jpEndTimeLayout.setVerticalGroup(
             jpEndTimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpEndTimeLayout.createSequentialGroup()
-                .addGroup(jpEndTimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpEndTimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jlEndDay)
-                        .addComponent(jtfEndDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jlIconEndDay))
-                .addGap(0, 6, Short.MAX_VALUE))
+            .addGroup(jpEndTimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jlEndDay)
+                .addComponent(jtfEndDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jlIconEndDay)
         );
 
-        jpTopBottom.add(jpEndTime);
-
-        jpButtomS.setBackground(new java.awt.Color(255, 255, 255));
-
-        btnSearch.setBackground(new java.awt.Color(255, 204, 204));
-        btnSearch.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search24.png"))); // NOI18N
-        btnSearch.setText("Tìm kiếm");
-        btnSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jpButtomSLayout = new javax.swing.GroupLayout(jpButtomS);
-        jpButtomS.setLayout(jpButtomSLayout);
-        jpButtomSLayout.setHorizontalGroup(
-            jpButtomSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpButtomSLayout.createSequentialGroup()
-                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 20, Short.MAX_VALUE))
+        javax.swing.GroupLayout jpBtnSearchLayout = new javax.swing.GroupLayout(jpBtnSearch);
+        jpBtnSearch.setLayout(jpBtnSearchLayout);
+        jpBtnSearchLayout.setHorizontalGroup(
+            jpBtnSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpBtnSearchLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlTitleSearch)
+                .addGap(28, 28, 28)
+                .addComponent(jpBeginTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpSearchTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
         );
-        jpButtomSLayout.setVerticalGroup(
-            jpButtomSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpButtomSLayout.createSequentialGroup()
-                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
+        jpBtnSearchLayout.setVerticalGroup(
+            jpBtnSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpBtnSearchLayout.createSequentialGroup()
+                .addGroup(jpBtnSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlTitleSearch)
+                    .addComponent(jpBeginTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jpEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jpSearchTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jpTopBottom.add(jpButtomS);
+        jpTopBottom.add(jpBtnSearch);
 
-        jpTop.add(jpTopBottom);
+        add(jpTopBottom);
 
-        add(jpTop);
-
-        jpBottom.setBackground(new java.awt.Color(255, 255, 255));
-        jpBottom.setLayout(new javax.swing.BoxLayout(jpBottom, javax.swing.BoxLayout.Y_AXIS));
-
-        jPanel14.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel14.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 0));
+        jpMainSearch.setBackground(new java.awt.Color(255, 255, 255));
+        jpMainSearch.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 0));
 
         button1.setBackground(new java.awt.Color(204, 204, 255));
         button1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -437,7 +459,7 @@ public class Statistical_GUI extends javax.swing.JPanel {
                 button1ActionPerformed(evt);
             }
         });
-        jPanel14.add(button1);
+        jpMainSearch.add(button1);
 
         button2.setBackground(new java.awt.Color(204, 204, 255));
         button2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -448,11 +470,24 @@ public class Statistical_GUI extends javax.swing.JPanel {
                 button2ActionPerformed(evt);
             }
         });
-        jPanel14.add(button2);
+        jpMainSearch.add(button2);
 
-        jpBottom.add(jPanel14);
+        add(jpMainSearch);
 
-        add(jpBottom);
+        jpTmp.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jpTmpLayout = new javax.swing.GroupLayout(jpTmp);
+        jpTmp.setLayout(jpTmpLayout);
+        jpTmpLayout.setHorizontalGroup(
+            jpTmpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1012, Short.MAX_VALUE)
+        );
+        jpTmpLayout.setVerticalGroup(
+            jpTmpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 351, Short.MAX_VALUE)
+        );
+
+        add(jpTmp);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtfStartDayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfStartDayActionPerformed
@@ -463,6 +498,25 @@ public class Statistical_GUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jlIconStartDayMouseClicked
 
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+
+        jpTmp.removeAll();
+        jpTmp.add(revenue_GUI);
+        jpTmp.revalidate();
+        jpTmp.repaint();
+    }//GEN-LAST:event_button1ActionPerformed
+
+    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+        jpTmp.removeAll();
+        jpTmp.add(productDetails_GUI);
+        jpTmp.revalidate();
+        jpTmp.repaint();
+    }//GEN-LAST:event_button2ActionPerformed
+
     private void jtfEndDayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfEndDayActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfEndDayActionPerformed
@@ -471,24 +525,11 @@ public class Statistical_GUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jlIconEndDayMouseClicked
 
-    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSearchActionPerformed
-
-    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-
-    }//GEN-LAST:event_button1ActionPerformed
-
-    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_button2ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Customs.Button btnSearch;
     private Customs.Button button1;
     private Customs.Button button2;
-    private javax.swing.JPanel jPanel14;
     private javax.swing.JLabel jlCard14Title;
     private javax.swing.JLabel jlCard1Title;
     private javax.swing.JLabel jlCard1Unit;
@@ -511,14 +552,15 @@ public class Statistical_GUI extends javax.swing.JPanel {
     private javax.swing.JLabel jlStartDay;
     private javax.swing.JLabel jlTitleSearch;
     private javax.swing.JPanel jpBeginTime;
-    private javax.swing.JPanel jpBottom;
-    private javax.swing.JPanel jpButtomS;
+    private javax.swing.JPanel jpBtnSearch;
     private javax.swing.JPanel jpCard1;
     private javax.swing.JPanel jpCard2;
     private javax.swing.JPanel jpCard3;
     private javax.swing.JPanel jpCard4;
     private javax.swing.JPanel jpEndTime;
+    private javax.swing.JPanel jpMainSearch;
     private javax.swing.JPanel jpSearchTime;
+    private javax.swing.JPanel jpTmp;
     private javax.swing.JPanel jpTop;
     private javax.swing.JPanel jpTopBottom;
     private javax.swing.JPanel jpToptop;
