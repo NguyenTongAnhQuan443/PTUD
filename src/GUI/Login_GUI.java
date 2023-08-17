@@ -2,8 +2,11 @@ package GUI;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+
 public class Login_GUI extends javax.swing.JFrame {
+
     private HomeManager_GUI HomeManager_GUI;
+
     public Login_GUI() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -196,25 +199,25 @@ public class Login_GUI extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         boolean userEmpty = jtfUser.getText().trim().isEmpty();
         boolean passEmpty = jpfPass.getText().isEmpty();
-        if(userEmpty){
+        if (userEmpty) {
             jtfUser.setHelperText("Hãy nhập tài khoản của bạn");
             jtfUser.grabFocus();
         }
-        if(passEmpty){
+        if (passEmpty) {
             jpfPass.setHelperText("Hãy nhập mật khẩu của bạn");
-            if(!userEmpty){
+            if (!userEmpty) {
                 jpfPass.grabFocus();
             }
         }
-        if(!userEmpty && !passEmpty){
+        if (!userEmpty && !passEmpty) {
             jtfUser.setHelperText(null);
             jpfPass.setHelperText(null);
             JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
             this.dispose();
- 
+
             HomeManager_GUI = (HomeManager_GUI) SwingUtilities.getWindowAncestor(Login_GUI.this);
             HomeManager_GUI = new HomeManager_GUI();
-            HomeManager_GUI.setVisible(true);         
+            HomeManager_GUI.setVisible(true);
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 

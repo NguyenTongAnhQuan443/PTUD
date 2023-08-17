@@ -59,8 +59,8 @@ public class Statistical_GUI extends javax.swing.JPanel {
         jtfEndDay = new javax.swing.JTextField();
         jlIconEndDay = new javax.swing.JLabel();
         jpMainSearch = new javax.swing.JPanel();
-        button1 = new Customs.Button();
-        button2 = new Customs.Button();
+        bynRevenue = new Customs.Button();
+        btnProduct = new Customs.Button();
         jpTmp = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -450,27 +450,27 @@ public class Statistical_GUI extends javax.swing.JPanel {
         jpMainSearch.setBackground(new java.awt.Color(255, 255, 255));
         jpMainSearch.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 0));
 
-        button1.setBackground(new java.awt.Color(204, 204, 255));
-        button1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        button1.setText("Doanh thu");
-        button1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        button1.addActionListener(new java.awt.event.ActionListener() {
+        bynRevenue.setBackground(new java.awt.Color(204, 204, 255));
+        bynRevenue.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bynRevenue.setText("Doanh thu");
+        bynRevenue.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        bynRevenue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button1ActionPerformed(evt);
+                bynRevenueActionPerformed(evt);
             }
         });
-        jpMainSearch.add(button1);
+        jpMainSearch.add(bynRevenue);
 
-        button2.setBackground(new java.awt.Color(204, 204, 255));
-        button2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        button2.setText("Sản phẩm");
-        button2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        button2.addActionListener(new java.awt.event.ActionListener() {
+        btnProduct.setBackground(new java.awt.Color(204, 204, 255));
+        btnProduct.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnProduct.setText("Sản phẩm");
+        btnProduct.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button2ActionPerformed(evt);
+                btnProductActionPerformed(evt);
             }
         });
-        jpMainSearch.add(button2);
+        jpMainSearch.add(btnProduct);
 
         add(jpMainSearch);
 
@@ -502,20 +502,20 @@ public class Statistical_GUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSearchActionPerformed
 
-    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+    private void bynRevenueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bynRevenueActionPerformed
 
         jpTmp.removeAll();
         jpTmp.add(revenue_GUI);
         jpTmp.revalidate();
         jpTmp.repaint();
-    }//GEN-LAST:event_button1ActionPerformed
+    }//GEN-LAST:event_bynRevenueActionPerformed
 
-    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+    private void btnProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductActionPerformed
         jpTmp.removeAll();
         jpTmp.add(productDetails_GUI);
         jpTmp.revalidate();
         jpTmp.repaint();
-    }//GEN-LAST:event_button2ActionPerformed
+    }//GEN-LAST:event_btnProductActionPerformed
 
     private void jtfEndDayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfEndDayActionPerformed
         // TODO add your handling code here:
@@ -527,9 +527,9 @@ public class Statistical_GUI extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private Customs.Button btnProduct;
     private Customs.Button btnSearch;
-    private Customs.Button button1;
-    private Customs.Button button2;
+    private Customs.Button bynRevenue;
     private javax.swing.JLabel jlCard14Title;
     private javax.swing.JLabel jlCard1Title;
     private javax.swing.JLabel jlCard1Unit;

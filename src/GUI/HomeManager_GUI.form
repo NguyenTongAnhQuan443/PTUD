@@ -56,7 +56,7 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lbStatistical" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlStatistical" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jlProduct" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
                           <Component id="jlStaff" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jlBill" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -84,7 +84,7 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="lbStatistical" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlStatistical" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jlProduct" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -132,6 +132,11 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="S&#x1ea3;n ph&#x1ea9;m"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlProductMouseClicked"/>
+                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlProductMouseEntered"/>
+                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlProductMouseExited"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jlStaff">
               <Properties>
@@ -146,6 +151,10 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Nh&#xe2;n vi&#xea;n"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlStaffMouseEntered"/>
+                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlStaffMouseExited"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jlBill">
               <Properties>
@@ -160,6 +169,10 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="H&#xf3;a &#x111;&#x1a1;n"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlBillMouseEntered"/>
+                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlBillMouseExited"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jlCustomer">
               <Properties>
@@ -174,6 +187,10 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Kh&#xe1;ch h&#xe0;ng"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlCustomerMouseEntered"/>
+                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlCustomerMouseExited"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jlHistory">
               <Properties>
@@ -188,6 +205,10 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="L&#x1ecb;ch s&#x1eed;"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlHistoryMouseEntered"/>
+                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlHistoryMouseExited"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jlSale">
               <Properties>
@@ -202,6 +223,10 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Khuy&#x1ebf;n m&#xe3;i"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlSaleMouseEntered"/>
+                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlSaleMouseExited"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jlChangePass">
               <Properties>
@@ -218,6 +243,8 @@
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlChangePassMouseClicked"/>
+                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlChangePassMouseEntered"/>
+                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlChangePassMouseExited"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jlLanguage">
@@ -246,8 +273,12 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="&#x110;&#x103;ng xu&#x1ea5;t"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlLogoutMouseEntered"/>
+                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlLogoutMouseExited"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="lbStatistical">
+            <Component class="javax.swing.JLabel" name="jlStatistical">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="18" style="0"/>
@@ -261,7 +292,9 @@
                 <Property name="text" type="java.lang.String" value="Th&#x1ed1;ng k&#xea;"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbStatisticalMouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlStatisticalMouseClicked"/>
+                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlStatisticalMouseEntered"/>
+                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlStatisticalMouseExited"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jlExit">
@@ -277,6 +310,11 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Tho&#xe1;t"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlExitMouseClicked"/>
+                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlExitMouseEntered"/>
+                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlExitMouseExited"/>
+              </Events>
             </Component>
             <Component class="Customs.Combobox" name="cbLanguage">
               <Properties>
@@ -357,7 +395,7 @@
                       <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
                       <Component id="jlLogo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="lbNameShop" min="-2" pref="163" max="-2" attributes="0"/>
+                      <Component id="jlNameShop" min="-2" pref="163" max="-2" attributes="0"/>
                       <EmptySpace pref="878" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -370,7 +408,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lbNameShop" min="-2" pref="41" max="-2" attributes="0"/>
+                      <Component id="jlNameShop" min="-2" pref="41" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -384,7 +422,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lbNameShop">
+            <Component class="javax.swing.JLabel" name="jlNameShop">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="36" style="3"/>

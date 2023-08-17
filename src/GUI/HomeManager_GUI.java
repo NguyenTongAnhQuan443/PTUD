@@ -14,6 +14,7 @@ Thống kê :
 import com.raven.datechooser.DateChooser;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.FlowLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
@@ -22,7 +23,8 @@ import utils.Utils;
 
 public class HomeManager_GUI extends javax.swing.JFrame {
 
-//    private l statistical_GUI;
+    private Statistical_GUI statistical_GUI;
+
     public HomeManager_GUI() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -47,14 +49,14 @@ public class HomeManager_GUI extends javax.swing.JFrame {
         jlChangePass = new javax.swing.JLabel();
         jlLanguage = new javax.swing.JLabel();
         jlLogout = new javax.swing.JLabel();
-        lbStatistical = new javax.swing.JLabel();
+        jlStatistical = new javax.swing.JLabel();
         jlExit = new javax.swing.JLabel();
         cbLanguage = new Customs.Combobox();
         jlDisplay = new javax.swing.JLabel();
         cbDisplay = new Customs.Combobox();
         jpTop = new javax.swing.JPanel();
         jlLogo = new javax.swing.JLabel();
-        lbNameShop = new javax.swing.JLabel();
+        jlNameShop = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Fley shop quản lý bán hàng");
@@ -68,31 +70,82 @@ public class HomeManager_GUI extends javax.swing.JFrame {
         jlProduct.setForeground(new java.awt.Color(255, 255, 255));
         jlProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/product32.png"))); // NOI18N
         jlProduct.setText("Sản phẩm");
+        jlProduct.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlProductMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jlProductMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jlProductMouseExited(evt);
+            }
+        });
 
         jlStaff.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jlStaff.setForeground(new java.awt.Color(255, 255, 255));
         jlStaff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/staff32.png"))); // NOI18N
         jlStaff.setText("Nhân viên");
+        jlStaff.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jlStaffMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jlStaffMouseExited(evt);
+            }
+        });
 
         jlBill.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jlBill.setForeground(new java.awt.Color(255, 255, 255));
         jlBill.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bill32.png"))); // NOI18N
         jlBill.setText("Hóa đơn");
+        jlBill.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jlBillMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jlBillMouseExited(evt);
+            }
+        });
 
         jlCustomer.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jlCustomer.setForeground(new java.awt.Color(255, 255, 255));
         jlCustomer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Customer32.png"))); // NOI18N
         jlCustomer.setText("Khách hàng");
+        jlCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jlCustomerMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jlCustomerMouseExited(evt);
+            }
+        });
 
         jlHistory.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jlHistory.setForeground(new java.awt.Color(255, 255, 255));
         jlHistory.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/history32.png"))); // NOI18N
         jlHistory.setText("Lịch sử");
+        jlHistory.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jlHistoryMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jlHistoryMouseExited(evt);
+            }
+        });
 
         jlSale.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jlSale.setForeground(new java.awt.Color(255, 255, 255));
         jlSale.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sale32.png"))); // NOI18N
         jlSale.setText("Khuyến mãi");
+        jlSale.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jlSaleMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jlSaleMouseExited(evt);
+            }
+        });
 
         jlChangePass.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jlChangePass.setForeground(new java.awt.Color(255, 255, 255));
@@ -101,6 +154,12 @@ public class HomeManager_GUI extends javax.swing.JFrame {
         jlChangePass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jlChangePassMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jlChangePassMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jlChangePassMouseExited(evt);
             }
         });
 
@@ -112,14 +171,28 @@ public class HomeManager_GUI extends javax.swing.JFrame {
         jlLogout.setForeground(new java.awt.Color(255, 255, 255));
         jlLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logout32.png"))); // NOI18N
         jlLogout.setText("Đăng xuất");
+        jlLogout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jlLogoutMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jlLogoutMouseExited(evt);
+            }
+        });
 
-        lbStatistical.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lbStatistical.setForeground(new java.awt.Color(255, 255, 255));
-        lbStatistical.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chart32.png"))); // NOI18N
-        lbStatistical.setText("Thống kê");
-        lbStatistical.addMouseListener(new java.awt.event.MouseAdapter() {
+        jlStatistical.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jlStatistical.setForeground(new java.awt.Color(255, 255, 255));
+        jlStatistical.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chart32.png"))); // NOI18N
+        jlStatistical.setText("Thống kê");
+        jlStatistical.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbStatisticalMouseClicked(evt);
+                jlStatisticalMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jlStatisticalMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jlStatisticalMouseExited(evt);
             }
         });
 
@@ -127,6 +200,17 @@ public class HomeManager_GUI extends javax.swing.JFrame {
         jlExit.setForeground(new java.awt.Color(255, 255, 255));
         jlExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exit32.png"))); // NOI18N
         jlExit.setText("Thoát");
+        jlExit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlExitMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jlExitMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jlExitMouseExited(evt);
+            }
+        });
 
         cbLanguage.setBackground(new java.awt.Color(0, 128, 128));
         cbLanguage.setForeground(new java.awt.Color(255, 255, 255));
@@ -160,7 +244,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
             .addGroup(jpLeftLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbStatistical)
+                    .addComponent(jlStatistical)
                     .addComponent(jlProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlStaff)
                     .addComponent(jlBill)
@@ -183,7 +267,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
         jpLeftLayout.setVerticalGroup(
             jpLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpLeftLayout.createSequentialGroup()
-                .addComponent(lbStatistical)
+                .addComponent(jlStatistical)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jlProduct)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -219,9 +303,9 @@ public class HomeManager_GUI extends javax.swing.JFrame {
 
         jlLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Logo64.png"))); // NOI18N
 
-        lbNameShop.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
-        lbNameShop.setForeground(new java.awt.Color(255, 255, 255));
-        lbNameShop.setText("Fley Shop");
+        jlNameShop.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
+        jlNameShop.setForeground(new java.awt.Color(255, 255, 255));
+        jlNameShop.setText("Fley Shop");
 
         javax.swing.GroupLayout jpTopLayout = new javax.swing.GroupLayout(jpTop);
         jpTop.setLayout(jpTopLayout);
@@ -231,7 +315,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
                 .addGap(77, 77, 77)
                 .addComponent(jlLogo)
                 .addGap(18, 18, 18)
-                .addComponent(lbNameShop, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jlNameShop, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(878, Short.MAX_VALUE))
         );
         jpTopLayout.setVerticalGroup(
@@ -241,7 +325,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jpTopLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbNameShop, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jlNameShop, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -273,9 +357,137 @@ public class HomeManager_GUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jlChangePassMouseClicked
 
-    private void lbStatisticalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbStatisticalMouseClicked
+    private void jlStatisticalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlStatisticalMouseClicked
 
-    }//GEN-LAST:event_lbStatisticalMouseClicked
+        jlStatistical.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        statistical_GUI = new Statistical_GUI();
+        add(statistical_GUI, BorderLayout.CENTER);
+        revalidate();
+        repaint();
+    }//GEN-LAST:event_jlStatisticalMouseClicked
+
+    private void jlProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlProductMouseClicked
+        Product_GUI product_GUI = new Product_GUI();
+        jpMain.add(product_GUI, BorderLayout.CENTER);
+        jpMain.revalidate();
+        jpMain.repaint();
+    }//GEN-LAST:event_jlProductMouseClicked
+
+    private void jlStatisticalMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlStatisticalMouseEntered
+        jlStatistical.setForeground(Color.ORANGE);
+        jlStatistical.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_jlStatisticalMouseEntered
+
+    private void jlStatisticalMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlStatisticalMouseExited
+        jlStatistical.setForeground(Color.WHITE);
+        jlStatistical.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_jlStatisticalMouseExited
+
+    private void jlProductMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlProductMouseEntered
+        jlProduct.setForeground(Color.ORANGE);
+        jlProduct.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_jlProductMouseEntered
+
+    private void jlProductMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlProductMouseExited
+        jlProduct.setForeground(Color.WHITE);
+        jlProduct.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_jlProductMouseExited
+
+    private void jlStaffMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlStaffMouseEntered
+        jlStaff.setForeground(Color.ORANGE);
+        jlStaff.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_jlStaffMouseEntered
+
+    private void jlStaffMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlStaffMouseExited
+        jlStaff.setForeground(Color.WHITE);
+        jlStaff.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_jlStaffMouseExited
+
+    private void jlBillMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBillMouseEntered
+        jlBill.setForeground(Color.ORANGE);
+        jlBill.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+    }//GEN-LAST:event_jlBillMouseEntered
+
+    private void jlBillMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBillMouseExited
+
+        jlBill.setForeground(Color.WHITE);
+        jlBill.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_jlBillMouseExited
+
+    private void jlCustomerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlCustomerMouseEntered
+        jlCustomer.setForeground(Color.ORANGE);
+        jlCustomer.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_jlCustomerMouseEntered
+
+    private void jlCustomerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlCustomerMouseExited
+
+        jlCustomer.setForeground(Color.WHITE);
+        jlCustomer.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_jlCustomerMouseExited
+
+    private void jlHistoryMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlHistoryMouseEntered
+        jlHistory.setForeground(Color.ORANGE);
+        jlHistory.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+    }//GEN-LAST:event_jlHistoryMouseEntered
+
+    private void jlHistoryMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlHistoryMouseExited
+
+        jlHistory.setForeground(Color.WHITE);
+        jlHistory.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_jlHistoryMouseExited
+
+    private void jlSaleMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlSaleMouseEntered
+        jlSale.setForeground(Color.ORANGE);
+        jlSale.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_jlSaleMouseEntered
+
+    private void jlSaleMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlSaleMouseExited
+
+        jlSale.setForeground(Color.WHITE);
+        jlSale.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_jlSaleMouseExited
+
+    private void jlChangePassMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlChangePassMouseEntered
+        jlChangePass.setForeground(Color.ORANGE);
+        jlChangePass.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+    }//GEN-LAST:event_jlChangePassMouseEntered
+
+    private void jlChangePassMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlChangePassMouseExited
+        jlChangePass.setForeground(Color.WHITE);
+        jlChangePass.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_jlChangePassMouseExited
+
+    private void jlLogoutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlLogoutMouseEntered
+        jlLogout.setForeground(Color.ORANGE);
+        jlLogout.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_jlLogoutMouseEntered
+
+    private void jlLogoutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlLogoutMouseExited
+
+        jlLogout.setForeground(Color.WHITE);
+        jlLogout.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_jlLogoutMouseExited
+
+    private void jlExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlExitMouseEntered
+        jlExit.setForeground(Color.ORANGE);
+        jlExit.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+    }//GEN-LAST:event_jlExitMouseEntered
+
+    private void jlExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlExitMouseExited
+
+        jlExit.setForeground(Color.WHITE);
+        jlExit.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_jlExitMouseExited
+
+    private void jlExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlExitMouseClicked
+        if (JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn thoát chương trình hay không ?", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_jlExitMouseClicked
 
     public static void main(String args[]) {
 
@@ -287,7 +499,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
     }
 
     public void setText() {
-        lbStatistical.setText(Utils.thongKe);
+        jlStatistical.setText(Utils.thongKe);
         jlProduct.setText(Utils.sanPham);
         jlStaff.setText(Utils.nhanVien);
         jlBill.setText(Utils.hoaDon);
@@ -317,13 +529,13 @@ public class HomeManager_GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jlLanguage;
     private javax.swing.JLabel jlLogo;
     private javax.swing.JLabel jlLogout;
+    private javax.swing.JLabel jlNameShop;
     private javax.swing.JLabel jlProduct;
     private javax.swing.JLabel jlSale;
     private javax.swing.JLabel jlStaff;
+    private javax.swing.JLabel jlStatistical;
     private javax.swing.JPanel jpLeft;
     private javax.swing.JPanel jpMain;
     private javax.swing.JPanel jpTop;
-    private javax.swing.JLabel lbNameShop;
-    private javax.swing.JLabel lbStatistical;
     // End of variables declaration//GEN-END:variables
 }
