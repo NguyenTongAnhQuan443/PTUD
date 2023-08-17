@@ -19,20 +19,24 @@ import java.awt.FlowLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import org.netbeans.lib.awtextra.AbsoluteLayout;
 import utils.Utils;
 
 public class HomeManager_GUI extends javax.swing.JFrame {
 
     private Statistical_GUI statistical_GUI;
-
+    private Product_GUI product_GUI;
     public HomeManager_GUI() {
         initComponents();
         this.setLocationRelativeTo(null);
-
-        Statistical_GUI statistical_GUI = new Statistical_GUI();
-        jpMain.add(statistical_GUI, BorderLayout.CENTER);
-        repaint();
+        
+//          statistical_GUI = new Statistical_GUI();
+openStatistical();
+          jpCenter.add(statistical_GUI);
+          jpCenter.revalidate();
+          jpCenter.repaint();
     }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -57,6 +61,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
         jpTop = new javax.swing.JPanel();
         jlLogo = new javax.swing.JLabel();
         jlNameShop = new javax.swing.JLabel();
+        jpCenter = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Fley shop quản lý bán hàng");
@@ -331,6 +336,9 @@ public class HomeManager_GUI extends javax.swing.JFrame {
 
         jpMain.add(jpTop, java.awt.BorderLayout.PAGE_START);
 
+        jpCenter.setLayout(new java.awt.GridLayout());
+        jpMain.add(jpCenter, java.awt.BorderLayout.CENTER);
+
         getContentPane().add(jpMain, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -358,19 +366,21 @@ public class HomeManager_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jlChangePassMouseClicked
 
     private void jlStatisticalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlStatisticalMouseClicked
-
-        jlStatistical.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        statistical_GUI = new Statistical_GUI();
-        add(statistical_GUI, BorderLayout.CENTER);
-        revalidate();
-        repaint();
+        openStatistical();
+       jpCenter.removeAll();
+       jpCenter.add(statistical_GUI);
+       jpCenter.revalidate();
+       jpCenter.repaint();
     }//GEN-LAST:event_jlStatisticalMouseClicked
 
     private void jlProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlProductMouseClicked
+        jpCenter.removeAll();
         Product_GUI product_GUI = new Product_GUI();
-        jpMain.add(product_GUI, BorderLayout.CENTER);
-        jpMain.revalidate();
-        jpMain.repaint();
+
+
+          jpCenter.add(product_GUI);
+          jpCenter.revalidate();
+          jpCenter.repaint();
     }//GEN-LAST:event_jlProductMouseClicked
 
     private void jlStatisticalMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlStatisticalMouseEntered
@@ -489,6 +499,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jlExitMouseClicked
 
+    
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -497,8 +508,12 @@ public class HomeManager_GUI extends javax.swing.JFrame {
             }
         });
     }
-
-    public void setText() {
+    
+//    private void beginHover
+private void openStatistical(){
+    statistical_GUI = new Statistical_GUI();
+}
+    private void setText() {
         jlStatistical.setText(Utils.thongKe);
         jlProduct.setText(Utils.sanPham);
         jlStaff.setText(Utils.nhanVien);
@@ -534,6 +549,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jlSale;
     private javax.swing.JLabel jlStaff;
     private javax.swing.JLabel jlStatistical;
+    private javax.swing.JPanel jpCenter;
     private javax.swing.JPanel jpLeft;
     private javax.swing.JPanel jpMain;
     private javax.swing.JPanel jpTop;

@@ -70,7 +70,7 @@ public class Statistical_GUI extends javax.swing.JPanel {
         jpTop.setLayout(new javax.swing.BoxLayout(jpTop, javax.swing.BoxLayout.Y_AXIS));
 
         jpToptop.setBackground(new java.awt.Color(255, 255, 255));
-        jpToptop.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thống kê", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        jpToptop.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thống kê", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 14))); // NOI18N
         jpToptop.setLayout(new javax.swing.BoxLayout(jpToptop, javax.swing.BoxLayout.X_AXIS));
 
         jpCard1.setBackground(new java.awt.Color(204, 204, 255));
@@ -451,9 +451,10 @@ public class Statistical_GUI extends javax.swing.JPanel {
         jpMainSearch.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 0));
 
         bynRevenue.setBackground(new java.awt.Color(204, 204, 255));
-        bynRevenue.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bynRevenue.setBorder(null);
+        bynRevenue.setForeground(new java.awt.Color(255, 255, 255));
         bynRevenue.setText("Doanh thu");
-        bynRevenue.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        bynRevenue.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         bynRevenue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bynRevenueActionPerformed(evt);
@@ -462,9 +463,10 @@ public class Statistical_GUI extends javax.swing.JPanel {
         jpMainSearch.add(bynRevenue);
 
         btnProduct.setBackground(new java.awt.Color(204, 204, 255));
-        btnProduct.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnProduct.setBorder(null);
+        btnProduct.setForeground(new java.awt.Color(255, 255, 255));
         btnProduct.setText("Sản phẩm");
-        btnProduct.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnProduct.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnProductActionPerformed(evt);
@@ -484,7 +486,7 @@ public class Statistical_GUI extends javax.swing.JPanel {
         );
         jpTmpLayout.setVerticalGroup(
             jpTmpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 351, Short.MAX_VALUE)
+            .addGap(0, 353, Short.MAX_VALUE)
         );
 
         add(jpTmp);

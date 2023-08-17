@@ -21,6 +21,7 @@ public class SRTable_GUI extends javax.swing.JPanel {
         jlTitle.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jlTitle.setText("Chi tiết doanh thu");
 
+        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
