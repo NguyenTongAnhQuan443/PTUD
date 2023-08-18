@@ -379,11 +379,15 @@ public class HomeManager_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_cbDisplayActionPerformed
 
     private void jlChangePassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlChangePassMouseClicked
-        bill_GUI.stopWebcam();
+        if(bill_GUI != null){
+            bill_GUI.stopWebcam();
+        }
     }//GEN-LAST:event_jlChangePassMouseClicked
 
     private void jlStatisticalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlStatisticalMouseClicked
-        bill_GUI.stopWebcam();
+        if(bill_GUI != null){
+            bill_GUI.stopWebcam();
+        } 
         openStatistical();
         jpCenter.removeAll();
         jpCenter.add(statistical_GUI);
@@ -392,7 +396,9 @@ public class HomeManager_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jlStatisticalMouseClicked
 
     private void jlProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlProductMouseClicked
-        bill_GUI.stopWebcam();
+        if(bill_GUI != null){
+            bill_GUI.stopWebcam();
+        }
         jpCenter.removeAll();
         Product_GUI product_GUI = new Product_GUI();
         jpCenter.add(product_GUI);
@@ -515,23 +521,33 @@ public class HomeManager_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jlBillMouseClicked
 
     private void jlStaffMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlStaffMouseClicked
-        bill_GUI.stopWebcam();
+        if(bill_GUI != null){
+            bill_GUI.stopWebcam();
+        }
     }//GEN-LAST:event_jlStaffMouseClicked
 
     private void jlCustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlCustomerMouseClicked
-        bill_GUI.stopWebcam();
+        if(bill_GUI != null){
+            bill_GUI.stopWebcam();
+        }
     }//GEN-LAST:event_jlCustomerMouseClicked
 
     private void jlHistoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlHistoryMouseClicked
-        bill_GUI.stopWebcam();
+        if(bill_GUI != null){
+            bill_GUI.stopWebcam();
+        }
     }//GEN-LAST:event_jlHistoryMouseClicked
 
     private void jlSaleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlSaleMouseClicked
-        bill_GUI.stopWebcam();
+        if(bill_GUI != null){
+            bill_GUI.stopWebcam();
+        }
     }//GEN-LAST:event_jlSaleMouseClicked
 
     private void jlLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlLogoutMouseClicked
-        bill_GUI.stopWebcam();
+        if(bill_GUI != null){
+            bill_GUI.stopWebcam();
+        }
     }//GEN-LAST:event_jlLogoutMouseClicked
 
     public static void main(String args[]) {
