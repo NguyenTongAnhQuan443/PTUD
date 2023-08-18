@@ -1,14 +1,16 @@
 //1013, 549
 package GUI;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Panel;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 public class Statistical_GUI extends javax.swing.JPanel {
 
-    SRevenue_GUI revenue_GUI = new SRevenue_GUI();
-    SProduct_GUI productDetails_GUI = new SProduct_GUI();
+    Statistical_Revenue_GUI revenue_GUI = new Statistical_Revenue_GUI();
+    Statistical_Product_GUI productDetails_GUI = new Statistical_Product_GUI();
 
     public Statistical_GUI() {
         initComponents();
@@ -59,7 +61,7 @@ public class Statistical_GUI extends javax.swing.JPanel {
         jtfEndDay = new javax.swing.JTextField();
         jlIconEndDay = new javax.swing.JLabel();
         jpMainSearch = new javax.swing.JPanel();
-        bynRevenue = new Customs.Button();
+        btnRevenue = new Customs.Button();
         btnProduct = new Customs.Button();
         jpTmp = new javax.swing.JPanel();
 
@@ -448,22 +450,27 @@ public class Statistical_GUI extends javax.swing.JPanel {
         add(jpTopBottom);
 
         jpMainSearch.setBackground(new java.awt.Color(255, 255, 255));
-        jpMainSearch.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 0));
+        jpMainSearch.setLayout(new java.awt.GridLayout(1, 0));
 
-        bynRevenue.setBackground(new java.awt.Color(204, 204, 255));
-        bynRevenue.setBorder(null);
-        bynRevenue.setForeground(new java.awt.Color(255, 255, 255));
-        bynRevenue.setText("Doanh thu");
-        bynRevenue.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        bynRevenue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bynRevenueActionPerformed(evt);
+        btnRevenue.setBackground(new java.awt.Color(204, 204, 255));
+        btnRevenue.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnRevenue.setForeground(new java.awt.Color(255, 255, 255));
+        btnRevenue.setText("Doanh thu");
+        btnRevenue.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnRevenue.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRevenueMouseClicked(evt);
             }
         });
-        jpMainSearch.add(bynRevenue);
+        btnRevenue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRevenueActionPerformed(evt);
+            }
+        });
+        jpMainSearch.add(btnRevenue);
 
         btnProduct.setBackground(new java.awt.Color(204, 204, 255));
-        btnProduct.setBorder(null);
+        btnProduct.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnProduct.setForeground(new java.awt.Color(255, 255, 255));
         btnProduct.setText("Sản phẩm");
         btnProduct.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -504,13 +511,13 @@ public class Statistical_GUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSearchActionPerformed
 
-    private void bynRevenueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bynRevenueActionPerformed
+    private void btnRevenueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevenueActionPerformed
 
         jpTmp.removeAll();
         jpTmp.add(revenue_GUI);
         jpTmp.revalidate();
         jpTmp.repaint();
-    }//GEN-LAST:event_bynRevenueActionPerformed
+    }//GEN-LAST:event_btnRevenueActionPerformed
 
     private void btnProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductActionPerformed
         jpTmp.removeAll();
@@ -527,11 +534,15 @@ public class Statistical_GUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jlIconEndDayMouseClicked
 
+    private void btnRevenueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRevenueMouseClicked
+
+    }//GEN-LAST:event_btnRevenueMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Customs.Button btnProduct;
+    private Customs.Button btnRevenue;
     private Customs.Button btnSearch;
-    private Customs.Button bynRevenue;
     private javax.swing.JLabel jlCard14Title;
     private javax.swing.JLabel jlCard1Title;
     private javax.swing.JLabel jlCard1Unit;

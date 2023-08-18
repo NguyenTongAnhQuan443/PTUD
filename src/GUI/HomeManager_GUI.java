@@ -19,24 +19,23 @@ import java.awt.FlowLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import org.netbeans.lib.awtextra.AbsoluteLayout;
 import utils.Utils;
 
 public class HomeManager_GUI extends javax.swing.JFrame {
 
     private Statistical_GUI statistical_GUI;
     private Product_GUI product_GUI;
+    private Bill_GUI bill_GUI;
+
     public HomeManager_GUI() {
         initComponents();
         this.setLocationRelativeTo(null);
-        
-//          statistical_GUI = new Statistical_GUI();
-openStatistical();
-          jpCenter.add(statistical_GUI);
-          jpCenter.revalidate();
-          jpCenter.repaint();
+
+        openStatistical();
+        jpCenter.add(statistical_GUI);
+        jpCenter.revalidate();
+        jpCenter.repaint();
     }
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -92,6 +91,9 @@ openStatistical();
         jlStaff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/staff32.png"))); // NOI18N
         jlStaff.setText("Nhân viên");
         jlStaff.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlStaffMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jlStaffMouseEntered(evt);
             }
@@ -105,6 +107,9 @@ openStatistical();
         jlBill.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bill32.png"))); // NOI18N
         jlBill.setText("Hóa đơn");
         jlBill.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlBillMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jlBillMouseEntered(evt);
             }
@@ -118,6 +123,9 @@ openStatistical();
         jlCustomer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Customer32.png"))); // NOI18N
         jlCustomer.setText("Khách hàng");
         jlCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlCustomerMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jlCustomerMouseEntered(evt);
             }
@@ -131,6 +139,9 @@ openStatistical();
         jlHistory.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/history32.png"))); // NOI18N
         jlHistory.setText("Lịch sử");
         jlHistory.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlHistoryMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jlHistoryMouseEntered(evt);
             }
@@ -144,6 +155,9 @@ openStatistical();
         jlSale.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sale32.png"))); // NOI18N
         jlSale.setText("Khuyến mãi");
         jlSale.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlSaleMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jlSaleMouseEntered(evt);
             }
@@ -177,6 +191,9 @@ openStatistical();
         jlLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logout32.png"))); // NOI18N
         jlLogout.setText("Đăng xuất");
         jlLogout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlLogoutMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jlLogoutMouseEntered(evt);
             }
@@ -336,7 +353,7 @@ openStatistical();
 
         jpMain.add(jpTop, java.awt.BorderLayout.PAGE_START);
 
-        jpCenter.setLayout(new java.awt.GridLayout());
+        jpCenter.setLayout(new java.awt.GridLayout(1, 0));
         jpMain.add(jpCenter, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(jpMain, java.awt.BorderLayout.CENTER);
@@ -362,25 +379,25 @@ openStatistical();
     }//GEN-LAST:event_cbDisplayActionPerformed
 
     private void jlChangePassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlChangePassMouseClicked
-
+        bill_GUI.stopWebcam();
     }//GEN-LAST:event_jlChangePassMouseClicked
 
     private void jlStatisticalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlStatisticalMouseClicked
+        bill_GUI.stopWebcam();
         openStatistical();
-       jpCenter.removeAll();
-       jpCenter.add(statistical_GUI);
-       jpCenter.revalidate();
-       jpCenter.repaint();
+        jpCenter.removeAll();
+        jpCenter.add(statistical_GUI);
+        jpCenter.revalidate();
+        jpCenter.repaint();
     }//GEN-LAST:event_jlStatisticalMouseClicked
 
     private void jlProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlProductMouseClicked
+        bill_GUI.stopWebcam();
         jpCenter.removeAll();
         Product_GUI product_GUI = new Product_GUI();
-
-
-          jpCenter.add(product_GUI);
-          jpCenter.revalidate();
-          jpCenter.repaint();
+        jpCenter.add(product_GUI);
+        jpCenter.revalidate();
+        jpCenter.repaint();
     }//GEN-LAST:event_jlProductMouseClicked
 
     private void jlStatisticalMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlStatisticalMouseEntered
@@ -416,11 +433,9 @@ openStatistical();
     private void jlBillMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBillMouseEntered
         jlBill.setForeground(Color.ORANGE);
         jlBill.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
     }//GEN-LAST:event_jlBillMouseEntered
 
     private void jlBillMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBillMouseExited
-
         jlBill.setForeground(Color.WHITE);
         jlBill.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_jlBillMouseExited
@@ -431,7 +446,6 @@ openStatistical();
     }//GEN-LAST:event_jlCustomerMouseEntered
 
     private void jlCustomerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlCustomerMouseExited
-
         jlCustomer.setForeground(Color.WHITE);
         jlCustomer.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_jlCustomerMouseExited
@@ -439,11 +453,9 @@ openStatistical();
     private void jlHistoryMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlHistoryMouseEntered
         jlHistory.setForeground(Color.ORANGE);
         jlHistory.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
     }//GEN-LAST:event_jlHistoryMouseEntered
 
     private void jlHistoryMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlHistoryMouseExited
-
         jlHistory.setForeground(Color.WHITE);
         jlHistory.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_jlHistoryMouseExited
@@ -454,7 +466,6 @@ openStatistical();
     }//GEN-LAST:event_jlSaleMouseEntered
 
     private void jlSaleMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlSaleMouseExited
-
         jlSale.setForeground(Color.WHITE);
         jlSale.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_jlSaleMouseExited
@@ -462,7 +473,6 @@ openStatistical();
     private void jlChangePassMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlChangePassMouseEntered
         jlChangePass.setForeground(Color.ORANGE);
         jlChangePass.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
     }//GEN-LAST:event_jlChangePassMouseEntered
 
     private void jlChangePassMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlChangePassMouseExited
@@ -476,7 +486,6 @@ openStatistical();
     }//GEN-LAST:event_jlLogoutMouseEntered
 
     private void jlLogoutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlLogoutMouseExited
-
         jlLogout.setForeground(Color.WHITE);
         jlLogout.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_jlLogoutMouseExited
@@ -484,11 +493,9 @@ openStatistical();
     private void jlExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlExitMouseEntered
         jlExit.setForeground(Color.ORANGE);
         jlExit.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
     }//GEN-LAST:event_jlExitMouseEntered
 
     private void jlExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlExitMouseExited
-
         jlExit.setForeground(Color.WHITE);
         jlExit.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_jlExitMouseExited
@@ -499,7 +506,34 @@ openStatistical();
         }
     }//GEN-LAST:event_jlExitMouseClicked
 
-    
+    private void jlBillMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBillMouseClicked
+        bill_GUI = new Bill_GUI();
+        jpCenter.removeAll();
+        jpCenter.add(bill_GUI);
+        jpCenter.revalidate();
+        jpCenter.repaint();
+    }//GEN-LAST:event_jlBillMouseClicked
+
+    private void jlStaffMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlStaffMouseClicked
+        bill_GUI.stopWebcam();
+    }//GEN-LAST:event_jlStaffMouseClicked
+
+    private void jlCustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlCustomerMouseClicked
+        bill_GUI.stopWebcam();
+    }//GEN-LAST:event_jlCustomerMouseClicked
+
+    private void jlHistoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlHistoryMouseClicked
+        bill_GUI.stopWebcam();
+    }//GEN-LAST:event_jlHistoryMouseClicked
+
+    private void jlSaleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlSaleMouseClicked
+        bill_GUI.stopWebcam();
+    }//GEN-LAST:event_jlSaleMouseClicked
+
+    private void jlLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlLogoutMouseClicked
+        bill_GUI.stopWebcam();
+    }//GEN-LAST:event_jlLogoutMouseClicked
+
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -508,11 +542,10 @@ openStatistical();
             }
         });
     }
-    
-//    private void beginHover
-private void openStatistical(){
-    statistical_GUI = new Statistical_GUI();
-}
+    private void openStatistical() {
+        statistical_GUI = new Statistical_GUI();
+    }
+
     private void setText() {
         jlStatistical.setText(Utils.thongKe);
         jlProduct.setText(Utils.sanPham);

@@ -3,13 +3,14 @@ package GUI;
 
 public class Product_GUI extends javax.swing.JPanel {
 
-    private PProperties_GUI pDetails_GUI;
+    private Product_Detail_GUI product_Detail_GUI;
+    private Product_Properties_GUI product_Properties_GUI;
     public Product_GUI() {
         initComponents();
         
-        pDetails_GUI = new PProperties_GUI();
+        product_Properties_GUI = new Product_Properties_GUI();
         jpTmp.removeAll();
-        jpTmp.add(pDetails_GUI);
+        jpTmp.add(product_Properties_GUI);
         jpTmp.revalidate();
         jpTmp.repaint();
     }
@@ -20,17 +21,17 @@ public class Product_GUI extends javax.swing.JPanel {
 
         jpMainSearch = new javax.swing.JPanel();
         btnProduct = new Customs.Button();
-        bynRevenue = new Customs.Button();
+        btnRevenue = new Customs.Button();
         jpTmp = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(204, 204, 255));
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
 
         jpMainSearch.setBackground(new java.awt.Color(255, 255, 255));
-        jpMainSearch.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 0));
+        jpMainSearch.setLayout(new java.awt.GridLayout(1, 0));
 
         btnProduct.setBackground(new java.awt.Color(204, 204, 255));
-        btnProduct.setBorder(null);
+        btnProduct.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnProduct.setForeground(new java.awt.Color(255, 255, 255));
         btnProduct.setText("Thuộc tính sản phẩm");
         btnProduct.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -41,37 +42,45 @@ public class Product_GUI extends javax.swing.JPanel {
         });
         jpMainSearch.add(btnProduct);
 
-        bynRevenue.setBackground(new java.awt.Color(204, 204, 255));
-        bynRevenue.setBorder(null);
-        bynRevenue.setForeground(new java.awt.Color(255, 255, 255));
-        bynRevenue.setText("Thông tin chi tiết");
-        bynRevenue.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        bynRevenue.addActionListener(new java.awt.event.ActionListener() {
+        btnRevenue.setBackground(new java.awt.Color(204, 204, 255));
+        btnRevenue.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnRevenue.setForeground(new java.awt.Color(255, 255, 255));
+        btnRevenue.setText("Thông tin chi tiết");
+        btnRevenue.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnRevenue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bynRevenueActionPerformed(evt);
+                btnRevenueActionPerformed(evt);
             }
         });
-        jpMainSearch.add(bynRevenue);
+        jpMainSearch.add(btnRevenue);
 
         add(jpMainSearch);
 
-        jpTmp.setLayout(new java.awt.GridLayout());
+        jpTmp.setLayout(new java.awt.GridLayout(1, 0));
         add(jpTmp);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bynRevenueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bynRevenueActionPerformed
+    private void btnRevenueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevenueActionPerformed
+                product_Detail_GUI = new Product_Detail_GUI();
+        jpTmp.removeAll();
+        jpTmp.add(product_Detail_GUI);
+        jpTmp.revalidate();
+        jpTmp.repaint();
 
-
-    }//GEN-LAST:event_bynRevenueActionPerformed
+    }//GEN-LAST:event_btnRevenueActionPerformed
 
     private void btnProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductActionPerformed
-
+                product_Properties_GUI = new Product_Properties_GUI();
+        jpTmp.removeAll();
+        jpTmp.add(product_Properties_GUI);
+        jpTmp.revalidate();
+        jpTmp.repaint();
     }//GEN-LAST:event_btnProductActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Customs.Button btnProduct;
-    private Customs.Button bynRevenue;
+    private Customs.Button btnRevenue;
     private javax.swing.JPanel jpMainSearch;
     private javax.swing.JPanel jpTmp;
     // End of variables declaration//GEN-END:variables

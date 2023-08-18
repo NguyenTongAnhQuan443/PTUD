@@ -5,8 +5,7 @@ import javax.swing.SwingUtilities;
 
 public class Login_GUI extends javax.swing.JFrame {
 
-    private HomeManager_GUI HomeManager_GUI;
-
+    private HomeManager_GUI homeManager_GUI;
     public Login_GUI() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -215,9 +214,9 @@ public class Login_GUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
             this.dispose();
 
-            HomeManager_GUI = (HomeManager_GUI) SwingUtilities.getWindowAncestor(Login_GUI.this);
-            HomeManager_GUI = new HomeManager_GUI();
-            HomeManager_GUI.setVisible(true);
+            homeManager_GUI = (HomeManager_GUI) SwingUtilities.getWindowAncestor(Login_GUI.this);
+            homeManager_GUI = new HomeManager_GUI();
+            homeManager_GUI.setVisible(true);
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
