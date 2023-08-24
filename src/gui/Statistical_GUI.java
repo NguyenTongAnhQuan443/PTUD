@@ -6,13 +6,13 @@
 + Thống kê sản phẩm 
     Top 5 sản phẩm còn nhiều nhất, ít nhất theo dạng bảng hoặc biểu đồ cột
 
++ Thống kê nhân viên
+    top 5, 10, 15 nhân viên có doanh thu cao nhất, ít nhất, (biểu đồ cột kép doanh thu và số đơn hàng)
+    Theo tiêu chí ngày tháng năm hiện tại
+
 + Thống kê khách hàng 
     Thống kê khách hàng theo tháng trong năm được chọn về 2 tiêu chí là: số lượng khách hàng và doanh thu của tháng đó (biểu đồ cột kép)
 
-+ Thống kê nhân viên
-    top 5, 10, 15 nhân viên có doanh thu cao nhất, ít nhất, (biểu đồ cột kép doanh thu và số đơn hàng)
-
-+ Thống kê theo ngày tháng năm
  */
 
 package gui;
@@ -27,8 +27,8 @@ public class Statistical_GUI extends javax.swing.JPanel {
 
     private Statistical_Revenue_GUI statistical_Revenue_GUI = new Statistical_Revenue_GUI();
     private Statistical_Product_GUI statistical_Product_GUI = new Statistical_Product_GUI();
-//    private Statistical_Staff_GUI statistical_Staff_GUI = new Statistical_Staff_GUI();
-    private Statistical_Staff_GUI_Test statistical_Staff_GUI_Test = new Statistical_Staff_GUI_Test();
+    private Statistical_Staff_GUI statistical_Staff_GUI = new Statistical_Staff_GUI();
+    private Statistical_Customer_GUI statistical_Customer_GUI = new Statistical_Customer_GUI();
     public Statistical_GUI() {
         initComponents();
 
@@ -360,7 +360,7 @@ public class Statistical_GUI extends javax.swing.JPanel {
         btnProduct2.setBackground(new java.awt.Color(204, 204, 255));
         btnProduct2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnProduct2.setForeground(new java.awt.Color(255, 255, 255));
-        btnProduct2.setText("Sản phẩm");
+        btnProduct2.setText("Thống kê khách hàng");
         btnProduct2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnProduct2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -407,13 +407,16 @@ public class Statistical_GUI extends javax.swing.JPanel {
 
     private void btnProduct1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProduct1ActionPerformed
         jpTmp.removeAll();
-        jpTmp.add(statistical_Staff_GUI_Test);
+        jpTmp.add(statistical_Staff_GUI);
         jpTmp.revalidate();
         jpTmp.repaint();
     }//GEN-LAST:event_btnProduct1ActionPerformed
 
     private void btnProduct2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProduct2ActionPerformed
-        // TODO add your handling code here:
+        jpTmp.removeAll();
+        jpTmp.add(statistical_Customer_GUI);
+        jpTmp.revalidate();
+        jpTmp.repaint();
     }//GEN-LAST:event_btnProduct2ActionPerformed
 
 

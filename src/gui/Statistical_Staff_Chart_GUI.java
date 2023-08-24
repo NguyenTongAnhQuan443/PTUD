@@ -4,9 +4,9 @@ import lib2.ModelChart;
 import java.awt.Color;
 import lib2.Chart;
 
-public class Statistical_Product_Chart_GUI extends javax.swing.JPanel {
+public class Statistical_Staff_Chart_GUI extends javax.swing.JPanel {
 
-    public Statistical_Product_Chart_GUI() {
+    public Statistical_Staff_Chart_GUI() {
         initComponents();
         
         jpChart.addLegend("Income", new Color(245, 189, 135));

@@ -2,9 +2,9 @@
 package gui;
 
 
-public class Statistical_Product_Table_GUI extends javax.swing.JPanel {
+public class Statistical_Staff_Table_GUI extends javax.swing.JPanel {
 
-    public Statistical_Product_Table_GUI() {
+    public Statistical_Staff_Table_GUI() {
         initComponents();
     }
 
@@ -19,22 +19,22 @@ public class Statistical_Product_Table_GUI extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
 
         jlNameTable.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jlNameTable.setText("Chi tiết tồn kho");
+        jlNameTable.setText("Thống kê doanh số nhân viên");
 
         jTable1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã SP", "Tên SP", "Số lượng bán", "Chất liệu", "Màu sắc", "Kích thước", "Số lượng"
+                "STT", "Mã NV", "Tên NV", "Số điện thoại", "Số lượng đơn hàng", "Doanh thu"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, false, true, true, true
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -51,16 +51,16 @@ public class Statistical_Product_Table_GUI extends javax.swing.JPanel {
                 .addComponent(jspTable, javax.swing.GroupLayout.PREFERRED_SIZE, 695, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(275, 275, 275)
+                .addGap(211, 211, 211)
                 .addComponent(jlNameTable)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jlNameTable)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jspTable, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents

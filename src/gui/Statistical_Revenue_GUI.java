@@ -10,15 +10,15 @@ import javax.swing.JRadioButton;
 
 public class Statistical_Revenue_GUI extends javax.swing.JPanel {
 
+    private Statistical_Customer_Table_GUI statistical_Customer_Table_GUI;
+    private Statistical_Customer_Chart_GUI statistical_Customer_Chart_GUI;
     public Statistical_Revenue_GUI() {
         initComponents();
 
-        Statistical_Revenue_Table_GUI statistical_Revenue_Table_GUI = new Statistical_Revenue_Table_GUI();
+        Statistical_Customer_Table_GUI statistical_Customer_Table_GUI = new Statistical_Customer_Table_GUI();
         jpRight.removeAll();
-
         jpRight.setLayout(new FlowLayout());
-        jpRight.add(statistical_Revenue_Table_GUI);
-
+        jpRight.add(statistical_Customer_Table_GUI);
         jpRight.revalidate();
         jpRight.repaint();
     }
@@ -72,7 +72,7 @@ public class Statistical_Revenue_GUI extends javax.swing.JPanel {
         cbChooserYear.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jlTitle.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jlTitle.setText("Thống kê doanh thu");
+        jlTitle.setText("Thống kê khách hàng");
 
         javax.swing.GroupLayout jpLeftLayout = new javax.swing.GroupLayout(jpLeft);
         jpLeft.setLayout(jpLeftLayout);
@@ -146,24 +146,20 @@ public class Statistical_Revenue_GUI extends javax.swing.JPanel {
 
     private void jrbTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbTableActionPerformed
 
-        Statistical_Revenue_Table_GUI tableRevenueDetails_GUI = new Statistical_Revenue_Table_GUI();
+        Statistical_Customer_Table_GUI statistical_Customer_Table_GUI = new Statistical_Customer_Table_GUI();
         jpRight.removeAll();
-
         jpRight.setLayout(new FlowLayout());
-        jpRight.add(tableRevenueDetails_GUI);
-
+        jpRight.add(this.statistical_Customer_Table_GUI);
         jpRight.revalidate();
         jpRight.repaint();
     }//GEN-LAST:event_jrbTableActionPerformed
 
     private void jrbChartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbChartActionPerformed
 
-        Statistical_Revenue_Chart_GUI chartRevenue_GUI = new Statistical_Revenue_Chart_GUI();
+        Statistical_Customer_Chart_GUI statistical_Customer_Chart_GUI = new Statistical_Customer_Chart_GUI();
         jpRight.removeAll();
-
         jpRight.setLayout(new FlowLayout());
-        jpRight.add(chartRevenue_GUI);
-
+        jpRight.add(statistical_Customer_Chart_GUI);
         jpRight.revalidate();
         jpRight.repaint();
     }//GEN-LAST:event_jrbChartActionPerformed
