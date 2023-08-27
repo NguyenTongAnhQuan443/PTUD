@@ -1,11 +1,14 @@
 
 package gui;
 
+import lib2.TableCustom;
+
 
 public class Statistical_Product_Table_GUI extends javax.swing.JPanel {
 
     public Statistical_Product_Table_GUI() {
         initComponents();
+        TableCustom.apply(jspTable, TableCustom.TableType.DEFAULT);
     }
 
     @SuppressWarnings("unchecked")
@@ -21,7 +24,6 @@ public class Statistical_Product_Table_GUI extends javax.swing.JPanel {
         jlNameTable.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jlNameTable.setText("Chi tiết tồn kho");
 
-        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
@@ -30,11 +32,11 @@ public class Statistical_Product_Table_GUI extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã SP", "Tên SP", "Số lượng bán", "Chất liệu", "Màu sắc", "Kích thước", "Số lượng"
+                "STT", "Mã SP", "Tên SP", "Chất liệu", "Màu sắc", "Kích thước", "Số lượng", "SL bán"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, false, true, true, true
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

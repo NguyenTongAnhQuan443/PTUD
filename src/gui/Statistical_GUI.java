@@ -67,8 +67,8 @@ public class Statistical_GUI extends javax.swing.JPanel {
         jpMainSearch = new javax.swing.JPanel();
         btnRevenue = new lib2.Button();
         btnProduct = new lib2.Button();
-        btnProduct1 = new lib2.Button();
-        btnProduct2 = new lib2.Button();
+        btnStaff = new lib2.Button();
+        btnCustomer = new lib2.Button();
         jpTmp = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -345,29 +345,29 @@ public class Statistical_GUI extends javax.swing.JPanel {
         });
         jpMainSearch.add(btnProduct);
 
-        btnProduct1.setBackground(new java.awt.Color(204, 204, 255));
-        btnProduct1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        btnProduct1.setForeground(new java.awt.Color(255, 255, 255));
-        btnProduct1.setText("Thống kê nhân viên");
-        btnProduct1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnProduct1.addActionListener(new java.awt.event.ActionListener() {
+        btnStaff.setBackground(new java.awt.Color(204, 204, 255));
+        btnStaff.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnStaff.setForeground(new java.awt.Color(255, 255, 255));
+        btnStaff.setText("Thống kê nhân viên");
+        btnStaff.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnStaff.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProduct1ActionPerformed(evt);
+                btnStaffActionPerformed(evt);
             }
         });
-        jpMainSearch.add(btnProduct1);
+        jpMainSearch.add(btnStaff);
 
-        btnProduct2.setBackground(new java.awt.Color(204, 204, 255));
-        btnProduct2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        btnProduct2.setForeground(new java.awt.Color(255, 255, 255));
-        btnProduct2.setText("Thống kê khách hàng");
-        btnProduct2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnProduct2.addActionListener(new java.awt.event.ActionListener() {
+        btnCustomer.setBackground(new java.awt.Color(204, 204, 255));
+        btnCustomer.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnCustomer.setForeground(new java.awt.Color(255, 255, 255));
+        btnCustomer.setText("Thống kê khách hàng");
+        btnCustomer.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProduct2ActionPerformed(evt);
+                btnCustomerActionPerformed(evt);
             }
         });
-        jpMainSearch.add(btnProduct2);
+        jpMainSearch.add(btnCustomer);
 
         add(jpMainSearch);
 
@@ -405,26 +405,26 @@ public class Statistical_GUI extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnRevenueMouseClicked
 
-    private void btnProduct1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProduct1ActionPerformed
+    private void btnStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStaffActionPerformed
         jpTmp.removeAll();
         jpTmp.add(statistical_Staff_GUI);
         jpTmp.revalidate();
         jpTmp.repaint();
-    }//GEN-LAST:event_btnProduct1ActionPerformed
+    }//GEN-LAST:event_btnStaffActionPerformed
 
-    private void btnProduct2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProduct2ActionPerformed
+    private void btnCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerActionPerformed
         jpTmp.removeAll();
         jpTmp.add(statistical_Customer_GUI);
         jpTmp.revalidate();
         jpTmp.repaint();
-    }//GEN-LAST:event_btnProduct2ActionPerformed
+    }//GEN-LAST:event_btnCustomerActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private lib2.Button btnCustomer;
     private lib2.Button btnProduct;
-    private lib2.Button btnProduct1;
-    private lib2.Button btnProduct2;
     private lib2.Button btnRevenue;
+    private lib2.Button btnStaff;
     private javax.swing.JLabel jlCard14Title;
     private javax.swing.JLabel jlCard1Title;
     private javax.swing.JLabel jlCard1Unit;

@@ -26,7 +26,7 @@ public class Login_GUI extends javax.swing.JFrame {
         jpfPass = new lib2.PasswordField();
         jtfUser = new lib2.TextField();
         jlTitle = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        jlForgotPass = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -117,8 +117,8 @@ public class Login_GUI extends javax.swing.JFrame {
         jlTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlTitle.setText("Đăng Nhập");
 
-        jLabel1.setForeground(new java.awt.Color(102, 204, 255));
-        jLabel1.setText("Bạn quên mật khẩu ?");
+        jlForgotPass.setForeground(new java.awt.Color(102, 204, 255));
+        jlForgotPass.setText("Bạn quên mật khẩu ?");
 
         javax.swing.GroupLayout jpFormLoginLayout = new javax.swing.GroupLayout(jpFormLogin);
         jpFormLogin.setLayout(jpFormLoginLayout);
@@ -139,7 +139,7 @@ public class Login_GUI extends javax.swing.JFrame {
                         .addGap(39, 39, 39))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpFormLoginLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(jlForgotPass)
                 .addGap(17, 17, 17))
         );
         jpFormLoginLayout.setVerticalGroup(
@@ -154,7 +154,7 @@ public class Login_GUI extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
+                .addComponent(jlForgotPass)
                 .addGap(9, 9, 9))
         );
 
@@ -233,9 +233,9 @@ public class Login_GUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnLogin;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jlContent1;
     private javax.swing.JLabel jlContent2;
+    private javax.swing.JLabel jlForgotPass;
     private javax.swing.JLabel jlHello;
     private javax.swing.JLabel jlTitle;
     private javax.swing.JPanel jpContent;

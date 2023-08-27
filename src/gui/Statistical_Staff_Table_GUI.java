@@ -1,11 +1,12 @@
 
 package gui;
 
-
+import lib2.TableCustom;
 public class Statistical_Staff_Table_GUI extends javax.swing.JPanel {
 
     public Statistical_Staff_Table_GUI() {
         initComponents();
+        TableCustom.apply(jspTable, TableCustom.TableType.DEFAULT);
     }
 
     @SuppressWarnings("unchecked")
@@ -14,15 +15,14 @@ public class Statistical_Staff_Table_GUI extends javax.swing.JPanel {
 
         jlNameTable = new javax.swing.JLabel();
         jspTable = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         jlNameTable.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jlNameTable.setText("Thống kê doanh số nhân viên");
 
-        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -30,7 +30,7 @@ public class Statistical_Staff_Table_GUI extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã NV", "Tên NV", "Số điện thoại", "Số lượng đơn hàng", "Doanh thu"
+                "STT", "Mã NV", "Tên NV", "Số điện thoại", "SL đơn hàng", "Doanh thu"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -41,7 +41,7 @@ public class Statistical_Staff_Table_GUI extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jspTable.setViewportView(jTable1);
+        jspTable.setViewportView(jTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -67,7 +67,7 @@ public class Statistical_Staff_Table_GUI extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable;
     private javax.swing.JLabel jlNameTable;
     private javax.swing.JScrollPane jspTable;
     // End of variables declaration//GEN-END:variables

@@ -1,11 +1,14 @@
 
 package gui;
 
+import lib2.TableCustom;
+
 
 public class Statistical_Customer_Table_GUI extends javax.swing.JPanel {
 
     public Statistical_Customer_Table_GUI() {
         initComponents();
+        TableCustom.apply(jspTable, TableCustom.TableType.DEFAULT);
     }
 
     @SuppressWarnings("unchecked")
@@ -19,9 +22,8 @@ public class Statistical_Customer_Table_GUI extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
 
         jlNameTable.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jlNameTable.setText("Chi tiết doanh thu");
+        jlNameTable.setText("Thống kê khách hàng");
 
-        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

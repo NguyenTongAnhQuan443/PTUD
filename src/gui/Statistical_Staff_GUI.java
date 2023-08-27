@@ -15,7 +15,7 @@ public class Statistical_Staff_GUI extends javax.swing.JPanel {
     public Statistical_Staff_GUI() {
         initComponents();
 
-        Statistical_Staff_Table_GUI statistical_Staff_Table_GUI = new Statistical_Staff_Table_GUI();
+        statistical_Staff_Table_GUI = new Statistical_Staff_Table_GUI();
         jpRight.removeAll();
         jpRight.setLayout(new FlowLayout());
         jpRight.add(statistical_Staff_Table_GUI);
@@ -146,8 +146,7 @@ public class Statistical_Staff_GUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jrbTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbTableActionPerformed
-
-        Statistical_Staff_Table_GUI statistical_Staff_Table_GUI = new Statistical_Staff_Table_GUI();
+        statistical_Staff_Table_GUI = new Statistical_Staff_Table_GUI();
         jpRight.removeAll();
         jpRight.setLayout(new FlowLayout());
         jpRight.add(this.statistical_Staff_Table_GUI);
@@ -156,11 +155,10 @@ public class Statistical_Staff_GUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jrbTableActionPerformed
 
     private void jrbChartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbChartActionPerformed
-
-        Statistical_Staff_Chart_GUI statistical_Staff_Chart_GUI = new Statistical_Staff_Chart_GUI();
+        statistical_Staff_Chart_GUI = new Statistical_Staff_Chart_GUI();
         jpRight.removeAll();
         jpRight.setLayout(new FlowLayout());
-        jpRight.add(this.statistical_Staff_Chart_GUI);
+        jpRight.add(statistical_Staff_Chart_GUI);
         jpRight.revalidate();
         jpRight.repaint();
     }//GEN-LAST:event_jrbChartActionPerformed

@@ -5,6 +5,7 @@ public class Product_GUI extends javax.swing.JPanel {
 
     private Product_Detail_GUI product_Detail_GUI;
     private Product_Properties_GUI product_Properties_GUI;
+    private Product_Filter_GUI product_Filter_GUI;
     public Product_GUI() {
         initComponents();
         
@@ -20,8 +21,9 @@ public class Product_GUI extends javax.swing.JPanel {
     private void initComponents() {
 
         jpMainSearch = new javax.swing.JPanel();
-        btnProduct = new lib2.Button();
-        btnRevenue = new lib2.Button();
+        btnProductProperties = new lib2.Button();
+        btnProductDetails = new lib2.Button();
+        btnProductFilter = new lib2.Button();
         jpTmp = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(204, 204, 255));
@@ -30,29 +32,41 @@ public class Product_GUI extends javax.swing.JPanel {
         jpMainSearch.setBackground(new java.awt.Color(255, 255, 255));
         jpMainSearch.setLayout(new java.awt.GridLayout(1, 0));
 
-        btnProduct.setBackground(new java.awt.Color(204, 204, 255));
-        btnProduct.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        btnProduct.setForeground(new java.awt.Color(255, 255, 255));
-        btnProduct.setText("Thuộc tính sản phẩm");
-        btnProduct.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnProduct.addActionListener(new java.awt.event.ActionListener() {
+        btnProductProperties.setBackground(new java.awt.Color(204, 204, 255));
+        btnProductProperties.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnProductProperties.setForeground(new java.awt.Color(255, 255, 255));
+        btnProductProperties.setText("Thuộc tính sản phẩm");
+        btnProductProperties.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnProductProperties.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProductActionPerformed(evt);
+                btnProductPropertiesActionPerformed(evt);
             }
         });
-        jpMainSearch.add(btnProduct);
+        jpMainSearch.add(btnProductProperties);
 
-        btnRevenue.setBackground(new java.awt.Color(204, 204, 255));
-        btnRevenue.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        btnRevenue.setForeground(new java.awt.Color(255, 255, 255));
-        btnRevenue.setText("Thông tin chi tiết");
-        btnRevenue.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnRevenue.addActionListener(new java.awt.event.ActionListener() {
+        btnProductDetails.setBackground(new java.awt.Color(204, 204, 255));
+        btnProductDetails.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnProductDetails.setForeground(new java.awt.Color(255, 255, 255));
+        btnProductDetails.setText("Thông tin chi tiết");
+        btnProductDetails.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnProductDetails.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRevenueActionPerformed(evt);
+                btnProductDetailsActionPerformed(evt);
             }
         });
-        jpMainSearch.add(btnRevenue);
+        jpMainSearch.add(btnProductDetails);
+
+        btnProductFilter.setBackground(new java.awt.Color(204, 204, 255));
+        btnProductFilter.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnProductFilter.setForeground(new java.awt.Color(255, 255, 255));
+        btnProductFilter.setText("Lọc sản phẩm");
+        btnProductFilter.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnProductFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProductFilterActionPerformed(evt);
+            }
+        });
+        jpMainSearch.add(btnProductFilter);
 
         add(jpMainSearch);
 
@@ -60,27 +74,36 @@ public class Product_GUI extends javax.swing.JPanel {
         add(jpTmp);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRevenueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevenueActionPerformed
-                product_Detail_GUI = new Product_Detail_GUI();
+    private void btnProductDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductDetailsActionPerformed
+        product_Detail_GUI = new Product_Detail_GUI();
         jpTmp.removeAll();
         jpTmp.add(product_Detail_GUI);
         jpTmp.revalidate();
         jpTmp.repaint();
 
-    }//GEN-LAST:event_btnRevenueActionPerformed
+    }//GEN-LAST:event_btnProductDetailsActionPerformed
 
-    private void btnProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductActionPerformed
-                product_Properties_GUI = new Product_Properties_GUI();
+    private void btnProductPropertiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductPropertiesActionPerformed
+        product_Properties_GUI = new Product_Properties_GUI();
         jpTmp.removeAll();
         jpTmp.add(product_Properties_GUI);
         jpTmp.revalidate();
         jpTmp.repaint();
-    }//GEN-LAST:event_btnProductActionPerformed
+    }//GEN-LAST:event_btnProductPropertiesActionPerformed
+
+    private void btnProductFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductFilterActionPerformed
+        Product_Filter_GUI product_Filter_GUI = new Product_Filter_GUI();
+        jpTmp.removeAll();
+        jpTmp.add(product_Filter_GUI);
+        jpTmp.revalidate();
+        jpTmp.repaint();
+    }//GEN-LAST:event_btnProductFilterActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private lib2.Button btnProduct;
-    private lib2.Button btnRevenue;
+    private lib2.Button btnProductDetails;
+    private lib2.Button btnProductFilter;
+    private lib2.Button btnProductProperties;
     private javax.swing.JPanel jpMainSearch;
     private javax.swing.JPanel jpTmp;
     // End of variables declaration//GEN-END:variables

@@ -2,10 +2,13 @@
 // free layout
 package gui;
 
+import lib2.TableCustom;
+
 public class Product_Detail_GUI extends javax.swing.JPanel {
 
     public Product_Detail_GUI() {
         initComponents();
+        TableCustom.apply(jspTable, TableCustom.TableType.DEFAULT);
     }
 
     @SuppressWarnings("unchecked")
@@ -30,7 +33,6 @@ public class Product_Detail_GUI extends javax.swing.JPanel {
         btnEdit = new lib2.Button();
         btnSearch = new lib2.Button();
         btnOutputFile = new lib2.Button();
-        btnSearch1 = new lib2.Button();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
 
@@ -130,7 +132,6 @@ public class Product_Detail_GUI extends javax.swing.JPanel {
         jpBottom.setBackground(new java.awt.Color(255, 255, 255));
         jpBottom.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin sản phẩm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 14))); // NOI18N
 
-        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
@@ -141,19 +142,27 @@ public class Product_Detail_GUI extends javax.swing.JPanel {
             new String [] {
                 "Mã sản phẩm", "Tên sản phẩm", "Loại sản phẩm", "Kích thước", "Màu sắc", "Chất liệu", "Đơn giá", "Số lượng"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jspTable.setViewportView(jTable1);
 
         btnAdd.setBackground(new java.awt.Color(135, 206, 235));
         btnAdd.setForeground(new java.awt.Color(255, 255, 255));
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add24.png"))); // NOI18N
-        btnAdd.setText("Thêm sản phẩm");
+        btnAdd.setText("Thêm SP");
         btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         btnDel.setBackground(new java.awt.Color(135, 206, 235));
         btnDel.setForeground(new java.awt.Color(255, 255, 255));
         btnDel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete24.png"))); // NOI18N
-        btnDel.setText("Xóa sản phẩm");
+        btnDel.setText("Xóa SP");
         btnDel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         btnInputFile.setBackground(new java.awt.Color(135, 206, 235));
@@ -170,7 +179,7 @@ public class Product_Detail_GUI extends javax.swing.JPanel {
 
         btnSearch.setBackground(new java.awt.Color(135, 206, 235));
         btnSearch.setForeground(new java.awt.Color(255, 255, 255));
-        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search24_1.png"))); // NOI18N
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/clear24.png"))); // NOI18N
         btnSearch.setText("Xóa trắng");
         btnSearch.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
@@ -180,12 +189,6 @@ public class Product_Detail_GUI extends javax.swing.JPanel {
         btnOutputFile.setText("Xuất SP ra file");
         btnOutputFile.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
-        btnSearch1.setBackground(new java.awt.Color(135, 206, 235));
-        btnSearch1.setForeground(new java.awt.Color(255, 255, 255));
-        btnSearch1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search24_1.png"))); // NOI18N
-        btnSearch1.setText("Tìm sản phẩm");
-        btnSearch1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-
         javax.swing.GroupLayout jpBottomLayout = new javax.swing.GroupLayout(jpBottom);
         jpBottom.setLayout(jpBottomLayout);
         jpBottomLayout.setHorizontalGroup(
@@ -193,23 +196,18 @@ public class Product_Detail_GUI extends javax.swing.JPanel {
             .addComponent(jspTable)
             .addGroup(jpBottomLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnDel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
+                .addComponent(btnDel, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 248, Short.MAX_VALUE)
+                .addComponent(btnInputFile, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnInputFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnOutputFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnOutputFile, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addGroup(jpBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpBottomLayout.createSequentialGroup()
-                    .addContainerGap(450, Short.MAX_VALUE)
-                    .addComponent(btnSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(429, 429, 429)))
         );
         jpBottomLayout.setVerticalGroup(
             jpBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,11 +223,6 @@ public class Product_Detail_GUI extends javax.swing.JPanel {
                     .addComponent(btnOutputFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(7, Short.MAX_VALUE))
-            .addGroup(jpBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpBottomLayout.createSequentialGroup()
-                    .addContainerGap(266, Short.MAX_VALUE)
-                    .addComponent(btnSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
         );
 
         add(jpBottom);
@@ -259,7 +252,6 @@ public class Product_Detail_GUI extends javax.swing.JPanel {
     private lib2.Button btnInputFile;
     private lib2.Button btnOutputFile;
     private lib2.Button btnSearch;
-    private lib2.Button btnSearch1;
     private lib2.ComboBoxSuggestion cbColor;
     private lib2.ComboBoxSuggestion cbMaterial;
     private lib2.ComboBoxSuggestion cbSize;

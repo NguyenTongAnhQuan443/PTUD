@@ -36,8 +36,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
     private Statistical_GUI statistical_GUI;
     private Product_GUI product_GUI;
     private Bill_GUI bill_GUI;
-
-    private int menuFlag = -1;
+    private Staff_GUI staff_GUI;
 
     public HomeManager_GUI() {
         initComponents();
@@ -47,7 +46,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
         jpCenter.add(statistical_GUI);
         jpCenter.revalidate();
         jpCenter.repaint();
-
+        jlStatistical.setForeground(Color.ORANGE);
     }
 
     @SuppressWarnings("unchecked")
@@ -525,6 +524,12 @@ public class HomeManager_GUI extends javax.swing.JFrame {
         if (bill_GUI != null) {
             bill_GUI.stopWebcam();
         }
+        
+        staff_GUI = new Staff_GUI();
+        jpCenter.removeAll();
+        jpCenter.add(staff_GUI);
+        jpCenter.revalidate();
+        jpCenter.repaint();
     }//GEN-LAST:event_jlStaffMouseClicked
 
     private void jlCustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlCustomerMouseClicked

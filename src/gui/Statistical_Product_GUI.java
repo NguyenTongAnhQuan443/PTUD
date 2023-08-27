@@ -11,11 +11,11 @@ import javax.swing.JRadioButton;
 public class Statistical_Product_GUI extends javax.swing.JPanel {
 
     private Statistical_Product_Table_GUI statistical_Product_Table_GUI;
-    private Statistical_Revenue_Chart_GUI statistical_Revenue_Chart_GUI;
+    private Statistical_Product_Chart_GUI statistical_Product_Chart_GUI;
     public Statistical_Product_GUI() {
         initComponents();
 
-        Statistical_Product_Table_GUI statistical_Product_Table_GUI = new Statistical_Product_Table_GUI();
+        statistical_Product_Table_GUI = new Statistical_Product_Table_GUI();
         jpRight.removeAll();
         jpRight.setLayout(new FlowLayout());
         jpRight.add(statistical_Product_Table_GUI);
@@ -147,7 +147,7 @@ public class Statistical_Product_GUI extends javax.swing.JPanel {
 
     private void jrbTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbTableActionPerformed
 
-        Statistical_Product_Table_GUI statistical_Product_Table_GUI = new Statistical_Product_Table_GUI();
+        statistical_Product_Table_GUI = new Statistical_Product_Table_GUI();
         jpRight.removeAll();
         jpRight.setLayout(new FlowLayout());
         jpRight.add(statistical_Product_Table_GUI);
@@ -157,7 +157,7 @@ public class Statistical_Product_GUI extends javax.swing.JPanel {
 
     private void jrbChartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbChartActionPerformed
 
-        Statistical_Product_Chart_GUI statistical_Product_Chart_GUI = new Statistical_Product_Chart_GUI();
+        statistical_Product_Chart_GUI = new Statistical_Product_Chart_GUI();
         jpRight.removeAll();
         jpRight.setLayout(new FlowLayout());
         jpRight.add(statistical_Product_Chart_GUI);
