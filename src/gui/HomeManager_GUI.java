@@ -37,7 +37,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
     private Product_GUI product_GUI;
     private Sell_GUI sell_GUI;
     private Staff_GUI staff_GUI;
-
+    private Customer_GUI customer_GUI;
     public HomeManager_GUI() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -537,6 +537,12 @@ public class HomeManager_GUI extends javax.swing.JFrame {
         if (sell_GUI != null) {
             sell_GUI.stopWebcam();
         }
+        
+        customer_GUI = new Customer_GUI();
+        jpCenter.removeAll();
+        jpCenter.add(customer_GUI);
+        jpCenter.revalidate();
+        jpCenter.repaint();
     }//GEN-LAST:event_jlCustomerMouseClicked
 
     private void jlHistoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlHistoryMouseClicked

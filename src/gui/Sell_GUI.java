@@ -98,7 +98,6 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         jpListBill.setBackground(new java.awt.Color(255, 255, 255));
         jpListBill.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách hóa đơn", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 14))); // NOI18N
 
-        jTableListBill.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTableListBill.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -150,7 +149,6 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         jpLeft2.setBackground(new java.awt.Color(255, 255, 255));
         jpLeft2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Giỏ hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 14))); // NOI18N
 
-        jTableCart.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTableCart.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
@@ -245,7 +243,6 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         jpLeft3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách sản phẩm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 14))); // NOI18N
         jpLeft3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jTableListProduct.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTableListProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
