@@ -108,7 +108,15 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             new String [] {
                 "STT", "Mã hóa đơn", "Tên NV", "Tên KH", "Trạng thái", "Ngày tạo"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jspListBill.setViewportView(jTableListBill);
 
         jpQR.setBackground(new java.awt.Color(255, 255, 255));
@@ -159,7 +167,15 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             new String [] {
                 "STT", "Mã SP", "Tên SP", "Số lượng", "Đơn giá", "Giảm giá", "Thành tiền", "Trạng thái"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jspCart.setViewportView(jTableCart);
 
         btnDel.setBackground(new java.awt.Color(135, 206, 235));
@@ -253,7 +269,15 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             new String [] {
                 "Mã SP", "Tên SP", "Loại", "Chất liệu", "Kích thước", "Màu sắc", "Số lượng", "Đơn giá"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jspListProduct.setViewportView(jTableListProduct);
 
         lbSearch.setText("Tìm Sản phẩm :");
