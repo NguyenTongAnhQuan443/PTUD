@@ -35,7 +35,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
 
     private Statistical_GUI statistical_GUI;
     private Product_GUI product_GUI;
-    private Bill_GUI bill_GUI;
+    private Sell_GUI sell_GUI;
     private Staff_GUI staff_GUI;
 
     public HomeManager_GUI() {
@@ -57,7 +57,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
         jpLeft = new javax.swing.JPanel();
         jlProduct = new javax.swing.JLabel();
         jlStaff = new javax.swing.JLabel();
-        jlBill = new javax.swing.JLabel();
+        jlSell = new javax.swing.JLabel();
         jlCustomer = new javax.swing.JLabel();
         jlHistory = new javax.swing.JLabel();
         jlSale = new javax.swing.JLabel();
@@ -114,19 +114,19 @@ public class HomeManager_GUI extends javax.swing.JFrame {
             }
         });
 
-        jlBill.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jlBill.setForeground(new java.awt.Color(255, 255, 255));
-        jlBill.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bill32.png"))); // NOI18N
-        jlBill.setText("Hóa đơn");
-        jlBill.addMouseListener(new java.awt.event.MouseAdapter() {
+        jlSell.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jlSell.setForeground(new java.awt.Color(255, 255, 255));
+        jlSell.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sell32.png"))); // NOI18N
+        jlSell.setText("Bán hàng");
+        jlSell.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jlBillMouseClicked(evt);
+                jlSellMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jlBillMouseEntered(evt);
+                jlSellMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jlBillMouseExited(evt);
+                jlSellMouseExited(evt);
             }
         });
 
@@ -281,7 +281,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
                     .addComponent(jlStatistical)
                     .addComponent(jlProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlStaff)
-                    .addComponent(jlBill)
+                    .addComponent(jlSell)
                     .addComponent(jlCustomer)
                     .addComponent(jlHistory)
                     .addComponent(jlSale)
@@ -307,7 +307,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jlStaff)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jlBill)
+                .addComponent(jlSell)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jlCustomer)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -392,8 +392,8 @@ public class HomeManager_GUI extends javax.swing.JFrame {
 
     private void jlChangePassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlChangePassMouseClicked
         selectMenu(jlChangePass);
-        if (bill_GUI != null) {
-            bill_GUI.stopWebcam();
+        if (sell_GUI != null) {
+            sell_GUI.stopWebcam();
         }
     }//GEN-LAST:event_jlChangePassMouseClicked
 
@@ -401,8 +401,8 @@ public class HomeManager_GUI extends javax.swing.JFrame {
         selectMenu(jlStatistical);
         jlStatistical.setForeground(Color.ORANGE);
 
-        if (bill_GUI != null) {
-            bill_GUI.stopWebcam();
+        if (sell_GUI != null) {
+            sell_GUI.stopWebcam();
         }
         openStatistical();
         jpCenter.removeAll();
@@ -413,8 +413,8 @@ public class HomeManager_GUI extends javax.swing.JFrame {
 
     private void jlProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlProductMouseClicked
         selectMenu(jlProduct);
-        if (bill_GUI != null) {
-            bill_GUI.stopWebcam();
+        if (sell_GUI != null) {
+            sell_GUI.stopWebcam();
         }
         jpCenter.removeAll();
         Product_GUI product_GUI = new Product_GUI();
@@ -447,13 +447,13 @@ public class HomeManager_GUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jlStaffMouseExited
 
-    private void jlBillMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBillMouseEntered
+    private void jlSellMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlSellMouseEntered
 
-    }//GEN-LAST:event_jlBillMouseEntered
+    }//GEN-LAST:event_jlSellMouseEntered
 
-    private void jlBillMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBillMouseExited
+    private void jlSellMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlSellMouseExited
 
-    }//GEN-LAST:event_jlBillMouseExited
+    }//GEN-LAST:event_jlSellMouseExited
 
     private void jlCustomerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlCustomerMouseEntered
 
@@ -510,19 +510,19 @@ public class HomeManager_GUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jlExitMouseClicked
 
-    private void jlBillMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBillMouseClicked
-        selectMenu(jlBill);
-        bill_GUI = new Bill_GUI();
+    private void jlSellMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlSellMouseClicked
+        selectMenu(jlSell);
+        sell_GUI = new Sell_GUI();
         jpCenter.removeAll();
-        jpCenter.add(bill_GUI);
+        jpCenter.add(sell_GUI);
         jpCenter.revalidate();
         jpCenter.repaint();
-    }//GEN-LAST:event_jlBillMouseClicked
+    }//GEN-LAST:event_jlSellMouseClicked
 
     private void jlStaffMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlStaffMouseClicked
         selectMenu(jlStaff);
-        if (bill_GUI != null) {
-            bill_GUI.stopWebcam();
+        if (sell_GUI != null) {
+            sell_GUI.stopWebcam();
         }
         
         staff_GUI = new Staff_GUI();
@@ -534,29 +534,29 @@ public class HomeManager_GUI extends javax.swing.JFrame {
 
     private void jlCustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlCustomerMouseClicked
         selectMenu(jlCustomer);
-        if (bill_GUI != null) {
-            bill_GUI.stopWebcam();
+        if (sell_GUI != null) {
+            sell_GUI.stopWebcam();
         }
     }//GEN-LAST:event_jlCustomerMouseClicked
 
     private void jlHistoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlHistoryMouseClicked
         selectMenu(jlHistory);
-        if (bill_GUI != null) {
-            bill_GUI.stopWebcam();
+        if (sell_GUI != null) {
+            sell_GUI.stopWebcam();
         }
     }//GEN-LAST:event_jlHistoryMouseClicked
 
     private void jlSaleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlSaleMouseClicked
         selectMenu(jlSale);
-        if (bill_GUI != null) {
-            bill_GUI.stopWebcam();
+        if (sell_GUI != null) {
+            sell_GUI.stopWebcam();
         }
     }//GEN-LAST:event_jlSaleMouseClicked
 
     private void jlLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlLogoutMouseClicked
         selectMenu(jlLogout);
-        if (bill_GUI != null) {
-            bill_GUI.stopWebcam();
+        if (sell_GUI != null) {
+            sell_GUI.stopWebcam();
         }
     }//GEN-LAST:event_jlLogoutMouseClicked
 
@@ -569,13 +569,13 @@ public class HomeManager_GUI extends javax.swing.JFrame {
         });
     }
 
-    public HomeManager_GUI(Statistical_GUI statistical_GUI, Product_GUI product_GUI, Bill_GUI bill_GUI, Combobox cbDisplay, Combobox cbLanguage, JLabel jlBill, JLabel jlChangePass, JLabel jlCustomer, JLabel jlDisplay, JLabel jlExit, JLabel jlHistory, JLabel jlLanguage, JLabel jlLogo, JLabel jlLogout, JLabel jlNameShop, JLabel jlProduct, JLabel jlSale, JLabel jlStaff, JLabel jlStatistical, JPanel jpCenter, JPanel jpLeft, JPanel jpMain, JPanel jpTop) throws HeadlessException {
+    public HomeManager_GUI(Statistical_GUI statistical_GUI, Product_GUI product_GUI, Sell_GUI bill_GUI, Combobox cbDisplay, Combobox cbLanguage, JLabel jlSell, JLabel jlChangePass, JLabel jlCustomer, JLabel jlDisplay, JLabel jlExit, JLabel jlHistory, JLabel jlLanguage, JLabel jlLogo, JLabel jlLogout, JLabel jlNameShop, JLabel jlProduct, JLabel jlSale, JLabel jlStaff, JLabel jlStatistical, JPanel jpCenter, JPanel jpLeft, JPanel jpMain, JPanel jpTop) throws HeadlessException {
         this.statistical_GUI = statistical_GUI;
         this.product_GUI = product_GUI;
-        this.bill_GUI = bill_GUI;
+        this.sell_GUI = sell_GUI;
         this.cbDisplay = cbDisplay;
         this.cbLanguage = cbLanguage;
-        this.jlBill = jlBill;
+        this.jlSell = jlSell;
         this.jlChangePass = jlChangePass;
         this.jlCustomer = jlCustomer;
         this.jlDisplay = jlDisplay;
@@ -610,7 +610,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
         jlStatistical.setForeground(Color.WHITE);
         jlProduct.setForeground(Color.WHITE);
         jlStaff.setForeground(Color.WHITE);
-        jlBill.setForeground(Color.WHITE);
+        jlSell.setForeground(Color.WHITE);
         jlCustomer.setForeground(Color.WHITE);
         jlHistory.setForeground(Color.WHITE);
         jlSale.setForeground(Color.WHITE);
@@ -628,7 +628,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
         jlStatistical.setText(Utils.thongKe);
         jlProduct.setText(Utils.sanPham);
         jlStaff.setText(Utils.nhanVien);
-        jlBill.setText(Utils.hoaDon);
+        jlSell.setText(Utils.hoaDon);
         jlCustomer.setText(Utils.khachHang);
         jlHistory.setText(Utils.lichSu);
         jlSale.setText(Utils.khuyenMai);
@@ -646,7 +646,6 @@ public class HomeManager_GUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Combobox cbDisplay;
     private lib2.Combobox cbLanguage;
-    private javax.swing.JLabel jlBill;
     private javax.swing.JLabel jlChangePass;
     private javax.swing.JLabel jlCustomer;
     private javax.swing.JLabel jlDisplay;
@@ -658,6 +657,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jlNameShop;
     private javax.swing.JLabel jlProduct;
     private javax.swing.JLabel jlSale;
+    private javax.swing.JLabel jlSell;
     private javax.swing.JLabel jlStaff;
     private javax.swing.JLabel jlStatistical;
     private javax.swing.JPanel jpCenter;

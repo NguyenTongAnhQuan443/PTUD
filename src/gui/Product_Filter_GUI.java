@@ -1,13 +1,26 @@
 //1012, 550
 package gui;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.JOptionPane;
 import lib2.TableCustom;
+
 
 public class Product_Filter_GUI extends javax.swing.JPanel {
 
     public Product_Filter_GUI() {
         initComponents();
         TableCustom.apply(jspTable, TableCustom.TableType.DEFAULT);
+        
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -15,6 +28,8 @@ public class Product_Filter_GUI extends javax.swing.JPanel {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jPanel1 = new javax.swing.JPanel();
+        imageLabel = new javax.swing.JLabel();
         jpTop = new javax.swing.JPanel();
         jrbFilterID = new javax.swing.JRadioButton();
         jrbFilterCriteria = new javax.swing.JRadioButton();
@@ -24,10 +39,22 @@ public class Product_Filter_GUI extends javax.swing.JPanel {
         jpBottom = new javax.swing.JPanel();
         jspTable = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
+        btnSearch1 = new lib2.Button();
 
         buttonGroup1.add(jrbFilterCriteria);
         buttonGroup1.add(jrbFilterID);
         jrbFilterID.setSelected(true);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(imageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(imageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+        );
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
 
@@ -51,7 +78,7 @@ public class Product_Filter_GUI extends javax.swing.JPanel {
 
         btnSearch.setBackground(new java.awt.Color(135, 206, 235));
         btnSearch.setForeground(new java.awt.Color(255, 255, 255));
-        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search24_1.png"))); // NOI18N
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search24.png"))); // NOI18N
         btnSearch.setText("Tìm SP");
         btnSearch.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
@@ -70,7 +97,7 @@ public class Product_Filter_GUI extends javax.swing.JPanel {
                     .addComponent(jtfInputID))
                 .addGap(18, 18, 18)
                 .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(258, Short.MAX_VALUE))
+                .addContainerGap(257, Short.MAX_VALUE))
         );
         jpTopLayout.setVerticalGroup(
             jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,17 +140,33 @@ public class Product_Filter_GUI extends javax.swing.JPanel {
         });
         jspTable.setViewportView(jTable);
 
+        btnSearch1.setBackground(new java.awt.Color(135, 206, 235));
+        btnSearch1.setForeground(new java.awt.Color(255, 255, 255));
+        btnSearch1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/qr24.png"))); // NOI18N
+        btnSearch1.setText("Tạo QR sản phẩm");
+        btnSearch1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSearch1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearch1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpBottomLayout = new javax.swing.GroupLayout(jpBottom);
         jpBottom.setLayout(jpBottomLayout);
         jpBottomLayout.setHorizontalGroup(
             jpBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jspTable, javax.swing.GroupLayout.DEFAULT_SIZE, 1002, Short.MAX_VALUE)
+            .addGroup(jpBottomLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jpBottomLayout.setVerticalGroup(
             jpBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpBottomLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jspTable, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE))
+                .addComponent(jspTable, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         add(jpBottom);
@@ -133,11 +176,32 @@ public class Product_Filter_GUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jrbFilterIDActionPerformed
 
+    private void btnSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch1ActionPerformed
+        try {
+            String QrCodeDat = "Minh Kỳ";
+            String filepath = "D:/FleyShopApp/QRProduct/QR_Products.png";
+            String charset = "UTF-8";
+            
+            Map<EncodeHintType, ErrorCorrectionLevel> hintMap = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
+            hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+            
+            BitMatrix matrix = new MultiFormatWriter().encode(new String(QrCodeDat.getBytes(charset), charset),BarcodeFormat.QR_CODE, 200, 200, hintMap);
+            MatrixToImageWriter.writeToFile(matrix, filepath.substring(filepath.lastIndexOf('.')+1),new File(filepath));
+
+            JOptionPane.showMessageDialog(null, "Tạo mã QR thành công ! \n Bạn hãy vào thư mục : D:\\FleyShopApp\\QRProduct để thực hiện in QR cho sản phẩm nhé ");
+        
+        } catch (Exception e) {
+            
+        }
+    }//GEN-LAST:event_btnSearch1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnSearch;
+    private lib2.Button btnSearch1;
     private javax.swing.ButtonGroup buttonGroup1;
     private lib2.ComboBoxSuggestion cbFilterCriteria;
+    private javax.swing.JLabel imageLabel;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JTable jTable;
     private javax.swing.JPanel jpBottom;
     private javax.swing.JPanel jpTop;

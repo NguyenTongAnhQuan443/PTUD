@@ -3,7 +3,6 @@ package gui;
 import lib2.TableCustom;
 public class Staff_Table_GUI extends javax.swing.JPanel {
 
-//    private Staff_AddStaff_GUI staff_AddStaff_GUI;
     public Staff_Table_GUI() {
         initComponents();
         

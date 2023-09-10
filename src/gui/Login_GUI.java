@@ -215,10 +215,6 @@ public class Login_GUI extends javax.swing.JFrame {
             homeManager_GUI = (HomeManager_GUI) SwingUtilities.getWindowAncestor(Login_GUI.this);
             homeManager_GUI = new HomeManager_GUI();
             homeManager_GUI.setVisible(true);
-
-//            Home h = (Home) SwingUtilities.getWindowAncestor(Login_GUI.this);
-//            h = new Home();
-//            h.setVisible(true);
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 

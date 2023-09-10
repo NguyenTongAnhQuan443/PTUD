@@ -1,0 +1,305 @@
+
+package gui;
+
+public class Sell_CreateOrderShip_GUI extends javax.swing.JPanel {
+
+    public Sell_CreateOrderShip_GUI() {
+        initComponents();
+    }
+
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        ipInfoCustomer = new javax.swing.JPanel();
+        jpCustomer = new javax.swing.JPanel();
+        jlNameCus = new javax.swing.JLabel();
+        jtfNameCus = new javax.swing.JTextField();
+        jtfAddress = new javax.swing.JTextField();
+        jlPhoneCus = new javax.swing.JLabel();
+        jlAddress = new javax.swing.JLabel();
+        cbProvince = new lib2.ComboBoxSuggestion();
+        cbDistrict = new lib2.ComboBoxSuggestion();
+        cbCommune = new lib2.ComboBoxSuggestion();
+        jlAddress1 = new javax.swing.JLabel();
+        jtfPhoneCus = new javax.swing.JTextField();
+        jpMoney = new javax.swing.JPanel();
+        jlTotalAmount = new javax.swing.JLabel();
+        jtfTotalAmount = new javax.swing.JTextField();
+        jlMoneyShip = new javax.swing.JLabel();
+        jtfMoneyShip = new javax.swing.JTextField();
+        jlTotal = new javax.swing.JLabel();
+        jtfTotal = new javax.swing.JTextField();
+        jtfNote = new javax.swing.JTextField();
+        jlNote = new javax.swing.JLabel();
+        jpPay = new javax.swing.JPanel();
+        btnReturn = new lib2.Button();
+        btnCreateOrder = new lib2.Button();
+        btnDone = new lib2.Button();
+        btnDelivering = new lib2.Button();
+
+        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
+
+        ipInfoCustomer.setBackground(new java.awt.Color(255, 255, 255));
+        ipInfoCustomer.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        ipInfoCustomer.setLayout(new java.awt.GridLayout(1, 1));
+
+        jpCustomer.setBackground(new java.awt.Color(255, 255, 255));
+        jpCustomer.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jlNameCus.setText("Tên KH (*):");
+
+        jtfNameCus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jtfAddress.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jlPhoneCus.setText("SDT (*):");
+
+        jlAddress.setText("Địa chỉ (*):");
+
+        cbProvince.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tỉnh/Thành phố" }));
+
+        cbDistrict.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Quận/Huyện" }));
+
+        cbCommune.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Phường/Xã" }));
+
+        jlAddress1.setText("Cụ thể :");
+
+        jtfPhoneCus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        javax.swing.GroupLayout jpCustomerLayout = new javax.swing.GroupLayout(jpCustomer);
+        jpCustomer.setLayout(jpCustomerLayout);
+        jpCustomerLayout.setHorizontalGroup(
+            jpCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpCustomerLayout.createSequentialGroup()
+                .addGroup(jpCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jpCustomerLayout.createSequentialGroup()
+                            .addComponent(jlPhoneCus)
+                            .addGap(36, 36, 36))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCustomerLayout.createSequentialGroup()
+                            .addGroup(jpCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jlAddress)
+                                .addComponent(jlNameCus))
+                            .addGap(18, 18, 18)))
+                    .addGroup(jpCustomerLayout.createSequentialGroup()
+                        .addComponent(jlAddress1)
+                        .addGap(34, 34, 34)))
+                .addGroup(jpCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbCommune, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(cbDistrict, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jtfNameCus, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                    .addComponent(jtfAddress)
+                    .addComponent(cbProvince, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                    .addComponent(jtfPhoneCus, javax.swing.GroupLayout.Alignment.TRAILING)))
+        );
+        jpCustomerLayout.setVerticalGroup(
+            jpCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpCustomerLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(jpCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfNameCus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlNameCus))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlPhoneCus)
+                    .addComponent(jtfPhoneCus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbProvince, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlAddress))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbCommune, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlAddress1))
+                .addGap(0, 6, Short.MAX_VALUE))
+        );
+
+        ipInfoCustomer.add(jpCustomer);
+
+        add(ipInfoCustomer);
+
+        jpMoney.setBackground(new java.awt.Color(255, 255, 255));
+        jpMoney.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jlTotalAmount.setText("Tổng tiền hàng : ");
+
+        jtfTotalAmount.setEditable(false);
+        jtfTotalAmount.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jlMoneyShip.setText("Tiền Ship :");
+
+        jtfMoneyShip.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jlTotal.setText("Khách cần trả :");
+
+        jtfTotal.setEditable(false);
+        jtfTotal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfTotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfTotalActionPerformed(evt);
+            }
+        });
+
+        jlNote.setText("Ghi chú :");
+
+        javax.swing.GroupLayout jpMoneyLayout = new javax.swing.GroupLayout(jpMoney);
+        jpMoney.setLayout(jpMoneyLayout);
+        jpMoneyLayout.setHorizontalGroup(
+            jpMoneyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpMoneyLayout.createSequentialGroup()
+                .addGroup(jpMoneyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlTotalAmount)
+                    .addComponent(jlMoneyShip)
+                    .addComponent(jlTotal)
+                    .addComponent(jlNote))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpMoneyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtfNote, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                    .addComponent(jtfTotal)
+                    .addComponent(jtfMoneyShip)
+                    .addComponent(jtfTotalAmount)))
+        );
+        jpMoneyLayout.setVerticalGroup(
+            jpMoneyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpMoneyLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpMoneyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfTotalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlTotalAmount))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpMoneyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfMoneyShip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlMoneyShip))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpMoneyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlTotal))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpMoneyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfNote, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlNote))
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+
+        add(jpMoney);
+
+        jpPay.setBackground(new java.awt.Color(255, 255, 255));
+        jpPay.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        btnReturn.setBackground(new java.awt.Color(135, 206, 235));
+        btnReturn.setForeground(new java.awt.Color(255, 255, 255));
+        btnReturn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pay24.png"))); // NOI18N
+        btnReturn.setText("Hoàn trả hàng");
+        btnReturn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnReturn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReturnActionPerformed(evt);
+            }
+        });
+
+        btnCreateOrder.setBackground(new java.awt.Color(135, 206, 235));
+        btnCreateOrder.setForeground(new java.awt.Color(255, 255, 255));
+        btnCreateOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/create24.png"))); // NOI18N
+        btnCreateOrder.setText("Tạo hóa đơn");
+        btnCreateOrder.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
+        btnDone.setBackground(new java.awt.Color(135, 206, 235));
+        btnDone.setForeground(new java.awt.Color(255, 255, 255));
+        btnDone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/done24.png"))); // NOI18N
+        btnDone.setText("Đã giao");
+        btnDone.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnDone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDoneActionPerformed(evt);
+            }
+        });
+
+        btnDelivering.setBackground(new java.awt.Color(135, 206, 235));
+        btnDelivering.setForeground(new java.awt.Color(255, 255, 255));
+        btnDelivering.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cart24.png"))); // NOI18N
+        btnDelivering.setText("Giao hàng");
+        btnDelivering.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnDelivering.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeliveringActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jpPayLayout = new javax.swing.GroupLayout(jpPay);
+        jpPay.setLayout(jpPayLayout);
+        jpPayLayout.setHorizontalGroup(
+            jpPayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpPayLayout.createSequentialGroup()
+                .addComponent(btnDelivering, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnDone, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE))
+            .addComponent(btnReturn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnCreateOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jpPayLayout.setVerticalGroup(
+            jpPayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpPayLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnCreateOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpPayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDelivering, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        add(jpPay);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReturnActionPerformed
+
+    private void btnDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDoneActionPerformed
+
+    private void btnDeliveringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeliveringActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeliveringActionPerformed
+
+    private void jtfTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfTotalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfTotalActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private lib2.Button btnCreateOrder;
+    private lib2.Button btnDelivering;
+    private lib2.Button btnDone;
+    private lib2.Button btnReturn;
+    private lib2.ComboBoxSuggestion cbCommune;
+    private lib2.ComboBoxSuggestion cbDistrict;
+    private lib2.ComboBoxSuggestion cbProvince;
+    private javax.swing.JPanel ipInfoCustomer;
+    private javax.swing.JLabel jlAddress;
+    private javax.swing.JLabel jlAddress1;
+    private javax.swing.JLabel jlMoneyShip;
+    private javax.swing.JLabel jlNameCus;
+    private javax.swing.JLabel jlNote;
+    private javax.swing.JLabel jlPhoneCus;
+    private javax.swing.JLabel jlTotal;
+    private javax.swing.JLabel jlTotalAmount;
+    private javax.swing.JPanel jpCustomer;
+    private javax.swing.JPanel jpMoney;
+    private javax.swing.JPanel jpPay;
+    private javax.swing.JTextField jtfAddress;
+    private javax.swing.JTextField jtfMoneyShip;
+    private javax.swing.JTextField jtfNameCus;
+    private javax.swing.JTextField jtfNote;
+    private javax.swing.JTextField jtfPhoneCus;
+    private javax.swing.JTextField jtfTotal;
+    private javax.swing.JTextField jtfTotalAmount;
+    // End of variables declaration//GEN-END:variables
+}

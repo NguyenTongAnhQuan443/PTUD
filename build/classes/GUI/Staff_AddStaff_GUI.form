@@ -187,24 +187,19 @@
                                           <Component id="jrbFemale" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="jtfCitizenIdentification" max="32767" attributes="0"/>
-                                      <Component id="jtfSalary" max="32767" attributes="0"/>
+                                      <Component id="cbPosition" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="cbPosition" alignment="0" min="-2" pref="212" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="cbProvince" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="cbDistrict" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                                          <Component id="cbCommune" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="jtfAddress" min="-2" pref="200" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <EmptySpace min="99" pref="177" max="32767" attributes="0"/>
+                                  <Component id="cbProvince" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="cbDistrict" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                                  <Component id="cbCommune" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jtfAddress" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <EmptySpace min="99" pref="240" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -221,7 +216,7 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jtfPhone" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jtfSalary" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbPosition" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -233,9 +228,7 @@
                                   <Component id="jrbFemale" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="29" max="32767" attributes="0"/>
-                          <Component id="cbPosition" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace pref="77" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="cbProvince" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="cbDistrict" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -342,11 +335,6 @@
                         <StringItem index="2" value="Nh&#xe2;n Vi&#xea;n"/>
                       </StringArray>
                     </Property>
-                  </Properties>
-                </Component>
-                <Component class="lib2.TextField" name="jtfSalary">
-                  <Properties>
-                    <Property name="labelText" type="java.lang.String" value="L&#x1b0;&#x1a1;ng"/>
                   </Properties>
                 </Component>
                 <Component class="lib2.ComboBoxSuggestion" name="cbDistrict">

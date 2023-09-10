@@ -3,9 +3,6 @@ package gui;
 
 import javax.swing.JPanel;
 
-/*
-    Chức vụ quản lý có quyền thêm nhân viên => khi thêm nhân viên đồng nghĩa cung cấp tài khoản nhân viên
-*/
 public class Staff_GUI extends javax.swing.JPanel {
 
     private Staff_Table_GUI staff_Table_GUI;
@@ -36,6 +33,7 @@ public class Staff_GUI extends javax.swing.JPanel {
         jpTopBottom = new javax.swing.JPanel();
         btnAdd = new lib2.Button();
         btnEdit = new lib2.Button();
+        btnDel1 = new lib2.Button();
         btnDel = new lib2.Button();
         btnInputFile = new lib2.Button();
         btnOutputFile = new lib2.Button();
@@ -61,7 +59,7 @@ public class Staff_GUI extends javax.swing.JPanel {
 
         btnSearch.setBackground(new java.awt.Color(135, 206, 235));
         btnSearch.setForeground(new java.awt.Color(255, 255, 255));
-        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search24_1.png"))); // NOI18N
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search24.png"))); // NOI18N
         btnSearch.setText("Tìm kiếm");
         btnSearch.setToolTipText("");
         btnSearch.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -163,6 +161,18 @@ public class Staff_GUI extends javax.swing.JPanel {
         });
         jpTopBottom.add(btnEdit);
 
+        btnDel1.setBackground(new java.awt.Color(135, 206, 235));
+        btnDel1.setForeground(new java.awt.Color(255, 255, 255));
+        btnDel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/warning24.png"))); // NOI18N
+        btnDel1.setText("Thôi việc   ");
+        btnDel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnDel1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDel1ActionPerformed(evt);
+            }
+        });
+        jpTopBottom.add(btnDel1);
+
         btnDel.setBackground(new java.awt.Color(135, 206, 235));
         btnDel.setForeground(new java.awt.Color(255, 255, 255));
         btnDel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete24.png"))); // NOI18N
@@ -194,7 +204,6 @@ public class Staff_GUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-
     Staff_AddStaff_GUI staff_AddStaff_GUI = new Staff_AddStaff_GUI();
     staff_AddStaff_GUI.setVisible(true);
     staff_AddStaff_GUI.setLocationRelativeTo(null);
@@ -206,11 +215,16 @@ public class Staff_GUI extends javax.swing.JPanel {
     staff_AddStaff_GUI.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnEditActionPerformed
 
+    private void btnDel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDel1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDel1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnAdd;
     private lib2.Button btnArrange;
     private lib2.Button btnDel;
+    private lib2.Button btnDel1;
     private lib2.Button btnEdit;
     private lib2.Button btnInputFile;
     private lib2.Button btnOutputFile;
