@@ -2,10 +2,10 @@
 package gui;
 
 import javax.swing.JPanel;
-
 public class Staff_GUI extends javax.swing.JPanel {
 
     private Staff_Table_GUI staff_Table_GUI;
+    private Staff_AddStaff_GUI staff_AddStaff_GUI;
     public Staff_GUI() {
         initComponents();
         
@@ -33,8 +33,8 @@ public class Staff_GUI extends javax.swing.JPanel {
         jpTopBottom = new javax.swing.JPanel();
         btnAdd = new lib2.Button();
         btnEdit = new lib2.Button();
-        btnDel1 = new lib2.Button();
-        btnDel = new lib2.Button();
+        btnDismissal = new lib2.Button();
+        btnPersonalInformation = new lib2.Button();
         btnInputFile = new lib2.Button();
         btnOutputFile = new lib2.Button();
         jpTMP = new javax.swing.JPanel();
@@ -140,7 +140,7 @@ public class Staff_GUI extends javax.swing.JPanel {
         btnAdd.setBackground(new java.awt.Color(135, 206, 235));
         btnAdd.setForeground(new java.awt.Color(255, 255, 255));
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add24.png"))); // NOI18N
-        btnAdd.setText("Thêm NV  ");
+        btnAdd.setText("Thêm NV ");
         btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,7 +152,7 @@ public class Staff_GUI extends javax.swing.JPanel {
         btnEdit.setBackground(new java.awt.Color(135, 206, 235));
         btnEdit.setForeground(new java.awt.Color(255, 255, 255));
         btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit24.png"))); // NOI18N
-        btnEdit.setText("Sủa thông tin NV  ");
+        btnEdit.setText("Sủa thông tin NV ");
         btnEdit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,36 +161,41 @@ public class Staff_GUI extends javax.swing.JPanel {
         });
         jpTopBottom.add(btnEdit);
 
-        btnDel1.setBackground(new java.awt.Color(135, 206, 235));
-        btnDel1.setForeground(new java.awt.Color(255, 255, 255));
-        btnDel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/warning24.png"))); // NOI18N
-        btnDel1.setText("Thôi việc   ");
-        btnDel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnDel1.addActionListener(new java.awt.event.ActionListener() {
+        btnDismissal.setBackground(new java.awt.Color(135, 206, 235));
+        btnDismissal.setForeground(new java.awt.Color(255, 255, 255));
+        btnDismissal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/warning24.png"))); // NOI18N
+        btnDismissal.setText("Thôi việc ");
+        btnDismissal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnDismissal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDel1ActionPerformed(evt);
+                btnDismissalActionPerformed(evt);
             }
         });
-        jpTopBottom.add(btnDel1);
+        jpTopBottom.add(btnDismissal);
 
-        btnDel.setBackground(new java.awt.Color(135, 206, 235));
-        btnDel.setForeground(new java.awt.Color(255, 255, 255));
-        btnDel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete24.png"))); // NOI18N
-        btnDel.setText("Xóa NV  ");
-        btnDel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jpTopBottom.add(btnDel);
+        btnPersonalInformation.setBackground(new java.awt.Color(135, 206, 235));
+        btnPersonalInformation.setForeground(new java.awt.Color(255, 255, 255));
+        btnPersonalInformation.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user24.png"))); // NOI18N
+        btnPersonalInformation.setText("Thông tin cá nhân ");
+        btnPersonalInformation.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnPersonalInformation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPersonalInformationActionPerformed(evt);
+            }
+        });
+        jpTopBottom.add(btnPersonalInformation);
 
         btnInputFile.setBackground(new java.awt.Color(135, 206, 235));
         btnInputFile.setForeground(new java.awt.Color(255, 255, 255));
         btnInputFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/inputfile24.png"))); // NOI18N
-        btnInputFile.setText("Nhập danh sách NV từ file  ");
+        btnInputFile.setText("Nhập danh sách NV ");
         btnInputFile.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jpTopBottom.add(btnInputFile);
 
         btnOutputFile.setBackground(new java.awt.Color(135, 206, 235));
         btnOutputFile.setForeground(new java.awt.Color(255, 255, 255));
         btnOutputFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/outputfile24.png"))); // NOI18N
-        btnOutputFile.setText("Xuất danh sách NV ra file  ");
+        btnOutputFile.setText("Xuất danh sách NV ");
         btnOutputFile.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jpTopBottom.add(btnOutputFile);
 
@@ -204,7 +209,7 @@ public class Staff_GUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-    Staff_AddStaff_GUI staff_AddStaff_GUI = new Staff_AddStaff_GUI();
+    staff_AddStaff_GUI = new Staff_AddStaff_GUI();
     staff_AddStaff_GUI.setVisible(true);
     staff_AddStaff_GUI.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnAddActionPerformed
@@ -215,19 +220,27 @@ public class Staff_GUI extends javax.swing.JPanel {
     staff_AddStaff_GUI.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnEditActionPerformed
 
-    private void btnDel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDel1ActionPerformed
+    private void btnDismissalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDismissalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnDel1ActionPerformed
+    }//GEN-LAST:event_btnDismissalActionPerformed
 
+    private void btnPersonalInformationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonalInformationActionPerformed
+        staff_AddStaff_GUI = new Staff_AddStaff_GUI();
+        staff_AddStaff_GUI.setVisible(true);
+    }//GEN-LAST:event_btnPersonalInformationActionPerformed
+
+    protected int flagPerInfo(){
+        return 1;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnAdd;
     private lib2.Button btnArrange;
-    private lib2.Button btnDel;
-    private lib2.Button btnDel1;
+    private lib2.Button btnDismissal;
     private lib2.Button btnEdit;
     private lib2.Button btnInputFile;
     private lib2.Button btnOutputFile;
+    private lib2.Button btnPersonalInformation;
     private lib2.Button btnSearch;
     private lib2.ComboBoxSuggestion cbArrange;
     private javax.swing.JLabel jlArrage;

@@ -62,7 +62,7 @@
                           <Component id="jlSell" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jlCustomer" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jlHistory" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jlSale" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlPromotion" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jlChangePass" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jlDisplay" min="-2" max="-2" attributes="0"/>
@@ -96,7 +96,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jlHistory" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jlSale" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlPromotion" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jlChangePass" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -214,7 +214,7 @@
                 <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlHistoryMouseExited"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jlSale">
+            <Component class="javax.swing.JLabel" name="jlPromotion">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="18" style="0"/>
@@ -228,9 +228,9 @@
                 <Property name="text" type="java.lang.String" value="Khuy&#x1ebf;n m&#xe3;i"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlSaleMouseClicked"/>
-                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlSaleMouseEntered"/>
-                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlSaleMouseExited"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlPromotionMouseClicked"/>
+                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlPromotionMouseEntered"/>
+                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlPromotionMouseExited"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jlChangePass">

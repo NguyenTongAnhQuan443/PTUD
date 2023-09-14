@@ -8,9 +8,12 @@ import javax.swing.JOptionPane;
 public class Staff_AddStaff_GUI extends javax.swing.JFrame {
 
     private DateChooser dateChooser;
+    private Staff_GUI staff_GUI;
     public Staff_AddStaff_GUI() {
         initComponents();
         setLocationRelativeTo(null);
+        staff_GUI = new Staff_GUI();
+        checkEvents(staff_GUI.flagPerInfo());
         
         DateChooser dateChoose = new DateChooser();
         dateChoose.setDateFormat("dd/MM/yyyy");
@@ -366,6 +369,12 @@ public class Staff_AddStaff_GUI extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jlIconCalendarMouseClicked
 
+    public void checkEvents(int n){
+        if(n == 1){
+            btnAdd.setVisible(false);
+            btnEdit.setText("Cập nhập");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnAdd;

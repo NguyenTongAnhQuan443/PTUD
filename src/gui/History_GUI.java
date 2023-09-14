@@ -33,7 +33,6 @@ public class History_GUI extends javax.swing.JPanel {
         jlDateCreate = new javax.swing.JLabel();
         jlStatus = new javax.swing.JLabel();
         jlReasonCancel = new javax.swing.JLabel();
-        jtfReasonCancel = new javax.swing.JTextField();
         jtfIDBill = new javax.swing.JTextField();
         jtfIDStaff = new javax.swing.JTextField();
         jtfNameStaff = new javax.swing.JTextField();
@@ -42,6 +41,8 @@ public class History_GUI extends javax.swing.JPanel {
         jtfTotal = new javax.swing.JTextField();
         jtfDateCreate = new javax.swing.JTextField();
         jtfStatus = new javax.swing.JTextField();
+        jspReasonCancel = new javax.swing.JScrollPane();
+        jtaReasonCancel = new javax.swing.JTextArea();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -152,12 +153,6 @@ public class History_GUI extends javax.swing.JPanel {
 
         jlReasonCancel.setText("Lý do hủy :");
 
-        jtfReasonCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfReasonCancelActionPerformed(evt);
-            }
-        });
-
         jtfIDBill.setEditable(false);
 
         jtfIDStaff.setEditable(false);
@@ -174,6 +169,10 @@ public class History_GUI extends javax.swing.JPanel {
 
         jtfStatus.setEditable(false);
 
+        jtaReasonCancel.setColumns(20);
+        jtaReasonCancel.setRows(5);
+        jspReasonCancel.setViewportView(jtaReasonCancel);
+
         javax.swing.GroupLayout jpRightLayout = new javax.swing.GroupLayout(jpRight);
         jpRight.setLayout(jpRightLayout);
         jpRightLayout.setHorizontalGroup(
@@ -182,12 +181,12 @@ public class History_GUI extends javax.swing.JPanel {
                 .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpRightLayout.createSequentialGroup()
                         .addComponent(jlReasonCancel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfReasonCancel))
+                        .addGap(18, 18, 18)
+                        .addComponent(jspReasonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(jpRightLayout.createSequentialGroup()
                         .addComponent(jlIDBill)
                         .addGap(29, 29, 29)
-                        .addComponent(jtfIDBill, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))
+                        .addComponent(jtfIDBill, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE))
                     .addGroup(jpRightLayout.createSequentialGroup()
                         .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlNameStaff)
@@ -207,7 +206,7 @@ public class History_GUI extends javax.swing.JPanel {
                             .addComponent(jtfPhoneCus)
                             .addComponent(jtfNameCus)
                             .addComponent(jtfIDStaff)
-                            .addComponent(jtfNameStaff, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))))
+                            .addComponent(jtfNameStaff))))
                 .addContainerGap())
         );
         jpRightLayout.setVerticalGroup(
@@ -250,18 +249,14 @@ public class History_GUI extends javax.swing.JPanel {
                     .addComponent(jlStatus)
                     .addComponent(jtfStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlReasonCancel)
-                    .addComponent(jtfReasonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(111, Short.MAX_VALUE))
+                    .addComponent(jspReasonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
         add(jpRight);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jtfReasonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfReasonCancelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfReasonCancelActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -283,6 +278,8 @@ public class History_GUI extends javax.swing.JPanel {
     private javax.swing.JPanel jpRight;
     private javax.swing.JScrollPane jspInfoProduct;
     private javax.swing.JScrollPane jspListBill;
+    private javax.swing.JScrollPane jspReasonCancel;
+    private javax.swing.JTextArea jtaReasonCancel;
     private javax.swing.JTextField jtfAddress;
     private javax.swing.JTextField jtfDateCreate;
     private javax.swing.JTextField jtfIDBill;
@@ -290,7 +287,6 @@ public class History_GUI extends javax.swing.JPanel {
     private javax.swing.JTextField jtfNameCus;
     private javax.swing.JTextField jtfNameStaff;
     private javax.swing.JTextField jtfPhoneCus;
-    private javax.swing.JTextField jtfReasonCancel;
     private javax.swing.JTextField jtfStatus;
     private javax.swing.JTextField jtfTotal;
     // End of variables declaration//GEN-END:variables
