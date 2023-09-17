@@ -12,6 +12,7 @@ public class Statistical_Customer_GUI extends javax.swing.JPanel {
 
     private Statistical_Customer_Chart_GUI statistical_Customer_Chart_GUI;
     private Statistical_Customer_Table_GUI statistical_Customer_Table_GUI;
+
     public Statistical_Customer_GUI() {
         initComponents();
 

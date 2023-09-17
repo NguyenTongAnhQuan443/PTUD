@@ -12,6 +12,7 @@ public class Statistical_Staff_GUI extends javax.swing.JPanel {
 
     private Statistical_Staff_Table_GUI statistical_Staff_Table_GUI;
     private Statistical_Staff_Chart_GUI statistical_Staff_Chart_GUI;
+
     public Statistical_Staff_GUI() {
         initComponents();
 

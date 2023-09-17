@@ -6,6 +6,7 @@ import javax.swing.SwingUtilities;
 public class Login_GUI extends javax.swing.JFrame {
 
     private HomeManager_GUI homeManager_GUI;
+
     public Login_GUI() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -218,14 +219,6 @@ public class Login_GUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    public static void main(String args[]) {
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Login_GUI().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnLogin;

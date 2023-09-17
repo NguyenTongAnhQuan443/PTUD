@@ -2,7 +2,9 @@
 //Left 763, 582
 //Right 250, 582
 package gui;
+
 import lib2.TableCustom;
+
 public class Promotion_GUI extends javax.swing.JPanel {
 
     public Promotion_GUI() {

@@ -1,10 +1,12 @@
-
 package gui;
+
+import javax.swing.JOptionPane;
 
 public class Sell_CreateOrderShip_GUI extends javax.swing.JPanel {
 
     public Sell_CreateOrderShip_GUI() {
         initComponents();
+        offInput();
     }
 
     @SuppressWarnings("unchecked")
@@ -207,6 +209,11 @@ public class Sell_CreateOrderShip_GUI extends javax.swing.JPanel {
         btnCreateOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/create24.png"))); // NOI18N
         btnCreateOrder.setText("Tạo hóa đơn");
         btnCreateOrder.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCreateOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateOrderActionPerformed(evt);
+            }
+        });
 
         btnDone.setBackground(new java.awt.Color(135, 206, 235));
         btnDone.setForeground(new java.awt.Color(255, 255, 255));
@@ -273,6 +280,46 @@ public class Sell_CreateOrderShip_GUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfTotalActionPerformed
 
+    private void btnCreateOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateOrderActionPerformed
+        if (JOptionPane.showConfirmDialog(null, "Bạn có muốn tạo đơn hàng ship không ?", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            onInput();
+        }
+    }//GEN-LAST:event_btnCreateOrderActionPerformed
+    public void clearInput() {
+        jtfAddress.setText("");
+        jtfMoneyShip.setText("");
+        jtfNameCus.setText("");
+        jtfNote.setText("");
+        jtfPhoneCus.setText("");
+        jtfTotal.setText("");
+        jtfTotalAmount.setText("");
+        cbCommune.setSelectedIndex(0);
+        cbDistrict.setSelectedIndex(0);
+        cbProvince.setSelectedIndex(0);
+    }
+
+    public void offInput() {
+        clearInput();
+        jtfNameCus.setEditable(false);
+        jtfPhoneCus.setEditable(false);
+        cbCommune.setEditable(false);
+        cbDistrict.setEditable(false);
+        cbProvince.setEditable(false);
+        jtfMoneyShip.setEditable(false);
+        jtfNote.setEditable(false);
+        jtfAddress.setEditable(false);
+    }
+        public void onInput() {
+        clearInput();
+        jtfNameCus.setEditable(true);
+        jtfPhoneCus.setEditable(true);
+        cbCommune.setEditable(true);
+        cbDistrict.setEditable(true);
+        cbProvince.setEditable(true);
+        jtfMoneyShip.setEditable(true);
+        jtfNote.setEditable(true);
+        jtfAddress.setEditable(true);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnCreateOrder;

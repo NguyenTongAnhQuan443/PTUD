@@ -1,23 +1,20 @@
-
 package gui;
 
 import com.raven.datechooser.DateChooser;
-import javax.print.event.PrintJobEvent;
-import javax.swing.JOptionPane;
 
 public class Staff_AddStaff_GUI extends javax.swing.JFrame {
 
     private DateChooser dateChooser;
-    private Staff_GUI staff_GUI;
+
+    private int flag = 0;
+
     public Staff_AddStaff_GUI() {
         initComponents();
         setLocationRelativeTo(null);
-        staff_GUI = new Staff_GUI();
-        checkEvents(staff_GUI.flagPerInfo());
-        
+
         DateChooser dateChoose = new DateChooser();
         dateChoose.setDateFormat("dd/MM/yyyy");
-	dateChoose.setTextRefernce(jtfDoB);
+        dateChoose.setTextRefernce(jtfDoB);
     }
 
     @SuppressWarnings("unchecked")
@@ -366,16 +363,24 @@ public class Staff_AddStaff_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void jlIconCalendarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlIconCalendarMouseClicked
-       
+
     }//GEN-LAST:event_jlIconCalendarMouseClicked
 
-    public void checkEvents(int n){
-        if(n == 1){
-            btnAdd.setVisible(false);
-            btnEdit.setText("Cập nhập");
-        }
+    public void setFlag(int flag) {
+//        this.isEditing = isEditing;
+        this.flag = flag;
+        checkEvents(); // Sau khi đặt trạng thái, kiểm tra và cập nhật giao diện người dùng
     }
 
+    public void checkEvents() {
+        if (flag == 1) {
+            btnEdit.setText("Sửa thông tin  ");
+            btnEdit.setVisible(false);
+        } else if (flag == 2 || flag == 3) {
+            btnAdd.setVisible(false);
+            btnEdit.setText("Cập nhập  ");
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnAdd;
     private lib2.Button btnBack;

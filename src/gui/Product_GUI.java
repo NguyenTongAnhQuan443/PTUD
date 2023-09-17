@@ -6,9 +6,10 @@ public class Product_GUI extends javax.swing.JPanel {
     private Product_Detail_GUI product_Detail_GUI;
     private Product_Properties_GUI product_Properties_GUI;
     private Product_Filter_GUI product_Filter_GUI;
+
     public Product_GUI() {
         initComponents();
-        
+
         product_Properties_GUI = new Product_Properties_GUI();
         jpTmp.removeAll();
         jpTmp.add(product_Properties_GUI);

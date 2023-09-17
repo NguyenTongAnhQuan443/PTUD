@@ -1,14 +1,14 @@
 // jpTMP 1120, 439
 package gui;
 
-import javax.swing.JPanel;
 public class Staff_GUI extends javax.swing.JPanel {
 
     private Staff_Table_GUI staff_Table_GUI;
     private Staff_AddStaff_GUI staff_AddStaff_GUI;
+
     public Staff_GUI() {
         initComponents();
-        
+
         staff_Table_GUI = new Staff_Table_GUI();
         jpTMP.removeAll();
         jpTMP.add(staff_Table_GUI);
@@ -209,29 +209,26 @@ public class Staff_GUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-    staff_AddStaff_GUI = new Staff_AddStaff_GUI();
-    staff_AddStaff_GUI.setVisible(true);
-    staff_AddStaff_GUI.setLocationRelativeTo(null);
+        staff_AddStaff_GUI = new Staff_AddStaff_GUI();
+        staff_AddStaff_GUI.setVisible(true);
+        staff_AddStaff_GUI.setFlag(1);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-    Staff_AddStaff_GUI staff_AddStaff_GUI = new Staff_AddStaff_GUI();
-    staff_AddStaff_GUI.setVisible(true);
-    staff_AddStaff_GUI.setLocationRelativeTo(null);
+        Staff_AddStaff_GUI staff_AddStaff_GUI = new Staff_AddStaff_GUI();
+        staff_AddStaff_GUI.setVisible(true);
+        staff_AddStaff_GUI.setFlag(2);
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnDismissalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDismissalActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnDismissalActionPerformed
 
     private void btnPersonalInformationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonalInformationActionPerformed
         staff_AddStaff_GUI = new Staff_AddStaff_GUI();
         staff_AddStaff_GUI.setVisible(true);
+        staff_AddStaff_GUI.setFlag(3);
     }//GEN-LAST:event_btnPersonalInformationActionPerformed
-
-    protected int flagPerInfo(){
-        return 1;
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnAdd;
@@ -253,4 +250,5 @@ public class Staff_GUI extends javax.swing.JPanel {
     private javax.swing.JPanel jpTopBottom;
     private javax.swing.JTextField jtfInputID;
     // End of variables declaration//GEN-END:variables
+
 }

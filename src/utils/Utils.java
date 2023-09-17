@@ -1,28 +1,24 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package utils;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-/**
- *
- * @author PC
- */
 public class Utils {
+
     public static String thongKe = "Thống Kê";
     public static String sanPham = "Sản Phẩm";
-    public static String nhanVien= "Nhân Viên";
-    public static String hoaDon= "Hóa Đơn";
-    public static String khachHang= "Khách Hàng";
-    public static String lichSu= "Lịch Sử";
-    public static String khuyenMai= "Khuyên Mãi";
-    public static String doiMK= "Đổi Mật Khẩu";
-    public static String dangXuat= "Đăng Xuất";
-    public static String giaoDien= "Giao Diện";
-    public static String ngonNgu= "Ngôn Ngữ";
+    public static String nhanVien = "Nhân Viên";
+    public static String hoaDon = "Hóa Đơn";
+    public static String khachHang = "Khách Hàng";
+    public static String lichSu = "Lịch Sử";
+    public static String khuyenMai = "Khuyên Mãi";
+    public static String doiMK = "Đổi Mật Khẩu";
+    public static String dangXuat = "Đăng Xuất";
+    public static String giaoDien = "Giao Diện";
+    public static String ngonNgu = "Ngôn Ngữ";
     public static String sang = "Sáng";
     public static String toi = "Tối";
     public static String vietNam = "Việt Nam";
@@ -30,14 +26,14 @@ public class Utils {
 
     public static void dd(int so) {
         ResourceBundle mybundle;
-        if(so==0){
+        if (so == 0) {
             Locale.setDefault(new Locale("vi", "VN"));
             mybundle = ResourceBundle.getBundle("Lng");
-        }else{
-             Locale.setDefault(new Locale("en", "US"));
+        } else {
+            Locale.setDefault(new Locale("en", "US"));
             mybundle = ResourceBundle.getBundle("Lng");
         }
-       
+
         thongKe = mybundle.getString("thongKe");
         sanPham = mybundle.getString("sanPham");
         nhanVien = mybundle.getString("nhanVien");
@@ -53,5 +49,18 @@ public class Utils {
         toi = mybundle.getString("toi");
         vietNam = mybundle.getString("vietNam");
         english = mybundle.getString("english");
+    }
+
+    public static void openPDF(String filePath) {
+        File pdfFile = new File(filePath);
+        try {
+            if (pdfFile.exists()) {
+                Desktop.getDesktop().open(pdfFile);
+            } else {
+                System.out.println("Tệp không tồn tại hayx kiểm tra lại ! ");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

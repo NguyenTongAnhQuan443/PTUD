@@ -1,11 +1,13 @@
 // 1120, 439
 package gui;
+
 import lib2.TableCustom;
+
 public class Staff_Table_GUI extends javax.swing.JPanel {
 
     public Staff_Table_GUI() {
         initComponents();
-        
+
         TableCustom.apply(jspTable, TableCustom.TableType.DEFAULT);
     }
 

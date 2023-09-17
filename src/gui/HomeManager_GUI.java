@@ -11,20 +11,9 @@ Thống kê :
 + Biến jlMonthMoney để gắn giá trị doanh thu tháng
 + Biến jlYearMoney để gắn giá trị doanh thu năm
  */
-import com.raven.datechooser.DateChooser;
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.FlowLayout;
-import java.awt.Frame;
 import java.awt.HeadlessException;
-import java.awt.Label;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -40,6 +29,8 @@ public class HomeManager_GUI extends javax.swing.JFrame {
     private Customer_GUI customer_GUI;
     private History_GUI history_GUI;
     private Promotion_GUI promotion_GUI;
+    private ChangePassword_GUI changePassword_GUI;
+
     public HomeManager_GUI() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -69,8 +60,6 @@ public class HomeManager_GUI extends javax.swing.JFrame {
         jlStatistical = new javax.swing.JLabel();
         jlExit = new javax.swing.JLabel();
         cbLanguage = new lib2.Combobox();
-        jlDisplay = new javax.swing.JLabel();
-        cbDisplay = new lib2.Combobox();
         jpTop = new javax.swing.JPanel();
         jlLogo = new javax.swing.JLabel();
         jlNameShop = new javax.swing.JLabel();
@@ -259,20 +248,6 @@ public class HomeManager_GUI extends javax.swing.JFrame {
             }
         });
 
-        jlDisplay.setForeground(new java.awt.Color(255, 255, 255));
-        jlDisplay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/display32.png"))); // NOI18N
-
-        cbDisplay.setBackground(new java.awt.Color(0, 128, 128));
-        cbDisplay.setForeground(new java.awt.Color(255, 255, 255));
-        cbDisplay.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Giao diện", "Tối", "Sáng" }));
-        cbDisplay.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        cbDisplay.setLabeText("");
-        cbDisplay.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbDisplayActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jpLeftLayout = new javax.swing.GroupLayout(jpLeft);
         jpLeft.setLayout(jpLeftLayout);
         jpLeftLayout.setHorizontalGroup(
@@ -280,25 +255,24 @@ public class HomeManager_GUI extends javax.swing.JFrame {
             .addGroup(jpLeftLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlStatistical)
-                    .addComponent(jlProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlStaff)
-                    .addComponent(jlSell)
-                    .addComponent(jlCustomer)
-                    .addComponent(jlHistory)
-                    .addComponent(jlPromotion)
-                    .addComponent(jlChangePass)
                     .addGroup(jpLeftLayout.createSequentialGroup()
-                        .addComponent(jlDisplay)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpLeftLayout.createSequentialGroup()
+                        .addGroup(jpLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlStatistical)
+                            .addComponent(jlProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlStaff)
+                            .addComponent(jlSell)
+                            .addComponent(jlCustomer)
+                            .addComponent(jlHistory)
+                            .addComponent(jlPromotion)
+                            .addComponent(jlChangePass)
+                            .addComponent(jlLogout)
+                            .addComponent(jlExit))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpLeftLayout.createSequentialGroup()
                         .addComponent(jlLanguage)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jlLogout)
-                    .addComponent(jlExit))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jpLeftLayout.setVerticalGroup(
             jpLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -318,19 +292,15 @@ public class HomeManager_GUI extends javax.swing.JFrame {
                 .addComponent(jlPromotion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jlChangePass)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jpLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(cbDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlDisplay))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jlLanguage)
-                    .addComponent(cbLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(cbLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlLanguage))
+                .addGap(18, 18, 18)
                 .addComponent(jlLogout)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jlExit)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         jpMain.add(jpLeft, java.awt.BorderLayout.LINE_START);
@@ -385,18 +355,13 @@ public class HomeManager_GUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cbLanguageActionPerformed
 
-    private void cbDisplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDisplayActionPerformed
-        if (cbDisplay.getSelectedIndex() == 1) {
-            JOptionPane.showMessageDialog(this, "đen nè");
-            this.repaint();
-        }
-    }//GEN-LAST:event_cbDisplayActionPerformed
-
     private void jlChangePassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlChangePassMouseClicked
         if (sell_GUI != null) {
             sell_GUI.stopWebcam();
         }
         selectMenu(jlChangePass);
+        changePassword_GUI = new ChangePassword_GUI();
+        openJPanel(changePassword_GUI);
     }//GEN-LAST:event_jlChangePassMouseClicked
 
     private void jlStatisticalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlStatisticalMouseClicked
@@ -551,27 +516,21 @@ public class HomeManager_GUI extends javax.swing.JFrame {
         if (sell_GUI != null) {
             sell_GUI.stopWebcam();
         }
+        if (JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn đăng xuất hay không ?", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            dispose();
+            Login_GUI login_GUI = new Login_GUI();
+            login_GUI.setVisible(true);
+        }
     }//GEN-LAST:event_jlLogoutMouseClicked
-
-    public static void main(String args[]) {
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new HomeManager_GUI().setVisible(true);
-            }
-        });
-    }
 
     public HomeManager_GUI(Statistical_GUI statistical_GUI, Product_GUI product_GUI, Sell_GUI bill_GUI, Combobox cbDisplay, Combobox cbLanguage, JLabel jlSell, JLabel jlChangePass, JLabel jlCustomer, JLabel jlDisplay, JLabel jlExit, JLabel jlHistory, JLabel jlLanguage, JLabel jlLogo, JLabel jlLogout, JLabel jlNameShop, JLabel jlProduct, JLabel jlSale, JLabel jlStaff, JLabel jlStatistical, JPanel jpCenter, JPanel jpLeft, JPanel jpMain, JPanel jpTop) throws HeadlessException {
         this.statistical_GUI = statistical_GUI;
         this.product_GUI = product_GUI;
         this.sell_GUI = sell_GUI;
-        this.cbDisplay = cbDisplay;
         this.cbLanguage = cbLanguage;
         this.jlSell = jlSell;
         this.jlChangePass = jlChangePass;
         this.jlCustomer = jlCustomer;
-        this.jlDisplay = jlDisplay;
         this.jlExit = jlExit;
         this.jlHistory = jlHistory;
         this.jlLanguage = jlLanguage;
@@ -589,7 +548,6 @@ public class HomeManager_GUI extends javax.swing.JFrame {
     }
 
     private void selectMenu(JLabel label) {
-
         jlStatistical.setForeground(Color.WHITE);
         jlProduct.setForeground(Color.WHITE);
         jlStaff.setForeground(Color.WHITE);
@@ -619,26 +577,28 @@ public class HomeManager_GUI extends javax.swing.JFrame {
         jlLogout.setText(Utils.dangXuat);
         String obj[] = {Utils.giaoDien, Utils.toi, Utils.sang};
         DefaultComboBoxModel model = new DefaultComboBoxModel(obj);
-        cbDisplay.setModel(model);
 
         String objEnglish[] = {Utils.ngonNgu, Utils.vietNam, Utils.english};
         DefaultComboBoxModel modelEnglish = new DefaultComboBoxModel(objEnglish);
         cbLanguage.setModel(modelEnglish);
     }
-    
-    private void openJPanel(JPanel panel){
+
+    private void openJPanel(JPanel panel) {
         jpCenter.removeAll();
         jpCenter.add(panel);
         jpCenter.revalidate();
         jpCenter.repaint();
     }
 
+    private void functionStaff() {
+// Thay đổi panel thống kê
+// Thay đổi panel nhân viên
+// Chỉ xem được chương trình khuyến mãi không thêm và sửa
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private lib2.Combobox cbDisplay;
     private lib2.Combobox cbLanguage;
     private javax.swing.JLabel jlChangePass;
     private javax.swing.JLabel jlCustomer;
-    private javax.swing.JLabel jlDisplay;
     private javax.swing.JLabel jlExit;
     private javax.swing.JLabel jlHistory;
     private javax.swing.JLabel jlLanguage;

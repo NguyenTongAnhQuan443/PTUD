@@ -1,8 +1,6 @@
-
 package gui;
 
 import lib2.TableCustom;
-
 
 public class Statistical_Customer_Table_GUI extends javax.swing.JPanel {
 

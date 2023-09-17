@@ -16,14 +16,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
-import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
-import java.awt.ComponentOrientation;
-import java.awt.FlowLayout;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.concurrent.ThreadFactory;
 import javax.swing.JOptionPane;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -36,23 +30,24 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
 //    private Executor executor = Executors.newSingleThreadExecutor(this);
 //    Dùng ExecutorService thay vì Executor để gọi được medthod shutdown camera
     private ExecutorService executor = Executors.newSingleThreadExecutor(this);
-    
+
     private Sell_CreateOrder_GUI sell_CreateOrder_GUI;
     private Sell_CreateOrderShip_GUI sell_CreateOrderShip_GUI;
+
     public Sell_GUI() {
-        initComponents(); 
+        initComponents();
         TableCustom.apply(jspListBill, TableCustom.TableType.DEFAULT);
         TableCustom.apply(jspCart, TableCustom.TableType.DEFAULT);
         TableCustom.apply(jspListProduct, TableCustom.TableType.DEFAULT);
-        
+
         ExecutorService executor = Executors.newSingleThreadExecutor(this);
         initWebcam();
-    
+
         sell_CreateOrder_GUI = new Sell_CreateOrder_GUI();
         jpRightBottom.add(sell_CreateOrder_GUI);
         jpRightBottom.revalidate();
         jpRightBottom.repaint();
-//        btnProductReturn.setVisible(false);   
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -407,7 +402,6 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         // TODO add your handling code here:
     }//GEN-LAST:event_btnProductReturnActionPerformed
 
-    
     private void initWebcam() {
         Dimension size = WebcamResolution.VGA.getSize();
 
@@ -430,7 +424,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     public void run() {
         do {
             try {
-                Thread.sleep(100);
+                Thread.sleep(1);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Sell_GUI.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -460,15 +454,15 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
 
         } while (true);
     }
-//@Override
 
+//@Override
     public Thread newThread(Runnable r) {
         Thread t = new Thread(r, "My Thread");
         t.setDaemon(true);
         return t;
     }
-    
- public void stopWebcam() {
+
+    public void stopWebcam() {
         webcam.close();
         executor.shutdown();
         try {
@@ -479,7 +473,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             executor.shutdownNow();
         }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnAdd;
     private javax.swing.JButton btnClear;

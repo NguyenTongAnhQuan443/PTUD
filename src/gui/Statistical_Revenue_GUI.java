@@ -12,9 +12,10 @@ public class Statistical_Revenue_GUI extends javax.swing.JPanel {
 
     private Statistical_Revenue_Chart_GUI statistical_Revenue_Chart_GUI;
     private Statistical_Revenue_Table_GUI statistical_Revenue_Table_GUI;
+
     public Statistical_Revenue_GUI() {
         initComponents();
-        
+
         statistical_Revenue_Table_GUI = new Statistical_Revenue_Table_GUI();
         jpRight.removeAll();
         jpRight.setLayout(new FlowLayout());

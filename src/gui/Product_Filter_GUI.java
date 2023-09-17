@@ -13,14 +13,12 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 import lib2.TableCustom;
 
-
 public class Product_Filter_GUI extends javax.swing.JPanel {
 
     public Product_Filter_GUI() {
         initComponents();
         TableCustom.apply(jspTable, TableCustom.TableType.DEFAULT);
-        
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -178,20 +176,20 @@ public class Product_Filter_GUI extends javax.swing.JPanel {
 
     private void btnSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch1ActionPerformed
         try {
-            String QrCodeDat = "Minh Kỳ";
+            String QrCodeData = "Minh Kỳ";
             String filepath = "D:/FleyShopApp/QRProduct/QR_Products.png";
             String charset = "UTF-8";
-            
+
             Map<EncodeHintType, ErrorCorrectionLevel> hintMap = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
             hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
-            
-            BitMatrix matrix = new MultiFormatWriter().encode(new String(QrCodeDat.getBytes(charset), charset),BarcodeFormat.QR_CODE, 200, 200, hintMap);
-            MatrixToImageWriter.writeToFile(matrix, filepath.substring(filepath.lastIndexOf('.')+1),new File(filepath));
+
+            BitMatrix matrix = new MultiFormatWriter().encode(new String(QrCodeData.getBytes(charset), charset), BarcodeFormat.QR_CODE, 200, 200, hintMap);
+            MatrixToImageWriter.writeToFile(matrix, filepath.substring(filepath.lastIndexOf('.') + 1), new File(filepath));
 
             JOptionPane.showMessageDialog(null, "Tạo mã QR thành công ! \n Bạn hãy vào thư mục : D:\\FleyShopApp\\QRProduct để thực hiện in QR cho sản phẩm nhé ");
-        
+
         } catch (Exception e) {
-            
+
         }
     }//GEN-LAST:event_btnSearch1ActionPerformed
 

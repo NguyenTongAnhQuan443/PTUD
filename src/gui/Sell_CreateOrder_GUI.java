@@ -1,10 +1,22 @@
 //230, 550
 package gui;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.JOptionPane;
+
 public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
 
     public Sell_CreateOrder_GUI() {
         initComponents();
+        offButton();
     }
 
     @SuppressWarnings("unchecked")
@@ -49,6 +61,7 @@ public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
 
         jlPhoneOldCus.setText("SDT Khách hàng :");
 
+        jtfPhoneOldCus.setEditable(false);
         jtfPhoneOldCus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jtfPhoneOldCus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,6 +74,11 @@ public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
         btnSearchPhone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search24.png"))); // NOI18N
         btnSearchPhone.setText("Tìm  ");
         btnSearchPhone.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSearchPhone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchPhoneActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpCheckOldCusLayout = new javax.swing.GroupLayout(jpCheckOldCus);
         jpCheckOldCus.setLayout(jpCheckOldCusLayout);
@@ -92,8 +110,10 @@ public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
 
         jlNameCus.setText("Tên KH :");
 
+        jtfNameCus.setEditable(false);
         jtfNameCus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        jtfPhoneCus.setEditable(false);
         jtfPhoneCus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jlPhoneCus.setText("SDT :");
@@ -144,6 +164,7 @@ public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
 
         jlPayments.setText("HT thanh toán :");
 
+        jtfMoneyReceived.setEditable(false);
         jtfMoneyReceived.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jtfMoneyReceived.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -231,12 +252,22 @@ public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
         btnCreateOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/create24.png"))); // NOI18N
         btnCreateOrder.setText("Tạo hóa đơn");
         btnCreateOrder.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCreateOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateOrderActionPerformed(evt);
+            }
+        });
 
         btnCancel.setBackground(new java.awt.Color(135, 206, 235));
         btnCancel.setForeground(new java.awt.Color(255, 255, 255));
         btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/x24.png"))); // NOI18N
         btnCancel.setText("Hủy");
         btnCancel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpPayLayout = new javax.swing.GroupLayout(jpPay);
         jpPay.setLayout(jpPayLayout);
@@ -267,7 +298,43 @@ public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jtfPhoneOldCusActionPerformed
 
     private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
-        // TODO add your handling code here:
+//      nếu thanh toán bằng tiền mặt
+        if (JOptionPane.showConfirmDialog(null, "Bạn có muốn thanh toán hóa đơn này không ?", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (cbPayments.getSelectedIndex() == 0) {
+//              Sự kiện thanh toán thành công và hỏi có in hóa đơn hay không
+                if (JOptionPane.showConfirmDialog(null, "Bạn có muốn in hóa đơn không ?", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+//                    Sự kiện in hóa đơn
+                    Invoice_GUI invoice_GUI = new Invoice_GUI();
+                    
+                }
+            } 
+//          Nếu thanh toán bằng momo
+            else if (cbPayments.getSelectedIndex() == 1) {
+                try {
+                    String monney = "231016"; // truyền số tiền hàng vào đây
+                    String str1 = "2|99|0365962232|Nguyen Tong Anh Quan||0|0|";
+                    String str2 = "||transfer_myqr";
+                    String QrCodeData = str1 + monney + str2;
+
+                    String projectDir = System.getProperty("user.dir"); // Lấy đường dẫn đến thư mục dự án
+
+                    String fileName = "QRPay.png";
+                    String filePath = projectDir + "\\src\\images\\" + fileName; // Sử dụng thư mục "images" trong dự án
+
+                    String charset = "UTF-8";
+                    Map<EncodeHintType, ErrorCorrectionLevel> hintMap = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
+                    hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+                    BitMatrix matrix = new MultiFormatWriter().encode(
+                            new String(QrCodeData.getBytes(charset), charset),
+                            BarcodeFormat.QR_CODE, 242, 242, hintMap);
+                    MatrixToImageWriter.writeToFile(matrix, filePath.substring(filePath.lastIndexOf('.') + 1), new File(filePath));
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+                Momo_GUI momo_GUI = new Momo_GUI();
+                momo_GUI.setVisible(true);
+            }
+        }
     }//GEN-LAST:event_btnPayActionPerformed
 
     private void jtfMoneyReceivedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfMoneyReceivedActionPerformed
@@ -275,10 +342,62 @@ public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jtfMoneyReceivedActionPerformed
 
     private void cbPaymentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPaymentsActionPerformed
-        // TODO add your handling code here:
+        if (cbPayments.getSelectedIndex() == 1) {
+            jtfMoneyReceived.setEditable(false);
+        } else {
+            jtfMoneyReceived.setEditable(true);
+        }
     }//GEN-LAST:event_cbPaymentsActionPerformed
 
+    private void btnCreateOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateOrderActionPerformed
+        if (JOptionPane.showConfirmDialog(null, "Bạn có muốn tạo đơn hàng mới không ?", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            jtfPhoneOldCus.setEditable(true);
+            btnSearchPhone.setEnabled(true);
+            jtfMoneyReceived.setEditable(true);
+            btnCancel.setEnabled(true);
+            btnPay.setEnabled(true);
+        }
+    }//GEN-LAST:event_btnCreateOrderActionPerformed
 
+    private void btnSearchPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchPhoneActionPerformed
+//        Thêm sự kiện nếu tìm thấy load data vào jtf tên khách hàng và sdt khách hàng
+//        Nếu không tìm thấy mở 2 jtf này lên để nhập thông tin 
+        jtfNameCus.setEditable(true);
+        jtfPhoneCus.setEditable(true);
+    }//GEN-LAST:event_btnSearchPhoneActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        if (JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn hủy hóa đơn này không ?", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            clearInput();
+            offInput();
+            offButton();
+        }
+
+    }//GEN-LAST:event_btnCancelActionPerformed
+    public void clearInput() {
+        jtfPhoneOldCus.setText("");
+        jtfNameCus.setText("");
+        jtfPhoneCus.setText("");
+        jtfTotalAmount.setText("");
+        jtfMoneyReceived.setText("");
+        jtfExcessCash.setText("");
+    }
+
+    public void offInput() {
+        jtfPhoneOldCus.setEditable(false);
+        btnSearchPhone.setEnabled(false);
+        cbVoucher.setEditable(false);
+        cbPayments.setEditable(false);
+        jtfNameCus.setEditable(false);
+        jtfPhoneCus.setEditable(false);
+        jtfMoneyReceived.setEditable(false);
+    }
+
+    public void offButton() {
+        btnSearchPhone.setEnabled(false);
+        btnCancel.setEnabled(false);
+        btnPay.setEnabled(false);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnCancel;
     private lib2.Button btnCreateOrder;

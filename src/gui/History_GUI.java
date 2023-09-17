@@ -1,7 +1,9 @@
 //1013, 579
 // left 763 right 250
 package gui;
+
 import lib2.TableCustom;
+
 public class History_GUI extends javax.swing.JPanel {
 
     public History_GUI() {

@@ -1,7 +1,9 @@
 // 1013, 579
 // 1013, 348 buttom
 package gui;
+
 import lib2.TableCustom;
+
 public class Customer_GUI extends javax.swing.JPanel {
 
     public Customer_GUI() {

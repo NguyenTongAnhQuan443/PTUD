@@ -12,6 +12,7 @@ public class Statistical_Product_GUI extends javax.swing.JPanel {
 
     private Statistical_Product_Table_GUI statistical_Product_Table_GUI;
     private Statistical_Product_Chart_GUI statistical_Product_Chart_GUI;
+
     public Statistical_Product_GUI() {
         initComponents();
 

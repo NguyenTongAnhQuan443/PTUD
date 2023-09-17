@@ -8,17 +8,17 @@ public class Statistical_Staff_Chart_GUI extends javax.swing.JPanel {
 
     public Statistical_Staff_Chart_GUI() {
         initComponents();
-        
+
         jpChart.addLegend("Income", new Color(245, 189, 135));
         jpChart.addLegend("Expense", new Color(135, 189, 245));
         jpChart.addLegend("Profit", new Color(189, 135, 245));
         jpChart.addLegend("Cost", new Color(139, 229, 222));
-        jpChart.addData(new ModelChart("January", new double[]{500, 200, 80,89}));
-        jpChart.addData(new ModelChart("February", new double[]{600, 750, 90,150}));
-        jpChart.addData(new ModelChart("March", new double[]{200, 350, 460,900}));
-        jpChart.addData(new ModelChart("April", new double[]{480, 150, 750,700}));
-        jpChart.addData(new ModelChart("May", new double[]{350, 540, 300,150}));
-        jpChart.addData(new ModelChart("June", new double[]{190, 280, 81,200}));
+        jpChart.addData(new ModelChart("January", new double[]{500, 200, 80, 89}));
+        jpChart.addData(new ModelChart("February", new double[]{600, 750, 90, 150}));
+        jpChart.addData(new ModelChart("March", new double[]{200, 350, 460, 900}));
+        jpChart.addData(new ModelChart("April", new double[]{480, 150, 750, 700}));
+        jpChart.addData(new ModelChart("May", new double[]{350, 540, 300, 150}));
+        jpChart.addData(new ModelChart("June", new double[]{190, 280, 81, 200}));
     }
 
     @SuppressWarnings("unchecked")
