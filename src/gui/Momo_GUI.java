@@ -135,7 +135,6 @@ public class Momo_GUI extends javax.swing.JFrame {
 
     private void btnInBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInBillActionPerformed
         if (JOptionPane.showConfirmDialog(null, "Khách hàng đã thanh toán thành công ?", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-
 // In hóa đơn           
 // Truyền dữ liệu vào các trường này
             Invoice_GUI invoice_GUI = new Invoice_GUI();

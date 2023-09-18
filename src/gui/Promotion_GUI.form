@@ -45,13 +45,13 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jspListProduct" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jspListProduct" alignment="0" pref="751" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="144" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jlTypeApply" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="cbTypeApply" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="240" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="checkboxSelectAll" min="-2" pref="119" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -202,35 +202,51 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                  <Component id="jlEndPromotion" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="jlStartPromotion" max="32767" attributes="0"/>
-                                      <Component id="jlNamePromotion" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="jlIDPromotion" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Component id="jlLimitPromotion" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jlPriceRangeStart" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jlPriceRangeEnd" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jlDetails" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jtfDetails" max="32767" attributes="0"/>
-                              <Component id="jpPricerangeEnd" max="32767" attributes="0"/>
-                              <Component id="jtfLimitPromotion" max="32767" attributes="0"/>
-                              <Component id="jtfStartPromotion" max="32767" attributes="0"/>
-                              <Component id="jtfNamePromotion" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jtfIDPromotion" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jtfEndPromotion" alignment="1" max="32767" attributes="0"/>
-                              <Component id="jtfPriceRangeEnd" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jtfPriceRangeEnd" max="32767" attributes="0"/>
+                              <Component id="jtfPriceRangeStart" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <Group type="102" alignment="1" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <Component id="btnSave" min="-2" pref="112" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="btnEdit" min="-2" pref="112" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jlIDPromotion" min="-2" pref="107" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                          <Component id="jtfIDPromotion" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jlLimitPromotion" max="32767" attributes="0"/>
+                              <Component id="jlEndPromotion" pref="107" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jtfEndPromotion" max="32767" attributes="0"/>
+                              <Component id="jtfLimitPromotion" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jlNamePromotion" max="32767" attributes="0"/>
+                              <Component id="jlStartPromotion" pref="107" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jtfNamePromotion" max="32767" attributes="0"/>
+                              <Component id="jtfStartPromotion" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="jlDetails" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jspDetails" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -247,52 +263,51 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="cbTypePromotion" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jlTypePromotion" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jtfIDPromotion" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="jlIDPromotion" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtfIDPromotion" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jlNamePromotion" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtfNamePromotion" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jlStartPromotion" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtfStartPromotion" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jlEndPromotion" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtfEndPromotion" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jlLimitPromotion" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtfLimitPromotion" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jlPriceRangeStart" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtfPriceRangeEnd" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jpPricerangeEnd" min="-2" max="-2" attributes="0"/>
-                      <Component id="jlPriceRangeEnd" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jlDetails" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtfDetails" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtfNamePromotion" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="jlNamePromotion" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="144" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jtfStartPromotion" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="jlStartPromotion" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jtfEndPromotion" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="jlEndPromotion" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jtfLimitPromotion" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="jlLimitPromotion" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jtfPriceRangeStart" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="jlPriceRangeStart" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jtfPriceRangeEnd" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="jlPriceRangeEnd" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jlDetails" min="-2" max="-2" attributes="0"/>
+                      <Component id="jspDetails" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="77" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnEdit" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                       <Component id="btnSave" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
@@ -346,13 +361,16 @@
         <Component class="lib2.ComboBoxSuggestion" name="cbTypePromotion">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
+              <StringArray count="2">
                 <StringItem index="0" value="Gi&#x1ea3;m theo %"/>
-                <StringItem index="1" value="Gi&#x1ea3;m theo s&#x1ed1; ti&#x1ec1;n"/>
-                <StringItem index="2" value="Gi&#x1ea3;m theo kho&#x1ea3;ng gi&#xe1;"/>
+                <StringItem index="1" value="Theo kho&#x1ea3;ng gi&#xe1;"/>
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbTypePromotionItemStateChanged"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbTypePromotionActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jlLimitPromotion">
           <Properties>
@@ -366,21 +384,25 @@
             <Property name="text" type="java.lang.String" value="Kho&#x1ea3;n gi&#xe1; t&#x1eeb; :"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jtfPriceRangeEnd">
+        <Component class="javax.swing.JTextField" name="jtfPriceRangeStart">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jpPricerangeEnd">
+        <Component class="javax.swing.JTextField" name="jtfPriceRangeEnd">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jlPriceRangeEnd">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&#x110;&#x1ebf;n"/>
+            <Property name="text" type="java.lang.String" value="&#x110;&#x1ebf;n :"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jlDetails">
           <Properties>
             <Property name="text" type="java.lang.String" value="M&#xf4; t&#x1ea3; :"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jtfDetails">
         </Component>
         <Component class="lib2.Button" name="btnEdit">
           <Properties>
@@ -433,6 +455,21 @@
             </Property>
           </Properties>
         </Component>
+        <Container class="javax.swing.JScrollPane" name="jspDetails">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTextArea" name="jtaDetails">
+              <Properties>
+                <Property name="columns" type="int" value="20"/>
+                <Property name="rows" type="int" value="5"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
       </SubComponents>
     </Container>
   </SubComponents>

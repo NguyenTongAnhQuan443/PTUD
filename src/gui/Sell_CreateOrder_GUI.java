@@ -7,16 +7,24 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
+import static utils.Utils.openPDF;
 
 public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
 
     public Sell_CreateOrder_GUI() {
         initComponents();
-        offButton();
     }
 
     @SuppressWarnings("unchecked")
@@ -47,7 +55,7 @@ public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
         jpPay = new javax.swing.JPanel();
         btnPay = new lib2.Button();
         btnCreateOrder = new lib2.Button();
-        btnCancel = new lib2.Button();
+        btnOrderWait = new lib2.Button();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
@@ -73,6 +81,7 @@ public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
         btnSearchPhone.setForeground(new java.awt.Color(255, 255, 255));
         btnSearchPhone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search24.png"))); // NOI18N
         btnSearchPhone.setText("Tìm  ");
+        btnSearchPhone.setEnabled(false);
         btnSearchPhone.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnSearchPhone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -240,6 +249,7 @@ public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
         btnPay.setForeground(new java.awt.Color(255, 255, 255));
         btnPay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pay24.png"))); // NOI18N
         btnPay.setText("Thanh toán");
+        btnPay.setEnabled(false);
         btnPay.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnPay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,14 +268,15 @@ public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
             }
         });
 
-        btnCancel.setBackground(new java.awt.Color(135, 206, 235));
-        btnCancel.setForeground(new java.awt.Color(255, 255, 255));
-        btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/x24.png"))); // NOI18N
-        btnCancel.setText("Hủy");
-        btnCancel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+        btnOrderWait.setBackground(new java.awt.Color(135, 206, 235));
+        btnOrderWait.setForeground(new java.awt.Color(255, 255, 255));
+        btnOrderWait.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/waiting24.png"))); // NOI18N
+        btnOrderWait.setText("Đơn chờ");
+        btnOrderWait.setEnabled(false);
+        btnOrderWait.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnOrderWait.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
+                btnOrderWaitActionPerformed(evt);
             }
         });
 
@@ -276,7 +287,7 @@ public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
             .addGroup(jpPayLayout.createSequentialGroup()
                 .addComponent(btnCreateOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE))
+                .addComponent(btnOrderWait, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE))
             .addComponent(btnPay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jpPayLayout.setVerticalGroup(
@@ -285,7 +296,7 @@ public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
                 .addGap(0, 6, Short.MAX_VALUE)
                 .addGroup(jpPayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCreateOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnOrderWait, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPay, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -303,12 +314,52 @@ public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
             if (cbPayments.getSelectedIndex() == 0) {
 //              Sự kiện thanh toán thành công và hỏi có in hóa đơn hay không
                 if (JOptionPane.showConfirmDialog(null, "Bạn có muốn in hóa đơn không ?", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-//                    Sự kiện in hóa đơn
+
+// In hóa đơn           
+// Truyền dữ liệu vào các trường này
                     Invoice_GUI invoice_GUI = new Invoice_GUI();
-                    
+                    invoice_GUI.setJlIDInvoiceDetails("Mã hóa đơn 002");
+                    invoice_GUI.setJlNameCusDetails("Tên KH");
+                    invoice_GUI.setJlDateInvoiceDetails("Ngày tạo");
+                    invoice_GUI.setJlNameStaffDetails("Tên nhân viên");
+//    invoice_GUI.setjTableListProduct(jTableListProduct); // truyền vào dữ liệu table
+                    invoice_GUI.setJlTotalDetails("Tổng tiền hàng");
+// In hóa đơn            
+
+// print the panel to pdf
+                    Document document = new Document();
+                    try {
+                        // Đường dẫn tới tệp PDF để lưu hóa đơn
+                        String pdfFilePath = "bill.pdf";
+                        // Tạo một đối tượng PdfWriter để viết nội dung vào tệp PDF
+                        PdfWriter.getInstance(document, new FileOutputStream(pdfFilePath));
+                        // Mở tài liệu để bắt đầu viết
+                        document.open();
+                        // Lấy kích thước của jpMain
+                        int width = invoice_GUI.getJpMain().getWidth();
+                        int height = invoice_GUI.getJpMain().getHeight();
+                        // Tạo một BufferedImage để chứa hình ảnh của jpMain
+                        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+                        Graphics2D g = image.createGraphics();
+
+                        invoice_GUI.getJpMain().printAll(g);
+                        g.dispose();
+                        // Chuyển đổi BufferedImage thành hình ảnh dựng sẵn để chèn vào tài liệu PDF
+                        com.itextpdf.text.Image pdfImage = com.itextpdf.text.Image.getInstance(image, null);
+                        // Đặt kích thước của hình ảnh trong tài liệu PDF (có thể điều chỉnh kích thước tùy ý)
+                        pdfImage.scaleToFit(PageSize.A4.getWidth(), PageSize.A4.getHeight());
+                        // Chèn hình ảnh vào tài liệu PDF
+                        document.add(pdfImage);
+                        // Đóng tài liệu
+                        document.close();
+                        openPDF(pdfFilePath);
+                    } catch (DocumentException | IOException e) {
+                        e.printStackTrace();
+                        JOptionPane.showMessageDialog(null, "Lỗi khi lưu hóa đơn: " + e.getMessage());
+                    }
+
                 }
-            } 
-//          Nếu thanh toán bằng momo
+            } //          Nếu thanh toán bằng momo
             else if (cbPayments.getSelectedIndex() == 1) {
                 try {
                     String monney = "231016"; // truyền số tiền hàng vào đây
@@ -354,7 +405,7 @@ public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
             jtfPhoneOldCus.setEditable(true);
             btnSearchPhone.setEnabled(true);
             jtfMoneyReceived.setEditable(true);
-            btnCancel.setEnabled(true);
+            btnOrderWait.setEnabled(true);
             btnPay.setEnabled(true);
         }
     }//GEN-LAST:event_btnCreateOrderActionPerformed
@@ -366,14 +417,15 @@ public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
         jtfPhoneCus.setEditable(true);
     }//GEN-LAST:event_btnSearchPhoneActionPerformed
 
-    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+    private void btnOrderWaitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderWaitActionPerformed
         if (JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn hủy hóa đơn này không ?", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             clearInput();
             offInput();
             offButton();
+//            Chuyển đơn hàng vào table hóa đơn trạng thái là đơn chờ
         }
 
-    }//GEN-LAST:event_btnCancelActionPerformed
+    }//GEN-LAST:event_btnOrderWaitActionPerformed
     public void clearInput() {
         jtfPhoneOldCus.setText("");
         jtfNameCus.setText("");
@@ -395,12 +447,12 @@ public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
 
     public void offButton() {
         btnSearchPhone.setEnabled(false);
-        btnCancel.setEnabled(false);
+        btnOrderWait.setEnabled(false);
         btnPay.setEnabled(false);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private lib2.Button btnCancel;
     private lib2.Button btnCreateOrder;
+    private lib2.Button btnOrderWait;
     private lib2.Button btnPay;
     private lib2.Button btnSearchPhone;
     private lib2.ComboBoxSuggestion cbPayments;

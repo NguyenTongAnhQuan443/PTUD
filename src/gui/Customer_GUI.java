@@ -62,6 +62,7 @@ public class Customer_GUI extends javax.swing.JPanel {
 
         jlIDCus.setText("Mã khách hàng : ");
 
+        jtfIDCus.setEditable(false);
         jtfIDCus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfIDCusActionPerformed(evt);
@@ -93,18 +94,29 @@ public class Customer_GUI extends javax.swing.JPanel {
         btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/clear24.png"))); // NOI18N
         btnClear.setText("Làm mới");
         btnClear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
 
         btnEdit.setBackground(new java.awt.Color(135, 206, 235));
         btnEdit.setForeground(new java.awt.Color(255, 255, 255));
         btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit24.png"))); // NOI18N
         btnEdit.setText("Sửa");
+        btnEdit.setEnabled(false);
         btnEdit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         btnAdd.setBackground(new java.awt.Color(135, 206, 235));
         btnAdd.setForeground(new java.awt.Color(255, 255, 255));
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add24.png"))); // NOI18N
-        btnAdd.setText("Thêm ");
+        btnAdd.setText("Thêm");
         btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpFunctionLayout = new javax.swing.GroupLayout(jpFunction);
         jpFunction.setLayout(jpFunctionLayout);
@@ -140,18 +152,21 @@ public class Customer_GUI extends javax.swing.JPanel {
 
         jlAddressDetail.setText("Địa chỉ cụ thể :");
 
+        jtfNameCus.setEditable(false);
         jtfNameCus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfNameCusActionPerformed(evt);
             }
         });
 
+        jtfPhoneCus.setEditable(false);
         jtfPhoneCus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfPhoneCusActionPerformed(evt);
             }
         });
 
+        jtfAddressDetail.setEditable(false);
         jtfAddressDetail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfAddressDetailActionPerformed(evt);
@@ -387,6 +402,46 @@ public class Customer_GUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfFilterPhoneActionPerformed
 
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        clearInput();
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        if(btnAdd.getText().equals("Thêm")){
+            openInput();
+        }else if(btnAdd.getText().equals("Hủy")){
+            offInput();
+            clearInput();
+            btnAdd.setText("Thêm");
+        }
+        
+
+    }//GEN-LAST:event_btnAddActionPerformed
+// ID Khách hàng do hệ thống phát sinh
+
+    public void openInput() {
+        jtfNameCus.setEditable(true);
+        jtfPhoneCus.setEditable(true);
+        jtfAddressDetail.setEditable(true);
+        btnAdd.setText("Hủy");
+    }
+
+    public void clearInput() {
+        jtfAddressDetail.setText("");
+        jtfIDCus.setText("");
+        jtfNameCus.setText("");
+        jtfPhoneCus.setText("");
+
+        cbCommune.setSelectedIndex(0);
+        cbDistrict.setSelectedIndex(0);
+        cbProvince.setSelectedIndex(0);
+    }
+
+    public void offInput() {
+        jtfNameCus.setEditable(false);
+        jtfPhoneCus.setEditable(false);
+        jtfAddressDetail.setEditable(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnAdd;

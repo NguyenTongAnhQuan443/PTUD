@@ -121,6 +121,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jtfNameCus">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
@@ -128,6 +129,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jtfAddress">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
@@ -177,6 +179,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jtfPhoneCus">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
@@ -267,6 +270,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jtfMoneyShip">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
@@ -289,6 +293,9 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jtfNote">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jlNote">
           <Properties>
@@ -312,13 +319,8 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <Component id="btnDelivering" min="-2" pref="111" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnDone" pref="109" max="32767" attributes="0"/>
-              </Group>
-              <Component id="btnReturn" alignment="1" max="32767" attributes="0"/>
-              <Component id="btnCreateOrder" alignment="0" max="32767" attributes="0"/>
+              <Component id="btnCreateOrder" alignment="0" pref="226" max="32767" attributes="0"/>
+              <Component id="btnDelivering" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -327,37 +329,13 @@
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="btnCreateOrder" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnDelivering" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnDone" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="btnReturn" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="btnDelivering" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="41" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="lib2.Button" name="btnReturn">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="eb" green="ce" red="87" type="rgb"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/pay24.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Ho&#xe0;n tr&#x1ea3; h&#xe0;ng"/>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="14" style="1"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReturnActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="lib2.Button" name="btnCreateOrder">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -369,33 +347,13 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/images/create24.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="T&#x1ea1;o h&#xf3;a &#x111;&#x1a1;n"/>
+            <Property name="text" type="java.lang.String" value="T&#x1ea1;o &#x111;&#x1a1;n h&#xe0;ng"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCreateOrderActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="lib2.Button" name="btnDone">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="eb" green="ce" red="87" type="rgb"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/done24.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="&#x110;&#xe3; giao"/>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="14" style="1"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDoneActionPerformed"/>
           </Events>
         </Component>
         <Component class="lib2.Button" name="btnDelivering">
@@ -410,6 +368,7 @@
               <Image iconType="3" name="/images/cart24.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Giao h&#xe0;ng"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>

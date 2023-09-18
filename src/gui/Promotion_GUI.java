@@ -11,6 +11,8 @@ public class Promotion_GUI extends javax.swing.JPanel {
         initComponents();
         TableCustom.apply(jspListProduct, TableCustom.TableType.DEFAULT);
         TableCustom.apply(jspListPromotion, TableCustom.TableType.DEFAULT);
+        
+        offInput();
     }
 
     @SuppressWarnings("unchecked")
@@ -41,14 +43,15 @@ public class Promotion_GUI extends javax.swing.JPanel {
         jlLimitPromotion = new javax.swing.JLabel();
         jtfLimitPromotion = new javax.swing.JTextField();
         jlPriceRangeStart = new javax.swing.JLabel();
+        jtfPriceRangeStart = new javax.swing.JTextField();
         jtfPriceRangeEnd = new javax.swing.JTextField();
-        jpPricerangeEnd = new javax.swing.JTextField();
         jlPriceRangeEnd = new javax.swing.JLabel();
         jlDetails = new javax.swing.JLabel();
-        jtfDetails = new javax.swing.JTextField();
         btnEdit = new lib2.Button();
         btnRefresh = new lib2.Button();
         btnSave = new lib2.Button();
+        jspDetails = new javax.swing.JScrollPane();
+        jtaDetails = new javax.swing.JTextArea();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -96,13 +99,13 @@ public class Promotion_GUI extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jspListProduct)
+            .addComponent(jspListProduct, javax.swing.GroupLayout.DEFAULT_SIZE, 751, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(144, 144, 144)
+                .addContainerGap()
                 .addComponent(jlTypeApply)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(cbTypeApply, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 240, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(checkboxSelectAll, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -173,13 +176,27 @@ public class Promotion_GUI extends javax.swing.JPanel {
 
         jlTypePromotion.setText("Hình thức :");
 
-        cbTypePromotion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Giảm theo %", "Giảm theo số tiền", "Giảm theo khoảng giá" }));
+        cbTypePromotion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Giảm theo %", "Theo khoảng giá" }));
+        cbTypePromotion.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbTypePromotionItemStateChanged(evt);
+            }
+        });
+        cbTypePromotion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTypePromotionActionPerformed(evt);
+            }
+        });
 
         jlLimitPromotion.setText("Mức giảm giá :       ");
 
         jlPriceRangeStart.setText("Khoản giá từ :");
 
-        jlPriceRangeEnd.setText("Đến");
+        jtfPriceRangeStart.setEditable(false);
+
+        jtfPriceRangeEnd.setEditable(false);
+
+        jlPriceRangeEnd.setText("Đến :");
 
         jlDetails.setText("Mô tả :");
 
@@ -201,6 +218,10 @@ public class Promotion_GUI extends javax.swing.JPanel {
         btnSave.setText("    Lưu    ");
         btnSave.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
+        jtaDetails.setColumns(20);
+        jtaDetails.setRows(5);
+        jspDetails.setViewportView(jtaDetails);
+
         javax.swing.GroupLayout jpRightLayout = new javax.swing.GroupLayout(jpRight);
         jpRight.setLayout(jpRightLayout);
         jpRightLayout.setHorizontalGroup(
@@ -214,30 +235,40 @@ public class Promotion_GUI extends javax.swing.JPanel {
                         .addComponent(cbTypePromotion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jpRightLayout.createSequentialGroup()
                         .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jlEndPromotion)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jlStartPromotion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jlNamePromotion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jlIDPromotion, javax.swing.GroupLayout.Alignment.LEADING)))
-                            .addComponent(jlLimitPromotion)
                             .addComponent(jlPriceRangeStart)
-                            .addComponent(jlPriceRangeEnd)
-                            .addComponent(jlDetails))
-                        .addGap(18, 18, 18)
+                            .addComponent(jlPriceRangeEnd))
+                        .addGap(46, 46, 46)
                         .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfDetails)
-                            .addComponent(jpPricerangeEnd)
-                            .addComponent(jtfLimitPromotion)
-                            .addComponent(jtfStartPromotion)
-                            .addComponent(jtfNamePromotion)
-                            .addComponent(jtfIDPromotion)
-                            .addComponent(jtfEndPromotion, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jtfPriceRangeEnd)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpRightLayout.createSequentialGroup()
+                            .addComponent(jtfPriceRangeEnd)
+                            .addComponent(jtfPriceRangeStart)))
+                    .addGroup(jpRightLayout.createSequentialGroup()
                         .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpRightLayout.createSequentialGroup()
+                        .addComponent(jlIDPromotion, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(jtfIDPromotion))
+                    .addGroup(jpRightLayout.createSequentialGroup()
+                        .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jlLimitPromotion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlEndPromotion, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
+                        .addGap(12, 12, 12)
+                        .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtfEndPromotion)
+                            .addComponent(jtfLimitPromotion)))
+                    .addGroup(jpRightLayout.createSequentialGroup()
+                        .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jlNamePromotion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlStartPromotion, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
+                        .addGap(12, 12, 12)
+                        .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtfNamePromotion)
+                            .addComponent(jtfStartPromotion)))
+                    .addGroup(jpRightLayout.createSequentialGroup()
+                        .addComponent(jlDetails)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jspDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jpRightLayout.createSequentialGroup()
@@ -248,43 +279,42 @@ public class Promotion_GUI extends javax.swing.JPanel {
         jpRightLayout.setVerticalGroup(
             jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpRightLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbTypePromotion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlTypePromotion))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlIDPromotion)
-                    .addComponent(jtfIDPromotion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlNamePromotion)
-                    .addComponent(jtfNamePromotion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlStartPromotion)
-                    .addComponent(jtfStartPromotion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlEndPromotion)
-                    .addComponent(jtfEndPromotion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlLimitPromotion)
-                    .addComponent(jtfLimitPromotion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
-                .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlPriceRangeStart)
-                    .addComponent(jtfPriceRangeEnd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpPricerangeEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlPriceRangeEnd))
-                .addGap(22, 22, 22)
                 .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfIDPromotion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlIDPromotion))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfNamePromotion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlNamePromotion))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfStartPromotion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlStartPromotion))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfEndPromotion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlEndPromotion))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfLimitPromotion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlLimitPromotion))
+                .addGap(18, 18, 18)
+                .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfPriceRangeStart, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlPriceRangeStart))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfPriceRangeEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlPriceRangeEnd))
+                .addGap(18, 18, 18)
+                .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlDetails)
-                    .addComponent(jtfDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
+                    .addComponent(jspDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -299,6 +329,31 @@ public class Promotion_GUI extends javax.swing.JPanel {
         add(jpRight);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cbTypePromotionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbTypePromotionItemStateChanged
+
+        if (cbTypePromotion.getSelectedIndex() == 0) {
+            offInput();
+        } else if (cbTypePromotion.getSelectedIndex() == 1) {
+            onInput();
+        }
+    }//GEN-LAST:event_cbTypePromotionItemStateChanged
+
+    private void cbTypePromotionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTypePromotionActionPerformed
+
+    }//GEN-LAST:event_cbTypePromotionActionPerformed
+    public void onInput() {
+        jtaDetails.setEditable(true);
+        jtfEndPromotion.setEditable(true);
+        jtfIDPromotion.setEditable(true);
+        jtfNamePromotion.setEditable(true);
+        jtfPriceRangeEnd.setEditable(true);
+        jtfPriceRangeStart.setEditable(true);
+        jtfStartPromotion.setEditable(true);
+    }
+    public void offInput(){
+        jtfPriceRangeEnd.setEditable(false);
+        jtfPriceRangeStart.setEditable(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnEdit;
@@ -322,16 +377,17 @@ public class Promotion_GUI extends javax.swing.JPanel {
     private javax.swing.JLabel jlTypeApply;
     private javax.swing.JLabel jlTypePromotion;
     private javax.swing.JPanel jpLeft;
-    private javax.swing.JTextField jpPricerangeEnd;
     private javax.swing.JPanel jpRight;
+    private javax.swing.JScrollPane jspDetails;
     private javax.swing.JScrollPane jspListProduct;
     private javax.swing.JScrollPane jspListPromotion;
-    private javax.swing.JTextField jtfDetails;
+    private javax.swing.JTextArea jtaDetails;
     private javax.swing.JTextField jtfEndPromotion;
     private javax.swing.JTextField jtfIDPromotion;
     private javax.swing.JTextField jtfLimitPromotion;
     private javax.swing.JTextField jtfNamePromotion;
     private javax.swing.JTextField jtfPriceRangeEnd;
+    private javax.swing.JTextField jtfPriceRangeStart;
     private javax.swing.JTextField jtfStartPromotion;
     // End of variables declaration//GEN-END:variables
 }

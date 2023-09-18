@@ -111,6 +111,7 @@
                   <Image iconType="3" name="/images/search24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="T&#xec;m  "/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
@@ -358,7 +359,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="btnCreateOrder" min="-2" pref="118" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnCancel" pref="102" max="32767" attributes="0"/>
+                  <Component id="btnOrderWait" pref="102" max="32767" attributes="0"/>
               </Group>
               <Component id="btnPay" alignment="1" max="32767" attributes="0"/>
           </Group>
@@ -369,7 +370,7 @@
                   <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnCreateOrder" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnCancel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnOrderWait" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnPay" min="-2" pref="35" max="-2" attributes="0"/>
@@ -390,6 +391,7 @@
               <Image iconType="3" name="/images/pay24.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Thanh to&#xe1;n"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
@@ -418,7 +420,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCreateOrderActionPerformed"/>
           </Events>
         </Component>
-        <Component class="lib2.Button" name="btnCancel">
+        <Component class="lib2.Button" name="btnOrderWait">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="eb" green="ce" red="87" type="rgb"/>
@@ -427,15 +429,16 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/x24.png"/>
+              <Image iconType="3" name="/images/waiting24.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="H&#x1ee7;y"/>
+            <Property name="text" type="java.lang.String" value="&#x110;&#x1a1;n ch&#x1edd;"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOrderWaitActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

@@ -65,9 +65,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         jspCart = new javax.swing.JScrollPane();
         jTableCart = new javax.swing.JTable();
         btnDel = new javax.swing.JButton();
-        btnWaiting = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
-        btnProductReturn = new javax.swing.JButton();
         jpLeft3 = new javax.swing.JPanel();
         jspListProduct = new javax.swing.JScrollPane();
         jTableListProduct = new javax.swing.JTable();
@@ -184,17 +182,6 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             }
         });
 
-        btnWaiting.setBackground(new java.awt.Color(135, 206, 235));
-        btnWaiting.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnWaiting.setForeground(new java.awt.Color(255, 255, 255));
-        btnWaiting.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/timeLeft24.png"))); // NOI18N
-        btnWaiting.setText("Đơn chờ ");
-        btnWaiting.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnWaitingActionPerformed(evt);
-            }
-        });
-
         btnClear.setBackground(new java.awt.Color(135, 206, 235));
         btnClear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnClear.setForeground(new java.awt.Color(255, 255, 255));
@@ -203,17 +190,6 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClearActionPerformed(evt);
-            }
-        });
-
-        btnProductReturn.setBackground(new java.awt.Color(135, 206, 235));
-        btnProductReturn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnProductReturn.setForeground(new java.awt.Color(255, 255, 255));
-        btnProductReturn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/productReturn16.png"))); // NOI18N
-        btnProductReturn.setText("Trả hàng");
-        btnProductReturn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProductReturnActionPerformed(evt);
             }
         });
 
@@ -226,9 +202,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpLeft2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnDel)
-                    .addComponent(btnWaiting)
-                    .addComponent(btnClear)
-                    .addComponent(btnProductReturn)))
+                    .addComponent(btnClear)))
         );
         jpLeft2Layout.setVerticalGroup(
             jpLeft2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,11 +214,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                         .addComponent(btnDel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnClear)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnWaiting)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnProductReturn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -306,7 +276,8 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbFilterCategory)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cbFilterCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(cbFilterCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jpLeft3Layout.setVerticalGroup(
             jpLeft3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -382,10 +353,6 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         jpRightBottom.repaint();
     }//GEN-LAST:event_btnOrderShipActionPerformed
 
-    private void btnWaitingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWaitingActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnWaitingActionPerformed
-
     private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDelActionPerformed
@@ -397,10 +364,6 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAddActionPerformed
-
-    private void btnProductReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductReturnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnProductReturnActionPerformed
 
     private void initWebcam() {
         Dimension size = WebcamResolution.VGA.getSize();
@@ -480,8 +443,6 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     private javax.swing.JButton btnDel;
     private lib2.Button btnOrder;
     private lib2.Button btnOrderShip;
-    private javax.swing.JButton btnProductReturn;
-    private javax.swing.JButton btnWaiting;
     private lib2.ComboBoxSuggestion cbFilterCategory;
     private javax.swing.JTable jTableCart;
     private javax.swing.JTable jTableListBill;

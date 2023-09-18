@@ -6,7 +6,6 @@ public class Sell_CreateOrderShip_GUI extends javax.swing.JPanel {
 
     public Sell_CreateOrderShip_GUI() {
         initComponents();
-        offInput();
     }
 
     @SuppressWarnings("unchecked")
@@ -35,9 +34,7 @@ public class Sell_CreateOrderShip_GUI extends javax.swing.JPanel {
         jtfNote = new javax.swing.JTextField();
         jlNote = new javax.swing.JLabel();
         jpPay = new javax.swing.JPanel();
-        btnReturn = new lib2.Button();
         btnCreateOrder = new lib2.Button();
-        btnDone = new lib2.Button();
         btnDelivering = new lib2.Button();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
@@ -51,8 +48,10 @@ public class Sell_CreateOrderShip_GUI extends javax.swing.JPanel {
 
         jlNameCus.setText("Tên KH (*):");
 
+        jtfNameCus.setEditable(false);
         jtfNameCus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        jtfAddress.setEditable(false);
         jtfAddress.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jlPhoneCus.setText("SDT (*):");
@@ -67,6 +66,7 @@ public class Sell_CreateOrderShip_GUI extends javax.swing.JPanel {
 
         jlAddress1.setText("Cụ thể :");
 
+        jtfPhoneCus.setEditable(false);
         jtfPhoneCus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jpCustomerLayout = new javax.swing.GroupLayout(jpCustomer);
@@ -135,6 +135,7 @@ public class Sell_CreateOrderShip_GUI extends javax.swing.JPanel {
 
         jlMoneyShip.setText("Tiền Ship :");
 
+        jtfMoneyShip.setEditable(false);
         jtfMoneyShip.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jlTotal.setText("Khách cần trả :");
@@ -146,6 +147,8 @@ public class Sell_CreateOrderShip_GUI extends javax.swing.JPanel {
                 jtfTotalActionPerformed(evt);
             }
         });
+
+        jtfNote.setEditable(false);
 
         jlNote.setText("Ghi chú :");
 
@@ -193,21 +196,10 @@ public class Sell_CreateOrderShip_GUI extends javax.swing.JPanel {
         jpPay.setBackground(new java.awt.Color(255, 255, 255));
         jpPay.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnReturn.setBackground(new java.awt.Color(135, 206, 235));
-        btnReturn.setForeground(new java.awt.Color(255, 255, 255));
-        btnReturn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pay24.png"))); // NOI18N
-        btnReturn.setText("Hoàn trả hàng");
-        btnReturn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnReturn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReturnActionPerformed(evt);
-            }
-        });
-
         btnCreateOrder.setBackground(new java.awt.Color(135, 206, 235));
         btnCreateOrder.setForeground(new java.awt.Color(255, 255, 255));
         btnCreateOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/create24.png"))); // NOI18N
-        btnCreateOrder.setText("Tạo hóa đơn");
+        btnCreateOrder.setText("Tạo đơn hàng");
         btnCreateOrder.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnCreateOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -215,21 +207,11 @@ public class Sell_CreateOrderShip_GUI extends javax.swing.JPanel {
             }
         });
 
-        btnDone.setBackground(new java.awt.Color(135, 206, 235));
-        btnDone.setForeground(new java.awt.Color(255, 255, 255));
-        btnDone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/done24.png"))); // NOI18N
-        btnDone.setText("Đã giao");
-        btnDone.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnDone.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDoneActionPerformed(evt);
-            }
-        });
-
         btnDelivering.setBackground(new java.awt.Color(135, 206, 235));
         btnDelivering.setForeground(new java.awt.Color(255, 255, 255));
         btnDelivering.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cart24.png"))); // NOI18N
         btnDelivering.setText("Giao hàng");
+        btnDelivering.setEnabled(false);
         btnDelivering.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnDelivering.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -241,12 +223,8 @@ public class Sell_CreateOrderShip_GUI extends javax.swing.JPanel {
         jpPay.setLayout(jpPayLayout);
         jpPayLayout.setHorizontalGroup(
             jpPayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpPayLayout.createSequentialGroup()
-                .addComponent(btnDelivering, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnDone, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE))
-            .addComponent(btnReturn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnCreateOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnCreateOrder, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+            .addComponent(btnDelivering, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jpPayLayout.setVerticalGroup(
             jpPayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,26 +232,19 @@ public class Sell_CreateOrderShip_GUI extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(btnCreateOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpPayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDelivering, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnDelivering, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         add(jpPay);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnReturnActionPerformed
-
-    private void btnDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnDoneActionPerformed
-
     private void btnDeliveringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeliveringActionPerformed
-        // TODO add your handling code here:
+        if (JOptionPane.showConfirmDialog(null, "Bạn có muốn giao hàng không ?", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            offInput();
+            JOptionPane.showMessageDialog(null, "Đang tiến hành giao hàng");
+            btnDelivering.setEnabled(false);
+        }
     }//GEN-LAST:event_btnDeliveringActionPerformed
 
     private void jtfTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfTotalActionPerformed
@@ -283,8 +254,26 @@ public class Sell_CreateOrderShip_GUI extends javax.swing.JPanel {
     private void btnCreateOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateOrderActionPerformed
         if (JOptionPane.showConfirmDialog(null, "Bạn có muốn tạo đơn hàng ship không ?", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             onInput();
+            btnDelivering.setEnabled(true);
         }
     }//GEN-LAST:event_btnCreateOrderActionPerformed
+
+    public void offInput() {
+        jtfNameCus.setEditable(false);
+        jtfPhoneCus.setEditable(false);
+        jtfMoneyShip.setEditable(false);
+        jtfNote.setEditable(false);
+        jtfAddress.setEditable(false);
+    }
+
+    public void onInput() {
+        jtfNameCus.setEditable(true);
+        jtfPhoneCus.setEditable(true);
+        jtfAddress.setEditable(true);
+        jtfMoneyShip.setEditable(true);
+        jtfNote.setEditable(true);
+    }
+
     public void clearInput() {
         jtfAddress.setText("");
         jtfMoneyShip.setText("");
@@ -298,34 +287,9 @@ public class Sell_CreateOrderShip_GUI extends javax.swing.JPanel {
         cbProvince.setSelectedIndex(0);
     }
 
-    public void offInput() {
-        clearInput();
-        jtfNameCus.setEditable(false);
-        jtfPhoneCus.setEditable(false);
-        cbCommune.setEditable(false);
-        cbDistrict.setEditable(false);
-        cbProvince.setEditable(false);
-        jtfMoneyShip.setEditable(false);
-        jtfNote.setEditable(false);
-        jtfAddress.setEditable(false);
-    }
-        public void onInput() {
-        clearInput();
-        jtfNameCus.setEditable(true);
-        jtfPhoneCus.setEditable(true);
-        cbCommune.setEditable(true);
-        cbDistrict.setEditable(true);
-        cbProvince.setEditable(true);
-        jtfMoneyShip.setEditable(true);
-        jtfNote.setEditable(true);
-        jtfAddress.setEditable(true);
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnCreateOrder;
     private lib2.Button btnDelivering;
-    private lib2.Button btnDone;
-    private lib2.Button btnReturn;
     private lib2.ComboBoxSuggestion cbCommune;
     private lib2.ComboBoxSuggestion cbDistrict;
     private lib2.ComboBoxSuggestion cbProvince;
