@@ -24,6 +24,8 @@ public class Sell_CreateOrderShip_GUI extends javax.swing.JPanel {
         cbCommune = new lib2.ComboBoxSuggestion();
         jlAddress1 = new javax.swing.JLabel();
         jtfPhoneCus = new javax.swing.JTextField();
+        jlEmail = new javax.swing.JLabel();
+        jtfEmail = new javax.swing.JTextField();
         jpMoney = new javax.swing.JPanel();
         jlTotalAmount = new javax.swing.JLabel();
         jtfTotalAmount = new javax.swing.JTextField();
@@ -69,10 +71,25 @@ public class Sell_CreateOrderShip_GUI extends javax.swing.JPanel {
         jtfPhoneCus.setEditable(false);
         jtfPhoneCus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        jlEmail.setText("Email :");
+
+        jtfEmail.setEditable(false);
+        jtfEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout jpCustomerLayout = new javax.swing.GroupLayout(jpCustomer);
         jpCustomer.setLayout(jpCustomerLayout);
         jpCustomerLayout.setHorizontalGroup(
             jpCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpCustomerLayout.createSequentialGroup()
+                .addGroup(jpCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlAddress)
+                    .addComponent(jlAddress1))
+                .addGap(18, 18, 18)
+                .addGroup(jpCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbCommune, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(cbDistrict, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jtfAddress)
+                    .addComponent(cbProvince, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
             .addGroup(jpCustomerLayout.createSequentialGroup()
                 .addGroup(jpCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,19 +97,14 @@ public class Sell_CreateOrderShip_GUI extends javax.swing.JPanel {
                             .addComponent(jlPhoneCus)
                             .addGap(36, 36, 36))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCustomerLayout.createSequentialGroup()
-                            .addGroup(jpCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jlAddress)
-                                .addComponent(jlNameCus))
+                            .addComponent(jlNameCus)
                             .addGap(18, 18, 18)))
                     .addGroup(jpCustomerLayout.createSequentialGroup()
-                        .addComponent(jlAddress1)
-                        .addGap(34, 34, 34)))
+                        .addComponent(jlEmail)
+                        .addGap(41, 41, 41)))
                 .addGroup(jpCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbCommune, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(cbDistrict, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jtfNameCus, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-                    .addComponent(jtfAddress)
-                    .addComponent(cbProvince, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                    .addComponent(jtfEmail)
+                    .addComponent(jtfNameCus)
                     .addComponent(jtfPhoneCus, javax.swing.GroupLayout.Alignment.TRAILING)))
         );
         jpCustomerLayout.setVerticalGroup(
@@ -108,6 +120,10 @@ public class Sell_CreateOrderShip_GUI extends javax.swing.JPanel {
                     .addComponent(jtfPhoneCus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlEmail)
+                    .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addGroup(jpCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbProvince, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlAddress))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -118,7 +134,7 @@ public class Sell_CreateOrderShip_GUI extends javax.swing.JPanel {
                 .addGroup(jpCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlAddress1))
-                .addGap(0, 6, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         ipInfoCustomer.add(jpCustomer);
@@ -264,6 +280,7 @@ public class Sell_CreateOrderShip_GUI extends javax.swing.JPanel {
         jtfMoneyShip.setEditable(false);
         jtfNote.setEditable(false);
         jtfAddress.setEditable(false);
+        jtfEmail.setEditable(false);
     }
 
     public void onInput() {
@@ -272,6 +289,7 @@ public class Sell_CreateOrderShip_GUI extends javax.swing.JPanel {
         jtfAddress.setEditable(true);
         jtfMoneyShip.setEditable(true);
         jtfNote.setEditable(true);
+        jtfEmail.setEditable(true);
     }
 
     public void clearInput() {
@@ -296,6 +314,7 @@ public class Sell_CreateOrderShip_GUI extends javax.swing.JPanel {
     private javax.swing.JPanel ipInfoCustomer;
     private javax.swing.JLabel jlAddress;
     private javax.swing.JLabel jlAddress1;
+    private javax.swing.JLabel jlEmail;
     private javax.swing.JLabel jlMoneyShip;
     private javax.swing.JLabel jlNameCus;
     private javax.swing.JLabel jlNote;
@@ -306,6 +325,7 @@ public class Sell_CreateOrderShip_GUI extends javax.swing.JPanel {
     private javax.swing.JPanel jpMoney;
     private javax.swing.JPanel jpPay;
     private javax.swing.JTextField jtfAddress;
+    private javax.swing.JTextField jtfEmail;
     private javax.swing.JTextField jtfMoneyShip;
     private javax.swing.JTextField jtfNameCus;
     private javax.swing.JTextField jtfNote;

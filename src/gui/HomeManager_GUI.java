@@ -30,7 +30,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
     private History_GUI history_GUI;
     private Promotion_GUI promotion_GUI;
     private ChangePassword_GUI changePassword_GUI;
-
+    private Supplier_GUI supplier_GUI;
     public HomeManager_GUI() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -60,6 +60,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
         jlStatistical = new javax.swing.JLabel();
         jlExit = new javax.swing.JLabel();
         cbLanguage = new lib2.Combobox();
+        jlSupplier = new javax.swing.JLabel();
         jpTop = new javax.swing.JPanel();
         jlLogo = new javax.swing.JLabel();
         jlNameShop = new javax.swing.JLabel();
@@ -248,6 +249,16 @@ public class HomeManager_GUI extends javax.swing.JFrame {
             }
         });
 
+        jlSupplier.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jlSupplier.setForeground(new java.awt.Color(255, 255, 255));
+        jlSupplier.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Supplier32.png"))); // NOI18N
+        jlSupplier.setText("Nhà cung cấp");
+        jlSupplier.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlSupplierMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpLeftLayout = new javax.swing.GroupLayout(jpLeft);
         jpLeft.setLayout(jpLeftLayout);
         jpLeftLayout.setHorizontalGroup(
@@ -255,9 +266,14 @@ public class HomeManager_GUI extends javax.swing.JFrame {
             .addGroup(jpLeftLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpLeftLayout.createSequentialGroup()
+                        .addComponent(jlLanguage)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addComponent(cbLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpLeftLayout.createSequentialGroup()
                         .addGroup(jpLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlStatistical)
+                            .addComponent(jlStatistical, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlSupplier)
                             .addComponent(jlProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlStaff)
                             .addComponent(jlSell)
@@ -267,18 +283,16 @@ public class HomeManager_GUI extends javax.swing.JFrame {
                             .addComponent(jlChangePass)
                             .addComponent(jlLogout)
                             .addComponent(jlExit))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpLeftLayout.createSequentialGroup()
-                        .addComponent(jlLanguage)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cbLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jpLeftLayout.setVerticalGroup(
             jpLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpLeftLayout.createSequentialGroup()
                 .addComponent(jlStatistical)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlProduct)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jlStaff)
@@ -300,7 +314,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
                 .addComponent(jlLogout)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jlExit)
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         jpMain.add(jpLeft, java.awt.BorderLayout.LINE_START);
@@ -523,6 +537,15 @@ public class HomeManager_GUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jlLogoutMouseClicked
 
+    private void jlSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlSupplierMouseClicked
+        selectMenu(jlSupplier);
+        if (sell_GUI != null) {
+            sell_GUI.stopWebcam();
+        }
+        supplier_GUI = new Supplier_GUI();
+        openJPanel(supplier_GUI);
+    }//GEN-LAST:event_jlSupplierMouseClicked
+
     public HomeManager_GUI(Statistical_GUI statistical_GUI, Product_GUI product_GUI, Sell_GUI bill_GUI, Combobox cbDisplay, Combobox cbLanguage, JLabel jlSell, JLabel jlChangePass, JLabel jlCustomer, JLabel jlDisplay, JLabel jlExit, JLabel jlHistory, JLabel jlLanguage, JLabel jlLogo, JLabel jlLogout, JLabel jlNameShop, JLabel jlProduct, JLabel jlSale, JLabel jlStaff, JLabel jlStatistical, JPanel jpCenter, JPanel jpLeft, JPanel jpMain, JPanel jpTop) throws HeadlessException {
         this.statistical_GUI = statistical_GUI;
         this.product_GUI = product_GUI;
@@ -610,6 +633,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jlSell;
     private javax.swing.JLabel jlStaff;
     private javax.swing.JLabel jlStatistical;
+    private javax.swing.JLabel jlSupplier;
     private javax.swing.JPanel jpCenter;
     private javax.swing.JPanel jpLeft;
     private javax.swing.JPanel jpMain;

@@ -41,6 +41,8 @@ public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
         jtfNameCus = new javax.swing.JTextField();
         jtfPhoneCus = new javax.swing.JTextField();
         jlPhoneCus = new javax.swing.JLabel();
+        jtfEmail = new javax.swing.JTextField();
+        jlEmail = new javax.swing.JLabel();
         jpMoney = new javax.swing.JPanel();
         jlTotalAmount = new javax.swing.JLabel();
         jtfTotalAmount = new javax.swing.JTextField();
@@ -124,8 +126,23 @@ public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
 
         jtfPhoneCus.setEditable(false);
         jtfPhoneCus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfPhoneCus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfPhoneCusActionPerformed(evt);
+            }
+        });
 
         jlPhoneCus.setText("SDT :");
+
+        jtfEmail.setEditable(false);
+        jtfEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfEmailActionPerformed(evt);
+            }
+        });
+
+        jlEmail.setText("Email :");
 
         javax.swing.GroupLayout jpNewCusLayout = new javax.swing.GroupLayout(jpNewCus);
         jpNewCus.setLayout(jpNewCusLayout);
@@ -133,14 +150,19 @@ public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
             jpNewCusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpNewCusLayout.createSequentialGroup()
                 .addGroup(jpNewCusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpNewCusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jpNewCusLayout.createSequentialGroup()
+                            .addComponent(jlPhoneCus)
+                            .addGap(36, 36, 36))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpNewCusLayout.createSequentialGroup()
+                            .addComponent(jlNameCus)
+                            .addGap(18, 18, 18)))
                     .addGroup(jpNewCusLayout.createSequentialGroup()
-                        .addComponent(jlPhoneCus)
-                        .addGap(36, 36, 36))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpNewCusLayout.createSequentialGroup()
-                        .addComponent(jlNameCus)
-                        .addGap(18, 18, 18)))
+                        .addComponent(jlEmail)
+                        .addGap(28, 28, 28)))
                 .addGroup(jpNewCusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtfNameCus, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                    .addComponent(jtfEmail)
+                    .addComponent(jtfNameCus, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
                     .addComponent(jtfPhoneCus)))
         );
         jpNewCusLayout.setVerticalGroup(
@@ -154,7 +176,11 @@ public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
                 .addGroup(jpNewCusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlPhoneCus)
                     .addComponent(jtfPhoneCus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 20, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpNewCusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlEmail)
+                    .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 17, Short.MAX_VALUE))
         );
 
         ipInfoCustomer.add(jpNewCus);
@@ -415,6 +441,8 @@ public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
 //        Nếu không tìm thấy mở 2 jtf này lên để nhập thông tin 
         jtfNameCus.setEditable(true);
         jtfPhoneCus.setEditable(true);
+        jtfEmail.setEditable(true);
+        jtfEmail.setEditable(true);
     }//GEN-LAST:event_btnSearchPhoneActionPerformed
 
     private void btnOrderWaitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderWaitActionPerformed
@@ -426,6 +454,14 @@ public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_btnOrderWaitActionPerformed
+
+    private void jtfPhoneCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfPhoneCusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfPhoneCusActionPerformed
+
+    private void jtfEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfEmailActionPerformed
     public void clearInput() {
         jtfPhoneOldCus.setText("");
         jtfNameCus.setText("");
@@ -443,6 +479,7 @@ public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
         jtfNameCus.setEditable(false);
         jtfPhoneCus.setEditable(false);
         jtfMoneyReceived.setEditable(false);
+        jtfEmail.setEditable(false);
     }
 
     public void offButton() {
@@ -458,6 +495,7 @@ public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
     private lib2.ComboBoxSuggestion cbPayments;
     private lib2.ComboBoxSuggestion cbVoucher;
     private javax.swing.JPanel ipInfoCustomer;
+    private javax.swing.JLabel jlEmail;
     private javax.swing.JLabel jlExcessCash;
     private javax.swing.JLabel jlMoneyReceived;
     private javax.swing.JLabel jlNameCus;
@@ -470,6 +508,7 @@ public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
     private javax.swing.JPanel jpMoney;
     private javax.swing.JPanel jpNewCus;
     private javax.swing.JPanel jpPay;
+    private javax.swing.JTextField jtfEmail;
     private javax.swing.JTextField jtfExcessCash;
     private javax.swing.JTextField jtfMoneyReceived;
     private javax.swing.JTextField jtfNameCus;

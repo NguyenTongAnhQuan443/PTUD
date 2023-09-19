@@ -30,7 +30,7 @@ public class Statistical_Customer_Table_GUI extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Tháng", "Số lượng khách hang", "Số lượng sản phẩm bán", "Doanh thu"
+                "Tháng", "Số lượng khách hàng", "Số lượng sản phẩm bán", "Doanh thu"
             }
         ) {
             boolean[] canEdit = new boolean [] {

@@ -50,7 +50,20 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jlAddress" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlAddress1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="cbCommune" alignment="1" pref="0" max="32767" attributes="0"/>
+                          <Component id="cbDistrict" alignment="1" pref="0" max="32767" attributes="0"/>
+                          <Component id="jtfAddress" alignment="0" max="32767" attributes="0"/>
+                          <Component id="cbProvince" alignment="1" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" alignment="0" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
@@ -58,24 +71,18 @@
                                   <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="jlAddress" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jlNameCus" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="jlNameCus" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jlAddress1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                              <Component id="jlEmail" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="cbCommune" alignment="1" pref="0" max="32767" attributes="0"/>
-                          <Component id="cbDistrict" alignment="1" pref="0" max="32767" attributes="0"/>
-                          <Component id="jtfNameCus" alignment="0" pref="147" max="32767" attributes="0"/>
-                          <Component id="jtfAddress" alignment="0" max="32767" attributes="0"/>
-                          <Component id="cbProvince" alignment="1" pref="0" max="32767" attributes="0"/>
+                          <Component id="jtfEmail" max="32767" attributes="0"/>
+                          <Component id="jtfNameCus" alignment="0" max="32767" attributes="0"/>
                           <Component id="jtfPhoneCus" alignment="1" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -96,6 +103,11 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jlEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jtfEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="9" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="cbProvince" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jlAddress" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -108,7 +120,7 @@
                           <Component id="jtfAddress" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jlAddress1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -185,6 +197,19 @@
                 </Property>
               </Properties>
             </Component>
+            <Component class="javax.swing.JLabel" name="jlEmail">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Email :"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jtfEmail">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
       </SubComponents>
@@ -244,7 +269,7 @@
                       <Component id="jtfNote" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="jlNote" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="35" max="32767" attributes="0"/>
+                  <EmptySpace pref="19" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -330,7 +355,7 @@
                   <Component id="btnCreateOrder" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnDelivering" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="41" max="32767" attributes="0"/>
+                  <EmptySpace pref="21" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
