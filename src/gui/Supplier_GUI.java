@@ -1,9 +1,12 @@
 package gui;
 
+import lib2.TableCustom;
+
 public class Supplier_GUI extends javax.swing.JPanel {
 
     public Supplier_GUI() {
         initComponents();
+        TableCustom.apply(jspTableSupplier, TableCustom.TableType.DEFAULT);
     }
 
     @SuppressWarnings("unchecked")
@@ -15,7 +18,7 @@ public class Supplier_GUI extends javax.swing.JPanel {
         jlIDSupplier = new javax.swing.JLabel();
         jtfIDSupplier = new javax.swing.JTextField();
         jlNameSupplier = new javax.swing.JLabel();
-        jtfSupplier = new javax.swing.JTextField();
+        jtfNameSupplier = new javax.swing.JTextField();
         jlEmail = new javax.swing.JLabel();
         jtfEmail = new javax.swing.JTextField();
         jlAddress = new javax.swing.JLabel();
@@ -49,9 +52,15 @@ public class Supplier_GUI extends javax.swing.JPanel {
 
         jlIDSupplier.setText("Mã nhà cung cấp :");
 
+        jtfIDSupplier.setEditable(false);
+
         jlNameSupplier.setText("Tên nhà cung cấp :");
 
+        jtfNameSupplier.setEditable(false);
+
         jlEmail.setText("Email :");
+
+        jtfEmail.setEditable(false);
 
         jlAddress.setText("Địa chỉ :");
 
@@ -62,6 +71,8 @@ public class Supplier_GUI extends javax.swing.JPanel {
         cbCommune.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Phường/Xã" }));
 
         jlAddressDetails.setText("Địa chỉ cụ thể :");
+
+        jtfAddressDetails.setEditable(false);
 
         btnEdit.setBackground(new java.awt.Color(135, 206, 235));
         btnEdit.setForeground(new java.awt.Color(255, 255, 255));
@@ -107,7 +118,7 @@ public class Supplier_GUI extends javax.swing.JPanel {
                 .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jpTopLayout.createSequentialGroup()
                         .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtfSupplier, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                            .addComponent(jtfNameSupplier, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
                             .addComponent(jtfEmail)
                             .addComponent(jtfIDSupplier))
                         .addGap(57, 57, 57)
@@ -151,7 +162,7 @@ public class Supplier_GUI extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlNameSupplier)
-                    .addComponent(jtfSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfNameSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlAddressDetails)
                     .addComponent(jtfAddressDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -269,9 +280,30 @@ public class Supplier_GUI extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAddActionPerformed
 
+        onInput();
+        setIndexCB();
+        btnAdd.setText("Lưu  ");
+    }//GEN-LAST:event_btnAddActionPerformed
+    public void onInput() {
+        jtfAddressDetails.setEditable(true);
+        jtfEmail.setEditable(true);
+        jtfIDSupplier.setEditable(true);
+        jtfNameSupplier.setEditable(true);
+    }
+
+    public void offInput() {
+        jtfAddressDetails.setEditable(false);
+        jtfEmail.setEditable(false);
+        jtfIDSupplier.setEditable(false);
+        jtfNameSupplier.setEditable(false);
+    }
+
+    public void setIndexCB() {
+        cbCommune.setSelectedIndex(0);
+        cbDistrict.setSelectedIndex(0);
+        cbProvince.setSelectedIndex(0);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnAdd;
@@ -299,7 +331,7 @@ public class Supplier_GUI extends javax.swing.JPanel {
     private javax.swing.JTextField jtfAddressDetails;
     private javax.swing.JTextField jtfEmail;
     private javax.swing.JTextField jtfIDSupplier;
+    private javax.swing.JTextField jtfNameSupplier;
     private javax.swing.JTextField jtfSearchIDSupplier;
-    private javax.swing.JTextField jtfSupplier;
     // End of variables declaration//GEN-END:variables
 }

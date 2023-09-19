@@ -152,21 +152,18 @@ public class Customer_GUI extends javax.swing.JPanel {
 
         jlAddressDetail.setText("Địa chỉ cụ thể :");
 
-        jtfNameCus.setEditable(false);
         jtfNameCus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfNameCusActionPerformed(evt);
             }
         });
 
-        jtfPhoneCus.setEditable(false);
         jtfPhoneCus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfPhoneCusActionPerformed(evt);
             }
         });
 
-        jtfAddressDetail.setEditable(false);
         jtfAddressDetail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfAddressDetailActionPerformed(evt);
@@ -415,15 +412,13 @@ public class Customer_GUI extends javax.swing.JPanel {
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        if(btnAdd.getText().equals("Thêm")){
-            openInput();
-        }else if(btnAdd.getText().equals("Hủy")){
-            offInput();
-            clearInput();
-            btnAdd.setText("Thêm");
-        }
-        
-
+//        if(btnAdd.getText().equals("Thêm")){
+//            openInput();
+//        }else if(btnAdd.getText().equals("Hủy")){
+//            offInput();
+//            clearInput();
+//            btnAdd.setText("Thêm");
+//        }
     }//GEN-LAST:event_btnAddActionPerformed
 // ID Khách hàng do hệ thống phát sinh
 

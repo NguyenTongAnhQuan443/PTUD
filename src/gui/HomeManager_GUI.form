@@ -68,12 +68,12 @@
                                   <Component id="jlProduct" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
                                   <Component id="jlStaff" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jlSell" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jlCustomer" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jlHistory" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jlPromotion" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jlChangePass" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jlLogout" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jlExit" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jlCustomer" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -95,10 +95,10 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jlSell" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jlCustomer" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jlHistory" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jlCustomer" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Component id="jlPromotion" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jlChangePass" min="-2" max="-2" attributes="0"/>
@@ -204,7 +204,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/images/history32.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="L&#x1ecb;ch s&#x1eed;"/>
+                <Property name="text" type="java.lang.String" value="L&#x1ecb;ch s&#x1eed; b&#xe1;n h&#xe0;ng"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlHistoryMouseClicked"/>

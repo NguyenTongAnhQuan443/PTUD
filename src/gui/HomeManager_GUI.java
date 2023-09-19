@@ -31,15 +31,24 @@ public class HomeManager_GUI extends javax.swing.JFrame {
     private Promotion_GUI promotion_GUI;
     private ChangePassword_GUI changePassword_GUI;
     private Supplier_GUI supplier_GUI;
+
     public HomeManager_GUI() {
         initComponents();
         this.setLocationRelativeTo(null);
 
+//        Nếu là chức vụ nhân viên quản lý
         openStatistical();
         jpCenter.add(statistical_GUI);
         jpCenter.revalidate();
         jpCenter.repaint();
         jlStatistical.setForeground(Color.ORANGE);
+//        Nếu là chức vụ nhân viên bán hàng
+//        openStatistical();
+//        jpCenter.add(statistical_GUI);
+//        jpCenter.revalidate();
+//        jpCenter.repaint();
+//        jlSupplier.setVisible(false);
+//        jlPromotion.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -141,7 +150,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
         jlHistory.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jlHistory.setForeground(new java.awt.Color(255, 255, 255));
         jlHistory.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/history32.png"))); // NOI18N
-        jlHistory.setText("Lịch sử");
+        jlHistory.setText("Lịch sử bán hàng");
         jlHistory.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jlHistoryMouseClicked(evt);
@@ -277,12 +286,12 @@ public class HomeManager_GUI extends javax.swing.JFrame {
                             .addComponent(jlProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlStaff)
                             .addComponent(jlSell)
-                            .addComponent(jlCustomer)
                             .addComponent(jlHistory)
                             .addComponent(jlPromotion)
                             .addComponent(jlChangePass)
                             .addComponent(jlLogout)
-                            .addComponent(jlExit))
+                            .addComponent(jlExit)
+                            .addComponent(jlCustomer))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -299,10 +308,10 @@ public class HomeManager_GUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jlSell)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jlCustomer)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jlHistory)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jlCustomer)
+                .addGap(12, 12, 12)
                 .addComponent(jlPromotion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jlChangePass)
@@ -581,6 +590,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
         jlChangePass.setForeground(Color.WHITE);
         jlLogout.setForeground(Color.WHITE);
         jlExit.setForeground(Color.WHITE);
+        jlSupplier.setForeground(Color.WHITE);
         label.setForeground(Color.ORANGE);
     }
 

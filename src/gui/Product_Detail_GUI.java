@@ -39,6 +39,7 @@ public class Product_Detail_GUI extends javax.swing.JPanel {
         jpTop.setBackground(new java.awt.Color(255, 255, 255));
         jpTop.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Quản lý sản phẩm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 14))); // NOI18N
 
+        jtfIDProduct.setEditable(false);
         jtfIDProduct.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jtfIDProduct.setLabelText("Mã sản phẩm");
         jtfIDProduct.setLineColor(new java.awt.Color(204, 204, 255));

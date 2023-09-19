@@ -325,25 +325,16 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jtfNameCus">
-          <Properties>
-            <Property name="editable" type="boolean" value="false"/>
-          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfNameCusActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jtfPhoneCus">
-          <Properties>
-            <Property name="editable" type="boolean" value="false"/>
-          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfPhoneCusActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jtfAddressDetail">
-          <Properties>
-            <Property name="editable" type="boolean" value="false"/>
-          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfAddressDetailActionPerformed"/>
           </Events>

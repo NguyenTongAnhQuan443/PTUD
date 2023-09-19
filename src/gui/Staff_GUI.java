@@ -95,7 +95,7 @@ public class Staff_GUI extends javax.swing.JPanel {
         jlArrage.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jlArrage.setText("Sắp xếp theo :");
 
-        cbArrange.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mã nhân viên", "Họ tên", "Ngày vào làm sớm nhất", "Ngày vào làm muộn nhất", "Doanh thu cao nhất", "Doanh thu thấp nhất" }));
+        cbArrange.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mã nhân viên", "Họ tên", "Doanh thu cao nhất", "Doanh thu thấp nhất" }));
 
         btnArrange.setBackground(new java.awt.Color(135, 206, 235));
         btnArrange.setForeground(new java.awt.Color(255, 255, 255));

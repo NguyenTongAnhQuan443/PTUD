@@ -247,7 +247,6 @@ public class History_GUI extends javax.swing.JPanel {
 
         jlIDInvoice.setText("Mã hóa đơn : ");
 
-        jtfNameCus.setEditable(false);
         jtfNameCus.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         jtfNameCus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -267,23 +266,9 @@ public class History_GUI extends javax.swing.JPanel {
 
         jlReasonCancel.setText("Lý do hủy :");
 
-        jtfIDInvoiceDetails.setEditable(false);
-
-        jtfIDStaff.setEditable(false);
-
-        jtfNameStaff.setEditable(false);
         jtfNameStaff.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
 
-        jtfPhoneCus.setEditable(false);
-
-        jtfAddress.setEditable(false);
         jtfAddress.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-
-        jtfTotal.setEditable(false);
-
-        jtfDateCreate.setEditable(false);
-
-        jtfStatusDetails.setEditable(false);
 
         jtaReasonCancel.setColumns(20);
         jtaReasonCancel.setRows(5);

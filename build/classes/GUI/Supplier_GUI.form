@@ -71,7 +71,7 @@
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jtfSupplier" alignment="0" pref="190" max="32767" attributes="0"/>
+                              <Component id="jtfNameSupplier" alignment="0" pref="190" max="32767" attributes="0"/>
                               <Component id="jtfEmail" alignment="0" max="32767" attributes="0"/>
                               <Component id="jtfIDSupplier" alignment="0" max="32767" attributes="0"/>
                           </Group>
@@ -128,7 +128,7 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jlNameSupplier" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtfSupplier" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="jtfNameSupplier" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="jlAddressDetails" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jtfAddressDetails" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
@@ -157,13 +157,19 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jtfIDSupplier">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jlNameSupplier">
           <Properties>
             <Property name="text" type="java.lang.String" value="T&#xea;n nh&#xe0; cung c&#x1ea5;p :"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jtfSupplier">
+        <Component class="javax.swing.JTextField" name="jtfNameSupplier">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jlEmail">
           <Properties>
@@ -171,6 +177,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jtfEmail">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jlAddress">
           <Properties>
@@ -210,6 +219,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jtfAddressDetails">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="lib2.Button" name="btnEdit">
           <Properties>
