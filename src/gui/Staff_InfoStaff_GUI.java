@@ -1,22 +1,26 @@
 package gui;
 
 import com.raven.datechooser.DateChooser;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import lib2.Button;
 
 public class Staff_InfoStaff_GUI extends javax.swing.JFrame {
-
+    
     private DateChooser dateChooser;
-
+    
     private int flag = 0;
-
+    
     public Staff_InfoStaff_GUI() {
         initComponents();
         setLocationRelativeTo(null);
-
+        
         DateChooser dateChoose = new DateChooser();
         dateChoose.setDateFormat("dd/MM/yyyy");
         dateChoose.setTextRefernce(jtfDoB);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -225,6 +229,11 @@ public class Staff_InfoStaff_GUI extends javax.swing.JFrame {
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add24.png"))); // NOI18N
         btnAdd.setText("Thêm");
         btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         btnBack.setBackground(new java.awt.Color(135, 206, 235));
         btnBack.setForeground(new java.awt.Color(255, 255, 255));
@@ -242,6 +251,11 @@ public class Staff_InfoStaff_GUI extends javax.swing.JFrame {
         btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit24.png"))); // NOI18N
         btnEdit.setText("Sủa thông tin ");
         btnEdit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         jlIDStaff.setText("Mã NV :");
 
@@ -366,21 +380,56 @@ public class Staff_InfoStaff_GUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jlIconCalendarMouseClicked
 
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        if (JOptionPane.showConfirmDialog(null, "Khi thực hiện thao tác này thông tin nhân viên sẽ được lưu vào hệ thống?", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditActionPerformed
+    
     public void setFlag(int flag) {
 //        this.isEditing = isEditing;
         this.flag = flag;
         checkEvents(); // Sau khi đặt trạng thái, kiểm tra và cập nhật giao diện người dùng
     }
-
+    
     public void checkEvents() {
         if (flag == 1) {
             btnEdit.setText("Sửa thông tin  ");
             btnEdit.setVisible(false);
-        } else if (flag == 2 || flag == 3) {
+        } else if (flag == 2) {
             btnAdd.setVisible(false);
             btnEdit.setText("Cập nhập  ");
+            jlIDStaff.setVisible(false);
+            jlPass.setVisible(false);
+            jtfPass.setVisible(false);
+            jtfIDStaff.setVisible(false);
         }
     }
+
+    public void setBtnAdd(boolean status) {
+        btnAdd.setVisible(status);
+    }
+
+    public void setJlIDStaff(boolean status) {
+        jlIDStaff.setVisible(status);
+    }
+
+    public void setJlPass(boolean status) {
+        jlPass.setVisible(status);
+    }
+
+    public void setJtfIDStaff(boolean status) {
+        jtfIDStaff.setVisible(status);
+    }
+
+    public void setJtfPass(boolean status) {
+        jtfPass.setVisible(status);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnAdd;
     private lib2.Button btnBack;

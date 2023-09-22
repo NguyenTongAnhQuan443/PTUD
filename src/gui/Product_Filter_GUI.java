@@ -60,7 +60,7 @@ public class Product_Filter_GUI extends javax.swing.JPanel {
         jpTop.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lọc sản phẩm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 14))); // NOI18N
 
         jrbFilterID.setBackground(new java.awt.Color(255, 255, 255));
-        jrbFilterID.setText("Tìm SP theo mã");
+        jrbFilterID.setText("Tìm sản phẩm theo mã");
         jrbFilterID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jrbFilterIDActionPerformed(evt);
@@ -70,14 +70,14 @@ public class Product_Filter_GUI extends javax.swing.JPanel {
         jrbFilterCriteria.setBackground(new java.awt.Color(255, 255, 255));
         jrbFilterCriteria.setText("Sắp xếp theo tiêu chí");
 
-        cbFilterCriteria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bán nhiều nhất", "Bán ít nhất", "Giá tăng dần", "Giá giảm giần", "Tồn kho nhiều nhất", "Tồn kho ít nhất" }));
+        cbFilterCriteria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bán nhiều nhất", "Bán ít nhất", "Giá tăng dần", "Giá giảm dần", "Tồn kho nhiều nhất", "Tồn kho ít nhất" }));
 
         jtfInputID.setText("Nhập mã sản phẩm");
 
         btnSearch.setBackground(new java.awt.Color(135, 206, 235));
         btnSearch.setForeground(new java.awt.Color(255, 255, 255));
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search24.png"))); // NOI18N
-        btnSearch.setText("Tìm SP");
+        btnSearch.setText("Tìm sản phẩm");
         btnSearch.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout jpTopLayout = new javax.swing.GroupLayout(jpTop);
@@ -94,8 +94,8 @@ public class Product_Filter_GUI extends javax.swing.JPanel {
                     .addComponent(cbFilterCriteria, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                     .addComponent(jtfInputID))
                 .addGap(18, 18, 18)
-                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(257, Short.MAX_VALUE))
+                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(207, Short.MAX_VALUE))
         );
         jpTopLayout.setVerticalGroup(
             jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

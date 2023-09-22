@@ -157,38 +157,68 @@ public class Product_Detail_GUI extends javax.swing.JPanel {
         btnAdd.setBackground(new java.awt.Color(135, 206, 235));
         btnAdd.setForeground(new java.awt.Color(255, 255, 255));
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add24.png"))); // NOI18N
-        btnAdd.setText("Thêm SP");
+        btnAdd.setText("Thêm");
         btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         btnDel.setBackground(new java.awt.Color(135, 206, 235));
         btnDel.setForeground(new java.awt.Color(255, 255, 255));
         btnDel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete24.png"))); // NOI18N
-        btnDel.setText("Xóa SP");
+        btnDel.setText("Xóa");
         btnDel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnDel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelActionPerformed(evt);
+            }
+        });
 
         btnInputFile.setBackground(new java.awt.Color(135, 206, 235));
         btnInputFile.setForeground(new java.awt.Color(255, 255, 255));
         btnInputFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/inputfile24.png"))); // NOI18N
         btnInputFile.setText("Nhập SP từ file");
         btnInputFile.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnInputFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInputFileActionPerformed(evt);
+            }
+        });
 
         btnEdit.setBackground(new java.awt.Color(135, 206, 235));
         btnEdit.setForeground(new java.awt.Color(255, 255, 255));
         btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit24.png"))); // NOI18N
         btnEdit.setText("Sủa thông tin");
         btnEdit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         btnSearch.setBackground(new java.awt.Color(135, 206, 235));
         btnSearch.setForeground(new java.awt.Color(255, 255, 255));
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/clear24.png"))); // NOI18N
         btnSearch.setText("Xóa trắng");
         btnSearch.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         btnOutputFile.setBackground(new java.awt.Color(135, 206, 235));
         btnOutputFile.setForeground(new java.awt.Color(255, 255, 255));
         btnOutputFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/outputfile24.png"))); // NOI18N
         btnOutputFile.setText("Xuất SP ra file");
         btnOutputFile.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnOutputFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOutputFileActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpBottomLayout = new javax.swing.GroupLayout(jpBottom);
         jpBottom.setLayout(jpBottomLayout);
@@ -245,7 +275,70 @@ public class Product_Detail_GUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfNumberActionPerformed
 
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+         if (btnAdd.getText().equals("Thêm")) {
+            jtfNameProduct.setEditable(true);
+            jtfNumber.setEditable(true);
+            jtfPrice.setEditable(true);
+            btnAdd.setText("Lưu");
+            btnEdit.setText("Hủy");
+        } else if (btnAdd.getText().equals("Lưu")) {
+            btnAdd.setText("Thêm");
+            clearInput();
+            offInput();
+            btnEdit.setText("Sủa thông tin");
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
 
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+         if (btnEdit.getText().equals("Hủy")) {
+            btnAdd.setText("Thêm");
+            clearInput();
+            offInput();
+            btnEdit.setText("Sủa thông tin");
+        } else if (btnEdit.getText().equals("Hủy")) {
+
+        }
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDelActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        clearInput();
+        cbColor.setSelectedIndex(0);
+        cbMaterial.setSelectedIndex(0);
+        cbSize.setSelectedIndex(0);
+        cbType.setSelectedIndex(0);
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnInputFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInputFileActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnInputFileActionPerformed
+
+    private void btnOutputFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOutputFileActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnOutputFileActionPerformed
+
+public void clearInput() {
+        jtfIDProduct.setText("");
+        jtfNameProduct.setText("");
+        jtfNumber.setText("");
+        jtfPrice.setText("");
+    }
+
+    public void onInput() {
+        jtfNameProduct.setEditable(true);
+        jtfNumber.setEditable(true);
+        jtfPrice.setEditable(true);
+    }
+
+    public void offInput() {
+        jtfNameProduct.setEditable(false);
+        jtfNumber.setEditable(false);
+        jtfPrice.setEditable(false);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnAdd;
     private lib2.Button btnDel;

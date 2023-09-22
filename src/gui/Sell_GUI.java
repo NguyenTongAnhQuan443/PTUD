@@ -99,7 +99,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã hóa đơn", "Tên NV", "Tên KH", "Trạng thái", "Ngày tạo"
+                "STT", "Mã hóa đơn", "Tên NV", "Tên KH", "Ngày tạo", "Trạng thái"
             }
         ) {
             boolean[] canEdit = new boolean [] {

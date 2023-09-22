@@ -56,29 +56,27 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <Component id="jlLanguage" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="18" max="32767" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="cbLanguage" min="-2" pref="137" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jlStatistical" min="-2" pref="150" max="-2" attributes="0"/>
-                                  <Component id="jlSupplier" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jlProduct" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                                  <Component id="jlStaff" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jlSell" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jlHistory" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jlPromotion" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jlChangePass" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jlLogout" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jlExit" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jlCustomer" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="jlStatistical" min="-2" pref="150" max="-2" attributes="0"/>
+                          <Component id="jlSupplier" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlProduct" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                          <Component id="jlStaff" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlSell" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlHistory" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlChangePass" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlLogout" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlExit" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlCustomer" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="jlAccount" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jlPromotion" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace pref="12" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -101,17 +99,19 @@
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Component id="jlPromotion" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jlAccount" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jlChangePass" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="cbLanguage" min="-2" pref="47" max="-2" attributes="0"/>
                           <Component id="jlLanguage" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jlLogout" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jlExit" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="55" max="32767" attributes="0"/>
+                      <EmptySpace pref="17" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -359,6 +359,25 @@
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlSupplierMouseClicked"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlAccount">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="18" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/images/user32.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="T&#xe0;i kho&#x1ea3;n"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlAccountMouseClicked"/>
+                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlAccountMouseEntered"/>
+                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlAccountMouseExited"/>
               </Events>
             </Component>
           </SubComponents>

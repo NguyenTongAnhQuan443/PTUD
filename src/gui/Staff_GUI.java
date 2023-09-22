@@ -2,20 +2,21 @@
 package gui;
 
 public class Staff_GUI extends javax.swing.JPanel {
-
+    
     private Staff_Table_GUI staff_Table_GUI;
     private Staff_InfoStaff_GUI staff_InfoStaff_GUI;
-
+    
     public Staff_GUI() {
         initComponents();
-
+        
         staff_Table_GUI = new Staff_Table_GUI();
         jpTMP.removeAll();
         jpTMP.add(staff_Table_GUI);
         jpTMP.revalidate();
         jpTMP.repaint();
+        btnPersonalInformation.setVisible(false);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -164,7 +165,7 @@ public class Staff_GUI extends javax.swing.JPanel {
         btnDismissal.setBackground(new java.awt.Color(135, 206, 235));
         btnDismissal.setForeground(new java.awt.Color(255, 255, 255));
         btnDismissal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/warning24.png"))); // NOI18N
-        btnDismissal.setText("Thôi việc ");
+        btnDismissal.setText("Danh sách thôi việc  ");
         btnDismissal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnDismissal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,7 +222,7 @@ public class Staff_GUI extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnDismissalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDismissalActionPerformed
-
+//     hiển thị danh sách thôi việc lên table
     }//GEN-LAST:event_btnDismissalActionPerformed
 
     private void btnPersonalInformationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonalInformationActionPerformed

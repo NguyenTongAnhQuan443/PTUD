@@ -276,19 +276,33 @@ public class Supplier_GUI extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // TODO add your handling code here:
+        if (btnEdit.getText().equals("Hủy  ")) {
+            clearinput();
+            offInput();
+            btnEdit.setText("Cập nhập  ");
+            btnAdd.setText("Thêm nhà cung cấp  ");
+        } else if (btnEdit.getText().equals("Cập nhập  ")) {
+
+        }
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
 
-        onInput();
-        setIndexCB();
-        btnAdd.setText("Lưu  ");
+        if (btnAdd.getText().equals("Thêm nhà cung cấp  ")) {
+            onInput();
+            setIndexCB();
+            btnAdd.setText("Lưu  ");
+            btnEdit.setText("Hủy  ");
+        } else if (btnAdd.getText().equals("Lưu  ")) {
+            clearinput();
+            offInput();
+            btnEdit.setText("Cập nhập  ");
+            btnAdd.setText("Thêm nhà cung cấp  ");
+        }
     }//GEN-LAST:event_btnAddActionPerformed
     public void onInput() {
         jtfAddressDetails.setEditable(true);
         jtfEmail.setEditable(true);
-        jtfIDSupplier.setEditable(true);
         jtfNameSupplier.setEditable(true);
     }
 
@@ -303,6 +317,14 @@ public class Supplier_GUI extends javax.swing.JPanel {
         cbCommune.setSelectedIndex(0);
         cbDistrict.setSelectedIndex(0);
         cbProvince.setSelectedIndex(0);
+    }
+
+    public void clearinput() {
+        jtfAddressDetails.setText("");
+        jtfEmail.setText("");
+        jtfIDSupplier.setText("");
+        jtfNameSupplier.setText("");
+        jtfSearchIDSupplier.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

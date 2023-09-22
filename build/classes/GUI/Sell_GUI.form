@@ -83,8 +83,8 @@
                             <Column editable="false" title="M&#xe3; h&#xf3;a &#x111;&#x1a1;n" type="java.lang.Object"/>
                             <Column editable="false" title="T&#xea;n NV" type="java.lang.Object"/>
                             <Column editable="false" title="T&#xea;n KH" type="java.lang.Object"/>
-                            <Column editable="false" title="Tr&#x1ea1;ng th&#xe1;i" type="java.lang.Object"/>
                             <Column editable="false" title="Ng&#xe0;y t&#x1ea1;o" type="java.lang.Object"/>
+                            <Column editable="false" title="Tr&#x1ea1;ng th&#xe1;i" type="java.lang.Object"/>
                           </Table>
                         </Property>
                       </Properties>
