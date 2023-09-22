@@ -2,13 +2,13 @@ package gui;
 
 import com.raven.datechooser.DateChooser;
 
-public class Staff_AddStaff_GUI extends javax.swing.JFrame {
+public class Staff_InfoStaff_GUI extends javax.swing.JFrame {
 
     private DateChooser dateChooser;
 
     private int flag = 0;
 
-    public Staff_AddStaff_GUI() {
+    public Staff_InfoStaff_GUI() {
         initComponents();
         setLocationRelativeTo(null);
 

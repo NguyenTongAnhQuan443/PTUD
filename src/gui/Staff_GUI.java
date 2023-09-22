@@ -4,7 +4,7 @@ package gui;
 public class Staff_GUI extends javax.swing.JPanel {
 
     private Staff_Table_GUI staff_Table_GUI;
-    private Staff_AddStaff_GUI staff_AddStaff_GUI;
+    private Staff_InfoStaff_GUI staff_InfoStaff_GUI;
 
     public Staff_GUI() {
         initComponents();
@@ -209,13 +209,13 @@ public class Staff_GUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        staff_AddStaff_GUI = new Staff_AddStaff_GUI();
-        staff_AddStaff_GUI.setVisible(true);
-        staff_AddStaff_GUI.setFlag(1);
+        staff_InfoStaff_GUI = new Staff_InfoStaff_GUI();
+        staff_InfoStaff_GUI.setVisible(true);
+        staff_InfoStaff_GUI.setFlag(1);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        Staff_AddStaff_GUI staff_AddStaff_GUI = new Staff_AddStaff_GUI();
+        Staff_InfoStaff_GUI staff_AddStaff_GUI = new Staff_InfoStaff_GUI();
         staff_AddStaff_GUI.setVisible(true);
         staff_AddStaff_GUI.setFlag(2);
     }//GEN-LAST:event_btnEditActionPerformed
@@ -225,9 +225,9 @@ public class Staff_GUI extends javax.swing.JPanel {
     }//GEN-LAST:event_btnDismissalActionPerformed
 
     private void btnPersonalInformationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonalInformationActionPerformed
-        staff_AddStaff_GUI = new Staff_AddStaff_GUI();
-        staff_AddStaff_GUI.setVisible(true);
-        staff_AddStaff_GUI.setFlag(3);
+        staff_InfoStaff_GUI = new Staff_InfoStaff_GUI();
+        staff_InfoStaff_GUI.setVisible(true);
+        staff_InfoStaff_GUI.setFlag(3);
     }//GEN-LAST:event_btnPersonalInformationActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
