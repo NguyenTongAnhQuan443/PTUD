@@ -135,12 +135,20 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jspListPromotion" alignment="0" pref="751" max="32767" attributes="0"/>
+                  <Component id="jspListPromotion" pref="751" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="btnSave1" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jspListPromotion" alignment="0" pref="278" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jspListPromotion" pref="238" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnSave1" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -171,6 +179,24 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="lib2.Button" name="btnSave1">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="eb" green="ce" red="87" type="rgb"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/images/save24.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="G&#x1eed;i th&#xf4;ng tin khuy&#x1ebf;n m&#xe3;i"/>
+                <Property name="toolTipText" type="java.lang.String" value="H&#x1ec7; th&#x1ed1;ng s&#x1ebd; g&#x1eed;i th&#xf4;ng tin c&#xe1;c ch&#x1b0;&#x1a1;ng tr&#xec;nh khuy&#x1ebf;n m&#xe3;i hi&#x1ec7;n c&#xf3; &#x111;&#x1ebf;n kh&#xe1;ch h&#xe0;ng qua Email"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="1"/>
+                </Property>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
       </SubComponents>

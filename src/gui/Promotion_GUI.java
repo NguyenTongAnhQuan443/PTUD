@@ -29,6 +29,7 @@ public class Promotion_GUI extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jspListPromotion = new javax.swing.JScrollPane();
         jTableListPromotion = new javax.swing.JTable();
+        btnSave1 = new lib2.Button();
         jpRight = new javax.swing.JPanel();
         jlIDPromotion = new javax.swing.JLabel();
         jlNamePromotion = new javax.swing.JLabel();
@@ -148,15 +149,28 @@ public class Promotion_GUI extends javax.swing.JPanel {
         });
         jspListPromotion.setViewportView(jTableListPromotion);
 
+        btnSave1.setBackground(new java.awt.Color(135, 206, 235));
+        btnSave1.setForeground(new java.awt.Color(255, 255, 255));
+        btnSave1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save24.png"))); // NOI18N
+        btnSave1.setText("Gửi thông tin khuyến mãi");
+        btnSave1.setToolTipText("Hệ thống sẽ gửi thông tin các chương trình khuyến mãi hiện có đến khách hàng qua Email");
+        btnSave1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jspListPromotion, javax.swing.GroupLayout.DEFAULT_SIZE, 751, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnSave1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jspListPromotion, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jspListPromotion, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSave1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jpLeft.add(jPanel2);
@@ -359,6 +373,7 @@ public class Promotion_GUI extends javax.swing.JPanel {
     private lib2.Button btnEdit;
     private lib2.Button btnRefresh;
     private lib2.Button btnSave;
+    private lib2.Button btnSave1;
     private lib2.ComboBoxSuggestion cbTypeApply;
     private lib2.ComboBoxSuggestion cbTypePromotion;
     private java.awt.Checkbox checkboxSelectAll;

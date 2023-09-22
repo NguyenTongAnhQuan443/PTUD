@@ -36,6 +36,7 @@ public class Customer_GUI extends javax.swing.JPanel {
         jtfNameCus = new javax.swing.JTextField();
         jtfPhoneCus = new javax.swing.JTextField();
         jtfAddressDetail = new javax.swing.JTextField();
+        jcReceivePromotion = new javax.swing.JCheckBox();
         jpBottom = new javax.swing.JPanel();
         jpSelect = new javax.swing.JPanel();
         btnInfo = new lib2.Button();
@@ -170,6 +171,9 @@ public class Customer_GUI extends javax.swing.JPanel {
             }
         });
 
+        jcReceivePromotion.setBackground(new java.awt.Color(255, 255, 255));
+        jcReceivePromotion.setText("Nhận thông tin chương trình khuyến mãi ?");
+
         javax.swing.GroupLayout jpTopLayout = new javax.swing.GroupLayout(jpTop);
         jpTop.setLayout(jpTopLayout);
         jpTopLayout.setHorizontalGroup(
@@ -207,7 +211,8 @@ public class Customer_GUI extends javax.swing.JPanel {
                                 .addComponent(jrbActive)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jrbInactive))
-                            .addComponent(jtfPhoneCus, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jtfPhoneCus, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jcReceivePromotion))
                 .addGap(18, 18, 18)
                 .addComponent(jpFunction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
@@ -235,13 +240,14 @@ public class Customer_GUI extends javax.swing.JPanel {
                         .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cbProvince, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbCommune, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlAddress))
+                            .addComponent(jlAddress)
+                            .addComponent(jcReceivePromotion))
                         .addGap(18, 18, 18)
                         .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtfAddressDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlAddressDetail))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jlAddressDetail)
+                            .addComponent(cbCommune, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         add(jpTop);
@@ -269,18 +275,25 @@ public class Customer_GUI extends javax.swing.JPanel {
 
         jTableCus.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã khách hàng", "Tên khách hàng", "Số điện thoại", "Email", "Địa chỉ", "Trạng thái"
+                "Mã khách hàng", "Tên khách hàng", "Số điện thoại", "Email", "Địa chỉ", "Trạng thái", "Nhận thông tin khuyến mãi"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -459,6 +472,7 @@ public class Customer_GUI extends javax.swing.JPanel {
     private lib2.ComboBoxSuggestion cbProvince;
     private lib2.ComboBoxSuggestion cbStatus;
     private javax.swing.JTable jTableCus;
+    private javax.swing.JCheckBox jcReceivePromotion;
     private javax.swing.JLabel jlAddress;
     private javax.swing.JLabel jlAddressDetail;
     private javax.swing.JLabel jlFilterPhone;
