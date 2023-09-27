@@ -125,7 +125,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         );
         jpQRLayout.setVerticalGroup(
             jpQRLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpWebcam, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+            .addComponent(jpWebcam, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jpListBillLayout = new javax.swing.GroupLayout(jpListBill);
@@ -133,14 +133,14 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         jpListBillLayout.setHorizontalGroup(
             jpListBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpListBillLayout.createSequentialGroup()
-                .addComponent(jspListBill, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jspListBill, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jpQR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jpListBillLayout.setVerticalGroup(
             jpListBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jspListBill, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addComponent(jpQR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jspListBill, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
         jpLeft1.add(jpListBill);
@@ -214,7 +214,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                         .addComponent(btnDel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnClear)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -302,7 +302,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         jpRight.setLayout(new javax.swing.BoxLayout(jpRight, javax.swing.BoxLayout.Y_AXIS));
 
         jpRightTop.setBackground(new java.awt.Color(204, 204, 255));
-        jpRightTop.setLayout(new java.awt.GridLayout(1, 0));
+        jpRightTop.setLayout(new java.awt.GridLayout(1, 2));
 
         btnOrder.setBackground(new java.awt.Color(204, 204, 255));
         btnOrder.setBorder(javax.swing.BorderFactory.createEtchedBorder());

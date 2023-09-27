@@ -184,17 +184,17 @@ public class Supplier_GUI extends javax.swing.JPanel {
 
         jTableSupplier.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã nhà cung cấp", "Tên nhà cung cấp", "Email", "Địa chỉ", "Trạng thái hợp đồng"
+                "STT", "Mã nhà cung cấp", "Tên nhà cung cấp", "Email", "Trạng thái hợp đồng"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

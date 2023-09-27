@@ -7,6 +7,7 @@ import lib2.TableCustom;
 
 public class History_GUI extends javax.swing.JPanel {
 
+    private TransferProduct_GUI transferProduct_GUI;
     public History_GUI() {
         initComponents();
         TableCustom.apply(jspListInvoice, TableCustom.TableType.DEFAULT);
@@ -34,6 +35,7 @@ public class History_GUI extends javax.swing.JPanel {
         btnSearch = new lib2.Button();
         jlStatusInvoice = new javax.swing.JLabel();
         cbStatusInvoice = new lib2.ComboBoxSuggestion();
+        btnTransfer = new lib2.Button();
         jpLeftInfoProduct = new javax.swing.JPanel();
         jspInfoProduct = new javax.swing.JScrollPane();
         jTableInfoProduct = new javax.swing.JTable();
@@ -134,6 +136,17 @@ public class History_GUI extends javax.swing.JPanel {
 
         jlStatusInvoice.setText("Trạng thái :");
 
+        btnTransfer.setBackground(new java.awt.Color(135, 206, 235));
+        btnTransfer.setForeground(new java.awt.Color(255, 255, 255));
+        btnTransfer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/transfer24.png"))); // NOI18N
+        btnTransfer.setText("Đổi hàng");
+        btnTransfer.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnTransfer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTransferActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpLeftListInvoiceLayout = new javax.swing.GroupLayout(jpLeftListInvoice);
         jpLeftListInvoice.setLayout(jpLeftListInvoiceLayout);
         jpLeftListInvoiceLayout.setHorizontalGroup(
@@ -167,6 +180,8 @@ public class History_GUI extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnDelivered, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnTransfer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnReturns, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -190,7 +205,8 @@ public class History_GUI extends javax.swing.JPanel {
                     .addComponent(btnDelivered, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnReturns, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlStatusInvoice)
-                    .addComponent(cbStatusInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(cbStatusInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTransfer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jpLeft.add(jpLeftListInvoice);
@@ -200,17 +216,17 @@ public class History_GUI extends javax.swing.JPanel {
 
         jTableInfoProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã SP", "Tên SP", "Nhà cung cấp", "Số lượng", "Đơn giá", "Giảm giá", "Thành tiền", "Trạng thái", "Lý do hủy"
+                "Mã SP", "Tên SP", "Số lượng", "SL Trả", "Đơn giá", "Giảm giá", "Thành tiền", "Trạng thái", "Lý do Đổi/Trả"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -247,6 +263,7 @@ public class History_GUI extends javax.swing.JPanel {
 
         jlIDInvoice.setText("Mã hóa đơn : ");
 
+        jtfNameCus.setEditable(false);
         jtfNameCus.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         jtfNameCus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -266,10 +283,25 @@ public class History_GUI extends javax.swing.JPanel {
 
         jlReasonCancel.setText("Lý do hủy :");
 
+        jtfIDInvoiceDetails.setEditable(false);
+
+        jtfIDStaff.setEditable(false);
+
+        jtfNameStaff.setEditable(false);
         jtfNameStaff.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
 
+        jtfPhoneCus.setEditable(false);
+
+        jtfAddress.setEditable(false);
         jtfAddress.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
 
+        jtfTotal.setEditable(false);
+
+        jtfDateCreate.setEditable(false);
+
+        jtfStatusDetails.setEditable(false);
+
+        jtaReasonCancel.setEditable(false);
         jtaReasonCancel.setColumns(20);
         jtaReasonCancel.setRows(5);
         jspReasonCancel.setViewportView(jtaReasonCancel);
@@ -383,11 +415,17 @@ public class History_GUI extends javax.swing.JPanel {
             }
     }//GEN-LAST:event_btnReturnsActionPerformed
 
+    private void btnTransferActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferActionPerformed
+        transferProduct_GUI = new TransferProduct_GUI();
+        transferProduct_GUI.setVisible(true);
+    }//GEN-LAST:event_btnTransferActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnDelivered;
     private lib2.Button btnReturns;
     private lib2.Button btnSearch;
+    private lib2.Button btnTransfer;
     private lib2.ComboBoxSuggestion cbDay;
     private lib2.ComboBoxSuggestion cbMonth;
     private lib2.ComboBoxSuggestion cbStatusInvoice;

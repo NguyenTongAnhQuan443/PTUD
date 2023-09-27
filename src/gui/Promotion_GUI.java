@@ -70,7 +70,7 @@ public class Promotion_GUI extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã sản phẩm", "Tên sản phẩm", "Kích thước", "Màu sắc", "Chất liệu", "Đơn giá", "Trạng thái"
+                "STT", "Mã SP", "Tên SP", "Kích thước", "Màu sắc", "Chất liệu", "Đơn giá", "Trạng thái"
             }
         ) {
             Class[] types = new Class [] {
@@ -136,7 +136,7 @@ public class Promotion_GUI extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã KM", "Tên chương trình", "Hình thức", "Giá giảm", "Sản phẩm", "Ngày bắt đầu", "Ngày kết thúc", "Trạng thái", "Mô tả"
+                "Mã KM", "Tên KM", "Hình thức", "Mức giảm giá", "Khoảng giá áp dụng", "Ngày bắt đầu", "Ngày kết thúc", "Trạng thái", "Mô tả"
             }
         ) {
             boolean[] canEdit = new boolean [] {

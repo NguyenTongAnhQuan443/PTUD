@@ -19,6 +19,6 @@ public class NewClass {
  */
 //    --
 }
-//tìm chương trình khuyến mãi hiện có
-//tìm chương trình khuyến mãi theo mã chương trình
-//In qr sản phẩm
+/*
+
+*/

@@ -37,6 +37,7 @@ public class Statistical_Revenue_GUI extends javax.swing.JPanel {
         jrbChart = new javax.swing.JRadioButton();
         cbChooserYear = new lib2.ComboBoxSuggestion();
         jlTitle = new javax.swing.JLabel();
+        button1 = new lib2.Button();
         jpRight = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -75,6 +76,12 @@ public class Statistical_Revenue_GUI extends javax.swing.JPanel {
         jlTitle.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jlTitle.setText("Thống kê doanh thu");
 
+        button1.setBackground(new java.awt.Color(135, 206, 235));
+        button1.setForeground(new java.awt.Color(255, 255, 255));
+        button1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dashboard24.png"))); // NOI18N
+        button1.setText("Báo cáo doanh thu");
+        button1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
         javax.swing.GroupLayout jpLeftLayout = new javax.swing.GroupLayout(jpLeft);
         jpLeft.setLayout(jpLeftLayout);
         jpLeftLayout.setHorizontalGroup(
@@ -97,8 +104,11 @@ public class Statistical_Revenue_GUI extends javax.swing.JPanel {
                                 .addComponent(jrbTable)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jrbChart))
-                            .addComponent(cbChooserYear, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(34, Short.MAX_VALUE))
+                            .addComponent(cbChooserYear, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jpLeftLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jpLeftLayout.setVerticalGroup(
             jpLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,7 +125,9 @@ public class Statistical_Revenue_GUI extends javax.swing.JPanel {
                 .addGroup(jpLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jrbTable)
                     .addComponent(jrbChart))
-                .addContainerGap(177, Short.MAX_VALUE))
+                .addGap(41, 41, 41)
+                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(102, Short.MAX_VALUE))
         );
 
         add(jpLeft);
@@ -166,6 +178,7 @@ public class Statistical_Revenue_GUI extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private lib2.Button button1;
     private lib2.ComboBoxSuggestion cbChooserYear;
     private javax.swing.JLabel jlChooserDisplay;
     private javax.swing.JLabel jlChooserYear;

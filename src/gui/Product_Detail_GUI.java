@@ -24,6 +24,7 @@ public class Product_Detail_GUI extends javax.swing.JPanel {
         cbType = new lib2.ComboBoxSuggestion();
         cbMaterial = new lib2.ComboBoxSuggestion();
         cbSize = new lib2.ComboBoxSuggestion();
+        jcStopBusiness = new javax.swing.JCheckBox();
         jpBottom = new javax.swing.JPanel();
         jspTable = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -88,15 +89,19 @@ public class Product_Detail_GUI extends javax.swing.JPanel {
         cbSize.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kích thước" }));
         cbSize.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        jcStopBusiness.setText("Ngừng kinh doanh");
+
         javax.swing.GroupLayout jpTopLayout = new javax.swing.GroupLayout(jpTop);
         jpTop.setLayout(jpTopLayout);
         jpTopLayout.setHorizontalGroup(
             jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpTopLayout.createSequentialGroup()
                 .addGap(63, 63, 63)
-                .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jtfPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfIDProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jtfPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtfIDProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcStopBusiness))
                 .addGap(31, 31, 31)
                 .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jtfNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -124,7 +129,8 @@ public class Product_Detail_GUI extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbType, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcStopBusiness))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -135,18 +141,25 @@ public class Product_Detail_GUI extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã sản phẩm", "Tên sản phẩm", "Loại sản phẩm", "Nhà cung cấp", "Kích thước", "Màu sắc", "Chất liệu", "Đơn giá", "Số lượng"
+                "Mã SP", "Tên SP", "Loại SP", "Nhà cung cấp", "Kích thước", "Màu sắc", "Chất liệu", "Đơn giá", "Số lượng", "Ngừng kinh doanh"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -351,6 +364,7 @@ public void clearInput() {
     private lib2.ComboBoxSuggestion cbSize;
     private lib2.ComboBoxSuggestion cbType;
     private javax.swing.JTable jTable1;
+    private javax.swing.JCheckBox jcStopBusiness;
     private javax.swing.JPanel jpBottom;
     private javax.swing.JPanel jpTop;
     private javax.swing.JScrollPane jspTable;

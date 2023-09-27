@@ -6,6 +6,7 @@ import lib2.TableCustom;
 
 public class Customer_GUI extends javax.swing.JPanel {
 
+    private PurchaseHistory_GUI purchaseHistory_GUI;
     public Customer_GUI() {
         initComponents();
         TableCustom.apply(jspTableCus, TableCustom.TableType.DEFAULT);
@@ -39,8 +40,6 @@ public class Customer_GUI extends javax.swing.JPanel {
         jcReceivePromotion = new javax.swing.JCheckBox();
         jpBottom = new javax.swing.JPanel();
         jpSelect = new javax.swing.JPanel();
-        btnInfo = new lib2.Button();
-        btnHistory = new lib2.Button();
         jpTable = new javax.swing.JPanel();
         jspTableCus = new javax.swing.JScrollPane();
         jTableCus = new javax.swing.JTable();
@@ -50,6 +49,7 @@ public class Customer_GUI extends javax.swing.JPanel {
         btnFilter = new lib2.Button();
         jlFilterStatus = new javax.swing.JLabel();
         cbStatus = new lib2.ComboBoxSuggestion();
+        jButton1 = new javax.swing.JButton();
 
         buttonGroup1.add(jrbActive);
         buttonGroup1.add(jrbInactive);
@@ -241,13 +241,13 @@ public class Customer_GUI extends javax.swing.JPanel {
                             .addComponent(cbProvince, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlAddress)
-                            .addComponent(jcReceivePromotion))
-                        .addGap(18, 18, 18)
+                            .addComponent(cbCommune, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtfAddressDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlAddressDetail)
-                            .addComponent(cbCommune, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(7, Short.MAX_VALUE))
+                            .addComponent(jcReceivePromotion))))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         add(jpTop);
@@ -256,20 +256,6 @@ public class Customer_GUI extends javax.swing.JPanel {
         jpBottom.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin khách hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 14))); // NOI18N
 
         jpSelect.setLayout(new java.awt.GridLayout(1, 2));
-
-        btnInfo.setBackground(new java.awt.Color(204, 204, 255));
-        btnInfo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        btnInfo.setForeground(new java.awt.Color(255, 255, 255));
-        btnInfo.setText("Thông tin cá nhân");
-        btnInfo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jpSelect.add(btnInfo);
-
-        btnHistory.setBackground(new java.awt.Color(204, 204, 255));
-        btnHistory.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        btnHistory.setForeground(new java.awt.Color(255, 255, 255));
-        btnHistory.setText("Lịch sử giao dịch");
-        btnHistory.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jpSelect.add(btnHistory);
 
         jpTable.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -335,6 +321,14 @@ public class Customer_GUI extends javax.swing.JPanel {
 
         cbStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Đang hoạt động", "Ngưng hoạt động" }));
 
+        jButton1.setBackground(new java.awt.Color(204, 204, 255));
+        jButton1.setText("Test lịch sử GD");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpFunctionTableLayout = new javax.swing.GroupLayout(jpFunctionTable);
         jpFunctionTable.setLayout(jpFunctionTableLayout);
         jpFunctionTableLayout.setHorizontalGroup(
@@ -346,12 +340,13 @@ public class Customer_GUI extends javax.swing.JPanel {
                 .addGap(0, 34, Short.MAX_VALUE))
             .addGroup(jpFunctionTableLayout.createSequentialGroup()
                 .addGroup(jpFunctionTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jpFunctionTableLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jpFunctionTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jtfFilterPhone)))
-                    .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                            .addComponent(jtfFilterPhone))))
                 .addContainerGap())
         );
         jpFunctionTableLayout.setVerticalGroup(
@@ -363,7 +358,9 @@ public class Customer_GUI extends javax.swing.JPanel {
                 .addComponent(jtfFilterPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addComponent(jlFilterStatus)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -387,7 +384,7 @@ public class Customer_GUI extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpBottomLayout.createSequentialGroup()
-                        .addGap(0, 14, Short.MAX_VALUE)
+                        .addGap(0, 26, Short.MAX_VALUE)
                         .addComponent(jpFunctionTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27))
                     .addComponent(jpTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -433,6 +430,11 @@ public class Customer_GUI extends javax.swing.JPanel {
 //            btnAdd.setText("Thêm");
 //        }
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        purchaseHistory_GUI = new PurchaseHistory_GUI();
+        purchaseHistory_GUI.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 // ID Khách hàng do hệ thống phát sinh
 
     public void openInput() {
@@ -464,13 +466,12 @@ public class Customer_GUI extends javax.swing.JPanel {
     private lib2.Button btnClear;
     private lib2.Button btnEdit;
     private lib2.Button btnFilter;
-    private lib2.Button btnHistory;
-    private lib2.Button btnInfo;
     private javax.swing.ButtonGroup buttonGroup1;
     private lib2.ComboBoxSuggestion cbCommune;
     private lib2.ComboBoxSuggestion cbDistrict;
     private lib2.ComboBoxSuggestion cbProvince;
     private lib2.ComboBoxSuggestion cbStatus;
+    private javax.swing.JButton jButton1;
     private javax.swing.JTable jTableCus;
     private javax.swing.JCheckBox jcReceivePromotion;
     private javax.swing.JLabel jlAddress;
