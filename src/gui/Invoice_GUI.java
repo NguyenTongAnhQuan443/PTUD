@@ -99,17 +99,23 @@ public class Invoice_GUI extends javax.swing.JFrame {
         jlTotalDetails = new javax.swing.JLabel();
         jlVND = new javax.swing.JLabel();
         jpThanks = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jlMoneyReceived = new javax.swing.JLabel();
+        jlVND1 = new javax.swing.JLabel();
+        jlExcessCash = new javax.swing.JLabel();
+        jlVND2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         jpMain.setBackground(new java.awt.Color(255, 255, 255));
 
-        jlLogo.setFont(new java.awt.Font("Segoe UI Black", 3, 48)); // NOI18N
+        jlLogo.setFont(new java.awt.Font("Segoe UI Black", 3, 24)); // NOI18N
         jlLogo.setForeground(new java.awt.Color(0, 128, 128));
         jlLogo.setText("Fley Shop");
 
-        jlTitle.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jlTitle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jlTitle.setText("HÓA ĐƠN TÍNH TIỀN");
 
         jlAddress.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -176,70 +182,98 @@ public class Invoice_GUI extends javax.swing.JFrame {
         jpThanks.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jpThanks.setText("Xin chân thành cảm ơn quý khách !");
 
+        jLabel1.setText("Số tiền nhận :");
+
+        jLabel2.setText("Số tiền thừa :");
+
+        jlMoneyReceived.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jlMoneyReceived.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlMoneyReceived.setText("100,000,000");
+
+        jlVND1.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jlVND1.setText("VND");
+
+        jlExcessCash.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jlExcessCash.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlExcessCash.setText("100,000,000");
+
+        jlVND2.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jlVND2.setText("VND");
+
         javax.swing.GroupLayout jpMainLayout = new javax.swing.GroupLayout(jpMain);
         jpMain.setLayout(jpMainLayout);
         jpMainLayout.setHorizontalGroup(
             jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpMainLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jlTitle)
+                .addGap(104, 104, 104))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpMainLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jlLogo)
+                .addGap(123, 123, 123))
             .addGroup(jpMainLayout.createSequentialGroup()
-                .addGap(97, 97, 97)
-                .addComponent(jpThanks)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jpMainLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpMainLayout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGroup(jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlIDInvoice)
+                            .addComponent(jlNameCus))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jlNameCusDetails, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlIDInvoiceDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpMainLayout.createSequentialGroup()
-                                .addGroup(jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jlIDInvoice)
-                                    .addComponent(jlNameCus))
+                                .addComponent(jlNameStaff)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jlNameCusDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
-                                    .addComponent(jlIDInvoiceDetails, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jlNameStaffDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE))
+                            .addGroup(jpMainLayout.createSequentialGroup()
+                                .addComponent(jlDateInvoice)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jpMainLayout.createSequentialGroup()
-                                        .addComponent(jlNameStaff)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jlNameStaffDetails, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(jpMainLayout.createSequentialGroup()
-                                        .addComponent(jlDateInvoice)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jlDateInvoiceDetails, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                            .addComponent(jspTableListProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                    .addGroup(jpMainLayout.createSequentialGroup()
-                        .addGroup(jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpMainLayout.createSequentialGroup()
-                                .addGap(74, 74, 74)
-                                .addComponent(jlLogo))
-                            .addGroup(jpMainLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jlAddress)
-                                .addGap(18, 18, 18)
-                                .addComponent(jlAddressDetails))
-                            .addGroup(jpMainLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jlHotline)
-                                .addGap(18, 18, 18)
-                                .addGroup(jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jlTitle)
-                                    .addComponent(jlHotlineDetails))))
-                        .addGap(0, 67, Short.MAX_VALUE))
+                                .addComponent(jlDateInvoiceDetails, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jspTableListProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jpMainLayout.createSequentialGroup()
                         .addComponent(jlTotal)
                         .addGap(18, 18, 18)
                         .addComponent(jlTotalDetails, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(12, 12, 12)
-                        .addComponent(jlVND)))
+                        .addComponent(jlVND))
+                    .addGroup(jpMainLayout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(92, 92, 92)
+                        .addComponent(jlMoneyReceived, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(12, 12, 12)
+                        .addComponent(jlVND1))
+                    .addGroup(jpMainLayout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(92, 92, 92)
+                        .addComponent(jlExcessCash, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(12, 12, 12)
+                        .addComponent(jlVND2))
+                    .addGroup(jpMainLayout.createSequentialGroup()
+                        .addGroup(jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpMainLayout.createSequentialGroup()
+                                .addComponent(jlAddress)
+                                .addGap(18, 18, 18)
+                                .addComponent(jlAddressDetails))
+                            .addGroup(jpMainLayout.createSequentialGroup()
+                                .addComponent(jlHotline)
+                                .addGap(18, 18, 18)
+                                .addComponent(jlHotlineDetails)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jpMainLayout.createSequentialGroup()
+                .addGap(85, 85, 85)
+                .addComponent(jpThanks)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpMainLayout.setVerticalGroup(
             jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpMainLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jlLogo)
-                .addGap(8, 8, 8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlAddress)
                     .addComponent(jlAddressDetails))
@@ -255,21 +289,32 @@ public class Invoice_GUI extends javax.swing.JFrame {
                     .addComponent(jlDateInvoice)
                     .addComponent(jlIDInvoiceDetails)
                     .addComponent(jlDateInvoiceDetails))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlNameCus)
                     .addComponent(jlNameStaff)
                     .addComponent(jlNameCusDetails)
                     .addComponent(jlNameStaffDetails))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jspTableListProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlTotal)
                     .addComponent(jlVND)
                     .addComponent(jlTotalDetails))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(jpThanks))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jlVND1)
+                    .addComponent(jlMoneyReceived))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jlVND2)
+                    .addComponent(jlExcessCash))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpThanks)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -301,16 +346,20 @@ public class Invoice_GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JTable jTableListProduct;
     private javax.swing.JLabel jlAddress;
     private javax.swing.JLabel jlAddressDetails;
     private javax.swing.JLabel jlDateInvoice;
     private javax.swing.JLabel jlDateInvoiceDetails;
+    private javax.swing.JLabel jlExcessCash;
     private javax.swing.JLabel jlHotline;
     private javax.swing.JLabel jlHotlineDetails;
     private javax.swing.JLabel jlIDInvoice;
     private javax.swing.JLabel jlIDInvoiceDetails;
     private javax.swing.JLabel jlLogo;
+    private javax.swing.JLabel jlMoneyReceived;
     private javax.swing.JLabel jlNameCus;
     private javax.swing.JLabel jlNameCusDetails;
     private javax.swing.JLabel jlNameStaff;
@@ -319,6 +368,8 @@ public class Invoice_GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jlTotal;
     private javax.swing.JLabel jlTotalDetails;
     private javax.swing.JLabel jlVND;
+    private javax.swing.JLabel jlVND1;
+    private javax.swing.JLabel jlVND2;
     private javax.swing.JPanel jpMain;
     private javax.swing.JLabel jpThanks;
     private javax.swing.JScrollPane jspTableListProduct;

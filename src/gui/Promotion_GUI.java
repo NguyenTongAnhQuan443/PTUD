@@ -47,12 +47,12 @@ public class Promotion_GUI extends javax.swing.JPanel {
         jtfPriceRangeStart = new javax.swing.JTextField();
         jtfPriceRangeEnd = new javax.swing.JTextField();
         jlPriceRangeEnd = new javax.swing.JLabel();
-        jlDetails = new javax.swing.JLabel();
+        jlDescribe = new javax.swing.JLabel();
         btnEdit = new lib2.Button();
         btnRefresh = new lib2.Button();
         btnSave = new lib2.Button();
-        jspDetails = new javax.swing.JScrollPane();
-        jtaDetails = new javax.swing.JTextArea();
+        jspDescribe = new javax.swing.JScrollPane();
+        jtaDescribe = new javax.swing.JTextArea();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -212,7 +212,7 @@ public class Promotion_GUI extends javax.swing.JPanel {
 
         jlPriceRangeEnd.setText("Đến :");
 
-        jlDetails.setText("Mô tả :");
+        jlDescribe.setText("Mô tả :");
 
         btnEdit.setBackground(new java.awt.Color(135, 206, 235));
         btnEdit.setForeground(new java.awt.Color(255, 255, 255));
@@ -232,9 +232,9 @@ public class Promotion_GUI extends javax.swing.JPanel {
         btnSave.setText("    Lưu    ");
         btnSave.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
-        jtaDetails.setColumns(20);
-        jtaDetails.setRows(5);
-        jspDetails.setViewportView(jtaDetails);
+        jtaDescribe.setColumns(20);
+        jtaDescribe.setRows(5);
+        jspDescribe.setViewportView(jtaDescribe);
 
         javax.swing.GroupLayout jpRightLayout = new javax.swing.GroupLayout(jpRight);
         jpRight.setLayout(jpRightLayout);
@@ -280,9 +280,9 @@ public class Promotion_GUI extends javax.swing.JPanel {
                             .addComponent(jtfNamePromotion)
                             .addComponent(jtfStartPromotion)))
                     .addGroup(jpRightLayout.createSequentialGroup()
-                        .addComponent(jlDetails)
+                        .addComponent(jlDescribe)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jspDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addComponent(jspDescribe, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jpRightLayout.createSequentialGroup()
@@ -326,8 +326,8 @@ public class Promotion_GUI extends javax.swing.JPanel {
                     .addComponent(jlPriceRangeEnd))
                 .addGap(18, 18, 18)
                 .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlDetails)
-                    .addComponent(jspDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jlDescribe)
+                    .addComponent(jspDescribe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -356,7 +356,7 @@ public class Promotion_GUI extends javax.swing.JPanel {
 
     }//GEN-LAST:event_cbTypePromotionActionPerformed
     public void onInput() {
-        jtaDetails.setEditable(true);
+        jtaDescribe.setEditable(true);
         jtfEndPromotion.setEditable(true);
         jtfIDPromotion.setEditable(true);
         jtfNamePromotion.setEditable(true);
@@ -381,7 +381,7 @@ public class Promotion_GUI extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTable jTableListProduct;
     private javax.swing.JTable jTableListPromotion;
-    private javax.swing.JLabel jlDetails;
+    private javax.swing.JLabel jlDescribe;
     private javax.swing.JLabel jlEndPromotion;
     private javax.swing.JLabel jlIDPromotion;
     private javax.swing.JLabel jlLimitPromotion;
@@ -393,10 +393,10 @@ public class Promotion_GUI extends javax.swing.JPanel {
     private javax.swing.JLabel jlTypePromotion;
     private javax.swing.JPanel jpLeft;
     private javax.swing.JPanel jpRight;
-    private javax.swing.JScrollPane jspDetails;
+    private javax.swing.JScrollPane jspDescribe;
     private javax.swing.JScrollPane jspListProduct;
     private javax.swing.JScrollPane jspListPromotion;
-    private javax.swing.JTextArea jtaDetails;
+    private javax.swing.JTextArea jtaDescribe;
     private javax.swing.JTextField jtfEndPromotion;
     private javax.swing.JTextField jtfIDPromotion;
     private javax.swing.JTextField jtfLimitPromotion;

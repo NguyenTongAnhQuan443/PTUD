@@ -89,6 +89,7 @@ public class Product_Detail_GUI extends javax.swing.JPanel {
         cbSize.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kích thước" }));
         cbSize.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        jcStopBusiness.setBackground(new java.awt.Color(255, 255, 255));
         jcStopBusiness.setText("Ngừng kinh doanh");
 
         javax.swing.GroupLayout jpTopLayout = new javax.swing.GroupLayout(jpTop);
@@ -147,7 +148,7 @@ public class Product_Detail_GUI extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã SP", "Tên SP", "Loại SP", "Nhà cung cấp", "Kích thước", "Màu sắc", "Chất liệu", "Đơn giá", "Số lượng", "Ngừng kinh doanh"
+                "Mã SP", "Tên SP", "Loại SP", "Kích thước", "Màu sắc", "Chất liệu", "Đơn giá", "Số lượng", "Nhà cung cấp", "Ngừng kinh doanh"
             }
         ) {
             Class[] types = new Class [] {

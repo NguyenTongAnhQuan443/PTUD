@@ -270,9 +270,9 @@
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="jlDetails" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlDescribe" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jspDetails" pref="0" max="32767" attributes="0"/>
+                          <Component id="jspDescribe" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -330,8 +330,8 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jlDetails" min="-2" max="-2" attributes="0"/>
-                      <Component id="jspDetails" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlDescribe" min="-2" max="-2" attributes="0"/>
+                      <Component id="jspDescribe" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="77" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -425,7 +425,7 @@
             <Property name="text" type="java.lang.String" value="&#x110;&#x1ebf;n :"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jlDetails">
+        <Component class="javax.swing.JLabel" name="jlDescribe">
           <Properties>
             <Property name="text" type="java.lang.String" value="M&#xf4; t&#x1ea3; :"/>
           </Properties>
@@ -481,14 +481,14 @@
             </Property>
           </Properties>
         </Component>
-        <Container class="javax.swing.JScrollPane" name="jspDetails">
+        <Container class="javax.swing.JScrollPane" name="jspDescribe">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTextArea" name="jtaDetails">
+            <Component class="javax.swing.JTextArea" name="jtaDescribe">
               <Properties>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>

@@ -23,17 +23,17 @@ public class Staff_Table_GUI extends javax.swing.JPanel {
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã NV", "Tên NV", "CCCD", "SDT", "Ngày sinh", "Giới tính", "Địa chỉ", "Chức vụ"
+                "Mã NV", "Tên NV", "CCCD", "SDT", "Ngày sinh", "Giới tính", "Địa chỉ", "Chức vụ", "Trạng thái"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

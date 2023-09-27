@@ -2,9 +2,9 @@
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
+    <Component class="javax.swing.ButtonGroup" name="bgSex">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="buttonGroup1.add(jrbFemale);&#xa;buttonGroup1.add(jrbMale);&#xa;jrbMale.setSelected(true);"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="bgSex.add(jrbFemale);&#xa;bgSex.add(jrbMale);&#xa;jrbMale.setSelected(true);"/>
       </AuxValues>
     </Component>
   </NonVisualComponents>
@@ -162,7 +162,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="221" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
@@ -201,6 +201,10 @@
                                   <Component id="jtfAddress" min="-2" pref="200" max="-2" attributes="0"/>
                                   <EmptySpace min="99" pref="240" max="32767" attributes="0"/>
                               </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="cbStatusWorking" min="-2" pref="212" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
@@ -228,7 +232,9 @@
                                   <Component id="jrbFemale" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="77" max="32767" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="cbStatusWorking" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="27" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="cbProvince" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="cbDistrict" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -331,8 +337,8 @@
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="3">
                         <StringItem index="0" value="Ch&#x1ee9;c v&#x1ee5;"/>
-                        <StringItem index="1" value="Qu&#x1ea3;n ly"/>
-                        <StringItem index="2" value="Nh&#xe2;n Vi&#xea;n"/>
+                        <StringItem index="1" value="Nh&#xe2;n vi&#xea;n qu&#x1ea3;n ly"/>
+                        <StringItem index="2" value="Nh&#xe2;n vi&#xea;n b&#xe1;n h&#xe0;ng"/>
                       </StringArray>
                     </Property>
                   </Properties>
@@ -342,6 +348,17 @@
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
                         <StringItem index="0" value="Qu&#x1ead;n/Huy&#x1ec7;n"/>
+                      </StringArray>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="lib2.ComboBoxSuggestion" name="cbStatusWorking">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="3">
+                        <StringItem index="0" value="Tr&#x1ea1;ng th&#xe1;i l&#xe0;m vi&#x1ec7;c"/>
+                        <StringItem index="1" value="&#x110;ang l&#xe0;m vi&#x1ec7;c"/>
+                        <StringItem index="2" value="Ng&#x1b0;ng l&#xe0;m vi&#x1ec7;c"/>
                       </StringArray>
                     </Property>
                   </Properties>
@@ -387,7 +404,7 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="17" max="32767" attributes="0"/>
+                          <EmptySpace pref="19" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jlIDStaff" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jtfIDStaff" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>

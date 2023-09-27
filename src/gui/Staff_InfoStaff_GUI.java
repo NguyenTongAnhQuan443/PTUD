@@ -25,7 +25,7 @@ public class Staff_InfoStaff_GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        bgSex = new javax.swing.ButtonGroup();
         jpMain = new javax.swing.JPanel();
         jpTop = new javax.swing.JPanel();
         jlLogo = new javax.swing.JLabel();
@@ -45,6 +45,7 @@ public class Staff_InfoStaff_GUI extends javax.swing.JFrame {
         jtfAddress = new lib2.TextField();
         cbPosition = new lib2.ComboBoxSuggestion();
         cbDistrict = new lib2.ComboBoxSuggestion();
+        cbStatusWorking = new lib2.ComboBoxSuggestion();
         jpAccStaff = new javax.swing.JPanel();
         btnAdd = new lib2.Button();
         btnBack = new lib2.Button();
@@ -55,8 +56,8 @@ public class Staff_InfoStaff_GUI extends javax.swing.JFrame {
         jlPass = new javax.swing.JLabel();
         btnClear = new lib2.Button();
 
-        buttonGroup1.add(jrbFemale);
-        buttonGroup1.add(jrbMale);
+        bgSex.add(jrbFemale);
+        bgSex.add(jrbMale);
         jrbMale.setSelected(true);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -150,9 +151,11 @@ public class Staff_InfoStaff_GUI extends javax.swing.JFrame {
 
         jtfAddress.setLabelText("Địa chỉ cụ thể");
 
-        cbPosition.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Chức vụ", "Quản ly", "Nhân Viên" }));
+        cbPosition.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Chức vụ", "Nhân viên quản ly", "Nhân viên bán hàng" }));
 
         cbDistrict.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Quận/Huyện" }));
+
+        cbStatusWorking.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Trạng thái làm việc", "Đang làm việc", "Ngưng làm việc" }));
 
         javax.swing.GroupLayout jpInfoStaffLayout = new javax.swing.GroupLayout(jpInfoStaff);
         jpInfoStaff.setLayout(jpInfoStaffLayout);
@@ -189,7 +192,10 @@ public class Staff_InfoStaff_GUI extends javax.swing.JFrame {
                         .addComponent(cbCommune, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jtfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(99, 240, Short.MAX_VALUE))))
+                        .addGap(99, 240, Short.MAX_VALUE))
+                    .addGroup(jpInfoStaffLayout.createSequentialGroup()
+                        .addComponent(cbStatusWorking, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jpInfoStaffLayout.setVerticalGroup(
             jpInfoStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,7 +216,9 @@ public class Staff_InfoStaff_GUI extends javax.swing.JFrame {
                         .addComponent(jlSex, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jrbMale)
                         .addComponent(jrbFemale)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(cbStatusWorking, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(jpInfoStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbProvince, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -298,7 +306,7 @@ public class Staff_InfoStaff_GUI extends javax.swing.JFrame {
         jpAccStaffLayout.setVerticalGroup(
             jpAccStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpAccStaffLayout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
+                .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(jpAccStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlIDStaff)
                     .addComponent(jtfIDStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -431,15 +439,16 @@ public class Staff_InfoStaff_GUI extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup bgSex;
     private lib2.Button btnAdd;
     private lib2.Button btnBack;
     private lib2.Button btnClear;
     private lib2.Button btnEdit;
-    private javax.swing.ButtonGroup buttonGroup1;
     private lib2.ComboBoxSuggestion cbCommune;
     private lib2.ComboBoxSuggestion cbDistrict;
     private lib2.ComboBoxSuggestion cbPosition;
     private lib2.ComboBoxSuggestion cbProvince;
+    private lib2.ComboBoxSuggestion cbStatusWorking;
     private javax.swing.JLabel jlIDStaff;
     private javax.swing.JLabel jlIconCalendar;
     private javax.swing.JLabel jlLogo;
