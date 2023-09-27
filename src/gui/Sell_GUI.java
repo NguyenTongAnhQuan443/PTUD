@@ -379,7 +379,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         //tắt hiển thị FPS video
         webcamPanel.setFPSDisplayed(false);
         //lúc đầu và set vị trị của webcamPanel thông qua hàm khởi tạo của Absolute Layout
-        jpWebcam.add(webcamPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 100));
+        jpWebcam.add(webcamPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 130));
         executor.execute(this);
     }
 
@@ -418,7 +418,6 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         } while (true);
     }
 
-//@Override
     public Thread newThread(Runnable r) {
         Thread t = new Thread(r, "My Thread");
         t.setDaemon(true);
