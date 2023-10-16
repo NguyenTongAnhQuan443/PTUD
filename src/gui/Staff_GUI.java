@@ -14,7 +14,6 @@ public class Staff_GUI extends javax.swing.JPanel {
         jpTMP.add(staff_Table_GUI);
         jpTMP.revalidate();
         jpTMP.repaint();
-        btnPersonalInformation.setVisible(false);
     }
     
     @SuppressWarnings("unchecked")
@@ -35,7 +34,7 @@ public class Staff_GUI extends javax.swing.JPanel {
         btnAdd = new lib2.Button();
         btnEdit = new lib2.Button();
         btnDismissal = new lib2.Button();
-        btnPersonalInformation = new lib2.Button();
+        btnReload = new lib2.Button();
         btnInputFile = new lib2.Button();
         btnOutputFile = new lib2.Button();
         jpTMP = new javax.swing.JPanel();
@@ -174,17 +173,17 @@ public class Staff_GUI extends javax.swing.JPanel {
         });
         jpTopBottom.add(btnDismissal);
 
-        btnPersonalInformation.setBackground(new java.awt.Color(135, 206, 235));
-        btnPersonalInformation.setForeground(new java.awt.Color(255, 255, 255));
-        btnPersonalInformation.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user24.png"))); // NOI18N
-        btnPersonalInformation.setText("Thông tin cá nhân ");
-        btnPersonalInformation.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnPersonalInformation.addActionListener(new java.awt.event.ActionListener() {
+        btnReload.setBackground(new java.awt.Color(135, 206, 235));
+        btnReload.setForeground(new java.awt.Color(255, 255, 255));
+        btnReload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh24.png"))); // NOI18N
+        btnReload.setText("Làm mới");
+        btnReload.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnReload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPersonalInformationActionPerformed(evt);
+                btnReloadActionPerformed(evt);
             }
         });
-        jpTopBottom.add(btnPersonalInformation);
+        jpTopBottom.add(btnReload);
 
         btnInputFile.setBackground(new java.awt.Color(135, 206, 235));
         btnInputFile.setForeground(new java.awt.Color(255, 255, 255));
@@ -225,11 +224,11 @@ public class Staff_GUI extends javax.swing.JPanel {
 //     hiển thị danh sách thôi việc lên table
     }//GEN-LAST:event_btnDismissalActionPerformed
 
-    private void btnPersonalInformationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonalInformationActionPerformed
-        staff_InfoStaff_GUI = new Staff_InfoStaff_GUI();
-        staff_InfoStaff_GUI.setVisible(true);
-        staff_InfoStaff_GUI.setFlag(3);
-    }//GEN-LAST:event_btnPersonalInformationActionPerformed
+    private void btnReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReloadActionPerformed
+//        staff_InfoStaff_GUI = new Staff_InfoStaff_GUI();
+//        staff_InfoStaff_GUI.setVisible(true);
+//        staff_InfoStaff_GUI.setFlag(3);
+    }//GEN-LAST:event_btnReloadActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnAdd;
@@ -238,7 +237,7 @@ public class Staff_GUI extends javax.swing.JPanel {
     private lib2.Button btnEdit;
     private lib2.Button btnInputFile;
     private lib2.Button btnOutputFile;
-    private lib2.Button btnPersonalInformation;
+    private lib2.Button btnReload;
     private lib2.Button btnSearch;
     private lib2.ComboBoxSuggestion cbArrange;
     private javax.swing.JLabel jlArrage;

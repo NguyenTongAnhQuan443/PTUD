@@ -22,7 +22,7 @@ import utils.Utils;
 
 public class HomeManager_GUI extends javax.swing.JFrame {
     
-    private Statistical_GUI statistical_GUI;
+    private Statistical_GUIX statistical_GUI;
     private Product_GUI product_GUI;
     private Sell_GUI sell_GUI;
     private Staff_GUI staff_GUI;
@@ -38,14 +38,14 @@ public class HomeManager_GUI extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
 
 //        Nếu là chức vụ nhân viên quản lý
-        statistical_GUI = new Statistical_GUI();
+        statistical_GUI = new Statistical_GUIX();
         jpCenter.add(statistical_GUI);
         jpCenter.revalidate();
         jpCenter.repaint();
         jlStatistical.setForeground(Color.ORANGE);
 
 //        Nếu là chức vụ nhân viên bán hàng
-//        statistical_GUI = new Statistical_GUI();
+//        statistical_GUI = new Statistical_GUIX();
 //        jpCenter.add(statistical_GUI);
 //        jpCenter.revalidate();
 //        jpCenter.repaint();
@@ -414,7 +414,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
             sell_GUI.stopWebcam();
         }
         selectMenu(jlStatistical);
-        statistical_GUI = new Statistical_GUI();
+        statistical_GUI = new Statistical_GUIX();
         openJPanel(statistical_GUI);
     }//GEN-LAST:event_jlStatisticalMouseClicked
 
@@ -596,7 +596,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
         jlAccount.setForeground(Color.WHITE);
     }//GEN-LAST:event_jlAccountMouseExited
     
-    public HomeManager_GUI(Statistical_GUI statistical_GUI, Product_GUI product_GUI, Sell_GUI bill_GUI, Combobox cbDisplay, Combobox cbLanguage, JLabel jlSell, JLabel jlChangePass, JLabel jlCustomer, JLabel jlDisplay, JLabel jlExit, JLabel jlHistory, JLabel jlLanguage, JLabel jlLogo, JLabel jlLogout, JLabel jlNameShop, JLabel jlProduct, JLabel jlSale, JLabel jlStaff, JLabel jlStatistical, JPanel jpCenter, JPanel jpLeft, JPanel jpMain, JPanel jpTop) throws HeadlessException {
+    public HomeManager_GUI(Statistical_GUIX statistical_GUI, Product_GUI product_GUI, Sell_GUI bill_GUI, Combobox cbDisplay, Combobox cbLanguage, JLabel jlSell, JLabel jlChangePass, JLabel jlCustomer, JLabel jlDisplay, JLabel jlExit, JLabel jlHistory, JLabel jlLanguage, JLabel jlLogo, JLabel jlLogout, JLabel jlNameShop, JLabel jlProduct, JLabel jlSale, JLabel jlStaff, JLabel jlStatistical, JPanel jpCenter, JPanel jpLeft, JPanel jpMain, JPanel jpTop) throws HeadlessException {
         this.statistical_GUI = statistical_GUI;
         this.product_GUI = product_GUI;
         this.sell_GUI = sell_GUI;

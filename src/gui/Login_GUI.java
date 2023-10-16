@@ -213,9 +213,12 @@ public class Login_GUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
             this.dispose();
 
-            homeManager_GUI = (HomeManager_GUI) SwingUtilities.getWindowAncestor(Login_GUI.this);
-            homeManager_GUI = new HomeManager_GUI();
-            homeManager_GUI.setVisible(true);
+//            homeManager_GUI = (HomeManager_GUI) SwingUtilities.getWindowAncestor(Login_GUI.this);
+//            homeManager_GUI = new HomeManager_GUI();
+//            homeManager_GUI.setVisible(true);
+                
+            Home_GUI home_GUI = new Home_GUI();
+            home_GUI.setVisible(true);
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 

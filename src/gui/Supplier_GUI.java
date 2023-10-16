@@ -48,7 +48,7 @@ public class Supplier_GUI extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
 
         jpTop.setBackground(new java.awt.Color(255, 255, 255));
-        jpTop.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lọc nhà cung cấp", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 14))); // NOI18N
+        jpTop.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chi tiết nhà cung cấp", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 14))); // NOI18N
 
         jlIDSupplier.setText("Mã nhà cung cấp :");
 

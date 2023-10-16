@@ -50,7 +50,7 @@
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="L&#x1ecd;c nh&#xe0; cung c&#x1ea5;p">
+            <TitledBorder title="Chi ti&#x1ebf;t nh&#xe0; cung c&#x1ea5;p">
               <Font PropertyName="font" name="Segoe UI" size="14" style="3"/>
             </TitledBorder>
           </Border>

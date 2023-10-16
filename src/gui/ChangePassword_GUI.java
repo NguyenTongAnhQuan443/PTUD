@@ -11,7 +11,7 @@ import javax.swing.SwingUtilities;
 public class ChangePassword_GUI extends javax.swing.JPanel {
 
     private Sell_GUI sell_GUI;
-    private Statistical_GUI statistical_GUI;
+    private Statistical_GUIX statistical_GUI;
 
     public ChangePassword_GUI() {
         initComponents();
