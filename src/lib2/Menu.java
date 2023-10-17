@@ -16,6 +16,9 @@ import net.miginfocom.swing.MigLayout;
 
 public class Menu extends JComponent {
 
+    private MenuItem currentSubMenu;
+    private MenuItem previousSubMenu;
+
     public MenuEvent getEvent() {
         return event;
     }
@@ -52,11 +55,10 @@ public class Menu extends JComponent {
         for (int i = 0; i < menuItems.length; i++) {
             addMenu(menuItems[i][0], i);
         }
-
     }
 
     private Icon getIcon(int index) {
-        URL url = getClass().getResource("/raven/menu/" + index + ".png");
+        URL url = getClass().getResource("/images/icons/" + index + ".png");
         if (url != null) {
             return new ImageIcon(url);
         } else {
@@ -76,14 +78,40 @@ public class Menu extends JComponent {
             public void actionPerformed(ActionEvent ae) {
                 if (length > 1) {
                     if (!item.isSelected()) {
+                        if (currentSubMenu != null) {
+                            // Đóng menu con hiện tại nếu có
+                            hideMenu(currentSubMenu, currentSubMenu.getIndex());
+                            currentSubMenu.setSelected(false);
+                            currentSubMenu.setForeground(Color.WHITE);
+                        }
+                        // Mở menu mới
                         item.setSelected(true);
+                        item.setForeground(Color.ORANGE);
                         addSubMenu(item, index, length, getComponentZOrder(item));
+                        // Cập nhật currentSubMenu
+                        currentSubMenu = item;
                     } else {
                         //  Hide menu
                         hideMenu(item, index);
                         item.setSelected(false);
+                        item.setForeground(Color.WHITE);
                     }
                 } else {
+                    if (!item.isSelected()) {
+                        if (currentSubMenu != null) {
+                            hideMenu(currentSubMenu, currentSubMenu.getIndex());
+                            currentSubMenu.setSelected(false);
+                            currentSubMenu.setForeground(Color.WHITE);
+                        }
+                        item.setSelected(true);
+                        item.setForeground(Color.ORANGE);
+                        addSubMenu(item, index, length, getComponentZOrder(item));
+                        currentSubMenu = item;
+                    } else {
+                        hideMenu(item, index);
+                        item.setSelected(false);
+                        item.setForeground(Color.WHITE);
+                    }
                     if (event != null) {
                         event.selected(index, 0);
                     }
@@ -131,7 +159,7 @@ public class Menu extends JComponent {
     @Override
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs.create();
-        g2.setColor(new Color(0,128,128));
+        g2.setColor(new Color(0, 128, 128));
         g2.fill(new Rectangle2D.Double(0, 0, getWidth(), getHeight()));
         super.paintComponent(grphcs);
     }

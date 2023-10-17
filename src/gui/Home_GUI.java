@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import lib2.MenuEvent;
@@ -203,7 +204,6 @@ public class Home_GUI extends javax.swing.JFrame {
         jpCenter.revalidate();
         jpCenter.repaint();
     }
-
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
