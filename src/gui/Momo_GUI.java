@@ -42,7 +42,7 @@ public class Momo_GUI extends javax.swing.JFrame {
         jpMain.setBackground(new java.awt.Color(255, 255, 255));
         jpMain.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thanh toán Momo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 14))); // NOI18N
 
-        jlLogoMomo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MoMo_Logo.png"))); // NOI18N
+        jlLogoMomo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/MoMo_Logo.png"))); // NOI18N
 
         jpQR.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -78,7 +78,7 @@ public class Momo_GUI extends javax.swing.JFrame {
 
         btnReturn.setBackground(new java.awt.Color(135, 206, 235));
         btnReturn.setForeground(new java.awt.Color(255, 255, 255));
-        btnReturn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/return16.png"))); // NOI18N
+        btnReturn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/return16.png"))); // NOI18N
         btnReturn.setText("Quay lại");
         btnReturn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnReturn.addActionListener(new java.awt.event.ActionListener() {
@@ -89,7 +89,7 @@ public class Momo_GUI extends javax.swing.JFrame {
 
         btnInBill.setBackground(new java.awt.Color(135, 206, 235));
         btnInBill.setForeground(new java.awt.Color(255, 255, 255));
-        btnInBill.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/printer16.png"))); // NOI18N
+        btnInBill.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/printer16.png"))); // NOI18N
         btnInBill.setText("Thành công_in hóa đơn");
         btnInBill.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnInBill.addMouseListener(new java.awt.event.MouseAdapter() {

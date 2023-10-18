@@ -107,7 +107,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/images/search24.png"/>
+                  <Image iconType="3" name="/images/icons/search24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="T&#xec;m  "/>
                 <Property name="enabled" type="boolean" value="false"/>
@@ -429,7 +429,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/pay24.png"/>
+              <Image iconType="3" name="/images/icons/pay24.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Thanh to&#xe1;n"/>
             <Property name="enabled" type="boolean" value="false"/>
@@ -450,7 +450,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/create24.png"/>
+              <Image iconType="3" name="/images/icons/create24.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="T&#x1ea1;o h&#xf3;a &#x111;&#x1a1;n"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -470,7 +470,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/waiting24.png"/>
+              <Image iconType="3" name="/images/icons/waiting24.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x110;&#x1a1;n ch&#x1edd;"/>
             <Property name="enabled" type="boolean" value="false"/>

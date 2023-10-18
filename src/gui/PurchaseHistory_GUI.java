@@ -46,8 +46,10 @@ public class PurchaseHistory_GUI extends javax.swing.JFrame {
         jlTitle.setText("Lịch sử giao dịch");
 
         btnClose.setBackground(new java.awt.Color(135, 206, 235));
-        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/x24.png"))); // NOI18N
+        btnClose.setForeground(new java.awt.Color(255, 255, 255));
+        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/x24.png"))); // NOI18N
         btnClose.setText("Đóng");
+        btnClose.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCloseActionPerformed(evt);

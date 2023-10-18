@@ -59,7 +59,7 @@ public class Staff_GUI extends javax.swing.JPanel {
 
         btnSearch.setBackground(new java.awt.Color(135, 206, 235));
         btnSearch.setForeground(new java.awt.Color(255, 255, 255));
-        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search24.png"))); // NOI18N
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/search24.png"))); // NOI18N
         btnSearch.setText("Tìm kiếm");
         btnSearch.setToolTipText("");
         btnSearch.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -99,7 +99,7 @@ public class Staff_GUI extends javax.swing.JPanel {
 
         btnArrange.setBackground(new java.awt.Color(135, 206, 235));
         btnArrange.setForeground(new java.awt.Color(255, 255, 255));
-        btnArrange.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/arrange24.png"))); // NOI18N
+        btnArrange.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/arrange24.png"))); // NOI18N
         btnArrange.setText("Sắp xếp");
         btnArrange.setToolTipText("");
         btnArrange.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -139,7 +139,7 @@ public class Staff_GUI extends javax.swing.JPanel {
 
         btnAdd.setBackground(new java.awt.Color(135, 206, 235));
         btnAdd.setForeground(new java.awt.Color(255, 255, 255));
-        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add24.png"))); // NOI18N
+        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/add24.png"))); // NOI18N
         btnAdd.setText("Thêm NV ");
         btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -151,7 +151,7 @@ public class Staff_GUI extends javax.swing.JPanel {
 
         btnEdit.setBackground(new java.awt.Color(135, 206, 235));
         btnEdit.setForeground(new java.awt.Color(255, 255, 255));
-        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit24.png"))); // NOI18N
+        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/edit24.png"))); // NOI18N
         btnEdit.setText("Sủa thông tin NV ");
         btnEdit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
@@ -163,7 +163,7 @@ public class Staff_GUI extends javax.swing.JPanel {
 
         btnDismissal.setBackground(new java.awt.Color(135, 206, 235));
         btnDismissal.setForeground(new java.awt.Color(255, 255, 255));
-        btnDismissal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/warning24.png"))); // NOI18N
+        btnDismissal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/warning24.png"))); // NOI18N
         btnDismissal.setText("Danh sách thôi việc  ");
         btnDismissal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnDismissal.addActionListener(new java.awt.event.ActionListener() {
@@ -175,7 +175,7 @@ public class Staff_GUI extends javax.swing.JPanel {
 
         btnReload.setBackground(new java.awt.Color(135, 206, 235));
         btnReload.setForeground(new java.awt.Color(255, 255, 255));
-        btnReload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh24.png"))); // NOI18N
+        btnReload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/refresh24.png"))); // NOI18N
         btnReload.setText("Làm mới");
         btnReload.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnReload.addActionListener(new java.awt.event.ActionListener() {
@@ -187,14 +187,14 @@ public class Staff_GUI extends javax.swing.JPanel {
 
         btnInputFile.setBackground(new java.awt.Color(135, 206, 235));
         btnInputFile.setForeground(new java.awt.Color(255, 255, 255));
-        btnInputFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/inputfile24.png"))); // NOI18N
+        btnInputFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/inputfile24.png"))); // NOI18N
         btnInputFile.setText("Nhập danh sách NV ");
         btnInputFile.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jpTopBottom.add(btnInputFile);
 
         btnOutputFile.setBackground(new java.awt.Color(135, 206, 235));
         btnOutputFile.setForeground(new java.awt.Color(255, 255, 255));
-        btnOutputFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/outputfile24.png"))); // NOI18N
+        btnOutputFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/outputfile24.png"))); // NOI18N
         btnOutputFile.setText("Xuất danh sách NV ");
         btnOutputFile.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jpTopBottom.add(btnOutputFile);

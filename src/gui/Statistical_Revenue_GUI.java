@@ -78,7 +78,7 @@ public class Statistical_Revenue_GUI extends javax.swing.JPanel {
 
         button1.setBackground(new java.awt.Color(135, 206, 235));
         button1.setForeground(new java.awt.Color(255, 255, 255));
-        button1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dashboard24.png"))); // NOI18N
+        button1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/dashboard24.png"))); // NOI18N
         button1.setText("Báo cáo doanh thu");
         button1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 

@@ -82,7 +82,7 @@ public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
 
         btnSearchPhone.setBackground(new java.awt.Color(135, 206, 235));
         btnSearchPhone.setForeground(new java.awt.Color(255, 255, 255));
-        btnSearchPhone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search24.png"))); // NOI18N
+        btnSearchPhone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/search24.png"))); // NOI18N
         btnSearchPhone.setText("Tìm  ");
         btnSearchPhone.setEnabled(false);
         btnSearchPhone.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -280,7 +280,7 @@ public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
 
         btnPay.setBackground(new java.awt.Color(135, 206, 235));
         btnPay.setForeground(new java.awt.Color(255, 255, 255));
-        btnPay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pay24.png"))); // NOI18N
+        btnPay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/pay24.png"))); // NOI18N
         btnPay.setText("Thanh toán");
         btnPay.setEnabled(false);
         btnPay.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -292,7 +292,7 @@ public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
 
         btnCreateOrder.setBackground(new java.awt.Color(135, 206, 235));
         btnCreateOrder.setForeground(new java.awt.Color(255, 255, 255));
-        btnCreateOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/create24.png"))); // NOI18N
+        btnCreateOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/create24.png"))); // NOI18N
         btnCreateOrder.setText("Tạo hóa đơn");
         btnCreateOrder.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnCreateOrder.addActionListener(new java.awt.event.ActionListener() {
@@ -303,7 +303,7 @@ public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
 
         btnOrderWait.setBackground(new java.awt.Color(135, 206, 235));
         btnOrderWait.setForeground(new java.awt.Color(255, 255, 255));
-        btnOrderWait.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/waiting24.png"))); // NOI18N
+        btnOrderWait.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/waiting24.png"))); // NOI18N
         btnOrderWait.setText("Đơn chờ");
         btnOrderWait.setEnabled(false);
         btnOrderWait.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N

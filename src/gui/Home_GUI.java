@@ -21,6 +21,7 @@ public class Home_GUI extends javax.swing.JFrame {
     private Promotion_GUI promotion_GUI;
     private Staff_InfoStaff_GUI1 staff_InfoStaff_GUI;
     private ChangePassword_GUI changePassword_GUI;
+    private Customer_GUI customer_GUI;
 
     public Home_GUI() {
         initComponents();
@@ -97,17 +98,22 @@ public class Home_GUI extends javax.swing.JFrame {
                     history_GUI = new History_GUI();
                     addJPanel(history_GUI);
                     JOptionPane.showMessageDialog(null, "DỰ KIẾN show danh sách các đơn hàng chưa giao ở đây");
-                } else if (index == 6) { // sự kiện menu khuyễn mãi
+                } else if (index == 6) { // sự kiện menu khách hàng
+                    stopWebcam();
+                    jpCenter.removeAll();
+                    customer_GUI = new Customer_GUI();
+                    addJPanel(customer_GUI);
+                } else if (index == 7) { // sự kiện menu khuyễn mãi
                     stopWebcam();
                     jpCenter.removeAll();
                     promotion_GUI = new Promotion_GUI();
                     addJPanel(promotion_GUI);
-                }else if (index == 7 && subIndex == 1) { // sự kiện menu tài khoản - thông tin tài khoản
+                } else if (index == 8 && subIndex == 1) { // sự kiện menu tài khoản - thông tin tài khoản
                     stopWebcam();
                     jpCenter.removeAll();
                     staff_InfoStaff_GUI = new Staff_InfoStaff_GUI1();
                     addJPanel(staff_InfoStaff_GUI);
-                }else if (index == 7 && subIndex == 2) { // sự kiện menu tài khoản - đổi mật khẩu
+                } else if (index == 8 && subIndex == 2) { // sự kiện menu tài khoản - đổi mật khẩu
                     stopWebcam();
                     jpCenter.removeAll();
                     changePassword_GUI = new ChangePassword_GUI();
@@ -137,7 +143,7 @@ public class Home_GUI extends javax.swing.JFrame {
 
         jpTop.setBackground(new java.awt.Color(0, 128, 128));
 
-        jlLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Logo64.png"))); // NOI18N
+        jlLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/Logo64.png"))); // NOI18N
 
         jlNameShop.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
         jlNameShop.setForeground(new java.awt.Color(255, 255, 255));
@@ -185,7 +191,7 @@ public class Home_GUI extends javax.swing.JFrame {
         jpMain.add(jpLeft, java.awt.BorderLayout.LINE_START);
 
         jpCenter.setBackground(new java.awt.Color(255, 255, 255));
-        jpCenter.setLayout(new java.awt.GridLayout());
+        jpCenter.setLayout(new java.awt.GridLayout(1, 0));
         jpMain.add(jpCenter, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(jpMain, java.awt.BorderLayout.CENTER);
@@ -204,6 +210,7 @@ public class Home_GUI extends javax.swing.JFrame {
         jpCenter.revalidate();
         jpCenter.repaint();
     }
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

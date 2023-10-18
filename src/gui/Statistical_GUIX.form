@@ -153,7 +153,7 @@
                 <Component class="javax.swing.JLabel" name="jlIconOrder">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/images/market64.png"/>
+                      <Image iconType="3" name="/images/icons/market64.png"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -216,7 +216,7 @@
                 <Component class="javax.swing.JLabel" name="jlIconMoneyDay">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/images/day64.png"/>
+                      <Image iconType="3" name="/images/icons/day64.png"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -321,7 +321,7 @@
                 <Component class="javax.swing.JLabel" name="jlIconMoneyMonth">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/images/mounth64.png"/>
+                      <Image iconType="3" name="/images/icons/mounth64.png"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -426,7 +426,7 @@
                 <Component class="javax.swing.JLabel" name="jlIconMoneyYear">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/images/year64.png"/>
+                      <Image iconType="3" name="/images/icons/year64.png"/>
                     </Property>
                   </Properties>
                 </Component>

@@ -76,7 +76,7 @@ public class Product_Filter_GUI extends javax.swing.JPanel {
 
         btnSearch.setBackground(new java.awt.Color(135, 206, 235));
         btnSearch.setForeground(new java.awt.Color(255, 255, 255));
-        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search24.png"))); // NOI18N
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/search24.png"))); // NOI18N
         btnSearch.setText("Tìm sản phẩm");
         btnSearch.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
@@ -147,7 +147,7 @@ public class Product_Filter_GUI extends javax.swing.JPanel {
 
         btnSearch1.setBackground(new java.awt.Color(135, 206, 235));
         btnSearch1.setForeground(new java.awt.Color(255, 255, 255));
-        btnSearch1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/qr24.png"))); // NOI18N
+        btnSearch1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/qr24.png"))); // NOI18N
         btnSearch1.setText("Tạo QR sản phẩm");
         btnSearch1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnSearch1.addActionListener(new java.awt.event.ActionListener() {

@@ -174,7 +174,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         btnDel.setBackground(new java.awt.Color(135, 206, 235));
         btnDel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnDel.setForeground(new java.awt.Color(255, 255, 255));
-        btnDel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete20.png"))); // NOI18N
+        btnDel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/delete20.png"))); // NOI18N
         btnDel.setText(" Xóa SP  ");
         btnDel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,7 +185,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         btnClear.setBackground(new java.awt.Color(135, 206, 235));
         btnClear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnClear.setForeground(new java.awt.Color(255, 255, 255));
-        btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Clear16.png"))); // NOI18N
+        btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/Clear16.png"))); // NOI18N
         btnClear.setText("Làm mới");
         btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -251,7 +251,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
 
         btnAdd.setBackground(new java.awt.Color(135, 206, 235));
         btnAdd.setForeground(new java.awt.Color(255, 255, 255));
-        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/addToCart16.png"))); // NOI18N
+        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/addToCart16.png"))); // NOI18N
         btnAdd.setText("Thêm vào giỏ");
         btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAdd.addActionListener(new java.awt.event.ActionListener() {

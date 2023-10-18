@@ -113,7 +113,7 @@
             <Component class="javax.swing.JLabel" name="jlLogo">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/images/Logo64.png"/>
+                  <Image iconType="3" name="/images/icons/Logo64.png"/>
                 </Property>
               </Properties>
             </Component>
@@ -277,7 +277,7 @@
                 <Component class="javax.swing.JLabel" name="jlIconCalendar">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/images/calendar32.png"/>
+                      <Image iconType="3" name="/images/icons/calendar32.png"/>
                     </Property>
                     <Property name="toolTipText" type="java.lang.String" value=""/>
                   </Properties>
@@ -430,7 +430,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/images/add24.png"/>
+                      <Image iconType="3" name="/images/icons/add24.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -450,7 +450,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/images/back24.png"/>
+                      <Image iconType="3" name="/images/icons/back24.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Quay l&#x1ea1;i  "/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -470,7 +470,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/images/edit24.png"/>
+                      <Image iconType="3" name="/images/icons/edit24.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="S&#x1ee7;a th&#xf4;ng tin "/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -504,7 +504,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/images/clear24.png"/>
+                      <Image iconType="3" name="/images/icons/clear24.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="X&#xf3;a tr&#x1eaf;ng"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">

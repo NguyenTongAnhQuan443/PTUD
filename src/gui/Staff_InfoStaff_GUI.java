@@ -68,7 +68,7 @@ public class Staff_InfoStaff_GUI extends javax.swing.JFrame {
 
         jpTop.setBackground(new java.awt.Color(0, 128, 128));
 
-        jlLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Logo64.png"))); // NOI18N
+        jlLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/Logo64.png"))); // NOI18N
 
         jlNameShop.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
         jlNameShop.setForeground(new java.awt.Color(255, 255, 255));
@@ -124,7 +124,7 @@ public class Staff_InfoStaff_GUI extends javax.swing.JFrame {
         jtfDoB.setEditable(false);
         jtfDoB.setText("Ngày sinh");
 
-        jlIconCalendar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/calendar32.png"))); // NOI18N
+        jlIconCalendar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/calendar32.png"))); // NOI18N
         jlIconCalendar.setToolTipText("");
         jlIconCalendar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -234,7 +234,7 @@ public class Staff_InfoStaff_GUI extends javax.swing.JFrame {
 
         btnAdd.setBackground(new java.awt.Color(135, 206, 235));
         btnAdd.setForeground(new java.awt.Color(255, 255, 255));
-        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add24.png"))); // NOI18N
+        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/add24.png"))); // NOI18N
         btnAdd.setText("Thêm");
         btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -245,7 +245,7 @@ public class Staff_InfoStaff_GUI extends javax.swing.JFrame {
 
         btnBack.setBackground(new java.awt.Color(135, 206, 235));
         btnBack.setForeground(new java.awt.Color(255, 255, 255));
-        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/back24.png"))); // NOI18N
+        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/back24.png"))); // NOI18N
         btnBack.setText("Quay lại  ");
         btnBack.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -256,7 +256,7 @@ public class Staff_InfoStaff_GUI extends javax.swing.JFrame {
 
         btnEdit.setBackground(new java.awt.Color(135, 206, 235));
         btnEdit.setForeground(new java.awt.Color(255, 255, 255));
-        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit24.png"))); // NOI18N
+        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/edit24.png"))); // NOI18N
         btnEdit.setText("Sủa thông tin ");
         btnEdit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
@@ -271,7 +271,7 @@ public class Staff_InfoStaff_GUI extends javax.swing.JFrame {
 
         btnClear.setBackground(new java.awt.Color(135, 206, 235));
         btnClear.setForeground(new java.awt.Color(255, 255, 255));
-        btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/clear24.png"))); // NOI18N
+        btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/clear24.png"))); // NOI18N
         btnClear.setText("Xóa trắng");
         btnClear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnClear.addActionListener(new java.awt.event.ActionListener() {

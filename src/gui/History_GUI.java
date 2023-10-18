@@ -100,7 +100,7 @@ public class History_GUI extends javax.swing.JPanel {
 
         btnReturns.setBackground(new java.awt.Color(135, 206, 235));
         btnReturns.setForeground(new java.awt.Color(255, 255, 255));
-        btnReturns.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/productReturn24.png"))); // NOI18N
+        btnReturns.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/productReturn24.png"))); // NOI18N
         btnReturns.setText("Trả hàng  ");
         btnReturns.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnReturns.addActionListener(new java.awt.event.ActionListener() {
@@ -111,7 +111,7 @@ public class History_GUI extends javax.swing.JPanel {
 
         btnDelivered.setBackground(new java.awt.Color(135, 206, 235));
         btnDelivered.setForeground(new java.awt.Color(255, 255, 255));
-        btnDelivered.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/done24.png"))); // NOI18N
+        btnDelivered.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/done24.png"))); // NOI18N
         btnDelivered.setText("Đã giao hàng");
         btnDelivered.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
@@ -125,7 +125,7 @@ public class History_GUI extends javax.swing.JPanel {
 
         btnSearch.setBackground(new java.awt.Color(135, 206, 235));
         btnSearch.setForeground(new java.awt.Color(255, 255, 255));
-        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search24.png"))); // NOI18N
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/search24.png"))); // NOI18N
         btnSearch.setText("Tìm   ");
         btnSearch.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -138,7 +138,7 @@ public class History_GUI extends javax.swing.JPanel {
 
         btnTransfer.setBackground(new java.awt.Color(135, 206, 235));
         btnTransfer.setForeground(new java.awt.Color(255, 255, 255));
-        btnTransfer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/transfer24.png"))); // NOI18N
+        btnTransfer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/transfer24.png"))); // NOI18N
         btnTransfer.setText("Đổi hàng");
         btnTransfer.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnTransfer.addActionListener(new java.awt.event.ActionListener() {

@@ -53,7 +53,7 @@ public class ChangePassword_GUI extends javax.swing.JPanel {
 
         jlCaptch.setText("Mã CAPTCHA :");
 
-        jlIconRefresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/arrowblue24.png"))); // NOI18N
+        jlIconRefresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/arrowblue24.png"))); // NOI18N
         jlIconRefresh.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jlIconRefreshMouseClicked(evt);
@@ -62,7 +62,7 @@ public class ChangePassword_GUI extends javax.swing.JPanel {
 
         btnBack.setBackground(new java.awt.Color(135, 206, 235));
         btnBack.setForeground(new java.awt.Color(255, 255, 255));
-        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/back24.png"))); // NOI18N
+        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/back24.png"))); // NOI18N
         btnBack.setText("Quay lại trang chủ");
         btnBack.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -73,7 +73,7 @@ public class ChangePassword_GUI extends javax.swing.JPanel {
 
         btnSave.setBackground(new java.awt.Color(135, 206, 235));
         btnSave.setForeground(new java.awt.Color(255, 255, 255));
-        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save24.png"))); // NOI18N
+        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/save24.png"))); // NOI18N
         btnSave.setText("Lưu thay đổi");
         btnSave.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
@@ -86,9 +86,8 @@ public class ChangePassword_GUI extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jtfIDStaff, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                .addComponent(jtfNewPass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jtfIDStaff, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(jtfNewPass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jlCaptch)
                             .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
                         .addGap(54, 54, 54)

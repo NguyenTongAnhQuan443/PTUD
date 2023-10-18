@@ -90,7 +90,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
 
         jlProduct.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jlProduct.setForeground(new java.awt.Color(255, 255, 255));
-        jlProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/product32.png"))); // NOI18N
+        jlProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/product32.png"))); // NOI18N
         jlProduct.setText("Sản phẩm");
         jlProduct.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -106,7 +106,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
 
         jlStaff.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jlStaff.setForeground(new java.awt.Color(255, 255, 255));
-        jlStaff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/staff32.png"))); // NOI18N
+        jlStaff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/staff32.png"))); // NOI18N
         jlStaff.setText("Nhân viên");
         jlStaff.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -122,7 +122,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
 
         jlSell.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jlSell.setForeground(new java.awt.Color(255, 255, 255));
-        jlSell.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sell32.png"))); // NOI18N
+        jlSell.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/sell32.png"))); // NOI18N
         jlSell.setText("Bán hàng");
         jlSell.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -138,7 +138,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
 
         jlCustomer.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jlCustomer.setForeground(new java.awt.Color(255, 255, 255));
-        jlCustomer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Customer32.png"))); // NOI18N
+        jlCustomer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/Customer32.png"))); // NOI18N
         jlCustomer.setText("Khách hàng");
         jlCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -154,7 +154,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
 
         jlHistory.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jlHistory.setForeground(new java.awt.Color(255, 255, 255));
-        jlHistory.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/history32.png"))); // NOI18N
+        jlHistory.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/history32.png"))); // NOI18N
         jlHistory.setText("Lịch sử bán hàng");
         jlHistory.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -170,7 +170,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
 
         jlPromotion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jlPromotion.setForeground(new java.awt.Color(255, 255, 255));
-        jlPromotion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sale32.png"))); // NOI18N
+        jlPromotion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/sale32.png"))); // NOI18N
         jlPromotion.setText("Khuyến mãi");
         jlPromotion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -186,7 +186,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
 
         jlChangePass.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jlChangePass.setForeground(new java.awt.Color(255, 255, 255));
-        jlChangePass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/key32.png"))); // NOI18N
+        jlChangePass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/key32.png"))); // NOI18N
         jlChangePass.setText("Đổi mật khẩu");
         jlChangePass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -202,11 +202,11 @@ public class HomeManager_GUI extends javax.swing.JFrame {
 
         jlLanguage.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jlLanguage.setForeground(new java.awt.Color(255, 255, 255));
-        jlLanguage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/language32.png"))); // NOI18N
+        jlLanguage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/language32.png"))); // NOI18N
 
         jlLogout.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jlLogout.setForeground(new java.awt.Color(255, 255, 255));
-        jlLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logout32.png"))); // NOI18N
+        jlLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/logout32.png"))); // NOI18N
         jlLogout.setText("Đăng xuất");
         jlLogout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -222,7 +222,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
 
         jlStatistical.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jlStatistical.setForeground(new java.awt.Color(255, 255, 255));
-        jlStatistical.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chart32.png"))); // NOI18N
+        jlStatistical.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/chart32.png"))); // NOI18N
         jlStatistical.setText("Thống kê");
         jlStatistical.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -238,7 +238,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
 
         jlExit.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jlExit.setForeground(new java.awt.Color(255, 255, 255));
-        jlExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exit32.png"))); // NOI18N
+        jlExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/exit32.png"))); // NOI18N
         jlExit.setText("Thoát");
         jlExit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -265,7 +265,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
 
         jlSupplier.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jlSupplier.setForeground(new java.awt.Color(255, 255, 255));
-        jlSupplier.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Supplier32.png"))); // NOI18N
+        jlSupplier.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/Supplier32.png"))); // NOI18N
         jlSupplier.setText("Nhà cung cấp");
         jlSupplier.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -275,7 +275,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
 
         jlAccount.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jlAccount.setForeground(new java.awt.Color(255, 255, 255));
-        jlAccount.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user32.png"))); // NOI18N
+        jlAccount.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/user32.png"))); // NOI18N
         jlAccount.setText("Tài khoản");
         jlAccount.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -352,7 +352,7 @@ public class HomeManager_GUI extends javax.swing.JFrame {
 
         jpTop.setBackground(new java.awt.Color(0, 128, 128));
 
-        jlLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Logo64.png"))); // NOI18N
+        jlLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/Logo64.png"))); // NOI18N
 
         jlNameShop.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
         jlNameShop.setForeground(new java.awt.Color(255, 255, 255));

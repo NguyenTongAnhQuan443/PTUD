@@ -85,7 +85,7 @@ public class Statistical_GUIX extends javax.swing.JPanel {
         jlCard1Unit.setForeground(new java.awt.Color(255, 255, 255));
         jlCard1Unit.setText("Đơn hàng");
 
-        jlIconOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/market64.png"))); // NOI18N
+        jlIconOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/market64.png"))); // NOI18N
 
         javax.swing.GroupLayout jpCard1Layout = new javax.swing.GroupLayout(jpCard1);
         jpCard1.setLayout(jpCard1Layout);
@@ -125,7 +125,7 @@ public class Statistical_GUIX extends javax.swing.JPanel {
 
         jpCard2.setBackground(new java.awt.Color(255, 204, 255));
 
-        jlIconMoneyDay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/day64.png"))); // NOI18N
+        jlIconMoneyDay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/day64.png"))); // NOI18N
 
         jlCard2Title.setBackground(new java.awt.Color(255, 255, 255));
         jlCard2Title.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -182,7 +182,7 @@ public class Statistical_GUIX extends javax.swing.JPanel {
 
         jpCard3.setBackground(new java.awt.Color(153, 204, 255));
 
-        jlIconMoneyMonth.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mounth64.png"))); // NOI18N
+        jlIconMoneyMonth.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/mounth64.png"))); // NOI18N
 
         jlCard3Title.setBackground(new java.awt.Color(255, 255, 255));
         jlCard3Title.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -239,7 +239,7 @@ public class Statistical_GUIX extends javax.swing.JPanel {
 
         jpCard4.setBackground(new java.awt.Color(0, 204, 204));
 
-        jlIconMoneyYear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/year64.png"))); // NOI18N
+        jlIconMoneyYear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/year64.png"))); // NOI18N
 
         jlCard14Title.setBackground(new java.awt.Color(255, 255, 255));
         jlCard14Title.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N

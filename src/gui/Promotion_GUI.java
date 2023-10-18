@@ -151,7 +151,7 @@ public class Promotion_GUI extends javax.swing.JPanel {
 
         btnSave1.setBackground(new java.awt.Color(135, 206, 235));
         btnSave1.setForeground(new java.awt.Color(255, 255, 255));
-        btnSave1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save24.png"))); // NOI18N
+        btnSave1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/save24.png"))); // NOI18N
         btnSave1.setText("Gửi thông tin khuyến mãi");
         btnSave1.setToolTipText("Hệ thống sẽ gửi thông tin các chương trình khuyến mãi hiện có đến khách hàng qua Email");
         btnSave1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -216,19 +216,19 @@ public class Promotion_GUI extends javax.swing.JPanel {
 
         btnEdit.setBackground(new java.awt.Color(135, 206, 235));
         btnEdit.setForeground(new java.awt.Color(255, 255, 255));
-        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit24.png"))); // NOI18N
+        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/edit24.png"))); // NOI18N
         btnEdit.setText("Sửa");
         btnEdit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         btnRefresh.setBackground(new java.awt.Color(135, 206, 235));
         btnRefresh.setForeground(new java.awt.Color(255, 255, 255));
-        btnRefresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh24.png"))); // NOI18N
+        btnRefresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/refresh24.png"))); // NOI18N
         btnRefresh.setText("  Làm mới  ");
         btnRefresh.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         btnSave.setBackground(new java.awt.Color(135, 206, 235));
         btnSave.setForeground(new java.awt.Color(255, 255, 255));
-        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save24.png"))); // NOI18N
+        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/save24.png"))); // NOI18N
         btnSave.setText("    Lưu    ");
         btnSave.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 

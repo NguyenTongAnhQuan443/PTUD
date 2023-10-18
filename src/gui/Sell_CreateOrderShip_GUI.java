@@ -222,7 +222,7 @@ public class Sell_CreateOrderShip_GUI extends javax.swing.JPanel {
 
         btnCreateOrder.setBackground(new java.awt.Color(135, 206, 235));
         btnCreateOrder.setForeground(new java.awt.Color(255, 255, 255));
-        btnCreateOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/create24.png"))); // NOI18N
+        btnCreateOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/create24.png"))); // NOI18N
         btnCreateOrder.setText("Tạo đơn hàng");
         btnCreateOrder.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnCreateOrder.addActionListener(new java.awt.event.ActionListener() {
@@ -233,7 +233,7 @@ public class Sell_CreateOrderShip_GUI extends javax.swing.JPanel {
 
         btnDelivering.setBackground(new java.awt.Color(135, 206, 235));
         btnDelivering.setForeground(new java.awt.Color(255, 255, 255));
-        btnDelivering.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cart24.png"))); // NOI18N
+        btnDelivering.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/cart24.png"))); // NOI18N
         btnDelivering.setText("Giao hàng");
         btnDelivering.setEnabled(false);
         btnDelivering.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N

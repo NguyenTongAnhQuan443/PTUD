@@ -118,7 +118,7 @@ public class Product_Properties_GUI extends javax.swing.JPanel {
         btnAdd.setBackground(new java.awt.Color(135, 206, 235));
         btnAdd.setBorder(null);
         btnAdd.setForeground(new java.awt.Color(255, 255, 255));
-        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add24.png"))); // NOI18N
+        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/add24.png"))); // NOI18N
         btnAdd.setText("Thêm thuộc tính");
         btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -130,7 +130,7 @@ public class Product_Properties_GUI extends javax.swing.JPanel {
         btnEdit.setBackground(new java.awt.Color(135, 206, 235));
         btnEdit.setBorder(null);
         btnEdit.setForeground(new java.awt.Color(255, 255, 255));
-        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit24.png"))); // NOI18N
+        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/edit24.png"))); // NOI18N
         btnEdit.setText("Sửa thuộc tính");
         btnEdit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnEdit.addActionListener(new java.awt.event.ActionListener() {

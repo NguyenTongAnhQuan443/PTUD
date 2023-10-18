@@ -146,13 +146,13 @@ public class TransferProduct_GUI extends javax.swing.JFrame implements Runnable,
 
         btnConfirm.setBackground(new java.awt.Color(135, 206, 235));
         btnConfirm.setForeground(new java.awt.Color(255, 255, 255));
-        btnConfirm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/done24.png"))); // NOI18N
+        btnConfirm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/done24.png"))); // NOI18N
         btnConfirm.setText("Xác nhận");
         btnConfirm.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         btnBack.setBackground(new java.awt.Color(135, 206, 235));
         btnBack.setForeground(new java.awt.Color(255, 255, 255));
-        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/back24.png"))); // NOI18N
+        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/back24.png"))); // NOI18N
         btnBack.setText("Quay lại");
         btnBack.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -268,7 +268,7 @@ public class TransferProduct_GUI extends javax.swing.JFrame implements Runnable,
 
         btnAdd.setBackground(new java.awt.Color(135, 206, 235));
         btnAdd.setForeground(new java.awt.Color(255, 255, 255));
-        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/addToCart16.png"))); // NOI18N
+        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/addToCart16.png"))); // NOI18N
         btnAdd.setText("Thêm vào giỏ");
         btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -449,7 +449,7 @@ public class TransferProduct_GUI extends javax.swing.JFrame implements Runnable,
         btnClear.setBackground(new java.awt.Color(135, 206, 235));
         btnClear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnClear.setForeground(new java.awt.Color(255, 255, 255));
-        btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Clear16.png"))); // NOI18N
+        btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/Clear16.png"))); // NOI18N
         btnClear.setText("Làm mới");
         btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -460,7 +460,7 @@ public class TransferProduct_GUI extends javax.swing.JFrame implements Runnable,
         btnDel.setBackground(new java.awt.Color(135, 206, 235));
         btnDel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnDel.setForeground(new java.awt.Color(255, 255, 255));
-        btnDel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete20.png"))); // NOI18N
+        btnDel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/delete20.png"))); // NOI18N
         btnDel.setText(" Xóa SP  ");
         btnDel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
