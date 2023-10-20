@@ -33,7 +33,6 @@ public class Staff_GUI extends javax.swing.JPanel {
         jpTopBottom = new javax.swing.JPanel();
         btnAdd = new lib2.Button();
         btnEdit = new lib2.Button();
-        btnDismissal = new lib2.Button();
         btnReload = new lib2.Button();
         btnInputFile = new lib2.Button();
         btnOutputFile = new lib2.Button();
@@ -161,18 +160,6 @@ public class Staff_GUI extends javax.swing.JPanel {
         });
         jpTopBottom.add(btnEdit);
 
-        btnDismissal.setBackground(new java.awt.Color(135, 206, 235));
-        btnDismissal.setForeground(new java.awt.Color(255, 255, 255));
-        btnDismissal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/warning24.png"))); // NOI18N
-        btnDismissal.setText("Danh sách thôi việc  ");
-        btnDismissal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnDismissal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDismissalActionPerformed(evt);
-            }
-        });
-        jpTopBottom.add(btnDismissal);
-
         btnReload.setBackground(new java.awt.Color(135, 206, 235));
         btnReload.setForeground(new java.awt.Color(255, 255, 255));
         btnReload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/refresh24.png"))); // NOI18N
@@ -220,20 +207,13 @@ public class Staff_GUI extends javax.swing.JPanel {
         staff_AddStaff_GUI.setFlag(2);
     }//GEN-LAST:event_btnEditActionPerformed
 
-    private void btnDismissalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDismissalActionPerformed
-//     hiển thị danh sách thôi việc lên table
-    }//GEN-LAST:event_btnDismissalActionPerformed
-
     private void btnReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReloadActionPerformed
-//        staff_InfoStaff_GUI = new Staff_InfoStaff_GUI();
-//        staff_InfoStaff_GUI.setVisible(true);
-//        staff_InfoStaff_GUI.setFlag(3);
+
     }//GEN-LAST:event_btnReloadActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnAdd;
     private lib2.Button btnArrange;
-    private lib2.Button btnDismissal;
     private lib2.Button btnEdit;
     private lib2.Button btnInputFile;
     private lib2.Button btnOutputFile;

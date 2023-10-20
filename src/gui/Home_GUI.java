@@ -1,5 +1,6 @@
 package gui;
 
+import entity.flag;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
@@ -72,16 +73,17 @@ public class Home_GUI extends javax.swing.JFrame {
                     product_GUI = new Product_GUI();
                     addJPanel(product_GUI);
                 } else if (index == 3 && subIndex == 1) { // sự kiện menu nhân viên - danh sách nhân viên
+                    flag.setFlagStaffGUI(true); // mở GUI danh sách nhân viên
                     stopWebcam();
                     jpCenter.removeAll();
                     staff_GUI = new Staff_GUI();
                     addJPanel(staff_GUI);
                 } else if (index == 3 && subIndex == 2) { // sự kiện menu nhân viên - danh sách thôi việc nhân viên
+                    flag.setFlagStaffGUI(false); // mở GUI danh sách nghỉ việc
                     stopWebcam();
                     jpCenter.removeAll();
                     staff_GUI = new Staff_GUI();
                     addJPanel(staff_GUI);
-                    JOptionPane.showMessageDialog(null, "Ẩn các button và chỉ show danh sách đã nghỉ việc ở đây");
                 } else if (index == 4) { // sự kiện memu bán hàng
                     stopWebcam();
                     jpCenter.removeAll();

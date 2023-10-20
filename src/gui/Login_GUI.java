@@ -15,7 +15,7 @@ public class Login_GUI extends javax.swing.JFrame {
     private Staff staff = new Staff();
 
     public Login_GUI() {
-//        login
+//        connectDB
         try {
             new ConnectDB().connect();
         } catch (Exception e) {

@@ -9,12 +9,13 @@ import entity.District;
 import entity.Province;
 import entity.Staff;
 import entity.Ward;
+import entity.flag;
 import javax.swing.table.DefaultTableModel;
 import lib2.TableCustom;
 
 public class Staff_Table_GUI extends javax.swing.JPanel {
 
-    private DefaultTableModel defaultTableModel; 
+    private DefaultTableModel defaultTableModel;
     private Staff staff = new Staff();
     private Staff_DAO staff_DAO = new Staff_DAO();
     private Province province;
@@ -23,21 +24,26 @@ public class Staff_Table_GUI extends javax.swing.JPanel {
     private Province_DAO province_DAO = new Province_DAO();
     private District_DAO district_DAO = new District_DAO();
     private Ward_DAO ward_DAO = new Ward_DAO();
+
     public Staff_Table_GUI() {
         initComponents();
         TableCustom.apply(jspTable, TableCustom.TableType.DEFAULT);
         defaultTableModel = (DefaultTableModel) jTable.getModel();
-        loadData();
-        
+        if (flag.isFlagStaffGUI() == false) {
+            loadData("SELECT * FROM Staff WHERE status = N'Nghỉ làm'");
+        }else{
+            loadData("SELECT * FROM Staff WHERE status = N'Đang làm'");
+        }
+
     }
-    public void loadData(){
-//        System.out.println(province_DAO.getProvinceByID("106496387271509"));
+
+    public void loadData(String sql) {
         defaultTableModel.setRowCount(0);
-        for (Staff staff : staff_DAO.getListStaff()) {
+        for (Staff staff : staff_DAO.getListStaffByStatus(sql)) {
             String sex = "";
-            if(staff.isSex()){
+            if (staff.isSex()) {
                 sex = "Nam";
-            }else{
+            } else {
                 sex = "Nữ";
             }
             String province = province_DAO.getProvinceNameByID(staff.getProvince().getId().toString());
@@ -45,7 +51,7 @@ public class Staff_Table_GUI extends javax.swing.JPanel {
             String ward = district_DAO.getDistrictNameByID(staff.getWard().getId().toString());
             String address = staff.getAddress();
             String addressDetails = province + ", " + district + ", " + district + ", " + address;
-            String[] rowData= {staff.getIdStaff(), staff.getName(), staff.getCic(), staff.getPhone(), staff.getEmail(), staff.getDayofbirth().toString(), sex, addressDetails, staff.convertRightsToString(staff.getRights())};
+            String[] rowData = {staff.getIdStaff(), staff.getName(), staff.getCic(), staff.getPhone(), staff.getEmail(), staff.getDayofbirth().toString(), sex, addressDetails, staff.convertRightsToString(staff.getRights())};
             defaultTableModel.addRow(rowData);
         }
     }
@@ -95,7 +101,6 @@ public class Staff_Table_GUI extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable jTable;

@@ -30,7 +30,41 @@ public class Staff_DAO {
 
     public Staff_DAO() {
     }
-
+//    lấy những nhân viên có trạng thái là "Đang làm"
+    public List<Staff> getListStaffByStatus(String sqlStatus) {
+    List<Staff> listStaff = new ArrayList<Staff>();
+    String sql = sqlStatus;
+    try {
+        connectDB.ConnectDB.getInstance();
+        Connection connection = (Connection) ConnectDB.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+        
+        while (resultSet.next()) {
+            String idStaff = resultSet.getString("idStaff");
+            String name = resultSet.getString("name");
+            String cic = resultSet.getString("cic");
+            String phone = resultSet.getString("phone");
+            String email = resultSet.getString("email");
+            LocalDate dayofbirth = resultSet.getDate("dayofbirth").toLocalDate();
+            boolean sex = resultSet.getBoolean("sex");
+            String province = resultSet.getString("province");
+            String district = resultSet.getString("district");
+            String ward = resultSet.getString("ward");
+            String address = resultSet.getString("address");
+            String rights = resultSet.getString("rights");
+            String status = resultSet.getString("status");
+            String password = resultSet.getString("password");
+            Staff staff = new Staff(idStaff, name, cic, phone, email, dayofbirth, sex, new Province(province), new District(district), new Ward(ward), address, Staff.convertStringToRights(rights), Staff.convertStringToStatus(status), password);
+            listStaff.add(staff);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    
+    return listStaff;
+}
+// Lấy toàn bộ nhân viên
     public List<Staff> getListStaff() {
         List<Staff> listStaff = new ArrayList<Staff>();
         String sql = "SELECT * FROM Staff";
