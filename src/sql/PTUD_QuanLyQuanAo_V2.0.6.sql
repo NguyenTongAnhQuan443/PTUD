@@ -22778,40 +22778,40 @@ GO
 
 GO
 
---TẠO BẢNG NHÀ CUNG CẤP OK
+--TẠO BẢNG NHÀ CUNG CẤP OOO--
 CREATE TABLE Supplier
 (
 	idSupplier CHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS PRIMARY KEY,
 	name NVARCHAR(55) COLLATE SQL_Latin1_General_CP1_CS_AS NOT NULL,
 	email NVARCHAR(50) NOT NULL,
-	status BIT NOT  NULL,
+	status NVARCHAR(25) NOT NULL,
 )
 GO
 
---TẠO BẢNG KHUYẾN MÃI OK
+--TẠO BẢNG KHUYẾN MÃI OOO--
 CREATE TABLE Promotion
 (
 	idPromotion CHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS PRIMARY KEY,
 	name NVARCHAR(55) COLLATE SQL_Latin1_General_CP1_CS_AS NOT NULL,
-	typePromotion NVARCHAR(20) NOT NULL, 
-	discount FLOAT NOT NULL, -- Số tiền giảm hoặc phần trăm giảm
+	typePromotion NVARCHAR(30) NOT NULL, 
+	discount FLOAT, -- Số tiền giảm hoặc phần trăm giảm
 	priceRange FLOAT, -- khoảng giá áp dụng ví dụ trên 100.000VND
 	dayStart DATE NOT NULL,
 	dayEnd DATE NOT NULL,
-	status BIT NOT  NULL,
+	status NVARCHAR(25) NOT NULL,
 	description NVARCHAR(50) -- mô tả
 )
 GO
 
---TẠO BẢNG THUỘC TÍNH SẢN PHẨM OK
+--TẠO BẢNG THUỘC TÍNH SẢN PHẨM OOO--
 CREATE TABLE Properties
 (
 	idProperties CHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS PRIMARY KEY,
-	properties NVARCHAR(10) NOT NULL
+	properties NVARCHAR(20) NOT NULL
 )
 GO
 
--- TẠO BẢNG CHI TIẾT THUỘC TÍNH SẢN PHẨM OK
+-- TẠO BẢNG CHI TIẾT THUỘC TÍNH SẢN PHẨM OOO--
 CREATE TABLE PropertiesDetails (
     idPropertiesDetails CHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS PRIMARY KEY,
 	propertiesDetails NVARCHAR(35) NOT NULL,
@@ -22820,25 +22820,23 @@ CREATE TABLE PropertiesDetails (
 )
 GO
 
---TẠO BẢNG SẢN PHẨM OK
+--TẠO BẢNG SẢN PHẨM OOO--
 CREATE TABLE Product
 (
 	idProduct CHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS PRIMARY KEY,
 	name NVARCHAR(55) COLLATE SQL_Latin1_General_CP1_CS_AS NOT NULL,
-	costprice FLOAT NOT NULL, -- giá nhập
+	costPrice FLOAT NOT NULL, -- giá nhập
 	originalPrice FLOAT NOT NULL, -- giá bán gốc
 	quantity INT NOT NULL,
-	status BIT NOT  NULL,
-	propertiesDetails CHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS NOT NULL,
-	promotion CHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS NOT NULL,
-	supplier CHAR (15) COLLATE SQL_Latin1_General_CP1_CS_AS,
+	status NVARCHAR(25) NOT NULL,
+	promotion CHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS,
+	supplier CHAR (15) COLLATE SQL_Latin1_General_CP1_CS_AS NOT NULL,
     FOREIGN KEY (supplier) REFERENCES Supplier(idSupplier),
-	FOREIGN KEY (propertiesDetails) REFERENCES PropertiesDetails(idPropertiesDetails),
 	FOREIGN KEY (promotion) REFERENCES promotion(idPromotion)
 )
 GO
 
--- TẠO BẢNG TRUNG GIAN GIỮA THUỘC TÍNH VÀ SẢN PHẨM
+-- TẠO BẢNG TRUNG GIAN GIỮA THUỘC TÍNH VÀ SẢN PHẨM OOO--
 CREATE TABLE ProductProperties (
 	idProductProperties CHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS NOT NULL,
     product CHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS NOT NULL,
@@ -22848,21 +22846,22 @@ CREATE TABLE ProductProperties (
     FOREIGN KEY (properties) REFERENCES Properties(idProperties)
 )
 
---TẠO BẢNG NHÂN VIÊN OK
+--TẠO BẢNG NHÂN VIÊN OOO--
 CREATE TABLE Staff
 (
 	idStaff CHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS NOT NULL PRIMARY KEY,
 	name NVARCHAR(55) COLLATE SQL_Latin1_General_CP1_CS_AS NOT NULL,
 	cic NVARCHAR(12) NOT NULL UNIQUE, -- citizen identification card căn cước công dân
 	phone NVARCHAR(10) NOT NULL UNIQUE,
+	email NVARCHAR(50),
 	dayofbirth DATE NOT NULL,
 	sex BIT NOT NULL,
 	province NVARCHAR(15) NOT NULL,
 	district NVARCHAR(15) NOT NULL,
 	ward NVARCHAR(15) NOT NULL,
 	address NVARCHAR(55) NOT NULL,
-	rights NVARCHAR(20) NOT NULL,
-	status BIT NOT  NULL,
+	rights NVARCHAR(25) NOT NULL,
+	status NVARCHAR(25) NOT NULL,
 	password VARCHAR(40) NOT NULL,
 	CONSTRAINT FK_Staff_Province FOREIGN KEY (province) REFERENCES Province(id),
 	CONSTRAINT FK_Staff_District FOREIGN KEY (district) REFERENCES District(id),
@@ -22870,7 +22869,7 @@ CREATE TABLE Staff
 )
 GO
 
---BẢNG KHÁCH HÀNG OK
+--BẢNG KHÁCH HÀNG OOO--
 CREATE TABLE Customer
 (
 	idCustomer CHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS PRIMARY KEY,
@@ -22888,7 +22887,7 @@ CREATE TABLE Customer
 )
 GO
 
--- TẠO BẢNG HÓA ĐƠN OK
+-- TẠO BẢNG HÓA ĐƠN OOO--
 CREATE TABLE Invoice
 (
     idInvoice CHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS PRIMARY KEY,	
@@ -22900,15 +22899,15 @@ CREATE TABLE Invoice
 	--discountedAmount FLOAT NOT NULL, -- Số tiền được giảm
     totalAmount FLOAT, -- Tổng tiền hóa đơn
     dateCreated DATETIME NOT NULL,
-    status BIT NOT NULL,
-    deliveryStatus BIT NOT NULL,
+    status NVARCHAR(25) NOT NULL,
+    deliveryStatus NVARCHAR(25) NOT NULL,
 	FOREIGN KEY (staff) REFERENCES Staff(idStaff),
     FOREIGN KEY (customer) REFERENCES Customer(idCustomer),
 	FOREIGN KEY (promotion) REFERENCES Promotion(idPromotion)
 )
 GO
 
--- BẢNG CHI TIẾT HÓA ĐƠN OK
+-- BẢNG CHI TIẾT HÓA ĐƠN OOO--
 CREATE TABLE InvoiceDetails 
 (
     idInvoiceDetails CHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS,
@@ -22923,3 +22922,208 @@ CREATE TABLE InvoiceDetails
 	FOREIGN KEY (invoice) REFERENCES Invoice(idInvoice)
 )
 GO
+
+-- Insert dữ liệu Supplier
+INSERT INTO Supplier (idSupplier, name, email, status)
+VALUES ('NCC0001', N'Louis Vuitton', 'LouisVuitton@gmail.com', N'Đang hợp tác');
+GO
+INSERT INTO Supplier (idSupplier, name, email, status)
+VALUES ('NCC0002', N'Gucci', 'Gucci@gmail.com', N'Đang hợp tác');
+GO
+INSERT INTO Supplier (idSupplier, name, email, status)
+VALUES ('NCC0003', N'Hermes', 'Hermes@gmail.com', N'Đang hợp tác');
+GO
+INSERT INTO Supplier (idSupplier, name, email, status)
+VALUES ('NCC0004', N'Prada', 'Prada@gmail.com', N'Ngưng hợp tác');
+GO
+INSERT INTO Supplier (idSupplier, name, email, status)
+VALUES ('NCC0005', N'Chanel', 'Chanel@gmail.com', N'Ngưng hợp tác');
+GO
+
+-- Insert dữ liệu Promotion 
+INSERT INTO Promotion (idPromotion, name, typePromotion, discount, dayStart, dayEnd, status, description)
+VALUES ('KM0001', N'Khuyễn mãi chào mừng năm học mới', N'KM theo %', 20.0, '2023-10-18', '2023-12-30', N'Còn hạn', N'Chương trình giảm giá 20% cho HSSV');
+GO
+INSERT INTO Promotion (idPromotion, name, typePromotion, discount, dayStart, dayEnd, status, description)
+VALUES ('KM0002', N'Khuyến mãi chào thu', N'KM theo %', 10.0, '2023-10-18', '2023-12-30', N'Còn hạn', N'Chương trình giảm giá 10% chào thu');
+GO
+INSERT INTO Promotion (idPromotion, name, typePromotion, discount, priceRange, dayStart, dayEnd, status, description)
+VALUES ('KM0003', N'Khuyến mãi vàng', N'KM theo tổng tiền', 50000.0, 500000.0, '2023-10-18', '2023-12-30', N'Còn hạn', N'Giảm 50,000 VND cho đơn hàng từ 500, 000 VND');
+GO
+INSERT INTO Promotion (idPromotion, name, typePromotion, discount, priceRange, dayStart, dayEnd, status, description)
+VALUES ('KM0004', N'Khuyến mãi kim cương', N'KM theo tổng tiền', 100000.0, 500000.0, '2023-10-18', '2023-12-30', N'Còn hạn', N'Giảm 100,000 VND cho đơn hàng từ 500, 000 VND');
+GO
+INSERT INTO Promotion (idPromotion, name, typePromotion, discount, dayStart, dayEnd, status, description)
+VALUES ('KM0005', N'Khuyến mãi mùa hè', N'KM theo %', 20.0, '2023-09-18', '2023-10-17', N'Hết hạn', N'Chương trình giảm giá 20% chào hè');
+GO
+INSERT INTO Promotion (idPromotion, name, typePromotion, discount, priceRange, dayStart, dayEnd, status, description)
+VALUES ('KM0006', N'Khuyến mãi tri ân', N'KM theo tổng tiền', 100000.0, 500000.0, '2023-09-18', '2023-10-17', N'Hết hạn', N'Giảm 100,000 VND cho đơn hàng từ 500, 000 VND');
+GO
+
+-- Insert dữ liệu Properties
+INSERT INTO Properties (idProperties, properties)
+VALUES ('P0001', N'Loại sản phẩm');
+GO
+INSERT INTO Properties (idProperties, properties)
+VALUES ('P0002', N'Kích thước');
+GO
+INSERT INTO Properties (idProperties, properties)
+VALUES ('P0003', N'Màu sắc');
+GO
+INSERT INTO Properties (idProperties, properties)
+VALUES ('P0004', N'Chất liệu');
+GO
+
+-- Insert dữ liệu PropertiesDetails
+INSERT INTO PropertiesDetails (idPropertiesDetails, propertiesDetails, properties)
+VALUES ('PD0001', N'Quần dài', 'P0001');
+GO
+INSERT INTO PropertiesDetails (idPropertiesDetails, propertiesDetails, properties)
+VALUES ('PD0002', N'Áo thun', 'P0001');
+GO
+INSERT INTO PropertiesDetails (idPropertiesDetails, propertiesDetails, properties)
+VALUES ('PD0003', N'Váy', 'P0001');
+GO
+INSERT INTO PropertiesDetails (idPropertiesDetails, propertiesDetails, properties)
+VALUES ('PD0004', N'Áo khoác', 'P0001');
+GO
+INSERT INTO PropertiesDetails (idPropertiesDetails, propertiesDetails, properties)
+VALUES ('PD0005', N'Quần short', 'P0001');
+GO
+
+INSERT INTO PropertiesDetails (idPropertiesDetails, propertiesDetails, properties)
+VALUES ('PD0006', N'S', 'P0002');
+GO
+INSERT INTO PropertiesDetails (idPropertiesDetails, propertiesDetails, properties)
+VALUES ('PD0007', N'M', 'P0002');
+GO
+INSERT INTO PropertiesDetails (idPropertiesDetails, propertiesDetails, properties)
+VALUES ('PD0008', N'L', 'P0002');
+GO
+INSERT INTO PropertiesDetails (idPropertiesDetails, propertiesDetails, properties)
+VALUES ('PD0009', N'XL', 'P0002');
+GO
+INSERT INTO PropertiesDetails (idPropertiesDetails, propertiesDetails, properties)
+VALUES ('PD00010', N'2XL', 'P0002');
+GO
+
+INSERT INTO PropertiesDetails (idPropertiesDetails, propertiesDetails, properties)
+VALUES ('PD0011', N'Đen', 'P0003');
+GO
+INSERT INTO PropertiesDetails (idPropertiesDetails, propertiesDetails, properties)
+VALUES ('PD0012', N'Trắng', 'P0003');
+GO
+INSERT INTO PropertiesDetails (idPropertiesDetails, propertiesDetails, properties)
+VALUES ('PD0013', N'Đỏ', 'P0003');
+GO
+INSERT INTO PropertiesDetails (idPropertiesDetails, propertiesDetails, properties)
+VALUES ('PD0014', N'Vàng', 'P0003');
+GO
+
+INSERT INTO PropertiesDetails (idPropertiesDetails, propertiesDetails, properties)
+VALUES ('PD0015', N'Cotton', 'P0004');
+GO
+INSERT INTO PropertiesDetails (idPropertiesDetails, propertiesDetails, properties)
+VALUES ('PD0016', N'Lụa', 'P0004');
+GO
+INSERT INTO PropertiesDetails (idPropertiesDetails, propertiesDetails, properties)
+VALUES ('PD0017', N'Kaki', 'P0004');
+GO
+INSERT INTO PropertiesDetails (idPropertiesDetails, propertiesDetails, properties)
+VALUES ('PD0018', N'Jean', 'P0004');
+GO
+
+-- Insert dữ liệu Product
+INSERT INTO Product (idProduct, name, costPrice, originalPrice, quantity, status, promotion, supplier)
+VALUES
+    ('SP0001', N'Áo thun Louis Vuitton', 50.0, 100.0, 100, N'Đang kinh doanh', 'KM0001', 'NCC0001'),
+    ('SP0002', N'Quần short Gucci', 60.0, 120.0, 80, N'Đang kinh doanh', NULL, 'NCC0002'),
+    ('SP0003', N'Váy Hermes', 70.0, 140.0, 60, N'Đang kinh doanh', 'KM0003', 'NCC0003'),
+    ('SP0004', N'Áo khoắc Prada', 80.0, 160.0, 50, N'Đang kinh doanh', NULL, 'NCC0004'),
+    ('SP0005', N'Quần dài Chanel', 90.0, 180.0, 70, N'Đang kinh doanh', NULL, 'NCC0005');
+
+GO
+
+-- Insert dữ liệu ProductProperties
+INSERT INTO ProductProperties (idProductProperties, product, properties)
+VALUES ('PP0001', 'SP0001', 'P0003'), -- Màu sắc: Trắng (PD0012)
+       ('PP0002', 'SP0001', 'P0001'), -- Loại sản phẩm: Áo thun (PD0002)
+       ('PP0003', 'SP0001', 'P0002'), -- Kích thước: M (PD0007)
+       ('PP0004', 'SP0001', 'P0004'); -- Chất liệu: Lụa (PD0015)
+GO
+INSERT INTO ProductProperties (idProductProperties, product, properties)
+VALUES ('PP0005', 'SP0002', 'P0004'), -- Màu sắc: Đen (PD0014)
+       ('PP0006', 'SP0002', 'P0001'), -- Loại sản phẩm: Quần short (PD0001)
+       ('PP0007', 'SP0002', 'P0002'), -- Kích thước: L (PD0008)
+       ('PP0008', 'SP0002', 'P0003'); -- Chất liệu: Kaki (PD0017)
+GO
+INSERT INTO ProductProperties (idProductProperties, product, properties)
+VALUES ('PP0009', 'SP0003', 'P0003'), -- Màu sắc: Đỏ (PD0013)
+       ('PP0010', 'SP0003', 'P0001'), -- Loại sản phẩm: Váy (PD0002)
+       ('PP0011', 'SP0003', 'P0004'), -- Kích thước: XL (PD0018)
+       ('PP0012', 'SP0003', 'P0002'); -- Chất liệu: Lụa (PD0016)
+GO
+INSERT INTO ProductProperties (idProductProperties, product, properties)
+VALUES ('PP0013', 'SP0004', 'P0001'), -- Màu sắc: Áo thun (PD0002)
+       ('PP0014', 'SP0004', 'P0003'), -- Loại sản phẩm: Jean (PD0005)
+       ('PP0015', 'SP0004', 'P0002'), -- Kích thước: S (PD0011)
+       ('PP0016', 'SP0004', 'P0004'); -- Chất liệu: Cotton (PD0016)
+GO
+INSERT INTO ProductProperties (idProductProperties, product, properties)
+VALUES ('PP0017', 'SP0005', 'P0002'), -- Màu sắc: Quần short (PD0001)
+       ('PP0018', 'SP0005', 'P0004'), -- Loại sản phẩm: Áo thun (PD0002)
+       ('PP0019', 'SP0005', 'P0003'), -- Kích thước: M (PD0007)
+       ('PP0020', 'SP0005', 'P0001'); -- Chất liệu: Kaki (PD0014)
+GO
+
+-- Insert dữ liệu Staff
+INSERT INTO Staff (idStaff, name, cic, phone, email,  dayofbirth, sex, province, district, ward, address, rights, status, password)
+VALUES
+    ('NV0001', N'Nguyễn Tống Anh Quân', '123456789011', '0123456789', 'meloball.m4v@gmail.com','2003-04-04', 1, '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', N'Nhân viên quản lý', N'Đang làm', '04042003'),
+	('NV0002', N'Bùi Đình Quang', '123456789012', '0123456788', 'meloball.m4v@gmail.com', '2003-04-03', 1, '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', N'Nhân viên bán hàng', N'Đang làm', '04042004'),
+	('NV0003', N'Nguyễn Xuân Bảo', '123456789010', '0123456780', 'meloball.m4v@gmail.com', '2003-04-02', 0, '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', N'Nhân viên quản lý', N'Nghỉ làm', '04042003'),
+	('NV0004', N'Nguyễn Xuân An', '113456789010', '0113456780', 'xuantocdo@gmail.com', '1999-04-02', 0, '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', N'Nhân viên quản lý', N'Nghỉ làm', '04042003'),
+	('NV0005', N'Nguyễn Xuân Sang', '123454789010', '0128456780', 'xuanden@gmail.com', '2002-02-02', 0, '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', N'Nhân viên quản lý', N'Nghỉ làm', '04042003'),
+	('NV0006', N'Ngô Đình Nam', '123459089012', '0123456778', 'dinhnam@gmail.com', '2003-12-30', 1, '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', N'Nhân viên bán hàng', N'Đang làm', '04042004');
+	
+GO
+
+-- Insert dữ liệu Customer
+INSERT INTO Customer (idCustomer, name, phone, email, province, district, ward, address, receivePromotions)
+VALUES
+    ('KH0001', N'Nguyễn Thị Hằng', '0123456789', 'hang.nguyen@example.com', '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', 1),
+    ('KH0002', N'Trần Văn Minh', '0987654321', 'minh.tran@example.com', '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', 0),
+    ('KH0003', N'Lê Thị Mai', '0123456780', 'mai.le@example.com', '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', 1),
+    ('KH0004', N'Hoàng Văn Tú', '0987654322', 'tu.hoang@example.com', '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', 0),
+    ('KH0005', N'Nguyễn Thị Trâm', '0123456781', 'tram.nguyen@example.com', '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', 1);
+GO
+
+-- Insert dữ liệu Invoice 
+-- Insert dữ liệu cho bảng Invoice
+INSERT INTO Invoice (idInvoice, staff, customer, promotion, amountReceived, changeAmount, totalAmount, dateCreated, status, deliveryStatus)
+VALUES
+    ('HD0001', 'NV0001', 'KH0001', 'KM0001', 1500.0, 0.0, 1500.0, GETDATE(), N'Đang xử lý', N'Chưa giao'),
+    ('HD0002', 'NV0002', 'KH0002', 'KM0002', 800.0, 200.0, 1000.0, GETDATE(), N'Hoàn thành', N'Đã giao'),
+    ('HD0003', 'NV0001', 'KH0003', 'KM0003', 4500.0, 0.0, 4500.0, GETDATE(), N'Đang xử lý', N'Chưa giao'),
+    ('HD0004', 'NV0002', 'KH0004', 'KM0004', 2500.0, 500.0, 3000.0, GETDATE(), N'Hoàn thành', N'Đã giao'),
+    ('HD0005', 'NV0003', 'KH0005', 'KM0005', 3000.0, 0.0, 3000.0, GETDATE(), N'Đang xử lý', N'Chưa giao');
+GO
+
+-- Insert dữ liệu InvoiceDetails 
+-- Insert dữ liệu cho bảng InvoiceDetails
+INSERT INTO InvoiceDetails (idInvoiceDetails, invoice, product, quantity, unitPrice, returnQuantity, returnReason)
+VALUES
+    ('CTHD0001', 'HD0001', 'SP0001', 5, 100.0, NULL, NULL),
+    ('CTHD0002', 'HD0001', 'SP0002', 3, 120.0, NULL, NULL),
+    ('CTHD0003', 'HD0002', 'SP0003', 2, 140.0, NULL, NULL),
+    ('CTHD0004', 'HD0003', 'SP0004', 1, 160.0, NULL, NULL),
+    ('CTHD0005', 'HD0003', 'SP0005', 4, 180.0, NULL, NULL),
+    ('CTHD0006', 'HD0004', 'SP0001', 2, 100.0, NULL, NULL),
+    ('CTHD0007', 'HD0004', 'SP0002', 3, 120.0, NULL, NULL),
+    ('CTHD0008', 'HD0005', 'SP0003', 1, 140.0, NULL, NULL),
+    ('CTHD0009', 'HD0005', 'SP0004', 5, 160.0, NULL, NULL),
+    ('CTHD0010', 'HD0005', 'SP0005', 2, 180.0, NULL, NULL);
+GO
+
+--UPDATE Staff SET password = '04042003' WHERE idStaff = 'NV0001';
+--SELECT province FROM Province WHERE id = '106169285912657';

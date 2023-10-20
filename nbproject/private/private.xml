@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+        <file>
+            <url>src/dao/Staff_DAO.java</url>
+            <bookmark id="1">
+                <name/>
+                <line>160</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/entity/Customer.java</file>
-            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/entity/Province.java</file>
-            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/entity/DeliveryStatus.java</file>
-            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/entity/ProductProperties.java</file>
-            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/entity/Properties.java</file>
-            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/entity/Supplier.java</file>
-            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/entity/PropertiesDetails.java</file>
+            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/gui/Staff_GUI.java</file>
+            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/dao/Staff_DAO.java</file>
+            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/gui/Home_GUI.java</file>
+            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/gui/Staff_Table_GUI.java</file>
+            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/gui/Login_GUI.java</file>
             <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/entity/Staff.java</file>
-            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/entity/Invoice.java</file>
-            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/entity/District.java</file>
-            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/entity/Product.java</file>
-            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/entity/Promotion.java</file>
         </group>
     </open-files>
 </project-private>

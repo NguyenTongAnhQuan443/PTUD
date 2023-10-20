@@ -2,14 +2,32 @@ package gui;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import dao.Staff_DAO;
+import connectDB.ConnectDB;
+import entity.Staff;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Login_GUI extends javax.swing.JFrame {
 
     private HomeManager_GUI homeManager_GUI;
+    private Staff_DAO staff_DAO;
+    private Staff staff = new Staff();
 
     public Login_GUI() {
+//        login
+        try {
+            new ConnectDB().connect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         initComponents();
         this.setLocationRelativeTo(null);
+
+//        Account default
+        jtfUser.setText("NV0001");
+        jpfPass.setText("04042003");
     }
 
     @SuppressWarnings("unchecked")
@@ -120,6 +138,11 @@ public class Login_GUI extends javax.swing.JFrame {
 
         jlForgotPass.setForeground(new java.awt.Color(102, 204, 255));
         jlForgotPass.setText("Bạn quên mật khẩu ?");
+        jlForgotPass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlForgotPassMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpFormLoginLayout = new javax.swing.GroupLayout(jpFormLogin);
         jpFormLogin.setLayout(jpFormLoginLayout);
@@ -195,6 +218,7 @@ public class Login_GUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+
         boolean userEmpty = jtfUser.getText().trim().isEmpty();
         boolean passEmpty = jpfPass.getText().isEmpty();
         if (userEmpty) {
@@ -210,18 +234,47 @@ public class Login_GUI extends javax.swing.JFrame {
         if (!userEmpty && !passEmpty) {
             jtfUser.setHelperText(null);
             jpfPass.setHelperText(null);
-            JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
-            this.dispose();
 
 //            homeManager_GUI = (HomeManager_GUI) SwingUtilities.getWindowAncestor(Login_GUI.this);
 //            homeManager_GUI = new HomeManager_GUI();
 //            homeManager_GUI.setVisible(true);
-                
-            Home_GUI home_GUI = new Home_GUI();
-            home_GUI.setVisible(true);
+            staff_DAO = new Staff_DAO();
+            String id = jtfUser.getText();
+            char[] passwordChars = jpfPass.getPassword();
+            String password = new String(passwordChars);
+            boolean checkAccount = staff_DAO.isAccount(id, password);
+            boolean checkRights = staff_DAO.checkRightsAccount(id);
+            if (checkAccount == true && checkRights == true) { // đăng nhập bằng quyền nhân viên quản lý
+                this.dispose();
+                String nameStaff = staff_DAO.getNameAccount(id);
+                JOptionPane.showMessageDialog(this, "Nhân viên : " + nameStaff + " đã nhập vào hệ thống !");
+                Home_GUI home_GUI = new Home_GUI();
+                home_GUI.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Tài khoản hoặc mật khẩu không chính xác ! Vui lòng thử lại");
+            }
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
+    private void jlForgotPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlForgotPassMouseClicked
+        String id = jtfUser.getText();
+        JOptionPane.showMessageDialog(null, "Bạn quên mật khẩu của mình ?");
+        if (staff_DAO.checkAccountExits(id)) {
+            String emailReceiver = staff_DAO.getEmailAccount(id); // lấy địa chỉ email của tài khoản
+            String newPass = staff_DAO.randomPassword(); // tạo mật khẩu mới
+            String titleEmail = "Tin nhắn cấp lại mật khẩu từ hệ thống FleyShop";
+            String contentEmail1 = "Mật khẩu mới của bạn là: <b>" + newPass + "</b>";
+            String contentEmail2 = "Vui lòng không cung cấp mật khẩu này cho bất kỳ ai. Xin cảm ơn !";
+            String contentEmail = contentEmail1 + "<br>" + contentEmail2;
+
+            staff_DAO.changePass(id, newPass); // thay đổi mật khẩu
+            staff_DAO.sendPassToEmail(emailReceiver, contentEmail, titleEmail);
+            JOptionPane.showMessageDialog(null, "Mật khẩu đã được cấp lại thông qua Email của bạn !");
+        } else {
+            JOptionPane.showMessageDialog(null, "Tài khoản không hợp lệ hoặc không tồn tại trên hệ thống");
+        }
+
+    }//GEN-LAST:event_jlForgotPassMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnLogin;

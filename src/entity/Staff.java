@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class Staff {
 // enum
+
     public static enum Rights {
         NhanVienBanHang, NhanVienQuanLy
     }
@@ -46,6 +47,7 @@ public class Staff {
     private String name;
     private String cic;
     private String Phone;
+    private String email;
     private LocalDate dayofbirth;
     private boolean sex;
     private Province province;
@@ -55,8 +57,15 @@ public class Staff {
     private Rights rights;
     private Status status;
     private String password;
-    
+
+    public String getEmail() {
+        return email;
+    }
+
 //    get set
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getIdStaff() {
         return idStaff;
@@ -161,9 +170,8 @@ public class Staff {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-//    Constructor
 
+//    Constructor
     public Staff() {
         super();
     }
@@ -173,12 +181,13 @@ public class Staff {
         this.idStaff = idStaff;
     }
 
-    public Staff(String idStaff, String name, String cic, String Phone, LocalDate dayofbirth, boolean sex, Province province, District district, Ward ward, String address, Rights rights, Status status, String password) {
+    public Staff(String idStaff, String name, String cic, String Phone, String email, LocalDate dayofbirth, boolean sex, Province province, District district, Ward ward, String address, Rights rights, Status status, String password) {
         super();
         this.idStaff = idStaff;
         this.name = name;
         this.cic = cic;
         this.Phone = Phone;
+        this.email = email;
         this.dayofbirth = dayofbirth;
         this.sex = sex;
         this.province = province;
@@ -189,8 +198,8 @@ public class Staff {
         this.status = status;
         this.password = password;
     }
-//    Hashcode equals
 
+//    Hashcode equals
     @Override
     public int hashCode() {
         int hash = 7;
@@ -212,13 +221,11 @@ public class Staff {
         final Staff other = (Staff) obj;
         return Objects.equals(this.idStaff, other.idStaff);
     }
-    
-//    toString
 
+//    toString
     @Override
     public String toString() {
-        return "Staff{" + "idStaff=" + idStaff + ", name=" + name + ", cic=" + cic + ", Phone=" + Phone + ", dayofbirth=" + dayofbirth + ", sex=" + sex + ", province=" + province + ", district=" + district + ", ward=" + ward + ", address=" + address + ", rights=" + rights + ", status=" + status + ", password=" + password + '}';
+        return "Staff{" + "idStaff=" + idStaff + ", name=" + name + ", cic=" + cic + ", Phone=" + Phone + ", email=" + email + ", dayofbirth=" + dayofbirth + ", sex=" + sex + ", province=" + province + ", district=" + district + ", ward=" + ward + ", address=" + address + ", rights=" + rights + ", status=" + status + ", password=" + password + '}';
     }
-    
-    
+
 }

@@ -1,14 +1,53 @@
 // 1120, 439
 package gui;
 
+import dao.District_DAO;
+import dao.Province_DAO;
+import dao.Staff_DAO;
+import dao.Ward_DAO;
+import entity.District;
+import entity.Province;
+import entity.Staff;
+import entity.Ward;
+import javax.swing.table.DefaultTableModel;
 import lib2.TableCustom;
 
 public class Staff_Table_GUI extends javax.swing.JPanel {
 
+    private DefaultTableModel defaultTableModel; 
+    private Staff staff = new Staff();
+    private Staff_DAO staff_DAO = new Staff_DAO();
+    private Province province;
+    private District district;
+    private Ward ward;
+    private Province_DAO province_DAO = new Province_DAO();
+    private District_DAO district_DAO = new District_DAO();
+    private Ward_DAO ward_DAO = new Ward_DAO();
     public Staff_Table_GUI() {
         initComponents();
-
         TableCustom.apply(jspTable, TableCustom.TableType.DEFAULT);
+        defaultTableModel = (DefaultTableModel) jTable.getModel();
+        loadData();
+        
+    }
+    public void loadData(){
+//        System.out.println(province_DAO.getProvinceByID("106496387271509"));
+        defaultTableModel.setRowCount(0);
+        for (Staff staff : staff_DAO.getListStaff()) {
+            String sex = "";
+            if(staff.isSex()){
+                sex = "Nam";
+            }else{
+                sex = "Nữ";
+            }
+            String province = province_DAO.getProvinceNameByID(staff.getProvince().getId().toString());
+            String district = district_DAO.getDistrictNameByID(staff.getDistrict().getId().toString());
+            String ward = district_DAO.getDistrictNameByID(staff.getWard().getId().toString());
+            String address = staff.getAddress();
+            String addressDetails = province + ", " + district + ", " + district + ", " + address;
+            String[] rowData= {staff.getIdStaff(), staff.getName(), staff.getCic(), staff.getPhone(), staff.getEmail(), staff.getDayofbirth().toString(), sex, addressDetails, staff.convertRightsToString(staff.getRights())};
+            defaultTableModel.addRow(rowData);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -29,7 +68,7 @@ public class Staff_Table_GUI extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã NV", "Tên NV", "CCCD", "SDT", "Ngày sinh", "Giới tính", "Địa chỉ", "Chức vụ", "Trạng thái"
+                "Mã NV", "Tên NV", "CCCD", "SDT", "Email", "Ngày sinh", "Giới tính", "Địa chỉ", "Chức vụ"
             }
         ) {
             boolean[] canEdit = new boolean [] {

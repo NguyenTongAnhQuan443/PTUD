@@ -2,20 +2,20 @@
 package gui;
 
 public class Staff_GUI extends javax.swing.JPanel {
-    
+
     private Staff_Table_GUI staff_Table_GUI;
     private Staff_InfoStaff_GUI staff_InfoStaff_GUI;
-    
+
     public Staff_GUI() {
         initComponents();
-        
+
         staff_Table_GUI = new Staff_Table_GUI();
         jpTMP.removeAll();
         jpTMP.add(staff_Table_GUI);
         jpTMP.revalidate();
         jpTMP.repaint();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

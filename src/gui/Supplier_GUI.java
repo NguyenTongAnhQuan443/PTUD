@@ -1,9 +1,14 @@
 package gui;
 
+import entity.District;
+import entity.Province;
+import entity.Ward;
 import lib2.TableCustom;
 
 public class Supplier_GUI extends javax.swing.JPanel {
-
+private Province province;
+private District district;
+private Ward ward;
     public Supplier_GUI() {
         initComponents();
         TableCustom.apply(jspTableSupplier, TableCustom.TableType.DEFAULT);
@@ -326,7 +331,8 @@ public class Supplier_GUI extends javax.swing.JPanel {
         jtfNameSupplier.setText("");
         jtfSearchIDSupplier.setText("");
     }
-
+// Sự kiện
+//    Sự kiện GetProvince
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnAdd;
     private lib2.Button btnEdit;
