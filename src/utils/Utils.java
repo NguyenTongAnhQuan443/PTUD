@@ -3,6 +3,8 @@ package utils;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -62,5 +64,21 @@ public class Utils {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static LocalDate getLocalDate(String date) {
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(date.contains("/") ? "dd/MM/yyyy" : "dd-MM-yyyy");
+        String dates[] = date.split(date.contains("/") ? "/" : "-");
+        for (int i = 0; i < 2; ++i) {
+            if (dates[i].length() == 1) {
+                dates[i] = '0' + dates[i];
+            }
+        }
+        if (dates[2].length() == 2) {
+            dates[2] = "19" + dates[2];
+        }
+        return LocalDate
+                .parse(String.format(date.contains("/") ? "%s/%s/%s" : "%s-%s-%s", dates[0], dates[1], dates[2]), dtf);
     }
 }

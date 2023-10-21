@@ -5,18 +5,15 @@
             <url>src/dao/Staff_DAO.java</url>
             <bookmark id="1">
                 <name/>
-                <line>194</line>
+                <line>253</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/gui/Staff_GUI.java</file>
-            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/dao/Staff_DAO.java</file>
-            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/gui/Home_GUI.java</file>
-            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/gui/Staff_Table_GUI.java</file>
-            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/entity/flag.java</file>
+            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/gui/Staff_InfoStaff_GUI.java</file>
+            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/dao/Ward_DAO.java</file>
         </group>
     </open-files>
 </project-private>

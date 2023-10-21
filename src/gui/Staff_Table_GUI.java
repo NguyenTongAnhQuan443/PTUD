@@ -31,8 +31,10 @@ public class Staff_Table_GUI extends javax.swing.JPanel {
         defaultTableModel = (DefaultTableModel) jTable.getModel();
         if (flag.isFlagStaffGUI() == false) {
             loadData("SELECT * FROM Staff WHERE status = N'Nghỉ làm'");
-        }else{
+            defaultTableModel.fireTableDataChanged(); // reload data
+        } else {
             loadData("SELECT * FROM Staff WHERE status = N'Đang làm'");
+            defaultTableModel.fireTableDataChanged(); // reload data
         }
 
     }

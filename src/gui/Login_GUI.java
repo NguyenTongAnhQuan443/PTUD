@@ -24,7 +24,6 @@ public class Login_GUI extends javax.swing.JFrame {
 
         initComponents();
         this.setLocationRelativeTo(null);
-
 //        Account default
         jtfUser.setText("NV0001");
         jpfPass.setText("04042003");

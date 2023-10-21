@@ -5,7 +5,7 @@ public class Staff_GUI extends javax.swing.JPanel {
 
     private Staff_Table_GUI staff_Table_GUI;
     private Staff_InfoStaff_GUI staff_InfoStaff_GUI;
-
+//    private Staff_InfoStaff_GUI1 staff_InfoStaff_GUI;
     public Staff_GUI() {
         initComponents();
 
@@ -196,9 +196,15 @@ public class Staff_GUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        if(staff_InfoStaff_GUI != null){
+            
+        }else{
         staff_InfoStaff_GUI = new Staff_InfoStaff_GUI();
         staff_InfoStaff_GUI.setVisible(true);
         staff_InfoStaff_GUI.setFlag(1);
+        }
+//staff_InfoStaff_GUI = new Staff_InfoStaff_GUI1();
+
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed

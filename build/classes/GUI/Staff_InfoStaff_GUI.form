@@ -83,7 +83,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="380" max="32767" attributes="0"/>
+                      <EmptySpace pref="452" max="32767" attributes="0"/>
                       <Component id="jlLogo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jlNameShop" min="-2" pref="163" max="-2" attributes="0"/>
@@ -166,6 +166,15 @@
                           <EmptySpace min="-2" pref="221" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
+                                  <Component id="cbProvince" min="-2" pref="163" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="cbDistrict" min="-2" pref="163" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="cbWard" min="-2" pref="163" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jtfAddress" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                           <Component id="jtfPhone" alignment="0" pref="250" max="32767" attributes="0"/>
@@ -176,36 +185,24 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jlIconCalendar" min="-2" max="-2" attributes="0"/>
                                       </Group>
+                                      <Component id="cbStatusWorking" alignment="0" min="-2" pref="212" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace pref="223" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Group type="102" attributes="0">
+                                      <Component id="jtfCitizenIdentification" pref="251" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
                                           <Component id="jlSex" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="jrbMale" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace pref="94" max="32767" attributes="0"/>
                                           <Component id="jrbFemale" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="jtfCitizenIdentification" max="32767" attributes="0"/>
                                       <Component id="cbPosition" max="32767" attributes="0"/>
+                                      <Component id="jtfEmail" alignment="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <Component id="cbProvince" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="cbDistrict" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                                  <Component id="cbCommune" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jtfAddress" min="-2" pref="200" max="-2" attributes="0"/>
-                                  <EmptySpace min="99" pref="240" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="cbStatusWorking" min="-2" pref="212" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
+                          <EmptySpace min="-2" pref="217" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -220,28 +217,38 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jtfPhone" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbPosition" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jtfDoB" min="-2" pref="32" max="-2" attributes="0"/>
-                              <Component id="jlIconCalendar" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="cbPosition" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jtfDoB" min="-2" pref="32" max="-2" attributes="0"/>
+                                      <Component id="jlIconCalendar" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="cbStatusWorking" min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jlSex" alignment="3" min="-2" pref="21" max="-2" attributes="0"/>
                                   <Component id="jrbMale" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jrbFemale" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="cbStatusWorking" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="27" max="32767" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="cbProvince" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="cbDistrict" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbCommune" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbWard" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jtfAddress" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                          <EmptySpace pref="10" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -251,6 +258,9 @@
                   <Properties>
                     <Property name="labelText" type="java.lang.String" value="H&#x1ecd; t&#xea;n"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtfNameKeyPressed"/>
+                  </Events>
                 </Component>
                 <Component class="lib2.TextField" name="jtfCitizenIdentification">
                   <Properties>
@@ -317,51 +327,71 @@
                       </StringArray>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbProvinceItemStateChanged"/>
+                  </Events>
                 </Component>
-                <Component class="lib2.ComboBoxSuggestion" name="cbCommune">
+                <Component class="lib2.ComboBoxSuggestion" name="cbWard">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
                         <StringItem index="0" value="Ph&#x1b0;&#x1edd;ng/X&#xe3;"/>
                       </StringArray>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbWardItemStateChanged"/>
+                  </Events>
                 </Component>
                 <Component class="lib2.TextField" name="jtfAddress">
                   <Properties>
                     <Property name="labelText" type="java.lang.String" value="&#x110;&#x1ecb;a ch&#x1ec9; c&#x1ee5; th&#x1ec3;"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfAddressActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="lib2.ComboBoxSuggestion" name="cbPosition">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="3">
-                        <StringItem index="0" value="Ch&#x1ee9;c v&#x1ee5;"/>
-                        <StringItem index="1" value="Nh&#xe2;n vi&#xea;n qu&#x1ea3;n ly"/>
-                        <StringItem index="2" value="Nh&#xe2;n vi&#xea;n b&#xe1;n h&#xe0;ng"/>
-                      </StringArray>
+                      <StringArray count="0"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbPositionActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="lib2.ComboBoxSuggestion" name="cbDistrict">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
                         <StringItem index="0" value="Qu&#x1ead;n/Huy&#x1ec7;n"/>
                       </StringArray>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbDistrictItemStateChanged"/>
+                  </Events>
                 </Component>
                 <Component class="lib2.ComboBoxSuggestion" name="cbStatusWorking">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="3">
-                        <StringItem index="0" value="Tr&#x1ea1;ng th&#xe1;i l&#xe0;m vi&#x1ec7;c"/>
-                        <StringItem index="1" value="&#x110;ang l&#xe0;m vi&#x1ec7;c"/>
-                        <StringItem index="2" value="Ng&#x1b0;ng l&#xe0;m vi&#x1ec7;c"/>
-                      </StringArray>
+                      <StringArray count="0"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbStatusWorkingActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="lib2.TextField" name="jtfEmail">
+                  <Properties>
+                    <Property name="labelText" type="java.lang.String" value="Email"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfEmailActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -389,7 +419,7 @@
                           <Component id="jlPass" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jtfPass" min="-2" pref="205" max="-2" attributes="0"/>
-                          <EmptySpace pref="10" max="32767" attributes="0"/>
+                          <EmptySpace pref="85" max="32767" attributes="0"/>
                           <Component id="btnAdd" min="-2" pref="94" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btnEdit" min="-2" max="-2" attributes="0"/>
@@ -404,7 +434,7 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="19" max="32767" attributes="0"/>
+                          <EmptySpace pref="12" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jlIDStaff" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jtfIDStaff" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>

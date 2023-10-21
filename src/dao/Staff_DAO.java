@@ -1,6 +1,6 @@
 package dao;
 
-import java.sql.Connection; // 
+import java.sql.Connection; //
 import connectDB.ConnectDB; //
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,6 +17,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -30,41 +32,98 @@ public class Staff_DAO {
 
     public Staff_DAO() {
     }
-//    lấy những nhân viên có trạng thái là "Đang làm"
-    public List<Staff> getListStaffByStatus(String sqlStatus) {
-    List<Staff> listStaff = new ArrayList<Staff>();
-    String sql = sqlStatus;
-    try {
-        connectDB.ConnectDB.getInstance();
-        Connection connection = (Connection) ConnectDB.getConnection();
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(sql);
-        
-        while (resultSet.next()) {
-            String idStaff = resultSet.getString("idStaff");
-            String name = resultSet.getString("name");
-            String cic = resultSet.getString("cic");
-            String phone = resultSet.getString("phone");
-            String email = resultSet.getString("email");
-            LocalDate dayofbirth = resultSet.getDate("dayofbirth").toLocalDate();
-            boolean sex = resultSet.getBoolean("sex");
-            String province = resultSet.getString("province");
-            String district = resultSet.getString("district");
-            String ward = resultSet.getString("ward");
-            String address = resultSet.getString("address");
-            String rights = resultSet.getString("rights");
-            String status = resultSet.getString("status");
-            String password = resultSet.getString("password");
-            Staff staff = new Staff(idStaff, name, cic, phone, email, dayofbirth, sex, new Province(province), new District(district), new Ward(ward), address, Staff.convertStringToRights(rights), Staff.convertStringToStatus(status), password);
-            listStaff.add(staff);
+
+//    thêm nhân viên
+    public boolean addStaff(Staff staff) {
+        try {
+            Connection connection = ConnectDB.getConnection();
+            String sql = "INSERT Staff VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, staff.getIdStaff());
+            preparedStatement.setString(2, staff.getName());
+            preparedStatement.setString(3, staff.getCic());
+            preparedStatement.setString(4, staff.getPhone());
+            preparedStatement.setString(5, staff.getEmail());
+            preparedStatement.setDate(6, java.sql.Date.valueOf(staff.getDayofbirth()));
+            preparedStatement.setBoolean(7, staff.isSex());
+            preparedStatement.setString(8, staff.getProvince().getId());
+            preparedStatement.setString(9, staff.getDistrict().getId());
+            preparedStatement.setString(10, staff.getWard().getId());
+            preparedStatement.setString(11, staff.getAddress());
+            preparedStatement.setString(12, staff.convertRightsToString(staff.getRights()));
+            preparedStatement.setString(13, staff.convertStatusToString(staff.getStatus()));
+            preparedStatement.setString(14, staff.getPassword());
+            preparedStatement.execute();
+            preparedStatement.close();
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
-    } catch (Exception e) {
-        e.printStackTrace();
+        return false;
     }
-    
-    return listStaff;
-}
+
+//    tạo mã nhân viên
+    public String createIDStaff() {
+        try {
+            Connection connection = ConnectDB.getConnection();
+            String sql = "SELECT TOP 1 [idStaff] FROM [dbo].[Staff] ORDER BY [idStaff] DESC"; // sort giảm dần -> lấy giá trị đầu
+            Statement Statement = ConnectDB.getConnection().createStatement();
+            ResultSet resultSet = Statement.executeQuery(sql);
+            if (resultSet.next()) {
+                String idStaff = resultSet.getString(1);
+                int number = Integer.parseInt(idStaff.substring(2));
+                number++;
+                String idStaffNew = number + "";
+                while (idStaff.length() < 4) {
+                    idStaffNew = "0" + idStaffNew;
+                    return "NV" + idStaffNew;
+                }
+            } else {
+                return "NV0001";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+//    lấy những nhân viên có trạng thái là "Đang làm"
+
+    public List<Staff> getListStaffByStatus(String sqlStatus) {
+        List<Staff> listStaff = new ArrayList<Staff>();
+        String sql = sqlStatus;
+        try {
+            connectDB.ConnectDB.getInstance();
+            Connection connection = (Connection) ConnectDB.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                String idStaff = resultSet.getString("idStaff");
+                String name = resultSet.getString("name");
+                String cic = resultSet.getString("cic");
+                String phone = resultSet.getString("phone");
+                String email = resultSet.getString("email");
+                LocalDate dayofbirth = resultSet.getDate("dayofbirth").toLocalDate();
+                boolean sex = resultSet.getBoolean("sex");
+                String province = resultSet.getString("province");
+                String district = resultSet.getString("district");
+                String ward = resultSet.getString("ward");
+                String address = resultSet.getString("address");
+                String rights = resultSet.getString("rights");
+                String status = resultSet.getString("status");
+                String password = resultSet.getString("password");
+                Staff staff = new Staff(idStaff, name, cic, phone, email, dayofbirth, sex, new Province(province), new District(district), new Ward(ward), address, Staff.convertStringToRights(rights), Staff.convertStringToStatus(status), password);
+                listStaff.add(staff);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listStaff;
+    }
 // Lấy toàn bộ nhân viên
+
     public List<Staff> getListStaff() {
         List<Staff> listStaff = new ArrayList<Staff>();
         String sql = "SELECT * FROM Staff";

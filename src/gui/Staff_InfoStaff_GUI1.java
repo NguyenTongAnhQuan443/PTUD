@@ -92,6 +92,8 @@ public class Staff_InfoStaff_GUI1 extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Chức năng"));
 
+        jtfIDStaff.setEditable(false);
+
         jlIDStaff.setText("Mã NV :");
 
         jlPass.setText("Mật khẩu :");
@@ -268,13 +270,11 @@ public class Staff_InfoStaff_GUI1 extends javax.swing.JPanel {
     }//GEN-LAST:event_jrbFemaleActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-//        if (JOptionPane.showConfirmDialog(null, "Khi thực hiện thao tác này thông tin nhân viên sẽ được lưu vào hệ thống?", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-//
-//        }
+
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed

@@ -1,8 +1,13 @@
 package gui;
 
+import dao.Province_DAO;
+import dao.Staff_DAO;
 import entity.flag;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
