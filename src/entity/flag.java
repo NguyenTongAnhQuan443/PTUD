@@ -1,24 +1,40 @@
 package entity;
 
-public class flag {
+public class Flag {
 
-    private static flag instence = new flag();
-    public static boolean flagStaffGUI;
+    private static Flag instence = new Flag();
+    public static boolean flagStaffGUI; // kiểm tra mở gui danh sách nhân viên đang làm hay nghỉ làm
+    public  static int flagStaffInfo;
+    // 0 là mặc định
+    // 1 là mở chức năng thêm nhân viên
 
-    public flag() {
+//    constructor
+    public Flag() {
         flagStaffGUI = false;
+        flagStaffInfo = 0;
     }
 
-    public static flag getInstence() {
+//    
+    public static Flag getInstence() {
         return instence;
     }
 
+// getset
     public static boolean isFlagStaffGUI() {
         return flagStaffGUI;
     }
 
     public static void setFlagStaffGUI(boolean flagStaffGUI) {
-        flag.flagStaffGUI = flagStaffGUI;
+        Flag.flagStaffGUI = flagStaffGUI;
     }
 
+    public static int getFlagStaffInfo() {
+        return flagStaffInfo;
+    }
+
+    public static void setFlagStaffInfo(int flagStaffInfo) {
+        Flag.flagStaffInfo = flagStaffInfo;
+    }
+
+    
 }

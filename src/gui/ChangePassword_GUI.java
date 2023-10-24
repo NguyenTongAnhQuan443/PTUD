@@ -136,8 +136,8 @@ public class ChangePassword_GUI extends javax.swing.JPanel {
         JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
         currentFrame.dispose();
 
-        HomeManager_GUI homeManager_GUI = new HomeManager_GUI();
-        homeManager_GUI.setVisible(true);
+//        HomeManager_GUI_X homeManager_GUI = new HomeManager_GUI_X();
+//        homeManager_GUI.setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
 // Hàm tạo mã Captcha
 

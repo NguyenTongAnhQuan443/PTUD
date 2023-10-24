@@ -81,4 +81,22 @@ public class Utils {
         return LocalDate
                 .parse(String.format(date.contains("/") ? "%s/%s/%s" : "%s-%s-%s", dates[0], dates[1], dates[2]), dtf);
     }
+
+    /**
+     * Get các từ tiếng Việt hoa có dấu
+     *
+     * @return
+     */
+    public static String getVietnameseDiacriticCharacters() {
+        return "ẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ";
+    }
+
+    /**
+     * Get các từ tiếng Việt thường có dấu
+     *
+     * @return
+     */
+    public static String getVietnameseDiacriticCharactersLower() {
+        return getVietnameseDiacriticCharacters().toLowerCase();
+    }
 }

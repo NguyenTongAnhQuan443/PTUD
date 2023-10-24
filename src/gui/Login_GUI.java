@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Login_GUI extends javax.swing.JFrame {
-
-    private HomeManager_GUI homeManager_GUI;
     private Staff_DAO staff_DAO;
     private Staff staff = new Staff();
 
@@ -234,8 +232,8 @@ public class Login_GUI extends javax.swing.JFrame {
             jtfUser.setHelperText(null);
             jpfPass.setHelperText(null);
 
-//            homeManager_GUI = (HomeManager_GUI) SwingUtilities.getWindowAncestor(Login_GUI.this);
-//            homeManager_GUI = new HomeManager_GUI();
+//            homeManager_GUI = (HomeManager_GUI_X) SwingUtilities.getWindowAncestor(Login_GUI.this);
+//            homeManager_GUI = new HomeManager_GUI_X();
 //            homeManager_GUI.setVisible(true);
             staff_DAO = new Staff_DAO();
             String id = jtfUser.getText();

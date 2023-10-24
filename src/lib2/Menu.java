@@ -40,7 +40,7 @@ public class Menu extends JComponent {
         {"Khuyến mãi"},
         {"Tài khoản", "Thông tin tài khoản", "Đổi mật khẩu"},
         {"Ngôn ngữ", "Tiếng Việt", "English"},
-        {"Về chúng tôi", "Hướng dẫn", "Báo lỗi", "Đóng góp ý kiến"},
+        {"Giúp đỡ", "Hướng dẫn", "Báo lỗi", "Đóng góp ý kiến"},
         {"Thoát"}
     };
 

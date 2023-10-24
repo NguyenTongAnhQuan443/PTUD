@@ -11,14 +11,11 @@ import entity.District;
 import entity.Province;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -28,7 +25,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class Staff_DAO {
+public class Staff_DAO extends DAO {
 
     public Staff_DAO() {
     }
@@ -63,29 +60,49 @@ public class Staff_DAO {
         return false;
     }
 
-//    tạo mã nhân viên
+// tạo mã nhân viên
     public String createIDStaff() {
         try {
-            Connection connection = ConnectDB.getConnection();
-            String sql = "SELECT TOP 1 [idStaff] FROM [dbo].[Staff] ORDER BY [idStaff] DESC"; // sort giảm dần -> lấy giá trị đầu
-            Statement Statement = ConnectDB.getConnection().createStatement();
-            ResultSet resultSet = Statement.executeQuery(sql);
+            String sql = "SELECT TOP 1 [idStaff] FROM [dbo].[Staff] ORDER BY [idStaff] DESC";
+            Statement statement = ConnectDB.getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+
             if (resultSet.next()) {
-                String idStaff = resultSet.getString(1);
-                int number = Integer.parseInt(idStaff.substring(2));
+                String maNhanVien = resultSet.getString(1).trim();
+                int number = Integer.parseInt(maNhanVien.substring(2));
                 number++;
-                String idStaffNew = number + "";
-                while (idStaff.length() < 4) {
-                    idStaffNew = "0" + idStaffNew;
-                    return "NV" + idStaffNew;
+                String maNhanVienNew = number + "";
+
+                while (maNhanVienNew.length() < 4) {
+                    maNhanVienNew = "0" + maNhanVienNew;
                 }
+
+                return "NV" + maNhanVienNew;
             } else {
                 return "NV0001";
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return null;
+    }
+
+//    thôi việc nhân viên
+    public boolean setStatusWorking(String idStaff) {
+        PreparedStatement preparedStatement = null;
+        String sql = "UPDATE Staff SET status = N'Nghỉ làm' WHERE idStaff = ?";
+        try {
+            preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, idStaff);
+
+            return preparedStatement.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            close(preparedStatement);
+        }
+        return false;
     }
 //    lấy những nhân viên có trạng thái là "Đang làm"
 
@@ -122,8 +139,8 @@ public class Staff_DAO {
 
         return listStaff;
     }
-// Lấy toàn bộ nhân viên
 
+// Lấy toàn bộ nhân viên
     public List<Staff> getListStaff() {
         List<Staff> listStaff = new ArrayList<Staff>();
         String sql = "SELECT * FROM Staff";
@@ -289,23 +306,35 @@ public class Staff_DAO {
     }
 
 // tạo mật khẩu ngẫu nhiên
+//    public static String randomPassword() {
+//        Random random = new Random();
+//        int length = 5 + (Math.abs(random.nextInt()) % 3);
+//        StringBuffer captchaStrBuffer = new StringBuffer();
+//        for (int i = 0; i < length; i++) {
+//            int baseCharacterNumber = Math.abs(random.nextInt()) % 62;
+//            int characterNumber = 0;
+//            if (baseCharacterNumber < 26) {
+//                characterNumber = 65 + baseCharacterNumber;
+//            } else if (baseCharacterNumber < 52) {
+//                characterNumber = 97 + (baseCharacterNumber - 26);
+//            } else {
+//                characterNumber = 48 + (baseCharacterNumber - 52);
+//            }
+//            captchaStrBuffer.append((char) characterNumber);
+//        }
+//        return captchaStrBuffer.toString();
+//    }
     public static String randomPassword() {
         Random random = new Random();
-        int length = 5 + (Math.abs(random.nextInt()) % 3);
-        StringBuffer captchaStrBuffer = new StringBuffer();
+        int length = 8;
+        StringBuffer passwordBuffer = new StringBuffer();
+
         for (int i = 0; i < length; i++) {
-            int baseCharacterNumber = Math.abs(random.nextInt()) % 62;
-            int characterNumber = 0;
-            if (baseCharacterNumber < 26) {
-                characterNumber = 65 + baseCharacterNumber;
-            } else if (baseCharacterNumber < 52) {
-                characterNumber = 97 + (baseCharacterNumber - 26);
-            } else {
-                characterNumber = 48 + (baseCharacterNumber - 52);
-            }
-            captchaStrBuffer.append((char) characterNumber);
+            int digit = Math.abs(random.nextInt(10)); // Sinh số ngẫu nhiên từ 0 đến 9
+            passwordBuffer.append(digit);
         }
-        return captchaStrBuffer.toString();
+
+        return passwordBuffer.toString();
     }
 
 // cập nhập mật khẩu
@@ -324,6 +353,40 @@ public class Staff_DAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return false;
+    }
+
+// kiểm tả số điện thoại tồn tại
+    public boolean checkPhoneExist(String phoneCheck) {
+        try {
+            PreparedStatement preparedStatement = ConnectDB.getConnection()
+                    .prepareStatement("SELECT * FROM [dbo].[Staff] WHERE [phone] = ?");
+            preparedStatement.setString(1, phoneCheck);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            return resultSet.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+//    kiểm tra số CCCD tồn tại
+    public boolean checkCICExist(String cic) {
+        try {
+            PreparedStatement preparedStatement = ConnectDB.getConnection()
+                    .prepareStatement("SELECT * FROM [dbo].[Staff] WHERE [cic] = ?");
+            preparedStatement.setString(1, cic);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            return resultSet.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return false;
     }
 }
