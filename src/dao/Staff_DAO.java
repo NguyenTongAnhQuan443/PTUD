@@ -27,6 +27,14 @@ import javax.mail.internet.MimeMessage;
 
 public class Staff_DAO extends DAO {
 
+    private Province_DAO province_DAO = new Province_DAO();
+    private District_DAO district_DAO = new District_DAO();
+    private Ward_DAO ward_DAO = new Ward_DAO();
+
+//    Province province = new Province();
+//    District district = new District();
+    Ward ward = new Ward();
+
     public Staff_DAO() {
     }
 
@@ -58,6 +66,39 @@ public class Staff_DAO extends DAO {
             ex.printStackTrace();
         }
         return false;
+    }
+
+//    lấy nhân viên bằng mã nhân viên
+    public Staff getStaffByID(String idStaff) {
+        String sql = "SELECT * FROM Staff WHERE idStaff = ?";
+
+        try {
+            PreparedStatement preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, idStaff);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+//                String idStaff = resultSet.getString("idStaff");
+                String name = resultSet.getString("name");
+                String cic = resultSet.getString("cic");
+                String phone = resultSet.getString("phone");
+                String email = resultSet.getString("email");
+                LocalDate dayofbirth = resultSet.getDate("dayofbirth").toLocalDate();
+                boolean sex = resultSet.getBoolean("sex");
+                String province = resultSet.getString("province");
+                String district = resultSet.getString("district");
+                String ward = resultSet.getString("ward");
+                String address = resultSet.getString("address");
+                String rights = resultSet.getString("rights");
+                String status = resultSet.getString("status");
+                String password = resultSet.getString("password");
+                Staff staff = new Staff(idStaff, name, cic, phone, email, dayofbirth, sex, new Province(province), new District(district), new Ward(ward), address, Staff.convertStringToRights(rights), Staff.convertStringToStatus(status), password);
+                return staff;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 // tạo mã nhân viên
@@ -104,8 +145,8 @@ public class Staff_DAO extends DAO {
         }
         return false;
     }
-//    lấy những nhân viên có trạng thái là "Đang làm"
 
+//    lấy những nhân viên có trạng thái là "Đang làm"
     public List<Staff> getListStaffByStatus(String sqlStatus) {
         List<Staff> listStaff = new ArrayList<Staff>();
         String sql = sqlStatus;
@@ -305,25 +346,6 @@ public class Staff_DAO extends DAO {
         }
     }
 
-// tạo mật khẩu ngẫu nhiên
-//    public static String randomPassword() {
-//        Random random = new Random();
-//        int length = 5 + (Math.abs(random.nextInt()) % 3);
-//        StringBuffer captchaStrBuffer = new StringBuffer();
-//        for (int i = 0; i < length; i++) {
-//            int baseCharacterNumber = Math.abs(random.nextInt()) % 62;
-//            int characterNumber = 0;
-//            if (baseCharacterNumber < 26) {
-//                characterNumber = 65 + baseCharacterNumber;
-//            } else if (baseCharacterNumber < 52) {
-//                characterNumber = 97 + (baseCharacterNumber - 26);
-//            } else {
-//                characterNumber = 48 + (baseCharacterNumber - 52);
-//            }
-//            captchaStrBuffer.append((char) characterNumber);
-//        }
-//        return captchaStrBuffer.toString();
-//    }
     public static String randomPassword() {
         Random random = new Random();
         int length = 8;
@@ -389,4 +411,5 @@ public class Staff_DAO extends DAO {
 
         return false;
     }
+
 }

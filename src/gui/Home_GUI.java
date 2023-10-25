@@ -5,9 +5,11 @@ import dao.Staff_DAO;
 import entity.Flag;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.GraphicsDevice;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -33,7 +35,8 @@ public class Home_GUI extends javax.swing.JFrame {
     public Home_GUI() {
         initComponents();
         this.setLocationRelativeTo(null);
-
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
         jpCenter.removeAll();
         statistical_GUI = new Statistical_GUI1();
         statistical_GUI.setJPRevenue();

@@ -7,11 +7,15 @@ public class Flag {
     public  static int flagStaffInfo;
     // 0 là mặc định
     // 1 là mở chức năng thêm nhân viên
+    // 2 là mở chức năng sửa thông tin nhân viên
+    
+    public static String flagIDStaff; // lấy idStaff
 
 //    constructor
     public Flag() {
         flagStaffGUI = false;
         flagStaffInfo = 0;
+        flagIDStaff = "";
     }
 
 //    
@@ -36,5 +40,15 @@ public class Flag {
         Flag.flagStaffInfo = flagStaffInfo;
     }
 
+    public static String getFlagIDStaff() {
+        return flagIDStaff;
+    }
+
+    public static void setFlagIDStaff(String flagIDStaff) {
+        Flag.flagIDStaff = flagIDStaff;
+    }
+
+
+    
     
 }

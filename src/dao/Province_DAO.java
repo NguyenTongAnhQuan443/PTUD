@@ -19,7 +19,7 @@ public class Province_DAO extends DAO{
     public Province_DAO() {
     }
 
-    public static Province_DAO getInstence() {
+    public static Province_DAO getInstance() {
         return instance;
     }
 

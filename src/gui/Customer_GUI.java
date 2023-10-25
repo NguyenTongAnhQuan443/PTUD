@@ -16,15 +16,11 @@ public class Customer_GUI extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
         jpTop = new javax.swing.JPanel();
         jlIDCus = new javax.swing.JLabel();
         jtfIDCus = new javax.swing.JTextField();
         jlNameCus = new javax.swing.JLabel();
         jlPhoneCus = new javax.swing.JLabel();
-        jlStatus = new javax.swing.JLabel();
-        jrbActive = new javax.swing.JRadioButton();
-        jrbInactive = new javax.swing.JRadioButton();
         jpFunction = new javax.swing.JPanel();
         btnClear = new lib2.Button();
         btnEdit = new lib2.Button();
@@ -51,10 +47,6 @@ public class Customer_GUI extends javax.swing.JPanel {
         cbStatus = new lib2.ComboBoxSuggestion();
         jButton1 = new javax.swing.JButton();
 
-        buttonGroup1.add(jrbActive);
-        buttonGroup1.add(jrbInactive);
-        jrbActive.setSelected(true);
-
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
 
@@ -73,19 +65,6 @@ public class Customer_GUI extends javax.swing.JPanel {
         jlNameCus.setText("Tên khách hàng :");
 
         jlPhoneCus.setText("Số điện thoại : ");
-
-        jlStatus.setText("Trạng thái :");
-
-        jrbActive.setBackground(new java.awt.Color(255, 255, 255));
-        jrbActive.setText("Đang hoạt động");
-
-        jrbInactive.setBackground(new java.awt.Color(255, 255, 255));
-        jrbInactive.setText("Ngưng hoạt động");
-        jrbInactive.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jrbInactiveActionPerformed(evt);
-            }
-        });
 
         jpFunction.setBackground(new java.awt.Color(255, 255, 255));
         jpFunction.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -198,20 +177,13 @@ public class Customer_GUI extends javax.swing.JPanel {
                                 .addComponent(cbDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jtfNameCus)
                             .addComponent(jtfAddressDetail))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbCommune, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jpTopLayout.createSequentialGroup()
-                        .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlPhoneCus)
-                            .addComponent(jlStatus))
+                        .addComponent(jlPhoneCus)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpTopLayout.createSequentialGroup()
-                                .addComponent(jrbActive)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jrbInactive))
-                            .addComponent(jtfPhoneCus, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jtfPhoneCus, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jcReceivePromotion))
                 .addGap(18, 18, 18)
                 .addComponent(jpFunction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -230,23 +202,21 @@ public class Customer_GUI extends javax.swing.JPanel {
                             .addComponent(jlPhoneCus)
                             .addComponent(jtfPhoneCus, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlNameCus)
-                            .addComponent(jlStatus)
-                            .addComponent(jrbActive)
-                            .addComponent(jrbInactive)
-                            .addComponent(jtfNameCus, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jlNameCus)
+                                .addComponent(jtfNameCus, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jcReceivePromotion, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(18, 18, 18)
                         .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cbProvince, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlAddress)
                             .addComponent(cbCommune, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtfAddressDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlAddressDetail)
-                            .addComponent(jcReceivePromotion))))
+                            .addComponent(jlAddressDetail))))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
@@ -397,10 +367,6 @@ public class Customer_GUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfIDCusActionPerformed
 
-    private void jrbInactiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbInactiveActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jrbInactiveActionPerformed
-
     private void jtfNameCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNameCusActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfNameCusActionPerformed
@@ -466,7 +432,6 @@ public class Customer_GUI extends javax.swing.JPanel {
     private lib2.Button btnClear;
     private lib2.Button btnEdit;
     private lib2.Button btnFilter;
-    private javax.swing.ButtonGroup buttonGroup1;
     private lib2.ComboBoxSuggestion cbCommune;
     private lib2.ComboBoxSuggestion cbDistrict;
     private lib2.ComboBoxSuggestion cbProvince;
@@ -481,15 +446,12 @@ public class Customer_GUI extends javax.swing.JPanel {
     private javax.swing.JLabel jlIDCus;
     private javax.swing.JLabel jlNameCus;
     private javax.swing.JLabel jlPhoneCus;
-    private javax.swing.JLabel jlStatus;
     private javax.swing.JPanel jpBottom;
     private javax.swing.JPanel jpFunction;
     private javax.swing.JPanel jpFunctionTable;
     private javax.swing.JPanel jpSelect;
     private javax.swing.JPanel jpTable;
     private javax.swing.JPanel jpTop;
-    private javax.swing.JRadioButton jrbActive;
-    private javax.swing.JRadioButton jrbInactive;
     private javax.swing.JScrollPane jspTableCus;
     private javax.swing.JTextField jtfAddressDetail;
     private javax.swing.JTextField jtfFilterPhone;

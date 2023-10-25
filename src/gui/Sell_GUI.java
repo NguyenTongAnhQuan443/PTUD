@@ -418,6 +418,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         } while (true);
     }
 
+    @Override
     public Thread newThread(Runnable r) {
         Thread t = new Thread(r, "My Thread");
         t.setDaemon(true);

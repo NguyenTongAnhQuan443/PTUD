@@ -16,7 +16,6 @@ import dao.DAO;
 
 public class District_DAO extends DAO{
     private static District_DAO instance = new District_DAO();
-
     public District_DAO() {
     }
 

@@ -30,6 +30,9 @@ import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 import lib2.ComboBoxSuggestion;
 import entity.Flag;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JPanel;
@@ -63,23 +66,45 @@ public class Staff_InfoStaff_GUI_1 extends javax.swing.JPanel {
 
         staff_DAO = new Staff_DAO();
 
-        setProvinceToComboBox();
-        cbPosition.setModel(new DefaultComboBoxModel<>(new String[]{Staff.convertRightsToString(Rights.NhanVienQuanLy),
+        cbRights.setModel(new DefaultComboBoxModel<>(new String[]{Staff.convertRightsToString(Rights.NhanVienQuanLy),
             Staff.convertRightsToString(Rights.NhanVienBanHang)}));
-        cbStatusWorking.setModel(new DefaultComboBoxModel<>(new String[]{Staff.convertStatusToString(Status.DangLam),
+        cbStatus.setModel(new DefaultComboBoxModel<>(new String[]{Staff.convertStatusToString(Status.DangLam),
             Staff.convertStatusToString(Status.NghiLam)}));
 
         cbDistrict.setEnabled(false);
         cbWard.setEnabled(false);
 
-// default Account
-        jtfIDStaff.setText(staff_DAO.createIDStaff());
-        jtfPass.setText("1234Abc@");
-
 //        kiểm tra mở gui Staff info từ chức năng nào
         if (Flag.getFlagStaffInfo() == 1) {
+//            nếu mở chức năng thêm nhân viên
+            setProvinceToComboBox();
             btnEdit.setVisible(false);
+//            btnBack.setVisible(false);
+
+            // default Account
+            jtfIDStaff.setText(staff_DAO.createIDStaff()); // tạo mã nhân viên
+            jtfPass.setText("1234Abc@");
+        } else if (Flag.getFlagStaffInfo() == 2) {
+            try {
+//             nếu mở chức năng chỉnh sữa thông tin nhân viên
+                btnAdd.setVisible(false);
+                setProvinceToComboBox();
+                setDistrictToComboBox(province);
+                setWardToComboBox(district);
+
+                cbDistrict.setEnabled(true);
+                cbWard.setEnabled(true);
+                jlIDStaff.setVisible(false);
+                jlPass.setVisible(false);
+                jtfIDStaff.setVisible(false);
+                jtfPass.setVisible(false);
+
+                loadDataEdit(Flag.getFlagIDStaff());
+            } catch (SQLException ex) {
+                Logger.getLogger(Staff_InfoStaff_GUI_1.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -100,9 +125,9 @@ public class Staff_InfoStaff_GUI_1 extends javax.swing.JPanel {
         cbProvince = new lib2.ComboBoxSuggestion();
         cbWard = new lib2.ComboBoxSuggestion();
         jtfAddress = new lib2.TextField();
-        cbPosition = new lib2.ComboBoxSuggestion();
+        cbRights = new lib2.ComboBoxSuggestion();
         cbDistrict = new lib2.ComboBoxSuggestion();
-        cbStatusWorking = new lib2.ComboBoxSuggestion();
+        cbStatus = new lib2.ComboBoxSuggestion();
         jtfEmail = new lib2.TextField();
         jPFunction = new javax.swing.JPanel();
         jtfIDStaff = new javax.swing.JTextField();
@@ -177,6 +202,11 @@ public class Staff_InfoStaff_GUI_1 extends javax.swing.JPanel {
                 cbProvinceItemStateChanged(evt);
             }
         });
+        cbProvince.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbProvinceActionPerformed(evt);
+            }
+        });
 
         cbWard.setEditable(false);
         cbWard.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Phường/Xã" }));
@@ -193,9 +223,9 @@ public class Staff_InfoStaff_GUI_1 extends javax.swing.JPanel {
             }
         });
 
-        cbPosition.addActionListener(new java.awt.event.ActionListener() {
+        cbRights.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbPositionActionPerformed(evt);
+                cbRightsActionPerformed(evt);
             }
         });
 
@@ -207,9 +237,9 @@ public class Staff_InfoStaff_GUI_1 extends javax.swing.JPanel {
             }
         });
 
-        cbStatusWorking.addActionListener(new java.awt.event.ActionListener() {
+        cbStatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbStatusWorkingActionPerformed(evt);
+                cbStatusActionPerformed(evt);
             }
         });
 
@@ -234,17 +264,16 @@ public class Staff_InfoStaff_GUI_1 extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(cbWard, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jtfAddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jtfAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE))
                     .addGroup(jpInfoStaffLayout.createSequentialGroup()
-                        .addGroup(jpInfoStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpInfoStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jtfPhone, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                                .addComponent(jtfName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jpInfoStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jtfPhone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jtfName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jpInfoStaffLayout.createSequentialGroup()
                                 .addComponent(jtfDoB, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jlIconCalendar))
-                            .addComponent(cbStatusWorking, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jpInfoStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jtfCitizenIdentification, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -254,7 +283,7 @@ public class Staff_InfoStaff_GUI_1 extends javax.swing.JPanel {
                                 .addComponent(jrbMale)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                                 .addComponent(jrbFemale))
-                            .addComponent(cbPosition, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbRights, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jtfEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(217, 217, 217))
         );
@@ -273,10 +302,10 @@ public class Staff_InfoStaff_GUI_1 extends javax.swing.JPanel {
                 .addGroup(jpInfoStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jtfDoB, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlIconCalendar)
-                    .addComponent(cbPosition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbRights, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(jpInfoStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbStatusWorking, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jpInfoStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jlSex, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jrbMale)
@@ -477,9 +506,9 @@ public class Staff_InfoStaff_GUI_1 extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfAddressActionPerformed
 
-    private void cbPositionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPositionActionPerformed
+    private void cbRightsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRightsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbPositionActionPerformed
+    }//GEN-LAST:event_cbRightsActionPerformed
 
     private void cbDistrictItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbDistrictItemStateChanged
 
@@ -507,9 +536,9 @@ public class Staff_InfoStaff_GUI_1 extends javax.swing.JPanel {
         isEnabledEventDistrict = true;
     }//GEN-LAST:event_cbDistrictItemStateChanged
 
-    private void cbStatusWorkingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStatusWorkingActionPerformed
+    private void cbStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStatusActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbStatusWorkingActionPerformed
+    }//GEN-LAST:event_cbStatusActionPerformed
 
     private void jtfEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfEmailActionPerformed
         // TODO add your handling code here:
@@ -529,8 +558,8 @@ public class Staff_InfoStaff_GUI_1 extends javax.swing.JPanel {
                 sex = false;
             }
             String address = jtfAddress.getText().trim();
-            Rights rights = Staff.convertStringToRights(cbPosition.getSelectedItem().toString());
-            Status status = Staff.convertStringToStatus(cbStatusWorking.getSelectedItem().toString());
+            Rights rights = Staff.convertStringToRights(cbRights.getSelectedItem().toString());
+            Status status = Staff.convertStringToStatus(cbStatus.getSelectedItem().toString());
             String password = jtfPass.getText().trim();
             Staff staff = new Staff(jtfIDStaff.getText().trim(), name, cic, phone, email, dob, sex, province, district, ward, address, rights, status, password);
             boolean res = staff_DAO.addStaff(staff);
@@ -553,19 +582,23 @@ public class Staff_InfoStaff_GUI_1 extends javax.swing.JPanel {
         jtfAddress.setText("");
         jtfCitizenIdentification.setText("");
         jtfDoB.setText("Ngày sinh");
-        jtfIDStaff.setText("");
+//        jtfIDStaff.setText("");
         jtfName.setText("");
-        jtfPass.setText("");
+//        jtfPass.setText("");
         jtfPhone.setText("");
         cbWard.setSelectedIndex(0);
         cbDistrict.setSelectedIndex(0);
-        cbPosition.setSelectedIndex(0);
+        cbRights.setSelectedIndex(0);
         cbProvince.setSelectedIndex(0);
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        //        dispose();
+        backToStaffGUI();
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void cbProvinceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProvinceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbProvinceActionPerformed
     /**
      * Xóa tất cả các items của JComboBox và thêm chuỗi vào JComboBox
      *
@@ -595,10 +628,25 @@ public class Staff_InfoStaff_GUI_1 extends javax.swing.JPanel {
                 return o1.getProvince().compareToIgnoreCase(o2.getProvince());
             }
         });
+        if (Flag.getFlagStaffInfo() == 1) {
+//          nếu mở chức năng thêm nhân viên
+            listProvince.forEach(province -> cbProvince.addItem(province.getProvince()));
+            isEnabledEventProvince = true;
+        } else if (Flag.getFlagStaffInfo() == 2) {
+//          nếu mở chức năng sửa thông tin nhân viên
+            listProvince.forEach(province -> {
+                int index = listProvince.indexOf(province);
+                cbProvince.addItem(province.getProvince());
 
-        listProvince.forEach(province -> cbProvince.addItem(province.getProvince()));
+                Staff staffTMP = staff_DAO.getStaffByID(Flag.getFlagIDStaff());
+                if (province.getId().equals(staffTMP.getProvince().getId())) {
+                    cbProvince.setSelectedIndex(index + 1);
+                    Staff_InfoStaff_GUI_1.this.province = province;
+                }
+            });
 
-        isEnabledEventProvince = true;
+            isEnabledEventProvince = true;
+        }
     }
 
     /**
@@ -616,9 +664,23 @@ public class Staff_InfoStaff_GUI_1 extends javax.swing.JPanel {
                 return o1.getDistrict().compareToIgnoreCase(o2.getDistrict());
             }
         });
-        listDistrict.forEach(district -> cbDistrict.addItem(district.getDistrict()));
-
-        isEnabledEventDistrict = true;
+        if (Flag.getFlagStaffInfo() == 1) {
+//            Nếu là mở chức năng thêm nhân viên
+            listDistrict.forEach(district -> cbDistrict.addItem(district.getDistrict()));
+            isEnabledEventDistrict = true;
+        } else if (Flag.getFlagStaffInfo() == 2) {
+//            Nếu mở chức năng chỉnh sửa thôn tin nhân viên
+            listDistrict.forEach(district -> {
+                int index = listDistrict.indexOf(district);
+                cbDistrict.addItem(district.getDistrict());
+                Staff staffTMP = staff_DAO.getStaffByID(Flag.getFlagIDStaff());
+                if (district.getId().equals(staffTMP.getDistrict().getId())) {
+                    cbDistrict.setSelectedIndex(index + 1);
+                    Staff_InfoStaff_GUI_1.this.district = district;
+                }
+            });
+            isEnabledEventDistrict = true;
+        }
     }
 
     /**
@@ -638,10 +700,23 @@ public class Staff_InfoStaff_GUI_1 extends javax.swing.JPanel {
                 return o1.getWard().compareToIgnoreCase(o2.getWard());
             }
         });
-
-        listWard.forEach(ward -> cbWard.addItem(ward.getWard()));
-
-        isEnabledEventWard = true;
+        if (Flag.getFlagStaffInfo() == 1) {
+            //          nếu mở chức năng thêm nhân viên
+            listWard.forEach(ward -> cbWard.addItem(ward.getWard()));
+            isEnabledEventWard = true;
+        } else if (Flag.getFlagStaffInfo() == 2) {
+//            Nếu mở chức năng chỉnh sửa thông tin nhân viên
+            listWard.forEach(ward -> {
+                int index = listWard.indexOf(ward);
+                cbWard.addItem(ward.getWard());
+                Staff staffTMP = staff_DAO.getStaffByID(Flag.getFlagIDStaff());
+                if (ward.getId().equals(staffTMP.getWard().getId())) {
+                    cbWard.setSelectedIndex(index + 1);
+                    Staff_InfoStaff_GUI_1.this.ward = ward;
+                }
+            });
+            isEnabledEventWard = true;
+        }
     }
 
 //    show error
@@ -650,6 +725,44 @@ public class Staff_InfoStaff_GUI_1 extends javax.swing.JPanel {
         jtf.requestFocus();
         JOptionPane.showMessageDialog(null, mess);
         return false;
+    }
+
+//    load data lên các JTF nếu mở chức năng edit thông tin nhân viên
+    public void loadDataEdit(String id) {
+        Staff staff = staff_DAO.getStaffByID(id);
+        jtfIDStaff.setText(staff.getIdStaff().trim());
+        jtfName.setText(staff.getName().trim());
+        jtfCitizenIdentification.setText(staff.getCic().trim());
+        jtfPhone.setText(staff.getPhone().trim());
+        jtfEmail.setText(staff.getEmail().trim());
+//      format lại định dạng ngày tháng năm cho đúng với thư viện datacChose
+        SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat outputDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String dob = "";
+        try {
+            Date date = inputDateFormat.parse(staff.getDayofbirth().toString());
+            dob = outputDateFormat.format(date);
+        } catch (ParseException e) {
+            System.err.println("Lỗi xảy ra trong quá trình chuyển đổi định dạng.");
+            e.printStackTrace();
+        }
+        jtfDoB.setText(dob);
+        if (staff.getRights().toString().trim().equals("NhanVienQuanLy")) {
+            cbRights.setSelectedIndex(0);
+        } else if (staff.getRights().toString().trim().equals("NhanVienBanHang")) {
+            cbRights.setSelectedIndex(1);
+        }
+        if (staff.getStatus().toString().trim().equals("DangLam")) {
+            cbStatus.setSelectedIndex(0);
+        } else if (staff.getStatus().toString().trim().equals("NghiLam")) {
+            cbStatus.setSelectedIndex(1);
+        }
+        if(staff.isSex() == true){
+            jrbMale.setSelected(true);
+        }else{
+            jrbFemale.setSelected(true);
+        }
+        jtfAddress.setText(staff.getAddress().trim());
     }
 
     private boolean checkRegex(String input, String regex) {
@@ -750,7 +863,7 @@ public class Staff_InfoStaff_GUI_1 extends javax.swing.JPanel {
         jtfPhone.setText("");
         cbWard.setSelectedIndex(0);
         cbDistrict.setSelectedIndex(0);
-        cbPosition.setSelectedIndex(0);
+        cbRights.setSelectedIndex(0);
         cbProvince.setSelectedIndex(0);
         jrbMale.setSelected(true);
     }
@@ -777,9 +890,9 @@ public class Staff_InfoStaff_GUI_1 extends javax.swing.JPanel {
     private lib2.Button btnEdit;
     private javax.swing.ButtonGroup buttonGroup1;
     private lib2.ComboBoxSuggestion cbDistrict;
-    private lib2.ComboBoxSuggestion cbPosition;
     private lib2.ComboBoxSuggestion cbProvince;
-    private lib2.ComboBoxSuggestion cbStatusWorking;
+    private lib2.ComboBoxSuggestion cbRights;
+    private lib2.ComboBoxSuggestion cbStatus;
     private lib2.ComboBoxSuggestion cbWard;
     private javax.swing.JPanel jPFunction;
     private javax.swing.JLabel jlIDStaff;

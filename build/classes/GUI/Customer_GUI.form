@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
-  <NonVisualComponents>
-    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="buttonGroup1.add(jrbActive);&#xa;buttonGroup1.add(jrbInactive);&#xa;jrbActive.setSelected(true);"/>
-      </AuxValues>
-    </Component>
-  </NonVisualComponents>
   <Properties>
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -73,23 +66,13 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="64" max="32767" attributes="0"/>
+                  <EmptySpace pref="65" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="cbCommune" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jlPhoneCus" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jlStatus" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jlPhoneCus" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="jrbActive" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jrbInactive" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jtfPhoneCus" min="-2" pref="238" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jtfPhoneCus" min="-2" pref="238" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jcReceivePromotion" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -113,12 +96,12 @@
                               <Component id="jtfPhoneCus" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jlNameCus" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jlStatus" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jrbActive" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jrbInactive" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jtfNameCus" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jlNameCus" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jtfNameCus" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jcReceivePromotion" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -127,11 +110,10 @@
                               <Component id="jlAddress" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="cbCommune" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jtfAddressDetail" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="jlAddressDetail" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jcReceivePromotion" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -163,30 +145,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="S&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i : "/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jlStatus">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Tr&#x1ea1;ng th&#xe1;i :"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JRadioButton" name="jrbActive">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="&#x110;ang ho&#x1ea1;t &#x111;&#x1ed9;ng"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JRadioButton" name="jrbInactive">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Ng&#x1b0;ng ho&#x1ea1;t &#x111;&#x1ed9;ng"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jrbInactiveActionPerformed"/>
-          </Events>
         </Component>
         <Container class="javax.swing.JPanel" name="jpFunction">
           <Properties>

@@ -1,5 +1,6 @@
 package gui;
 
+import com.raven.datechooser.DateChooser;
 import dao.District_DAO;
 import dao.Province_DAO;
 import lib2.TableCustom;
@@ -7,18 +8,32 @@ import entity.Flag;
 import javax.swing.table.DefaultTableModel;
 import entity.Staff;
 import dao.Staff_DAO;
+import entity.District;
+import entity.Province;
+import entity.Ward;
 import java.awt.GridLayout;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import utils.Utils;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Staff_GUI1 extends javax.swing.JPanel {
-    
+
     private DefaultTableModel defaultTableModel;
     private Staff_DAO staff_DAO = new Staff_DAO();
     private Province_DAO province_DAO = new Province_DAO();
     private District_DAO district_DAO = new District_DAO();
     private Sell_GUI sell_GUI;
     private Staff_InfoStaff_GUI_1 staff_InfoStaff_GUI;
-    
+    private Province province;
+    private District district;
+    private Ward ward;
+
     public Staff_GUI1() {
         initComponents();
         TableCustom.apply(jspTable, TableCustom.TableType.DEFAULT);
@@ -31,7 +46,7 @@ public class Staff_GUI1 extends javax.swing.JPanel {
             defaultTableModel.fireTableDataChanged(); // reload data
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -279,13 +294,22 @@ public class Staff_GUI1 extends javax.swing.JPanel {
         jpMain.removeAll();
         staff_InfoStaff_GUI = new Staff_InfoStaff_GUI_1();
         addJPanel(staff_InfoStaff_GUI);
-        
+
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        Staff_InfoStaff_GUI_X staff_AddStaff_GUI = new Staff_InfoStaff_GUI_X();
-        staff_AddStaff_GUI.setVisible(true);
-        staff_AddStaff_GUI.setFlag(2);
+        Flag.setFlagStaffInfo(2);
+        int selectRow = jTable.getSelectedRow();
+        if (selectRow == -1) {
+            JOptionPane.showMessageDialog(null, "Bạn chưa chọn nhân viên muốn cập nhập thông tin !");
+        } else {
+            Flag.setFlagIDStaff(defaultTableModel.getValueAt(selectRow, 0).toString()); // set ID nhân viên chơ cờ
+            Flag.setFlagStaffInfo(2); // set trạng thái hiện tại là chức năng chỉnh sửa thông tin
+            stopWebcam();
+            jpMain.removeAll();
+            staff_InfoStaff_GUI = new Staff_InfoStaff_GUI_1();
+            addJPanel(staff_InfoStaff_GUI);
+        }
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
@@ -295,7 +319,7 @@ public class Staff_GUI1 extends javax.swing.JPanel {
     private void btnReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReloadActionPerformed
 
     }//GEN-LAST:event_btnReloadActionPerformed
-    
+
     public void loadData(String sql) {
         defaultTableModel.setRowCount(0);
         for (Staff staff : staff_DAO.getListStaffByStatus(sql)) {
@@ -314,13 +338,13 @@ public class Staff_GUI1 extends javax.swing.JPanel {
             defaultTableModel.addRow(rowData);
         }
     }
-    
+
     public void stopWebcam() {
         if (sell_GUI != null) {
             sell_GUI.stopWebcam();
         }
     }
-    
+
     public void addJPanel(JPanel jPanel) {
         jpMain.add(jPanel);
         jpMain.revalidate();
