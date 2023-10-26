@@ -5,7 +5,7 @@
             <url>src/dao/Staff_DAO.java</url>
             <bookmark id="1">
                 <name/>
-                <line>311</line>
+                <line>326</line>
                 <key/>
             </bookmark>
         </file>
@@ -13,6 +13,7 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/gui/Staff_GUI1.java</file>
+            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/dao/Staff_DAO.java</file>
             <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/gui/Home_GUI.java</file>
             <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/gui/Staff_InfoStaff_GUI_1.java</file>
             <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/gui/History_GUI.java</file>

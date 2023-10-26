@@ -98,7 +98,7 @@ public class Staff_InfoStaff_GUI_1 extends javax.swing.JPanel {
                 jlPass.setVisible(false);
                 jtfIDStaff.setVisible(false);
                 jtfPass.setVisible(false);
-
+                btnClear.setVisible(false);
                 loadDataEdit(Flag.getFlagIDStaff());
             } catch (SQLException ex) {
                 Logger.getLogger(Staff_InfoStaff_GUI_1.class.getName()).log(Level.SEVERE, null, ex);
@@ -344,7 +344,7 @@ public class Staff_InfoStaff_GUI_1 extends javax.swing.JPanel {
         btnEdit.setBackground(new java.awt.Color(135, 206, 235));
         btnEdit.setForeground(new java.awt.Color(255, 255, 255));
         btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/edit24.png"))); // NOI18N
-        btnEdit.setText("Sủa thông tin ");
+        btnEdit.setText("Cập nhập  ");
         btnEdit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -355,7 +355,7 @@ public class Staff_InfoStaff_GUI_1 extends javax.swing.JPanel {
         btnClear.setBackground(new java.awt.Color(135, 206, 235));
         btnClear.setForeground(new java.awt.Color(255, 255, 255));
         btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/clear24.png"))); // NOI18N
-        btnClear.setText("Xóa trắng");
+        btnClear.setText("Xóa trắng  ");
         btnClear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -387,7 +387,7 @@ public class Staff_InfoStaff_GUI_1 extends javax.swing.JPanel {
                 .addComponent(jlPass)
                 .addGap(18, 18, 18)
                 .addComponent(jtfPass, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -545,7 +545,7 @@ public class Staff_InfoStaff_GUI_1 extends javax.swing.JPanel {
     }//GEN-LAST:event_jtfEmailActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        if (validator() == true) {
+        if (validator()) {
             String name = jtfName.getText().trim();
             String cic = jtfCitizenIdentification.getText().trim();
             String phone = jtfPhone.getText().trim();
@@ -566,16 +566,39 @@ public class Staff_InfoStaff_GUI_1 extends javax.swing.JPanel {
             if (res) {
                 JOptionPane.showMessageDialog(null, "Thêm nhân viên thành công !");
                 backToStaffGUI();
-//                clear();
             } else {
                 JOptionPane.showMessageDialog(null, "Thêm nhân viên thất bại !");
             }
-
         }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-
+        if (validator()) {
+            String name = jtfName.getText().trim();
+            String cic = jtfCitizenIdentification.getText().trim();
+            String phone = jtfPhone.getText().trim();
+            String email = jtfEmail.getText().trim();
+            LocalDate dob = Utils.getLocalDate(jtfDoB.getText().trim());
+            boolean sex;
+            if (jrbMale.isSelected()) {
+                sex = true;
+            } else {
+                sex = false;
+            }
+            String address = jtfAddress.getText().trim();
+            Rights rights = Staff.convertStringToRights(cbRights.getSelectedItem().toString());
+            Status status = Staff.convertStringToStatus(cbStatus.getSelectedItem().toString());
+            String password = jtfPass.getText().trim();
+            Staff staff = new Staff(jtfIDStaff.getText().trim(), name, cic, phone, email, dob, sex, province, district, ward, address, rights, status, password);
+            int choice = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn cập nhập lại thông tin nhân viên hay không ?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+            if (choice == JOptionPane.YES_OPTION) {
+                boolean res = staff_DAO.updateInfoStaff(staff);
+                if (res) {
+                    JOptionPane.showMessageDialog(null, "Cập nhập thông tin nhân viên thành công !");
+                    backToStaffGUI();
+                }
+            }
+        }
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
@@ -585,6 +608,7 @@ public class Staff_InfoStaff_GUI_1 extends javax.swing.JPanel {
 //        jtfIDStaff.setText("");
         jtfName.setText("");
 //        jtfPass.setText("");
+        jtfEmail.setText("");
         jtfPhone.setText("");
         cbWard.setSelectedIndex(0);
         cbDistrict.setSelectedIndex(0);
@@ -735,7 +759,6 @@ public class Staff_InfoStaff_GUI_1 extends javax.swing.JPanel {
         jtfCitizenIdentification.setText(staff.getCic().trim());
         jtfPhone.setText(staff.getPhone().trim());
         jtfEmail.setText(staff.getEmail().trim());
-//      format lại định dạng ngày tháng năm cho đúng với thư viện datacChose
         SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat outputDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String dob = "";
@@ -757,12 +780,13 @@ public class Staff_InfoStaff_GUI_1 extends javax.swing.JPanel {
         } else if (staff.getStatus().toString().trim().equals("NghiLam")) {
             cbStatus.setSelectedIndex(1);
         }
-        if(staff.isSex() == true){
+        if (staff.isSex() == true) {
             jrbMale.setSelected(true);
-        }else{
+        } else {
             jrbFemale.setSelected(true);
         }
         jtfAddress.setText(staff.getAddress().trim());
+        jtfPass.setText(staff.getPassword().trim());
     }
 
     private boolean checkRegex(String input, String regex) {
@@ -804,9 +828,6 @@ public class Staff_InfoStaff_GUI_1 extends javax.swing.JPanel {
         if (checkRegex(cic, "^\\d{12}$") == false) {
             return showERROR(jtfCitizenIdentification, "CCCD phải là 12 ký tự số !");
         }
-        if (staff_DAO.checkCICExist(cic)) {
-            return showERROR(jtfCitizenIdentification, "Số CCCD này đã tồn tại trên hệ thống vui lòng kiểm tra lại");
-        }
 
         String phone = jtfPhone.getText().trim();
         if (phone.length() <= 0) {
@@ -814,9 +835,6 @@ public class Staff_InfoStaff_GUI_1 extends javax.swing.JPanel {
         }
         if (checkRegex(phone, "^0\\d{9}$") == false) {
             return showERROR(jtfPhone, "Số điện thoại không đúng định dạng 0xx.xxxx.xxx vui lòng kiểm tra lại");
-        }
-        if (staff_DAO.checkPhoneExist(phone)) {
-            return showERROR(jtfPhone, "Số điện thoại này đã được sử dụng trên hệ thống vui lòng kiểm tra lại !");
         }
 
         String email = jtfEmail.getText().trim();
@@ -850,6 +868,43 @@ public class Staff_InfoStaff_GUI_1 extends javax.swing.JPanel {
         String address = jtfAddress.getText().trim();
         if (address.length() <= 0) {
             return showERROR(jtfAddress, "Vui lòng nhập địa chỉ cụ thể");
+        }
+
+        if (Flag.getFlagStaffInfo() == 1) {
+            if (staff_DAO.checkCICExist(cic)) {
+                return showERROR(jtfCitizenIdentification, "Số CCCD này đã tồn tại trên hệ thống vui lòng kiểm tra lại");
+            }
+            if (staff_DAO.checkPhoneExist(phone)) {
+                return showERROR(jtfPhone, "Số điện thoại này đã được sử dụng trên hệ thống vui lòng kiểm tra lại !");
+            }
+        } else if (Flag.getFlagStaffInfo() == 2) {
+
+            String name1 = jtfName.getText().trim();
+            String cic1 = jtfCitizenIdentification.getText().trim();
+            String phone1 = jtfPhone.getText().trim();
+            String email1 = jtfEmail.getText().trim();
+            LocalDate dob1 = Utils.getLocalDate(jtfDoB.getText().trim());
+            boolean sex1;
+            if (jrbMale.isSelected()) {
+                sex1 = true;
+            } else {
+                sex1 = false;
+            }
+            String address1 = jtfAddress.getText().trim();
+            Rights rights1 = Staff.convertStringToRights(cbRights.getSelectedItem().toString());
+            Status status1 = Staff.convertStringToStatus(cbStatus.getSelectedItem().toString());
+            String password1 = jtfPass.getText().trim();
+            Staff staffTMP1 = new Staff(jtfIDStaff.getText().trim(), name1, cic1, phone1, email1, dob1, sex1, this.province, this.district, this.ward, address, rights1, status1, password1);
+            Staff staffTMP2 = staff_DAO.getStaffByID(jtfIDStaff.getText().trim());
+
+            if (!staffTMP1.equals(staffTMP2)) {
+                if (staff_DAO.checkCICExist(cic)) {
+                    return showERROR(jtfCitizenIdentification, "Số CCCD này đã tồn tại trên hệ thống vui lòng kiểm tra lại");
+                }
+                if (staff_DAO.checkPhoneExist(phone)) {
+                    return showERROR(jtfPhone, "Số điện thoại này đã được sử dụng trên hệ thống vui lòng kiểm tra lại !");
+                }
+            }
         }
         return true;
     }

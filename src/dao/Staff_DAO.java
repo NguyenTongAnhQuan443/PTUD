@@ -26,15 +26,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class Staff_DAO extends DAO {
-
-    private Province_DAO province_DAO = new Province_DAO();
-    private District_DAO district_DAO = new District_DAO();
-    private Ward_DAO ward_DAO = new Ward_DAO();
-
-//    Province province = new Province();
-//    District district = new District();
-    Ward ward = new Ward();
-
     public Staff_DAO() {
     }
 
@@ -68,7 +59,35 @@ public class Staff_DAO extends DAO {
         return false;
     }
 
-//    lấy nhân viên bằng mã nhân viên
+// tạo mã nhân viên
+    public String createIDStaff() {
+        try {
+            String sql = "SELECT TOP 1 [idStaff] FROM [dbo].[Staff] ORDER BY [idStaff] DESC";
+            Statement statement = ConnectDB.getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            if (resultSet.next()) {
+                String maNhanVien = resultSet.getString(1).trim();
+                int number = Integer.parseInt(maNhanVien.substring(2));
+                number++;
+                String maNhanVienNew = number + "";
+
+                while (maNhanVienNew.length() < 4) {
+                    maNhanVienNew = "0" + maNhanVienNew;
+                }
+
+                return "NV" + maNhanVienNew;
+            } else {
+                return "NV0001";
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    //    lấy nhân viên bằng mã nhân viên
     public Staff getStaffByID(String idStaff) {
         String sql = "SELECT * FROM Staff WHERE idStaff = ?";
 
@@ -100,51 +119,47 @@ public class Staff_DAO extends DAO {
         }
         return null;
     }
-
-// tạo mã nhân viên
-    public String createIDStaff() {
+    
+//    Cập nhập thông tin nhân viên
+    public boolean updateInfoStaff(Staff staff){
+        String sql = "Update Staff SET name = ?, cic = ?, phone = ?, email = ?, dayofbirth = ?, sex = ?, province = ?, district = ?, ward = ?, address = ?, rights = ?, status = ? WHERE idStaff = ?";
         try {
-            String sql = "SELECT TOP 1 [idStaff] FROM [dbo].[Staff] ORDER BY [idStaff] DESC";
-            Statement statement = ConnectDB.getConnection().createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
-
-            if (resultSet.next()) {
-                String maNhanVien = resultSet.getString(1).trim();
-                int number = Integer.parseInt(maNhanVien.substring(2));
-                number++;
-                String maNhanVienNew = number + "";
-
-                while (maNhanVienNew.length() < 4) {
-                    maNhanVienNew = "0" + maNhanVienNew;
-                }
-
-                return "NV" + maNhanVienNew;
-            } else {
-                return "NV0001";
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
-//    thôi việc nhân viên
-    public boolean setStatusWorking(String idStaff) {
-        PreparedStatement preparedStatement = null;
-        String sql = "UPDATE Staff SET status = N'Nghỉ làm' WHERE idStaff = ?";
-        try {
-            preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
-            preparedStatement.setString(1, idStaff);
-
+            PreparedStatement preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, staff.getName());
+            preparedStatement.setString(2, staff.getCic());
+            preparedStatement.setString(3, staff.getPhone());
+            preparedStatement.setString(4, staff.getEmail());
+            preparedStatement.setDate(5, java.sql.Date.valueOf(staff.getDayofbirth()));
+            preparedStatement.setBoolean(6, staff.isSex());
+            preparedStatement.setString(7, staff.getProvince().getId());
+            preparedStatement.setString(8, staff.getDistrict().getId());
+            preparedStatement.setString(9, staff.getWard().getId());
+            preparedStatement.setString(10, staff.getAddress());
+            preparedStatement.setString(11, staff.convertRightsToString(staff.getRights()));
+            preparedStatement.setString(12, staff.convertStatusToString(staff.getStatus()));
+            preparedStatement.setString(13, staff.getIdStaff());
             return preparedStatement.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            close(preparedStatement);
         }
         return false;
     }
+//    thôi việc nhân viên
+//    public boolean setStatusWorking(String idStaff) {
+//        PreparedStatement preparedStatement = null;
+//        String sql = "UPDATE Staff SET status = N'Nghỉ làm' WHERE idStaff = ?";
+//        try {
+//            preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
+//            preparedStatement.setString(1, idStaff);
+//
+//            return preparedStatement.executeUpdate() > 0;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            close(preparedStatement);
+//        }
+//        return false;
+//    }
 
 //    lấy những nhân viên có trạng thái là "Đang làm"
     public List<Staff> getListStaffByStatus(String sqlStatus) {

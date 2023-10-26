@@ -319,7 +319,7 @@
                       <Component id="jlPass" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jtfPass" min="-2" pref="160" max="-2" attributes="0"/>
-                      <EmptySpace pref="38" max="32767" attributes="0"/>
+                      <EmptySpace pref="51" max="32767" attributes="0"/>
                       <Component id="btnAdd" min="-2" pref="94" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnEdit" min="-2" max="-2" attributes="0"/>
@@ -403,7 +403,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/images/icons/edit24.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="S&#x1ee7;a th&#xf4;ng tin "/>
+                <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;p  "/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
@@ -423,7 +423,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/images/icons/clear24.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="X&#xf3;a tr&#x1eaf;ng"/>
+                <Property name="text" type="java.lang.String" value="X&#xf3;a tr&#x1eaf;ng  "/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="1"/>
                 </Property>

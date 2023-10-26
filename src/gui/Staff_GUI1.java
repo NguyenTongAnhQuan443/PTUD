@@ -65,8 +65,6 @@ public class Staff_GUI1 extends javax.swing.JPanel {
         jpTopBottom = new javax.swing.JPanel();
         btnAdd = new lib2.Button();
         btnEdit = new lib2.Button();
-        btnRemove = new lib2.Button();
-        btnReload = new lib2.Button();
         btnInputFile = new lib2.Button();
         btnOutputFile = new lib2.Button();
         jPTable = new javax.swing.JPanel();
@@ -109,7 +107,7 @@ public class Staff_GUI1 extends javax.swing.JPanel {
                 .addComponent(jtfInputID, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         jpTop1LeftLayout.setVerticalGroup(
             jpTop1LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,7 +127,7 @@ public class Staff_GUI1 extends javax.swing.JPanel {
         jlArrage.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jlArrage.setText("Sắp xếp theo :");
 
-        cbArrange.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mã nhân viên", "Họ tên", "Doanh thu cao nhất", "Doanh thu thấp nhất" }));
+        cbArrange.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Họ tên", "Doanh thu cao nhất", "Doanh thu thấp nhất" }));
 
         btnArrange.setBackground(new java.awt.Color(135, 206, 235));
         btnArrange.setForeground(new java.awt.Color(255, 255, 255));
@@ -149,7 +147,7 @@ public class Staff_GUI1 extends javax.swing.JPanel {
                 .addComponent(cbArrange, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnArrange, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         jpTop1RightLayout.setVerticalGroup(
             jpTop1RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,30 +192,6 @@ public class Staff_GUI1 extends javax.swing.JPanel {
             }
         });
         jpTopBottom.add(btnEdit);
-
-        btnRemove.setBackground(new java.awt.Color(135, 206, 235));
-        btnRemove.setForeground(new java.awt.Color(255, 255, 255));
-        btnRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/warning24.png"))); // NOI18N
-        btnRemove.setText("Thôi việc");
-        btnRemove.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnRemove.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRemoveActionPerformed(evt);
-            }
-        });
-        jpTopBottom.add(btnRemove);
-
-        btnReload.setBackground(new java.awt.Color(135, 206, 235));
-        btnReload.setForeground(new java.awt.Color(255, 255, 255));
-        btnReload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/refresh24.png"))); // NOI18N
-        btnReload.setText("Làm mới");
-        btnReload.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnReload.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReloadActionPerformed(evt);
-            }
-        });
-        jpTopBottom.add(btnReload);
 
         btnInputFile.setBackground(new java.awt.Color(135, 206, 235));
         btnInputFile.setForeground(new java.awt.Color(255, 255, 255));
@@ -312,14 +286,6 @@ public class Staff_GUI1 extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnEditActionPerformed
 
-    private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRemoveActionPerformed
-
-    private void btnReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReloadActionPerformed
-
-    }//GEN-LAST:event_btnReloadActionPerformed
-
     public void loadData(String sql) {
         defaultTableModel.setRowCount(0);
         for (Staff staff : staff_DAO.getListStaffByStatus(sql)) {
@@ -358,8 +324,6 @@ public class Staff_GUI1 extends javax.swing.JPanel {
     private lib2.Button btnEdit;
     private lib2.Button btnInputFile;
     private lib2.Button btnOutputFile;
-    private lib2.Button btnReload;
-    private lib2.Button btnRemove;
     private lib2.Button btnSearch;
     private lib2.ComboBoxSuggestion cbArrange;
     private javax.swing.JPanel jPTable;
