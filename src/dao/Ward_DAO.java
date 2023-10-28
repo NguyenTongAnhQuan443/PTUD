@@ -97,17 +97,16 @@ public class Ward_DAO extends DAO{
         String wardName = "";
 
         try {
-            Connection connection = connectDB.ConnectDB.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            PreparedStatement preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
             preparedStatement.setString(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                wardName = resultSet.getString("district");
+                wardName = resultSet.getString("ward");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return wardName;
-    }
+    } 
 }

@@ -26,6 +26,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class Staff_DAO extends DAO {
+
     public Staff_DAO() {
     }
 
@@ -97,7 +98,6 @@ public class Staff_DAO extends DAO {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-//                String idStaff = resultSet.getString("idStaff");
                 String name = resultSet.getString("name");
                 String cic = resultSet.getString("cic");
                 String phone = resultSet.getString("phone");
@@ -119,9 +119,9 @@ public class Staff_DAO extends DAO {
         }
         return null;
     }
-    
+
 //    Cập nhập thông tin nhân viên
-    public boolean updateInfoStaff(Staff staff){
+    public boolean updateInfoStaff(Staff staff) {
         String sql = "Update Staff SET name = ?, cic = ?, phone = ?, email = ?, dayofbirth = ?, sex = ?, province = ?, district = ?, ward = ?, address = ?, rights = ?, status = ? WHERE idStaff = ?";
         try {
             PreparedStatement preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
@@ -144,6 +144,44 @@ public class Staff_DAO extends DAO {
         }
         return false;
     }
+// thêm vào một danh sách nhân viên (dùng cho hàm import file excel)
+    public boolean addStaffList(List<Staff> staffList) {
+    if (staffList == null || staffList.isEmpty()) {
+        return false; // Không thể thêm nếu danh sách trống hoặc null.
+    }
+
+    try {
+        Connection connection = ConnectDB.getConnection();
+        String sql = "INSERT INTO Staff VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+        for (Staff staff : staffList) {
+            preparedStatement.setString(1, staff.getIdStaff());
+            preparedStatement.setString(2, staff.getName());
+            preparedStatement.setString(3, staff.getCic());
+            preparedStatement.setString(4, staff.getPhone());
+            preparedStatement.setString(5, staff.getEmail());
+            preparedStatement.setDate(6, java.sql.Date.valueOf(staff.getDayofbirth()));
+            preparedStatement.setBoolean(7, staff.isSex());
+            preparedStatement.setString(8, staff.getProvince().getId());
+            preparedStatement.setString(9, staff.getDistrict().getId());
+            preparedStatement.setString(10, staff.getWard().getId());
+            preparedStatement.setString(11, staff.getAddress());
+            preparedStatement.setString(12, staff.convertRightsToString(staff.getRights()));
+            preparedStatement.setString(13, staff.convertStatusToString(staff.getStatus()));
+            preparedStatement.setString(14, staff.getPassword());
+            preparedStatement.addBatch();
+        }
+
+        preparedStatement.executeBatch();
+        preparedStatement.close();
+        return true;
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+    return false;
+}
+    
 //    thôi việc nhân viên
 //    public boolean setStatusWorking(String idStaff) {
 //        PreparedStatement preparedStatement = null;

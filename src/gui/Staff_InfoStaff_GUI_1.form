@@ -70,8 +70,8 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="147" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="cbProvince" min="-2" pref="140" max="-2" attributes="0"/>
@@ -91,7 +91,7 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jlIconCalendar" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="cbStatus" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="cbStatus" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -100,22 +100,22 @@
                                       <Component id="jlSex" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jrbMale" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="94" max="32767" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                       <Component id="jrbFemale" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="cbRights" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jtfEmail" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jtfEmail" alignment="0" min="-2" pref="251" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="217" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="207" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jtfCitizenIdentification" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jtfName" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -125,13 +125,13 @@
                           <Component id="jtfPhone" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jtfEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jtfDoB" alignment="0" min="-2" pref="32" max="-2" attributes="0"/>
                           <Component id="jlIconCalendar" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="cbRights" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="cbStatus" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="3" attributes="0">
@@ -140,14 +140,14 @@
                               <Component id="jrbFemale" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="cbProvince" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cbDistrict" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cbWard" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jtfAddress" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="130" max="32767" attributes="0"/>
+                      <EmptySpace pref="115" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

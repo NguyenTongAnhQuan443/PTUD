@@ -23127,3 +23127,9 @@ GO
 
 --UPDATE Staff SET password = '04042003' WHERE idStaff = 'NV0001';
 --SELECT province FROM Province WHERE id = '106169285912657';
+--SELECT * FROM Staff WHERE status = N'Đang làm'
+--SELECT TOP 1 [idStaff] FROM [dbo].[Staff] ORDER BY [idStaff] DESC;
+--SELECT ward FROM ward WHERE id = '106950881834034'
+
+--INSERT INTO Staff (idStaff, name, cic, phone, email, dayofbirth, sex, province, district, ward, address, rights, status, password)
+--VALUES ('NV0007', N'Châu Anh Tuấn', '000000000001', '0000000001', 'chauanhtuan@gmail.com', '2003-04-04',1,'106740938589706', '106028445700703', '106864503020960','ABC', N'Nhân viên quản lý', N'Đang làm', '1234ABC@')
