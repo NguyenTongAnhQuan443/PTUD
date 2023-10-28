@@ -11,13 +11,12 @@ import entity.Staff;
 import dao.Staff_DAO;
 import entity.District;
 import entity.Province;
-import entity.Staff.Rights;
-import entity.Staff.Status;
 import entity.Ward;
 import java.awt.GridLayout;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -35,6 +34,7 @@ import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import jdk.jshell.execution.Util;
 
 import jxl.CellView;
 import jxl.Sheet;
@@ -43,6 +43,7 @@ import jxl.format.Alignment;
 import jxl.format.Border;
 import jxl.format.BorderLineStyle;
 import jxl.read.biff.BiffException;
+import jxl.write.Font;
 import jxl.write.Label;
 import jxl.write.WritableCellFormat;
 import jxl.write.WritableSheet;
@@ -51,9 +52,16 @@ import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 import static org.apache.poi.hssf.usermodel.HeaderFooter.file;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFColor;
+import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -217,6 +225,11 @@ public class Staff_GUI1 extends javax.swing.JPanel {
         btnOutputFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/outputfile24.png"))); // NOI18N
         btnOutputFile.setText("Xuất danh sách NV ");
         btnOutputFile.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnOutputFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOutputFileActionPerformed(evt);
+            }
+        });
         jpTopBottom.add(btnOutputFile);
 
         jpTop.add(jpTopBottom);
@@ -328,6 +341,33 @@ public class Staff_GUI1 extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnInputFileActionPerformed
 
+    private void btnOutputFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOutputFileActionPerformed
+        JOptionPane.showMessageDialog(null, "Hãy chọn nơi bạn muốn lưu");
+        JFileChooser jFileChooser = new JFileChooser("D://");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel Files", "xls", "xlsx");
+        jFileChooser.setFileFilter(filter);
+        int result = jFileChooser.showSaveDialog(null); // Sử dụng showSaveDialog để chọn nơi lưu
+
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File file = jFileChooser.getSelectedFile();
+            String pathname = file.getAbsolutePath();
+
+            if (!pathname.toLowerCase().endsWith(".xlsx")) {
+                pathname += ".xlsx";
+            }
+            List<Staff> staffList = staff_DAO.getListStaff();
+
+            // Kiểm tra nếu danh sách staffList không rỗng, sau đó tiến hành ghi vào tệp Excel
+            if (!staffList.isEmpty()) {
+                writeExcel(pathname, staffList);
+                JOptionPane.showMessageDialog(null, "Danh sách nhân viên đã được lưu vào " + pathname);
+            } else {
+                JOptionPane.showMessageDialog(null, "Không có dữ liệu nhân viên để lưu.");
+            }
+        }
+
+    }//GEN-LAST:event_btnOutputFileActionPerformed
+
     public void loadData(String sql) {
         defaultTableModel.setRowCount(0);
         for (Staff staff : staff_DAO.getListStaffByStatus(sql)) {
@@ -402,7 +442,90 @@ public class Staff_GUI1 extends javax.swing.JPanel {
         }
         return listStaff;
     }
+//    Xuất danh sánh nhân viên ra file Excel
 
+    public void writeExcel(String filePath, List<Staff> staffList) {
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet("Staff Data");
+
+        // Tạo tiêu đề cho các cột
+        Row headerRow = sheet.createRow(0);
+        String[] headers = {"Mã nhân viên", "Họ tên", "CCCD", "Số điện thoại", "Email", "Ngày sinh", "Giới tính", "Tỉnh/Thành phố", "Quận/Huyện", "Phường/Xã", "Địa chỉ chi tiết", "Chức vụ", "Trạng thái làm việc"};
+
+        // Tạo kiểu dáng in đậm
+        CellStyle headerCellStyle = workbook.createCellStyle();
+        XSSFFont headerFont = workbook.createFont();
+        headerFont.setBold(true); // Đặt in đậm
+        headerCellStyle.setFont(headerFont);
+        //      Đỗ mào cho ô tiêu đề
+        headerCellStyle.setFillForegroundColor(IndexedColors.YELLOW.getIndex());
+        headerCellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+
+        for (int i = 0; i < headers.length; i++) {
+            Cell cell = headerRow.createCell(i);
+            cell.setCellValue(headers[i]);
+            cell.setCellStyle(headerCellStyle);
+            // Điều chỉnh kích thước cột tự động
+            sheet.autoSizeColumn(i);
+        }
+
+        // Thêm dữ liệu từ danh sách staffList vào tệp Excel
+        for (int i = 0; i < staffList.size(); i++) {
+            Row row = sheet.createRow(i + 1);
+            Staff staff = staffList.get(i);
+
+            // Thêm dữ liệu từ Staff vào từng ô cột tương ứng
+            Cell idStaffCell = row.createCell(0);
+            idStaffCell.setCellValue(staff.getIdStaff());
+
+            Cell nameCell = row.createCell(1);
+            nameCell.setCellValue(staff.getName());
+
+            Cell cicCell = row.createCell(2);
+            cicCell.setCellValue(staff.getCic());
+
+            Cell phoneCell = row.createCell(3);
+            phoneCell.setCellValue(staff.getPhone());
+
+            Cell emailCell = row.createCell(4);
+            emailCell.setCellValue(staff.getEmail());
+
+            Cell dayOfBirthCell = row.createCell(5);
+            dayOfBirthCell.setCellValue(Utils.convertDateFormat(staff.getDayofbirth().toString()));
+
+            Cell sexCell = row.createCell(6);
+            sexCell.setCellValue(staff.isSex() ? "Nam" : "Nữ");
+
+            Cell provinceCell = row.createCell(7);
+            String nameProvince = province_DAO.getProvinceNameByID(staff.getProvince().getId());
+            provinceCell.setCellValue(nameProvince);
+
+            Cell districtCell = row.createCell(8);
+            String nameDistrict = district_DAO.getDistrictNameByID(staff.getDistrict().getId().toString());
+            districtCell.setCellValue(nameDistrict);
+
+            Cell wardCell = row.createCell(9);
+            String nameWard = ward_DAO.getWardNameByID(staff.getWard().getId());
+            wardCell.setCellValue(nameWard);
+
+            Cell addressCell = row.createCell(10);
+            addressCell.setCellValue(staff.getAddress());
+
+            Cell rightsCell = row.createCell(11);
+            rightsCell.setCellValue(Staff.convertRightsToString(staff.getRights()));
+
+            Cell statusCell = row.createCell(12);
+            statusCell.setCellValue(Staff.convertStatusToString(staff.getStatus()));
+        }
+
+        // Lưu workbook vào tệp Excel
+        try (FileOutputStream fileOut = new FileOutputStream(filePath)) {
+            workbook.write(fileOut);
+            fileOut.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnAdd;

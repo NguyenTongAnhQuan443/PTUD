@@ -3,8 +3,11 @@ package utils;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -99,4 +102,17 @@ public class Utils {
     public static String getVietnameseDiacriticCharactersLower() {
         return getVietnameseDiacriticCharacters().toLowerCase();
     }
+//    chuyển đổi định dạng ngày tháng năm từ yyyy/mm/dd sang dd/mm/yyyy
+    public static String convertDateFormat(String inputDate) {
+    try {
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        Date date = inputFormat.parse(inputDate);
+        return outputFormat.format(date);
+    } catch (ParseException e) {
+        e.printStackTrace();
+        return "";
+    }
+}
 }
