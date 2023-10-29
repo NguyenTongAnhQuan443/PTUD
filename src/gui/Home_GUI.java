@@ -25,10 +25,10 @@ public class Home_GUI extends javax.swing.JFrame {
     private Supplier_GUI supplier_GUI;
     private Product_GUI product_GUI;
 //    private Staff_GUI staff_GUI;
-    private Staff_GUI1 staff_GUI;
+    private Staff_GUI staff_GUI;
     private History_GUI history_GUI;
     private Promotion_GUI promotion_GUI;
-    private Staff_InfoStaff_GUI_1 staff_InfoStaff_GUI;
+    private Staff_InfoStaff_GUI staff_InfoStaff_GUI;
     private ChangePassword_GUI changePassword_GUI;
     private Customer_GUI customer_GUI;
 
@@ -85,13 +85,13 @@ public class Home_GUI extends javax.swing.JFrame {
                     Flag.setFlagStaffGUI(true); // mở GUI danh sách nhân viên
                     stopWebcam();
                     jpCenter.removeAll();
-                    staff_GUI = new Staff_GUI1();
+                    staff_GUI = new Staff_GUI();
                     addJPanel(staff_GUI);
                 } else if (index == 3 && subIndex == 2) { // sự kiện menu nhân viên - danh sách thôi việc nhân viên
                     Flag.setFlagStaffGUI(false); // mở GUI danh sách nghỉ việc
                     stopWebcam();
                     jpCenter.removeAll();
-                    staff_GUI = new Staff_GUI1();
+                    staff_GUI = new Staff_GUI();
                     addJPanel(staff_GUI);
                 } else if (index == 4) { // sự kiện memu bán hàng
                     stopWebcam();
@@ -122,7 +122,7 @@ public class Home_GUI extends javax.swing.JFrame {
                 } else if (index == 8 && subIndex == 1) { // sự kiện menu tài khoản - thông tin tài khoản
                     stopWebcam();
                     jpCenter.removeAll();
-                    staff_InfoStaff_GUI = new Staff_InfoStaff_GUI_1();
+                    staff_InfoStaff_GUI = new Staff_InfoStaff_GUI();
                     addJPanel(staff_InfoStaff_GUI);
                 } else if (index == 8 && subIndex == 2) { // sự kiện menu tài khoản - đổi mật khẩu
                     stopWebcam();
@@ -149,6 +149,8 @@ public class Home_GUI extends javax.swing.JFrame {
         jpCenter = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Phần mềm quản lsy bán quần áo FleyShop");
+        setResizable(false);
 
         jpMain.setLayout(new java.awt.BorderLayout());
 

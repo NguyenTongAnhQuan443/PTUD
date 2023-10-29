@@ -4,14 +4,18 @@ import entity.District;
 import entity.Province;
 import entity.Ward;
 import lib2.TableCustom;
-
+import dao.Supplier_DAO;
 public class Supplier_GUI extends javax.swing.JPanel {
-private Province province;
-private District district;
-private Ward ward;
+
+    private Province province;
+    private District district;
+    private Ward ward;
+    private Supplier_DAO supplier_DAO = new Supplier_DAO();
     public Supplier_GUI() {
         initComponents();
         TableCustom.apply(jspTableSupplier, TableCustom.TableType.DEFAULT);
+        
+        jtfIDSupplier.setText(supplier_DAO.createIDSupplier());
     }
 
     @SuppressWarnings("unchecked")
@@ -51,6 +55,7 @@ private Ward ward;
         jrbStillWorking.setSelected(true);
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
 
         jpTop.setBackground(new java.awt.Color(255, 255, 255));
         jpTop.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chi tiết nhà cung cấp", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 14))); // NOI18N
@@ -70,8 +75,18 @@ private Ward ward;
         jlAddress.setText("Địa chỉ :");
 
         cbProvince.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tỉnh/Thành phố" }));
+        cbProvince.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbProvinceActionPerformed(evt);
+            }
+        });
 
         cbDistrict.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Quận/Huyện" }));
+        cbDistrict.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbDistrictActionPerformed(evt);
+            }
+        });
 
         cbCommune.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Phường/Xã" }));
 
@@ -93,10 +108,10 @@ private Ward ward;
         jlStatus.setText("Tình trạng hợp tác :");
 
         jrbStopWorking.setBackground(new java.awt.Color(255, 255, 255));
-        jrbStopWorking.setText("Hết hợp đồng");
+        jrbStopWorking.setText("Ngưng hợp tác");
 
         jrbStillWorking.setBackground(new java.awt.Color(255, 255, 255));
-        jrbStillWorking.setText("Còn hợp đồng");
+        jrbStillWorking.setText("Đang hợp tác");
 
         btnAdd.setBackground(new java.awt.Color(135, 206, 235));
         btnAdd.setForeground(new java.awt.Color(255, 255, 255));
@@ -114,49 +129,46 @@ private Ward ward;
         jpTopLayout.setHorizontalGroup(
             jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpTopLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(30, 30, 30)
                 .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jlNameSupplier, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jlIDSupplier, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(69, 69, 69)
-                .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jlEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpTopLayout.createSequentialGroup()
                         .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtfNameSupplier, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                            .addComponent(jtfNameSupplier)
                             .addComponent(jtfEmail)
-                            .addComponent(jtfIDSupplier))
-                        .addGap(57, 57, 57)
+                            .addComponent(jtfIDSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(300, 300, 300)
+                        .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlAddressDetails)
+                            .addComponent(jlStatus)
+                            .addComponent(jlAddress))
+                        .addGap(18, 18, 18)
                         .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpTopLayout.createSequentialGroup()
-                                .addComponent(jlStatus)
-                                .addGap(18, 18, 18)
                                 .addComponent(jrbStillWorking)
                                 .addGap(18, 18, 18)
                                 .addComponent(jrbStopWorking))
+                            .addComponent(jtfAddressDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jpTopLayout.createSequentialGroup()
-                                .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jlAddressDetails)
-                                    .addComponent(jlAddress))
-                                .addGap(42, 42, 42)
-                                .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jpTopLayout.createSequentialGroup()
-                                        .addComponent(cbProvince, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(cbDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(cbCommune, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jtfAddressDetails)))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpTopLayout.createSequentialGroup()
+                                .addComponent(cbProvince, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbCommune, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jpTopLayout.createSequentialGroup()
                         .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpTopLayout.setVerticalGroup(
             jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpTopLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(10, 10, 10)
                 .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlIDSupplier)
                     .addComponent(jtfIDSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -177,12 +189,14 @@ private Ward ward;
                     .addComponent(jlStatus)
                     .addComponent(jrbStillWorking)
                     .addComponent(jrbStopWorking))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addGap(35, 35, 35)
                 .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
+
+        add(jpTop);
 
         jpBottom.setBackground(new java.awt.Color(255, 255, 255));
         jpBottom.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách nhà cung cấp", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 14))); // NOI18N
@@ -223,13 +237,12 @@ private Ward ward;
 
         jlFillterStatus.setText("Lọc theo trạng thái :");
 
-        cbStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Còn hợp đồng", "Hết hợp đồng" }));
+        cbStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Đang hợp tác", "Ngưng hợp tác" }));
 
         javax.swing.GroupLayout jpBottomLayout = new javax.swing.GroupLayout(jpBottom);
         jpBottom.setLayout(jpBottomLayout);
         jpBottomLayout.setHorizontalGroup(
             jpBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jspTableSupplier)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpBottomLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jlSearchIDSupplier)
@@ -242,12 +255,12 @@ private Ward ward;
                 .addGap(18, 18, 18)
                 .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addComponent(jspTableSupplier)
         );
         jpBottomLayout.setVerticalGroup(
             jpBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpBottomLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jspTableSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jspTableSupplier)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jpBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -260,20 +273,7 @@ private Ward ward;
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpTop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jpBottom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jpTop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpBottom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        add(jpBottom);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
@@ -292,12 +292,13 @@ private Ward ward;
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-
         if (btnAdd.getText().equals("Thêm nhà cung cấp  ")) {
             onInput();
             setIndexCB();
             btnAdd.setText("Lưu  ");
             btnEdit.setText("Hủy  ");
+            
+            
         } else if (btnAdd.getText().equals("Lưu  ")) {
             clearinput();
             offInput();
@@ -305,6 +306,14 @@ private Ward ward;
             btnAdd.setText("Thêm nhà cung cấp  ");
         }
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void cbDistrictActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDistrictActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbDistrictActionPerformed
+
+    private void cbProvinceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProvinceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbProvinceActionPerformed
     public void onInput() {
         jtfAddressDetails.setEditable(true);
         jtfEmail.setEditable(true);

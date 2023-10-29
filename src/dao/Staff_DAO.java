@@ -68,23 +68,22 @@ public class Staff_DAO extends DAO {
             ResultSet resultSet = statement.executeQuery(sql);
 
             if (resultSet.next()) {
-                String maNhanVien = resultSet.getString(1).trim();
-                int number = Integer.parseInt(maNhanVien.substring(2));
+                String idStaff = resultSet.getString(1).trim();
+                int number = Integer.parseInt(idStaff.substring(2));
                 number++;
-                String maNhanVienNew = number + "";
+                String idStaffNew = number + "";
 
-                while (maNhanVienNew.length() < 4) {
-                    maNhanVienNew = "0" + maNhanVienNew;
+                while (idStaffNew.length() < 4) {
+                    idStaffNew = "0" + idStaffNew;
                 }
 
-                return "NV" + maNhanVienNew;
+                return "NV" + idStaffNew;
             } else {
                 return "NV0001";
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return null;
     }
 
