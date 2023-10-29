@@ -330,7 +330,7 @@ public class Staff_GUI extends javax.swing.JPanel {
             jPTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPTableLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jspTable, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE))
+                .addComponent(jspTable, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE))
         );
 
         jpMain.add(jPTable);
@@ -339,7 +339,7 @@ public class Staff_GUI extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpMain, javax.swing.GroupLayout.DEFAULT_SIZE, 1001, Short.MAX_VALUE)
+            .addComponent(jpMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -497,14 +497,16 @@ public class Staff_GUI extends javax.swing.JPanel {
     }//GEN-LAST:event_btnRestoreActionPerformed
 
     private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
-        Flag.setFlagStaffInfo(2);
-        int selectRow = jTable.getSelectedRow();
-        Flag.setFlagIDStaff(defaultTableModel.getValueAt(selectRow, 0).toString()); // set ID nhân viên chơ cờ
-        Flag.setFlagStaffInfo(2); // set trạng thái hiện tại là chức năng chỉnh sửa thông tin
-        stopWebcam();
-        jpMain.removeAll();
-        staff_InfoStaff_GUI = new Staff_InfoStaff_GUI();
-        addJPanel(staff_InfoStaff_GUI);
+        if (evt.getClickCount() == 2) {
+            Flag.setFlagStaffInfo(2);
+            int selectRow = jTable.getSelectedRow();
+            Flag.setFlagIDStaff(defaultTableModel.getValueAt(selectRow, 0).toString()); // set ID nhân viên chơ cờ
+            Flag.setFlagStaffInfo(2); // set trạng thái hiện tại là chức năng chỉnh sửa thông tin
+            stopWebcam();
+            jpMain.removeAll();
+            staff_InfoStaff_GUI = new Staff_InfoStaff_GUI();
+            addJPanel(staff_InfoStaff_GUI);
+        }
     }//GEN-LAST:event_jTableMouseClicked
 
     public void loadData(String sql) {

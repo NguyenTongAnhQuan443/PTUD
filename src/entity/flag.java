@@ -9,7 +9,6 @@ public class Flag {
     // 0 là mặc định
     // 1 là mở chức năng thêm nhân viên
     // 2 là mở chức năng sửa thông tin nhân viên
-
     public static String flagIDStaff; // lấy idStaff
 
 //    constructor

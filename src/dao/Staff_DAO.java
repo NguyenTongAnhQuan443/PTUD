@@ -2,8 +2,8 @@ package dao;
 
 import java.sql.Connection; //
 import connectDB.ConnectDB; //
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.PreparedStatement;//
+import java.sql.ResultSet;//
 import java.sql.Statement; //
 import entity.Staff;
 import entity.Ward;
@@ -272,7 +272,7 @@ public class Staff_DAO extends DAO {
         String sql = "SELECT * FROM Staff";
         try {
             connectDB.ConnectDB.getInstance();
-            Connection connection = (Connection) ConnectDB.getConnection();
+            Connection connection = ConnectDB.getConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
@@ -494,6 +494,21 @@ public class Staff_DAO extends DAO {
             e.printStackTrace();
         }
 
+        return false;
+    }
+    //    kiểm tra số Email tồn tại
+    public boolean checkEmailExist(String emailCheck) {
+        try {
+            PreparedStatement preparedStatement = ConnectDB.getConnection()
+                    .prepareStatement("SELECT * FROM [dbo].[Staff] WHERE [email] = ?");
+            preparedStatement.setString(1, emailCheck);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            return resultSet.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 

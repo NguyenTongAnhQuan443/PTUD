@@ -149,7 +149,7 @@ public class Home_GUI extends javax.swing.JFrame {
         jpCenter = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Phần mềm quản lsy bán quần áo FleyShop");
+        setTitle("Phần mềm quản lý bán quần áo FleyShop");
         setResizable(false);
 
         jpMain.setLayout(new java.awt.BorderLayout());

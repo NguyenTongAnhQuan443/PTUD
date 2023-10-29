@@ -478,7 +478,7 @@ public class Staff_InfoStaff_GUI extends javax.swing.JPanel {
         try {
             setDistrictToComboBox(Staff_InfoStaff_GUI.this.province);
         } catch (SQLException ex) {
-            
+
         }
         repaint();
         cbDistrict.setEnabled(true);
@@ -512,7 +512,6 @@ public class Staff_InfoStaff_GUI extends javax.swing.JPanel {
     }//GEN-LAST:event_cbRightsActionPerformed
 
     private void cbDistrictItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbDistrictItemStateChanged
-
         if (!isEnabledEventDistrict) {
             return;
         }
@@ -877,6 +876,9 @@ public class Staff_InfoStaff_GUI extends javax.swing.JPanel {
             if (staff_DAO.checkPhoneExist(phone)) {
                 return showERROR(jtfPhone, "Số điện thoại này đã được sử dụng trên hệ thống vui lòng kiểm tra lại !");
             }
+            if(staff_DAO.checkEmailExist(email)){
+                return showERROR(jtfPhone, "Email này đã được sử dụng trên hệ thống vui lòng kiểm tra lại !");
+            }
             String pass = jtfPass.getText().trim();
             String regexPass = "^(?=.*[A-Z])(?=.*\\d)(?=.*\\W).{8,}$";
             if (checkRegex(pass, regexPass) == false) {
@@ -908,6 +910,9 @@ public class Staff_InfoStaff_GUI extends javax.swing.JPanel {
                 }
                 if (staff_DAO.checkPhoneExist(phone)) {
                     return showERROR(jtfPhone, "Số điện thoại này đã được sử dụng trên hệ thống vui lòng kiểm tra lại !");
+                }
+                if (staff_DAO.checkEmailExist(email)) {
+                    return showERROR(jtfPhone, "Email này đã được sử dụng trên hệ thống vui lòng kiểm tra lại !");
                 }
             }
         }

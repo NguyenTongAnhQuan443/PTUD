@@ -26,10 +26,15 @@ public class Supplier {
     private String idSupplier;
     private String name;
     private String email;
+    private String phone;
     private Status status;
-
+    private Province province;
+    private District district;
+    private Ward ward;
+    private String address;
+    
 //    get set
-    public String getIdSupplier() {
+    public String getIdSupplier() {    
         return idSupplier;
     }
 
@@ -53,12 +58,52 @@ public class Supplier {
         this.email = email;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public Status getStatus() {
         return status;
     }
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public Province getProvince() {
+        return province;
+    }
+
+    public void setProvince(Province province) {
+        this.province = province;
+    }
+
+    public District getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(District district) {
+        this.district = district;
+    }
+
+    public Ward getWard() {
+        return ward;
+    }
+
+    public void setWard(Ward ward) {
+        this.ward = ward;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {   
+        this.address = address;
     }
 
 //    Constructor
@@ -71,14 +116,19 @@ public class Supplier {
         this.idSupplier = idSupplier;
     }
 
-    public Supplier(String idSupplier, String name, String email, Status status) {
+    public Supplier(String idSupplier, String name, String email, String phone, Status status, Province province, District district, Ward ward, String address) {
         super();
         this.idSupplier = idSupplier;
         this.name = name;
         this.email = email;
+        this.phone = phone;
         this.status = status;
+        this.province = province;
+        this.district = district;
+        this.ward = ward;
+        this.address = address;
     }
-
+    
 //    Hash code equals
     @Override
     public int hashCode() {
@@ -103,9 +153,10 @@ public class Supplier {
     }
 
 //    toString
+
     @Override
     public String toString() {
-        return "Supplier{" + "idSupplier=" + idSupplier + ", name=" + name + ", email=" + email + ", status=" + status + '}';
+        return "Supplier{" + "idSupplier=" + idSupplier + ", name=" + name + ", email=" + email + ", phone=" + phone + ", status=" + status + ", province=" + province + ", district=" + district + ", ward=" + ward + ", address=" + address + '}';
     }
 
 }

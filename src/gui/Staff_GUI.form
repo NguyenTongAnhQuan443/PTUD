@@ -16,7 +16,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jpMain" alignment="0" pref="1001" max="32767" attributes="0"/>
+          <Component id="jpMain" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -366,7 +366,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jspTable" pref="344" max="32767" attributes="0"/>
+                      <Component id="jspTable" pref="667" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
