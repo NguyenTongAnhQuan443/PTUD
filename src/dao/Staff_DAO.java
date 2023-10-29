@@ -182,24 +182,24 @@ public class Staff_DAO extends DAO {
     return false;
 }
     
-//    thôi việc nhân viên
-//    public boolean setStatusWorking(String idStaff) {
-//        PreparedStatement preparedStatement = null;
-//        String sql = "UPDATE Staff SET status = N'Nghỉ làm' WHERE idStaff = ?";
-//        try {
-//            preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
-//            preparedStatement.setString(1, idStaff);
-//
-//            return preparedStatement.executeUpdate() > 0;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            close(preparedStatement);
-//        }
-//        return false;
-//    }
+//    khôi phục trạng thái làm việc của nhân viên
+    public boolean setStatusWorking(String idStaff) {
+        PreparedStatement preparedStatement = null;
+        String sql = "UPDATE Staff SET status = N'Đang làm' WHERE idStaff = ?";
+        try {
+            preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, idStaff);
 
-//    lấy những nhân viên có trạng thái là "Đang làm"
+            return preparedStatement.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            close(preparedStatement);
+        }
+        return false;
+    }
+
+//    lấy những nhân viên có theo trạng thái làm việc
     public List<Staff> getListStaffByStatus(String sqlStatus) {
         List<Staff> listStaff = new ArrayList<Staff>();
         String sql = sqlStatus;
@@ -232,6 +232,39 @@ public class Staff_DAO extends DAO {
         }
 
         return listStaff;
+    }
+    
+    //Tìm nhân viên theo mã nhân viên và trạng thái làm việc
+    public Staff getStaffByIDAndStatus(String idStaff, String statusWorking) {
+        String sql = "SELECT * FROM Staff WHERE idStaff = ? AND status = ?";
+        try {
+            PreparedStatement preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, idStaff);
+            preparedStatement.setString(2, statusWorking);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                String id = resultSet.getString("idStaff");
+                String name = resultSet.getString("name");
+                String cic = resultSet.getString("cic");
+                String phone = resultSet.getString("phone");
+                String email = resultSet.getString("email");
+                LocalDate dayofbirth = resultSet.getDate("dayofbirth").toLocalDate();
+                boolean sex = resultSet.getBoolean("sex");
+                String province = resultSet.getString("province");
+                String district = resultSet.getString("district");
+                String ward = resultSet.getString("ward");
+                String address = resultSet.getString("address");
+                String rights = resultSet.getString("rights");
+                String status = resultSet.getString("status");
+                String password = resultSet.getString("password");
+                Staff staff = new Staff(idStaff, name, cic, phone, email, dayofbirth, sex, new Province(province), new District(district), new Ward(ward), address, Staff.convertStringToRights(rights), Staff.convertStringToStatus(status), password);
+                return staff;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 // Lấy toàn bộ nhân viên

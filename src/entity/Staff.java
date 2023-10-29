@@ -8,7 +8,7 @@ public class Staff {
 // enum
 
     public static enum Rights {
-        NhanVienBanHang, NhanVienQuanLy
+        NhanVienBanHang, NhanVienQuanLy, NhanVienVanChuyen
     }
 
     public static enum Status {
@@ -18,15 +18,19 @@ public class Staff {
     public static String convertRightsToString(Rights right) {
         if (right.equals(right.NhanVienBanHang)) {
             return "Nhân viên bán hàng";
+        } else if (right.equals(right.NhanVienQuanLy)) {
+            return "Nhân viên quản lý";
         }
-        return "Nhân viên quản lý";
+        return "Nhân viên vận chuyển";
     }
 
     public static Rights convertStringToRights(String rights) {
         if (rights.equals("Nhân viên bán hàng")) {
             return Rights.NhanVienBanHang;
+        } else if (rights.equals("Nhân viên quản lý")) {
+            return Rights.NhanVienQuanLy;
         }
-        return Rights.NhanVienQuanLy;
+        return Rights.NhanVienVanChuyen;
     }
 
     public static Status convertStringToStatus(String status) {

@@ -3,12 +3,13 @@ package entity;
 public class Flag {
 
     private static Flag instence = new Flag();
-    public static boolean flagStaffGUI; // kiểm tra mở gui danh sách nhân viên đang làm hay nghỉ làm
-    public  static int flagStaffInfo;
+    public static boolean flagStaffGUI;
+    // kiểm tra mở gui danh sách nhân viên đang làm hay nghỉ làm
+    public static int flagStaffInfo;
     // 0 là mặc định
     // 1 là mở chức năng thêm nhân viên
     // 2 là mở chức năng sửa thông tin nhân viên
-    
+
     public static String flagIDStaff; // lấy idStaff
 
 //    constructor
@@ -48,7 +49,4 @@ public class Flag {
         Flag.flagIDStaff = flagIDStaff;
     }
 
-
-    
-    
 }

@@ -85,9 +85,14 @@ public class Staff_GUI1 extends javax.swing.JPanel {
         if (Flag.isFlagStaffGUI() == false) {
             loadData("SELECT * FROM Staff WHERE status = N'Nghỉ làm'");
             defaultTableModel.fireTableDataChanged(); // reload data
+            btnAdd.setVisible(false);
+            btnInputFile.setVisible(false);
         } else {
             loadData("SELECT * FROM Staff WHERE status = N'Đang làm'");
             defaultTableModel.fireTableDataChanged(); // reload data
+            jlStatusWKS.setVisible(false);
+            jtfIDRestore.setVisible(false);
+            btnRestore.setVisible(false);
         }
     }
 
@@ -103,9 +108,13 @@ public class Staff_GUI1 extends javax.swing.JPanel {
         jtfInputID = new javax.swing.JTextField();
         btnSearch = new lib2.Button();
         jpTop1Right = new javax.swing.JPanel();
+        btnRestore = new lib2.Button();
+        jtfIDRestore = new javax.swing.JTextField();
+        jlStatusWKS = new javax.swing.JLabel();
         jpTopBottom = new javax.swing.JPanel();
         btnAdd = new lib2.Button();
         btnEdit = new lib2.Button();
+        btnRelaod = new lib2.Button();
         btnInputFile = new lib2.Button();
         btnOutputFile = new lib2.Button();
         jPTable = new javax.swing.JPanel();
@@ -136,6 +145,11 @@ public class Staff_GUI1 extends javax.swing.JPanel {
         btnSearch.setText("Tìm kiếm");
         btnSearch.setToolTipText("");
         btnSearch.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpTop1LeftLayout = new javax.swing.GroupLayout(jpTop1Left);
         jpTop1Left.setLayout(jpTop1LeftLayout);
@@ -148,7 +162,7 @@ public class Staff_GUI1 extends javax.swing.JPanel {
                 .addComponent(jtfInputID, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         jpTop1LeftLayout.setVerticalGroup(
             jpTop1LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,22 +172,51 @@ public class Staff_GUI1 extends javax.swing.JPanel {
                     .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfInputID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlSearch))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jpTop1.add(jpTop1Left);
 
         jpTop1Right.setBackground(new java.awt.Color(255, 255, 255));
 
+        btnRestore.setBackground(new java.awt.Color(135, 206, 235));
+        btnRestore.setForeground(new java.awt.Color(255, 255, 255));
+        btnRestore.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/waiting24.png"))); // NOI18N
+        btnRestore.setText("Khôi phục trạng thái làm việc NV");
+        btnRestore.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnRestore.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRestoreActionPerformed(evt);
+            }
+        });
+
+        jtfIDRestore.setText("Nhập mã nhân viên");
+
+        jlStatusWKS.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        jlStatusWKS.setText("Trạng thái làm việc: ");
+
         javax.swing.GroupLayout jpTop1RightLayout = new javax.swing.GroupLayout(jpTop1Right);
         jpTop1Right.setLayout(jpTop1RightLayout);
         jpTop1RightLayout.setHorizontalGroup(
             jpTop1RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 550, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpTop1RightLayout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(jlStatusWKS)
+                .addGap(12, 12, 12)
+                .addComponent(jtfIDRestore, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnRestore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jpTop1RightLayout.setVerticalGroup(
             jpTop1RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 64, Short.MAX_VALUE)
+            .addGroup(jpTop1RightLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpTop1RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRestore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfIDRestore, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlStatusWKS))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jpTop1.add(jpTop1Right);
@@ -207,6 +250,18 @@ public class Staff_GUI1 extends javax.swing.JPanel {
             }
         });
         jpTopBottom.add(btnEdit);
+
+        btnRelaod.setBackground(new java.awt.Color(135, 206, 235));
+        btnRelaod.setForeground(new java.awt.Color(255, 255, 255));
+        btnRelaod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/refresh24.png"))); // NOI18N
+        btnRelaod.setText("Làm mới danh sách NV");
+        btnRelaod.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnRelaod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelaodActionPerformed(evt);
+            }
+        });
+        jpTopBottom.add(btnRelaod);
 
         btnInputFile.setBackground(new java.awt.Color(135, 206, 235));
         btnInputFile.setForeground(new java.awt.Color(255, 255, 255));
@@ -355,7 +410,14 @@ public class Staff_GUI1 extends javax.swing.JPanel {
             if (!pathname.toLowerCase().endsWith(".xlsx")) {
                 pathname += ".xlsx";
             }
-            List<Staff> staffList = staff_DAO.getListStaff();
+            List<Staff> staffList;
+            if (Flag.isFlagStaffGUI() == true) {
+                String sql = "SELECT * FROM Staff WHERE status = N'Đang làm'";
+                staffList = staff_DAO.getListStaffByStatus(sql);
+            } else {
+                String sql = "SELECT * FROM Staff WHERE status = N'Nghỉ làm'";
+                staffList = staff_DAO.getListStaffByStatus(sql);
+            }
 
             // Kiểm tra nếu danh sách staffList không rỗng, sau đó tiến hành ghi vào tệp Excel
             if (!staffList.isEmpty()) {
@@ -367,6 +429,67 @@ public class Staff_GUI1 extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_btnOutputFileActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        String id = jtfInputID.getText().trim();
+        if (id.equals("") || id.equals("Nhập mã nhân viên")) {
+            JOptionPane.showMessageDialog(null, "Vui lòng nhập mã nhân viên cần tìm !");
+        } else {
+            if (Flag.isFlagStaffGUI() == true) {
+                Staff staff = staff_DAO.getStaffByIDAndStatus(id, "Đang làm");
+                if (staff != null) {
+                    loadDataSearch(staff);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Không tìm thấy nhân viên có mã " + id + " trong danh sách Đang làm");
+                }
+            } else if (Flag.isFlagStaffGUI() == false) {
+                Staff staff = staff_DAO.getStaffByIDAndStatus(id, "Nghỉ làm");
+                if (staff != null) {
+                    loadDataSearch(staff);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Không tìm thấy nhân viên có mã " + id + " trong danh sách Nghỉ làm");
+                }
+            }
+        }
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnRelaodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelaodActionPerformed
+        if (Flag.isFlagStaffGUI() == false) {
+            loadData("SELECT * FROM Staff WHERE status = N'Nghỉ làm'");
+            defaultTableModel.fireTableDataChanged(); // reload data
+            JOptionPane.showMessageDialog(null, "Danh sách nhân viên đã được làm mới");
+        } else {
+            loadData("SELECT * FROM Staff WHERE status = N'Đang làm'");
+            defaultTableModel.fireTableDataChanged(); // reload data
+            JOptionPane.showMessageDialog(null, "Danh sách nhân viên đã được làm mới");
+        }
+    }//GEN-LAST:event_btnRelaodActionPerformed
+
+    private void btnRestoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestoreActionPerformed
+        if (Flag.isFlagStaffGUI() == false) {
+            String id = jtfIDRestore.getText().trim();
+            if (id.equals("") || id.equals("Nhập mã nhân viên")) {
+                JOptionPane.showMessageDialog(null, "Vui lòng nhập mã nhân viên trước khi thao tác !");
+            } else {
+                boolean res = staff_DAO.setStatusWorking(id);
+                if (res) {
+                    int confirm = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn khôi phục trạng thái làm việc của nhân viên hay không ?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+                    if (confirm == JOptionPane.YES_OPTION) {
+                        if (Flag.isFlagStaffGUI() == false) {
+                            loadData("SELECT * FROM Staff WHERE status = N'Nghỉ làm'");
+                            defaultTableModel.fireTableDataChanged(); // reload data
+                        } else {
+                            loadData("SELECT * FROM Staff WHERE status = N'Đang làm'");
+                            defaultTableModel.fireTableDataChanged(); // reload data
+                        }
+                        JOptionPane.showMessageDialog(null, "Đã khôi phục trạng thái làm việc của nhân viên");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Không tìm thấy nhân viên trong danh sách. Vui lòng kiểm tra lại");
+                }
+            }
+        }
+    }//GEN-LAST:event_btnRestoreActionPerformed
 
     public void loadData(String sql) {
         defaultTableModel.setRowCount(0);
@@ -527,15 +650,50 @@ public class Staff_GUI1 extends javax.swing.JPanel {
         }
     }
 
+//    load dữ liệu nhân viên timd được khi nhấn nút tìm kiếm
+    public void loadDataSearch(Staff staff) {
+        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+        while (model.getRowCount() > 0) {
+            model.removeRow(0);
+        }
+        String sex = "";
+        if (staff.isSex()) {
+            sex = "Nam";
+        } else {
+            sex = "Nữ";
+        }
+        String province = province_DAO.getProvinceNameByID(staff.getProvince().getId().toString());
+        String district = district_DAO.getDistrictNameByID(staff.getDistrict().getId().toString());
+        String ward = ward_DAO.getWardNameByID(staff.getWard().getId().toString());
+        String address = staff.getAddress();
+        String addressDetails = province + ", " + district + ", " + ward + ", " + address;
+        String rights = Staff.convertRightsToString(staff.getRights());
+        Object[] rowData = {
+            staff.getIdStaff(),
+            staff.getName(),
+            staff.getCic(),
+            staff.getPhone(),
+            staff.getEmail(),
+            staff.getDayofbirth(),
+            sex,
+            addressDetails,
+            rights
+        };
+        model.addRow(rowData);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnAdd;
     private lib2.Button btnEdit;
     private lib2.Button btnInputFile;
     private lib2.Button btnOutputFile;
+    private lib2.Button btnRelaod;
+    private lib2.Button btnRestore;
     private lib2.Button btnSearch;
     private javax.swing.JPanel jPTable;
     private javax.swing.JTable jTable;
     private javax.swing.JLabel jlSearch;
+    private javax.swing.JLabel jlStatusWKS;
     public static javax.swing.JPanel jpMain;
     private javax.swing.JPanel jpTop;
     private javax.swing.JPanel jpTop1;
@@ -543,6 +701,7 @@ public class Staff_GUI1 extends javax.swing.JPanel {
     private javax.swing.JPanel jpTop1Right;
     private javax.swing.JPanel jpTopBottom;
     private javax.swing.JScrollPane jspTable;
+    private javax.swing.JTextField jtfIDRestore;
     private javax.swing.JTextField jtfInputID;
     // End of variables declaration//GEN-END:variables
 }
