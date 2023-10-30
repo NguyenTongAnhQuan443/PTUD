@@ -9,13 +9,20 @@ public class Flag {
     // 0 là mặc định
     // 1 là mở chức năng thêm nhân viên
     // 2 là mở chức năng sửa thông tin nhân viên
-    public static String flagIDStaff; // lấy idStaff
+    public static String flagIDStaff; // lấy idStaff cho chức năng cập nhập
+    public static int flagUpdateSupplier;
+    // 0 là mặc định
+    // 1 là mở chức năng thêm nhà cung cấp
+    // 2 là mở chức năng cập nhập nhà cung cấp
+    public static String flagIDSupplier; // lấy id supplier cho chức năng cập nhập
 
 //    constructor
     public Flag() {
         flagStaffGUI = false;
         flagStaffInfo = 0;
         flagIDStaff = "";
+        flagUpdateSupplier = 0;
+        flagIDSupplier = "";
     }
 
 //    
@@ -46,6 +53,22 @@ public class Flag {
 
     public static void setFlagIDStaff(String flagIDStaff) {
         Flag.flagIDStaff = flagIDStaff;
+    }
+
+    public static int getFlagUpdateSupplier() {
+        return flagUpdateSupplier;
+    }
+
+    public static void setFlagUpdateSupplier(int flagUpdateSupplier) {
+        Flag.flagUpdateSupplier = flagUpdateSupplier;
+    }
+
+    public static String getFlagIDSupplier() {
+        return flagIDSupplier;
+    }
+
+    public static void setFlagIDSupplier(String flagIDSupplier) {
+        Flag.flagIDSupplier = flagIDSupplier;
     }
 
 }

@@ -22,32 +22,36 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class Supplier_GUI extends javax.swing.JPanel {
-
+    
     private Province province;
     private District district;
     private Ward ward;
     private Supplier_DAO supplier_DAO = new Supplier_DAO();
-
+    
     private boolean isEnabledEventWard = false;
     private boolean isEnabledEventDistrict = false;
     private boolean isEnabledEventProvince = false;
-
+    
     private Province_DAO province_DAO = new Province_DAO();
     private District_DAO district_DAO = new District_DAO();
     private Ward_DAO ward_DAO = new Ward_DAO();
-
+    
     private DefaultTableModel defaultTableModel;
-
+    
     public Supplier_GUI() {
         initComponents();
         TableCustom.apply(jspTableSupplier, TableCustom.TableType.DEFAULT);
         defaultTableModel = (DefaultTableModel) jTableSupplier.getModel();
-
+        
         setProvinceToComboBox();
         offInput();
         loadData();
-    }
 
+//        if (Flag.getFlagUpdateSupplier() == 2) {
+//            btnSave.setEnabled(true);
+//        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -350,36 +354,42 @@ public class Supplier_GUI extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-//        if (btnEdit.getText().equals("Hủy  ")) {
-//            clearinput();
-//            offInput();
-//            btnEdit.setText("Cập nhập  ");
-//            btnAdd.setText("Thêm nhà cung cấp  ");
-//        } else if (btnEdit.getText().equals("Cập nhập  ")) {
-//
-//        }
+        Flag.setFlagUpdateSupplier(2);
         int selectRow = jTableSupplier.getSelectedRow();
         if (selectRow == -1) {
             JOptionPane.showMessageDialog(null, "Bạn chưa chọn nhà cung cấp muốn cập nhập thông tin !");
         } else {
             btnAdd.setEnabled(false);
+            onInput();
+            btnSave.setEnabled(true);
         }
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        jtfIDSupplier.setText(supplier_DAO.createIDSupplier());
+        jtfIDSupplier.setText(supplier_DAO.createIDSupplier().toString());
+        Flag.setFlagUpdateSupplier(1);
         if (btnAdd.getText().trim().equals("Thêm mới")) {
             onInput();
 //        btnAdd.setEnabled(false);
             btnSave.setEnabled(true);
             btnEdit.setEnabled(false);
-
             btnAdd.setText("Hủy");
+            
+            if (!(jtfNameSupplier.getText().trim().equals(""))) {
+//              nếu 1 trong các jtf có dữ liệu tức là có thao tác chọn index bên dưới jtbale => remove all 
+                jtfAddressDetails.setText("");
+                jtfEmail.setText("");
+                jtfNameSupplier.setText("");
+                jtfSearchPhone.setText("");
+                jtfPhoneSupplier.setText("");
+                setIndexCB();
+            }
         } else if (btnAdd.getText().trim().equals("Hủy")) {
             btnSave.setEnabled(false);
             btnEdit.setEnabled(true);
             btnAdd.setText("Thêm mới");
             offInput();
+            
             clearinput();
             setIndexCB();
         }
@@ -400,13 +410,13 @@ public class Supplier_GUI extends javax.swing.JPanel {
         isEnabledEventDistrict = false;
         isEnabledEventWard = false;
         String nameProvinceIsSelected = (String) cbProvince.getSelectedItem();
-
+        
         cbWard.setSelectedIndex(0);
         cbWard.setEnabled(false);
         cbDistrict = (ComboBoxSuggestion) resizeComboBox(cbDistrict, District.getDistrictLabel());
         district = null;
         ward = null;
-
+        
         if (nameProvinceIsSelected.equals(province.getProvinceLabel())) {
             cbDistrict.setSelectedIndex(0);
             cbDistrict.setEnabled(false);
@@ -415,11 +425,11 @@ public class Supplier_GUI extends javax.swing.JPanel {
         }
         Province province = province_DAO.getProvinceByNameProvince(nameProvinceIsSelected);
         Supplier_GUI.this.province = province;
-
+        
         try {
             setDistrictToComboBox(Supplier_GUI.this.province);
         } catch (SQLException ex) {
-
+            
         }
         repaint();
         cbDistrict.setEnabled(true);
@@ -436,7 +446,7 @@ public class Supplier_GUI extends javax.swing.JPanel {
         String nameDistrictSelected = (String) cbDistrict.getSelectedItem();
         cbWard = (ComboBoxSuggestion) resizeComboBox(cbWard, Ward.getWardLabel());
         ward = null;
-
+        
         if (nameDistrictSelected.equals(District.getDistrictLabel())) {
             cbWard.setSelectedIndex(0);
             cbWard.setEnabled(false);
@@ -457,47 +467,71 @@ public class Supplier_GUI extends javax.swing.JPanel {
         }
         isEnabledEventWard = false;
         String nameWardSelected = cbWard.getSelectedItem().toString();
-
+        
         if (nameWardSelected.equals(Ward.getWardLabel())) {
             ward = null;
             return;
         }
-
+        
         Ward ward = ward_DAO.getWardByNameWard(district, nameWardSelected);
         Supplier_GUI.this.ward = ward;
         isEnabledEventWard = false;
     }//GEN-LAST:event_cbWardItemStateChanged
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        if (btnAdd.getText().trim().equals("Hủy")) {
-            if (validator()) {
-                String idSupplier = jtfIDSupplier.getText().trim();
-                String name = jtfNameSupplier.getText().trim();
-                String email = jtfEmail.getText().trim();
-                String phone = jtfPhoneSupplier.getText().trim();
-                String addressDetails = jtfAddressDetails.getText().trim();
-                Supplier supplier = new Supplier(idSupplier, name, email, phone, Supplier.convertStringToStatus(cbStatus.getSelectedItem().toString()), Supplier_GUI.this.province, Supplier_GUI.this.district, Supplier_GUI.this.ward, addressDetails);
-                boolean res = supplier_DAO.addSupplier(supplier);
-                if (res) {
+        if (Flag.getFlagUpdateSupplier() == 1) {
+            if (btnAdd.getText().trim().equals("Hủy")) {
+                if (validator()) {
+                    String idSupplier = jtfIDSupplier.getText().trim();
+                    String name = jtfNameSupplier.getText().trim();
+                    String email = jtfEmail.getText().trim();
+                    String phone = jtfPhoneSupplier.getText().trim();
+                    String addressDetails = jtfAddressDetails.getText().trim();
+                    Supplier supplier = new Supplier(idSupplier, name, email, phone, Supplier.convertStringToStatus(cbStatus.getSelectedItem().toString()), Supplier_GUI.this.province, Supplier_GUI.this.district, Supplier_GUI.this.ward, addressDetails);
+                    boolean res = supplier_DAO.addSupplier(supplier);
+                    if (res) {
+                        loadData();
+                        clearinput();
+                        btnSave.setEnabled(false);
+                        btnAdd.setEnabled(true);
+                        offInput();
+                        setIndexCB();
+                        btnEdit.setEnabled(true);
+                        btnAdd.setText("Thêm mới");
+                        JOptionPane.showMessageDialog(null, "Thêm nhà cung cấp thành công !");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Thêm nhà cung cấp thất bại !");
+                    }
+                }
+            }
+        } else if (Flag.getFlagUpdateSupplier() == 2) {
+            String id = jtfIDSupplier.getText().trim();
+            String name = jtfNameSupplier.getText().trim();
+            String email = jtfEmail.getText().trim();
+            String phone = jtfPhoneSupplier.getText().trim();
+            String addressDetails = jtfAddressDetails.getText().trim();
+            Supplier supplierUpdate = new Supplier(id, name, email, phone, Supplier.convertStringToStatus(cbStatus.getSelectedItem().toString()), Supplier_GUI.this.province, Supplier_GUI.this.district, Supplier_GUI.this.ward, addressDetails);
+            boolean res = supplier_DAO.updateInfoSupplier(supplierUpdate);
+            if (res) {
+                int resultTMP = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn cập nhập lại thông tin NCC không ?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+                if (resultTMP == JOptionPane.YES_OPTION) {
                     loadData();
-                    clearinput();
                     btnSave.setEnabled(false);
-                    btnAdd.setEnabled(true);
+                    clearinput();
                     offInput();
                     setIndexCB();
-                    btnEdit.setEnabled(true);
-                    btnAdd.setText("Thêm mới");
-                    JOptionPane.showMessageDialog(null, "Thêm nhà cung cấp thành công !");
-                } else {
-                    JOptionPane.showMessageDialog(null, "Thêm nhà cung cấp thất bại !");
+                    btnAdd.setEnabled(true);
+                    JOptionPane.showMessageDialog(null, "Đã cập nhập thông tin nhà cung cấp");
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "Cập nhập thông tin nhà cung cấp thất bại vui lòng kiểm tra lại !");
             }
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void jTableSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableSupplierMouseClicked
-
-        if (evt.getClickCount() == 1) {
+        
+        if (evt.getClickCount() == 1 && btnAdd.getText().equals("Thêm mới")) {
             int selectedRow = jTableSupplier.getSelectedRow();
             jtfIDSupplier.setText(jTableSupplier.getValueAt(selectedRow, 0).toString());
             jtfNameSupplier.setText(jTableSupplier.getValueAt(selectedRow, 1).toString());
@@ -508,20 +542,79 @@ public class Supplier_GUI extends javax.swing.JPanel {
             } else if (jTableSupplier.getValueAt(selectedRow, 4).toString().equals("Ngưng hợp tác")) {
                 cbStatus.setSelectedIndex(1);
             }
+            
+            int selectRow = jTableSupplier.getSelectedRow();
+            Flag.setFlagIDSupplier(defaultTableModel.getValueAt(selectRow, 0).toString()); // lấy id nhà cung cấp cần chỉnh sửa 
 
-            String provinceSTR = "";
-            String districtSTR = "";
-            String wardSTR = "";
-//            cắt chuỗi bằng dấu phẩy
+//          cắt chuỗi bằng dấu phẩy (để lấy addressDetails)
             String input = jTableSupplier.getValueAt(selectedRow, 5).toString();
             String[] parts = input.split(",");
-            if (parts.length >= 3) {
-                provinceSTR = parts[0].trim();
-                districtSTR = parts[1].trim();
-                wardSTR = parts[2].trim();
+            if (parts.length >= 4) {
+                jtfAddressDetails.setText(parts[3].trim()); // lấy chuỗi thứ 4
             }
-            
+
+//          lấy province
+            isEnabledEventProvince = false;
+            List<Province> listProvince = province_DAO.getListProvince();
+            listProvince.sort(new Comparator<Province>() {
+                @Override
+                public int compare(Province o1, Province o2) {
+                    return o1.getProvince().compareToIgnoreCase(o2.getProvince());
+                }
+            });
+            listProvince.forEach(province -> {
+                int index = listProvince.indexOf(province);
+                cbProvince.addItem(province.getProvince());
+                
+                Supplier supplierTMP = supplier_DAO.getSupplierByID(Flag.getFlagIDSupplier());
+                if (province.getId().equals(supplierTMP.getProvince().getId())) {
+                    cbProvince.setSelectedIndex(index + 1);
+                    Supplier_GUI.this.province = province;
+                }
+            });
+            isEnabledEventProvince = true;
         }
+
+//        lấy district
+        isEnabledEventDistrict = false;
+        List<District> listDistrict = district_DAO.getListDistrict(province);
+        listDistrict.sort(new Comparator<District>() {
+            @Override
+            public int compare(District o1, District o2) {
+                return o1.getDistrict().compareToIgnoreCase(o2.getDistrict());
+            }
+        });
+        listDistrict.forEach(district -> {
+            int index = listDistrict.indexOf(district);
+            cbDistrict.addItem(district.getDistrict());
+            Supplier supplierTMP = supplier_DAO.getSupplierByID(Flag.getFlagIDSupplier());
+            if (district.getId().equals(supplierTMP.getDistrict().getId())) {
+                cbDistrict.setSelectedIndex(index + 1);
+                Supplier_GUI.this.district = district;
+            }
+        });
+        isEnabledEventDistrict = true;
+
+//        lấy ward
+        isEnabledEventWard = false;
+        List<Ward> listWard = ward_DAO.getListWard(district);
+        listWard.sort(new Comparator<Ward>() {
+            @Override
+            public int compare(Ward o1, Ward o2) {
+                return o1.getWard().compareToIgnoreCase(o2.getWard());
+            }
+        });
+        listWard.forEach(ward -> {
+            int index = listWard.indexOf(ward);
+            cbWard.addItem(ward.getWard());
+            Supplier supplierTMP = supplier_DAO.getSupplierByID(Flag.getFlagIDSupplier());
+            if (ward.getId().equals(supplierTMP.getWard().getId())) {
+                cbWard.setSelectedIndex(index + 1);
+                Supplier_GUI.this.ward = ward;
+            }
+        });
+        isEnabledEventWard = true;
+
     }//GEN-LAST:event_jTableSupplierMouseClicked
     public void onInput() {
         jtfAddressDetails.setEditable(true);
@@ -529,36 +622,36 @@ public class Supplier_GUI extends javax.swing.JPanel {
         jtfNameSupplier.setEditable(true);
         jtfPhoneSupplier.setEditable(true);
         cbProvince.setEditable(true);
-
+        
         cbProvince.setEnabled(true);
         cbStatus.setEnabled(true);
     }
-
+    
     public void offInput() {
         jtfAddressDetails.setEditable(false);
         jtfEmail.setEditable(false);
         jtfNameSupplier.setEditable(false);
         jtfPhoneSupplier.setEditable(false);
         cbProvince.setEditable(false);
-
+        
         cbDistrict.setEnabled(false);
         cbWard.setEnabled(false);
         btnSave.setEnabled(false);
         cbProvince.setEnabled(false);
         cbStatus.setEnabled(false);
     }
-
+    
     public void setIndexCB() {
         cbWard.setSelectedIndex(0);
         cbDistrict.setSelectedIndex(0);
         cbProvince.setSelectedIndex(0);
         cbStatus.setSelectedIndex(0);
-
+        
         cbProvince.setEditable(false);
         cbDistrict.setEditable(false);
         cbWard.setEditable(false);
     }
-
+    
     public void clearinput() {
         jtfAddressDetails.setText("");
         jtfEmail.setText("");
@@ -588,15 +681,16 @@ public class Supplier_GUI extends javax.swing.JPanel {
      */
     private void setProvinceToComboBox() {
         isEnabledEventProvince = false;
-
+        
         List<Province> listProvince = province_DAO.getListProvince();
-
+        
         listProvince.sort(new Comparator<Province>() {
             @Override
             public int compare(Province o1, Province o2) {
                 return o1.getProvince().compareToIgnoreCase(o2.getProvince());
             }
         });
+        int selectRow = jTableSupplier.getSelectedRow(); // lấy dòng được chọn trên table
         listProvince.forEach(province -> cbProvince.addItem(province.getProvince()));
         isEnabledEventProvince = true;
     }
@@ -608,7 +702,7 @@ public class Supplier_GUI extends javax.swing.JPanel {
      */
     private void setDistrictToComboBox(Province province) throws SQLException {
         isEnabledEventDistrict = false;
-
+        
         List<District> listDistrict = district_DAO.getListDistrict(province);
         listDistrict.sort(new Comparator<District>() {
             @Override

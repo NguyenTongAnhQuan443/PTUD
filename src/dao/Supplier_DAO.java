@@ -127,4 +127,53 @@ public class Supplier_DAO extends DAO {
         }
         return false;
     }
+    
+    //    lấy nhà cung cấp bằng mã nhân viên
+    public Supplier getSupplierByID(String idSupplier) {
+        String sql = "SELECT * FROM Supplier WHERE idSupplier = ?";
+
+        try {
+            PreparedStatement preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, idSupplier);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                String name = resultSet.getString("name");
+                String email = resultSet.getString("email");
+                String phone = resultSet.getString("phone");
+                String status = resultSet.getString("status");
+                String province = resultSet.getString("province");
+                String district = resultSet.getString("district");
+                String ward = resultSet.getString("ward");
+                String address = resultSet.getString("address");
+                Supplier supplier = new Supplier(idSupplier.trim(), name, email, phone, Supplier.convertStringToStatus(status), new Province(province), new District(district), new Ward(ward), address);
+                return supplier;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    //    Cập nhập thông tin nhân viên
+    public boolean updateInfoSupplier(Supplier supplier) {
+        String sql = "Update Supplier SET name = ?, email = ?, phone = ?, status = ?, province = ?, district = ?, ward = ?, address = ? WHERE idSupplier = ?";
+        try {
+            PreparedStatement preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, supplier.getName());
+            preparedStatement.setString(2, supplier.getEmail());
+            preparedStatement.setString(3, supplier.getPhone());
+            preparedStatement.setString(4, Supplier.convertStatusToString(supplier.getStatus()));
+            preparedStatement.setString(5, supplier.getProvince().getId());
+            preparedStatement.setString(6, supplier.getDistrict().getId());
+            preparedStatement.setString(7, supplier.getWard().getId());
+            preparedStatement.setString(8, supplier.getAddress());
+            
+            preparedStatement.setString(9, supplier.getIdSupplier());
+            return preparedStatement.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
