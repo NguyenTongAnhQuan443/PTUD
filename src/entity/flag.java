@@ -70,5 +70,4 @@ public class Flag {
     public static void setFlagIDSupplier(String flagIDSupplier) {
         Flag.flagIDSupplier = flagIDSupplier;
     }
-
 }

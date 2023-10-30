@@ -143,45 +143,45 @@ public class Staff_DAO extends DAO {
         }
         return false;
     }
-    
+
 // thêm vào một danh sách nhân viên (dùng cho hàm import file excel)
     public boolean addStaffList(List<Staff> staffList) {
-    if (staffList == null || staffList.isEmpty()) {
-        return false; // Không thể thêm nếu danh sách trống hoặc null.
-    }
-
-    try {
-        Connection connection = ConnectDB.getConnection();
-        String sql = "INSERT INTO Staff VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
-        for (Staff staff : staffList) {
-            preparedStatement.setString(1, staff.getIdStaff());
-            preparedStatement.setString(2, staff.getName());
-            preparedStatement.setString(3, staff.getCic());
-            preparedStatement.setString(4, staff.getPhone());
-            preparedStatement.setString(5, staff.getEmail());
-            preparedStatement.setDate(6, java.sql.Date.valueOf(staff.getDayofbirth()));
-            preparedStatement.setBoolean(7, staff.isSex());
-            preparedStatement.setString(8, staff.getProvince().getId());
-            preparedStatement.setString(9, staff.getDistrict().getId());
-            preparedStatement.setString(10, staff.getWard().getId());
-            preparedStatement.setString(11, staff.getAddress());
-            preparedStatement.setString(12, staff.convertRightsToString(staff.getRights()));
-            preparedStatement.setString(13, staff.convertStatusToString(staff.getStatus()));
-            preparedStatement.setString(14, staff.getPassword());
-            preparedStatement.addBatch();
+        if (staffList == null || staffList.isEmpty()) {
+            return false; // Không thể thêm nếu danh sách trống hoặc null.
         }
 
-        preparedStatement.executeBatch();
-        preparedStatement.close();
-        return true;
-    } catch (SQLException ex) {
-        ex.printStackTrace();
+        try {
+            Connection connection = ConnectDB.getConnection();
+            String sql = "INSERT INTO Staff VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            for (Staff staff : staffList) {
+                preparedStatement.setString(1, staff.getIdStaff());
+                preparedStatement.setString(2, staff.getName());
+                preparedStatement.setString(3, staff.getCic());
+                preparedStatement.setString(4, staff.getPhone());
+                preparedStatement.setString(5, staff.getEmail());
+                preparedStatement.setDate(6, java.sql.Date.valueOf(staff.getDayofbirth()));
+                preparedStatement.setBoolean(7, staff.isSex());
+                preparedStatement.setString(8, staff.getProvince().getId());
+                preparedStatement.setString(9, staff.getDistrict().getId());
+                preparedStatement.setString(10, staff.getWard().getId());
+                preparedStatement.setString(11, staff.getAddress());
+                preparedStatement.setString(12, staff.convertRightsToString(staff.getRights()));
+                preparedStatement.setString(13, staff.convertStatusToString(staff.getStatus()));
+                preparedStatement.setString(14, staff.getPassword());
+                preparedStatement.addBatch();
+            }
+
+            preparedStatement.executeBatch();
+            preparedStatement.close();
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
     }
-    return false;
-}
-    
+
 //    khôi phục trạng thái làm việc của nhân viên
     public boolean setStatusWorking(String idStaff) {
         PreparedStatement preparedStatement = null;
@@ -233,7 +233,7 @@ public class Staff_DAO extends DAO {
 
         return listStaff;
     }
-    
+
     //Tìm nhân viên theo mã nhân viên và trạng thái làm việc
     public Staff getStaffByIDAndStatus(String idStaff, String statusWorking) {
         String sql = "SELECT * FROM Staff WHERE idStaff = ? AND status = ?";
@@ -497,6 +497,7 @@ public class Staff_DAO extends DAO {
 
         return false;
     }
+
     //    kiểm tra số Email tồn tại
     public boolean checkEmailExist(String emailCheck) {
         try {

@@ -138,6 +138,11 @@ public class Staff_GUI extends javax.swing.JPanel {
         jlSearch.setText("Tìm nhân viên :");
 
         jtfInputID.setText("Nhập mã nhân viên");
+        jtfInputID.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtfInputIDMouseClicked(evt);
+            }
+        });
 
         btnSearch.setBackground(new java.awt.Color(135, 206, 235));
         btnSearch.setForeground(new java.awt.Color(255, 255, 255));
@@ -432,7 +437,6 @@ public class Staff_GUI extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Không có dữ liệu nhân viên để lưu.");
             }
         }
-
     }//GEN-LAST:event_btnOutputFileActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
@@ -508,6 +512,10 @@ public class Staff_GUI extends javax.swing.JPanel {
             addJPanel(staff_InfoStaff_GUI);
         }
     }//GEN-LAST:event_jTableMouseClicked
+
+    private void jtfInputIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtfInputIDMouseClicked
+        jtfInputID.setText("");
+    }//GEN-LAST:event_jtfInputIDMouseClicked
 
     public void loadData(String sql) {
         defaultTableModel.setRowCount(0);
@@ -668,7 +676,7 @@ public class Staff_GUI extends javax.swing.JPanel {
         }
     }
 
-//    load dữ liệu nhân viên timd được khi nhấn nút tìm kiếm
+//    load dữ liệu nhân viên tìm được khi nhấn nút tìm kiếm
     public void loadDataSearch(Staff staff) {
         DefaultTableModel model = (DefaultTableModel) jTable.getModel();
         while (model.getRowCount() > 0) {

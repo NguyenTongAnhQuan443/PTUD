@@ -838,6 +838,9 @@ public class Staff_InfoStaff_GUI extends javax.swing.JPanel {
 
         String email = jtfEmail.getText().trim();
         String regexEmail = "^[A-Za-z0-9+_.-]+@(.+)$";
+        if(email.length() < 1){
+            return showERROR(jtfEmail, "Vui lòng nhập địa chỉ Email !");
+        }
         if (checkRegex(email, regexEmail) == false) {
             return showERROR(jtfEmail, "Email không đúng định dạng, vui lòng kiểm tra lại !");
         }
