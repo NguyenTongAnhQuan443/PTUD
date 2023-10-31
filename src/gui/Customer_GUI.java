@@ -21,10 +21,6 @@ public class Customer_GUI extends javax.swing.JPanel {
         jtfIDCus = new javax.swing.JTextField();
         jlNameCus = new javax.swing.JLabel();
         jlPhoneCus = new javax.swing.JLabel();
-        jpFunction = new javax.swing.JPanel();
-        btnClear = new lib2.Button();
-        btnEdit = new lib2.Button();
-        btnAdd = new lib2.Button();
         jlAddress = new javax.swing.JLabel();
         cbProvince = new lib2.ComboBoxSuggestion();
         cbDistrict = new lib2.ComboBoxSuggestion();
@@ -34,18 +30,20 @@ public class Customer_GUI extends javax.swing.JPanel {
         jtfPhoneCus = new javax.swing.JTextField();
         jtfAddressDetail = new javax.swing.JTextField();
         jcReceivePromotion = new javax.swing.JCheckBox();
+        btnAdd1 = new lib2.Button();
+        btnEdit = new lib2.Button();
+        btnClear = new lib2.Button();
         jpBottom = new javax.swing.JPanel();
         jpSelect = new javax.swing.JPanel();
         jpTable = new javax.swing.JPanel();
         jspTableCus = new javax.swing.JScrollPane();
         jTableCus = new javax.swing.JTable();
-        jpFunctionTable = new javax.swing.JPanel();
         jlFilterPhone = new javax.swing.JLabel();
         jtfFilterPhone = new javax.swing.JTextField();
         btnFilter = new lib2.Button();
         jlFilterStatus = new javax.swing.JLabel();
-        cbStatus = new lib2.ComboBoxSuggestion();
         jButton1 = new javax.swing.JButton();
+        cbStatus = new lib2.ComboBoxSuggestion();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
@@ -66,69 +64,23 @@ public class Customer_GUI extends javax.swing.JPanel {
 
         jlPhoneCus.setText("Số điện thoại : ");
 
-        jpFunction.setBackground(new java.awt.Color(255, 255, 255));
-        jpFunction.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        btnClear.setBackground(new java.awt.Color(135, 206, 235));
-        btnClear.setForeground(new java.awt.Color(255, 255, 255));
-        btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/clear24.png"))); // NOI18N
-        btnClear.setText("Làm mới");
-        btnClear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnClear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClearActionPerformed(evt);
-            }
-        });
-
-        btnEdit.setBackground(new java.awt.Color(135, 206, 235));
-        btnEdit.setForeground(new java.awt.Color(255, 255, 255));
-        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/edit24.png"))); // NOI18N
-        btnEdit.setText("Sửa");
-        btnEdit.setEnabled(false);
-        btnEdit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-
-        btnAdd.setBackground(new java.awt.Color(135, 206, 235));
-        btnAdd.setForeground(new java.awt.Color(255, 255, 255));
-        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/add24.png"))); // NOI18N
-        btnAdd.setText("Thêm");
-        btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jpFunctionLayout = new javax.swing.GroupLayout(jpFunction);
-        jpFunction.setLayout(jpFunctionLayout);
-        jpFunctionLayout.setHorizontalGroup(
-            jpFunctionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpFunctionLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpFunctionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                    .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jpFunctionLayout.setVerticalGroup(
-            jpFunctionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpFunctionLayout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
-                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
-        );
-
         jlAddress.setText("Địa chỉ : ");
 
         cbProvince.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tỉnh/Thành phố" }));
 
         cbDistrict.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Quận/Huyện" }));
+        cbDistrict.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbDistrictActionPerformed(evt);
+            }
+        });
 
         cbCommune.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Phường/Xã" }));
+        cbCommune.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCommuneActionPerformed(evt);
+            }
+        });
 
         jlAddressDetail.setText("Địa chỉ cụ thể :");
 
@@ -153,70 +105,105 @@ public class Customer_GUI extends javax.swing.JPanel {
         jcReceivePromotion.setBackground(new java.awt.Color(255, 255, 255));
         jcReceivePromotion.setText("Nhận thông tin chương trình khuyến mãi ?");
 
+        btnAdd1.setBackground(new java.awt.Color(135, 206, 235));
+        btnAdd1.setForeground(new java.awt.Color(255, 255, 255));
+        btnAdd1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/add24.png"))); // NOI18N
+        btnAdd1.setText("Thêm");
+        btnAdd1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAdd1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdd1ActionPerformed(evt);
+            }
+        });
+
+        btnEdit.setBackground(new java.awt.Color(135, 206, 235));
+        btnEdit.setForeground(new java.awt.Color(255, 255, 255));
+        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/edit24.png"))); // NOI18N
+        btnEdit.setText("Sửa");
+        btnEdit.setEnabled(false);
+        btnEdit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
+        btnClear.setBackground(new java.awt.Color(135, 206, 235));
+        btnClear.setForeground(new java.awt.Color(255, 255, 255));
+        btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/clear24.png"))); // NOI18N
+        btnClear.setText("Làm mới");
+        btnClear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpTopLayout = new javax.swing.GroupLayout(jpTop);
         jpTop.setLayout(jpTopLayout);
         jpTopLayout.setHorizontalGroup(
             jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpTopLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jpTopLayout.createSequentialGroup()
-                        .addComponent(jlIDCus)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jtfIDCus))
+                .addGap(30, 30, 30)
+                .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlIDCus)
+                    .addComponent(jlAddress)
+                    .addComponent(jlPhoneCus))
+                .addGap(25, 25, 25)
+                .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpTopLayout.createSequentialGroup()
                         .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlNameCus)
-                            .addComponent(jlAddress)
-                            .addComponent(jlAddressDetail))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jpTopLayout.createSequentialGroup()
+                                .addComponent(jtfIDCus, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(172, 172, 172)
+                                .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jlNameCus)
+                                    .addComponent(jlAddressDetail)))
                             .addGroup(jpTopLayout.createSequentialGroup()
                                 .addComponent(cbProvince, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(cbDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jtfNameCus)
-                            .addComponent(jtfAddressDetail))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbCommune, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jpTopLayout.createSequentialGroup()
-                        .addComponent(jlPhoneCus)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jtfPhoneCus, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jcReceivePromotion))
+                                .addComponent(cbCommune, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(80, 80, 80)
+                        .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jcReceivePromotion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jtfAddressDetail)
+                            .addComponent(jtfNameCus)))
+                    .addComponent(jtfPhoneCus, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(332, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpTopLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAdd1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jpFunction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(551, 551, 551))
         );
         jpTopLayout.setVerticalGroup(
             jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpTopLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpFunction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jpTopLayout.createSequentialGroup()
-                        .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlIDCus)
-                            .addComponent(jtfIDCus, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlPhoneCus)
-                            .addComponent(jtfPhoneCus, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jlNameCus)
-                                .addComponent(jtfNameCus, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jcReceivePromotion, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(18, 18, 18)
-                        .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbProvince, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlAddress)
-                            .addComponent(cbCommune, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtfAddressDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlAddressDetail))))
+                .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlIDCus)
+                    .addComponent(jtfIDCus, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlNameCus)
+                    .addComponent(jtfNameCus, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlPhoneCus)
+                    .addComponent(jtfPhoneCus, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jtfAddressDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jlAddressDetail)))
+                .addGap(18, 18, 18)
+                .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbProvince, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbCommune, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlAddress)
+                    .addComponent(cbDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcReceivePromotion))
+                .addGap(32, 32, 32)
+                .addGroup(jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdd1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
@@ -257,22 +244,7 @@ public class Customer_GUI extends javax.swing.JPanel {
         });
         jspTableCus.setViewportView(jTableCus);
 
-        javax.swing.GroupLayout jpTableLayout = new javax.swing.GroupLayout(jpTable);
-        jpTable.setLayout(jpTableLayout);
-        jpTableLayout.setHorizontalGroup(
-            jpTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpTableLayout.createSequentialGroup()
-                .addComponent(jspTableCus, javax.swing.GroupLayout.DEFAULT_SIZE, 837, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jpTableLayout.setVerticalGroup(
-            jpTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jspTableCus, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-        );
-
-        jpFunctionTable.setBackground(new java.awt.Color(255, 255, 255));
-        jpFunctionTable.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
+        jlFilterPhone.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jlFilterPhone.setText("Tìm theo SDT :");
 
         jtfFilterPhone.addActionListener(new java.awt.event.ActionListener() {
@@ -286,10 +258,14 @@ public class Customer_GUI extends javax.swing.JPanel {
         btnFilter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/search24.png"))); // NOI18N
         btnFilter.setText("Tìm");
         btnFilter.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFilterActionPerformed(evt);
+            }
+        });
 
+        jlFilterStatus.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jlFilterStatus.setText("Lọc theo trạng thái :");
-
-        cbStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Đang hoạt động", "Ngưng hoạt động" }));
 
         jButton1.setBackground(new java.awt.Color(204, 204, 255));
         jButton1.setText("Test lịch sử GD");
@@ -299,41 +275,45 @@ public class Customer_GUI extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jpFunctionTableLayout = new javax.swing.GroupLayout(jpFunctionTable);
-        jpFunctionTable.setLayout(jpFunctionTableLayout);
-        jpFunctionTableLayout.setHorizontalGroup(
-            jpFunctionTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpFunctionTableLayout.createSequentialGroup()
-                .addGroup(jpFunctionTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlFilterPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlFilterStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 34, Short.MAX_VALUE))
-            .addGroup(jpFunctionTableLayout.createSequentialGroup()
-                .addGroup(jpFunctionTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(jpFunctionTableLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jpFunctionTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jtfFilterPhone))))
-                .addContainerGap())
-        );
-        jpFunctionTableLayout.setVerticalGroup(
-            jpFunctionTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpFunctionTableLayout.createSequentialGroup()
-                .addContainerGap()
+        cbStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Đang hoạt động", "Ngưng hoạt động" }));
+        cbStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbStatusActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jpTableLayout = new javax.swing.GroupLayout(jpTable);
+        jpTable.setLayout(jpTableLayout);
+        jpTableLayout.setHorizontalGroup(
+            jpTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpTableLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
                 .addComponent(jlFilterPhone)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfFilterPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addComponent(jtfFilterPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addComponent(jlFilterStatus)
+                .addGap(18, 18, 18)
+                .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addComponent(jspTableCus)
+        );
+        jpTableLayout.setVerticalGroup(
+            jpTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpTableLayout.createSequentialGroup()
+                .addComponent(jspTableCus, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jpTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                    .addComponent(jlFilterPhone)
+                    .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlFilterStatus)
+                    .addComponent(jButton1)
+                    .addComponent(jtfFilterPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -344,20 +324,14 @@ public class Customer_GUI extends javax.swing.JPanel {
             .addComponent(jpSelect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jpBottomLayout.createSequentialGroup()
                 .addComponent(jpTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpFunctionTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0))
         );
         jpBottomLayout.setVerticalGroup(
             jpBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpBottomLayout.createSequentialGroup()
                 .addComponent(jpSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpBottomLayout.createSequentialGroup()
-                        .addGap(0, 26, Short.MAX_VALUE)
-                        .addComponent(jpFunctionTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27))
-                    .addComponent(jpTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jpTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         add(jpBottom);
@@ -387,27 +361,37 @@ public class Customer_GUI extends javax.swing.JPanel {
         clearInput();
     }//GEN-LAST:event_btnClearActionPerformed
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-//        if(btnAdd.getText().equals("Thêm")){
-//            openInput();
-//        }else if(btnAdd.getText().equals("Hủy")){
-//            offInput();
-//            clearInput();
-//            btnAdd.setText("Thêm");
-//        }
-    }//GEN-LAST:event_btnAddActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         purchaseHistory_GUI = new PurchaseHistory_GUI();
         purchaseHistory_GUI.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cbCommuneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCommuneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbCommuneActionPerformed
+
+    private void cbDistrictActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDistrictActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbDistrictActionPerformed
+
+    private void btnAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdd1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAdd1ActionPerformed
+
+    private void cbStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStatusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbStatusActionPerformed
+
+    private void btnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFilterActionPerformed
 // ID Khách hàng do hệ thống phát sinh
 
     public void openInput() {
         jtfNameCus.setEditable(true);
         jtfPhoneCus.setEditable(true);
         jtfAddressDetail.setEditable(true);
-        btnAdd.setText("Hủy");
+//        btnAdd.setText("Hủy");
     }
 
     public void clearInput() {
@@ -428,7 +412,7 @@ public class Customer_GUI extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private lib2.Button btnAdd;
+    private lib2.Button btnAdd1;
     private lib2.Button btnClear;
     private lib2.Button btnEdit;
     private lib2.Button btnFilter;
@@ -447,8 +431,6 @@ public class Customer_GUI extends javax.swing.JPanel {
     private javax.swing.JLabel jlNameCus;
     private javax.swing.JLabel jlPhoneCus;
     private javax.swing.JPanel jpBottom;
-    private javax.swing.JPanel jpFunction;
-    private javax.swing.JPanel jpFunctionTable;
     private javax.swing.JPanel jpSelect;
     private javax.swing.JPanel jpTable;
     private javax.swing.JPanel jpTop;

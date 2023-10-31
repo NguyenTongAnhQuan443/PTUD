@@ -16,7 +16,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,69,0,0,3,-11"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,68,0,0,5,41"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
@@ -41,44 +41,51 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="jlIDCus" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jtfIDCus" max="32767" attributes="0"/>
-                      </Group>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jlIDCus" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlAddress" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlPhoneCus" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jlNameCus" min="-2" max="-2" attributes="0"/>
-                              <Component id="jlAddress" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jlAddressDetail" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jtfIDCus" min="-2" pref="250" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="172" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jlNameCus" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jlAddressDetail" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="cbProvince" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="cbCommune" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="cbDistrict" min="-2" max="-2" attributes="0"/>
                               </Group>
+                          </Group>
+                          <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jcReceivePromotion" max="32767" attributes="0"/>
+                              <Component id="jtfAddressDetail" max="32767" attributes="0"/>
                               <Component id="jtfNameCus" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jtfAddressDetail" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
+                      <Component id="jtfPhoneCus" min="-2" pref="250" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="65" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="cbCommune" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jlPhoneCus" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jtfPhoneCus" min="-2" pref="238" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="jcReceivePromotion" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <EmptySpace pref="332" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="btnAdd1" min="-2" pref="110" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jpFunction" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                  <Component id="btnEdit" min="-2" pref="110" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btnClear" min="-2" pref="110" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="551" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -86,36 +93,34 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jpFunction" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jlIDCus" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jtfIDCus" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="jlPhoneCus" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jtfPhoneCus" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jlNameCus" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jtfNameCus" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jcReceivePromotion" alignment="1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="cbProvince" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbDistrict" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jlAddress" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbCommune" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jtfAddressDetail" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="jlAddressDetail" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jlIDCus" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtfIDCus" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="jlNameCus" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtfNameCus" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jlPhoneCus" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtfPhoneCus" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                          <Component id="jtfAddressDetail" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="jlAddressDetail" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="cbProvince" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbCommune" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlAddress" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbDistrict" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jcReceivePromotion" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btnAdd1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnEdit" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnClear" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="19" max="32767" attributes="0"/>
               </Group>
@@ -146,107 +151,6 @@
             <Property name="text" type="java.lang.String" value="S&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i : "/>
           </Properties>
         </Component>
-        <Container class="javax.swing.JPanel" name="jpFunction">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
-                <EtchetBorder/>
-              </Border>
-            </Property>
-          </Properties>
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnClear" max="32767" attributes="0"/>
-                          <Component id="btnEdit" alignment="0" pref="138" max="32767" attributes="0"/>
-                          <Component id="btnAdd" alignment="0" pref="138" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="23" max="32767" attributes="0"/>
-                      <Component id="btnAdd" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnEdit" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnClear" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-            </DimensionLayout>
-          </Layout>
-          <SubComponents>
-            <Component class="lib2.Button" name="btnClear">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="eb" green="ce" red="87" type="rgb"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/images/icons/clear24.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="L&#xe0;m m&#x1edb;i"/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="14" style="1"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnClearActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="lib2.Button" name="btnEdit">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="eb" green="ce" red="87" type="rgb"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/images/icons/edit24.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
-                <Property name="enabled" type="boolean" value="false"/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="14" style="1"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="lib2.Button" name="btnAdd">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="eb" green="ce" red="87" type="rgb"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/images/icons/add24.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="14" style="1"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddActionPerformed"/>
-              </Events>
-            </Component>
-          </SubComponents>
-        </Container>
         <Component class="javax.swing.JLabel" name="jlAddress">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x110;&#x1ecb;a ch&#x1ec9; : "/>
@@ -269,6 +173,9 @@
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbDistrictActionPerformed"/>
+          </Events>
         </Component>
         <Component class="lib2.ComboBoxSuggestion" name="cbCommune">
           <Properties>
@@ -278,6 +185,9 @@
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCommuneActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jlAddressDetail">
           <Properties>
@@ -307,6 +217,64 @@
             <Property name="text" type="java.lang.String" value="Nh&#x1ead;n th&#xf4;ng tin ch&#x1b0;&#x1a1;ng tr&#xec;nh khuy&#x1ebf;n m&#xe3;i ?"/>
           </Properties>
         </Component>
+        <Component class="lib2.Button" name="btnAdd1">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="eb" green="ce" red="87" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/icons/add24.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="1"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdd1ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="lib2.Button" name="btnEdit">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="eb" green="ce" red="87" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/icons/edit24.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
+            <Property name="enabled" type="boolean" value="false"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="1"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="lib2.Button" name="btnClear">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="eb" green="ce" red="87" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/icons/clear24.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="L&#xe0;m m&#x1edb;i"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="1"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnClearActionPerformed"/>
+          </Events>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="jpBottom">
@@ -329,8 +297,7 @@
               <Component id="jpSelect" max="32767" attributes="0"/>
               <Group type="102" attributes="0">
                   <Component id="jpTable" max="32767" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jpFunctionTable" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -339,14 +306,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jpSelect" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="0" pref="26" max="32767" attributes="0"/>
-                          <Component id="jpFunctionTable" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="jpTable" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jpTable" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -370,14 +330,38 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jspTableCus" pref="837" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                      <Component id="jlFilterPhone" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jtfFilterPhone" min="-2" pref="140" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnFilter" min="-2" pref="120" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="jButton1" min="-2" pref="412" max="-2" attributes="0"/>
+                      <EmptySpace pref="64" max="32767" attributes="0"/>
+                      <Component id="jlFilterStatus" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="cbStatus" min="-2" pref="150" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
+                  <Component id="jspTableCus" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jspTableCus" alignment="0" pref="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jspTableCus" min="-2" pref="414" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" max="-2" attributes="0">
+                          <Component id="jlFilterPhone" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbStatus" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlFilterStatus" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jtfFilterPhone" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="btnFilter" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -406,69 +390,11 @@
                 </Component>
               </SubComponents>
             </Container>
-          </SubComponents>
-        </Container>
-        <Container class="javax.swing.JPanel" name="jpFunctionTable">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
-                <EtchetBorder/>
-              </Border>
-            </Property>
-          </Properties>
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jlFilterPhone" alignment="0" min="-2" pref="84" max="-2" attributes="0"/>
-                          <Component id="jlFilterStatus" alignment="0" min="-2" pref="116" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="0" pref="34" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="cbStatus" alignment="0" pref="0" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jButton1" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="btnFilter" max="32767" attributes="0"/>
-                                  <Component id="jtfFilterPhone" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jlFilterPhone" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jtfFilterPhone" min="-2" pref="28" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnFilter" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="45" max="32767" attributes="0"/>
-                      <Component id="jlFilterStatus" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cbStatus" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-            </DimensionLayout>
-          </Layout>
-          <SubComponents>
             <Component class="javax.swing.JLabel" name="jlFilterPhone">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="12" style="3"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="T&#xec;m theo SDT :"/>
               </Properties>
             </Component>
@@ -493,20 +419,16 @@
                   <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFilterActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jlFilterStatus">
               <Properties>
-                <Property name="text" type="java.lang.String" value="L&#x1ecd;c theo tr&#x1ea1;ng th&#xe1;i :"/>
-              </Properties>
-            </Component>
-            <Component class="lib2.ComboBoxSuggestion" name="cbStatus">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="2">
-                    <StringItem index="0" value="&#x110;ang ho&#x1ea1;t &#x111;&#x1ed9;ng"/>
-                    <StringItem index="1" value="Ng&#x1b0;ng ho&#x1ea1;t &#x111;&#x1ed9;ng"/>
-                  </StringArray>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="12" style="3"/>
                 </Property>
+                <Property name="text" type="java.lang.String" value="L&#x1ecd;c theo tr&#x1ea1;ng th&#xe1;i :"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="jButton1">
@@ -518,6 +440,19 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="lib2.ComboBoxSuggestion" name="cbStatus">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="2">
+                    <StringItem index="0" value="&#x110;ang ho&#x1ea1;t &#x111;&#x1ed9;ng"/>
+                    <StringItem index="1" value="Ng&#x1b0;ng ho&#x1ea1;t &#x111;&#x1ed9;ng"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbStatusActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
