@@ -128,7 +128,7 @@ public class Supplier_DAO extends DAO {
         return false;
     }
 
-    //    lấy nhà cung cấp bằng mã nhân viên
+    //    lấy nhà cung cấp bằng mã nahf cung cấp
     public Supplier getSupplierByID(String idSupplier) {
         String sql = "SELECT * FROM Supplier WHERE idSupplier = ?";
 
@@ -155,7 +155,7 @@ public class Supplier_DAO extends DAO {
         return null;
     }
 
-    //    Cập nhập thông tin nhân viên
+    //    Cập nhập thông tin nhà cung cấp
     public boolean updateInfoSupplier(Supplier supplier) {
         String sql = "Update Supplier SET name = ?, email = ?, phone = ?, status = ?, province = ?, district = ?, ward = ?, address = ? WHERE idSupplier = ?";
         try {

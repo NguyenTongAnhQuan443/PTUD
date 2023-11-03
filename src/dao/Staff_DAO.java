@@ -498,7 +498,7 @@ public class Staff_DAO extends DAO {
         return false;
     }
 
-    //    kiểm tra số Email tồn tại
+    //    kiểm tra Email tồn tại
     public boolean checkEmailExist(String emailCheck) {
         try {
             PreparedStatement preparedStatement = ConnectDB.getConnection()

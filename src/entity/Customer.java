@@ -12,6 +12,9 @@ public class Customer {
     private District district;
     private Ward ward;
     private String address;
+    private int rewardPoints;
+    private String typeRank;
+    private double totalAmount6months;
     private boolean receivePromotions;
 
 //    get set
@@ -87,6 +90,30 @@ public class Customer {
         this.receivePromotions = receivePromotions;
     }
 
+    public int getRewardPoints() {
+        return rewardPoints;
+    }
+
+    public void setRewardPoints(int rewardPoints) {
+        this.rewardPoints = rewardPoints;
+    }
+
+    public String getTypeRank() {
+        return typeRank;
+    }
+
+    public void setTypeRank(String typeRank) {
+        this.typeRank = typeRank;
+    }
+
+    public double getTotalAmount6months() {
+        return totalAmount6months;
+    }
+
+    public void setTotalAmount6months(double totalAmount6months) {
+        this.totalAmount6months = totalAmount6months;
+    }
+    
 //    Constructor
     public Customer() {
         super();
@@ -107,6 +134,21 @@ public class Customer {
         this.district = district;
         this.ward = ward;
         this.address = address;
+        this.receivePromotions = receivePromotions;
+    }
+
+    public Customer(String idCustomer, String name, String phone, String email, Province province, District district, Ward ward, String address, int rewardPoints, String typeRank, double totalAmount6months, boolean receivePromotions) {
+        this.idCustomer = idCustomer;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.province = province;
+        this.district = district;
+        this.ward = ward;
+        this.address = address;
+        this.rewardPoints = rewardPoints;
+        this.typeRank = typeRank;
+        this.totalAmount6months = totalAmount6months;
         this.receivePromotions = receivePromotions;
     }
 
@@ -134,9 +176,12 @@ public class Customer {
     }
 
 //    toString
+
     @Override
     public String toString() {
-        return "Customer{" + "idCustomer=" + idCustomer + ", name=" + name + ", phone=" + phone + ", email=" + email + ", province=" + province + ", district=" + district + ", ward=" + ward + ", address=" + address + ", receivePromotions=" + receivePromotions + '}';
+        return "Customer{" + "idCustomer=" + idCustomer + ", name=" + name + ", phone=" + phone + ", email=" + email + ", province=" + province + ", district=" + district + ", ward=" + ward + ", address=" + address + ", rewardPoints=" + rewardPoints + ", typeRank=" + typeRank + ", totalAmount6months=" + totalAmount6months + ", receivePromotions=" + receivePromotions + '}';
     }
 
+    
+    
 }

@@ -33,6 +33,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
+import javax.swing.ListSelectionModel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import jdk.jshell.execution.Util;
 
@@ -82,6 +83,8 @@ public class Staff_GUI extends javax.swing.JPanel {
         initComponents();
         TableCustom.apply(jspTable, TableCustom.TableType.DEFAULT);
         defaultTableModel = (DefaultTableModel) jTable.getModel();
+        ListSelectionModel selectionModel = jTable.getSelectionModel();
+        selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         if (Flag.isFlagStaffGUI() == false) {
             loadData("SELECT * FROM Staff WHERE status = N'Nghỉ làm'");
             defaultTableModel.fireTableDataChanged(); // reload data
@@ -196,6 +199,11 @@ public class Staff_GUI extends javax.swing.JPanel {
         });
 
         jtfIDRestore.setText("Nhập mã nhân viên");
+        jtfIDRestore.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtfIDRestoreMouseClicked(evt);
+            }
+        });
 
         jlStatusWKS.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jlStatusWKS.setText("Trạng thái làm việc: ");
@@ -517,6 +525,10 @@ public class Staff_GUI extends javax.swing.JPanel {
         jtfInputID.setText("");
     }//GEN-LAST:event_jtfInputIDMouseClicked
 
+    private void jtfIDRestoreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtfIDRestoreMouseClicked
+        jtfIDRestore.setText("");
+    }//GEN-LAST:event_jtfIDRestoreMouseClicked
+
     public void loadData(String sql) {
         defaultTableModel.setRowCount(0);
         for (Staff staff : staff_DAO.getListStaffByStatus(sql)) {
@@ -595,7 +607,7 @@ public class Staff_GUI extends javax.swing.JPanel {
 
     public void writeExcel(String filePath, List<Staff> staffList) {
         XSSFWorkbook workbook = new XSSFWorkbook();
-        XSSFSheet sheet = workbook.createSheet("Staff Data");
+        XSSFSheet sheet = workbook.createSheet("Danh sách nhân viên");
 
         // Tạo tiêu đề cho các cột
         Row headerRow = sheet.createRow(0);

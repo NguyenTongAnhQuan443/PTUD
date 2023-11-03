@@ -45,7 +45,7 @@ public class District_DAO extends DAO{
         return listDistrict;
     }
 //
-////    get quận bằng tỉnh + quận
+//    get quận bằng tỉnh + quận
 //    public District getDistrict(Province province, District district) {
 //        PreparedStatement preparedStatement = null;
 //        ResultSet resultSet = null;
@@ -68,7 +68,7 @@ public class District_DAO extends DAO{
 //
 //        return null;
 //    }
-//
+
 //  Get quận theo tỉnh + tên quận
     public District getDistrictByNameDistrict(Province province, String nameDistrict) {
         PreparedStatement preparedStatement = null;

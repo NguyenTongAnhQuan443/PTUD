@@ -44,7 +44,7 @@ public class Province_DAO extends DAO{
         }
         return listProvince;
     }
-//
+    
 //   Get tỉnh theo tên tỉnh
     public Province getProvinceByNameProvince(String nameProvince) {
         PreparedStatement preparedStatement = null;

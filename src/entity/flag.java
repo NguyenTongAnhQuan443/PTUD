@@ -10,11 +10,18 @@ public class Flag {
     // 1 là mở chức năng thêm nhân viên
     // 2 là mở chức năng sửa thông tin nhân viên
     public static String flagIDStaff; // lấy idStaff cho chức năng cập nhập
+    
     public static int flagUpdateSupplier;
     // 0 là mặc định
     // 1 là mở chức năng thêm nhà cung cấp
     // 2 là mở chức năng cập nhập nhà cung cấp
     public static String flagIDSupplier; // lấy id supplier cho chức năng cập nhập
+    
+    public static int flagUpdateCustomer;
+    // 0 là mặc định
+    // 1 là mở chức năng thêm Khách hàng
+    // 2 là mở chức năng cập nhập Khách hàng
+    public static String flagIDCustomer;
 
 //    constructor
     public Flag() {
@@ -23,9 +30,11 @@ public class Flag {
         flagIDStaff = "";
         flagUpdateSupplier = 0;
         flagIDSupplier = "";
+        flagUpdateCustomer = 0;
+        flagIDCustomer = "";
     }
 
-//    
+//
     public static Flag getInstence() {
         return instence;
     }
@@ -70,4 +79,21 @@ public class Flag {
     public static void setFlagIDSupplier(String flagIDSupplier) {
         Flag.flagIDSupplier = flagIDSupplier;
     }
+
+    public static int getFlagUpdateCustomer() {
+        return flagUpdateCustomer;
+    }
+
+    public static void setFlagUpdateCustomer(int flagUpdateCustomer) {
+        Flag.flagUpdateCustomer = flagUpdateCustomer;
+    }
+
+    public static String getFlagIDCustomer() {
+        return flagIDCustomer;
+    }
+
+    public static void setFlagIDCustomer(String flagIDCustomer) {
+        Flag.flagIDCustomer = flagIDCustomer;
+    }
+    
 }

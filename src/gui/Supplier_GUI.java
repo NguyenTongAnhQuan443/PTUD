@@ -26,6 +26,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.ss.usermodel.Cell;
@@ -58,7 +59,8 @@ public class Supplier_GUI extends javax.swing.JPanel {
         initComponents();
         TableCustom.apply(jspTableSupplier, TableCustom.TableType.DEFAULT);
         defaultTableModel = (DefaultTableModel) jTableSupplier.getModel();
-
+        ListSelectionModel selectionModel = jTableSupplier.getSelectionModel();
+        selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         setProvinceToComboBox();
         offInput();
         loadData();
@@ -119,6 +121,7 @@ public class Supplier_GUI extends javax.swing.JPanel {
         jlAddressPDW.setText("Địa chỉ :");
 
         cbProvince.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tỉnh/Thành phố" }));
+        cbProvince.setEnabled(false);
         cbProvince.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbProvinceItemStateChanged(evt);
@@ -131,6 +134,7 @@ public class Supplier_GUI extends javax.swing.JPanel {
         });
 
         cbDistrict.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Quận/Huyện" }));
+        cbDistrict.setEnabled(false);
         cbDistrict.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbDistrictItemStateChanged(evt);
@@ -143,6 +147,7 @@ public class Supplier_GUI extends javax.swing.JPanel {
         });
 
         cbWard.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Phường/Xã" }));
+        cbWard.setEnabled(false);
         cbWard.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbWardItemStateChanged(evt);
@@ -346,6 +351,12 @@ public class Supplier_GUI extends javax.swing.JPanel {
         jlSearchPhone.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jlSearchPhone.setText("Lọc theo SDT / Email:");
 
+        jtfSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtfSearchMouseClicked(evt);
+            }
+        });
+
         btnSearch.setBackground(new java.awt.Color(135, 206, 235));
         btnSearch.setForeground(new java.awt.Color(255, 255, 255));
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/search24.png"))); // NOI18N
@@ -473,7 +484,7 @@ public class Supplier_GUI extends javax.swing.JPanel {
             btnReload.setEnabled(false);
 
             if (!(jtfNameSupplier.getText().trim().equals(""))) {
-//              nếu 1 trong các jtf có dữ liệu tức là có thao tác chọn index bên dưới jtbale => remove all 
+//              nếu 1 trong các jtf có dữ liệu tức là có thao tác chọn index bên dưới jtbale => remove all
                 jtfAddressDetails.setText("");
                 jtfEmail.setText("");
                 jtfNameSupplier.setText("");
@@ -502,6 +513,7 @@ public class Supplier_GUI extends javax.swing.JPanel {
     }//GEN-LAST:event_cbProvinceActionPerformed
 
     private void cbProvinceItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbProvinceItemStateChanged
+
         if (!isEnabledEventProvince) {
             return;
         }
@@ -604,27 +616,29 @@ public class Supplier_GUI extends javax.swing.JPanel {
                 }
             }
         } else if (Flag.getFlagUpdateSupplier() == 2) {
-            String id = jtfIDSupplier.getText().trim();
-            String name = jtfNameSupplier.getText().trim();
-            String email = jtfEmail.getText().trim();
-            String phone = jtfPhoneSupplier.getText().trim();
-            String addressDetails = jtfAddressDetails.getText().trim();
-            Supplier supplierUpdate = new Supplier(id, name, email, phone, Supplier.convertStringToStatus(cbStatus.getSelectedItem().toString()), Supplier_GUI.this.province, Supplier_GUI.this.district, Supplier_GUI.this.ward, addressDetails);
-            boolean res = supplier_DAO.updateInfoSupplier(supplierUpdate);
-            if (res) {
+            if (validator()) {
+                String id = jtfIDSupplier.getText().trim();
+                String name = jtfNameSupplier.getText().trim();
+                String email = jtfEmail.getText().trim();
+                String phone = jtfPhoneSupplier.getText().trim();
+                String addressDetails = jtfAddressDetails.getText().trim();
+                Supplier supplierUpdate = new Supplier(id, name, email, phone, Supplier.convertStringToStatus(cbStatus.getSelectedItem().toString()), Supplier_GUI.this.province, Supplier_GUI.this.district, Supplier_GUI.this.ward, addressDetails);
                 int resultTMP = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn cập nhập lại thông tin NCC không ?", "Xác nhận", JOptionPane.YES_NO_OPTION);
                 if (resultTMP == JOptionPane.YES_OPTION) {
-                    loadData();
-                    btnSave.setEnabled(false);
-                    clearinput();
-                    offInput();
-                    setIndexCB();
-                    btnAdd.setEnabled(true);
-                    btnReload.setEnabled(true);
-                    JOptionPane.showMessageDialog(null, "Đã cập nhập thông tin nhà cung cấp");
+                    boolean res = supplier_DAO.updateInfoSupplier(supplierUpdate);
+                    if (res) {
+                        loadData();
+                        btnSave.setEnabled(false);
+                        clearinput();
+                        offInput();
+                        setIndexCB();
+                        btnAdd.setEnabled(true);
+                        btnReload.setEnabled(true);
+                        JOptionPane.showMessageDialog(null, "Đã cập nhập thông tin nhà cung cấp");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Cập nhập thông tin nhà cung cấp thất bại vui lòng kiểm tra lại !");
+                    }
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "Cập nhập thông tin nhà cung cấp thất bại vui lòng kiểm tra lại !");
             }
         }
     }//GEN-LAST:event_btnSaveActionPerformed
@@ -632,6 +646,7 @@ public class Supplier_GUI extends javax.swing.JPanel {
     private void jTableSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableSupplierMouseClicked
 
         if (evt.getClickCount() == 1 && btnAdd.getText().equals("Thêm mới")) {
+            Flag.setFlagUpdateSupplier(2);
             int selectedRow = jTableSupplier.getSelectedRow();
             jtfIDSupplier.setText(jTableSupplier.getValueAt(selectedRow, 0).toString());
             jtfNameSupplier.setText(jTableSupplier.getValueAt(selectedRow, 1).toString());
@@ -644,8 +659,7 @@ public class Supplier_GUI extends javax.swing.JPanel {
             }
 
             int selectRow = jTableSupplier.getSelectedRow();
-            Flag.setFlagIDSupplier(defaultTableModel.getValueAt(selectRow, 0).toString()); // lấy id nhà cung cấp cần chỉnh sửa 
-
+            Flag.setFlagIDSupplier(defaultTableModel.getValueAt(selectRow, 0).toString()); // lấy id nhà cung cấp cần chỉnh sửa
 //          cắt chuỗi bằng dấu phẩy (để lấy addressDetails)
             String input = jTableSupplier.getValueAt(selectedRow, 5).toString();
             String[] parts = input.split(",");
@@ -654,7 +668,6 @@ public class Supplier_GUI extends javax.swing.JPanel {
             }
 
 //          lấy province
-            isEnabledEventProvince = false;
             List<Province> listProvince = province_DAO.getListProvince();
             listProvince.sort(new Comparator<Province>() {
                 @Override
@@ -672,53 +685,51 @@ public class Supplier_GUI extends javax.swing.JPanel {
                     Supplier_GUI.this.province = province;
                 }
             });
-            isEnabledEventProvince = true;
-        }
+            cbDistrict.setEnabled(false);
 
-//        lấy district
-        isEnabledEventDistrict = false;
-        List<District> listDistrict = district_DAO.getListDistrict(province);
-        listDistrict.sort(new Comparator<District>() {
-            @Override
-            public int compare(District o1, District o2) {
-                return o1.getDistrict().compareToIgnoreCase(o2.getDistrict());
-            }
-        });
-        listDistrict.forEach(district -> {
-            int index = listDistrict.indexOf(district);
-            cbDistrict.addItem(district.getDistrict());
-            Supplier supplierTMP = supplier_DAO.getSupplierByID(Flag.getFlagIDSupplier());
-            if (district.getId().equals(supplierTMP.getDistrict().getId())) {
-                cbDistrict.setSelectedIndex(index + 1);
-                Supplier_GUI.this.district = district;
-            }
-        });
-        isEnabledEventDistrict = true;
+            //        lấy district
+            List<District> listDistrict = district_DAO.getListDistrict(province);
+            listDistrict.sort(new Comparator<District>() {
+                @Override
+                public int compare(District o1, District o2) {
+                    return o1.getDistrict().compareToIgnoreCase(o2.getDistrict());
+                }
+            });
+            listDistrict.forEach(district -> {
+                int index = listDistrict.indexOf(district);
+                cbDistrict.addItem(district.getDistrict());
+                Supplier supplierTMP = supplier_DAO.getSupplierByID(Flag.getFlagIDSupplier());
+                if (district.getId().equals(supplierTMP.getDistrict().getId())) {
+                    cbDistrict.setSelectedIndex(index + 1);
+                    Supplier_GUI.this.district = district;
+                }
+            });
+            cbWard.setEnabled(false);
 
 //        lấy ward
-        isEnabledEventWard = false;
-        List<Ward> listWard = ward_DAO.getListWard(district);
-        listWard.sort(new Comparator<Ward>() {
-            @Override
-            public int compare(Ward o1, Ward o2) {
-                return o1.getWard().compareToIgnoreCase(o2.getWard());
-            }
-        });
-        listWard.forEach(ward -> {
-            int index = listWard.indexOf(ward);
-            cbWard.addItem(ward.getWard());
-            Supplier supplierTMP = supplier_DAO.getSupplierByID(Flag.getFlagIDSupplier());
-            if (ward.getId().equals(supplierTMP.getWard().getId())) {
-                cbWard.setSelectedIndex(index + 1);
-                Supplier_GUI.this.ward = ward;
-            }
-        });
-        isEnabledEventWard = true;
-
+            List<Ward> listWard = ward_DAO.getListWard(district);
+            listWard.sort(new Comparator<Ward>() {
+                @Override
+                public int compare(Ward o1, Ward o2) {
+                    return o1.getWard().compareToIgnoreCase(o2.getWard());
+                }
+            });
+            listWard.forEach(ward -> {
+                int index = listWard.indexOf(ward);
+                cbWard.addItem(ward.getWard());
+                Supplier supplierTMP = supplier_DAO.getSupplierByID(Flag.getFlagIDSupplier());
+                if (ward.getId().equals(supplierTMP.getWard().getId())) {
+                    cbWard.setSelectedIndex(index + 1);
+                    Supplier_GUI.this.ward = ward;
+                }
+            });
+        }
     }//GEN-LAST:event_jTableSupplierMouseClicked
 
     private void btnReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReloadActionPerformed
         loadData();
+        clearinput();
+        setIndexCB();
         JOptionPane.showMessageDialog(null, "Danh sách nhà cung cấp đã được làm mới ");
     }//GEN-LAST:event_btnReloadActionPerformed
 
@@ -758,19 +769,19 @@ public class Supplier_GUI extends javax.swing.JPanel {
                 sql = "SELECT * FROM Supplier WHERE status = N'Đang hợp tác'";
             } else if (selectedStatus == 2) {
                 sql = "SELECT * FROM Supplier WHERE status = N'Ngưng hợp tác'";
-            } else if(selectedStatus == 0){
+            } else if (selectedStatus == 0) {
                 supplierList = supplier_DAO.getListSupplier();
             }
             if (!sql.isEmpty()) {
                 supplierList = supplier_DAO.getListSupplierByStatus(sql);
             }
-            // Kiểm tra nếu danh sách staffList không rỗng, sau đó tiến hành ghi vào tệp Excel
+            // Kiểm tra nếu danh sách không rỗng, sau đó tiến hành ghi vào tệp Excel
             if (!supplierList.isEmpty()) {
                 writeExcel(pathname, supplierList);
                 cbFillterStatus.setSelectedIndex(0); // mỗi lần xuất file xong set lại index để tránh lỗi
-                JOptionPane.showMessageDialog(null, "Danh sách nhân viên đã được lưu vào " + pathname);
+                JOptionPane.showMessageDialog(null, "Danh sách nhà cung cấp  đã được lưu vào " + pathname);
             } else {
-                JOptionPane.showMessageDialog(null, "Không có dữ liệu nhân viên để lưu.");
+                JOptionPane.showMessageDialog(null, "Không có dữ liệu nhà cung cấp để lưu.");
             }
         }
     }//GEN-LAST:event_btnExportFileActionPerformed
@@ -798,6 +809,10 @@ public class Supplier_GUI extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_btnImportFileActionPerformed
+
+    private void jtfSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtfSearchMouseClicked
+        jtfSearch.setText("");
+    }//GEN-LAST:event_jtfSearchMouseClicked
     public void onInput() {
         jtfAddressDetails.setEditable(true);
         jtfEmail.setEditable(true);
@@ -962,7 +977,7 @@ public class Supplier_GUI extends javax.swing.JPanel {
         return false;
     }
 
-//    check các thông tin nhập vào 
+//    check các thông tin nhập vào
     private boolean validator() {
         String name = jtfNameSupplier.getText().trim();
         if (name.length() < 1) {
@@ -976,9 +991,7 @@ public class Supplier_GUI extends javax.swing.JPanel {
         if (checkRegex(email, regexEmail) == false) {
             return showERROR(jtfEmail, "Email không đúng định dạng, vui lòng kiểm tra lại !");
         }
-        if (supplier_DAO.checkEmailExist(email)) {
-            return showERROR(jtfPhoneSupplier, "Email này đã được sử dụng trên hệ thống vui lòng kiểm tra lại !");
-        }
+
         String province = (String) cbProvince.getSelectedItem();
         if (province.equals(Province.getProvinceLabel())) {
             JOptionPane.showMessageDialog(null, "Hãy chọn địa chỉ Tỉnh/Thành phố");
@@ -1005,8 +1018,26 @@ public class Supplier_GUI extends javax.swing.JPanel {
         if (checkRegex(phone, "^0\\d{9}$") == false) {
             return showERROR(jtfPhoneSupplier, "Số điện thoại không đúng định dạng 0xx.xxxx.xxx vui lòng kiểm tra lại");
         }
-        if (supplier_DAO.checkPhoneExist(phone)) {
-            return showERROR(jtfPhoneSupplier, "Số điện thoại này đã được sử dụng trên hệ thống vui lòng kiểm tra lại !");
+
+        if (Flag.getFlagUpdateSupplier() == 1) {
+            if (supplier_DAO.checkPhoneExist(phone)) {
+                return showERROR(jtfPhoneSupplier, "Số điện thoại nhà cung cấp này đã được sử dụng trên hệ thống vui lòng kiểm tra lại !");
+            }
+            if (supplier_DAO.checkEmailExist(email)) {
+                return showERROR(jtfEmail, "Email nhà cung cấp này đã được sử dụng trên hệ thống vui lòng kiểm tra lại !");
+            }
+        } else if (Flag.getFlagUpdateSupplier() == 2) {
+            String currentIDSupplier = Flag.getFlagIDSupplier();
+            for (Supplier supplier : supplier_DAO.getListSupplier()) {
+                if (!supplier.getIdSupplier().trim().equals(currentIDSupplier)) {
+                    if (supplier.getPhone().equals(jtfPhoneSupplier.getText().trim())) {
+                        return showERROR(jtfPhoneSupplier, "Số điện thoại nhà cung cấp này đã được sử dụng trên hệ thống vui lòng kiểm tra lại !");
+                    }
+                    if (supplier.getEmail().equals(jtfEmail.getText().trim())) {
+                        return showERROR(jtfEmail, "Email nhà cung cấp này đã được sử dụng trên hệ thống vui lòng kiểm tra lại !");
+                    }
+                }
+            }
         }
         return true;
     }
@@ -1066,13 +1097,13 @@ public class Supplier_GUI extends javax.swing.JPanel {
         return listSupplier;
     }
 
-    //    Xuất danh sánh nhân viên ra file Excel
+    //    Xuất danh sánh nhà cung cấp ra file Excel
     public void writeExcel(String filePath, List<Supplier> SupplierList) {
         XSSFWorkbook workbook = new XSSFWorkbook();
-        XSSFSheet sheet = workbook.createSheet("Supplier Data");
+        XSSFSheet sheet = workbook.createSheet("Danh sách nhà cung cấp");
         // Tạo tiêu đề cho các cột
         Row headerRow = sheet.createRow(0);
-        String[] headers = {"Mã nhà cung cấp", "Tên nhà cung cấp", "Email", "Số điện thoại", "Trạng thái hợp đồng", "Tỉnh/Thành phố", "Quận/Huyện", "Phường/Xã", "Địa chỉ chi tiết",};
+        String[] headers = {"Mã nhà cung cấp", "Tên nhà cung cấp", "Email", "Số điện thoại", "Trạng thái hợp đồng", "Tỉnh/Thành phố", "Quận/Huyện", "Phường/Xã", "Địa chỉ chi tiết"};
 
         // Tạo kiểu dáng in đậm
         CellStyle headerCellStyle = workbook.createCellStyle();
