@@ -4,6 +4,28 @@ import java.util.Objects;
 
 public class Customer {
 
+    public static enum TypeRank {
+        KhachHangBac, KhachHangVang, KhachHangKimCuong
+    }
+
+    public static String convertTypeRankToString(TypeRank rank) {
+        if (rank.equals(rank.KhachHangBac)) {
+            return "Khách hàng bạc";
+        } else if (rank.equals(rank.KhachHangVang)) {
+            return "Khách hàng vàng";
+        }
+        return "Khách hàng kim cương";
+    }
+
+    public static TypeRank convertStringToTypeRank(String rank) {
+        if (rank.equals("Khách hàng bạc")) {
+            return TypeRank.KhachHangBac;
+        } else if (rank.equals("Khách hàng vàng")) {
+            return TypeRank.KhachHangVang;
+        }
+        return TypeRank.KhachHangKimCuong;
+    }
+
     private String idCustomer;
     private String name;
     private String phone;
@@ -13,7 +35,7 @@ public class Customer {
     private Ward ward;
     private String address;
     private int rewardPoints;
-    private String typeRank;
+    private TypeRank typeRank;
     private double totalAmount6months;
     private boolean receivePromotions;
 
@@ -98,11 +120,11 @@ public class Customer {
         this.rewardPoints = rewardPoints;
     }
 
-    public String getTypeRank() {
+    public TypeRank getTypeRank() {
         return typeRank;
     }
 
-    public void setTypeRank(String typeRank) {
+    public void setTypeRank(TypeRank typeRank) {
         this.typeRank = typeRank;
     }
 
@@ -113,7 +135,7 @@ public class Customer {
     public void setTotalAmount6months(double totalAmount6months) {
         this.totalAmount6months = totalAmount6months;
     }
-    
+
 //    Constructor
     public Customer() {
         super();
@@ -135,9 +157,10 @@ public class Customer {
         this.ward = ward;
         this.address = address;
         this.receivePromotions = receivePromotions;
-    }
+    } // tạo khách hàng mới không cần rank + tổng tiêu 6 tháng gần nhất (dùng cho chức năng cập nhập)
 
-    public Customer(String idCustomer, String name, String phone, String email, Province province, District district, Ward ward, String address, int rewardPoints, String typeRank, double totalAmount6months, boolean receivePromotions) {
+    public Customer(String idCustomer, String name, String phone, String email, Province province, District district, Ward ward, String address, int rewardPoints, TypeRank typeRank, double totalAmount6months, boolean receivePromotions) {
+        super();
         this.idCustomer = idCustomer;
         this.name = name;
         this.phone = phone;
@@ -150,7 +173,7 @@ public class Customer {
         this.typeRank = typeRank;
         this.totalAmount6months = totalAmount6months;
         this.receivePromotions = receivePromotions;
-    }
+    } //full thuộc tính
 
 //    Hascode equals
     @Override
@@ -176,12 +199,9 @@ public class Customer {
     }
 
 //    toString
-
     @Override
     public String toString() {
         return "Customer{" + "idCustomer=" + idCustomer + ", name=" + name + ", phone=" + phone + ", email=" + email + ", province=" + province + ", district=" + district + ", ward=" + ward + ", address=" + address + ", rewardPoints=" + rewardPoints + ", typeRank=" + typeRank + ", totalAmount6months=" + totalAmount6months + ", receivePromotions=" + receivePromotions + '}';
     }
 
-    
-    
 }

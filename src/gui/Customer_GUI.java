@@ -117,7 +117,6 @@ public class Customer_GUI extends javax.swing.JPanel {
 
         jlAddress.setText("Địa chỉ : ");
 
-        cbProvince.setEditable(false);
         cbProvince.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tỉnh/Thành phố" }));
         cbProvince.setEnabled(false);
         cbProvince.setFocusCycleRoot(true);
@@ -605,7 +604,6 @@ public class Customer_GUI extends javax.swing.JPanel {
 
             int selectRow = jTableCus.getSelectedRow();
             Flag.setFlagIDCustomer(defaultTableModel.getValueAt(selectRow, 0).toString()); // lấy id nhà cung cấp cần chỉnh sửa 
-
 //          cắt chuỗi bằng dấu phẩy (để lấy addressDetails)
             String input = jTableCus.getValueAt(selectedRow, 4).toString();
             String[] parts = input.split(",");
@@ -614,7 +612,7 @@ public class Customer_GUI extends javax.swing.JPanel {
             }
 
 //            chuyển đổi check trong table thành kiểu boolean
-            Object value = jTableCus.getValueAt(selectRow, 6);
+            Object value = jTableCus.getValueAt(selectRow, 8);
             Boolean boolValue = (Boolean) value;
             boolean resJCheck = boolValue.booleanValue();
             if (resJCheck) {
@@ -690,12 +688,16 @@ public class Customer_GUI extends javax.swing.JPanel {
         if (Flag.getFlagUpdateCustomer() == 1) {
             if (btnAdd.getText().trim().equals("Hủy")) {
                 if (validator()) {
+
                     String idCustomer = jtfIDCus.getText().trim();
                     String name = jtfNameCus.getText().trim();
                     String phone = jtfPhoneCus.getText().trim();
                     String email = jtfEmail.getText().trim();
-                    String addressDetails = jtfAddressDetails.getText().trim();
-                    Customer customer = new Customer(idCustomer, name, phone, email, province, district, ward, addressDetails, jcReceivePromotion.isSelected());
+                    String address = jtfAddressDetails.getText().trim();
+                    if (jtfNameCus.getText().trim().equals("")) {
+                        name = "Khách  hàng tạm";
+                    }
+                    Customer customer = new Customer(idCustomer, name, phone, email, province, district, ward, address, 0, Customer.convertStringToTypeRank("Khách hàng bạc"), 0, jcReceivePromotion.isSelected());
                     boolean res = customer_DAO.addCustomer(customer);
                     if (res) {
                         loadData();
@@ -753,41 +755,28 @@ public class Customer_GUI extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnFilter2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilter2ActionPerformed
-//        JOptionPane.showMessageDialog(null, "Hãy chọn nơi bạn muốn lưu");
-//        JFileChooser jFileChooser = new JFileChooser("D://");
-//        FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel Files", "xls", "xlsx");
-//        jFileChooser.setFileFilter(filter);
-//        int result = jFileChooser.showSaveDialog(null); // Sử dụng showSaveDialog để chọn nơi lưu
-//
-//        if (result == JFileChooser.APPROVE_OPTION) {
-//            File file = jFileChooser.getSelectedFile();
-//            String pathname = file.getAbsolutePath();
-//
-//            if (!pathname.toLowerCase().endsWith(".xlsx")) {
-//                pathname += ".xlsx";
-//            }
-//            List<Customer> customerList = null;
-////            int selectedStatus = cbFillterStatus.getSelectedIndex();
-////            String sql = "";
-////            if (selectedStatus == 1) {
-////                sql = "SELECT * FROM Supplier WHERE status = N'Đang hợp tác'";
-////            } else if (selectedStatus == 2) {
-////                sql = "SELECT * FROM Supplier WHERE status = N'Ngưng hợp tác'";
-////            } else if (selectedStatus == 0) {
-////                supplierList = supplier_DAO.getListSupplier();
-////            }
-////            if (!sql.isEmpty()) {
-////                supplierList = supplier_DAO.getListSupplierByStatus(sql);
-////            }
-//            // Kiểm tra nếu danh sách không rỗng, sau đó tiến hành ghi vào tệp Excel
-//            if (!customerList.isEmpty()) {
-//                writeExcel(pathname, customerList);
-//                JOptionPane.showMessageDialog(null, "Danh sách khách hàng tiềm năng đã được lưu vào " + pathname);
-//            } else {
-//                JOptionPane.showMessageDialog(null, "Không có dữ liệu nhân viên để lưu.");
-//            }
-//        }
-JOptionPane.showMessageDialog(null, "Chức năng đang được phát triển");
+        JOptionPane.showMessageDialog(null, "Hãy chọn nơi bạn muốn lưu");
+        JFileChooser jFileChooser = new JFileChooser("D://");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel Files", "xls", "xlsx");
+        jFileChooser.setFileFilter(filter);
+        int result = jFileChooser.showSaveDialog(null); // Sử dụng showSaveDialog để chọn nơi lưu
+
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File file = jFileChooser.getSelectedFile();
+            String pathname = file.getAbsolutePath();
+
+            if (!pathname.toLowerCase().endsWith(".xlsx")) {
+                pathname += ".xlsx";
+            }
+            List<Customer> customerList = customer_DAO.getListPotentialCustomers();
+            // Kiểm tra nếu danh sách không rỗng, sau đó tiến hành ghi vào tệp Excel
+            if (!customerList.isEmpty()) {
+                writeExcel(pathname, customerList);
+                JOptionPane.showMessageDialog(null, "Danh sách khách hàng tiềm năng đã được lưu vào " + pathname);
+            } else {
+                JOptionPane.showMessageDialog(null, "Không có dữ liệu nhân viên để lưu.");
+            }
+        }
     }//GEN-LAST:event_btnFilter2ActionPerformed
 
     public void onInput() {
@@ -829,7 +818,7 @@ JOptionPane.showMessageDialog(null, "Chức năng đang được phát triển")
             String address = customer.getAddress();
             String addressDetails = province + ", " + district + ", " + ward + ", " + address;
             Boolean receivePromotion = customer.isReceivePromotions();
-            Object[] rowData = {customer.getIdCustomer(), customer.getName(), customer.getPhone(), customer.getEmail(), addressDetails, customer.getRewardPoints(), customer.getTypeRank(), customer.getTotalAmount6months(), receivePromotion};
+            Object[] rowData = {customer.getIdCustomer(), customer.getName(), customer.getPhone(), customer.getEmail(), addressDetails, customer.getRewardPoints(), Customer.convertTypeRankToString(customer.getTypeRank()), customer.getTotalAmount6months(), receivePromotion};
             defaultTableModel.addRow(rowData);
         }
     }
@@ -926,69 +915,78 @@ JOptionPane.showMessageDialog(null, "Chức năng đang được phát triển")
 
 //  Kiểm tả thông tin nhập
     public boolean validator() {
-        String vietNamese = Utils.getVietnameseDiacriticCharacters() + "A-Z";
-        String vietNameseLower = Utils.getVietnameseDiacriticCharactersLower() + "a-z";
+//        String vietNamese = Utils.getVietnameseDiacriticCharacters() + "A-Z";
+//        String vietNameseLower = Utils.getVietnameseDiacriticCharactersLower() + "a-z";
+//
+//        String name = jtfNameCus.getText().trim();
+//        if (name.length() <= 0) {
+//            return showERROR(jtfNameCus, "Họ tên không được trống !");
+//        }
+//        if (checkRegex(name, "^[^\\d]*$") == false) {
+//            return showERROR(jtfNameCus, "Họ tên không được chứa ký tự số !");
+//        }
+//        if (!Pattern.matches(
+//                String.format("[%s][%s]*( [%s][%s]*)+", vietNamese, vietNameseLower, vietNamese, vietNameseLower),
+//                name)) {
+//            return showERROR(jtfNameCus, "Họ tên bắt đầu bằng ký tự hoa, có ít nhất 2 từ trong đó không chứa ký tự đặc biệt nào !");
+//        }
 
-        String name = jtfNameCus.getText().trim();
-        if (name.length() <= 0) {
-            return showERROR(jtfNameCus, "Họ tên không được trống !");
-        }
-        if (checkRegex(name, "^[^\\d]*$") == false) {
-            return showERROR(jtfNameCus, "Họ tên không được chứa ký tự số !");
-        }
-        if (!Pattern.matches(
-                String.format("[%s][%s]*( [%s][%s]*)+", vietNamese, vietNameseLower, vietNamese, vietNameseLower),
-                name)) {
-            return showERROR(jtfNameCus, "Họ tên bắt đầu bằng ký tự hoa, có ít nhất 2 từ trong đó không chứa ký tự đặc biệt nào !");
-        }
-
-        String phone = jtfPhoneCus.getText().trim();
-        if (phone.length() <= 0) {
-            return showERROR(jtfPhoneCus, "Vui lòng nhập số điện thoại của khách hàng !");
-        }
-        if (checkRegex(phone, "^0\\d{9}$") == false) {
-            return showERROR(jtfPhoneCus, "Số điện thoại không đúng định dạng 0xx.xxxx.xxx vui lòng kiểm tra lại");
-        }
-
+//        String phone = jtfPhoneCus.getText().trim();
+//        if (phone.length() <= 0) {
+//            return showERROR(jtfPhoneCus, "Vui lòng nhập số điện thoại của khách hàng !");
+//        }
+//        if (checkRegex(phone, "^0\\d{9}$") == false) {
+//            return showERROR(jtfPhoneCus, "Số điện thoại không đúng định dạng 0xx.xxxx.xxx vui lòng kiểm tra lại");
+//        }
         String email = jtfEmail.getText().trim();
         String regexEmail = "^[A-Za-z0-9+_.-]+@(.+)$";
-        if (email.length() < 1) {
-            return showERROR(jtfEmail, "Vui lòng nhập địa chỉ Email !");
-        }
-        if (checkRegex(email, regexEmail) == false) {
+//        if (email.length() < 1) {
+//            return showERROR(jtfEmail, "Vui lòng nhập địa chỉ Email !");
+//        }
+//        if (checkRegex(email, regexEmail) == false) {
+//            return showERROR(jtfEmail, "Email không đúng định dạng, vui lòng kiểm tra lại !");
+//        }
+//        String province = (String) cbProvince.getSelectedItem();
+//        if (province.equals(Province.getProvinceLabel())) {
+//            JOptionPane.showMessageDialog(null, "Hãy chọn địa chỉ Tỉnh/Thành phố");
+//            return false;
+//        }
+//        String district = (String) cbDistrict.getSelectedItem();
+//        if (district.equals(District.getDistrictLabel())) {
+//            JOptionPane.showMessageDialog(null, "Hãy chọn địa chỉ Quận/Huyện");
+//            return false;
+//        }
+//        String ward = (String) cbWard.getSelectedItem();
+//        if (ward.equals(Ward.getWardLabel())) {
+//            JOptionPane.showMessageDialog(null, "Hãy chọn địa chỉ Phường/Xã");
+//            return false;
+//        }
+//        String address = jtfAddressDetails.getText().trim();
+//        if (address.length() <= 0) {
+//            return showERROR(jtfAddressDetails, "Vui lòng nhập địa chỉ cụ thể");
+//        }
+//        if (Flag.getFlagUpdateCustomer() == 1) {
+//
+//            if (customer_DAO.checkPhoneExist(phone)) {
+//                return showERROR(jtfPhoneCus, "Số điện thoại của khách hàng này đã được lưu trên hệ thống !");
+//            }
+//            if (customer_DAO.checkEmailExist(email)) {
+//                return showERROR(jtfEmail, "Email này đã được lưu trên hệ thống vui lòng kiểm tra lại !");
+//            }
+//        } else if (Flag.getFlagUpdateCustomer() == 2) {
+//        }
+        if (jcReceivePromotion.isSelected() == true) {
+            if (jtfEmail.getText().trim().equals("")) {
+                return showERROR(jtfEmail, "Vui lòng nhập vào thông tin Email để được nhận thông tin chương trình khuyến mãi !");
+            }
+            if (checkRegex(email, regexEmail) == false) {
             return showERROR(jtfEmail, "Email không đúng định dạng, vui lòng kiểm tra lại !");
         }
-
-        String province = (String) cbProvince.getSelectedItem();
-        if (province.equals(Province.getProvinceLabel())) {
-            JOptionPane.showMessageDialog(null, "Hãy chọn địa chỉ Tỉnh/Thành phố");
-            return false;
         }
-        String district = (String) cbDistrict.getSelectedItem();
-        if (district.equals(District.getDistrictLabel())) {
-            JOptionPane.showMessageDialog(null, "Hãy chọn địa chỉ Quận/Huyện");
-            return false;
-        }
-        String ward = (String) cbWard.getSelectedItem();
-        if (ward.equals(Ward.getWardLabel())) {
-            JOptionPane.showMessageDialog(null, "Hãy chọn địa chỉ Phường/Xã");
-            return false;
-        }
-        String address = jtfAddressDetails.getText().trim();
-        if (address.length() <= 0) {
-            return showERROR(jtfAddressDetails, "Vui lòng nhập địa chỉ cụ thể");
-        }
-
-        if (Flag.getFlagUpdateCustomer() == 1) {
-
-            if (customer_DAO.checkPhoneExist(phone)) {
-                return showERROR(jtfPhoneCus, "Số điện thoại của khách hàng này đã được lưu trên hệ thống !");
-            }
-            if (customer_DAO.checkEmailExist(email)) {
-                return showERROR(jtfEmail, "Email này đã được lưu trên hệ thống vui lòng kiểm tra lại !");
-            }
-        } else if (Flag.getFlagUpdateCustomer() == 2) {
-
+        if (province == null) {
+            province = new Province("106008781098622");
+            district = new District("106281379506480");
+            ward = new Ward("106756471969301");
         }
         return true;
     }
@@ -1011,7 +1009,7 @@ JOptionPane.showMessageDialog(null, "Chức năng đang được phát triển")
             customer.getEmail(),
             addressDetails,
             customer.getRewardPoints(),
-            customer.getTypeRank(),
+            Customer.convertTypeRankToString(customer.getTypeRank()),
             customer.getTotalAmount6months(),
             customer.isReceivePromotions()
         };
@@ -1024,7 +1022,7 @@ JOptionPane.showMessageDialog(null, "Chức năng đang được phát triển")
         XSSFSheet sheet = workbook.createSheet("Danh sách khách hàng tiềm năng");
         // Tạo tiêu đề cho các cột
         Row headerRow = sheet.createRow(0);
-        String[] headers = {"Mã khách hàng", "Tên khách hàng", "Số điện thoại", "Email", "Tỉnh/Thành phố", "Quận/Huyện", "Phường/Xã", "Địa chỉ chi tiết", "Điểm tích lũy"};
+        String[] headers = {"Mã khách hàng", "Tên khách hàng", "Số điện thoại", "Email", "Tỉnh/Thành phố", "Quận/Huyện", "Phường/Xã", "Địa chỉ chi tiết", "Điểm tích lũy", "Xếp hạng", "Tổng mua trong 6 tháng gần nhất"};
 
         // Tạo kiểu dáng in đậm
         CellStyle headerCellStyle = workbook.createCellStyle();
@@ -1074,10 +1072,16 @@ JOptionPane.showMessageDialog(null, "Chức năng đang được phát triển")
             wardCell.setCellValue(nameWard);
 
             Cell addressCell = row.createCell(7);
-            addressCell.setCellValue(customer.getAddress());
+            addressCell.setCellValue(customer.getAddress()); 
 
             Cell rewardPoints = row.createCell(8);
-            addressCell.setCellValue(customer.getRewardPoints());
+            rewardPoints.setCellValue(customer.getRewardPoints());
+            
+            Cell typeRank = row.createCell(9);
+            typeRank.setCellValue(Customer.convertTypeRankToString(customer.getTypeRank()));
+            
+            Cell totalAmount6months = row.createCell(10);
+            totalAmount6months.setCellValue(customer.getTotalAmount6months() + " VNĐ");
 
         }
 
