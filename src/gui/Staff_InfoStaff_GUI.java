@@ -40,7 +40,7 @@ import javax.swing.JPanel;
 import lib2.TextField;
 
 public class Staff_InfoStaff_GUI extends javax.swing.JPanel {
-    
+
     private DateChooser dateChooser;
     private boolean isEnabledEventWard = false;
     private boolean isEnabledEventDistrict = false;
@@ -57,21 +57,21 @@ public class Staff_InfoStaff_GUI extends javax.swing.JPanel {
     private Sell_GUI sell_GUI;
     private Staff_GUI staff_GUI;
     private Home_GUI home_GUI;
-    
+
     public Staff_InfoStaff_GUI() {
         initComponents();
-        
+
         DateChooser dateChoose = new DateChooser();
         dateChoose.setDateFormat("dd/MM/yyyy");
         dateChoose.setTextRefernce(jtfDoB);
-        
+
         staff_DAO = new Staff_DAO();
-        
+
         cbRights.setModel(new DefaultComboBoxModel<>(new String[]{Staff.convertRightsToString(Rights.NhanVienQuanLy),
             Staff.convertRightsToString(Rights.NhanVienBanHang)}));
         cbStatus.setModel(new DefaultComboBoxModel<>(new String[]{Staff.convertStatusToString(Status.DangLam),
             Staff.convertStatusToString(Status.NghiLam)}));
-        
+
         cbDistrict.setEnabled(false);
         cbWard.setEnabled(false);
 
@@ -87,12 +87,12 @@ public class Staff_InfoStaff_GUI extends javax.swing.JPanel {
             jtfPass.setText("1234Abc@");
         } else if (Flag.getFlagStaffInfo() == 2) {
             try {
-//             nếu mở chức năng chỉnh sữa thông tin nhân viên
+                //             nếu mở chức năng chỉnh sữa thông tin nhân viên
                 btnAdd.setVisible(false);
                 setProvinceToComboBox();
                 setDistrictToComboBox(province);
                 setWardToComboBox(district);
-                
+
                 cbDistrict.setEnabled(true);
                 cbWard.setEnabled(true);
                 jlIDStaff.setVisible(false);
@@ -102,12 +102,30 @@ public class Staff_InfoStaff_GUI extends javax.swing.JPanel {
                 btnClear.setVisible(false);
                 loadDataEdit(Flag.getFlagIDStaff());
             } catch (SQLException ex) {
+            }
+        } else if (Flag.getFlagStaffInfo() == 3) {
+            try {
+                btnAdd.setVisible(false);
+                setProvinceToComboBox();
+                setDistrictToComboBox(province);
+                setWardToComboBox(district);
+
+                cbDistrict.setEnabled(true);
+                cbWard.setEnabled(true);
+                jlIDStaff.setVisible(false);
+                jlPass.setVisible(false);
+                jtfIDStaff.setVisible(false);
+                jtfPass.setVisible(false);
+                btnClear.setVisible(false);
+                btnBack.setVisible(false);
+                loadDataEdit(Flag.getIdStaff()); // Truyền vào User đăng nhập
+            } catch (SQLException ex) {
                 Logger.getLogger(Staff_InfoStaff_GUI.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -459,13 +477,13 @@ public class Staff_InfoStaff_GUI extends javax.swing.JPanel {
         isEnabledEventDistrict = false;
         isEnabledEventWard = false;
         String nameProvinceIsSelected = (String) cbProvince.getSelectedItem();
-        
+
         cbWard.setSelectedIndex(0);
         cbWard.setEnabled(false);
         cbDistrict = (ComboBoxSuggestion) resizeComboBox(cbDistrict, District.getDistrictLabel());
         district = null;
         ward = null;
-        
+
         if (nameProvinceIsSelected.equals(province.getProvinceLabel())) {
             cbDistrict.setSelectedIndex(0);
             cbDistrict.setEnabled(false);
@@ -474,11 +492,11 @@ public class Staff_InfoStaff_GUI extends javax.swing.JPanel {
         }
         Province province = province_DAO.getProvinceByNameProvince(nameProvinceIsSelected);
         Staff_InfoStaff_GUI.this.province = province;
-        
+
         try {
             setDistrictToComboBox(Staff_InfoStaff_GUI.this.province);
         } catch (SQLException ex) {
-            
+
         }
         repaint();
         cbDistrict.setEnabled(true);
@@ -492,12 +510,12 @@ public class Staff_InfoStaff_GUI extends javax.swing.JPanel {
         }
         isEnabledEventWard = false;
         String nameWardSelected = cbWard.getSelectedItem().toString();
-        
+
         if (nameWardSelected.equals(Ward.getWardLabel())) {
             ward = null;
             return;
         }
-        
+
         Ward ward = ward_DAO.getWardByNameWard(district, nameWardSelected);
         Staff_InfoStaff_GUI.this.ward = ward;
         isEnabledEventWard = false;
@@ -520,7 +538,7 @@ public class Staff_InfoStaff_GUI extends javax.swing.JPanel {
         String nameDistrictSelected = (String) cbDistrict.getSelectedItem();
         cbWard = (ComboBoxSuggestion) resizeComboBox(cbWard, Ward.getWardLabel());
         ward = null;
-        
+
         if (nameDistrictSelected.equals(District.getDistrictLabel())) {
             cbWard.setSelectedIndex(0);
             cbWard.setEnabled(false);
@@ -594,7 +612,9 @@ public class Staff_InfoStaff_GUI extends javax.swing.JPanel {
                 boolean res = staff_DAO.updateInfoStaff(staff);
                 if (res) {
                     JOptionPane.showMessageDialog(null, "Cập nhập thông tin nhân viên thành công !");
-                    backToStaffGUI();
+                    if (Flag.getFlagStaffInfo() == 2) {
+                        backToStaffGUI();
+                    }
                 }
             }
         }
@@ -604,9 +624,7 @@ public class Staff_InfoStaff_GUI extends javax.swing.JPanel {
         jtfAddress.setText("");
         jtfCitizenIdentification.setText("");
         jtfDoB.setText("Ngày sinh");
-//        jtfIDStaff.setText("");
         jtfName.setText("");
-//        jtfPass.setText("");
         jtfEmail.setText("");
         jtfPhone.setText("");
         cbWard.setSelectedIndex(0);
@@ -642,9 +660,9 @@ public class Staff_InfoStaff_GUI extends javax.swing.JPanel {
      */
     private void setProvinceToComboBox() {
         isEnabledEventProvince = false;
-        
+
         List<Province> listProvince = province_DAO.getListProvince();
-        
+
         listProvince.sort(new Comparator<Province>() {
             @Override
             public int compare(Province o1, Province o2) {
@@ -660,14 +678,26 @@ public class Staff_InfoStaff_GUI extends javax.swing.JPanel {
             listProvince.forEach(province -> {
                 int index = listProvince.indexOf(province);
                 cbProvince.addItem(province.getProvince());
-                
+
                 Staff staffTMP = staff_DAO.getStaffByID(Flag.getFlagIDStaff());
                 if (province.getId().equals(staffTMP.getProvince().getId())) {
                     cbProvince.setSelectedIndex(index + 1);
                     Staff_InfoStaff_GUI.this.province = province;
                 }
             });
-            
+
+            isEnabledEventProvince = true;
+        } else if (Flag.getFlagStaffInfo() == 3) {
+            listProvince.forEach(province -> {
+                int index = listProvince.indexOf(province);
+                cbProvince.addItem(province.getProvince());
+
+                Staff staffTMP = staff_DAO.getStaffByID(Flag.getIdStaff());
+                if (province.getId().equals(staffTMP.getProvince().getId())) {
+                    cbProvince.setSelectedIndex(index + 1);
+                    Staff_InfoStaff_GUI.this.province = province;
+                }
+            });
             isEnabledEventProvince = true;
         }
     }
@@ -679,7 +709,7 @@ public class Staff_InfoStaff_GUI extends javax.swing.JPanel {
      */
     private void setDistrictToComboBox(Province province) throws SQLException {
         isEnabledEventDistrict = false;
-        
+
         List<District> listDistrict = district_DAO.getListDistrict(province);
         listDistrict.sort(new Comparator<District>() {
             @Override
@@ -703,6 +733,17 @@ public class Staff_InfoStaff_GUI extends javax.swing.JPanel {
                 }
             });
             isEnabledEventDistrict = true;
+        } else if (Flag.getFlagStaffInfo() == 3) {
+            listDistrict.forEach(district -> {
+                int index = listDistrict.indexOf(district);
+                cbDistrict.addItem(district.getDistrict());
+                Staff staffTMP = staff_DAO.getStaffByID(Flag.getIdStaff());
+                if (district.getId().equals(staffTMP.getDistrict().getId())) {
+                    cbDistrict.setSelectedIndex(index + 1);
+                    Staff_InfoStaff_GUI.this.district = district;
+                }
+            });
+            isEnabledEventDistrict = true;
         }
     }
 
@@ -713,11 +754,11 @@ public class Staff_InfoStaff_GUI extends javax.swing.JPanel {
      */
     private void setWardToComboBox(District district) {
         isEnabledEventWard = false;
-        
+
         List<Ward> listWard = ward_DAO.getListWard(district);
-        
+
         listWard.sort(new Comparator<Ward>() {
-            
+
             @Override
             public int compare(Ward o1, Ward o2) {
                 return o1.getWard().compareToIgnoreCase(o2.getWard());
@@ -733,6 +774,17 @@ public class Staff_InfoStaff_GUI extends javax.swing.JPanel {
                 int index = listWard.indexOf(ward);
                 cbWard.addItem(ward.getWard());
                 Staff staffTMP = staff_DAO.getStaffByID(Flag.getFlagIDStaff());
+                if (ward.getId().equals(staffTMP.getWard().getId())) {
+                    cbWard.setSelectedIndex(index + 1);
+                    Staff_InfoStaff_GUI.this.ward = ward;
+                }
+            });
+            isEnabledEventWard = true;
+        } else if (Flag.getFlagStaffInfo() == 3) {
+            listWard.forEach(ward -> {
+                int index = listWard.indexOf(ward);
+                cbWard.addItem(ward.getWard());
+                Staff staffTMP = staff_DAO.getStaffByID(Flag.getIdStaff());
                 if (ward.getId().equals(staffTMP.getWard().getId())) {
                     cbWard.setSelectedIndex(index + 1);
                     Staff_InfoStaff_GUI.this.ward = ward;
@@ -807,7 +859,7 @@ public class Staff_InfoStaff_GUI extends javax.swing.JPanel {
     private boolean validator() {
         String vietNamese = Utils.getVietnameseDiacriticCharacters() + "A-Z";
         String vietNameseLower = Utils.getVietnameseDiacriticCharactersLower() + "a-z";
-        
+
         String name = jtfName.getText().trim();
         if (name.length() <= 0) {
             return showERROR(jtfName, "Họ tên không được trống !");
@@ -820,7 +872,7 @@ public class Staff_InfoStaff_GUI extends javax.swing.JPanel {
                 name)) {
             return showERROR(jtfName, "Họ tên bắt đầu bằng ký tự hoa, có ít nhất 2 từ trong đó không chứa ký tự đặc biệt nào !");
         }
-        
+
         String cic = jtfCitizenIdentification.getText().trim();
         if (cic.length() <= 0) {
             return showERROR(jtfCitizenIdentification, "Vui lòng nhập đầy đủ số CCCD !");
@@ -828,7 +880,7 @@ public class Staff_InfoStaff_GUI extends javax.swing.JPanel {
         if (checkRegex(cic, "^\\d{12}$") == false) {
             return showERROR(jtfCitizenIdentification, "CCCD phải là 12 ký tự số !");
         }
-        
+
         String phone = jtfPhone.getText().trim();
         if (phone.length() <= 0) {
             return showERROR(jtfPhone, "Vui lòng nhập số điện thoại của nhân viên !");
@@ -836,7 +888,7 @@ public class Staff_InfoStaff_GUI extends javax.swing.JPanel {
         if (checkRegex(phone, "^0\\d{9}$") == false) {
             return showERROR(jtfPhone, "Số điện thoại không đúng định dạng 0xx.xxxx.xxx vui lòng kiểm tra lại");
         }
-        
+
         String email = jtfEmail.getText().trim();
         String regexEmail = "^[A-Za-z0-9+_.-]+@(.+)$";
         if (email.length() < 1) {
@@ -845,14 +897,14 @@ public class Staff_InfoStaff_GUI extends javax.swing.JPanel {
         if (checkRegex(email, regexEmail) == false) {
             return showERROR(jtfEmail, "Email không đúng định dạng, vui lòng kiểm tra lại !");
         }
-        
+
         String dob = jtfDoB.getText();
         long daysElapsed = java.time.temporal.ChronoUnit.DAYS.between(Utils.getLocalDate(dob), LocalDate.now());
         boolean checkAge = daysElapsed / (18 * 365) > 0;
         if (checkAge == false) {
             return showERROR(jtfDoB, "Nhân viên chưa đủ 18 tuổi !");
         }
-        
+
         String province = (String) cbProvince.getSelectedItem();
         if (province.equals(Province.getProvinceLabel())) {
             JOptionPane.showMessageDialog(null, "Hãy chọn địa chỉ Tỉnh/Thành phố");
@@ -872,7 +924,7 @@ public class Staff_InfoStaff_GUI extends javax.swing.JPanel {
         if (address.length() <= 0) {
             return showERROR(jtfAddress, "Vui lòng nhập địa chỉ cụ thể");
         }
-        
+
         if (Flag.getFlagStaffInfo() == 1) {
             if (staff_DAO.checkCICExist(cic)) {
                 return showERROR(jtfCitizenIdentification, "Số CCCD của nhân viên này đã tồn tại trên hệ thống vui lòng kiểm tra lại");
@@ -906,7 +958,7 @@ public class Staff_InfoStaff_GUI extends javax.swing.JPanel {
         }
         return true;
     }
-    
+
     private void clear() {
         jtfAddress.setText("");
         jtfCitizenIdentification.setText("");
@@ -920,13 +972,13 @@ public class Staff_InfoStaff_GUI extends javax.swing.JPanel {
         cbProvince.setSelectedIndex(0);
         jrbMale.setSelected(true);
     }
-    
+
     public void stopWebcam() {
         if (sell_GUI != null) {
             sell_GUI.stopWebcam();
         }
     }
-    
+
     public void backToStaffGUI() {
         JPanel parent = (JPanel) this.getParent();
         parent.remove(this);

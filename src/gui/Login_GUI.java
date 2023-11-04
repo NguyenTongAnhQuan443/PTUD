@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import dao.Staff_DAO;
 import connectDB.ConnectDB;
+import entity.Flag;
 import entity.Staff;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ public class Login_GUI extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
 //        Account default
         jtfUser.setText("NV0001");
-        jpfPass.setText("04042003");
+        jpfPass.setText("1234Abc@");
     }
 
     @SuppressWarnings("unchecked")
@@ -232,11 +233,8 @@ public class Login_GUI extends javax.swing.JFrame {
             jtfUser.setHelperText(null);
             jpfPass.setHelperText(null);
 
-//            homeManager_GUI = (HomeManager_GUI_X) SwingUtilities.getWindowAncestor(Login_GUI.this);
-//            homeManager_GUI = new HomeManager_GUI_X();
-//            homeManager_GUI.setVisible(true);
             staff_DAO = new Staff_DAO();
-            String id = jtfUser.getText();
+            String id = jtfUser.getText().trim();
             char[] passwordChars = jpfPass.getPassword();
             String password = new String(passwordChars);
             boolean checkAccount = staff_DAO.isAccount(id, password);
@@ -244,11 +242,16 @@ public class Login_GUI extends javax.swing.JFrame {
             if (checkAccount == true && checkRights == true) { // đăng nhập bằng quyền nhân viên quản lý
                 this.dispose();
                 String nameStaff = staff_DAO.getNameAccount(id);
+                
+                // lưu tài khoản đăng nhập
+                Flag.setIdStaff(id);
+                Flag.setPassStaff(password);
+                
                 JOptionPane.showMessageDialog(this, "Nhân viên : " + nameStaff + " đã nhập vào hệ thống !");
                 Home_GUI home_GUI = new Home_GUI();
                 home_GUI.setVisible(true);
             } else {
-                JOptionPane.showMessageDialog(null, "Tài khoản hoặc mật khẩu không chính xác ! Vui lòng thử lại");
+                JOptionPane.showMessageDialog(null, "Tài khoản hoặc mật khẩu không chính xác vui lòng thử lại");
             }
         }
     }//GEN-LAST:event_btnLoginActionPerformed

@@ -1,10 +1,15 @@
 package gui;
 
+import dao.Staff_DAO;
+import entity.Flag;
 import java.awt.event.ActionEvent;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
@@ -12,12 +17,13 @@ public class ChangePassword_GUI extends javax.swing.JPanel {
 
     private Sell_GUI sell_GUI;
     private Statistical_GUIX statistical_GUI;
+    private String captcha;
 
     public ChangePassword_GUI() {
         initComponents();
         jtfCaptcha.setText(createCaptcha());
-
         disableCopyPaste(jtfCaptcha);
+        jtfIDStaff.setText(Flag.getIdStaff().trim());
     }
 
     @SuppressWarnings("unchecked")
@@ -32,12 +38,12 @@ public class ChangePassword_GUI extends javax.swing.JPanel {
         jtfCaptcha = new javax.swing.JTextField();
         jlCaptch = new javax.swing.JLabel();
         jlIconRefresh = new javax.swing.JLabel();
-        btnBack = new lib2.Button();
         btnSave = new lib2.Button();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Đổi mật khẩu", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
+        jtfIDStaff.setEditable(false);
         jtfIDStaff.setLabelText("Mã nhân viên");
 
         jtfOldPass.setLabelText("Nhập mật khẩu cũ");
@@ -49,7 +55,7 @@ public class ChangePassword_GUI extends javax.swing.JPanel {
         jtfInputCaptcha.setLabelText("Nhập mã Captcha");
 
         jtfCaptcha.setEditable(false);
-        jtfCaptcha.setFont(new java.awt.Font("Footlight MT Light", 1, 24)); // NOI18N
+        jtfCaptcha.setFont(new java.awt.Font("Footlight MT Light", 1, 36)); // NOI18N
 
         jlCaptch.setText("Mã CAPTCHA :");
 
@@ -60,22 +66,16 @@ public class ChangePassword_GUI extends javax.swing.JPanel {
             }
         });
 
-        btnBack.setBackground(new java.awt.Color(135, 206, 235));
-        btnBack.setForeground(new java.awt.Color(255, 255, 255));
-        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/back24.png"))); // NOI18N
-        btnBack.setText("Quay lại trang chủ");
-        btnBack.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
-
         btnSave.setBackground(new java.awt.Color(135, 206, 235));
         btnSave.setForeground(new java.awt.Color(255, 255, 255));
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/save24.png"))); // NOI18N
         btnSave.setText("Lưu thay đổi");
         btnSave.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -97,8 +97,7 @@ public class ChangePassword_GUI extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jtfCaptcha, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jlIconRefresh))
-                            .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jlIconRefresh))))
                     .addComponent(jtfInputCaptcha, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(419, Short.MAX_VALUE))
         );
@@ -121,9 +120,7 @@ public class ChangePassword_GUI extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jtfInputCaptcha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(174, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -132,15 +129,28 @@ public class ChangePassword_GUI extends javax.swing.JPanel {
         jtfCaptcha.setText(createCaptcha());
     }//GEN-LAST:event_jlIconRefreshMouseClicked
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        currentFrame.dispose();
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        if (validator()) {
+            Flag.setPassStaff(jtfNewPass.getText().trim());
+            Staff_DAO staff_DAO = new Staff_DAO();
+            boolean res = staff_DAO.changePass(Flag.getIdStaff().trim(), jtfNewPass.getText().trim());
+            if(res){
+                clearInput();
+                JOptionPane.showMessageDialog(null, "Thay đổi mật khẩu thành công !");
+            }else{
+                JOptionPane.showMessageDialog(null, "Thay đổi mật khẩu thất bại vui lòng kiểm tra lại");
+            }
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
 
-//        HomeManager_GUI_X homeManager_GUI = new HomeManager_GUI_X();
-//        homeManager_GUI.setVisible(true);
-    }//GEN-LAST:event_btnBackActionPerformed
+public void clearInput(){
+    jtfCaptcha.setText(createCaptcha());
+    jtfConfirmPass.setText("");
+    jtfInputCaptcha.setText("");
+    jtfNewPass.setText("");
+    jtfOldPass.setText("");
+}
 // Hàm tạo mã Captcha
-
     private static String createCaptcha() {
         Random random = new Random();
         int length = 4 + (Math.abs(random.nextInt()) % 3);
@@ -178,8 +188,51 @@ public class ChangePassword_GUI extends javax.swing.JPanel {
         });
     }
 
+    //    show error
+    private boolean showERROR(JTextField jtf, String mess) {
+        jtf.selectAll();
+        jtf.requestFocus();
+        JOptionPane.showMessageDialog(null, mess);
+        return false;
+    }
+
+    //    check Regex
+    private boolean checkRegex(String input, String regex) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(input);
+        if (matcher.matches()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean validator() {
+        if (!jtfOldPass.getText().equals(Flag.getPassStaff())) {
+            return showERROR(jtfOldPass, "Mật khẩu bạn nhập không khớp với mật khẩu cũ vui lòng kiểm tra lại !");
+        }
+        if (jtfNewPass.getText().equals(Flag.getPassStaff())) {
+            return showERROR(jtfNewPass, "Mật khẩu mới không được giống với mật khẩu cũ vui lòng kiểm tra lại !");
+        }
+
+        String pass = jtfNewPass.getText().trim();
+        String regexPass = "^(?=.*[A-Z])(?=.*\\d)(?=.*\\W).{8,}$";
+        if (checkRegex(pass, regexPass) == false) {
+            return showERROR(jtfNewPass, "Password có ít nhất 8 ký tự, trong có có ít nhất một chữ in hoa, và một ký tự đặc biệt!");
+        }
+        
+        if(!jtfConfirmPass.getText().trim().equals(jtfNewPass.getText().trim())){
+            return showERROR(jtfConfirmPass, "Mật khẩu nhập lại không giống mật khẩu mới vui lòng kiểm tra lại !");
+        }
+        
+        captcha = jtfCaptcha.getText().trim();
+        if (!jtfInputCaptcha.getText().trim().equals(captcha)) {
+            return showERROR(jtfInputCaptcha, "Mã Captcha chưa chính xác vui lòng kiểm tra lại hoặc thay đổi mã Captcha khác");
+        }
+        return true;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private lib2.Button btnBack;
     private lib2.Button btnSave;
     private javax.swing.JLabel jlCaptch;
     private javax.swing.JLabel jlIconRefresh;

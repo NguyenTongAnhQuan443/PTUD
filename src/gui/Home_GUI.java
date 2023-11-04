@@ -41,7 +41,7 @@ public class Home_GUI extends javax.swing.JFrame {
         statistical_GUI = new Statistical_GUI1();
         statistical_GUI.setJPRevenue();
         addJPanel(statistical_GUI);
-
+        
 // Sụ kiện mở các menu
         menu1.setEvent(new MenuEvent() {
             @Override
@@ -120,6 +120,7 @@ public class Home_GUI extends javax.swing.JFrame {
                     promotion_GUI = new Promotion_GUI();
                     addJPanel(promotion_GUI);
                 } else if (index == 8 && subIndex == 1) { // sự kiện menu tài khoản - thông tin tài khoản
+                    Flag.setFlagStaffInfo(3);
                     stopWebcam();
                     jpCenter.removeAll();
                     staff_InfoStaff_GUI = new Staff_InfoStaff_GUI();

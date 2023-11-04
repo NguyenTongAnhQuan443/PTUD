@@ -9,6 +9,7 @@ public class Flag {
     // 0 là mặc định
     // 1 là mở chức năng thêm nhân viên
     // 2 là mở chức năng sửa thông tin nhân viên
+    // 3 là mở từ menu tài khoản
     public static String flagIDStaff; // lấy idStaff cho chức năng cập nhập
     
     public static int flagUpdateSupplier;
@@ -22,6 +23,10 @@ public class Flag {
     // 1 là mở chức năng thêm Khách hàng
     // 2 là mở chức năng cập nhập Khách hàng
     public static String flagIDCustomer;
+    
+    //Lưu thông tin nhân viên đăng nhập
+    protected static String idStaff;
+    protected static String passStaff;
 
 //    constructor
     public Flag() {
@@ -32,6 +37,9 @@ public class Flag {
         flagIDSupplier = "";
         flagUpdateCustomer = 0;
         flagIDCustomer = "";
+        
+        idStaff = "";
+        passStaff = "";
     }
 
 //
@@ -94,6 +102,22 @@ public class Flag {
 
     public static void setFlagIDCustomer(String flagIDCustomer) {
         Flag.flagIDCustomer = flagIDCustomer;
+    }
+
+    public static String getIdStaff() {
+        return idStaff;
+    }
+
+    public static void setIdStaff(String idStaff) {
+        Flag.idStaff = idStaff;
+    }
+
+    public static String getPassStaff() {
+        return passStaff;
+    }
+
+    public static void setPassStaff(String passStaff) {
+        Flag.passStaff = passStaff;
     }
     
 }

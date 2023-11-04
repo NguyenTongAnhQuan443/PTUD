@@ -370,7 +370,7 @@ public class Staff_GUI extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        Flag.setFlagStaffInfo(2);
+
         int selectRow = jTable.getSelectedRow();
         if (selectRow == -1) {
             JOptionPane.showMessageDialog(null, "Bạn chưa chọn nhân viên muốn cập nhập thông tin !");
