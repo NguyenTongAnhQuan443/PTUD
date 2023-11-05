@@ -23,14 +23,15 @@ public class Home_GUI extends javax.swing.JFrame {
     private Statistical_Staff_GUI statistical_Staff_GUI;
     private Sell_GUI sell_GUI;
     private Supplier_GUI supplier_GUI;
-    private Product_GUI product_GUI;
-//    private Staff_GUI staff_GUI;
+    private Product_GUI_XX product_GUI;
     private Staff_GUI staff_GUI;
     private History_GUI history_GUI;
     private Promotion_GUI promotion_GUI;
     private Staff_InfoStaff_GUI staff_InfoStaff_GUI;
     private ChangePassword_GUI changePassword_GUI;
     private Customer_GUI customer_GUI;
+    
+    private Product_GUI product_GUI1;
 
     public Home_GUI() {
         initComponents();
@@ -79,7 +80,7 @@ public class Home_GUI extends javax.swing.JFrame {
                 } else if (index == 2) { // sự kiện menu sản phẩm
                     stopWebcam();
                     jpCenter.removeAll();
-                    product_GUI = new Product_GUI();
+                    product_GUI = new Product_GUI_XX();
                     addJPanel(product_GUI);
                 } else if (index == 3 && subIndex == 1) { // sự kiện menu nhân viên - danh sách nhân viên
                     Flag.setFlagStaffGUI(true); // mở GUI danh sách nhân viên
@@ -130,8 +131,12 @@ public class Home_GUI extends javax.swing.JFrame {
                     jpCenter.removeAll();
                     changePassword_GUI = new ChangePassword_GUI();
                     addJPanel(changePassword_GUI);
+                }else if (index == 9 && subIndex == 1) { 
+                    stopWebcam();
+                    jpCenter.removeAll();
+                    product_GUI1 = new Product_GUI();
+                    addJPanel(product_GUI1);
                 }
-
             }
         });
     }

@@ -940,7 +940,6 @@ public class Supplier_GUI extends javax.swing.JPanel {
             String addressDetails = province + ", " + district + ", " + ward + ", " + address;
             String[] rowData = {supplier.getIdSupplier(), supplier.getName(), supplier.getEmail(), supplier.getPhone(), Supplier.convertStatusToString(supplier.getStatus()), addressDetails};
             defaultTableModel.addRow(rowData);
-
         }
     }
 
