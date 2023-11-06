@@ -9,4 +9,11 @@ public class Note {
     Menu sản phẩm (Đang làm)
     */
     // Xuất file khách hàng trong ngày
+    
+    /*
+    Trong khách hàng tính : 
+    + Điểm tích lũy
+    + Xếp hạng
+    + Tổng tiêu 6 tháng gần nhất
+    */
 }

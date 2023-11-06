@@ -40,26 +40,43 @@ public class ProductProperties_DAO {
     public boolean addProductType(ProductType productType) {
         try {
             java.sql.Connection connection = ConnectDB.getConnection();
-            String sql = "INSERT ProductType VALUES (?)";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, productType.getName());
-            preparedStatement.execute();
-            preparedStatement.close();
-            return true;
+            if (!isProductTypeExists(connection, productType)) {
+                String sql = "INSERT ProductType VALUES (?)";
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setString(1, productType.getName());
+                preparedStatement.execute();
+                preparedStatement.close();
+                return true;
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return false;
     }
 
+//    Kiểm tra sự tồn tại thuộc tính đó trong hệ thống
+    private boolean isProductTypeExists(Connection connection, ProductType productType) throws SQLException {
+        String query = "SELECT COUNT(*) FROM ProductType WHERE name = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, productType.getName());
+        ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet.next();
+        int count = resultSet.getInt(1);
+        preparedStatement.close();
+        return count > 0;
+    }
+
 //     Sửa thông tin loại sản phẩm
     public boolean updateProductType(ProductType productType) {
-        String sql = "Update ProductType SET name = ? WHERE idProductType = ?";
+
         try {
-            PreparedStatement preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
-            preparedStatement.setString(1, productType.getName());
-            preparedStatement.setInt(2, productType.getIdProductType());
-            return preparedStatement.executeUpdate() > 0;
+            if (!isProductTypeExists(ConnectDB.getConnection(), productType)) {
+                String sql = "Update ProductType SET name = ? WHERE idProductType = ?";
+                PreparedStatement preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
+                preparedStatement.setString(1, productType.getName());
+                preparedStatement.setInt(2, productType.getIdProductType());
+                return preparedStatement.executeUpdate() > 0;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -91,26 +108,43 @@ public class ProductProperties_DAO {
     public boolean addProductColor(ProductColor productColor) {
         try {
             java.sql.Connection connection = ConnectDB.getConnection();
-            String sql = "INSERT ProductColor VALUES (?)";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, productColor.getName());
-            preparedStatement.execute();
-            preparedStatement.close();
-            return true;
+            if (!isProductColorExists(connection, productColor)) {
+                String sql = "INSERT ProductColor VALUES (?)";
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setString(1, productColor.getName());
+                preparedStatement.execute();
+                preparedStatement.close();
+                return true;
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return false;
     }
 
+    //    Kiểm tra sự tồn tại thuộc tính đó trong hệ thống
+    private boolean isProductColorExists(Connection connection, ProductColor productColor) throws SQLException {
+        String query = "SELECT COUNT(*) FROM ProductColor WHERE name = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, productColor.getName());
+        ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet.next();
+        int count = resultSet.getInt(1);
+        preparedStatement.close();
+        return count > 0;
+    }
+
 //     Sửa thông tin loại sản phẩm
     public boolean updateProductColor(ProductColor productColor) {
-        String sql = "Update ProductColor SET name = ? WHERE idColor = ?";
+
         try {
-            PreparedStatement preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
-            preparedStatement.setString(1, productColor.getName());
-            preparedStatement.setInt(2, productColor.getIdColor());
-            return preparedStatement.executeUpdate() > 0;
+            if (!isProductColorExists(ConnectDB.getConnection(), productColor)) {
+                String sql = "Update ProductColor SET name = ? WHERE idColor = ?";
+                PreparedStatement preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
+                preparedStatement.setString(1, productColor.getName());
+                preparedStatement.setInt(2, productColor.getIdColor());
+                return preparedStatement.executeUpdate() > 0;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -142,26 +176,42 @@ public class ProductProperties_DAO {
     public boolean addProductSize(ProductSize productSize) {
         try {
             java.sql.Connection connection = ConnectDB.getConnection();
-            String sql = "INSERT ProductSize VALUES (?)";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, productSize.getName());
-            preparedStatement.execute();
-            preparedStatement.close();
-            return true;
+            if (!isProductSizeExists(connection, productSize)) {
+                String sql = "INSERT ProductSize VALUES (?)";
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setString(1, productSize.getName());
+                preparedStatement.execute();
+                preparedStatement.close();
+                return true;
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return false;
     }
 
+    //    Kiểm tra sự tồn tại thuộc tính đó trong hệ thống
+    private boolean isProductSizeExists(Connection connection, ProductSize productSize) throws SQLException {
+        String query = "SELECT COUNT(*) FROM ProductSize WHERE name = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, productSize.getName());
+        ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet.next();
+        int count = resultSet.getInt(1);
+        preparedStatement.close();
+        return count > 0;
+    }
+
 //     Sửa thông tin kích thước
     public boolean updateProductSize(ProductSize productSize) {
-        String sql = "Update ProductSize SET name = ? WHERE idSize = ?";
         try {
-            PreparedStatement preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
-            preparedStatement.setString(1, productSize.getName());
-            preparedStatement.setInt(2, productSize.getIdSize());
-            return preparedStatement.executeUpdate() > 0;
+            if (!isProductSizeExists(ConnectDB.getConnection(), productSize)) {
+                String sql = "Update ProductSize SET name = ? WHERE idSize = ?";
+                PreparedStatement preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
+                preparedStatement.setString(1, productSize.getName());
+                preparedStatement.setInt(2, productSize.getIdSize());
+                return preparedStatement.executeUpdate() > 0;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -193,26 +243,43 @@ public class ProductProperties_DAO {
     public boolean addProductMaterial(ProductMaterial productMaterial) {
         try {
             java.sql.Connection connection = ConnectDB.getConnection();
-            String sql = "INSERT ProductMaterial VALUES (?)";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, productMaterial.getName());
-            preparedStatement.execute();
-            preparedStatement.close();
-            return true;
+            if (!isProductMaterialExists(connection, productMaterial)) {
+                String sql = "INSERT ProductMaterial VALUES (?)";
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setString(1, productMaterial.getName());
+                preparedStatement.execute();
+                preparedStatement.close();
+                return true;
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return false;
     }
 
+    //    Kiểm tra sự tồn tại thuộc tính đó trong hệ thống
+    private boolean isProductMaterialExists(Connection connection, ProductMaterial productMaterial) throws SQLException {
+        String query = "SELECT COUNT(*) FROM ProductMaterial WHERE name = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, productMaterial.getName());
+        ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet.next();
+        int count = resultSet.getInt(1);
+        preparedStatement.close();
+        return count > 0;
+    }
+
 //     Sửa thông tin chất liệu
     public boolean updateProductMaterial(ProductMaterial productMaterial) {
-        String sql = "Update ProductMaterial SET name = ? WHERE idMaterial = ?";
+
         try {
-            PreparedStatement preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
-            preparedStatement.setString(1, productMaterial.getName());
-            preparedStatement.setInt(2, productMaterial.getIdMaterial());
-            return preparedStatement.executeUpdate() > 0;
+            if (!isProductMaterialExists(ConnectDB.getConnection(), productMaterial)) {
+                String sql = "Update ProductMaterial SET name = ? WHERE idMaterial = ?";
+                PreparedStatement preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
+                preparedStatement.setString(1, productMaterial.getName());
+                preparedStatement.setInt(2, productMaterial.getIdMaterial());
+                return preparedStatement.executeUpdate() > 0;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

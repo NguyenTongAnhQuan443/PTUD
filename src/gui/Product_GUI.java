@@ -17,6 +17,7 @@ public class Product_GUI extends javax.swing.JPanel {
     private DefaultTableModel defaultTableModelProductMaterial;
     private DefaultTableModel defaultTableModelProductSize;
     private DefaultTableModel defaultTableModelProductType;
+    private DefaultTableModel defaultTableModelListProduct;
 
     private ProductProperties_DAO productProperties_DAO = new ProductProperties_DAO();
 
@@ -48,6 +49,11 @@ public class Product_GUI extends javax.swing.JPanel {
         defaultTableModelProductType = (DefaultTableModel) jTableProductType.getModel();
         ListSelectionModel selectionModel_4 = jTableProductType.getSelectionModel();
         selectionModel_4.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        TableCustom.apply(jSPTableListProduct, TableCustom.TableType.DEFAULT);
+        defaultTableModelListProduct = (DefaultTableModel) jTableListProduct.getModel();
+        ListSelectionModel selectionModel_5 = jTableListProduct.getSelectionModel();
+        selectionModel_5.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
     }
 
@@ -85,6 +91,27 @@ public class Product_GUI extends javax.swing.JPanel {
         jSPProductMaterial = new javax.swing.JScrollPane();
         jTableProductMaterial = new javax.swing.JTable();
         JP2 = new javax.swing.JPanel();
+        jPTop = new javax.swing.JPanel();
+        jtfIDProduct = new lib2.TextField();
+        jtfPrice = new lib2.TextField();
+        cbColor = new lib2.ComboBoxSuggestion();
+        jtfNameProduct = new lib2.TextField();
+        jtfQuantity = new lib2.TextField();
+        cbType = new lib2.ComboBoxSuggestion();
+        cbMaterial = new lib2.ComboBoxSuggestion();
+        cbSize = new lib2.ComboBoxSuggestion();
+        jcStopBusiness = new javax.swing.JCheckBox();
+        btnAddProduct = new lib2.Button();
+        btnEditProduct = new lib2.Button();
+        btnClearJTF = new lib2.Button();
+        jtfCostPrice = new lib2.TextField();
+        cbSupplier = new lib2.ComboBoxSuggestion();
+        jPBottom = new javax.swing.JPanel();
+        jSPTableListProduct = new javax.swing.JScrollPane();
+        jTableListProduct = new javax.swing.JTable();
+        btnDel = new lib2.Button();
+        btnInputFile = new lib2.Button();
+        btnOutputFile = new lib2.Button();
         JP3 = new javax.swing.JPanel();
 
         buttonGroup1.add(jrbColor);
@@ -238,7 +265,7 @@ public class Product_GUI extends javax.swing.JPanel {
                         .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addContainerGap(290, Short.MAX_VALUE))
         );
         JP1MT_RightLayout.setVerticalGroup(
             JP1MT_RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,11 +338,11 @@ public class Product_GUI extends javax.swing.JPanel {
         jPProductType.setLayout(jPProductTypeLayout);
         jPProductTypeLayout.setHorizontalGroup(
             jPProductTypeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSPProductType, javax.swing.GroupLayout.DEFAULT_SIZE, 1096, Short.MAX_VALUE)
+            .addComponent(jSPProductType, javax.swing.GroupLayout.DEFAULT_SIZE, 1212, Short.MAX_VALUE)
         );
         jPProductTypeLayout.setVerticalGroup(
             jPProductTypeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSPProductType, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+            .addComponent(jSPProductType, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
         );
 
         jTabbedPaneChild.addTab("Loại sản phẩm", jPProductType);
@@ -350,11 +377,11 @@ public class Product_GUI extends javax.swing.JPanel {
         jPProductSize.setLayout(jPProductSizeLayout);
         jPProductSizeLayout.setHorizontalGroup(
             jPProductSizeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSPProductSize, javax.swing.GroupLayout.DEFAULT_SIZE, 1096, Short.MAX_VALUE)
+            .addComponent(jSPProductSize, javax.swing.GroupLayout.DEFAULT_SIZE, 1212, Short.MAX_VALUE)
         );
         jPProductSizeLayout.setVerticalGroup(
             jPProductSizeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSPProductSize, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+            .addComponent(jSPProductSize, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
         );
 
         jTabbedPaneChild.addTab("Kích thước", jPProductSize);
@@ -389,11 +416,11 @@ public class Product_GUI extends javax.swing.JPanel {
         jPProductColor.setLayout(jPProductColorLayout);
         jPProductColorLayout.setHorizontalGroup(
             jPProductColorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSPProductColor, javax.swing.GroupLayout.DEFAULT_SIZE, 1096, Short.MAX_VALUE)
+            .addComponent(jSPProductColor, javax.swing.GroupLayout.DEFAULT_SIZE, 1212, Short.MAX_VALUE)
         );
         jPProductColorLayout.setVerticalGroup(
             jPProductColorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSPProductColor, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+            .addComponent(jSPProductColor, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
         );
 
         jTabbedPaneChild.addTab("Màu sắc", jPProductColor);
@@ -428,11 +455,11 @@ public class Product_GUI extends javax.swing.JPanel {
         jPProductMaterial.setLayout(jPProductMaterialLayout);
         jPProductMaterialLayout.setHorizontalGroup(
             jPProductMaterialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSPProductMaterial, javax.swing.GroupLayout.DEFAULT_SIZE, 1096, Short.MAX_VALUE)
+            .addComponent(jSPProductMaterial, javax.swing.GroupLayout.DEFAULT_SIZE, 1212, Short.MAX_VALUE)
         );
         jPProductMaterialLayout.setVerticalGroup(
             jPProductMaterialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSPProductMaterial, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+            .addComponent(jSPProductMaterial, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
         );
 
         jTabbedPaneChild.addTab("Chất liệu", jPProductMaterial);
@@ -452,16 +479,274 @@ public class Product_GUI extends javax.swing.JPanel {
 
         jTabbedPaneMain.addTab("Thuộc tính sản phẩm", JP1);
 
-        javax.swing.GroupLayout JP2Layout = new javax.swing.GroupLayout(JP2);
-        JP2.setLayout(JP2Layout);
-        JP2Layout.setHorizontalGroup(
-            JP2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1096, Short.MAX_VALUE)
+        JP2.setBackground(new java.awt.Color(255, 255, 255));
+        JP2.setLayout(new javax.swing.BoxLayout(JP2, javax.swing.BoxLayout.Y_AXIS));
+
+        jPTop.setBackground(new java.awt.Color(255, 255, 255));
+        jPTop.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Quản lý sản phẩm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 14))); // NOI18N
+
+        jtfIDProduct.setEditable(false);
+        jtfIDProduct.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfIDProduct.setLabelText("Mã sản phẩm");
+        jtfIDProduct.setLineColor(new java.awt.Color(204, 204, 255));
+        jtfIDProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfIDProductActionPerformed(evt);
+            }
+        });
+
+        jtfPrice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfPrice.setLabelText("Giá bán");
+        jtfPrice.setLineColor(new java.awt.Color(204, 204, 255));
+        jtfPrice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfPriceActionPerformed(evt);
+            }
+        });
+
+        cbColor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Màu sắc" }));
+        cbColor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jtfNameProduct.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfNameProduct.setLabelText("Tên sản phẩm");
+        jtfNameProduct.setLineColor(new java.awt.Color(204, 204, 255));
+        jtfNameProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfNameProductActionPerformed(evt);
+            }
+        });
+
+        jtfQuantity.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfQuantity.setLabelText("Số lượng");
+        jtfQuantity.setLineColor(new java.awt.Color(204, 204, 255));
+        jtfQuantity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfQuantityActionPerformed(evt);
+            }
+        });
+
+        cbType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Loại sản phẩm" }));
+        cbType.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        cbMaterial.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Chất liệu" }));
+        cbMaterial.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        cbSize.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kích thước" }));
+        cbSize.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jcStopBusiness.setBackground(new java.awt.Color(255, 255, 255));
+        jcStopBusiness.setText("Ngừng kinh doanh");
+
+        btnAddProduct.setBackground(new java.awt.Color(135, 206, 235));
+        btnAddProduct.setForeground(new java.awt.Color(255, 255, 255));
+        btnAddProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/add24.png"))); // NOI18N
+        btnAddProduct.setText("Thêm");
+        btnAddProduct.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAddProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddProductActionPerformed(evt);
+            }
+        });
+
+        btnEditProduct.setBackground(new java.awt.Color(135, 206, 235));
+        btnEditProduct.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/edit24.png"))); // NOI18N
+        btnEditProduct.setText("Sủa thông tin");
+        btnEditProduct.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnEditProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditProductActionPerformed(evt);
+            }
+        });
+
+        btnClearJTF.setBackground(new java.awt.Color(135, 206, 235));
+        btnClearJTF.setForeground(new java.awt.Color(255, 255, 255));
+        btnClearJTF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/clear24.png"))); // NOI18N
+        btnClearJTF.setText("Xóa trắng");
+        btnClearJTF.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnClearJTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearJTFActionPerformed(evt);
+            }
+        });
+
+        jtfCostPrice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfCostPrice.setLabelText("Giá nhập");
+        jtfCostPrice.setLineColor(new java.awt.Color(204, 204, 255));
+        jtfCostPrice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfCostPriceActionPerformed(evt);
+            }
+        });
+
+        cbSupplier.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nhà cung cấp" }));
+        cbSupplier.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbSupplier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSupplierActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPTopLayout = new javax.swing.GroupLayout(jPTop);
+        jPTop.setLayout(jPTopLayout);
+        jPTopLayout.setHorizontalGroup(
+            jPTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPTopLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jcStopBusiness)
+                    .addGroup(jPTopLayout.createSequentialGroup()
+                        .addGroup(jPTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPTopLayout.createSequentialGroup()
+                                .addGroup(jPTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtfIDProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtfQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jtfNameProduct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cbSupplier, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)))
+                            .addGroup(jPTopLayout.createSequentialGroup()
+                                .addComponent(cbSize, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPTopLayout.createSequentialGroup()
+                                .addGroup(jPTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jtfCostPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cbType, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jtfPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cbColor, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)))
+                            .addGroup(jPTopLayout.createSequentialGroup()
+                                .addComponent(btnAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnEditProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnClearJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
-        JP2Layout.setVerticalGroup(
-            JP2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 675, Short.MAX_VALUE)
+        jPTopLayout.setVerticalGroup(
+            jPTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPTopLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfIDProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfNameProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfCostPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(cbType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbSupplier, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jtfQuantity, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbColor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbSize, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEditProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnClearJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jcStopBusiness)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
+
+        JP2.add(jPTop);
+
+        jPBottom.setBackground(new java.awt.Color(255, 255, 255));
+        jPBottom.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin sản phẩm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 14))); // NOI18N
+
+        jTableListProduct.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Mã SP", "Tên SP", "Đơn giá", "Số lượng", "Nhà cung cấp", "Màu sắc", "Kích thước", "Chất liệu", "Khuyễn mãi", "Ngừng kinh doanh"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jSPTableListProduct.setViewportView(jTableListProduct);
+
+        btnDel.setBackground(new java.awt.Color(135, 206, 235));
+        btnDel.setForeground(new java.awt.Color(255, 255, 255));
+        btnDel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/delete24.png"))); // NOI18N
+        btnDel.setText("Ngừng kinh doanh");
+        btnDel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnDel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelActionPerformed(evt);
+            }
+        });
+
+        btnInputFile.setBackground(new java.awt.Color(135, 206, 235));
+        btnInputFile.setForeground(new java.awt.Color(255, 255, 255));
+        btnInputFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/inputfile24.png"))); // NOI18N
+        btnInputFile.setText("Nhập SP từ file");
+        btnInputFile.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnInputFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInputFileActionPerformed(evt);
+            }
+        });
+
+        btnOutputFile.setBackground(new java.awt.Color(135, 206, 235));
+        btnOutputFile.setForeground(new java.awt.Color(255, 255, 255));
+        btnOutputFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/outputfile24.png"))); // NOI18N
+        btnOutputFile.setText("Xuất SP ra file");
+        btnOutputFile.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnOutputFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOutputFileActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPBottomLayout = new javax.swing.GroupLayout(jPBottom);
+        jPBottom.setLayout(jPBottomLayout);
+        jPBottomLayout.setHorizontalGroup(
+            jPBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSPTableListProduct)
+            .addGroup(jPBottomLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnDel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 743, Short.MAX_VALUE)
+                .addComponent(btnInputFile, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnOutputFile, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPBottomLayout.setVerticalGroup(
+            jPBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPBottomLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jSPTableListProduct, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnInputFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnOutputFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
+        JP2.add(jPBottom);
 
         jTabbedPaneMain.addTab("Danh sách sản phẩm", JP2);
 
@@ -469,11 +754,11 @@ public class Product_GUI extends javax.swing.JPanel {
         JP3.setLayout(JP3Layout);
         JP3Layout.setHorizontalGroup(
             JP3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1096, Short.MAX_VALUE)
+            .addGap(0, 1212, Short.MAX_VALUE)
         );
         JP3Layout.setVerticalGroup(
             JP3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 675, Short.MAX_VALUE)
+            .addGap(0, 799, Short.MAX_VALUE)
         );
 
         jTabbedPaneMain.addTab("Lọc sản phẩm", JP3);
@@ -560,7 +845,7 @@ public class Product_GUI extends javax.swing.JPanel {
                         btnEdit.setEnabled(true);
                         JOptionPane.showMessageDialog(null, "Thêm thuộc tính thành công");
                     } else {
-                        JOptionPane.showMessageDialog(null, "Thêm thuộc tính thất bại vui lòng kiểm tra lại");
+                        JOptionPane.showMessageDialog(null, "Loại sản phẩm này đã tồn tại vui lòng kiểm tra lại");
                     }
                 }
             } else if (jrbSize.isSelected()) { // thêm thuộc tính kích thước
@@ -576,7 +861,7 @@ public class Product_GUI extends javax.swing.JPanel {
                         btnEdit.setEnabled(true);
                         JOptionPane.showMessageDialog(null, "Thêm kích thước thành công");
                     } else {
-                        JOptionPane.showMessageDialog(null, "Thêm kích thước thất bại vui lòng kiểm tra lại");
+                        JOptionPane.showMessageDialog(null, "Kích thước này đã tồn tại vui lòng kiểm tra lại");
                     }
                 }
             } else if (jrbColor.isSelected()) { // thêm màu sắc mới
@@ -592,7 +877,7 @@ public class Product_GUI extends javax.swing.JPanel {
                         btnEdit.setEnabled(true);
                         JOptionPane.showMessageDialog(null, "Thêm màu sắc thành công");
                     } else {
-                        JOptionPane.showMessageDialog(null, "Thêm màu sắc thất bại vui lòng kiểm tra lại");
+                        JOptionPane.showMessageDialog(null, "Màu sắc này đã tồn tại vui lòng kiểm tra lại");
                     }
                 }
             } else if (jrbMaterial.isSelected()) { // thêm chất liệu mới
@@ -608,7 +893,7 @@ public class Product_GUI extends javax.swing.JPanel {
                         btnEdit.setEnabled(true);
                         JOptionPane.showMessageDialog(null, "Thêm chất liệu thành công");
                     } else {
-                        JOptionPane.showMessageDialog(null, "Thêm chất liệu thất bại vui lòng kiểm tra lại");
+                        JOptionPane.showMessageDialog(null, "Chất liệu này đã tồn tại vui lòng kiểm tra lại");
                     }
                 }
             }
@@ -633,7 +918,7 @@ public class Product_GUI extends javax.swing.JPanel {
                             loadDataProductType();
                             JOptionPane.showMessageDialog(null, "Cập nhập thành công !");
                         } else {
-                            JOptionPane.showMessageDialog(null, "Cập nhập thất bại !");
+                            JOptionPane.showMessageDialog(null, "Tên loại sản phẩm này không có sự khác biệt so với ban đầu hoặc đã tồn tại trong hệ thống");
                         }
                     }
                 }
@@ -656,7 +941,7 @@ public class Product_GUI extends javax.swing.JPanel {
                             loadDataProductSize();
                             JOptionPane.showMessageDialog(null, "Cập nhập thành công !");
                         } else {
-                            JOptionPane.showMessageDialog(null, "Cập nhập thất bại !");
+                            JOptionPane.showMessageDialog(null, "Tên loại kích thước này không có sự khác biệt so với ban đầu hoặc đã tồn tại trong hệ thống");
                         }
                     }
                 }
@@ -679,7 +964,7 @@ public class Product_GUI extends javax.swing.JPanel {
                             loadDataProductColor();
                             JOptionPane.showMessageDialog(null, "Cập nhập thành công !");
                         } else {
-                            JOptionPane.showMessageDialog(null, "Cập nhập thất bại !");
+                            JOptionPane.showMessageDialog(null, "Tên loại màu sắc này không có sự khác biệt so với ban đầu hoặc đã tồn tại trong hệ thống");
                         }
                     }
                 }
@@ -702,7 +987,7 @@ public class Product_GUI extends javax.swing.JPanel {
                             loadDataProductMaterial();
                             JOptionPane.showMessageDialog(null, "Cập nhập thành công !");
                         } else {
-                            JOptionPane.showMessageDialog(null, "Cập nhập thất bại !");
+                            JOptionPane.showMessageDialog(null, "Tên loại chất liệu này không có sự khác biệt so với ban đầu hoặc đã tồn tại trong hệ thống");
                         }
                     }
                 }
@@ -723,15 +1008,19 @@ public class Product_GUI extends javax.swing.JPanel {
         if (selectedIndex == 0) {
             jrbType.setSelected(true);
             loadDataProductType();
+            btnStock();
         } else if (selectedIndex == 1) {
             jrbSize.setSelected(true);
             loadDataProductSize();
+            btnStock();
         } else if (selectedIndex == 2) {
             jrbColor.setSelected(true);
             loadDataProductColor();
+            btnStock();
         } else if (selectedIndex == 3) {
             jrbMaterial.setSelected(true);
             loadDataProductMaterial();
+            btnStock();
         }
     }//GEN-LAST:event_jTabbedPaneChildStateChanged
 
@@ -763,17 +1052,102 @@ public class Product_GUI extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jTableProductMaterialMouseClicked
 
+    private void jtfIDProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfIDProductActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfIDProductActionPerformed
+
+    private void jtfPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfPriceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfPriceActionPerformed
+
+    private void jtfNameProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNameProductActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfNameProductActionPerformed
+
+    private void jtfQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfQuantityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfQuantityActionPerformed
+
+    private void btnAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductActionPerformed
+//        if (btnAdd.getText().equals("Thêm")) {
+//            jtfNameProduct.setEditable(true);
+//            jtfNumber.setEditable(true);
+//            jtfPrice.setEditable(true);
+//            btnAdd.setText("Lưu");
+//            btnEdit.setText("Hủy");
+//        } else if (btnAdd.getText().equals("Lưu")) {
+//            btnAdd.setText("Thêm");
+//            clearInput();
+//            offInput();
+//            btnEdit.setText("Sủa thông tin");
+//        }
+    }//GEN-LAST:event_btnAddProductActionPerformed
+
+    private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDelActionPerformed
+
+    private void btnInputFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInputFileActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnInputFileActionPerformed
+
+    private void btnEditProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditProductActionPerformed
+//        if (btnEdit.getText().equals("Hủy")) {
+//            btnAdd.setText("Thêm");
+//            clearInput();
+//            offInput();
+//            btnEdit.setText("Sủa thông tin");
+//        } else if (btnEdit.getText().equals("Hủy")) {
+//
+//        }
+    }//GEN-LAST:event_btnEditProductActionPerformed
+
+    private void btnClearJTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearJTFActionPerformed
+//        clearInput();
+//        cbColor.setSelectedIndex(0);
+//        cbMaterial.setSelectedIndex(0);
+//        cbSize.setSelectedIndex(0);
+//        cbType.setSelectedIndex(0);
+    }//GEN-LAST:event_btnClearJTFActionPerformed
+
+    private void btnOutputFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOutputFileActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnOutputFileActionPerformed
+
+    private void jtfCostPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCostPriceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfCostPriceActionPerformed
+
+    private void cbSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSupplierActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbSupplierActionPerformed
+
 //    Selected JRB
     public void SelectedJRB() {
         if (jrbType.isSelected()) {
             jTabbedPaneChild.setSelectedIndex(0);
+            btnStock();
         } else if (jrbSize.isSelected()) {
             jTabbedPaneChild.setSelectedIndex(1);
+            btnStock();
         } else if (jrbColor.isSelected()) {
             jTabbedPaneChild.setSelectedIndex(2);
+            btnStock();
         } else if (jrbMaterial.isSelected()) {
             jTabbedPaneChild.setSelectedIndex(3);
+            btnStock();
         }
+    }
+
+//          khi chuyển tap các button quay lại trạng thái ban đầu
+    private void btnStock() {
+        jtfInputName.setText("");
+        jtfInputName.setEditable(false);
+        btnAdd.setEnabled(true);
+        btnAdd.setText("Thêm mới");
+        btnSave.setEnabled(false);
+        btnEdit.setText("Sửa thuộc tính");
+        btnEdit.setEnabled(true);
     }
 
 //    Show ERROR
@@ -840,28 +1214,49 @@ public class Product_GUI extends javax.swing.JPanel {
     private javax.swing.JPanel JP2;
     private javax.swing.JPanel JP3;
     private lib2.Button btnAdd;
+    private lib2.Button btnAddProduct;
+    private lib2.Button btnClearJTF;
+    private lib2.Button btnDel;
     private lib2.Button btnEdit;
+    private lib2.Button btnEditProduct;
+    private lib2.Button btnInputFile;
+    private lib2.Button btnOutputFile;
     private lib2.Button btnSave;
     private javax.swing.ButtonGroup buttonGroup1;
+    private lib2.ComboBoxSuggestion cbColor;
+    private lib2.ComboBoxSuggestion cbMaterial;
+    private lib2.ComboBoxSuggestion cbSize;
+    private lib2.ComboBoxSuggestion cbSupplier;
+    private lib2.ComboBoxSuggestion cbType;
+    private javax.swing.JPanel jPBottom;
     private javax.swing.JPanel jPProductColor;
     private javax.swing.JPanel jPProductMaterial;
     private javax.swing.JPanel jPProductSize;
     private javax.swing.JPanel jPProductType;
+    private javax.swing.JPanel jPTop;
     private javax.swing.JScrollPane jSPProductColor;
     private javax.swing.JScrollPane jSPProductMaterial;
     private javax.swing.JScrollPane jSPProductSize;
     private javax.swing.JScrollPane jSPProductType;
+    private javax.swing.JScrollPane jSPTableListProduct;
     private javax.swing.JTabbedPane jTabbedPaneChild;
     private javax.swing.JTabbedPane jTabbedPaneMain;
+    private javax.swing.JTable jTableListProduct;
     private javax.swing.JTable jTableProductColor;
     private javax.swing.JTable jTableProductMaterial;
     private javax.swing.JTable jTableProductSize;
     private javax.swing.JTable jTableProductType;
+    private javax.swing.JCheckBox jcStopBusiness;
     private javax.swing.JLabel jlNote1;
     private javax.swing.JRadioButton jrbColor;
     private javax.swing.JRadioButton jrbMaterial;
     private javax.swing.JRadioButton jrbSize;
     private javax.swing.JRadioButton jrbType;
+    private lib2.TextField jtfCostPrice;
+    private lib2.TextField jtfIDProduct;
     private lib2.TextField jtfInputName;
+    private lib2.TextField jtfNameProduct;
+    private lib2.TextField jtfPrice;
+    private lib2.TextField jtfQuantity;
     // End of variables declaration//GEN-END:variables
 }
