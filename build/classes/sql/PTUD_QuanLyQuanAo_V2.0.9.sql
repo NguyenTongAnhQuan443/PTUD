@@ -23043,18 +23043,14 @@ INSERT INTO ProductType (name) VALUES
 GO
 
 -- Insert dữ liệu Product
-/*
-INSERT INTO Product (idProduct, name, costPrice, originalPrice, quantity, status, promotion, supplier)
-VALUES
-    ('SP0001', N'Áo thun Louis Vuitton', 50.0, 100.0, 100, N'Đang kinh doanh', 'KM0001', 'NCC0001'),
-    ('SP0002', N'Quần short Gucci', 60.0, 120.0, 80, N'Đang kinh doanh', NULL, 'NCC0002'),
-    ('SP0003', N'Váy Hermes', 70.0, 140.0, 60, N'Đang kinh doanh', 'KM0003', 'NCC0003'),
-    ('SP0004', N'Áo khoắc Prada', 80.0, 160.0, 50, N'Đang kinh doanh', NULL, 'NCC0004'),
-    ('SP0005', N'Quần dài Chanel', 90.0, 180.0, 70, N'Đang kinh doanh', NULL, 'NCC0005');
-
+INSERT INTO Product (idProduct, name, costPrice, originalPrice, quantity, status, supplier, productType, color, size, material, imageProduct)
+VALUES 
+('SP00001', N'Quần kaki đen', 100000, 150000, 100, N'Đang kinh doanh', 'NCC0001', 1, 1, 1, 1, ''),
+('SP00002', N'Quần Short cá tính', 150000, 200000, 100, N'Đang kinh doanh', 'NCC0002', 1, 1, 1, 2, ''),
+('SP00003', N'Áo Cadigan mùa thu', 200000, 300000, 100, N'Đang kinh doanh', 'NCC0004', 3, 1, 4, 3, ''),
+('SP00004', N'Áo Cadigan thời thượng', 100000, 400000, 100, N'Đang kinh doanh', 'NCC0005', 4, 1, 5, 3, ''),
+('SP00005', N'Áo polo Nam', 300000, 550000, 100, N'Đang kinh doanh', 'NCC0005', 2, 1, 1, 1, '');
 GO
-*/
-
 -- Insert dữ liệu Invoice 
 /*
 INSERT INTO Invoice (idInvoice, staff, customer, promotion, amountReceived, changeAmount, totalAmount, dateCreated, status, deliveryStatus)
@@ -23083,5 +23079,4 @@ VALUES
     ('CTHD0010', 'HD0005', 'SP0005', 2, 180.0, NULL, NULL);
 GO
 */
-SELECT * FROM Product
-SELECT * FROM ProductColor WHERE name = N'Đen'
+select * from Product

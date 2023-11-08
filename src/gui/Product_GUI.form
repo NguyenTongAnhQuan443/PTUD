@@ -635,7 +635,7 @@
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="btnSaveProduct" min="-2" pref="130" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                          <Component id="btnClearJTF" min="-2" pref="110" max="-2" attributes="0"/>
+                                          <Component id="btnEditProduct" min="-2" pref="110" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -678,7 +678,7 @@
                                   <Component id="cbMaterial" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
                                   <Component id="cbSize" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
                                   <Component id="btnSaveProduct" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
-                                  <Component id="btnClearJTF" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                                  <Component id="btnEditProduct" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                                   <Component id="btnAddProduct" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -811,6 +811,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Ng&#x1eeb;ng kinh doanh"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="lib2.Button" name="btnIMGProduct">
@@ -855,7 +856,7 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaveProductActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="lib2.Button" name="btnClearJTF">
+                <Component class="lib2.Button" name="btnEditProduct">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="eb" green="ce" red="87" type="rgb"/>
@@ -864,15 +865,15 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/images/icons/clear24.png"/>
+                      <Image iconType="3" name="/images/icons/edit24.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="X&#xf3;a tr&#x1eaf;ng"/>
+                    <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;p"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="14" style="1"/>
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnClearJTFActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditProductActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="lib2.TextField" name="jtfCostPrice">
@@ -972,11 +973,9 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jSPTableListProduct" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jSPTableListProduct" alignment="0" pref="1205" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnDel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="743" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="btnInputFile" min="-2" pref="139" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btnOutputFile" min="-2" pref="134" max="-2" attributes="0"/>
@@ -991,7 +990,6 @@
                           <Component id="jSPTableListProduct" pref="431" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="btnDel" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnInputFile" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnOutputFile" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -1029,26 +1027,6 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="lib2.Button" name="btnDel">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="eb" green="ce" red="87" type="rgb"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                    </Property>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/images/icons/delete24.png"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Ng&#x1eeb;ng kinh doanh"/>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI" size="14" style="1"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDelActionPerformed"/>
-                  </Events>
-                </Component>
                 <Component class="lib2.Button" name="btnInputFile">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
