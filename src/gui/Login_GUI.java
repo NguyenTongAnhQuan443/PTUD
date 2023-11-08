@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Login_GUI extends javax.swing.JFrame {
-    private Staff_DAO staff_DAO;
+    private Staff_DAO staff_DAO = new Staff_DAO();
     private Staff staff = new Staff();
 
     public Login_GUI() {
@@ -257,8 +257,8 @@ public class Login_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void jlForgotPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlForgotPassMouseClicked
-        String id = jtfUser.getText();
-        JOptionPane.showMessageDialog(null, "Bạn quên mật khẩu của mình ?");
+        String id = jtfUser.getText().trim();
+       JOptionPane.showMessageDialog(null, "Bạn quên mật khẩu của mình ?");
         if (staff_DAO.checkAccountExits(id)) {
             String emailReceiver = staff_DAO.getEmailAccount(id); // lấy địa chỉ email của tài khoản
             String newPass = staff_DAO.randomPassword(); // tạo mật khẩu mới

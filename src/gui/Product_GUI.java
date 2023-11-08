@@ -19,7 +19,9 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,6 +53,11 @@ public class Product_GUI extends javax.swing.JPanel {
 
     private Product product;
     private String imageProductPath;
+
+    private List<Product> listProduct = new ArrayList<Product>();
+    private List<Supplier> listSupplier = new ArrayList<Supplier>();
+    private List<ProductColor> listProductColor = new ArrayList<ProductColor>();
+    private List<ProductMaterial> listProductMaterial = new ArrayList<ProductMaterial>();
 
     public Product_GUI() {
         initComponents();
@@ -85,7 +92,7 @@ public class Product_GUI extends javax.swing.JPanel {
         addProductMaterialToCBB();
         addProductSizeToCBB();
         addSupplierToCBB();
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -678,7 +685,10 @@ public class Product_GUI extends javax.swing.JPanel {
             .addGroup(jPTopLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jcStopBusiness)
+                    .addGroup(jPTopLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jcStopBusiness)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPTopLayout.createSequentialGroup()
                         .addGroup(jPTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jtfQuantity, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -708,8 +718,8 @@ public class Product_GUI extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(jPTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnIMGProduct, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                            .addComponent(jPIMGProduct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
+                            .addComponent(jPIMGProduct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         jPTopLayout.setVerticalGroup(
             jPTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -772,6 +782,11 @@ public class Product_GUI extends javax.swing.JPanel {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTableListProduct.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableListProductMouseClicked(evt);
             }
         });
         jSPTableListProduct.setViewportView(jTableListProduct);
@@ -1284,6 +1299,36 @@ public class Product_GUI extends javax.swing.JPanel {
         loadDataProduct();
     }//GEN-LAST:event_jTabbedPaneMainMouseClicked
 
+    private void jTableListProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListProductMouseClicked
+        int selectRow = jTableListProduct.getSelectedRow();
+        String idProduct = jTableListProduct.getValueAt(selectRow, 0).toString().trim();
+        for (Product product : listProduct) {
+            if (idProduct.equals(product.getIdProduct().trim())) {
+                jtfIDProduct.setText(product.getIdProduct().trim());
+                jtfNameProduct.setText(product.getName().trim());
+                jtfCostPrice.setText(product.getCostPrice() + "");
+                jtfPrice.setText(product.getOriginalPrice() + "");
+                jtfQuantity.setText(product.getQuantity() + "");
+                if (product.getStatus().equals(product.getStatus().NgungKinhDoanh)) {
+                    jcStopBusiness.setSelected(true);
+                }
+
+                Image image;
+                try {
+                    image = ImageIO.read(new File(product.getPathImageProduct().trim()));
+                    int width = jLIMGProduct.getWidth();
+                    int height = jLIMGProduct.getHeight();
+                    Image scaledImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+                    Icon icon = new ImageIcon(scaledImage);
+                    jLIMGProduct.setIcon(icon);
+                } catch (IOException ex) {
+                    Logger.getLogger(Product_GUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        }
+    }//GEN-LAST:event_jTableListProductMouseClicked
+
 //    Thêm loại sản phẩm vào commbobox
     private void addProductTypeToCBB() {
         for (ProductType productType : productProperties_DAO.getListProductType()) {
@@ -1499,7 +1544,8 @@ public class Product_GUI extends javax.swing.JPanel {
 
     private void loadDataProduct() {
         defaultTableModelListProduct.setRowCount(0);
-        for (Product product : product_DAO.getListProduct()) {
+        listProduct = product_DAO.getListProduct();
+        for (Product product : listProduct) {
             String idProduct = product.getIdProduct().trim();
             String name = product.getName();
             double originalPrice = product.getOriginalPrice();
@@ -1509,9 +1555,9 @@ public class Product_GUI extends javax.swing.JPanel {
             String size = productProperties_DAO.getProductSizeByID(product.getProductSize().getIdSize() + "").getName().toString().trim();
             String material = productProperties_DAO.getProductMaterialByID(product.getProductMaterial().getIdMaterial() + "").getName().toString().trim();
             boolean bool;
-            if(product.getStatus().equals(Product.convertStringToStatus("Đang kinh doanh"))){
+            if (product.getStatus().equals(Product.convertStringToStatus("Đang kinh doanh"))) {
                 bool = true;
-            }else{
+            } else {
                 bool = false;
             }
             Object[] rowData = {idProduct, name, originalPrice + "", quantity + "", suppplier, color, size, material, bool};
