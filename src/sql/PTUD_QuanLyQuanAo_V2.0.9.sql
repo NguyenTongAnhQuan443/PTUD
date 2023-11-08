@@ -22781,12 +22781,11 @@ GO
 --TẠO BẢNG NHÀ CUNG CẤP
 CREATE TABLE Supplier
 (
-	idSupplier CHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS PRIMARY KEY,
+	idSupplier CHAR(15) PRIMARY KEY,
 	name NVARCHAR(55) COLLATE SQL_Latin1_General_CP1_CS_AS NOT NULL,
 	email NVARCHAR(50) NOT NULL UNIQUE,
 	phone NVARCHAR(10) NOT NULL UNIQUE,
 	status NVARCHAR(25) NOT NULL,
-
 	province NVARCHAR(15) NOT NULL,
 	district NVARCHAR(15) NOT NULL,
 	ward NVARCHAR(15) NOT NULL,
@@ -22794,21 +22793,6 @@ CREATE TABLE Supplier
 	CONSTRAINT FK_Supplier_Province FOREIGN KEY (province) REFERENCES Province(id),
 	CONSTRAINT FK_Supplier_District FOREIGN KEY (district) REFERENCES District(id),
 	CONSTRAINT FK_Supplier_Ward FOREIGN KEY (ward) REFERENCES Ward(id)
-)
-GO
-
---TẠO BẢNG KHUYẾN MÃI
-CREATE TABLE Promotion
-(
-	idPromotion CHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS PRIMARY KEY,
-	name NVARCHAR(55) COLLATE SQL_Latin1_General_CP1_CS_AS NOT NULL,
-	typePromotion NVARCHAR(30) NOT NULL, 
-	discount FLOAT, -- Số tiền giảm hoặc phần trăm giảm
-	priceRange FLOAT, -- khoảng giá áp dụng ví dụ trên 100.000VND
-	dayStart DATE NOT NULL,
-	dayEnd DATE NOT NULL,
-	status NVARCHAR(25) NOT NULL,
-	description NVARCHAR(50) -- mô tả
 )
 GO
 
@@ -22848,15 +22832,14 @@ CREATE TABLE Product
 	costPrice FLOAT NOT NULL, -- giá nhập
 	originalPrice FLOAT NOT NULL, -- giá bán gốc
 	quantity INT NOT NULL,
-	status NVARCHAR(25) NOT NULL,
-	promotion CHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS,
-	supplier CHAR (15) COLLATE SQL_Latin1_General_CP1_CS_AS NOT NULL,
+	status NVARCHAR(25) NOT NULL, --o0o
+	supplier CHAR (15),
+	productType INT,
 	color INT,
     size INT,
     material INT,
-    productType INT,
-    FOREIGN KEY (supplier) REFERENCES Supplier(idSupplier),
-    FOREIGN KEY (promotion) REFERENCES Promotion(idPromotion),
+	imageProduct NVARCHAR(100),
+	FOREIGN KEY (supplier) REFERENCES Supplier(idSupplier),
     FOREIGN KEY (color) REFERENCES ProductColor(idColor),
     FOREIGN KEY (size) REFERENCES ProductSize(idSize),
     FOREIGN KEY (material) REFERENCES productMaterial(idMaterial),
@@ -22864,6 +22847,22 @@ CREATE TABLE Product
 )
 GO
 
+--TẠO BẢNG KHUYẾN MÃI
+CREATE TABLE Promotion
+(
+	idPromotion CHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS PRIMARY KEY,
+	name NVARCHAR(55) COLLATE SQL_Latin1_General_CP1_CS_AS NOT NULL,
+	typePromotion NVARCHAR(30) NOT NULL, 
+	discount FLOAT, -- Số tiền giảm hoặc phần trăm giảm
+	priceRange FLOAT, -- khoảng giá áp dụng ví dụ trên 100.000VND
+	dayStart DATE NOT NULL,
+	dayEnd DATE NOT NULL,
+	product CHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS,
+	status NVARCHAR(25) NOT NULL,
+	description NVARCHAR(50), -- mô tả
+	FOREIGN KEY (product) REFERENCES Product(idProduct),
+)
+GO
 --TẠO BẢNG NHÂN VIÊN
 CREATE TABLE Staff
 (
@@ -22962,6 +22961,7 @@ VALUES ('NCC0005', N'Chanel', 'Chanel@gmail.com', '0889055555', N'Ngưng hợp t
 GO
 
 -- Insert dữ liệu Promotion 
+/*
 INSERT INTO Promotion (idPromotion, name, typePromotion, discount, dayStart, dayEnd, status, description)
 VALUES ('KM0001', N'Khuyễn mãi chào mừng năm học mới', N'KM theo %', 20.0, '2023-10-18', '2023-12-30', N'Còn hạn', N'Chương trình giảm giá 20% cho HSSV');
 GO
@@ -22980,17 +22980,7 @@ GO
 INSERT INTO Promotion (idPromotion, name, typePromotion, discount, priceRange, dayStart, dayEnd, status, description)
 VALUES ('KM0006', N'Khuyến mãi tri ân', N'KM theo tổng tiền', 100000.0, 500000.0, '2023-09-18', '2023-10-17', N'Hết hạn', N'Giảm 100,000 VND cho đơn hàng từ 500, 000 VND');
 GO
-
--- Insert dữ liệu Product
-INSERT INTO Product (idProduct, name, costPrice, originalPrice, quantity, status, promotion, supplier)
-VALUES
-    ('SP0001', N'Áo thun Louis Vuitton', 50.0, 100.0, 100, N'Đang kinh doanh', 'KM0001', 'NCC0001'),
-    ('SP0002', N'Quần short Gucci', 60.0, 120.0, 80, N'Đang kinh doanh', NULL, 'NCC0002'),
-    ('SP0003', N'Váy Hermes', 70.0, 140.0, 60, N'Đang kinh doanh', 'KM0003', 'NCC0003'),
-    ('SP0004', N'Áo khoắc Prada', 80.0, 160.0, 50, N'Đang kinh doanh', NULL, 'NCC0004'),
-    ('SP0005', N'Quần dài Chanel', 90.0, 180.0, 70, N'Đang kinh doanh', NULL, 'NCC0005');
-
-GO
+*/
 
 -- Insert dữ liệu Staff
 INSERT INTO Staff (idStaff, name, cic, phone, email,  dayofbirth, sex, province, district, ward, address, rights, status, password)
@@ -23013,31 +23003,6 @@ VALUES
     ('KH0004', N'Hoàng Văn Tú', '0987654322', 'tu.hoang@example.com', '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', 4000, N'Khách hàng bạc', '4000000',0),
     ('KH0005', N'Nguyễn Thị Trâm', '0123456781', 'tram.nguyen@example.com', '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', 5000, N'Khách hàng vàng', '5500000',1),
 	('KH0006', N'Lê Thị Mai Anh', '0128456780', 'mai.anhle@example.com', '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', 3000, N'Khách hàng kim cương', '7000000', 1);
-GO
-
--- Insert dữ liệu Invoice 
-INSERT INTO Invoice (idInvoice, staff, customer, promotion, amountReceived, changeAmount, totalAmount, dateCreated, status, deliveryStatus)
-VALUES
-    ('HD0001', 'NV0001', 'KH0001', 'KM0001', 1500.0, 0.0, 1500.0, GETDATE(), N'Đang xử lý', N'Chưa giao'),
-    ('HD0002', 'NV0002', 'KH0002', 'KM0002', 800.0, 200.0, 1000.0, GETDATE(), N'Hoàn thành', N'Đã giao'),
-    ('HD0003', 'NV0001', 'KH0003', 'KM0003', 4500.0, 0.0, 4500.0, GETDATE(), N'Đang xử lý', N'Chưa giao'),
-    ('HD0004', 'NV0002', 'KH0004', 'KM0004', 2500.0, 500.0, 3000.0, GETDATE(), N'Hoàn thành', N'Đã giao'),
-    ('HD0005', 'NV0003', 'KH0005', 'KM0005', 3000.0, 0.0, 3000.0, GETDATE(), N'Đang xử lý', N'Chưa giao');
-GO
-
--- Insert dữ liệu cho bảng InvoiceDetails
-INSERT INTO InvoiceDetails (idInvoiceDetails, invoice, product, quantity, unitPrice, returnQuantity, returnReason)
-VALUES
-    ('CTHD0001', 'HD0001', 'SP0001', 5, 100.0, NULL, NULL),
-    ('CTHD0002', 'HD0001', 'SP0002', 3, 120.0, NULL, NULL),
-    ('CTHD0003', 'HD0002', 'SP0003', 2, 140.0, NULL, NULL),
-    ('CTHD0004', 'HD0003', 'SP0004', 1, 160.0, NULL, NULL),
-    ('CTHD0005', 'HD0003', 'SP0005', 4, 180.0, NULL, NULL),
-    ('CTHD0006', 'HD0004', 'SP0001', 2, 100.0, NULL, NULL),
-    ('CTHD0007', 'HD0004', 'SP0002', 3, 120.0, NULL, NULL),
-    ('CTHD0008', 'HD0005', 'SP0003', 1, 140.0, NULL, NULL),
-    ('CTHD0009', 'HD0005', 'SP0004', 5, 160.0, NULL, NULL),
-    ('CTHD0010', 'HD0005', 'SP0005', 2, 180.0, NULL, NULL);
 GO
 
 --Inser dữ liệu màu sắc sản phẩm
@@ -23076,3 +23041,47 @@ INSERT INTO ProductType (name) VALUES
 (N'Áo Khoác'),
 (N'Quần Short');
 GO
+
+-- Insert dữ liệu Product
+/*
+INSERT INTO Product (idProduct, name, costPrice, originalPrice, quantity, status, promotion, supplier)
+VALUES
+    ('SP0001', N'Áo thun Louis Vuitton', 50.0, 100.0, 100, N'Đang kinh doanh', 'KM0001', 'NCC0001'),
+    ('SP0002', N'Quần short Gucci', 60.0, 120.0, 80, N'Đang kinh doanh', NULL, 'NCC0002'),
+    ('SP0003', N'Váy Hermes', 70.0, 140.0, 60, N'Đang kinh doanh', 'KM0003', 'NCC0003'),
+    ('SP0004', N'Áo khoắc Prada', 80.0, 160.0, 50, N'Đang kinh doanh', NULL, 'NCC0004'),
+    ('SP0005', N'Quần dài Chanel', 90.0, 180.0, 70, N'Đang kinh doanh', NULL, 'NCC0005');
+
+GO
+*/
+
+-- Insert dữ liệu Invoice 
+/*
+INSERT INTO Invoice (idInvoice, staff, customer, promotion, amountReceived, changeAmount, totalAmount, dateCreated, status, deliveryStatus)
+VALUES
+    ('HD0001', 'NV0001', 'KH0001', 'KM0001', 1500.0, 0.0, 1500.0, GETDATE(), N'Đang xử lý', N'Chưa giao'),
+    ('HD0002', 'NV0002', 'KH0002', 'KM0002', 800.0, 200.0, 1000.0, GETDATE(), N'Hoàn thành', N'Đã giao'),
+    ('HD0003', 'NV0001', 'KH0003', 'KM0003', 4500.0, 0.0, 4500.0, GETDATE(), N'Đang xử lý', N'Chưa giao'),
+    ('HD0004', 'NV0002', 'KH0004', 'KM0004', 2500.0, 500.0, 3000.0, GETDATE(), N'Hoàn thành', N'Đã giao'),
+    ('HD0005', 'NV0003', 'KH0005', 'KM0005', 3000.0, 0.0, 3000.0, GETDATE(), N'Đang xử lý', N'Chưa giao');
+GO
+*/
+
+-- Insert dữ liệu cho bảng InvoiceDetails
+/*
+INSERT INTO InvoiceDetails (idInvoiceDetails, invoice, product, quantity, unitPrice, returnQuantity, returnReason)
+VALUES
+    ('CTHD0001', 'HD0001', 'SP0001', 5, 100.0, NULL, NULL),
+    ('CTHD0002', 'HD0001', 'SP0002', 3, 120.0, NULL, NULL),
+    ('CTHD0003', 'HD0002', 'SP0003', 2, 140.0, NULL, NULL),
+    ('CTHD0004', 'HD0003', 'SP0004', 1, 160.0, NULL, NULL),
+    ('CTHD0005', 'HD0003', 'SP0005', 4, 180.0, NULL, NULL),
+    ('CTHD0006', 'HD0004', 'SP0001', 2, 100.0, NULL, NULL),
+    ('CTHD0007', 'HD0004', 'SP0002', 3, 120.0, NULL, NULL),
+    ('CTHD0008', 'HD0005', 'SP0003', 1, 140.0, NULL, NULL),
+    ('CTHD0009', 'HD0005', 'SP0004', 5, 160.0, NULL, NULL),
+    ('CTHD0010', 'HD0005', 'SP0005', 2, 180.0, NULL, NULL);
+GO
+*/
+SELECT * FROM Product
+SELECT * FROM ProductColor WHERE name = N'Đen'

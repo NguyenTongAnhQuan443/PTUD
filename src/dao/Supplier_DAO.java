@@ -128,7 +128,7 @@ public class Supplier_DAO extends DAO {
         return false;
     }
 
-    //    lấy nhà cung cấp bằng mã nahf cung cấp
+    //    lấy nhà cung cấp bằng mã nhà cung cấp
     public Supplier getSupplierByID(String idSupplier) {
         String sql = "SELECT * FROM Supplier WHERE idSupplier = ?";
 
@@ -268,5 +268,36 @@ public class Supplier_DAO extends DAO {
             ex.printStackTrace();
         }
         return false;
+    }
+
+//    lấy nhà cung cấp bằng mã nhà cung cấp
+    public Supplier getSupplierByNameSupplier(String nameSupplier) {
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String sql = "SELECT * FROM Supplier WHERE name = ?";
+        try {
+            preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, nameSupplier);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                String idSupplier = resultSet.getString(1);
+                String name = resultSet.getString(2);
+                String email = resultSet.getString(3);
+                String phone = resultSet.getString(4);
+                String status = resultSet.getString(5);
+                Province province = new Province(resultSet.getString(6));
+                District district = new District(resultSet.getString(7));
+                Ward ward = new Ward(resultSet.getString(8));
+                String address = resultSet.getString(9);
+                return new Supplier(idSupplier, name, email, phone, Supplier.convertStringToStatus(status), province, district, ward, address);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(preparedStatement, resultSet);
+        }
+
+        return null;
     }
 }

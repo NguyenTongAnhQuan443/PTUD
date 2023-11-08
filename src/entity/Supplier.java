@@ -108,7 +108,6 @@ public class Supplier {
 
 //    Constructor
     public Supplier() {
-        super();
     }
 
     public Supplier(String idSupplier) {

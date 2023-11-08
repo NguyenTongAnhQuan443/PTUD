@@ -29,11 +29,15 @@ public class Product {
     private Double originalPrice;
     private int quantity;
     private Status status;
-    private PropertiesDetails propertiesDetails;
-    private Promotion promotion;
     private Supplier supplier;
+    private ProductType productType;
+    private ProductColor productColor;
+    private ProductSize productSize;
+    private ProductMaterial productMaterial;
+    private String pathImageProduct;
+    
+//    Get set
 
-//    get set
     public String getIdProduct() {
         return idProduct;
     }
@@ -82,22 +86,6 @@ public class Product {
         this.status = status;
     }
 
-    public PropertiesDetails getPropertiesDetails() {
-        return propertiesDetails;
-    }
-
-    public void setPropertiesDetails(PropertiesDetails propertiesDetails) {
-        this.propertiesDetails = propertiesDetails;
-    }
-
-    public Promotion getPromotion() {
-        return promotion;
-    }
-
-    public void setPromotion(Promotion promotion) {
-        this.promotion = promotion;
-    }
-
     public Supplier getSupplier() {
         return supplier;
     }
@@ -106,17 +94,52 @@ public class Product {
         this.supplier = supplier;
     }
 
+    public ProductType getProductType() {
+        return productType;
+    }
+
+    public void setProductType(ProductType productType) {
+        this.productType = productType;
+    }
+
+    public ProductColor getProductColor() {
+        return productColor;
+    }
+
+    public void setProductColor(ProductColor productColor) {
+        this.productColor = productColor;
+    }
+
+    public ProductSize getProductSize() {
+        return productSize;
+    }
+
+    public void setProductSize(ProductSize productSize) {
+        this.productSize = productSize;
+    }
+
+    public ProductMaterial getProductMaterial() {
+        return productMaterial;
+    }
+
+    public void setProductMaterial(ProductMaterial productMaterial) {
+        this.productMaterial = productMaterial;
+    }
+
+    public String getPathImageProduct() {
+        return pathImageProduct;
+    }
+
+    public void setPathImageProduct(String pathImageProduct) {
+        this.pathImageProduct = pathImageProduct;
+    }
+    
 //    Constructor
+
     public Product() {
-        super();
     }
 
-    public Product(String idProduct) {
-        super();
-        this.idProduct = idProduct;
-    }
-
-    public Product(String idProduct, String name, Double costPrice, Double originalPrice, int quantity, Status status, PropertiesDetails propertiesDetails, Promotion promotion, Supplier supplier) {
+    public Product(String idProduct, String name, Double costPrice, Double originalPrice, int quantity, Status status, Supplier supplier, ProductType productType, ProductColor productColor, ProductSize productSize, ProductMaterial productMaterial, String pathImageProduct) {
         super();
         this.idProduct = idProduct;
         this.name = name;
@@ -124,16 +147,20 @@ public class Product {
         this.originalPrice = originalPrice;
         this.quantity = quantity;
         this.status = status;
-        this.propertiesDetails = propertiesDetails;
-        this.promotion = promotion;
         this.supplier = supplier;
+        this.productType = productType;
+        this.productColor = productColor;
+        this.productSize = productSize;
+        this.productMaterial = productMaterial;
+        this.pathImageProduct = pathImageProduct;
     }
+    
 
-//    Hash code equals
+//    Hashcode equals
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * hash + Objects.hashCode(this.idProduct);
+        hash = 83 * hash + Objects.hashCode(this.idProduct);
         return hash;
     }
 
@@ -151,11 +178,12 @@ public class Product {
         final Product other = (Product) obj;
         return Objects.equals(this.idProduct, other.idProduct);
     }
-
+    
 //    toString
+
     @Override
     public String toString() {
-        return "Product{" + "idProduct=" + idProduct + ", name=" + name + ", costPrice=" + costPrice + ", originalPrice=" + originalPrice + ", quantity=" + quantity + ", status=" + status + ", propertiesDetails=" + propertiesDetails + ", promotion=" + promotion + ", supplier=" + supplier + '}';
+        return "Product{" + "idProduct=" + idProduct + ", name=" + name + ", costPrice=" + costPrice + ", originalPrice=" + originalPrice + ", quantity=" + quantity + ", status=" + status + ", supplier=" + supplier + ", productType=" + productType + ", productColor=" + productColor + ", productSize=" + productSize + ", productMaterial=" + productMaterial + ", pathImageProduct=" + pathImageProduct + '}';
     }
-
 }
+   

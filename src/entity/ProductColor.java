@@ -28,12 +28,18 @@ public class ProductColor {
     public ProductColor() {
     }
 
+    public ProductColor(int idColor) {
+        super();
+        this.idColor = idColor;
+    }
+
     public ProductColor(String name) {
         super();
         this.name = name;
     }
 
     public ProductColor(int idColor, String name) {
+        super();
         this.idColor = idColor;
         this.name = name;
     }

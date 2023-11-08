@@ -477,7 +477,6 @@ public class Supplier_GUI extends javax.swing.JPanel {
         Flag.setFlagUpdateSupplier(1);
         if (btnAdd.getText().trim().equals("Thêm mới")) {
             onInput();
-//        btnAdd.setEnabled(false);
             btnSave.setEnabled(true);
             btnEdit.setEnabled(false);
             btnAdd.setText("Hủy");

@@ -28,6 +28,11 @@ public class ProductMaterial {
 
     public ProductMaterial() {
     }
+
+    public ProductMaterial(int idMaterial) {
+        super();
+        this.idMaterial = idMaterial;
+    }
     
     public ProductMaterial( String name) {
         super();
@@ -35,6 +40,7 @@ public class ProductMaterial {
     }
 
     public ProductMaterial(int idMaterial, String name) {
+        super();
         this.idMaterial = idMaterial;
         this.name = name;
     }

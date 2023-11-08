@@ -13,7 +13,7 @@ import entity.ProductColor;
 import entity.ProductMaterial;
 import entity.ProductSize;
 
-public class ProductProperties_DAO {
+public class ProductProperties_DAO extends DAO {
 //    LOẠI SẢN PHẨM
 
 //  Lấy toàn bộ productType
@@ -81,6 +81,52 @@ public class ProductProperties_DAO {
             e.printStackTrace();
         }
         return false;
+    }
+
+//    Lấy name producType bằng ID
+    public String getProductNameById(int id) {
+        String productName = null;
+
+        try {
+            Connection connection = ConnectDB.getConnection();
+            String sql = "SELECT name FROM ProductType WHERE idProductType = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                productName = resultSet.getString("name");
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return productName;
+    }
+
+//    lấy ProductType bằng tên productType
+    public ProductType getProductTypeByNameProductType(String nameProductType) {
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String sql = "SELECT * FROM ProductType WHERE name = ?";
+        try {
+            preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, nameProductType);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return new ProductType(resultSet.getInt(1), resultSet.getString(2));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(preparedStatement, resultSet);
+        }
+
+        return null;
     }
 
 //    MÀU SẮC
@@ -151,8 +197,52 @@ public class ProductProperties_DAO {
         return false;
     }
 
+//    Lấy ProductColor bằng tên ProductColor
+    public ProductColor getProductColorByNameProductColor(String nameProductColor) {
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String sql = "SELECT * FROM ProductColor WHERE name = ?";
+        try {
+            preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, nameProductColor);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                ProductColor productColor = new ProductColor(resultSet.getInt(1), resultSet.getString(2));
+                return productColor;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(preparedStatement, resultSet);
+        }
+
+        return null;
+    }
+
+//    Lấy product Color = ID (dùng load id màu thành thên màu)
+    public ProductColor getProductColorByID(String idColor) {
+        String sql = "SELECT * FROM ProductColor WHERE idColor = ?";
+
+        try {
+            PreparedStatement preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, idColor);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                int id = resultSet.getInt(1);
+                String name = resultSet.getString(2);
+                ProductColor productColor = new ProductColor(id, name);
+                return productColor;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 //    KÍCH THƯỚC
     //  Lấy toàn bộ ProductSize
+
     public List<ProductSize> getListProductSize() {
         List<ProductSize> listProductSize = new ArrayList<ProductSize>();
         String sql = "SELECT * FROM ProductSize ORDER BY idSize ASC";
@@ -216,6 +306,48 @@ public class ProductProperties_DAO {
             e.printStackTrace();
         }
         return false;
+    }
+
+    //    Lấy ProductSize bằng tên ProductSize
+    public ProductSize getProductSizeByNameProductSize(String nameProductSize) {
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String sql = "SELECT * FROM ProductSize WHERE name = ?";
+        try {
+            preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, nameProductSize);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return new ProductSize(resultSet.getInt(1), resultSet.getString(2));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(preparedStatement, resultSet);
+        }
+        return null;
+    }
+
+//    Lấy ProductSize = id
+    public ProductSize getProductSizeByID(String idSize) {
+        String sql = "SELECT * FROM ProductSize WHERE idSize = ?";
+
+        try {
+            PreparedStatement preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, idSize);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                int id = resultSet.getInt(1);
+                String name = resultSet.getString(2);
+                ProductSize productSize = new ProductSize(id, name);
+                return productSize;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 //    CHẤT LIỆU
@@ -284,5 +416,47 @@ public class ProductProperties_DAO {
             e.printStackTrace();
         }
         return false;
+    }
+
+//    Lấy ProductMaterial bằng tên Material
+    public ProductMaterial getProductMaterialByNameProductMaterial(String nameProductMaterial) {
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String sql = "SELECT * FROM ProductMaterial WHERE name = ?";
+        try {
+            preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, nameProductMaterial);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return new ProductMaterial(resultSet.getInt(1), resultSet.getString(2));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(preparedStatement, resultSet);
+        }
+        return null;
+    }
+
+//    Lấy ProductMaterial = ID
+    public ProductMaterial getProductMaterialByID(String idMaterial) {
+        String sql = "SELECT * FROM ProductMaterial WHERE idMaterial = ?";
+
+        try {
+            PreparedStatement preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, idMaterial);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                int id = resultSet.getInt(1);
+                String name = resultSet.getString(2);
+                ProductMaterial productMaterial = new ProductMaterial(id, name);
+                return productMaterial;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

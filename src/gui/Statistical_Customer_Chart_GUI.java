@@ -9,7 +9,7 @@ public class Statistical_Customer_Chart_GUI extends javax.swing.JPanel {
     public Statistical_Customer_Chart_GUI() {
         initComponents();
 
-        jpChart.addLegend("Income", new Color(245, 189, 135));
+        jpChart.addLegend("Doanh thu", new Color(245, 189, 135));
         jpChart.addLegend("Expense", new Color(135, 189, 245));
         jpChart.addLegend("Profit", new Color(189, 135, 245));
         jpChart.addLegend("Cost", new Color(139, 229, 222));

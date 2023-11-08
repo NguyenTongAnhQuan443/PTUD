@@ -28,6 +28,11 @@ public class ProductType {
     public ProductType() {
     }
 
+    public ProductType(int idProductType) {
+        super();
+        this.idProductType = idProductType;
+    }
+
     public ProductType(String name) {
         super();
         this.name = name;

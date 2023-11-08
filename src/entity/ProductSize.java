@@ -29,6 +29,11 @@ public class ProductSize {
     public ProductSize() {
     }
 
+    public ProductSize(int idSize) {
+        super();
+        this.idSize = idSize;
+    }
+
     public ProductSize(String name) {
         super();
         this.name = name;
