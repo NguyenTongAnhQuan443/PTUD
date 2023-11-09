@@ -7,7 +7,7 @@ public class Promotion {
 //    enum
 
     public static enum TypePromotion {
-        KhuyenMaiPT, KhuyenMaiTongTien
+        KhuyenMaiTheoPhanTram, KhuyenMaiTongTienHoaDon
     }
 
     public static enum Status {
@@ -15,17 +15,17 @@ public class Promotion {
     }
 
     public static String convertTypePromotionToString(TypePromotion typePromotion) {
-        if (typePromotion.equals(typePromotion.KhuyenMaiPT)) {
-            return "KM theo %";
+        if (typePromotion.equals(typePromotion.KhuyenMaiTheoPhanTram)) {
+            return "Khuyến mãi theo %";
         }
         return "KM theo tổng tiền";
     }
 
     public static TypePromotion convertStringToTypePromotion(String typePromotion) {
         if (typePromotion.equals("KM theo %")) {
-            return TypePromotion.KhuyenMaiPT;
+            return TypePromotion.KhuyenMaiTheoPhanTram;
         }
-        return TypePromotion.KhuyenMaiTongTien;
+        return TypePromotion.KhuyenMaiTongTienHoaDon;
     }
 
     public static Status convertStringToStatus(String status) {
@@ -127,7 +127,6 @@ public class Promotion {
 
 //    constructor
     public Promotion() {
-        super();
     }
 
     public Promotion(String idPromotion) {

@@ -25,23 +25,22 @@ public class Home_GUI extends javax.swing.JFrame {
     private Supplier_GUI supplier_GUI;
     private Staff_GUI staff_GUI;
     private History_GUI history_GUI;
-    private Promotion_GUI_XXX promotion_GUI;
     private Staff_InfoStaff_GUI staff_InfoStaff_GUI;
     private ChangePassword_GUI changePassword_GUI;
     private Customer_GUI customer_GUI;
-    
+
     private Product_GUI product_GUI1;
 
     public Home_GUI() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
+
         jpCenter.removeAll();
         statistical_GUI = new Statistical_GUI1();
         statistical_GUI.setJPRevenue();
         addJPanel(statistical_GUI);
-        
+
 // Sụ kiện mở các menu
         menu1.setEvent(new MenuEvent() {
             @Override
@@ -117,7 +116,7 @@ public class Home_GUI extends javax.swing.JFrame {
                 } else if (index == 7) { // sự kiện menu khuyễn mãi
                     stopWebcam();
                     jpCenter.removeAll();
-                    promotion_GUI = new Promotion_GUI_XXX();
+                    Promotion_GUI promotion_GUI = new Promotion_GUI();
                     addJPanel(promotion_GUI);
                 } else if (index == 8 && subIndex == 1) { // sự kiện menu tài khoản - thông tin tài khoản
                     Flag.setFlagStaffInfo(3);
@@ -130,13 +129,10 @@ public class Home_GUI extends javax.swing.JFrame {
                     jpCenter.removeAll();
                     changePassword_GUI = new ChangePassword_GUI();
                     addJPanel(changePassword_GUI);
-                }else if (index == 9 && subIndex == 1) { 
-                   JOptionPane.showMessageDialog(null, "Chức năng đang được phát triển !");
-                }else if (index == 9 && subIndex == 2) { 
-                    stopWebcam();
-                    jpCenter.removeAll();
-                    Promotion_GUI promotion_GUI = new Promotion_GUI();
-                    addJPanel(promotion_GUI);
+                } else if (index == 9 && subIndex == 1) {
+                    JOptionPane.showMessageDialog(null, "Chức năng đang được phát triển !");
+                } else if (index == 9 && subIndex == 2) {
+                    JOptionPane.showMessageDialog(null, "Chức năng đang được phát triển !");
                 }
             }
         });
@@ -246,8 +242,8 @@ public class Home_GUI extends javax.swing.JFrame {
     public void setJpCenter(JPanel jpCenter) {
         this.jpCenter = jpCenter;
     }
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jlLogo;
     private javax.swing.JLabel jlNameShop;

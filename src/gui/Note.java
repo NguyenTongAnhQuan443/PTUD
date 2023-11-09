@@ -15,5 +15,6 @@ public class Note {
     + Điểm tích lũy
     + Xếp hạng
     + Tổng tiêu 6 tháng gần nhất
+    + lịch sủ giao dịch
     */
 }

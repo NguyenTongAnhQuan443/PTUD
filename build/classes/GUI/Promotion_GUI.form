@@ -29,14 +29,11 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Component id="jpRight" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
               <Component id="jPListPromotion" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="hPListProductPromotion" max="32767" attributes="0"/>
           </Group>
+          <Component id="jpRight" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -61,6 +58,7 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="btnAddPromotion" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="jlTypePromotion" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -78,24 +76,28 @@
                           <Component id="jspDescribe" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jlStartPromotion" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jlEndPromotion" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jlEndPromotion" alignment="0" max="32767" attributes="0"/>
                               <Component id="jlNamePromotion" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jlLimitPromotion" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jlPriceRangeStart" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jlPriceRangeEnd" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jlPriceRange" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jtfPriceRangeEnd" max="32767" attributes="0"/>
-                              <Component id="jtfPriceRangeStart" max="32767" attributes="0"/>
+                              <Component id="jtfPriceRange" max="32767" attributes="0"/>
                               <Component id="jtfLimitPromotion" max="32767" attributes="0"/>
                               <Component id="jtfNamePromotion" max="32767" attributes="0"/>
                               <Component id="jtfEndPromotion" max="32767" attributes="0"/>
                               <Component id="jtfStartPromotion" max="32767" attributes="0"/>
                           </Group>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="btnEdit" min="-2" pref="112" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="btnSave" min="-2" pref="112" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="btnRefresh1" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -136,15 +138,10 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jtfPriceRangeStart" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="jlPriceRangeStart" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtfPriceRange" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="jlPriceRange" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jtfPriceRangeEnd" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="jlPriceRangeEnd" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jspDescribe" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
@@ -153,6 +150,15 @@
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
+                  <Component id="btnAddPromotion" min="-2" pref="38" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btnEdit" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                      <Component id="btnSave" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                  <Component id="btnRefresh1" min="-2" pref="38" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -165,12 +171,14 @@
         </Component>
         <Component class="lib2.ComboBoxSuggestion" name="cbTypePromotion">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="2">
                 <StringItem index="0" value="Gi&#x1ea3;m theo %"/>
-                <StringItem index="1" value="Theo kho&#x1ea3;ng gi&#xe1;"/>
+                <StringItem index="1" value="Theo t&#x1ed5;ng ti&#x1ec1;n h&#xf3;a &#x111;&#x1a1;n"/>
               </StringArray>
             </Property>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbTypePromotionItemStateChanged"/>
@@ -183,6 +191,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jtfIDPromotion">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jlNamePromotion">
           <Properties>
@@ -190,6 +201,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jtfNamePromotion">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jlStartPromotion">
           <Properties>
@@ -197,6 +211,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jtfStartPromotion">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jlEndPromotion">
           <Properties>
@@ -204,6 +221,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jtfEndPromotion">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jlLimitPromotion">
           <Properties>
@@ -211,25 +231,18 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jtfLimitPromotion">
-        </Component>
-        <Component class="javax.swing.JLabel" name="jlPriceRangeStart">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Kho&#x1ea3;n gi&#xe1; t&#x1eeb; :"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jtfPriceRangeStart">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jtfPriceRangeEnd">
+        <Component class="javax.swing.JLabel" name="jlPriceRange">
           <Properties>
-            <Property name="editable" type="boolean" value="false"/>
+            <Property name="text" type="java.lang.String" value="H&#xf3;a &#x111;&#x1a1;n tr&#xea;n :"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jlPriceRangeEnd">
+        <Component class="javax.swing.JTextField" name="jtfPriceRange">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&#x110;&#x1ebf;n :"/>
+            <Property name="editable" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jlDescribe">
@@ -246,12 +259,84 @@
           <SubComponents>
             <Component class="javax.swing.JTextArea" name="jtaDescribe">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
               </Properties>
             </Component>
           </SubComponents>
         </Container>
+        <Component class="lib2.Button" name="btnSave">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="eb" green="ce" red="87" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/icons/save24.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="    L&#x1b0;u    "/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="1"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="lib2.Button" name="btnEdit">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="eb" green="ce" red="87" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/icons/edit24.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="1"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="lib2.Button" name="btnAddPromotion">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="eb" green="ce" red="87" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/icons/add24.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="T&#x1ea1;o khuy&#x1ebf;n m&#xe3;i"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="1"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddPromotionActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="lib2.Button" name="btnRefresh1">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="eb" green="ce" red="87" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/icons/refresh24.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="  L&#xe0;m m&#x1edb;i  "/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="1"/>
+            </Property>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="jPListPromotion">
@@ -352,7 +437,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jspListProduct" alignment="0" pref="932" max="32767" attributes="0"/>
+              <Component id="jspListProduct" alignment="0" pref="934" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jlTypeApply" min="-2" max="-2" attributes="0"/>

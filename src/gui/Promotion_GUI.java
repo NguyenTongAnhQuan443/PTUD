@@ -1,16 +1,20 @@
 package gui;
 
+import com.raven.datechooser.DateChooser;
+import dao.Promotion_DAO;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import lib2.TableCustom;
 
 public class Promotion_GUI extends javax.swing.JPanel {
+
     private DefaultTableModel defaultTableModelListPromotion;
     private DefaultTableModel defaultTableModel1ListProduct;
+    private Promotion_DAO promotion_DAO = new Promotion_DAO();
 
     public Promotion_GUI() {
         initComponents();
-        
+
         TableCustom.apply(jspListPromotion, TableCustom.TableType.DEFAULT);
         defaultTableModelListPromotion = (DefaultTableModel) jTableListPromotion.getModel();
         ListSelectionModel selectionModel_1 = jTableListPromotion.getSelectionModel();
@@ -20,6 +24,12 @@ public class Promotion_GUI extends javax.swing.JPanel {
         defaultTableModel1ListProduct = (DefaultTableModel) jTableListProduct.getModel();
         ListSelectionModel selectionModel_2 = jTableListProduct.getSelectionModel();
         selectionModel_2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        DateChooser dateChoose = new DateChooser();
+        dateChoose.setDateFormat("dd/MM/yyyy");
+        dateChoose.setTextRefernce(jtfStartPromotion);
+        dateChoose.setTextRefernce(jtfEndPromotion);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -39,13 +49,15 @@ public class Promotion_GUI extends javax.swing.JPanel {
         jtfEndPromotion = new javax.swing.JTextField();
         jlLimitPromotion = new javax.swing.JLabel();
         jtfLimitPromotion = new javax.swing.JTextField();
-        jlPriceRangeStart = new javax.swing.JLabel();
-        jtfPriceRangeStart = new javax.swing.JTextField();
-        jtfPriceRangeEnd = new javax.swing.JTextField();
-        jlPriceRangeEnd = new javax.swing.JLabel();
+        jlPriceRange = new javax.swing.JLabel();
+        jtfPriceRange = new javax.swing.JTextField();
         jlDescribe = new javax.swing.JLabel();
         jspDescribe = new javax.swing.JScrollPane();
         jtaDescribe = new javax.swing.JTextArea();
+        btnSave = new lib2.Button();
+        btnEdit = new lib2.Button();
+        btnAddPromotion = new lib2.Button();
+        btnRefresh1 = new lib2.Button();
         jPListPromotion = new javax.swing.JPanel();
         jspListPromotion = new javax.swing.JScrollPane();
         jTableListPromotion = new javax.swing.JTable();
@@ -62,7 +74,9 @@ public class Promotion_GUI extends javax.swing.JPanel {
 
         jlTypePromotion.setText("Hình thức :");
 
-        cbTypePromotion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Giảm theo %", "Theo khoảng giá" }));
+        cbTypePromotion.setEditable(false);
+        cbTypePromotion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Giảm theo %", "Theo tổng tiền hóa đơn" }));
+        cbTypePromotion.setEnabled(false);
         cbTypePromotion.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbTypePromotionItemStateChanged(evt);
@@ -76,27 +90,63 @@ public class Promotion_GUI extends javax.swing.JPanel {
 
         jlIDPromotion.setText("Mã khuyễn mãi :");
 
+        jtfIDPromotion.setEditable(false);
+
         jlNamePromotion.setText("Tên chương trình :");
+
+        jtfNamePromotion.setEditable(false);
 
         jlStartPromotion.setText("Thời gian bắt đầu :");
 
+        jtfStartPromotion.setEditable(false);
+
         jlEndPromotion.setText("Thời gian kết thúc :");
+
+        jtfEndPromotion.setEditable(false);
 
         jlLimitPromotion.setText("Mức giảm giá : ");
 
-        jlPriceRangeStart.setText("Khoản giá từ :");
+        jtfLimitPromotion.setEditable(false);
 
-        jtfPriceRangeStart.setEditable(false);
+        jlPriceRange.setText("Hóa đơn trên :");
 
-        jtfPriceRangeEnd.setEditable(false);
-
-        jlPriceRangeEnd.setText("Đến :");
+        jtfPriceRange.setEditable(false);
 
         jlDescribe.setText("Mô tả :");
 
+        jtaDescribe.setEditable(false);
         jtaDescribe.setColumns(20);
         jtaDescribe.setRows(5);
         jspDescribe.setViewportView(jtaDescribe);
+
+        btnSave.setBackground(new java.awt.Color(135, 206, 235));
+        btnSave.setForeground(new java.awt.Color(255, 255, 255));
+        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/save24.png"))); // NOI18N
+        btnSave.setText("    Lưu    ");
+        btnSave.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
+        btnEdit.setBackground(new java.awt.Color(135, 206, 235));
+        btnEdit.setForeground(new java.awt.Color(255, 255, 255));
+        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/edit24.png"))); // NOI18N
+        btnEdit.setText("Sửa");
+        btnEdit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
+        btnAddPromotion.setBackground(new java.awt.Color(135, 206, 235));
+        btnAddPromotion.setForeground(new java.awt.Color(255, 255, 255));
+        btnAddPromotion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/add24.png"))); // NOI18N
+        btnAddPromotion.setText("Tạo khuyến mãi");
+        btnAddPromotion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAddPromotion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddPromotionActionPerformed(evt);
+            }
+        });
+
+        btnRefresh1.setBackground(new java.awt.Color(135, 206, 235));
+        btnRefresh1.setForeground(new java.awt.Color(255, 255, 255));
+        btnRefresh1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/refresh24.png"))); // NOI18N
+        btnRefresh1.setText("  Làm mới  ");
+        btnRefresh1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout jpRightLayout = new javax.swing.GroupLayout(jpRight);
         jpRight.setLayout(jpRightLayout);
@@ -105,6 +155,7 @@ public class Promotion_GUI extends javax.swing.JPanel {
             .addGroup(jpRightLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAddPromotion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jpRightLayout.createSequentialGroup()
                         .addComponent(jlTypePromotion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -119,21 +170,24 @@ public class Promotion_GUI extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jspDescribe, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(jpRightLayout.createSequentialGroup()
-                        .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jlStartPromotion)
-                            .addComponent(jlEndPromotion)
+                            .addComponent(jlEndPromotion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jlNamePromotion)
                             .addComponent(jlLimitPromotion)
-                            .addComponent(jlPriceRangeStart)
-                            .addComponent(jlPriceRangeEnd))
+                            .addComponent(jlPriceRange, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfPriceRangeEnd)
-                            .addComponent(jtfPriceRangeStart)
+                            .addComponent(jtfPriceRange)
                             .addComponent(jtfLimitPromotion)
                             .addComponent(jtfNamePromotion)
                             .addComponent(jtfEndPromotion)
-                            .addComponent(jtfStartPromotion))))
+                            .addComponent(jtfStartPromotion)))
+                    .addGroup(jpRightLayout.createSequentialGroup()
+                        .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRefresh1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jpRightLayout.setVerticalGroup(
@@ -165,19 +219,23 @@ public class Promotion_GUI extends javax.swing.JPanel {
                     .addComponent(jlLimitPromotion))
                 .addGap(18, 18, 18)
                 .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfPriceRangeStart, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlPriceRangeStart))
-                .addGap(18, 18, 18)
-                .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfPriceRangeEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlPriceRangeEnd))
-                .addGap(18, 18, 18)
+                    .addComponent(jtfPriceRange, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlPriceRange))
+                .addGap(34, 34, 34)
                 .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jspDescribe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jpRightLayout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(jlDescribe)))
-                .addContainerGap(325, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAddPromotion, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addComponent(btnRefresh1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPListPromotion.setBackground(new java.awt.Color(255, 255, 255));
@@ -269,7 +327,7 @@ public class Promotion_GUI extends javax.swing.JPanel {
         hPListProductPromotion.setLayout(hPListProductPromotionLayout);
         hPListProductPromotionLayout.setHorizontalGroup(
             hPListProductPromotionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jspListProduct, javax.swing.GroupLayout.DEFAULT_SIZE, 932, Short.MAX_VALUE)
+            .addComponent(jspListProduct, javax.swing.GroupLayout.DEFAULT_SIZE, 934, Short.MAX_VALUE)
             .addGroup(hPListProductPromotionLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jlTypeApply)
@@ -305,30 +363,70 @@ public class Promotion_GUI extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jpRight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
                 .addComponent(jPListPromotion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(hPListProductPromotion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jpRight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbTypePromotionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbTypePromotionItemStateChanged
-
-//        if (cbTypePromotion.getSelectedIndex() == 0) {
-//            offInput();
-//        } else if (cbTypePromotion.getSelectedIndex() == 1) {
-//            onInput();
-//        }
+        if (cbTypePromotion.getSelectedIndex() == 0) {
+            jtfNamePromotion.setEditable(true);
+            jtfLimitPromotion.setEditable(true);
+            jtaDescribe.setEditable(true);
+        } else if (cbTypePromotion.getSelectedIndex() == 1) {
+            jtfNamePromotion.setText("");
+            jtfLimitPromotion.setText("");
+            jtfPriceRange.setText("");
+            jtaDescribe.setText("");
+            jtfNamePromotion.setEditable(true);
+            jtfLimitPromotion.setEditable(true);
+            jtfPriceRange.setEditable(true);
+        }
     }//GEN-LAST:event_cbTypePromotionItemStateChanged
 
     private void cbTypePromotionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTypePromotionActionPerformed
 
     }//GEN-LAST:event_cbTypePromotionActionPerformed
 
+    private void btnAddPromotionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPromotionActionPerformed
+        if (btnAddPromotion.getText().equals("Tạo khuyến mãi")) {
+            cbTypePromotion.setEnabled(true);
+            jtfIDPromotion.setText(promotion_DAO.createIDPromotion());
+            jtfNamePromotion.setEditable(true);
+            jtfLimitPromotion.setEditable(true);
+            jtaDescribe.setEditable(true);
+            btnAddPromotion.setText("Hủy");
+        } else if (btnAddPromotion.getText().equals("Hủy")) {
+            clearInput();
+            jtfIDPromotion.setText("");
+            cbTypePromotion.setSelectedIndex(0);
+            offInput();
+            btnAddPromotion.setText("Tạo khuyến mãi");
+        }
+    }//GEN-LAST:event_btnAddPromotionActionPerformed
 
+    private void clearInput() {
+        jtfIDPromotion.setText("");
+        jtfNamePromotion.setText("");
+        jtfLimitPromotion.setText("");
+        jtfPriceRange.setText("");
+        jtaDescribe.setText("");
+    }
+
+    private void offInput() {
+        cbTypePromotion.setEnabled(false);
+        jtfNamePromotion.setEditable(false);
+        jtfLimitPromotion.setEditable(false);
+        jtfPriceRange.setEditable(false);
+        jtaDescribe.setEditable(false);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private lib2.Button btnAddPromotion;
+    private lib2.Button btnEdit;
+    private lib2.Button btnRefresh1;
+    private lib2.Button btnSave;
     private lib2.Button btnSendprodmotion;
     private lib2.ComboBoxSuggestion cbTypeApply;
     private lib2.ComboBoxSuggestion cbTypePromotion;
@@ -342,8 +440,7 @@ public class Promotion_GUI extends javax.swing.JPanel {
     private javax.swing.JLabel jlIDPromotion;
     private javax.swing.JLabel jlLimitPromotion;
     private javax.swing.JLabel jlNamePromotion;
-    private javax.swing.JLabel jlPriceRangeEnd;
-    private javax.swing.JLabel jlPriceRangeStart;
+    private javax.swing.JLabel jlPriceRange;
     private javax.swing.JLabel jlStartPromotion;
     private javax.swing.JLabel jlTypeApply;
     private javax.swing.JLabel jlTypePromotion;
@@ -356,8 +453,7 @@ public class Promotion_GUI extends javax.swing.JPanel {
     private javax.swing.JTextField jtfIDPromotion;
     private javax.swing.JTextField jtfLimitPromotion;
     private javax.swing.JTextField jtfNamePromotion;
-    private javax.swing.JTextField jtfPriceRangeEnd;
-    private javax.swing.JTextField jtfPriceRangeStart;
+    private javax.swing.JTextField jtfPriceRange;
     private javax.swing.JTextField jtfStartPromotion;
     // End of variables declaration//GEN-END:variables
 }
