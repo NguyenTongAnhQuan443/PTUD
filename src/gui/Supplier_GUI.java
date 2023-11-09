@@ -778,9 +778,9 @@ public class Supplier_GUI extends javax.swing.JPanel {
             if (!supplierList.isEmpty()) {
                 writeExcel(pathname, supplierList);
                 cbFillterStatus.setSelectedIndex(0); // mỗi lần xuất file xong set lại index để tránh lỗi
-                JOptionPane.showMessageDialog(null, "Danh sách nhà cung cấp  đã được lưu vào " + pathname);
+                JOptionPane.showMessageDialog(null, "Danh sách nhà cung cấp đã được lưu vào " + pathname);
             } else {
-                JOptionPane.showMessageDialog(null, "Không có dữ liệu nhà cung cấp để lưu.");
+                JOptionPane.showMessageDialog(null, "Không có dữ liệu nhà cung cấp để lưu vui lòng kiểm tra lại");
             }
         }
     }//GEN-LAST:event_btnExportFileActionPerformed
@@ -798,7 +798,7 @@ public class Supplier_GUI extends javax.swing.JPanel {
                 boolean res = supplier_DAO.addSupplierList(listSupplier);
                 if (res) {
                     loadData();
-                    JOptionPane.showMessageDialog(null, "Đã hoàn thành nhà cung cấp từ danh sách !");
+                    JOptionPane.showMessageDialog(null, "Đã hoàn thành nhập danh sách nhà cung cấp từ file");
                 } else {
                     JOptionPane.showMessageDialog(null, "Vui lòng kiểm tra lại định dạng file về: Mã nhà cung cấp, Tên nhà cung cấp, SDT, Email, Địa chỉ V.V !");
                 }
@@ -1025,13 +1025,26 @@ public class Supplier_GUI extends javax.swing.JPanel {
                 return showERROR(jtfEmail, "Email nhà cung cấp này đã được sử dụng trên hệ thống vui lòng kiểm tra lại !");
             }
         } else if (Flag.getFlagUpdateSupplier() == 2) {
-            String currentIDSupplier = Flag.getFlagIDSupplier();
+            String currentIDSupplier = Flag.getFlagIDSupplier().trim();
+            String currentPhone = jtfPhoneSupplier.getText().trim();
+            String currentEmail = jtfEmail.getText().trim();
+            boolean isCurrentSupplierPhone = false; // Biến để xác định xem số điện thoại hiện tại là của supplier đang cập nhật
+            boolean isCurrentSupplierEmail = false; // Biến để xác định xem email hiện tại là của supplier đang cập nhật
+
             for (Supplier supplier : supplier_DAO.getListSupplier()) {
-                if (!supplier.getIdSupplier().trim().equals(currentIDSupplier)) {
-                    if (supplier.getPhone().equals(jtfPhoneSupplier.getText().trim())) {
+                if (supplier.getIdSupplier().trim().equals(currentIDSupplier)) {
+                    // Nếu ID của supplier khớp với supplier đang cập nhật, kiểm tra số điện thoại và email
+                    if (!supplier.getPhone().equals(currentPhone)) {
+                        isCurrentSupplierPhone = true;
+                    }
+                    if (!supplier.getEmail().equals(currentEmail)) {
+                        isCurrentSupplierEmail = true;
+                    }
+                } else {
+                    if (supplier.getPhone().equals(currentPhone)) {
                         return showERROR(jtfPhoneSupplier, "Số điện thoại nhà cung cấp này đã được sử dụng trên hệ thống vui lòng kiểm tra lại !");
                     }
-                    if (supplier.getEmail().equals(jtfEmail.getText().trim())) {
+                    if (supplier.getEmail().equals(currentEmail)) {
                         return showERROR(jtfEmail, "Email nhà cung cấp này đã được sử dụng trên hệ thống vui lòng kiểm tra lại !");
                     }
                 }
@@ -1058,7 +1071,7 @@ public class Supplier_GUI extends javax.swing.JPanel {
             supplier.getEmail(),
             supplier.getPhone(),
             status,
-            addressDetails,};
+            addressDetails};
         model.addRow(rowData);
     }
 

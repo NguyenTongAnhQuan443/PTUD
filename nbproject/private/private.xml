@@ -13,8 +13,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/gui/Supplier_GUI.java</file>
-            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/dao/Staff_DAO.java</file>
+            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/dao/Product_DAO.java</file>
             <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/gui/Product_GUI.java</file>
+            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/</file>
+            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/dao/ProductProperties_DAO.java</file>
         </group>
     </open-files>
 </project-private>

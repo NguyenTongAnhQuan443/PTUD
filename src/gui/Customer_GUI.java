@@ -193,6 +193,7 @@ public class Customer_GUI extends javax.swing.JPanel {
         btnSave.setForeground(new java.awt.Color(255, 255, 255));
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/done24.png"))); // NOI18N
         btnSave.setText("Lưu");
+        btnSave.setEnabled(false);
         btnSave.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -965,23 +966,46 @@ public class Customer_GUI extends javax.swing.JPanel {
 //        if (address.length() <= 0) {
 //            return showERROR(jtfAddressDetails, "Vui lòng nhập địa chỉ cụ thể");
 //        }
-//        if (Flag.getFlagUpdateCustomer() == 1) {
-//
-//            if (customer_DAO.checkPhoneExist(phone)) {
-//                return showERROR(jtfPhoneCus, "Số điện thoại của khách hàng này đã được lưu trên hệ thống !");
-//            }
-//            if (customer_DAO.checkEmailExist(email)) {
-//                return showERROR(jtfEmail, "Email này đã được lưu trên hệ thống vui lòng kiểm tra lại !");
-//            }
-//        } else if (Flag.getFlagUpdateCustomer() == 2) {
-//        }
+        if (Flag.getFlagUpdateCustomer() == 1) {
+
+            if (customer_DAO.checkPhoneExist(jtfPhoneCus.getText().trim()) && !jtfPhoneCus.getText().trim().equals("")) {
+                return showERROR(jtfPhoneCus, "Số điện thoại của khách hàng này đã được lưu trên hệ thống !");
+            }
+            if (customer_DAO.checkEmailExist(email) && !jtfEmail.getText().trim().equals("")) {
+                return showERROR(jtfEmail, "Email này đã được lưu trên hệ thống vui lòng kiểm tra lại !");
+            }
+        } else if (Flag.getFlagUpdateCustomer() == 2 && !jtfEmail.getText().trim().equals("")) {
+            String currentIDCustomer = Flag.getFlagIDCustomer().trim();
+            String currentPhone = jtfPhoneCus.getText().trim();
+            String currentEmail = jtfEmail.getText().trim();
+            boolean isCurrentCusPhone = false;
+            boolean isCurrentCusEmail = false;
+
+            for (Customer customer : customer_DAO.getListCustomers()) {
+                if (customer.getIdCustomer().trim().equals(currentIDCustomer)) {
+                    if (!customer.getPhone().equals(currentPhone)) {
+                        isCurrentCusPhone = true;
+                    }
+                    if (!customer.getEmail().equals(currentEmail)) {
+                        isCurrentCusEmail = true;
+                    }
+                } else {
+                    if (customer.getPhone().equals(currentPhone)) {
+                        return showERROR(jtfPhoneCus, "Số điện thoại khách hàng này đã được sử dụng trên hệ thống vui lòng kiểm tra lại !");
+                    }
+                    if (customer.getEmail().equals(currentEmail)) {
+                        return showERROR(jtfEmail, "Email khách hàng này đã được sử dụng trên hệ thống vui lòng kiểm tra lại !");
+                    }
+                }
+            }
+        }
         if (jcReceivePromotion.isSelected() == true) {
             if (jtfEmail.getText().trim().equals("")) {
                 return showERROR(jtfEmail, "Vui lòng nhập vào thông tin Email để được nhận thông tin chương trình khuyến mãi !");
             }
             if (checkRegex(email, regexEmail) == false) {
-            return showERROR(jtfEmail, "Email không đúng định dạng, vui lòng kiểm tra lại !");
-        }
+                return showERROR(jtfEmail, "Email không đúng định dạng, vui lòng kiểm tra lại !");
+            }
         }
         if (province == null) {
             province = new Province("106008781098622");
@@ -1072,14 +1096,14 @@ public class Customer_GUI extends javax.swing.JPanel {
             wardCell.setCellValue(nameWard);
 
             Cell addressCell = row.createCell(7);
-            addressCell.setCellValue(customer.getAddress()); 
+            addressCell.setCellValue(customer.getAddress());
 
             Cell rewardPoints = row.createCell(8);
             rewardPoints.setCellValue(customer.getRewardPoints());
-            
+
             Cell typeRank = row.createCell(9);
             typeRank.setCellValue(Customer.convertTypeRankToString(customer.getTypeRank()));
-            
+
             Cell totalAmount6months = row.createCell(10);
             totalAmount6months.setCellValue(customer.getTotalAmount6months() + " VNĐ");
 
