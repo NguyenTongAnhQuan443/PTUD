@@ -295,4 +295,26 @@ public class Product_DAO {
         return promotionID;
     }
 
+//    Lấy danh sách sản phẩm của khuyến mãi nào đó
+    public List<String> getListIDProductInPromotion(String idPromotionSearch) {
+        List<String> listIDProduct = new ArrayList<>();
+        String sql = "select * from ProductPromotion where idPromotion = ?";
+
+        try {
+            connectDB.ConnectDB.getInstance();
+            Connection connection = ConnectDB.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, idPromotionSearch);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String idProduct = resultSet.getString("idProduct");
+                listIDProduct.add(idProduct);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listIDProduct;
+    }
+
 }

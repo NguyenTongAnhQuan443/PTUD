@@ -643,7 +643,6 @@ public class Supplier_GUI extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void jTableSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableSupplierMouseClicked
-
         if (evt.getClickCount() == 1 && btnAdd.getText().equals("Thêm mới")) {
             Flag.setFlagUpdateSupplier(2);
             int selectedRow = jTableSupplier.getSelectedRow();
