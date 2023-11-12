@@ -64,11 +64,17 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="cbTypePromotion" max="32767" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
+                      <Component id="btnRefresh1" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           <Component id="jlIDPromotion" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jtfIDPromotion" min="-2" pref="142" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="btnSave" min="-2" pref="112" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="btnEdit" min="-2" pref="112" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jlDescribe" min="-2" max="-2" attributes="0"/>
@@ -77,27 +83,39 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jlStartPromotion" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jlEndPromotion" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jlNamePromotion" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jlLimitPromotion" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jlDiscount" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jlPriceRange" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
+                                  <Component id="jlUnit" min="-2" pref="32" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                                  <Component id="jtfPriceRange" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jlStartPromotion" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jlEndPromotion" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jlNamePromotion" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jlQuantity" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jtfPriceRange" max="32767" attributes="0"/>
-                              <Component id="jtfLimitPromotion" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jtfDiscount" min="-2" pref="91" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="jtfQuantity" max="32767" attributes="0"/>
                               <Component id="jtfNamePromotion" max="32767" attributes="0"/>
                               <Component id="jtfEndPromotion" max="32767" attributes="0"/>
                               <Component id="jtfStartPromotion" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="btnEdit" min="-2" pref="112" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btnSave" min="-2" pref="112" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="btnRefresh1" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -133,8 +151,14 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jtfLimitPromotion" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="jlLimitPromotion" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtfQuantity" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="jlQuantity" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jtfDiscount" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="jlDiscount" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlUnit" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -174,8 +198,8 @@
             <Property name="editable" type="boolean" value="false"/>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="2">
-                <StringItem index="0" value="Gi&#x1ea3;m theo %"/>
-                <StringItem index="1" value="Theo t&#x1ed5;ng ti&#x1ec1;n h&#xf3;a &#x111;&#x1a1;n"/>
+                <StringItem index="0" value="KM theo %"/>
+                <StringItem index="1" value="KM theo t&#x1ed5;ng ti&#x1ec1;n"/>
               </StringArray>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
@@ -225,12 +249,12 @@
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jlLimitPromotion">
+        <Component class="javax.swing.JLabel" name="jlDiscount">
           <Properties>
             <Property name="text" type="java.lang.String" value="M&#x1ee9;c gi&#x1ea3;m gi&#xe1; : "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jtfLimitPromotion">
+        <Component class="javax.swing.JTextField" name="jtfDiscount">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
@@ -278,10 +302,14 @@
               <Image iconType="3" name="/images/icons/save24.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="    L&#x1b0;u    "/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaveActionPerformed"/>
+          </Events>
         </Component>
         <Component class="lib2.Button" name="btnEdit">
           <Properties>
@@ -299,6 +327,9 @@
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditActionPerformed"/>
+          </Events>
         </Component>
         <Component class="lib2.Button" name="btnAddPromotion">
           <Properties>
@@ -332,9 +363,28 @@
               <Image iconType="3" name="/images/icons/refresh24.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="  L&#xe0;m m&#x1edb;i  "/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jtfQuantity">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlQuantity">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="S&#x1ed1; l&#x1b0;&#x1ee3;ng m&#xe3;: "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlUnit">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="3"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="%"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -384,12 +434,13 @@
             <Component class="javax.swing.JTable" name="jTableListPromotion">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="9" rowCount="4">
+                  <Table columnCount="10" rowCount="4">
                     <Column editable="false" title="M&#xe3; KM" type="java.lang.Object"/>
                     <Column editable="false" title="T&#xea;n KM" type="java.lang.Object"/>
                     <Column editable="false" title="H&#xec;nh th&#x1ee9;c" type="java.lang.Object"/>
-                    <Column editable="false" title="M&#x1ee9;c gi&#x1ea3;m gi&#xe1;" type="java.lang.Object"/>
-                    <Column editable="false" title="Kho&#x1ea3;ng gi&#xe1; &#xe1;p d&#x1ee5;ng" type="java.lang.Object"/>
+                    <Column editable="false" title="M&#x1ee9;c gi&#x1ea3;m" type="java.lang.Object"/>
+                    <Column editable="false" title="&#xc1;p d&#x1ee5;ng cho H&#x110; tr&#xea;n" type="java.lang.Object"/>
+                    <Column editable="false" title="S&#x1ed1; l&#x1b0;&#x1ee3;ng" type="java.lang.Object"/>
                     <Column editable="false" title="Ng&#xe0;y b&#x1eaf;t &#x111;&#x1ea7;u" type="java.lang.Object"/>
                     <Column editable="false" title="Ng&#xe0;y k&#x1ebf;t th&#xfa;c" type="java.lang.Object"/>
                     <Column editable="false" title="Tr&#x1ea1;ng th&#xe1;i" type="java.lang.Object"/>
@@ -437,16 +488,16 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jspListProduct" alignment="0" pref="934" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jlTypeApply" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="cbTypeApply" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="checkboxSelectAll" min="-2" pref="119" max="-2" attributes="0"/>
+                  <EmptySpace pref="557" max="32767" attributes="0"/>
+                  <Component id="jcSelectAll" min="-2" pref="119" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
+              <Component id="jspListProduct" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -457,15 +508,46 @@
                           <Component id="jlTypeApply" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cbTypeApply" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="checkboxSelectAll" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jcSelectAll" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jspListProduct" pref="307" max="32767" attributes="0"/>
+                  <Component id="jspListProduct" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
+        <Component class="javax.swing.JLabel" name="jlTypeApply">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#xc1;p d&#x1ee5;ng cho :"/>
+          </Properties>
+        </Component>
+        <Component class="lib2.ComboBoxSuggestion" name="cbTypeApply">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="T&#x1ea5;t c&#x1ea3;"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbTypeApplyItemStateChanged"/>
+          </Events>
+        </Component>
+        <Component class="java.awt.Checkbox" name="jcSelectAll">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="0"/>
+            </Property>
+            <Property name="label" type="java.lang.String" value="T&#x1ea5;t c&#x1ea3; s&#x1ea3;n ph&#x1ea9;m"/>
+            <Property name="name" type="java.lang.String" value="" noResource="true"/>
+          </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jcSelectAllItemStateChanged"/>
+          </Events>
+        </Component>
         <Container class="javax.swing.JScrollPane" name="jspListProduct">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -476,37 +558,24 @@
             <Component class="javax.swing.JTable" name="jTableListProduct">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="8" rowCount="4">
-                    <Column editable="false" title="STT" type="java.lang.Object"/>
+                  <Table columnCount="10" rowCount="4">
                     <Column editable="false" title="M&#xe3; SP" type="java.lang.Object"/>
                     <Column editable="false" title="T&#xea;n SP" type="java.lang.Object"/>
-                    <Column editable="false" title="K&#xed;ch th&#x1b0;&#x1edb;c" type="java.lang.Object"/>
+                    <Column editable="false" title="Gi&#xe1; g&#x1ed1;c" type="java.lang.Object"/>
+                    <Column editable="false" title="Gi&#xe1; KM" type="java.lang.Object"/>
+                    <Column editable="false" title="S&#x1ed1; l&#x1b0;&#x1ee3;ng" type="java.lang.Object"/>
+                    <Column editable="false" title="Nh&#xe0; cung c&#x1ea5;p" type="java.lang.Object"/>
                     <Column editable="false" title="M&#xe0;u s&#x1eaf;c" type="java.lang.Object"/>
+                    <Column editable="false" title="K&#xed;ch th&#x1b0;&#x1edb;c" type="java.lang.Object"/>
                     <Column editable="false" title="Ch&#x1ea5;t li&#x1ec7;u" type="java.lang.Object"/>
-                    <Column editable="false" title="&#x110;&#x1a1;n gi&#xe1;" type="java.lang.Object"/>
                     <Column editable="true" title="Tr&#x1ea1;ng th&#xe1;i" type="java.lang.Boolean"/>
                   </Table>
                 </Property>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="jlTypeApply">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="&#xc1;p d&#x1ee5;ng cho :"/>
-          </Properties>
-        </Component>
-        <Component class="lib2.ComboBoxSuggestion" name="cbTypeApply">
-        </Component>
-        <Component class="java.awt.Checkbox" name="checkboxSelectAll">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="12" style="0"/>
-            </Property>
-            <Property name="label" type="java.lang.String" value="T&#x1ea5;t c&#x1ea3; s&#x1ea3;n ph&#x1ea9;m"/>
-            <Property name="name" type="java.lang.String" value="" noResource="true"/>
-          </Properties>
-        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

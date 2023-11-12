@@ -32,9 +32,9 @@ public class Supplier {
     private District district;
     private Ward ward;
     private String address;
-    
+
 //    get set
-    public String getIdSupplier() {    
+    public String getIdSupplier() {
         return idSupplier;
     }
 
@@ -102,7 +102,7 @@ public class Supplier {
         return address;
     }
 
-    public void setAddress(String address) {   
+    public void setAddress(String address) {
         this.address = address;
     }
 
@@ -127,7 +127,7 @@ public class Supplier {
         this.ward = ward;
         this.address = address;
     }
-    
+
 //    Hash code equals
     @Override
     public int hashCode() {
@@ -152,7 +152,6 @@ public class Supplier {
     }
 
 //    toString
-
     @Override
     public String toString() {
         return "Supplier{" + "idSupplier=" + idSupplier + ", name=" + name + ", email=" + email + ", phone=" + phone + ", status=" + status + ", province=" + province + ", district=" + district + ", ward=" + ward + ", address=" + address + '}';

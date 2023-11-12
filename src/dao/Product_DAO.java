@@ -105,7 +105,76 @@ public class Product_DAO {
         return listProduct;
     }
 
-//    Cập nhập thông tin sản phẩm
+//    Lấy danh sách sản phẩm đang kinh doanh => dùng cho hiển thị danh sách sản phẩm trogn khuyến mãi
+    public List<Product> getListProductAreTrading() {
+        List<Product> listProduct = new ArrayList<Product>();
+        String sql = "SELECT * FROM Product WHERE status = N'Đang kinh doanh'";
+
+        try {
+            connectDB.ConnectDB.getInstance();
+            Connection connection = ConnectDB.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                String idProduct = resultSet.getString("idProduct");
+                String name = resultSet.getString("name");
+                double costPrice = resultSet.getDouble("costPrice");
+                double originalPrice = resultSet.getDouble("originalPrice");
+                double currentPrice = resultSet.getDouble("currentPrice");
+                int quantity = resultSet.getInt("quantity");
+                String status = resultSet.getString("status");
+                String supplier = resultSet.getString("supplier");
+                int productType = resultSet.getInt("productType");
+                int color = resultSet.getInt("color");
+                int size = resultSet.getInt("size");
+                int material = resultSet.getInt("material");
+                String imageProduct = resultSet.getString("imageProduct");
+
+                Product product = new Product(idProduct, name, costPrice, originalPrice, currentPrice, quantity, Product.convertStringToStatus(status), new Supplier(supplier), new ProductType(productType), new ProductColor(color), new ProductSize(size), new ProductMaterial(material), imageProduct);
+
+                listProduct.add(product);
+            }
+        } catch (Exception e) {
+        }
+        return listProduct;
+    }
+
+//    Lấy danh sách sản phẩm thông qua id productType và status là đang kinh doanh
+    public List<Product> getListProductByProductTypeAndStatus(int productType) {
+        List<Product> listProduct = new ArrayList<>();
+        String sql = "SELECT * FROM Product WHERE productType = ? AND status = N'Đang kinh doanh'";
+
+        try {
+            connectDB.ConnectDB.getInstance();
+            Connection connection = ConnectDB.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, productType);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String idProduct = resultSet.getString("idProduct");
+                String name = resultSet.getString("name");
+                double costPrice = resultSet.getDouble("costPrice");
+                double originalPrice = resultSet.getDouble("originalPrice");
+                int quantity = resultSet.getInt("quantity");
+                String status = resultSet.getString("status");
+                String supplier = resultSet.getString("supplier");
+                int color = resultSet.getInt("color");
+                int size = resultSet.getInt("size");
+                int material = resultSet.getInt("material");
+                String imageProduct = resultSet.getString("imageProduct");
+
+                Product product = new Product(idProduct, name, costPrice, originalPrice, quantity, Product.convertStringToStatus(status), new Supplier(supplier), new ProductType(productType), new ProductColor(color), new ProductSize(size), new ProductMaterial(material), imageProduct);
+
+                listProduct.add(product);
+            }
+        } catch (Exception e) {
+            // Xử lý ngoại lệ nếu cần
+            e.printStackTrace();
+        }
+        return listProduct;
+    }
+
     public boolean updateInfoProduct(Product product) {
         String sql = "UPDATE Product SET name = ?, costPrice = ?, originalPrice = ?, quantity = ?, status = ?, supplier = ?, productType = ?, color = ?, size = ?, material = ?, imageProduct = ? WHERE idProduct = ?";
         try {
@@ -197,4 +266,33 @@ public class Product_DAO {
         }
         return false;
     }
+
+//    Lấy sản phẩm đang nằm trong chương trình khuyến mãi theo % bằng ID sản phẩm trả về mã KM
+    public String getPromotionIDForProduct(String productID) {
+        String promotionID = null;
+        try {
+            Connection connection = ConnectDB.getConnection();
+            // Thực hiện truy vấn để lấy mã chương trình khuyến mãi cho sản phẩm
+            String sql = "SELECT P.idPromotion "
+                    + "FROM Promotion P "
+                    + "JOIN ProductPromotion PP ON P.idPromotion = PP.idPromotion "
+                    + "JOIN Product PD ON PP.idProduct = PD.idProduct "
+                    + "WHERE PD.idProduct = ? AND P.typePromotion = 'KM theo %' AND PD.currentPrice IS NOT NULL AND PD.currentPrice > 0";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, productID);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    promotionID = resultSet.getString("idPromotion");
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return promotionID;
+    }
+
 }

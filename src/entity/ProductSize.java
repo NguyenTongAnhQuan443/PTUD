@@ -3,11 +3,11 @@ package entity;
 import java.util.Objects;
 
 public class ProductSize {
-    private int idSize ;
-    private String name ;
-    
-//    Get set
 
+    private int idSize;
+    private String name;
+
+//    Get set
     public int getIdSize() {
         return idSize;
     }
@@ -25,7 +25,6 @@ public class ProductSize {
     }
 
 //    Constructor
-
     public ProductSize() {
     }
 
@@ -46,7 +45,6 @@ public class ProductSize {
     }
 
 //    Hashcode equals
-
     @Override
     public int hashCode() {
         int hash = 5;
@@ -69,6 +67,7 @@ public class ProductSize {
         return Objects.equals(this.name, other.name);
     }
 //    toString
+
     @Override
     public String toString() {
         return "ProductSize{" + "idSize=" + idSize + ", name=" + name + '}';

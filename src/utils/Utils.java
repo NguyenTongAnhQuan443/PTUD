@@ -3,6 +3,7 @@ package utils;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -103,16 +104,29 @@ public class Utils {
         return getVietnameseDiacriticCharacters().toLowerCase();
     }
 //    chuyển đổi định dạng ngày tháng năm từ yyyy/mm/dd sang dd/mm/yyyy
-    public static String convertDateFormat(String inputDate) {
-    try {
-        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-        Date date = inputFormat.parse(inputDate);
-        return outputFormat.format(date);
-    } catch (ParseException e) {
-        e.printStackTrace();
-        return "";
+    public static String convertDateFormat(String inputDate) {
+        try {
+            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+            Date date = inputFormat.parse(inputDate);
+            return outputFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
-}
+
+//    Định dạng kiểu tiền 
+    public static String formatMoney(int amount) {
+        NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+        return format.format(amount);
+    }
+
+    public static String formatMoney(double amount) {
+        NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+        return format.format(amount);
+    }
+
 }

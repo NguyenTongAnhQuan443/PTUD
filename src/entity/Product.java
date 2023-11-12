@@ -27,6 +27,7 @@ public class Product {
     private String name;
     private Double costPrice;
     private Double originalPrice;
+    private Double currentPrice;
     private int quantity;
     private Status status;
     private Supplier supplier;
@@ -35,9 +36,8 @@ public class Product {
     private ProductSize productSize;
     private ProductMaterial productMaterial;
     private String pathImageProduct;
-    
-//    Get set
 
+//    Get set
     public String getIdProduct() {
         return idProduct;
     }
@@ -68,6 +68,14 @@ public class Product {
 
     public void setOriginalPrice(Double originalPrice) {
         this.originalPrice = originalPrice;
+    }
+
+    public Double getCurrentPrice() {
+        return currentPrice;
+    }
+
+    public void setCurrentPrice(Double currentPrice) {
+        this.currentPrice = currentPrice;
     }
 
     public int getQuantity() {
@@ -133,9 +141,8 @@ public class Product {
     public void setPathImageProduct(String pathImageProduct) {
         this.pathImageProduct = pathImageProduct;
     }
-    
-//    Constructor
 
+//    Constructor
     public Product() {
     }
 
@@ -153,8 +160,23 @@ public class Product {
         this.productSize = productSize;
         this.productMaterial = productMaterial;
         this.pathImageProduct = pathImageProduct;
+    } // Thiếu tham số currentPrice
+
+    public Product(String idProduct, String name, Double costPrice, Double originalPrice, Double currentPrice, int quantity, Status status, Supplier supplier, ProductType productType, ProductColor productColor, ProductSize productSize, ProductMaterial productMaterial, String pathImageProduct) {
+        this.idProduct = idProduct;
+        this.name = name;
+        this.costPrice = costPrice;
+        this.originalPrice = originalPrice;
+        this.currentPrice = currentPrice;
+        this.quantity = quantity;
+        this.status = status;
+        this.supplier = supplier;
+        this.productType = productType;
+        this.productColor = productColor;
+        this.productSize = productSize;
+        this.productMaterial = productMaterial;
+        this.pathImageProduct = pathImageProduct;
     }
-    
 
 //    Hashcode equals
     @Override
@@ -178,12 +200,11 @@ public class Product {
         final Product other = (Product) obj;
         return Objects.equals(this.idProduct, other.idProduct);
     }
-    
-//    toString
 
+//    toString
     @Override
     public String toString() {
-        return "Product{" + "idProduct=" + idProduct + ", name=" + name + ", costPrice=" + costPrice + ", originalPrice=" + originalPrice + ", quantity=" + quantity + ", status=" + status + ", supplier=" + supplier + ", productType=" + productType + ", productColor=" + productColor + ", productSize=" + productSize + ", productMaterial=" + productMaterial + ", pathImageProduct=" + pathImageProduct + '}';
+        return "Product{" + "idProduct=" + idProduct + ", name=" + name + ", costPrice=" + costPrice + ", originalPrice=" + originalPrice + ", currentPrice=" + currentPrice + ", quantity=" + quantity + ", status=" + status + ", supplier=" + supplier + ", productType=" + productType + ", productColor=" + productColor + ", productSize=" + productSize + ", productMaterial=" + productMaterial + ", pathImageProduct=" + pathImageProduct + '}';
     }
+
 }
-   

@@ -3,11 +3,11 @@ package entity;
 import java.util.Objects;
 
 public class ProductMaterial {
+
     private int idMaterial;
     private String name;
-    
-//    Get set
 
+//    Get set
     public int getIdMaterial() {
         return idMaterial;
     }
@@ -23,9 +23,8 @@ public class ProductMaterial {
     public void setName(String name) {
         this.name = name;
     }
-    
-//    Constructor
 
+//    Constructor
     public ProductMaterial() {
     }
 
@@ -33,8 +32,8 @@ public class ProductMaterial {
         super();
         this.idMaterial = idMaterial;
     }
-    
-    public ProductMaterial( String name) {
+
+    public ProductMaterial(String name) {
         super();
         this.name = name;
     }
@@ -73,5 +72,5 @@ public class ProductMaterial {
     public String toString() {
         return "ProductMaterial{" + "idMaterial=" + idMaterial + ", name=" + name + '}';
     }
-    
+
 }

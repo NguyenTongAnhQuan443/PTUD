@@ -49,6 +49,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import utils.Utils;
 
 public class Product_GUI extends javax.swing.JPanel {
 
@@ -1248,18 +1249,20 @@ public class Product_GUI extends javax.swing.JPanel {
                 try {
                     image = ImageIO.read(new File(imageProductPath));
 
-                    // Đảm bảo kích thước hình ảnh vừa với JLabel
-                    int width = jLIMGProduct.getWidth();
-                    int height = jLIMGProduct.getHeight();
-                    Image scaledImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+                    if (image != null) {
+                        // Đảm bảo kích thước hình ảnh vừa với JLabel
+                        int width = jLIMGProduct.getWidth();
+                        int height = jLIMGProduct.getHeight();
+                        Image scaledImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
 
-                    // Chuyển hình ảnh đã điều chỉnh thành biểu tượng (Icon)
-                    Icon icon = new ImageIcon(scaledImage);
+                        // Chuyển hình ảnh đã điều chỉnh thành biểu tượng (Icon)
+                        Icon icon = new ImageIcon(scaledImage);
 
-                    // Đặt biểu tượng cho JLabel
-                    jLIMGProduct.setIcon(icon);
+                        // Đặt biểu tượng cho JLabel
+                        jLIMGProduct.setIcon(icon);
+                    }
                 } catch (IOException ex) {
-
+                    ex.printStackTrace(); // Handle the exception appropriately, e.g., log or display an error message
                 }
             }
         }
@@ -1762,7 +1765,7 @@ public class Product_GUI extends javax.swing.JPanel {
             } else {
                 bool = true;
             }
-            Object[] rowData = {idProduct, name, originalPrice + "", quantity + "", suppplier, color, size, material, bool};
+            Object[] rowData = {idProduct, name, Utils.formatMoney(originalPrice) + "", quantity + "", suppplier, color, size, material, bool};
             defaultTableModelListProduct.addRow(rowData);
         }
     }
@@ -1784,7 +1787,7 @@ public class Product_GUI extends javax.swing.JPanel {
             } else {
                 bool = true;
             }
-            Object[] rowData = {idProduct, name, originalPrice + "", quantity + "", suppplier, color, size, material, bool};
+            Object[] rowData = {idProduct, name, Utils.formatMoney(originalPrice) + "", quantity + "", suppplier, color, size, material, bool};
             defaultTableModelListProduct.addRow(rowData);
         }
 

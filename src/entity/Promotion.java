@@ -16,7 +16,7 @@ public class Promotion {
 
     public static String convertTypePromotionToString(TypePromotion typePromotion) {
         if (typePromotion.equals(typePromotion.KhuyenMaiTheoPhanTram)) {
-            return "Khuyến mãi theo %";
+            return "KM theo %";
         }
         return "KM theo tổng tiền";
     }
@@ -41,18 +41,19 @@ public class Promotion {
         }
         return "Hết hạn";
     }
-//    
+
     private String idPromotion;
     private String name;
     private TypePromotion typePromotion;
     private double discount;
     private double priceRange;
+    private int quantity;
     private LocalDate dayStart;
     private LocalDate dayEnd;
     private Status status;
     private String decription;
 
-//    get set
+//    Get Set
     public String getIdPromotion() {
         return idPromotion;
     }
@@ -93,6 +94,14 @@ public class Promotion {
         this.priceRange = priceRange;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     public LocalDate getDayStart() {
         return dayStart;
     }
@@ -125,7 +134,7 @@ public class Promotion {
         this.decription = decription;
     }
 
-//    constructor
+//    Constructor
     public Promotion() {
     }
 
@@ -134,24 +143,38 @@ public class Promotion {
         this.idPromotion = idPromotion;
     }
 
-    public Promotion(String idPromotion, String name, TypePromotion typePromotion, double discount, double priceRange, LocalDate dayStart, LocalDate dayEnd, Status status, String decription) {
+    public Promotion(String idPromotion, String name, TypePromotion typePromotion, double discount, int quantity, LocalDate dayStart, LocalDate dayEnd, Status status, String decription) {
+        super();
+        this.idPromotion = idPromotion;
+        this.name = name;
+        this.typePromotion = typePromotion;
+        this.discount = discount;
+        this.quantity = quantity;
+        this.dayStart = dayStart;
+        this.dayEnd = dayEnd;
+        this.status = status;
+        this.decription = decription;
+    } // Thiếu priceRange
+
+    public Promotion(String idPromotion, String name, TypePromotion typePromotion, double discount, double priceRange, int quantity, LocalDate dayStart, LocalDate dayEnd, Status status, String decription) {
         super();
         this.idPromotion = idPromotion;
         this.name = name;
         this.typePromotion = typePromotion;
         this.discount = discount;
         this.priceRange = priceRange;
+        this.quantity = quantity;
         this.dayStart = dayStart;
         this.dayEnd = dayEnd;
         this.status = status;
         this.decription = decription;
     }
 
-//    Hashcode equals
+//    Hashcode Equals
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 43 * hash + Objects.hashCode(this.idPromotion);
+        int hash = 5;
+        hash = 89 * hash + Objects.hashCode(this.idPromotion);
         return hash;
     }
 
@@ -173,7 +196,7 @@ public class Promotion {
 //    toString
     @Override
     public String toString() {
-        return "Promotion{" + "idPromotion=" + idPromotion + ", name=" + name + ", typePromotion=" + typePromotion + ", discount=" + discount + ", priceRange=" + priceRange + ", dayStart=" + dayStart + ", dayEnd=" + dayEnd + ", status=" + status + ", decription=" + decription + '}';
+        return "Promotion{" + "idPromotion=" + idPromotion + ", name=" + name + ", typePromotion=" + typePromotion + ", discount=" + discount + ", priceRange=" + priceRange + ", quantity=" + quantity + ", dayStart=" + dayStart + ", dayEnd=" + dayEnd + ", status=" + status + ", decription=" + decription + '}';
     }
 
 }

@@ -11,19 +11,19 @@ public class Flag {
     // 2 là mở chức năng sửa thông tin nhân viên
     // 3 là mở từ menu tài khoản
     public static String flagIDStaff; // lấy idStaff cho chức năng cập nhập
-    
+
     public static int flagUpdateSupplier;
     // 0 là mặc định
     // 1 là mở chức năng thêm nhà cung cấp
     // 2 là mở chức năng cập nhập nhà cung cấp
     public static String flagIDSupplier; // lấy id supplier cho chức năng cập nhập
-    
+
     public static int flagUpdateCustomer;
     // 0 là mặc định
     // 1 là mở chức năng thêm Khách hàng
     // 2 là mở chức năng cập nhập Khách hàng
     public static String flagIDCustomer;
-    
+
     //Lưu thông tin nhân viên đăng nhập
     protected static String idStaff;
     protected static String passStaff;
@@ -37,7 +37,7 @@ public class Flag {
         flagIDSupplier = "";
         flagUpdateCustomer = 0;
         flagIDCustomer = "";
-        
+
         idStaff = "";
         passStaff = "";
     }
@@ -119,5 +119,5 @@ public class Flag {
     public static void setPassStaff(String passStaff) {
         Flag.passStaff = passStaff;
     }
-    
+
 }

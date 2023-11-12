@@ -3,11 +3,11 @@ package entity;
 import java.util.Objects;
 
 public class ProductColor {
-    private  int idColor;
-    private String name;
-    
-//    Get set
 
+    private int idColor;
+    private String name;
+
+//    Get set
     public int getIdColor() {
         return idColor;
     }
@@ -43,9 +43,8 @@ public class ProductColor {
         this.idColor = idColor;
         this.name = name;
     }
-    
-//    Hashcode equals
 
+//    Hashcode equals
     @Override
     public int hashCode() {
         int hash = 3;
@@ -68,10 +67,10 @@ public class ProductColor {
         return Objects.equals(this.name, other.name);
     }
 //    toString
+
     @Override
     public String toString() {
         return "ProductColor{" + "idColor=" + idColor + ", name=" + name + '}';
     }
-    
-    
+
 }

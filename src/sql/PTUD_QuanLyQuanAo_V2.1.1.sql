@@ -22831,6 +22831,7 @@ CREATE TABLE Product
 	name NVARCHAR(55) COLLATE SQL_Latin1_General_CP1_CS_AS NOT NULL,
 	costPrice FLOAT NOT NULL, -- giá nhập
 	originalPrice FLOAT NOT NULL, -- giá bán gốc
+	currentPrice FLOAT, -- giá bán hiện tại nếu có chương trinh khuyến mãi
 	quantity INT NOT NULL,
 	status NVARCHAR(25) NOT NULL, --o0o
 	supplier NVARCHAR(15),
@@ -22853,16 +22854,55 @@ CREATE TABLE Promotion
 	idPromotion NVARCHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS PRIMARY KEY,
 	name NVARCHAR(55) COLLATE SQL_Latin1_General_CP1_CS_AS NOT NULL,
 	typePromotion NVARCHAR(30) NOT NULL, 
-	discount FLOAT, -- Số tiền giảm hoặc phần trăm giảm
+	discount FLOAT NOT NULL,  -- Số tiền giảm hoặc phần trăm giảm
 	priceRange FLOAT, -- khoảng giá áp dụng ví dụ trên 100.000VND
+	quantity INT NOT NULL,
 	dayStart DATE NOT NULL,
 	dayEnd DATE NOT NULL,
-	product NVARCHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS,
-	status NVARCHAR(25) NOT NULL,
-	description NVARCHAR(50), -- mô tả
-	FOREIGN KEY (product) REFERENCES Product(idProduct),
+	status NVARCHAR(25),
+	description NVARCHAR(50),
+	--CONSTRAINT CK_Promotion_Date CHECK (dayStart < dayEnd),
+	CONSTRAINT CK_Promotion_Status CHECK (status IN (N'Hết hạn', N'Còn hạn')),
 )
 GO
+
+-- TRIGGER KIỂM TRA HẠN KHUYỄN MÃI
+CREATE TRIGGER trg_Promotion_Status
+ON Promotion
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    UPDATE Promotion
+    SET status = CASE 
+                    WHEN dayEnd IS NULL THEN N'Còn hạn'  -- Xem xét nếu dayEnd có thể là NULL
+                    WHEN dayEnd < GETDATE() THEN N'Hết hạn'
+                    ELSE N'Còn hạn'
+                 END
+    WHERE idPromotion IN (SELECT idPromotion FROM inserted) AND status = N'Còn hạn';
+
+	 -- Cập nhật currentPrice của sản phẩm khi Khuyến mãi hết hạn
+    UPDATE Product
+    SET currentPrice = 0
+    FROM Product
+    INNER JOIN ProductPromotion ON Product.idProduct = ProductPromotion.idProduct
+    INNER JOIN Promotion ON ProductPromotion.idPromotion = Promotion.idPromotion
+    WHERE Promotion.status = N'Hết hạn';
+END
+GO
+
+-- TẠO BẢNG TRUNG GIAN SẢN PHẨM VÀ KHUYỄN MÃI
+CREATE TABLE ProductPromotion
+(
+    id INT PRIMARY KEY IDENTITY(1,1),
+    idProduct NVARCHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS,
+    idPromotion NVARCHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS,
+    FOREIGN KEY (idProduct) REFERENCES Product(idProduct),
+    FOREIGN KEY (idPromotion) REFERENCES Promotion(idPromotion)
+)
+GO
+
 --TẠO BẢNG NHÂN VIÊN
 CREATE TABLE Staff
 (
@@ -22906,6 +22946,28 @@ CREATE TABLE Customer
 	CONSTRAINT FK_Customer_Ward FOREIGN KEY (ward) REFERENCES Ward(id)
 )
 GO
+
+--TRIGGER RANK KHÁCH HÀNG
+CREATE TRIGGER trg_Customer_TypeRank
+ON Customer
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    UPDATE c
+    SET typeRank = 
+        CASE
+            WHEN i.totalAmount6months < 3000000 THEN N'Khách hàng bạc'
+            WHEN i.totalAmount6months < 5000000 THEN N'Khách hàng vàng'
+            WHEN i.totalAmount6months >= 20000000 THEN N'Khách hàng kim cương'
+			ELSE N'Khách hàng bạc'
+        END
+    FROM Customer c
+    INNER JOIN inserted i ON c.idCustomer = i.idCustomer
+    WHERE i.totalAmount6months IS NOT NULL; -- Thêm điều kiện kiểm tra NULL
+
+END
+GO
+
 
 -- TẠO BẢNG HÓA ĐƠN
 CREATE TABLE Invoice
@@ -22997,12 +23059,12 @@ GO
 -- Insert dữ liệu Customer
 INSERT INTO Customer (idCustomer, name, phone, email, province, district, ward, address, rewardPoints, typeRank, totalAmount6months ,receivePromotions)
 VALUES
-    ('KH0001', N'Nguyễn Thị Hằng', '0123456789', 'hang.nguyen@example.com', '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', 1000, N'Khách hàng bạc', '4000000',1),
-    ('KH0002', N'Trần Văn Minh', '0987654321', 'minh.tran@example.com', '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', 2000, N'Khách hàng vàng', '5000000', 0),
-    ('KH0003', N'Lê Thị Mai', '0123456780', 'mai.le@example.com', '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', 3000, N'Khách hàng kim cương', '6500000', 1),
-    ('KH0004', N'Hoàng Văn Tú', '0987654322', 'tu.hoang@example.com', '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', 4000, N'Khách hàng bạc', '4000000',0),
-    ('KH0005', N'Nguyễn Thị Trâm', '0123456781', 'tram.nguyen@example.com', '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', 5000, N'Khách hàng vàng', '5500000',1),
-	('KH0006', N'Lê Thị Mai Anh', '0128456780', 'mai.anhle@example.com', '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', 3000, N'Khách hàng kim cương', '7000000', 1);
+    ('KH0001', N'Nguyễn Thị Hằng', '0123456789', 'hang.nguyen@example.com', '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', 1000, N'Khách hàng bạc', '2000000',1),
+    ('KH0002', N'Trần Văn Minh', '0987654321', 'minh.tran@example.com', '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', 2000, N'Khách hàng bạc', '2000000', 0),
+    ('KH0003', N'Lê Thị Mai', '0123456780', 'mai.le@example.com', '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', 3000, N'Khách hàng kim bạc', '2500000', 1),
+    ('KH0004', N'Hoàng Văn Tú', '0987654322', 'tu.hoang@example.com', '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', 4000, N'Khách hàng bạc', '2000000',0),
+    ('KH0005', N'Nguyễn Thị Trâm', '0123456781', 'tram.nguyen@example.com', '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', 5000, N'Khách hàng bạc', '2000000',1),
+	('KH0006', N'Lê Thị Mai Anh', '0128456780', 'mai.anhle@example.com', '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', 3000, N'Khách hàng kim bạc', '2000000', 1);
 GO
 
 --Inser dữ liệu màu sắc sản phẩm
@@ -23093,6 +23155,23 @@ VALUES
     ('CTHD0010', 'HD0005', 'SP0005', 2, 180.0, NULL, NULL);
 GO
 */
---select * from Product
---delete from Product
---delete from ProductColor
+
+--INSERT INTO Promotion (idPromotion, name, typePromotion, discount, priceRange, quantity, dayStart, dayEnd, status, description)
+--VALUES ('P001', 'Khuyến mãi năm mới', 'Giảm giá', 10, NULL, 0, '2023-01-01', '2023-12-31', N'Còn hạn', 'Khuyến mãi năm mới')
+--GO
+
+--Test TRIGGER KHUYẾN MÃI
+--select * from Promotion
+--SELECT dayEnd FROM Promotion WHERE idPromotion = 'KM0001';
+--UPDATE Promotion SET dayEnd = DATEADD(DAY, -1, GETDATE()) WHERE idPromotion = 'KM0001';
+
+--select * from Customer
+
+
+--TEST TRIGGER RANK KHÁCH HÀNG
+--UPDATE Customer
+--SET totalAmount6months = 35000000
+--WHERE idCustomer = 'KH0001';
+
+--select * from Customer
+select * from Product
