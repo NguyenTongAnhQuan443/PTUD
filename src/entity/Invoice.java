@@ -6,26 +6,23 @@ import java.util.Objects;
 public class Invoice {
 
     // enum
-    public static enum DeliveryStatus {
-        DangGiaoHang, DaGiaoHang
-    }
-
+//    public static enum DeliveryStatus {
+//        DangGiaoHang, DaGiaoHang
+//    }
+//    public static String convertDeliveryStatusToString(DeliveryStatus deliveryStatus) {
+//        if (deliveryStatus.equals(deliveryStatus.DaGiaoHang)) {
+//            return "Đã giao hàng";
+//        }
+//        return "Đang giao hàng";
+//    }
+    //    public static DeliveryStatus convertStringToDeliveryStatus(String deliveryStatus) {
+//        if (deliveryStatus.equals("Đang giao hàng")) {
+//            return DeliveryStatus.DangGiaoHang;
+//        }
+//        return DeliveryStatus.DaGiaoHang;
+//    }
     public static enum Status {
         DaThanhToan, DonCho
-    }
-
-    public static String convertDeliveryStatusToString(DeliveryStatus deliveryStatus) {
-        if (deliveryStatus.equals(deliveryStatus.DaGiaoHang)) {
-            return "Đã giao hàng";
-        }
-        return "Đang giao hàng";
-    }
-
-    public static DeliveryStatus convertStringToDeliveryStatus(String deliveryStatus) {
-        if (deliveryStatus.equals("Đang giao hàng")) {
-            return DeliveryStatus.DangGiaoHang;
-        }
-        return DeliveryStatus.DaGiaoHang;
     }
 
     public static Status convertStringToStatus(String status) {
@@ -51,7 +48,7 @@ public class Invoice {
     private double totalAmount;
     private LocalTime dateCreated;
     private Status status;
-    private DeliveryStatus deliveryStatus;
+    //private DeliveryStatus deliveryStatus;
 
 //    get set
     public String getIdInvoice() {
@@ -126,17 +123,16 @@ public class Invoice {
         this.status = status;
     }
 
-    public DeliveryStatus getDeliveryStatus() {
-        return deliveryStatus;
-    }
-
-    public void setDeliveryStatus(DeliveryStatus deliveryStatus) {
-        this.deliveryStatus = deliveryStatus;
-    }
+//    public DeliveryStatus getDeliveryStatus() {
+//        return deliveryStatus;
+//    }
+//
+//    public void setDeliveryStatus(DeliveryStatus deliveryStatus) {
+//        this.deliveryStatus = deliveryStatus;
+//    }
 
 //    constructor
     public Invoice() {
-        super();
     }
 
     public Invoice(String idInvoice) {
@@ -155,7 +151,6 @@ public class Invoice {
         this.totalAmount = totalAmount;
         this.dateCreated = dateCreated;
         this.status = status;
-        this.deliveryStatus = deliveryStatus;
     }
 
 //    Hashcode equals
@@ -182,9 +177,10 @@ public class Invoice {
     }
 
 //    toString
+
     @Override
     public String toString() {
-        return "Invoice{" + "idInvoice=" + idInvoice + ", staff=" + staff + ", customer=" + customer + ", promotion=" + promotion + ", amountReceived=" + amountReceived + ", changeAmount=" + changeAmount + ", totalAmount=" + totalAmount + ", dateCreated=" + dateCreated + ", status=" + status + ", deliveryStatus=" + deliveryStatus + '}';
+        return "Invoice{" + "idInvoice=" + idInvoice + ", staff=" + staff + ", customer=" + customer + ", promotion=" + promotion + ", amountReceived=" + amountReceived + ", changeAmount=" + changeAmount + ", totalAmount=" + totalAmount + ", dateCreated=" + dateCreated + ", status=" + status + '}';
     }
-
+    
 }
