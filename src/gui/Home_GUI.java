@@ -21,13 +21,14 @@ public class Home_GUI extends javax.swing.JFrame {
     private Statistical_Revenue_GUI statistical_Revenue_GUI;
     private Statistical_Product_GUI statistical_Product_GUI;
     private Statistical_Staff_GUI statistical_Staff_GUI;
-    private Sell_GUI sell_GUI;
+    private Sell_GUIXXX sell_GUI;
     private Supplier_GUI supplier_GUI;
     private Staff_GUI staff_GUI;
     private History_GUI history_GUI;
     private Staff_InfoStaff_GUI staff_InfoStaff_GUI;
     private ChangePassword_GUI changePassword_GUI;
     private Customer_GUI customer_GUI;
+    private Sell_GUI sell_GUI1;
 
     private Product_GUI product_GUI1;
 
@@ -95,7 +96,7 @@ public class Home_GUI extends javax.swing.JFrame {
                 } else if (index == 4) { // sự kiện memu bán hàng
                     stopWebcam();
                     jpCenter.removeAll();
-                    sell_GUI = new Sell_GUI();
+                    sell_GUI = new Sell_GUIXXX();
                     addJPanel(sell_GUI);
                 } else if (index == 5 && subIndex == 1) { // sự kiện menu lịch sử bán hàng - danh sách hàng đã giao
                     stopWebcam();
@@ -130,7 +131,10 @@ public class Home_GUI extends javax.swing.JFrame {
                     changePassword_GUI = new ChangePassword_GUI();
                     addJPanel(changePassword_GUI);
                 } else if (index == 9 && subIndex == 1) {
-                    JOptionPane.showMessageDialog(null, "Chức năng đang được phát triển !");
+                    stopWebcam();
+                    jpCenter.removeAll();
+                    sell_GUI1 = new Sell_GUI();
+                    addJPanel(sell_GUI1);
                 } else if (index == 9 && subIndex == 2) {
                     JOptionPane.showMessageDialog(null, "Chức năng đang được phát triển !");
                 }
@@ -216,8 +220,8 @@ public class Home_GUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void stopWebcam() {
-        if (sell_GUI != null) {
-            sell_GUI.stopWebcam();
+        if (sell_GUI1 != null) {
+            sell_GUI1.stopWebcam();
         }
     }
 

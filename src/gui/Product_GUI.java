@@ -1790,7 +1790,6 @@ public class Product_GUI extends javax.swing.JPanel {
             Object[] rowData = {idProduct, name, Utils.formatMoney(originalPrice) + "", quantity + "", suppplier, color, size, material, bool};
             defaultTableModelListProduct.addRow(rowData);
         }
-
     }
 
 // Set First Item to Default CBB Model Supplier

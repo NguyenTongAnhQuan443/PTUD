@@ -21,9 +21,9 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 import static utils.Utils.openPDF;
 
-public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
+public class Sell_CreateOrder_GUI_XX extends javax.swing.JPanel {
 
-    public Sell_CreateOrder_GUI() {
+    public Sell_CreateOrder_GUI_XX() {
         initComponents();
     }
 
@@ -398,7 +398,8 @@ public class Sell_CreateOrder_GUI extends javax.swing.JPanel {
                     String monney = "231016"; // truyền số tiền hàng vào đây
                     String str1 = "2|99|0365962232|Nguyen Tong Anh Quan||0|0|";
                     String str2 = "||transfer_myqr";
-                    String QrCodeData = str1 + monney + str2;
+//                    String QrCodeData = str1 + monney + str2;
+                    String QrCodeData = "SP0005";
 
                     String projectDir = System.getProperty("user.dir"); // Lấy đường dẫn đến thư mục dự án
 

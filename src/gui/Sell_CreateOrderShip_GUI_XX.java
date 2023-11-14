@@ -2,9 +2,9 @@ package gui;
 
 import javax.swing.JOptionPane;
 
-public class Sell_CreateOrderShip_GUI extends javax.swing.JPanel {
+public class Sell_CreateOrderShip_GUI_XX extends javax.swing.JPanel {
 
-    public Sell_CreateOrderShip_GUI() {
+    public Sell_CreateOrderShip_GUI_XX() {
         initComponents();
     }
 

@@ -241,6 +241,40 @@ public class Promotion_DAO extends DAO {
 
         return listPromotion;
     }
+// Lấy khuyến mãi theo tổng tiền với trạng thái còn hạn, và hóa đơn áp dụng  trên một giá trị cụ thể
+    public List<Promotion> getListPromotionsByStatusAndTypePromotion2(float minPriceRange) {
+    List<Promotion> listPromotion = new ArrayList<>();
+    String sql = "SELECT * FROM promotion WHERE status = N'Còn hạn' AND typePromotion = N'KM theo tổng tiền' AND priceRange >= ?";
+
+    try {
+        connectDB.ConnectDB.getInstance();
+        Connection connection = ConnectDB.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setFloat(1, minPriceRange);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            String idPromotion = resultSet.getString("idPromotion");
+            String name = resultSet.getString("name");
+            String typePromotion = resultSet.getString("typePromotion");
+            float discount = resultSet.getFloat("discount");
+            float priceRange = resultSet.getFloat("priceRange");
+            int quantity = resultSet.getInt("quantity");
+            LocalDate dayStart = resultSet.getDate("dayStart").toLocalDate();
+            LocalDate dayEnd = resultSet.getDate("dayEnd").toLocalDate();
+            String promotionStatus = resultSet.getString("status");
+            String description = resultSet.getString("description");
+
+            Promotion promotion = new Promotion(idPromotion, name, Promotion.convertStringToTypePromotion(typePromotion), discount, priceRange, quantity, dayStart, dayEnd, Promotion.convertStringToStatus(promotionStatus), description);
+            listPromotion.add(promotion);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return listPromotion;
+}
 
 //    Lấy khuyến mãi bằng id
     public Promotion getPromotionByID(String id) {
@@ -248,6 +282,34 @@ public class Promotion_DAO extends DAO {
         try {
             PreparedStatement preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
             preparedStatement.setString(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                String idPromotion = resultSet.getString("idPromotion");
+                String name = resultSet.getString("name");
+                String typePromotion = resultSet.getString("typePromotion");
+                float discount = resultSet.getFloat("discount");
+                float priceRange = resultSet.getFloat("priceRange");
+                int quantity = resultSet.getInt("quantity");
+                LocalDate dayStart = resultSet.getDate("dayStart").toLocalDate();
+                LocalDate dayEnd = resultSet.getDate("dayEnd").toLocalDate();
+                String status = resultSet.getString("status");
+                String description = resultSet.getString("description");
+
+                Promotion promotion = new Promotion(idPromotion, name, Promotion.convertStringToTypePromotion(typePromotion), discount, priceRange, quantity, dayStart, dayEnd, Promotion.convertStringToStatus(status), description);
+                return promotion;
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+// Lấy Promotion bằng tên promotion
+    public Promotion getPromotionByNamePromotion(String namePromotion) {
+        String sql = "select * from Promotion Where  name = ?";
+        try {
+            PreparedStatement preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, namePromotion);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
@@ -293,48 +355,6 @@ public class Promotion_DAO extends DAO {
         return false;
     }
 
-//   Gửi thông tin chương trình khuyến mãi
-//    public boolean sendEmail(List<String> emailReceivers, String contentEmail, String titleEmail) {
-//        final String fromEmail = "fleyteam@gmail.com";
-//        final String pass = "bthrqkwfyiadlrkb";
-//
-//        Properties props = new Properties();
-//        props.put("mail.smtp.host", "smtp.gmail.com");
-//        props.put("mail.smtp.port", "587");
-//        props.put("mail.smtp.auth", "true");
-//        props.put("mail.smtp.starttls.enable", "true");
-//
-//        Authenticator auth = new Authenticator() {
-//            @Override
-//            protected PasswordAuthentication getPasswordAuthentication() {
-//                return new PasswordAuthentication(fromEmail, pass);
-//            }
-//        };
-//
-//        Session session = Session.getInstance(props, auth);
-//
-//        boolean isEmailSent = true;
-//
-//        for (String emailReceiver : emailReceivers) {
-//            MimeMessage msg = new MimeMessage(session);
-//
-//            try {
-//                msg.addHeader("content-type", "text/HTML; charset = UTF-8");
-//                msg.setFrom(fromEmail);
-//                msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailReceiver, false));
-//                msg.setSubject(titleEmail);
-//                msg.setSentDate(new Date());
-//                msg.setContent(contentEmail, "text/HTML; charset = UTF-8");
-//                Transport.send(msg);
-//                System.out.println("Email sent to: " + emailReceiver);
-//            } catch (MessagingException e1) {
-//                e1.printStackTrace();
-//                isEmailSent = false;
-//            }
-//        }
-//
-//        return isEmailSent;
-//    }
     public boolean sendEmailWithAttachment(List<String> emailReceivers, String contentEmail, String titleEmail, String attachmentPath) {
         final String fromEmail = "fleyteam@gmail.com";
         final String pass = "bthrqkwfyiadlrkb";

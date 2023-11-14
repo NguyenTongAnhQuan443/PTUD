@@ -20,6 +20,7 @@ import java.util.regex.Pattern;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -689,7 +690,6 @@ public class Customer_GUI extends javax.swing.JPanel {
         if (Flag.getFlagUpdateCustomer() == 1) {
             if (btnAdd.getText().trim().equals("Hủy")) {
                 if (validator()) {
-
                     String idCustomer = jtfIDCus.getText().trim();
                     String name = jtfNameCus.getText().trim();
                     String phone = jtfPhoneCus.getText().trim();
@@ -712,6 +712,11 @@ public class Customer_GUI extends javax.swing.JPanel {
                         JOptionPane.showMessageDialog(null, "Thêm khách hàng thành công !");
                     } else {
                         JOptionPane.showMessageDialog(null, "Thêm khách hàng thất bại !");
+                    }
+                    
+                    if(Flag.getFlagSell_GUI() == 1){ // nếu thêm khách hầng từ Sell_GUI thì quay lại Sell_GUI
+                        Flag.setIdCusForSell_GUI(idCustomer);
+                        backToSellGUI();
                     }
                 }
             }
@@ -932,13 +937,7 @@ public class Customer_GUI extends javax.swing.JPanel {
 //            return showERROR(jtfNameCus, "Họ tên bắt đầu bằng ký tự hoa, có ít nhất 2 từ trong đó không chứa ký tự đặc biệt nào !");
 //        }
 
-//        String phone = jtfPhoneCus.getText().trim();
-//        if (phone.length() <= 0) {
-//            return showERROR(jtfPhoneCus, "Vui lòng nhập số điện thoại của khách hàng !");
-//        }
-//        if (checkRegex(phone, "^0\\d{9}$") == false) {
-//            return showERROR(jtfPhoneCus, "Số điện thoại không đúng định dạng 0xx.xxxx.xxx vui lòng kiểm tra lại");
-//        }
+//      
         String email = jtfEmail.getText().trim();
         String regexEmail = "^[A-Za-z0-9+_.-]+@(.+)$";
 //        if (email.length() < 1) {
@@ -1116,6 +1115,13 @@ public class Customer_GUI extends javax.swing.JPanel {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public void backToSellGUI() {
+        JPanel parent = (JPanel) this.getParent();
+        parent.remove(this);
+        parent.add(new Sell_GUI()); // Thay "JPanel1()" bằng cách khởi tạo đúng của JPanel 1
+        parent.revalidate();
+        parent.repaint();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnAdd;

@@ -25,7 +25,7 @@ public class Login_GUI extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
 //        Account default
         jtfUser.setText("NV0001");
-        jpfPass.setText("04042003");
+        jpfPass.setText("1234Abc@");
     }
 
     @SuppressWarnings("unchecked")

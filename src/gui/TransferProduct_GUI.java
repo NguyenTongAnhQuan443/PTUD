@@ -611,7 +611,7 @@ public class TransferProduct_GUI extends javax.swing.JFrame implements Runnable,
             try {
                 Thread.sleep(1);
             } catch (InterruptedException ex) {
-                Logger.getLogger(Sell_GUI.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Sell_GUIXXX.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             Result result = null;
@@ -629,7 +629,7 @@ public class TransferProduct_GUI extends javax.swing.JFrame implements Runnable,
             try {
                 result = new MultiFormatReader().decode(bitmap);
             } catch (NotFoundException ex) {
-                Logger.getLogger(Sell_GUI.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Sell_GUIXXX.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             if (result != null) {

@@ -28,6 +28,12 @@ public class Flag {
     protected static String idStaff;
     protected static String passStaff;
 
+    public static int flagSell_GUI;
+    // 0 mặc định 
+    // 1 từ GUI khách hàng quay lại gui bán hàng
+    public static String idCusForSell_GUI;
+//    Lưu ID khách hàng từ nút thêm mới 
+
 //    constructor
     public Flag() {
         flagStaffGUI = false;
@@ -40,6 +46,9 @@ public class Flag {
 
         idStaff = "";
         passStaff = "";
+
+        flagSell_GUI = 0;
+        idCusForSell_GUI = "";
     }
 
 //
@@ -118,6 +127,22 @@ public class Flag {
 
     public static void setPassStaff(String passStaff) {
         Flag.passStaff = passStaff;
+    }
+
+    public static int getFlagSell_GUI() {
+        return flagSell_GUI;
+    }
+
+    public static void setFlagSell_GUI(int flagSell_GUI) {
+        Flag.flagSell_GUI = flagSell_GUI;
+    }
+
+    public static String getIdCusForSell_GUI() {
+        return idCusForSell_GUI;
+    }
+
+    public static void setIdCusForSell_GUI(String idCusForSell_GUI) {
+        Flag.idCusForSell_GUI = idCusForSell_GUI;
     }
 
 }
