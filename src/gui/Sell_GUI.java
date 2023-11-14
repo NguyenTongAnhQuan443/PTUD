@@ -78,6 +78,11 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             jtfEmail.setText(customer1.getEmail());
             jtfNameCus.setText(customer1.getName());
             jtfPhoneCus.setEditable(false);
+
+            btnCreateInvoice.setText("Hủy");
+            btnPendingInvoice.setEnabled(true);
+            btnPay.setEnabled(true);
+            jtfMoneyReceived.setEditable(true);
         }
 
         defaultTableModelCart.setRowCount(0); // set cho jtable cart = 0 để table trống lần đầu khởi tạo 
@@ -279,7 +284,6 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
 
         jtfPhoneCus.setEditable(false);
         jtfPhoneCus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jtfPhoneCus.setEnabled(false);
         jtfPhoneCus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfPhoneCusActionPerformed(evt);
@@ -290,6 +294,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         btnSearchPhone.setForeground(new java.awt.Color(255, 255, 255));
         btnSearchPhone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/search24.png"))); // NOI18N
         btnSearchPhone.setText("Tìm  ");
+        btnSearchPhone.setEnabled(false);
         btnSearchPhone.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnSearchPhone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -454,7 +459,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                     .addComponent(jlMoneyReceived))
                 .addGap(18, 18, 18)
                 .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfExcessCash, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfExcessCash, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlExcessCash))
                 .addContainerGap(74, Short.MAX_VALUE))
         );
@@ -604,6 +609,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         if (customer != null) {
             jtfEmail.setText(customer.getEmail());
             jtfNameCus.setText(customer.getName());
+            btnPay.setEnabled(true);
         } else {
             if (JOptionPane.showConfirmDialog(null, "Khách hàng chưa tồn tại trên hệ thống, vui lòng thêm mới khách hàng !", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 Flag.setFlagSell_GUI(1);
@@ -698,10 +704,28 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     }//GEN-LAST:event_btnPendingInvoiceActionPerformed
 
     private void btnCreateInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateInvoiceActionPerformed
-//        jtfPhoneCus.setEditable(true);
-//        btnSearchPhone.setEnabled(true);
-//        btnPay.setEnabled(true);
-//        btnPendingInvoice.setEnabled(true);
+        if (btnCreateInvoice.getText().equals("Tạo hóa đơn")) {
+            jtfPhoneCus.setEditable(true);
+            btnSearchPhone.setEnabled(true);
+            btnPendingInvoice.setEnabled(true);
+            btnCreateInvoice.setText("Hủy");
+
+        } else if (btnCreateInvoice.getText().equals("Hủy")) {
+            jtfPhoneCus.setEditable(false);
+            btnSearchPhone.setEnabled(false);
+            btnPendingInvoice.setEnabled(false);
+            btnCreateInvoice.setText("Tạo hóa đơn");
+            btnPay.setEnabled(false);
+            jtfMoneyReceived.setEditable(false);
+            if (defaultTableModelCart.getRowCount() != 0) {
+                int option = JOptionPane.showConfirmDialog(null, "Giỏ hàng đang bận bạn có chắc muốn hủy toàn bộ không !", "Xác nhận", JOptionPane.YES_NO_OPTION);
+                if (option == JOptionPane.YES_OPTION) {
+                    defaultTableModelCart.setRowCount(0);
+                }
+            }
+            clearAllInPut();
+            jtfMoneyReceived.setEditable(false);
+        }
     }//GEN-LAST:event_btnCreateInvoiceActionPerformed
 
     private void jTableCartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCartMouseClicked
@@ -745,8 +769,18 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     private void jTableCartMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCartMouseReleased
 
     }//GEN-LAST:event_jTableCartMouseReleased
-
+    private void clearAllInPut() {
+        jtfEmail.setText("");
+        jtfExcessCash.setText("");
+        jtfMoneyReceived.setText("");
+        jtfNameCus.setText("");
+        jtfPhoneCus.setText("");
+        jtfTotalAmount.setText("");
+        cbPayments.setSelectedIndex(0);
+        cbVoucher.setSelectedItem("");
+    }
 // Hàm tính tổng tiền từ cột "thành tiền" của JTable
+
     private double calculateTotalAmount() {
         double totalAmount = 0;
         int rowCount = jTableCart.getRowCount();
@@ -841,7 +875,10 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
 
             if (result != null) {
                 String qrIDProduct = result.getText();
-                boolean res = addToCart(qrIDProduct);
+                if (btnCreateInvoice.getText().equals("Hủy") && !jtfNameCus.getText().equals("")) {
+                    addToCart(qrIDProduct);
+                }
+
             }
 
         } while (webcam.isOpen());
@@ -866,7 +903,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         }
     }
 
-    private boolean addToCart(String idProduct) {
+    private void addToCart(String idProduct) {
         Product product = product_DAO.getProductByID(idProduct);
 
         if (product != null) {
@@ -886,7 +923,6 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                     // Tính toán và cập nhật thành tiền
                     double totalPrice = (currentQuantity + 1) * priceProduct;
                     defaultTableModelCart.setValueAt(totalPrice + "đ", i, 5); // Cột Thành tiền
-                    return true;
                 }
             }
 
@@ -902,7 +938,6 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             defaultTableModelCart.addRow(rowData);
 
         }
-        return true;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
