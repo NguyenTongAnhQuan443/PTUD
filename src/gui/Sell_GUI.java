@@ -40,51 +40,53 @@ import lib2.TableCustom;
 import utils.Utils;
 
 public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFactory {
-
+    
     private ProductAddToCart_GUI productAddToCart_GUI;
     private DefaultTableModel defaultTableModelPendingInvoice;
     private DefaultTableModel defaultTableModelCart;
-
+    
     private Promotion_DAO promotion_DAO = new Promotion_DAO();
     private Customer_DAO customer_DAO = new Customer_DAO();
     private Product_DAO product_DAO = new Product_DAO();
-
+    
     private WebcamPanel webcamPanel = null;
     private Webcam webcam = null;
 //    private Executor executor = Executors.newSingleThreadExecutor(this);
 //    Dùng ExecutorService thay vì Executor để gọi được medthod shutdown camera
     private ExecutorService executor = Executors.newSingleThreadExecutor(this);
-
+    
     private float priceRange;
-
+    
     public Sell_GUI() {
         initComponents();
         TableCustom.apply(jSPPendingnvoice, TableCustom.TableType.DEFAULT);
         defaultTableModelPendingInvoice = (DefaultTableModel) jTablePendingInvoice.getModel();
         ListSelectionModel selectionModel_1 = jTablePendingInvoice.getSelectionModel();
         selectionModel_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
+        
         TableCustom.apply(jSPCart, TableCustom.TableType.DEFAULT);
         defaultTableModelCart = (DefaultTableModel) jTableCart.getModel();
         ListSelectionModel selectionModel_2 = jTableCart.getSelectionModel();
         selectionModel_2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
+        
         ExecutorService executor = Executors.newSingleThreadExecutor((ThreadFactory) this);
         initWebcam();
-
+        
         if (Flag.getFlagSell_GUI() == 1) { // nếu GUI mở từ Customer_GUI
             Customer customer1 = customer_DAO.getCustomerByID(Flag.getIdCusForSell_GUI());
             jtfPhoneCus.setText(customer1.getPhone());
             jtfEmail.setText(customer1.getEmail());
             jtfNameCus.setText(customer1.getName());
             jtfPhoneCus.setEditable(false);
-
+            
             btnCreateInvoice.setText("Hủy");
             btnPendingInvoice.setEnabled(true);
             btnPay.setEnabled(true);
             jtfMoneyReceived.setEditable(true);
+            jTFPoints.setText(customer1.getRewardPoints() + "");
+            jTFMinusPoints.setEditable(true);
         }
-
+        
         defaultTableModelCart.setRowCount(0); // set cho jtable cart = 0 để table trống lần đầu khởi tạo 
 
         defaultTableModelCart.addTableModelListener(new TableModelListener() {
@@ -98,9 +100,9 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                 }
             }
         });
-
+        
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -124,6 +126,8 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         jtfNameCus = new javax.swing.JTextField();
         jtfEmail = new javax.swing.JTextField();
         jlEmail = new javax.swing.JLabel();
+        jLPoints = new javax.swing.JLabel();
+        jTFPoints = new javax.swing.JTextField();
         jP_3_3 = new javax.swing.JPanel();
         jlTotalAmount = new javax.swing.JLabel();
         jtfTotalAmount = new javax.swing.JTextField();
@@ -135,6 +139,8 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         jlExcessCash = new javax.swing.JLabel();
         cbVoucher = new lib2.ComboBoxSuggestion();
         cbPayments = new lib2.ComboBoxSuggestion();
+        jTFMinusPoints = new javax.swing.JTextField();
+        jLMinusPoints = new javax.swing.JLabel();
         iP3_4 = new javax.swing.JPanel();
         btnPay = new lib2.Button();
         btnPendingInvoice = new lib2.Button();
@@ -270,8 +276,9 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         jP2Layout.setVerticalGroup(
             jP2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jP2Layout.createSequentialGroup()
-                .addGap(0, 4, Short.MAX_VALUE)
-                .addComponent(jSPCart, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jSPCart, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
         );
 
         jP3.setBackground(new java.awt.Color(255, 255, 255));
@@ -326,7 +333,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                 .addGroup(iP3_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnSearchPhone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jtfPhoneCus))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jP3_2.setBackground(new java.awt.Color(255, 255, 255));
@@ -347,25 +354,31 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
 
         jlEmail.setText("Email :");
 
+        jLPoints.setText("Điểm tích lũy:");
+
+        jTFPoints.setEditable(false);
+
         javax.swing.GroupLayout jP3_2Layout = new javax.swing.GroupLayout(jP3_2);
         jP3_2.setLayout(jP3_2Layout);
         jP3_2Layout.setHorizontalGroup(
             jP3_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jP3_2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jP3_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlNameCus)
-                    .addComponent(jlEmail))
+                .addGroup(jP3_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLPoints, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jlNameCus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jlEmail, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(13, 13, 13)
                 .addGroup(jP3_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jtfEmail)
-                    .addComponent(jtfNameCus))
+                    .addComponent(jtfNameCus)
+                    .addComponent(jTFPoints))
                 .addGap(6, 6, 6))
         );
         jP3_2Layout.setVerticalGroup(
             jP3_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jP3_2Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addContainerGap()
                 .addGroup(jP3_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfNameCus, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlNameCus))
@@ -373,7 +386,11 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                 .addGroup(jP3_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlEmail)
                     .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jP3_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTFPoints, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLPoints))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jP_3_3.setBackground(new java.awt.Color(255, 255, 255));
@@ -411,6 +428,15 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             }
         });
 
+        jTFMinusPoints.setEditable(false);
+        jTFMinusPoints.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFMinusPointsActionPerformed(evt);
+            }
+        });
+
+        jLMinusPoints.setText("Trừ điểm TL:");
+
         javax.swing.GroupLayout jP_3_3Layout = new javax.swing.GroupLayout(jP_3_3);
         jP_3_3.setLayout(jP_3_3Layout);
         jP_3_3Layout.setHorizontalGroup(
@@ -430,25 +456,31 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                         .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlVoucher)
                             .addComponent(jlPayments)
-                            .addComponent(jlTotalAmount))
+                            .addComponent(jlTotalAmount)
+                            .addComponent(jLMinusPoints))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtfTotalAmount)
                             .addComponent(cbVoucher, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                            .addComponent(cbPayments, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(cbPayments, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTFMinusPoints))))
                 .addContainerGap())
         );
         jP_3_3Layout.setVerticalGroup(
             jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jP_3_3Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jP_3_3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfTotalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlTotalAmount))
                 .addGap(18, 18, 18)
                 .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbVoucher, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbVoucher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlVoucher))
+                .addGap(18, 18, 18)
+                .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTFMinusPoints, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLMinusPoints))
                 .addGap(18, 18, 18)
                 .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbPayments, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -461,7 +493,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                 .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfExcessCash, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlExcessCash))
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         iP3_4.setBackground(new java.awt.Color(255, 255, 255));
@@ -518,14 +550,14 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         );
         iP3_4Layout.setVerticalGroup(
             iP3_4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, iP3_4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(iP3_4Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(iP3_4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnCreateInvoice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnPendingInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPay, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jP3Layout = new javax.swing.GroupLayout(jP3);
@@ -541,12 +573,13 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             jP3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jP3Layout.createSequentialGroup()
                 .addComponent(iP3_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jP3_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jP_3_3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(iP3_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(iP3_4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -564,14 +597,13 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jP3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jP3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jP1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jP2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jP2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -610,6 +642,8 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             jtfEmail.setText(customer.getEmail());
             jtfNameCus.setText(customer.getName());
             btnPay.setEnabled(true);
+            jTFPoints.setText(customer.getRewardPoints() + "");
+            jTFMinusPoints.setEditable(true);
         } else {
             if (JOptionPane.showConfirmDialog(null, "Khách hàng chưa tồn tại trên hệ thống, vui lòng thêm mới khách hàng !", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 Flag.setFlagSell_GUI(1);
@@ -709,7 +743,6 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             btnSearchPhone.setEnabled(true);
             btnPendingInvoice.setEnabled(true);
             btnCreateInvoice.setText("Hủy");
-
         } else if (btnCreateInvoice.getText().equals("Hủy")) {
             jtfPhoneCus.setEditable(false);
             btnSearchPhone.setEnabled(false);
@@ -725,6 +758,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             }
             clearAllInPut();
             jtfMoneyReceived.setEditable(false);
+            jTFMinusPoints.setEditable(false);
         }
     }//GEN-LAST:event_btnCreateInvoiceActionPerformed
 
@@ -736,7 +770,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         if ("tableCellEditor".equals(evt.getPropertyName())) {
             int selectedRow = jTableCart.getSelectedRow();
             int selectedColumn = jTableCart.getSelectedColumn();
-
+            
             if (selectedColumn == 3) { // Kiểm tra nếu cột là cột số lượng
                 String quantitySTR = jTableCart.getValueAt(selectedRow, 3).toString().trim().replaceAll("\\.0", "").replaceAll("đ", "");
                 String priceSTR = jTableCart.getValueAt(selectedRow, 4).toString().trim().replaceAll("\\.0", "").replaceAll("đ", "");
@@ -769,6 +803,10 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     private void jTableCartMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCartMouseReleased
 
     }//GEN-LAST:event_jTableCartMouseReleased
+
+    private void jTFMinusPointsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFMinusPointsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFMinusPointsActionPerformed
     private void clearAllInPut() {
         jtfEmail.setText("");
         jtfExcessCash.setText("");
@@ -776,6 +814,8 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         jtfNameCus.setText("");
         jtfPhoneCus.setText("");
         jtfTotalAmount.setText("");
+        jTFMinusPoints.setText("");
+        jTFPoints.setText("");
         cbPayments.setSelectedIndex(0);
         cbVoucher.setSelectedItem("");
     }
@@ -791,7 +831,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         }
         return totalAmount;
     }
-
+    
     private void loadPromotion(List<Promotion> listPromotion) {
         // Xóa tất cả dữ liệu cũ từ ComboBoxModel
         DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>();
@@ -800,23 +840,23 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             cbVoucher.addItem(promotion.getName());
         }
     }
-
+    
     public void toCustomerGUI() {
         JPanel parent = (JPanel) this.getParent();
         parent.remove(this);
         parent.add(new Customer_GUI()); // Thay "JPanel1()" bằng cách khởi tạo đúng của JPanel 1
         parent.revalidate();
         parent.repaint();
-
+        
     }
-
+    
     private boolean showERROR(JTextField jtf, String mess) {
         jtf.selectAll();
         jtf.requestFocus();
         JOptionPane.showMessageDialog(null, mess);
         return false;
     }
-
+    
     private boolean checkRegex(String input, String regex) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(input);
@@ -826,7 +866,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             return false;
         }
     }
-
+    
     private void initWebcam() {
         Dimension size = WebcamResolution.VGA.getSize();
 
@@ -844,7 +884,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         jpWebcam.add(webcamPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 220));
         executor.execute(this);
     }
-
+    
     @Override
     public void run() {
         do {
@@ -852,10 +892,10 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                 Thread.sleep(100);
             } catch (InterruptedException ex) {
             }
-
+            
             Result result = null;
             BufferedImage image = null;
-
+            
             if (webcam.isOpen()) {
                 image = webcam.getImage();
                 if (image == null) {
@@ -864,33 +904,33 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             } else {
                 break;
             }
-
+            
             LuminanceSource source = new BufferedImageLuminanceSource(image);
             BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-
+            
             try {
                 result = new MultiFormatReader().decode(bitmap);
             } catch (NotFoundException ex) {
             }
-
+            
             if (result != null) {
                 String qrIDProduct = result.getText();
                 if (btnCreateInvoice.getText().equals("Hủy") && !jtfNameCus.getText().equals("")) {
                     addToCart(qrIDProduct);
                 }
-
+                
             }
-
+            
         } while (webcam.isOpen());
     }
-
+    
     @Override
     public Thread newThread(Runnable r) {
         Thread t = new Thread(r, "My Thread");
         t.setDaemon(true);
         return t;
     }
-
+    
     public void stopWebcam() {
         webcam.close();
         executor.shutdown();
@@ -902,10 +942,10 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             executor.shutdownNow();
         }
     }
-
+    
     private void addToCart(String idProduct) {
         Product product = product_DAO.getProductByID(idProduct);
-
+        
         if (product != null) {
             JOptionPane.showMessageDialog(null, "Đã thêm sản phẩm");
             // Kiểm tra xem sản phẩm đã tồn tại trong bảng chưa
@@ -933,10 +973,10 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             } else {
                 priceProduct = product.getCurrentPrice();
             }
-
+            
             Object[] rowData = {rowCount + 1, product.getIdProduct(), product.getName(), 1, priceProduct + "đ", priceProduct + "đ"};
             defaultTableModelCart.addRow(rowData);
-
+            
         }
     }
 
@@ -949,6 +989,8 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     private lib2.ComboBoxSuggestion cbVoucher;
     private javax.swing.JPanel iP3_1;
     private javax.swing.JPanel iP3_4;
+    private javax.swing.JLabel jLMinusPoints;
+    private javax.swing.JLabel jLPoints;
     private javax.swing.JPanel jP1;
     private javax.swing.JPanel jP2;
     private javax.swing.JPanel jP3;
@@ -958,6 +1000,8 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     private javax.swing.JPanel jP_3_3;
     private javax.swing.JScrollPane jSPCart;
     private javax.swing.JScrollPane jSPPendingnvoice;
+    private javax.swing.JTextField jTFMinusPoints;
+    private javax.swing.JTextField jTFPoints;
     private javax.swing.JTable jTableCart;
     private javax.swing.JTable jTablePendingInvoice;
     private javax.swing.JLabel jlEmail;
