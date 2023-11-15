@@ -11,6 +11,7 @@ import com.google.zxing.Result;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
 import dao.Customer_DAO;
+import dao.Invoice_DAO;
 import dao.Product_DAO;
 import dao.Promotion_DAO;
 import entity.Customer;
@@ -38,47 +39,49 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import lib2.TableCustom;
 import utils.Utils;
+import entity.Invoice;
+import java.time.LocalTime;
 
 public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFactory {
-    
+
     private ProductAddToCart_GUI productAddToCart_GUI;
     private DefaultTableModel defaultTableModelPendingInvoice;
     private DefaultTableModel defaultTableModelCart;
-    
+
     private Promotion_DAO promotion_DAO = new Promotion_DAO();
     private Customer_DAO customer_DAO = new Customer_DAO();
     private Product_DAO product_DAO = new Product_DAO();
-    
+    private Invoice_DAO invoice_DAO = new Invoice_DAO();
     private WebcamPanel webcamPanel = null;
     private Webcam webcam = null;
 //    private Executor executor = Executors.newSingleThreadExecutor(this);
 //    Dùng ExecutorService thay vì Executor để gọi được medthod shutdown camera
     private ExecutorService executor = Executors.newSingleThreadExecutor(this);
-    
+
     private float priceRange;
-    
+
     public Sell_GUI() {
         initComponents();
         TableCustom.apply(jSPPendingnvoice, TableCustom.TableType.DEFAULT);
         defaultTableModelPendingInvoice = (DefaultTableModel) jTablePendingInvoice.getModel();
         ListSelectionModel selectionModel_1 = jTablePendingInvoice.getSelectionModel();
         selectionModel_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        
+
         TableCustom.apply(jSPCart, TableCustom.TableType.DEFAULT);
         defaultTableModelCart = (DefaultTableModel) jTableCart.getModel();
         ListSelectionModel selectionModel_2 = jTableCart.getSelectionModel();
         selectionModel_2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        
+
         ExecutorService executor = Executors.newSingleThreadExecutor((ThreadFactory) this);
         initWebcam();
-        
+
         if (Flag.getFlagSell_GUI() == 1) { // nếu GUI mở từ Customer_GUI
             Customer customer1 = customer_DAO.getCustomerByID(Flag.getIdCusForSell_GUI());
             jtfPhoneCus.setText(customer1.getPhone());
             jtfEmail.setText(customer1.getEmail());
             jtfNameCus.setText(customer1.getName());
             jtfPhoneCus.setEditable(false);
-            
+
             btnCreateInvoice.setText("Hủy");
             btnPendingInvoice.setEnabled(true);
             btnPay.setEnabled(true);
@@ -86,7 +89,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             jTFPoints.setText(customer1.getRewardPoints() + "");
             jTFMinusPoints.setEditable(true);
         }
-        
+
         defaultTableModelCart.setRowCount(0); // set cho jtable cart = 0 để table trống lần đầu khởi tạo 
 
         defaultTableModelCart.addTableModelListener(new TableModelListener() {
@@ -100,9 +103,9 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                 }
             }
         });
-        
+
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -422,6 +425,11 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         jlExcessCash.setText("Số tiền còn lại :");
 
         cbPayments.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tiền mặt", "Momo" }));
+        cbPayments.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbPaymentsItemStateChanged(evt);
+            }
+        });
         cbPayments.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbPaymentsActionPerformed(evt);
@@ -620,11 +628,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     }//GEN-LAST:event_jtfEmailActionPerformed
 
     private void cbPaymentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPaymentsActionPerformed
-        if (cbPayments.getSelectedIndex() == 1) {
-            jtfMoneyReceived.setEditable(false);
-        } else {
-            jtfMoneyReceived.setEditable(true);
-        }
+
     }//GEN-LAST:event_cbPaymentsActionPerformed
 
     private void btnSearchPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchPhoneActionPerformed
@@ -734,7 +738,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     }//GEN-LAST:event_btnPayActionPerformed
 
     private void btnPendingInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPendingInvoiceActionPerformed
-        productAddToCart_GUI.setVisible(true);
+//        Invoice invoice = new Invoice("KM0001", staff, customer, promotion, PROPERTIES, HEIGHT, TOP_ALIGNMENT, LocalTime.MAX, Invoice.Status.DonCho, deliveryStatus);
     }//GEN-LAST:event_btnPendingInvoiceActionPerformed
 
     private void btnCreateInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateInvoiceActionPerformed
@@ -743,6 +747,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             btnSearchPhone.setEnabled(true);
             btnPendingInvoice.setEnabled(true);
             btnCreateInvoice.setText("Hủy");
+            jtfMoneyReceived.setEditable(true);
         } else if (btnCreateInvoice.getText().equals("Hủy")) {
             jtfPhoneCus.setEditable(false);
             btnSearchPhone.setEnabled(false);
@@ -770,7 +775,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         if ("tableCellEditor".equals(evt.getPropertyName())) {
             int selectedRow = jTableCart.getSelectedRow();
             int selectedColumn = jTableCart.getSelectedColumn();
-            
+
             if (selectedColumn == 3) { // Kiểm tra nếu cột là cột số lượng
                 String quantitySTR = jTableCart.getValueAt(selectedRow, 3).toString().trim().replaceAll("\\.0", "").replaceAll("đ", "");
                 String priceSTR = jTableCart.getValueAt(selectedRow, 4).toString().trim().replaceAll("\\.0", "").replaceAll("đ", "");
@@ -807,6 +812,14 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     private void jTFMinusPointsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFMinusPointsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFMinusPointsActionPerformed
+
+    private void cbPaymentsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbPaymentsItemStateChanged
+        if (cbPayments.getSelectedIndex() == 1) {
+            jtfMoneyReceived.setEditable(false);
+        } else {
+            jtfMoneyReceived.setEditable(true);
+        }
+    }//GEN-LAST:event_cbPaymentsItemStateChanged
     private void clearAllInPut() {
         jtfEmail.setText("");
         jtfExcessCash.setText("");
@@ -831,7 +844,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         }
         return totalAmount;
     }
-    
+
     private void loadPromotion(List<Promotion> listPromotion) {
         // Xóa tất cả dữ liệu cũ từ ComboBoxModel
         DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>();
@@ -840,23 +853,23 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             cbVoucher.addItem(promotion.getName());
         }
     }
-    
+
     public void toCustomerGUI() {
         JPanel parent = (JPanel) this.getParent();
         parent.remove(this);
         parent.add(new Customer_GUI()); // Thay "JPanel1()" bằng cách khởi tạo đúng của JPanel 1
         parent.revalidate();
         parent.repaint();
-        
+
     }
-    
+
     private boolean showERROR(JTextField jtf, String mess) {
         jtf.selectAll();
         jtf.requestFocus();
         JOptionPane.showMessageDialog(null, mess);
         return false;
     }
-    
+
     private boolean checkRegex(String input, String regex) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(input);
@@ -866,7 +879,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             return false;
         }
     }
-    
+
     private void initWebcam() {
         Dimension size = WebcamResolution.VGA.getSize();
 
@@ -884,18 +897,18 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         jpWebcam.add(webcamPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 220));
         executor.execute(this);
     }
-    
+
     @Override
     public void run() {
         do {
             try {
-                Thread.sleep(100);
+                Thread.sleep(200);
             } catch (InterruptedException ex) {
             }
-            
+
             Result result = null;
             BufferedImage image = null;
-            
+
             if (webcam.isOpen()) {
                 image = webcam.getImage();
                 if (image == null) {
@@ -904,33 +917,35 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             } else {
                 break;
             }
-            
+
             LuminanceSource source = new BufferedImageLuminanceSource(image);
             BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-            
+
             try {
                 result = new MultiFormatReader().decode(bitmap);
             } catch (NotFoundException ex) {
             }
-            
+
             if (result != null) {
                 String qrIDProduct = result.getText();
                 if (btnCreateInvoice.getText().equals("Hủy") && !jtfNameCus.getText().equals("")) {
                     addToCart(qrIDProduct);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Vui lòng thêm khách hàng trước");
                 }
-                
+
             }
-            
+
         } while (webcam.isOpen());
     }
-    
+
     @Override
     public Thread newThread(Runnable r) {
         Thread t = new Thread(r, "My Thread");
         t.setDaemon(true);
         return t;
     }
-    
+
     public void stopWebcam() {
         webcam.close();
         executor.shutdown();
@@ -942,41 +957,53 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             executor.shutdownNow();
         }
     }
-    
+
     private void addToCart(String idProduct) {
         Product product = product_DAO.getProductByID(idProduct);
-        
+
         if (product != null) {
-            JOptionPane.showMessageDialog(null, "Đã thêm sản phẩm");
             // Kiểm tra xem sản phẩm đã tồn tại trong bảng chưa
             int rowCount = defaultTableModelCart.getRowCount();
+            boolean productExists = false;
+
             for (int i = 0; i < rowCount; i++) {
                 String existingProductId = defaultTableModelCart.getValueAt(i, 1).toString();
+
                 if (existingProductId.equals(idProduct)) {
-                    // Sản phẩm đã tồn tại trong bảng, tăng số lượng lên 1
-                    int currentQuantity = Integer.parseInt(defaultTableModelCart.getValueAt(i, 3).toString());
-                    double priceProduct = Double.parseDouble(defaultTableModelCart.getValueAt(i, 4).toString().replace("đ", ""));
+                    // Sản phẩm đã tồn tại trong bảng
+                    productExists = true;
 
-                    // Cập nhật số lượng
-                    defaultTableModelCart.setValueAt(currentQuantity + 1, i, 3); // Cột số lượng
+                    if (product.getQuantity() > product_DAO.getProductByID(idProduct).getQuantity()) {
+                        int currentQuantity = Integer.parseInt(defaultTableModelCart.getValueAt(i, 3).toString());
+                        double priceProduct = Double.parseDouble(defaultTableModelCart.getValueAt(i, 4).toString().replace("đ", ""));
 
-                    // Tính toán và cập nhật thành tiền
-                    double totalPrice = (currentQuantity + 1) * priceProduct;
-                    defaultTableModelCart.setValueAt(totalPrice + "đ", i, 5); // Cột Thành tiền
+                        // Cập nhật số lượng
+                        defaultTableModelCart.setValueAt(currentQuantity + 1, i, 3); // Cột số lượng
+
+                        // Tính toán và cập nhật thành tiền
+                        double totalPrice = (currentQuantity + 1) * priceProduct;
+                        defaultTableModelCart.setValueAt(totalPrice + "đ", i, 5); // Cột Thành tiền
+
+                        JOptionPane.showMessageDialog(null, "Đã thêm sản phẩm");
+                    } else if (product.getQuantity() <= product_DAO.getProductByID(idProduct).getQuantity()) {
+                        JOptionPane.showMessageDialog(null, "Vượt quá số lượng tồn kho, vui lòng kiểm tra lại");
+                    }
                 }
             }
 
-            // Sản phẩm chưa tồn tại trong bảng, thêm mới vào
-            double priceProduct;
-            if (product.getCurrentPrice() == null || product.getCurrentPrice() == 0) {
-                priceProduct = product.getOriginalPrice();
-            } else {
-                priceProduct = product.getCurrentPrice();
+            if (!productExists) {
+                // Sản phẩm chưa tồn tại trong bảng, thêm mới vào
+                double priceProduct;
+                if (product.getCurrentPrice() == null || product.getCurrentPrice() == 0) {
+                    priceProduct = product.getOriginalPrice();
+                } else {
+                    priceProduct = product.getCurrentPrice();
+                }
+
+                Object[] rowData = {rowCount + 1, product.getIdProduct(), product.getName(), 1, priceProduct + "đ", priceProduct + "đ"};
+                defaultTableModelCart.addRow(rowData);
+                JOptionPane.showMessageDialog(null, "Đã thêm sản phẩm");
             }
-            
-            Object[] rowData = {rowCount + 1, product.getIdProduct(), product.getName(), 1, priceProduct + "đ", priceProduct + "đ"};
-            defaultTableModelCart.addRow(rowData);
-            
         }
     }
 
