@@ -14,6 +14,7 @@ import dao.Customer_DAO;
 import dao.Invoice_DAO;
 import dao.Product_DAO;
 import dao.Promotion_DAO;
+import dao.Staff_DAO;
 import entity.Customer;
 import entity.Flag;
 import entity.Product;
@@ -41,6 +42,7 @@ import lib2.TableCustom;
 import utils.Utils;
 import entity.Invoice;
 import java.time.LocalTime;
+import entity.Staff;
 
 public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFactory {
 
@@ -52,6 +54,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     private Customer_DAO customer_DAO = new Customer_DAO();
     private Product_DAO product_DAO = new Product_DAO();
     private Invoice_DAO invoice_DAO = new Invoice_DAO();
+    private Staff_DAO staff_DAO = new Staff_DAO();
     private WebcamPanel webcamPanel = null;
     private Webcam webcam = null;
 //    private Executor executor = Executors.newSingleThreadExecutor(this);
@@ -120,6 +123,17 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         jSPCart = new javax.swing.JScrollPane();
         jTableCart = new javax.swing.JTable();
         jP3 = new javax.swing.JPanel();
+        iP3_4 = new javax.swing.JPanel();
+        btnPay = new lib2.Button();
+        btnPendingInvoice = new lib2.Button();
+        btnCreateInvoice = new lib2.Button();
+        iP3_3 = new javax.swing.JPanel();
+        jLIDInvoice = new javax.swing.JLabel();
+        jLIDInvoiceMain = new javax.swing.JLabel();
+        jLIDStaff = new javax.swing.JLabel();
+        jLIDStaffMain = new javax.swing.JLabel();
+        jLNameStaff = new javax.swing.JLabel();
+        jLNameStaffMain = new javax.swing.JLabel();
         iP3_1 = new javax.swing.JPanel();
         jlPhoneCus = new javax.swing.JLabel();
         jtfPhoneCus = new javax.swing.JTextField();
@@ -144,10 +158,6 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         cbPayments = new lib2.ComboBoxSuggestion();
         jTFMinusPoints = new javax.swing.JTextField();
         jLMinusPoints = new javax.swing.JLabel();
-        iP3_4 = new javax.swing.JPanel();
-        btnPay = new lib2.Button();
-        btnPendingInvoice = new lib2.Button();
-        btnCreateInvoice = new lib2.Button();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -278,231 +288,13 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         );
         jP2Layout.setVerticalGroup(
             jP2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jP2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jSPCart, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38))
+            .addGroup(jP2Layout.createSequentialGroup()
+                .addComponent(jSPCart)
+                .addContainerGap())
         );
 
         jP3.setBackground(new java.awt.Color(255, 255, 255));
         jP3.setBorder(javax.swing.BorderFactory.createTitledBorder("Chi tiết hóa đơn"));
-
-        iP3_1.setBackground(new java.awt.Color(255, 255, 255));
-        iP3_1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Khách hàng cũ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 10))); // NOI18N
-
-        jlPhoneCus.setText("SDT Khách hàng :");
-
-        jtfPhoneCus.setEditable(false);
-        jtfPhoneCus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jtfPhoneCus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfPhoneCusActionPerformed(evt);
-            }
-        });
-
-        btnSearchPhone.setBackground(new java.awt.Color(135, 206, 235));
-        btnSearchPhone.setForeground(new java.awt.Color(255, 255, 255));
-        btnSearchPhone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/search24.png"))); // NOI18N
-        btnSearchPhone.setText("Tìm  ");
-        btnSearchPhone.setEnabled(false);
-        btnSearchPhone.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnSearchPhone.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchPhoneActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout iP3_1Layout = new javax.swing.GroupLayout(iP3_1);
-        iP3_1.setLayout(iP3_1Layout);
-        iP3_1Layout.setHorizontalGroup(
-            iP3_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(iP3_1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(iP3_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(iP3_1Layout.createSequentialGroup()
-                        .addComponent(jtfPhoneCus)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSearchPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(iP3_1Layout.createSequentialGroup()
-                        .addComponent(jlPhoneCus)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        iP3_1Layout.setVerticalGroup(
-            iP3_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(iP3_1Layout.createSequentialGroup()
-                .addComponent(jlPhoneCus)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(iP3_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnSearchPhone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jtfPhoneCus))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jP3_2.setBackground(new java.awt.Color(255, 255, 255));
-        jP3_2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jlNameCus.setText("Tên KH :");
-
-        jtfNameCus.setEditable(false);
-        jtfNameCus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        jtfEmail.setEditable(false);
-        jtfEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jtfEmail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfEmailActionPerformed(evt);
-            }
-        });
-
-        jlEmail.setText("Email :");
-
-        jLPoints.setText("Điểm tích lũy:");
-
-        jTFPoints.setEditable(false);
-
-        javax.swing.GroupLayout jP3_2Layout = new javax.swing.GroupLayout(jP3_2);
-        jP3_2.setLayout(jP3_2Layout);
-        jP3_2Layout.setHorizontalGroup(
-            jP3_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jP3_2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jP3_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLPoints, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlNameCus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlEmail, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(13, 13, 13)
-                .addGroup(jP3_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtfEmail)
-                    .addComponent(jtfNameCus)
-                    .addComponent(jTFPoints))
-                .addGap(6, 6, 6))
-        );
-        jP3_2Layout.setVerticalGroup(
-            jP3_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jP3_2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jP3_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfNameCus, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlNameCus))
-                .addGap(18, 18, 18)
-                .addGroup(jP3_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlEmail)
-                    .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jP3_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTFPoints, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLPoints))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jP_3_3.setBackground(new java.awt.Color(255, 255, 255));
-        jP_3_3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jlTotalAmount.setText("TỔNG TIỀN: ");
-
-        jtfTotalAmount.setEditable(false);
-        jtfTotalAmount.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        jtfTotalAmount.setForeground(new java.awt.Color(255, 51, 51));
-
-        jlVoucher.setText("Mã giảm giá :");
-
-        jlPayments.setText("HT thanh toán :");
-
-        jtfMoneyReceived.setEditable(false);
-        jtfMoneyReceived.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jtfMoneyReceived.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfMoneyReceivedActionPerformed(evt);
-            }
-        });
-
-        jlMoneyReceived.setText("Số tiền nhận :");
-
-        jtfExcessCash.setEditable(false);
-        jtfExcessCash.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        jlExcessCash.setText("Số tiền còn lại :");
-
-        cbPayments.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tiền mặt", "Momo" }));
-        cbPayments.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbPaymentsItemStateChanged(evt);
-            }
-        });
-        cbPayments.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbPaymentsActionPerformed(evt);
-            }
-        });
-
-        jTFMinusPoints.setEditable(false);
-        jTFMinusPoints.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFMinusPointsActionPerformed(evt);
-            }
-        });
-
-        jLMinusPoints.setText("Trừ điểm TL:");
-
-        javax.swing.GroupLayout jP_3_3Layout = new javax.swing.GroupLayout(jP_3_3);
-        jP_3_3.setLayout(jP_3_3Layout);
-        jP_3_3Layout.setHorizontalGroup(
-            jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jP_3_3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jP_3_3Layout.createSequentialGroup()
-                        .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlExcessCash)
-                            .addComponent(jlMoneyReceived))
-                        .addGap(6, 6, 6)
-                        .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfMoneyReceived)
-                            .addComponent(jtfExcessCash)))
-                    .addGroup(jP_3_3Layout.createSequentialGroup()
-                        .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlVoucher)
-                            .addComponent(jlPayments)
-                            .addComponent(jlTotalAmount)
-                            .addComponent(jLMinusPoints))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfTotalAmount)
-                            .addComponent(cbVoucher, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                            .addComponent(cbPayments, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTFMinusPoints))))
-                .addContainerGap())
-        );
-        jP_3_3Layout.setVerticalGroup(
-            jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jP_3_3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfTotalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlTotalAmount))
-                .addGap(18, 18, 18)
-                .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbVoucher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlVoucher))
-                .addGap(18, 18, 18)
-                .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTFMinusPoints, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLMinusPoints))
-                .addGap(18, 18, 18)
-                .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbPayments, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlPayments))
-                .addGap(18, 18, 18)
-                .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfMoneyReceived, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlMoneyReceived))
-                .addGap(18, 18, 18)
-                .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfExcessCash, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlExcessCash))
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
 
         iP3_4.setBackground(new java.awt.Color(255, 255, 255));
         iP3_4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -559,7 +351,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         iP3_4Layout.setVerticalGroup(
             iP3_4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(iP3_4Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(4, 4, 4)
                 .addGroup(iP3_4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnCreateInvoice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnPendingInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -568,26 +360,308 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        iP3_3.setBackground(new java.awt.Color(255, 255, 255));
+        iP3_3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lập hóa đơn", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 10))); // NOI18N
+
+        jLIDInvoice.setText("Mã HĐ: ");
+
+        jLIDInvoiceMain.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
+        jLIDStaff.setText("Mã NV: ");
+
+        jLIDStaffMain.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
+        jLNameStaff.setText("Tên NV:");
+
+        jLNameStaffMain.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+
+        javax.swing.GroupLayout iP3_3Layout = new javax.swing.GroupLayout(iP3_3);
+        iP3_3.setLayout(iP3_3Layout);
+        iP3_3Layout.setHorizontalGroup(
+            iP3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(iP3_3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(iP3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(iP3_3Layout.createSequentialGroup()
+                        .addComponent(jLIDInvoice)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLIDInvoiceMain, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(iP3_3Layout.createSequentialGroup()
+                        .addComponent(jLIDStaff)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLIDStaffMain, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(iP3_3Layout.createSequentialGroup()
+                        .addComponent(jLNameStaff)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLNameStaffMain, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        iP3_3Layout.setVerticalGroup(
+            iP3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(iP3_3Layout.createSequentialGroup()
+                .addGroup(iP3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLIDInvoice)
+                    .addComponent(jLIDInvoiceMain, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(iP3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLIDStaff)
+                    .addComponent(jLIDStaffMain, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(iP3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLNameStaff)
+                    .addComponent(jLNameStaffMain, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 2, Short.MAX_VALUE))
+        );
+
+        iP3_1.setBackground(new java.awt.Color(255, 255, 255));
+        iP3_1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Khách hàng cũ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 10))); // NOI18N
+
+        jlPhoneCus.setText("SDT Khách hàng :");
+
+        jtfPhoneCus.setEditable(false);
+        jtfPhoneCus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfPhoneCus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfPhoneCusActionPerformed(evt);
+            }
+        });
+
+        btnSearchPhone.setBackground(new java.awt.Color(135, 206, 235));
+        btnSearchPhone.setForeground(new java.awt.Color(255, 255, 255));
+        btnSearchPhone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/search24.png"))); // NOI18N
+        btnSearchPhone.setText("Tìm  ");
+        btnSearchPhone.setEnabled(false);
+        btnSearchPhone.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSearchPhone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchPhoneActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout iP3_1Layout = new javax.swing.GroupLayout(iP3_1);
+        iP3_1.setLayout(iP3_1Layout);
+        iP3_1Layout.setHorizontalGroup(
+            iP3_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(iP3_1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(iP3_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(iP3_1Layout.createSequentialGroup()
+                        .addComponent(jtfPhoneCus)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnSearchPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(iP3_1Layout.createSequentialGroup()
+                        .addComponent(jlPhoneCus)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        iP3_1Layout.setVerticalGroup(
+            iP3_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(iP3_1Layout.createSequentialGroup()
+                .addComponent(jlPhoneCus)
+                .addGap(0, 0, 0)
+                .addGroup(iP3_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnSearchPhone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jtfPhoneCus))
+                .addGap(0, 4, Short.MAX_VALUE))
+        );
+
+        jP3_2.setBackground(new java.awt.Color(255, 255, 255));
+        jP3_2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jlNameCus.setText("Tên KH :");
+
+        jtfNameCus.setEditable(false);
+        jtfNameCus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfNameCus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfNameCusActionPerformed(evt);
+            }
+        });
+
+        jtfEmail.setEditable(false);
+        jtfEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfEmailActionPerformed(evt);
+            }
+        });
+
+        jlEmail.setText("Email :");
+
+        jLPoints.setText("Điểm tích lũy:");
+
+        jTFPoints.setEditable(false);
+
+        javax.swing.GroupLayout jP3_2Layout = new javax.swing.GroupLayout(jP3_2);
+        jP3_2.setLayout(jP3_2Layout);
+        jP3_2Layout.setHorizontalGroup(
+            jP3_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jP3_2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jP3_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLPoints, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jlNameCus, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlEmail, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGap(13, 13, 13)
+                .addGroup(jP3_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtfEmail)
+                    .addComponent(jtfNameCus)
+                    .addComponent(jTFPoints))
+                .addContainerGap())
+        );
+        jP3_2Layout.setVerticalGroup(
+            jP3_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jP3_2Layout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addGroup(jP3_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfNameCus, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlNameCus))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jP3_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlEmail)
+                    .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jP3_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTFPoints, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLPoints))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jP_3_3.setBackground(new java.awt.Color(255, 255, 255));
+        jP_3_3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jlTotalAmount.setText("TỔNG TIỀN: ");
+
+        jtfTotalAmount.setEditable(false);
+        jtfTotalAmount.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jtfTotalAmount.setForeground(new java.awt.Color(255, 51, 51));
+        jtfTotalAmount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfTotalAmountActionPerformed(evt);
+            }
+        });
+
+        jlVoucher.setText("Mã giảm giá :");
+
+        jlPayments.setText("HT thanh toán :");
+
+        jtfMoneyReceived.setEditable(false);
+        jtfMoneyReceived.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfMoneyReceived.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfMoneyReceivedActionPerformed(evt);
+            }
+        });
+
+        jlMoneyReceived.setText("Số tiền nhận:");
+
+        jtfExcessCash.setEditable(false);
+        jtfExcessCash.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jlExcessCash.setText("Số tiền còn lại:");
+
+        cbPayments.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tiền mặt", "Momo" }));
+        cbPayments.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbPaymentsItemStateChanged(evt);
+            }
+        });
+        cbPayments.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbPaymentsActionPerformed(evt);
+            }
+        });
+
+        jTFMinusPoints.setEditable(false);
+        jTFMinusPoints.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFMinusPointsActionPerformed(evt);
+            }
+        });
+
+        jLMinusPoints.setText("Trừ điểm TL:");
+
+        javax.swing.GroupLayout jP_3_3Layout = new javax.swing.GroupLayout(jP_3_3);
+        jP_3_3.setLayout(jP_3_3Layout);
+        jP_3_3Layout.setHorizontalGroup(
+            jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jP_3_3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jlPayments, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLMinusPoints, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jlTotalAmount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jP_3_3Layout.createSequentialGroup()
+                            .addComponent(jlVoucher, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+                            .addGap(6, 6, 6)))
+                    .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jlExcessCash, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jlMoneyReceived, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbVoucher, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                    .addComponent(jtfTotalAmount)
+                    .addComponent(jtfMoneyReceived)
+                    .addComponent(jtfExcessCash)
+                    .addComponent(cbPayments, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTFMinusPoints))
+                .addContainerGap())
+        );
+        jP_3_3Layout.setVerticalGroup(
+            jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jP_3_3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfTotalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlTotalAmount))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbVoucher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlVoucher))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTFMinusPoints, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLMinusPoints))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbPayments, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlPayments))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfMoneyReceived, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlMoneyReceived))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfExcessCash, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlExcessCash))
+                .addGap(4, 4, 4))
+        );
+
         javax.swing.GroupLayout jP3Layout = new javax.swing.GroupLayout(jP3);
         jP3.setLayout(jP3Layout);
         jP3Layout.setHorizontalGroup(
             jP3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(iP3_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jP3_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jP_3_3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(iP3_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(iP3_3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(iP3_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jP3_2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jP_3_3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jP3Layout.setVerticalGroup(
             jP3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jP3Layout.createSequentialGroup()
+                .addComponent(iP3_3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(iP3_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jP3_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jP_3_3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(iP3_4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -611,7 +685,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jP1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jP2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                        .addComponent(jP2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -648,6 +722,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             btnPay.setEnabled(true);
             jTFPoints.setText(customer.getRewardPoints() + "");
             jTFMinusPoints.setEditable(true);
+            Flag.setIdCusForSell_GUI(customer.getIdCustomer().trim());
         } else {
             if (JOptionPane.showConfirmDialog(null, "Khách hàng chưa tồn tại trên hệ thống, vui lòng thêm mới khách hàng !", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 Flag.setFlagSell_GUI(1);
@@ -738,7 +813,10 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     }//GEN-LAST:event_btnPayActionPerformed
 
     private void btnPendingInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPendingInvoiceActionPerformed
-//        Invoice invoice = new Invoice("KM0001", staff, customer, promotion, PROPERTIES, HEIGHT, TOP_ALIGNMENT, LocalTime.MAX, Invoice.Status.DonCho, deliveryStatus);
+        Staff staff = staff_DAO.getStaffByID(Flag.getIdStaff());
+        Customer customer = customer_DAO.getCustomerByID(Flag.getIdCusForSell_GUI());
+        double amountReciver = Double.parseDouble(jtfMoneyReceived.getText().trim());
+//        Invoice invoice = new Invoice("HĐ0001", staff, customer, null, amountReciver, HEIGHT, TOP_ALIGNMENT, LocalTime.MAX, Invoice.Status.DonCho, deliveryStatus);
     }//GEN-LAST:event_btnPendingInvoiceActionPerformed
 
     private void btnCreateInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateInvoiceActionPerformed
@@ -748,6 +826,10 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             btnPendingInvoice.setEnabled(true);
             btnCreateInvoice.setText("Hủy");
             jtfMoneyReceived.setEditable(true);
+
+            jLIDInvoiceMain.setText(invoice_DAO.createIDInvoice());
+            jLIDStaffMain.setText(Flag.getIdStaff());
+            jLNameStaffMain.setText(staff_DAO.getStaffByID(Flag.getIdStaff()).getName());
         } else if (btnCreateInvoice.getText().equals("Hủy")) {
             jtfPhoneCus.setEditable(false);
             btnSearchPhone.setEnabled(false);
@@ -764,6 +846,10 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             clearAllInPut();
             jtfMoneyReceived.setEditable(false);
             jTFMinusPoints.setEditable(false);
+
+            jLIDInvoiceMain.setText("");
+            jLIDStaffMain.setText("");
+            jLNameStaffMain.setText("");
         }
     }//GEN-LAST:event_btnCreateInvoiceActionPerformed
 
@@ -820,6 +906,14 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             jtfMoneyReceived.setEditable(true);
         }
     }//GEN-LAST:event_cbPaymentsItemStateChanged
+
+    private void jtfTotalAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfTotalAmountActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfTotalAmountActionPerformed
+
+    private void jtfNameCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNameCusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfNameCusActionPerformed
     private void clearAllInPut() {
         jtfEmail.setText("");
         jtfExcessCash.setText("");
@@ -1015,8 +1109,15 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     private lib2.ComboBoxSuggestion cbPayments;
     private lib2.ComboBoxSuggestion cbVoucher;
     private javax.swing.JPanel iP3_1;
+    private javax.swing.JPanel iP3_3;
     private javax.swing.JPanel iP3_4;
+    private javax.swing.JLabel jLIDInvoice;
+    private javax.swing.JLabel jLIDInvoiceMain;
+    private javax.swing.JLabel jLIDStaff;
+    private javax.swing.JLabel jLIDStaffMain;
     private javax.swing.JLabel jLMinusPoints;
+    private javax.swing.JLabel jLNameStaff;
+    private javax.swing.JLabel jLNameStaffMain;
     private javax.swing.JLabel jLPoints;
     private javax.swing.JPanel jP1;
     private javax.swing.JPanel jP2;

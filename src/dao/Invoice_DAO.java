@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.List;
 import entity.Invoice;
 import entity.InvoiceDetails;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.time.LocalDate;
 
 public class Invoice_DAO extends DAO {
@@ -39,5 +41,30 @@ public class Invoice_DAO extends DAO {
             ex.printStackTrace();
         }
         return false;
+    }
+    public String createIDInvoice() {
+        try {
+            String sql = "SELECT TOP 1 [idInvoice] FROM [dbo].[Invoice] ORDER BY [idInvoice] DESC";
+            Statement statement = ConnectDB.getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            if (resultSet.next()) {
+                String idProduct = resultSet.getString(1).trim();
+                int number = Integer.parseInt(idProduct.substring(2));
+                number++;
+                String idProductNew = number + "";
+
+                while (idProductNew.length() < 4) {
+                    idProductNew = "0" + idProductNew;
+                }
+
+                return "HĐ" + idProductNew;
+            } else {
+                return "HĐ0001";
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
