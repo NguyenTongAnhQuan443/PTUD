@@ -14,9 +14,11 @@
         <group>
             <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/dao/Product_DAO.java</file>
             <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/dao/Invoice_DAO.java</file>
+            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/gui/Home_GUI.java</file>
             <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/gui/Sell_GUI.java</file>
-            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/entity/Flag.java</file>
             <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/gui/Login_GUI.java</file>
+            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/dao/InvoiceDetails_DAO.java</file>
+            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/entity/InvoiceDetails.java</file>
         </group>
     </open-files>
 </project-private>

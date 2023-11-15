@@ -13,6 +13,7 @@ import java.time.LocalDate;
 
 public class Invoice_DAO extends DAO {
 
+//    Tạo hóa đơn
     public boolean createInvoice(Invoice invoice) {
         Connection connection = null;
         PreparedStatement invoiceStatement = null;

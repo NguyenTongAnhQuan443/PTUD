@@ -692,7 +692,7 @@
                               </Group>
                           </Group>
                           <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jlExcessCash" max="32767" attributes="0"/>
+                              <Component id="jLChangeAmount" max="32767" attributes="0"/>
                               <Component id="jlMoneyReceived" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -701,7 +701,7 @@
                           <Component id="cbVoucher" pref="0" max="32767" attributes="0"/>
                           <Component id="jtfTotalAmount" max="32767" attributes="0"/>
                           <Component id="jtfMoneyReceived" max="32767" attributes="0"/>
-                          <Component id="jtfExcessCash" max="32767" attributes="0"/>
+                          <Component id="jtfChangeAmount" max="32767" attributes="0"/>
                           <Component id="cbPayments" max="32767" attributes="0"/>
                           <Component id="jTFMinusPoints" max="32767" attributes="0"/>
                       </Group>
@@ -739,8 +739,8 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jtfExcessCash" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                          <Component id="jlExcessCash" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jtfChangeAmount" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="jLChangeAmount" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                   </Group>
@@ -793,7 +793,7 @@
                 <Property name="text" type="java.lang.String" value="S&#x1ed1; ti&#x1ec1;n nh&#x1ead;n:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jtfExcessCash">
+            <Component class="javax.swing.JTextField" name="jtfChangeAmount">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -801,7 +801,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jlExcessCash">
+            <Component class="javax.swing.JLabel" name="jLChangeAmount">
               <Properties>
                 <Property name="text" type="java.lang.String" value="S&#x1ed1; ti&#x1ec1;n c&#xf2;n l&#x1ea1;i:"/>
               </Properties>

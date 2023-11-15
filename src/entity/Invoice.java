@@ -1,26 +1,12 @@
 package entity;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Objects;
 
 public class Invoice {
 
     // enum
-//    public static enum DeliveryStatus {
-//        DangGiaoHang, DaGiaoHang
-//    }
-//    public static String convertDeliveryStatusToString(DeliveryStatus deliveryStatus) {
-//        if (deliveryStatus.equals(deliveryStatus.DaGiaoHang)) {
-//            return "Đã giao hàng";
-//        }
-//        return "Đang giao hàng";
-//    }
-    //    public static DeliveryStatus convertStringToDeliveryStatus(String deliveryStatus) {
-//        if (deliveryStatus.equals("Đang giao hàng")) {
-//            return DeliveryStatus.DangGiaoHang;
-//        }
-//        return DeliveryStatus.DaGiaoHang;
-//    }
     public static enum Status {
         DaThanhToan, DonCho
     }
@@ -46,9 +32,8 @@ public class Invoice {
     private double amountReceived;
     private double changeAmount;
     private double totalAmount;
-    private LocalTime dateCreated;
+    private LocalDateTime dateCreated;
     private Status status;
-    //private DeliveryStatus deliveryStatus;
 
 //    get set
     public String getIdInvoice() {
@@ -107,13 +92,15 @@ public class Invoice {
         this.totalAmount = totalAmount;
     }
 
-    public LocalTime getDateCreated() {
+    public LocalDateTime getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(LocalTime dateCreated) {
+    public void setDateCreated(LocalDateTime dateCreated) {
         this.dateCreated = dateCreated;
     }
+
+   
 
     public Status getStatus() {
         return status;
@@ -122,14 +109,6 @@ public class Invoice {
     public void setStatus(Status status) {
         this.status = status;
     }
-
-//    public DeliveryStatus getDeliveryStatus() {
-//        return deliveryStatus;
-//    }
-//
-//    public void setDeliveryStatus(DeliveryStatus deliveryStatus) {
-//        this.deliveryStatus = deliveryStatus;
-//    }
 
 //    constructor
     public Invoice() {
@@ -140,8 +119,7 @@ public class Invoice {
         this.idInvoice = idInvoice;
     }
 
-    public Invoice(String idInvoice, Staff staff, Customer customer, Promotion promotion, double amountReceived, double changeAmount, double totalAmount, LocalTime dateCreated, Status status, DeliveryStatus deliveryStatus) {
-        super();
+    public Invoice(String idInvoice, Staff staff, Customer customer, Promotion promotion, double amountReceived, double changeAmount, double totalAmount, LocalDateTime dateCreated, Status status) {
         this.idInvoice = idInvoice;
         this.staff = staff;
         this.customer = customer;
@@ -152,6 +130,8 @@ public class Invoice {
         this.dateCreated = dateCreated;
         this.status = status;
     }
+
+   
 
 //    Hashcode equals
     @Override

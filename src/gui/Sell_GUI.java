@@ -11,6 +11,7 @@ import com.google.zxing.Result;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
 import dao.Customer_DAO;
+import dao.InvoiceDetails_DAO;
 import dao.Invoice_DAO;
 import dao.Product_DAO;
 import dao.Promotion_DAO;
@@ -41,8 +42,11 @@ import javax.swing.table.DefaultTableModel;
 import lib2.TableCustom;
 import utils.Utils;
 import entity.Invoice;
+import entity.InvoiceDetails;
 import java.time.LocalTime;
 import entity.Staff;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFactory {
 
@@ -55,6 +59,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     private Product_DAO product_DAO = new Product_DAO();
     private Invoice_DAO invoice_DAO = new Invoice_DAO();
     private Staff_DAO staff_DAO = new Staff_DAO();
+    private InvoiceDetails_DAO invoiceDetails_DAO = new InvoiceDetails_DAO();
     private WebcamPanel webcamPanel = null;
     private Webcam webcam = null;
 //    private Executor executor = Executors.newSingleThreadExecutor(this);
@@ -152,8 +157,8 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         jlPayments = new javax.swing.JLabel();
         jtfMoneyReceived = new javax.swing.JTextField();
         jlMoneyReceived = new javax.swing.JLabel();
-        jtfExcessCash = new javax.swing.JTextField();
-        jlExcessCash = new javax.swing.JLabel();
+        jtfChangeAmount = new javax.swing.JTextField();
+        jLChangeAmount = new javax.swing.JLabel();
         cbVoucher = new lib2.ComboBoxSuggestion();
         cbPayments = new lib2.ComboBoxSuggestion();
         jTFMinusPoints = new javax.swing.JTextField();
@@ -555,10 +560,10 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
 
         jlMoneyReceived.setText("Số tiền nhận:");
 
-        jtfExcessCash.setEditable(false);
-        jtfExcessCash.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfChangeAmount.setEditable(false);
+        jtfChangeAmount.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jlExcessCash.setText("Số tiền còn lại:");
+        jLChangeAmount.setText("Số tiền còn lại:");
 
         cbPayments.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tiền mặt", "Momo" }));
         cbPayments.addItemListener(new java.awt.event.ItemListener() {
@@ -597,14 +602,14 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                             .addComponent(jlVoucher, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
                             .addGap(6, 6, 6)))
                     .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jlExcessCash, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLChangeAmount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jlMoneyReceived, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbVoucher, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                     .addComponent(jtfTotalAmount)
                     .addComponent(jtfMoneyReceived)
-                    .addComponent(jtfExcessCash)
+                    .addComponent(jtfChangeAmount)
                     .addComponent(cbPayments, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTFMinusPoints))
                 .addContainerGap())
@@ -634,8 +639,8 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                     .addComponent(jlMoneyReceived))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfExcessCash, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlExcessCash))
+                    .addComponent(jtfChangeAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLChangeAmount))
                 .addGap(4, 4, 4))
         );
 
@@ -815,8 +820,12 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     private void btnPendingInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPendingInvoiceActionPerformed
         Staff staff = staff_DAO.getStaffByID(Flag.getIdStaff());
         Customer customer = customer_DAO.getCustomerByID(Flag.getIdCusForSell_GUI());
-        double amountReciver = Double.parseDouble(jtfMoneyReceived.getText().trim());
-//        Invoice invoice = new Invoice("HĐ0001", staff, customer, null, amountReciver, HEIGHT, TOP_ALIGNMENT, LocalTime.MAX, Invoice.Status.DonCho, deliveryStatus);
+//        double amountReciver = Double.parseDouble(jtfMoneyReceived.getText().trim());
+        Invoice invoice = new Invoice(invoice_DAO.createIDInvoice(), staff, customer, null, 2000000.0, 100000.0, 100000.0, LocalDateTime.now(), Invoice.convertStringToStatus("Đã thanh toán"));
+        boolean res = invoice_DAO.createInvoice(invoice);
+    //        Invoice invoice = new Invoice(TOOL_TIP_TEXT_KEY, staff, customer, promotion, amountReciver, amountReciver, amountReciver, LocalTime.MAX, Invoice.Status.DonCho, deliveryStatus)
+//        InvoiceDetails invoiceDetails = new InvoiceDetails(invoiceDetails_DAO.createIDInvoiceDetails(), invoice, product, SOMEBITS, amountReciver, PROPERTIES, TOOL_TIP_TEXT_KEY);
+        
     }//GEN-LAST:event_btnPendingInvoiceActionPerformed
 
     private void btnCreateInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateInvoiceActionPerformed
@@ -916,7 +925,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     }//GEN-LAST:event_jtfNameCusActionPerformed
     private void clearAllInPut() {
         jtfEmail.setText("");
-        jtfExcessCash.setText("");
+        jtfChangeAmount.setText("");
         jtfMoneyReceived.setText("");
         jtfNameCus.setText("");
         jtfPhoneCus.setText("");
@@ -1111,6 +1120,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     private javax.swing.JPanel iP3_1;
     private javax.swing.JPanel iP3_3;
     private javax.swing.JPanel iP3_4;
+    private javax.swing.JLabel jLChangeAmount;
     private javax.swing.JLabel jLIDInvoice;
     private javax.swing.JLabel jLIDInvoiceMain;
     private javax.swing.JLabel jLIDStaff;
@@ -1133,7 +1143,6 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     private javax.swing.JTable jTableCart;
     private javax.swing.JTable jTablePendingInvoice;
     private javax.swing.JLabel jlEmail;
-    private javax.swing.JLabel jlExcessCash;
     private javax.swing.JLabel jlMoneyReceived;
     private javax.swing.JLabel jlNameCus;
     private javax.swing.JLabel jlPayments;
@@ -1141,8 +1150,8 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     private javax.swing.JLabel jlTotalAmount;
     private javax.swing.JLabel jlVoucher;
     private javax.swing.JPanel jpWebcam;
+    private javax.swing.JTextField jtfChangeAmount;
     private javax.swing.JTextField jtfEmail;
-    private javax.swing.JTextField jtfExcessCash;
     private javax.swing.JTextField jtfMoneyReceived;
     private javax.swing.JTextField jtfNameCus;
     private javax.swing.JTextField jtfPhoneCus;
