@@ -242,15 +242,15 @@ public class Promotion_DAO extends DAO {
         return listPromotion;
     }
 // Lấy khuyến mãi theo tổng tiền với trạng thái còn hạn, và hóa đơn áp dụng  trên một giá trị cụ thể
-    public List<Promotion> getListPromotionsByStatusAndTypePromotion2(float minPriceRange) {
+    public List<Promotion> getListPromotionsByStatusAndTypePromotion2(double minPriceRange) {
     List<Promotion> listPromotion = new ArrayList<>();
-    String sql = "SELECT * FROM promotion WHERE status = N'Còn hạn' AND typePromotion = N'KM theo tổng tiền' AND priceRange >= ?";
+    String sql = "SELECT * FROM promotion WHERE status = N'Còn hạn' AND typePromotion = N'KM theo tổng tiền' AND ? >= priceRange";
 
     try {
         connectDB.ConnectDB.getInstance();
         Connection connection = ConnectDB.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setFloat(1, minPriceRange);
+        preparedStatement.setDouble(1, minPriceRange);
 
         ResultSet resultSet = preparedStatement.executeQuery();
 

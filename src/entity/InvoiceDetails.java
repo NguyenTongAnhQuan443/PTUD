@@ -10,7 +10,7 @@ public class InvoiceDetails {
     private int quantity;
     private double unitPrice;
     private int returnQuantity;
-    private String returnReasonl;
+    private String returnReason;
 
 //    Get set
     public String getIdInvoiceDetails() {
@@ -61,15 +61,15 @@ public class InvoiceDetails {
         this.returnQuantity = returnQuantity;
     }
 
-    public String getReturnReasonl() {
-        return returnReasonl;
+    public String getReturnReason() {
+        return returnReason;
     }
 
-    public void setReturnReasonl(String returnReasonl) {
-        this.returnReasonl = returnReasonl;
+    public void setReturnReason(String returnReason) {
+        this.returnReason = returnReason;
     }
+
 //    Constructor
-
     public InvoiceDetails() {
     }
 
@@ -78,7 +78,7 @@ public class InvoiceDetails {
         this.idInvoiceDetails = idInvoiceDetails;
     }
 
-    public InvoiceDetails(String idInvoiceDetails, Invoice invoice, Product product, int quantity, double unitPrice, int returnQuantity, String returnReasonl) {
+    public InvoiceDetails(String idInvoiceDetails, Invoice invoice, Product product, int quantity, double unitPrice, int returnQuantity, String returnReason) {
         super();
         this.idInvoiceDetails = idInvoiceDetails;
         this.invoice = invoice;
@@ -86,14 +86,14 @@ public class InvoiceDetails {
         this.quantity = quantity;
         this.unitPrice = unitPrice;
         this.returnQuantity = returnQuantity;
-        this.returnReasonl = returnReasonl;
+        this.returnReason = returnReason;
     }
-//    Hashcode equals
 
+//    Hashcode Equals
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 17 * hash + Objects.hashCode(this.idInvoiceDetails);
+        int hash = 3;
+        hash = 67 * hash + Objects.hashCode(this.idInvoiceDetails);
         return hash;
     }
 
@@ -111,11 +111,11 @@ public class InvoiceDetails {
         final InvoiceDetails other = (InvoiceDetails) obj;
         return Objects.equals(this.idInvoiceDetails, other.idInvoiceDetails);
     }
-//    toString 
 
+//    toString
     @Override
     public String toString() {
-        return "InvoiceDetails{" + "idInvoiceDetails=" + idInvoiceDetails + ", invoice=" + invoice + ", product=" + product + ", quantity=" + quantity + ", unitPrice=" + unitPrice + ", returnQuantity=" + returnQuantity + ", returnReasonl=" + returnReasonl + '}';
+        return "InvoiceDetails{" + "idInvoiceDetails=" + idInvoiceDetails + ", invoice=" + invoice + ", product=" + product + ", quantity=" + quantity + ", unitPrice=" + unitPrice + ", returnQuantity=" + returnQuantity + ", returnReason=" + returnReason + '}';
     }
 
 }

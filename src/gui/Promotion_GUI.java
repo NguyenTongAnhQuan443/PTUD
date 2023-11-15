@@ -631,6 +631,7 @@ public class Promotion_GUI extends javax.swing.JPanel {
                     btnAddPromotion.setText("Tạo khuyến mãi");
                     btnSave.setEnabled(false);
                     jcSelectAll.setState(false);
+                    cbProductType.setSelectedIndex(0);
                     clearInput();
                     offInput();
                     loadDataPromotion(promotion_DAO.getListPromotion());

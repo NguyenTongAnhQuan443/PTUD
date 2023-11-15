@@ -40,31 +40,26 @@ public class InvoiceDetails_DAO extends DAO {
     }
 //    Tạo chi tiết hóa đơn
 
-    public boolean createInvoice(InvoiceDetails invoiceDetails) {
-        Connection connection = null;
-        PreparedStatement invoiceStatement = null;
-        PreparedStatement preparedStatement = null;
+    public boolean createInvoiceDetails(InvoiceDetails invoiceDetails) {
+        try (Connection connection = ConnectDB.getConnection(); PreparedStatement invoiceStatement = connection.prepareStatement(
+                "INSERT INTO InvoiceDetails (idInvoiceDetails, invoice, product, unitPrice, returnQuantity, returnReason) "
+                + "VALUES (?, ?, ?, ?, ?, ?)")) {
 
-        try {
-            connection = ConnectDB.getConnection();
             connection.setAutoCommit(false);
 
-            String invoiceSql = "INSERT INTO InvoiceDetails (idInvoiceDetails, invoice, product, unitPrice, returnQuantity, returnReason) "
-                    + "VALUES (?, ?, ?, ?, ?, ?)";
-            invoiceStatement = connection.prepareStatement(invoiceSql);
             invoiceStatement.setString(1, invoiceDetails.getIdInvoiceDetails());
             invoiceStatement.setString(2, invoiceDetails.getInvoice().getIdInvoice());
             invoiceStatement.setString(3, invoiceDetails.getProduct().getIdProduct());
             invoiceStatement.setDouble(4, invoiceDetails.getUnitPrice());
             invoiceStatement.setInt(5, invoiceDetails.getReturnQuantity());
-            invoiceStatement.setString(6, invoiceDetails.getReturnReasonl());
+            invoiceStatement.setString(6, invoiceDetails.getReturnReason());
             invoiceStatement.executeUpdate();
-            preparedStatement.close();
+
+            connection.commit();
             return true;
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            ex.printStackTrace(); // Thay bằng log hoặc xử lý ngoại lệ một cách chính xác
         }
         return false;
     }
-
 }

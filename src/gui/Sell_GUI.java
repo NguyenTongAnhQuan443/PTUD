@@ -16,13 +16,11 @@ import dao.Invoice_DAO;
 import dao.Product_DAO;
 import dao.Promotion_DAO;
 import dao.Staff_DAO;
-import entity.Customer;
 import entity.Flag;
 import entity.Product;
 import entity.Promotion;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -40,13 +38,12 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import lib2.TableCustom;
-import utils.Utils;
 import entity.Invoice;
-import entity.InvoiceDetails;
-import java.time.LocalTime;
 import entity.Staff;
-import java.time.LocalDate;
+import entity.Customer;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFactory {
 
@@ -60,13 +57,16 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     private Invoice_DAO invoice_DAO = new Invoice_DAO();
     private Staff_DAO staff_DAO = new Staff_DAO();
     private InvoiceDetails_DAO invoiceDetails_DAO = new InvoiceDetails_DAO();
+
     private WebcamPanel webcamPanel = null;
     private Webcam webcam = null;
 //    private Executor executor = Executors.newSingleThreadExecutor(this);
 //    Dùng ExecutorService thay vì Executor để gọi được medthod shutdown camera
     private ExecutorService executor = Executors.newSingleThreadExecutor(this);
 
-    private float priceRange;
+    private double priceRange;
+    private Customer customer;
+    private Map<String, String> promotionMap = new HashMap<>();
 
     public Sell_GUI() {
         initComponents();
@@ -104,10 +104,11 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             @Override
             public void tableChanged(TableModelEvent e) {
                 if (e.getType() == TableModelEvent.INSERT || e.getType() == TableModelEvent.UPDATE || e.getType() == TableModelEvent.DELETE) {
-                    jtfTotalAmount.setText(calculateTotalAmount() + "VNĐ");
-                    priceRange = (float) calculateTotalAmount();
+                    jtfTotalAmount.setText(calculateTotalAmount() + " VNĐ");
+                    priceRange = (double) calculateTotalAmount();
                     //        Lấy tổng tiền hóa đon từ đó lấy mã giảm giá hợp lý
                     loadPromotion(promotion_DAO.getListPromotionsByStatusAndTypePromotion2(priceRange));
+                    System.out.println(priceRange);
                 }
             }
         });
@@ -711,29 +712,33 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     }//GEN-LAST:event_cbPaymentsActionPerformed
 
     private void btnSearchPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchPhoneActionPerformed
-        String phone = jtfPhoneCus.getText().trim();
-        if (phone.length() <= 0) {
-            showERROR(jtfPhoneCus, "Vui lòng nhập số điện thoại của khách hàng !");
-            return;
-        }
-        if (checkRegex(phone, "^0\\d{9}$") == false) {
-            showERROR(jtfPhoneCus, "Số điện thoại không đúng định dạng 0xx.xxxx.xxx vui lòng kiểm tra lại");
-            return;
-        }
-        Customer customer = customer_DAO.getCustomerByPhone(phone);
-        if (customer != null) {
-            jtfEmail.setText(customer.getEmail());
-            jtfNameCus.setText(customer.getName());
-            btnPay.setEnabled(true);
-            jTFPoints.setText(customer.getRewardPoints() + "");
-            jTFMinusPoints.setEditable(true);
-            Flag.setIdCusForSell_GUI(customer.getIdCustomer().trim());
-        } else {
-            if (JOptionPane.showConfirmDialog(null, "Khách hàng chưa tồn tại trên hệ thống, vui lòng thêm mới khách hàng !", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                Flag.setFlagSell_GUI(1);
-                stopWebcam();
-                toCustomerGUI();
+        if (jtfNameCus.getText().equals("")) {
+            String phone = jtfPhoneCus.getText().trim();
+            if (phone.length() <= 0) {
+                showERROR(jtfPhoneCus, "Vui lòng nhập số điện thoại của khách hàng !");
+                return;
             }
+            if (checkRegex(phone, "^0\\d{9}$") == false) {
+                showERROR(jtfPhoneCus, "Số điện thoại không đúng định dạng 0xx.xxxx.xxx vui lòng kiểm tra lại");
+                return;
+            }
+            Customer customer = customer_DAO.getCustomerByPhone(phone);
+            if (customer != null) {
+                jtfEmail.setText(customer.getEmail());
+                jtfNameCus.setText(customer.getName());
+                btnPay.setEnabled(true);
+                jTFPoints.setText(customer.getRewardPoints() + "");
+                jTFMinusPoints.setEditable(true);
+                Flag.setIdCusForSell_GUI(customer.getIdCustomer().trim());
+            } else {
+                if (JOptionPane.showConfirmDialog(null, "Khách hàng chưa tồn tại trên hệ thống, vui lòng thêm mới khách hàng !", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    Flag.setFlagSell_GUI(1);
+                    stopWebcam();
+                    toCustomerGUI();
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Đã có thông tin khách hàng cho hóa đơn !");
         }
     }//GEN-LAST:event_btnSearchPhoneActionPerformed
 
@@ -818,14 +823,12 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     }//GEN-LAST:event_btnPayActionPerformed
 
     private void btnPendingInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPendingInvoiceActionPerformed
-        Staff staff = staff_DAO.getStaffByID(Flag.getIdStaff());
-        Customer customer = customer_DAO.getCustomerByID(Flag.getIdCusForSell_GUI());
-//        double amountReciver = Double.parseDouble(jtfMoneyReceived.getText().trim());
-        Invoice invoice = new Invoice(invoice_DAO.createIDInvoice(), staff, customer, null, 2000000.0, 100000.0, 100000.0, LocalDateTime.now(), Invoice.convertStringToStatus("Đã thanh toán"));
-        boolean res = invoice_DAO.createInvoice(invoice);
-    //        Invoice invoice = new Invoice(TOOL_TIP_TEXT_KEY, staff, customer, promotion, amountReciver, amountReciver, amountReciver, LocalTime.MAX, Invoice.Status.DonCho, deliveryStatus)
-//        InvoiceDetails invoiceDetails = new InvoiceDetails(invoiceDetails_DAO.createIDInvoiceDetails(), invoice, product, SOMEBITS, amountReciver, PROPERTIES, TOOL_TIP_TEXT_KEY);
-        
+//        Staff staff = staff_DAO.getStaffByID(Flag.getIdStaff());
+//        Customer customer = customer_DAO.getCustomerByID(Flag.getIdCusForSell_GUI());
+
+//        boolean res = invoice_DAO.createInvoice(invoice);
+        createInvoice();
+
     }//GEN-LAST:event_btnPendingInvoiceActionPerformed
 
     private void btnCreateInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateInvoiceActionPerformed
@@ -879,7 +882,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                 double totalPrice = quantity * unitPrice;
 
                 // Cập nhật giá trị trong JTable
-                jTableCart.setValueAt(totalPrice, selectedRow, 5);
+                jTableCart.setValueAt(totalPrice + "đ", selectedRow, 5);
 
                 // Bắt buộc JTable cập nhật lại hiển thị cho ô cụ thể đã thay đổi
                 ((AbstractTableModel) jTableCart.getModel()).fireTableCellUpdated(selectedRow, 5);
@@ -916,13 +919,13 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         }
     }//GEN-LAST:event_cbPaymentsItemStateChanged
 
-    private void jtfTotalAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfTotalAmountActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfTotalAmountActionPerformed
-
     private void jtfNameCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNameCusActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfNameCusActionPerformed
+
+    private void jtfTotalAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfTotalAmountActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfTotalAmountActionPerformed
     private void clearAllInPut() {
         jtfEmail.setText("");
         jtfChangeAmount.setText("");
@@ -935,8 +938,8 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         cbPayments.setSelectedIndex(0);
         cbVoucher.setSelectedItem("");
     }
-// Hàm tính tổng tiền từ cột "thành tiền" của JTable
 
+// Hàm tính tổng tiền từ cột "thành tiền" của JTable
     private double calculateTotalAmount() {
         double totalAmount = 0;
         int rowCount = jTableCart.getRowCount();
@@ -948,15 +951,32 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         return totalAmount;
     }
 
+//    Load thông tin khuyến mãi lên combobox
     private void loadPromotion(List<Promotion> listPromotion) {
-        // Xóa tất cả dữ liệu cũ từ ComboBoxModel
+//        DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>();
+//        cbVoucher.setModel(comboBoxModel);
+//        for (Promotion promotion : listPromotion) {
+//            cbVoucher.addItem(promotion.getName());
+//        }
         DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>();
         cbVoucher.setModel(comboBoxModel);
+
         for (Promotion promotion : listPromotion) {
-            cbVoucher.addItem(promotion.getName());
+            String promotionName = promotion.getName();
+            String promotionId = promotion.getIdPromotion();
+
+            cbVoucher.addItem(promotionName);
+            promotionMap.put(promotionName, promotionId);
         }
     }
 
+    // Lấy id của promotion từ tên promotion được chọn
+    private String getPromotionIdFromComboBox() {
+        String selectedPromotionName = (String) cbVoucher.getSelectedItem();
+        return promotionMap.get(selectedPromotionName);
+    }
+
+//    Đi đến trang customer_GUI
     public void toCustomerGUI() {
         JPanel parent = (JPanel) this.getParent();
         parent.remove(this);
@@ -1061,11 +1081,11 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         }
     }
 
+//    Thêm sản phẩm vào giỏ hàng
     private void addToCart(String idProduct) {
         Product product = product_DAO.getProductByID(idProduct);
 
         if (product != null) {
-            // Kiểm tra xem sản phẩm đã tồn tại trong bảng chưa
             int rowCount = defaultTableModelCart.getRowCount();
             boolean productExists = false;
 
@@ -1073,29 +1093,24 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                 String existingProductId = defaultTableModelCart.getValueAt(i, 1).toString();
 
                 if (existingProductId.equals(idProduct)) {
-                    // Sản phẩm đã tồn tại trong bảng
                     productExists = true;
 
-                    if (product.getQuantity() > product_DAO.getProductByID(idProduct).getQuantity()) {
-                        int currentQuantity = Integer.parseInt(defaultTableModelCart.getValueAt(i, 3).toString());
-                        double priceProduct = Double.parseDouble(defaultTableModelCart.getValueAt(i, 4).toString().replace("đ", ""));
+                    int currentQuantity = Integer.parseInt(defaultTableModelCart.getValueAt(i, 3).toString());
+                    double priceProduct = Double.parseDouble(defaultTableModelCart.getValueAt(i, 4).toString().replace("đ", ""));
 
-                        // Cập nhật số lượng
-                        defaultTableModelCart.setValueAt(currentQuantity + 1, i, 3); // Cột số lượng
-
-                        // Tính toán và cập nhật thành tiền
-                        double totalPrice = (currentQuantity + 1) * priceProduct;
-                        defaultTableModelCart.setValueAt(totalPrice + "đ", i, 5); // Cột Thành tiền
-
-                        JOptionPane.showMessageDialog(null, "Đã thêm sản phẩm");
-                    } else if (product.getQuantity() <= product_DAO.getProductByID(idProduct).getQuantity()) {
+                    // Sử dụng thông tin số lượng từ đối tượng sản phẩm đã lấy
+                    if (currentQuantity + 1 > product.getQuantity()) {
                         JOptionPane.showMessageDialog(null, "Vượt quá số lượng tồn kho, vui lòng kiểm tra lại");
+                    } else {
+                        defaultTableModelCart.setValueAt(currentQuantity + 1, i, 3);
+                        double totalPrice = (currentQuantity + 1) * priceProduct;
+                        defaultTableModelCart.setValueAt(totalPrice + "đ", i, 5);
+                        JOptionPane.showMessageDialog(null, "Đã thêm sản phẩm");
                     }
                 }
             }
 
             if (!productExists) {
-                // Sản phẩm chưa tồn tại trong bảng, thêm mới vào
                 double priceProduct;
                 if (product.getCurrentPrice() == null || product.getCurrentPrice() == 0) {
                     priceProduct = product.getOriginalPrice();
@@ -1108,6 +1123,31 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                 JOptionPane.showMessageDialog(null, "Đã thêm sản phẩm");
             }
         }
+    }
+
+//    Tạo hóa đơn
+    private void createInvoice() {
+        String idInvoice = invoice_DAO.createIDInvoice();
+        Staff staff = staff_DAO.getStaffByID(Flag.getIdStaff());
+        Customer customer = customer_DAO.getCustomerByID(Flag.getIdCusForSell_GUI());
+        Promotion promotion = null;
+
+        String idpromotion = promotion.getIdPromotion();
+//        int indexPromotion = 0;
+//        for (int i = 1; i < def.getSize(); i++) {
+//            if (supplier_DAO.getListSupplier().get(i - 1).getIdSupplier().toString().trim().equals(idSupplier)) {
+//                indexSupplier = i;
+//                break;
+//            }
+//        }
+//        cbSupplier.setSelectedIndex(indexSupplier);
+
+        double amountReceived = 10000; // tiền nhận
+        double changeAmount = 100000;// tiền thừa
+        Invoice invoice = new Invoice(idInvoice, staff, customer, promotion, amountReceived, changeAmount, 100000, LocalDateTime.now(), Invoice.Status.DonCho);
+        invoice_DAO.createInvoice(invoice);
+//        return null;
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

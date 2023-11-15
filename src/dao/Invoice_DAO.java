@@ -15,34 +15,31 @@ public class Invoice_DAO extends DAO {
 
 //    Tạo hóa đơn
     public boolean createInvoice(Invoice invoice) {
-        Connection connection = null;
-        PreparedStatement invoiceStatement = null;
-        PreparedStatement preparedStatement = null;
+        try (Connection connection = ConnectDB.getConnection(); PreparedStatement invoiceStatement = connection.prepareStatement(
+                "INSERT INTO Invoice (idInvoice, staff, customer, promotion, amountReceived, changeAmount, totalAmount, dateCreated, status) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
 
-        try {
-            connection = ConnectDB.getConnection();
             connection.setAutoCommit(false);
 
-            String invoiceSql = "INSERT INTO Invoice (idInvoice, staff, customer, promotion, amountReceived, changeAmount, totalAmount, dateCreated, status) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            invoiceStatement = connection.prepareStatement(invoiceSql);
             invoiceStatement.setString(1, invoice.getIdInvoice());
             invoiceStatement.setString(2, invoice.getStaff().getIdStaff());
             invoiceStatement.setString(3, invoice.getCustomer().getIdCustomer());
-            invoiceStatement.setString(4, invoice.getPromotion().getIdPromotion());
+            invoiceStatement.setString(4, invoice.getPromotion() != null ? invoice.getPromotion().getIdPromotion() : null);
             invoiceStatement.setDouble(5, invoice.getAmountReceived());
             invoiceStatement.setDouble(6, invoice.getChangeAmount());
             invoiceStatement.setDouble(7, invoice.getTotalAmount());
             invoiceStatement.setDate(8, java.sql.Date.valueOf(LocalDate.now()));
             invoiceStatement.setString(9, Invoice.convertStatusToString(invoice.getStatus()));
             invoiceStatement.executeUpdate();
-            preparedStatement.close();
+
+            connection.commit();
             return true;
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            ex.printStackTrace(); // Thay bằng log hoặc xử lý ngoại lệ một cách chính xác
         }
         return false;
     }
+
     public String createIDInvoice() {
         try {
             String sql = "SELECT TOP 1 [idInvoice] FROM [dbo].[Invoice] ORDER BY [idInvoice] DESC";
