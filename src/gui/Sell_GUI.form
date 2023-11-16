@@ -35,7 +35,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jP3" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
@@ -678,7 +678,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
@@ -705,6 +705,11 @@
                           <Component id="jtfChangeAmount" max="32767" attributes="0"/>
                           <Component id="cbPayments" max="32767" attributes="0"/>
                           <Component id="cbPonis" max="32767" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="jLTitleVAT" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -718,7 +723,9 @@
                           <Component id="jtfTotalAmount" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                           <Component id="jlTotalAmount" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                      <Component id="jLTitleVAT" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="cbVoucher" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jlVoucher" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -770,7 +777,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jlVoucher">
               <Properties>
-                <Property name="text" type="java.lang.String" value="M&#xe3; gi&#x1ea3;m gi&#xe1; :"/>
+                <Property name="text" type="java.lang.String" value="Gi&#x1ea3;m gi&#xe1;:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jlPayments">
@@ -787,6 +794,7 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfMoneyReceivedActionPerformed"/>
+                <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jtfMoneyReceivedPropertyChange"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jlMoneyReceived">
@@ -845,6 +853,11 @@
                     <StringItem index="10" value="10.000"/>
                   </StringArray>
                 </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLTitleVAT">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="(&#x110;&#xe3; bao g&#x1ed3;m ph&#xed; VAT)"/>
               </Properties>
             </Component>
           </SubComponents>

@@ -48,28 +48,32 @@ public class Home_GUI extends javax.swing.JFrame {
             public void selected(int index, int subIndex) {
                 if (index == 0 && subIndex == 1) { // sự kiện menu thống kê - doanh thu
                     stopWebcam();
-                    jpCenter.removeAll();
-                    statistical_GUI = new Statistical_GUI1();
-                    statistical_GUI.setJPRevenue();
-                    addJPanel(statistical_GUI);
+//                    jpCenter.removeAll();
+//                    statistical_GUI = new Statistical_GUI1();
+//                    statistical_GUI.setJPRevenue();
+//                    addJPanel(statistical_GUI);
+                    JOptionPane.showMessageDialog(null, "Chức nưng đang được phát triển");
                 } else if (index == 0 && subIndex == 2) { // sự kiện menu thống kê - nhân viên
                     stopWebcam();
-                    jpCenter.removeAll();
-                    statistical_GUI = new Statistical_GUI1();
-                    statistical_GUI.setJPStaff();
-                    addJPanel(statistical_GUI);
+//                    jpCenter.removeAll();
+//                    statistical_GUI = new Statistical_GUI1();
+//                    statistical_GUI.setJPStaff();
+//                    addJPanel(statistical_GUI);
+JOptionPane.showMessageDialog(null, "Chức nưng đang được phát triển");
                 } else if (index == 0 && subIndex == 3) { // sự kiện menu thống kê - sản phẩm
                     stopWebcam();
-                    jpCenter.removeAll();
-                    statistical_GUI = new Statistical_GUI1();
-                    statistical_GUI.setJPProduct();
-                    addJPanel(statistical_GUI);
+//                    jpCenter.removeAll();
+//                    statistical_GUI = new Statistical_GUI1();
+//                    statistical_GUI.setJPProduct();
+//                    addJPanel(statistical_GUI);
+JOptionPane.showMessageDialog(null, "Chức nưng đang được phát triển");
                 } else if (index == 0 && subIndex == 4) { // sự kiện menu thống kê - khách hàng
                     stopWebcam();
-                    jpCenter.removeAll();
-                    statistical_GUI = new Statistical_GUI1();
-                    statistical_GUI.setJPCustomer();
-                    addJPanel(statistical_GUI);
+//                    jpCenter.removeAll();
+//                    statistical_GUI = new Statistical_GUI1();
+//                    statistical_GUI.setJPCustomer();
+//                    addJPanel(statistical_GUI);
+JOptionPane.showMessageDialog(null, "Chức nưng đang được phát triển");
                 } else if (index == 1) { // sự kiện menu nhà cung cấp
                     stopWebcam();
                     jpCenter.removeAll();
@@ -131,7 +135,9 @@ public class Home_GUI extends javax.swing.JFrame {
                     changePassword_GUI = new ChangePassword_GUI();
                     addJPanel(changePassword_GUI);
                 } else if (index == 9 && subIndex == 1) {
-//                    stopWebcam();
+                    stopWebcam();
+                    VAT_GUI vat_gui = new VAT_GUI();
+                    vat_gui.setVisible(true);
 //                    jpCenter.removeAll();
 //                    sell_GUI = new Sell_GUIXXX();
 //                    addJPanel(sell_GUI);

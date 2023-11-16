@@ -16,6 +16,7 @@ import dao.Invoice_DAO;
 import dao.Product_DAO;
 import dao.Promotion_DAO;
 import dao.Staff_DAO;
+import dao.VAT_DAO;
 import entity.Flag;
 import entity.Product;
 import entity.Promotion;
@@ -62,6 +63,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     private Invoice_DAO invoice_DAO = new Invoice_DAO();
     private Staff_DAO staff_DAO = new Staff_DAO();
     private InvoiceDetails_DAO invoiceDetails_DAO = new InvoiceDetails_DAO();
+    private VAT_DAO vat_dao = new VAT_DAO();
 
     private WebcamPanel webcamPanel = null;
     private Webcam webcam = null;
@@ -109,7 +111,23 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             @Override
             public void tableChanged(TableModelEvent e) {
                 if (e.getType() == TableModelEvent.INSERT || e.getType() == TableModelEvent.UPDATE || e.getType() == TableModelEvent.DELETE) {
-                    jtfTotalAmount.setText(calculateTotalAmount() + " VNĐ");
+
+                    // 1) Tính giá trị VAT
+                    double vatValue = calculateTotalAmount() * (vat_dao.getVAT() / 100);
+                    // 2) Lấy tiền giảm khuyến mãi nếu có
+                    double promotionMoney = 0;
+                    Promotion promotion = promotion_DAO.getPromotionByID(getPromotionIdFromComboBox());
+                    if (promotion != null) {
+                        promotionMoney = promotion.getDiscount();
+                    }
+                    // 3) trừ điểm tích lũy nếu có 
+                    double pointsMoney = 0;
+                   
+                    // 4) Tổng tiền = Tổng tiền hàng + VAT - khuyến mãi - điểm tích lũy 
+                    double total = calculateTotalAmount() + vatValue - getPointsToMoney() - promotionMoney;
+                    jtfTotalAmount.setText(total + " VNĐ");
+
+                    // Tính tiền được áp dụng khuyến mãi
                     priceRange = (double) calculateTotalAmount();
                     //        Lấy tổng tiền hóa đon từ đó lấy mã giảm giá hợp lý
                     loadPromotion(promotion_DAO.getListPromotionsByStatusAndTypePromotion2(priceRange));
@@ -168,6 +186,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         cbPayments = new lib2.ComboBoxSuggestion();
         jLMinusPoints = new javax.swing.JLabel();
         cbPonis = new lib2.ComboBoxSuggestion();
+        jLTitleVAT = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -551,7 +570,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             }
         });
 
-        jlVoucher.setText("Mã giảm giá :");
+        jlVoucher.setText("Giảm giá:");
 
         jlPayments.setText("HT thanh toán :");
 
@@ -560,6 +579,11 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         jtfMoneyReceived.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfMoneyReceivedActionPerformed(evt);
+            }
+        });
+        jtfMoneyReceived.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jtfMoneyReceivedPropertyChange(evt);
             }
         });
 
@@ -586,6 +610,8 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
 
         cbPonis.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1.000", "2.000", "3.000", "4.000", "5.000", "6.000", "7.000", "8.000", "9.000", "10.000" }));
 
+        jLTitleVAT.setText("(Đã bao gồm phí VAT)");
+
         javax.swing.GroupLayout jP_3_3Layout = new javax.swing.GroupLayout(jP_3_3);
         jP_3_3.setLayout(jP_3_3Layout);
         jP_3_3Layout.setHorizontalGroup(
@@ -611,7 +637,11 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                     .addComponent(jtfMoneyReceived)
                     .addComponent(jtfChangeAmount)
                     .addComponent(cbPayments, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbPonis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cbPonis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jP_3_3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLTitleVAT)
+                        .addGap(13, 13, 13)))
                 .addContainerGap())
         );
         jP_3_3Layout.setVerticalGroup(
@@ -621,7 +651,9 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                 .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfTotalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlTotalAmount))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(1, 1, 1)
+                .addComponent(jLTitleVAT)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbVoucher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlVoucher))
@@ -684,7 +716,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jP3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -729,6 +761,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                 jTFPoints.setText(customer.getRewardPoints() + "");
                 cbPonis.setEnabled(true);
                 Flag.setIdCusForSell_GUI(customer.getIdCustomer().trim());
+                jtfPhoneCus.setEditable(false);
             } else {
                 if (JOptionPane.showConfirmDialog(null, "Khách hàng chưa tồn tại trên hệ thống, vui lòng thêm mới khách hàng !", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     Flag.setFlagSell_GUI(1);
@@ -822,7 +855,10 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     }//GEN-LAST:event_btnPayActionPerformed
 
     private void btnPendingInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPendingInvoiceActionPerformed
-        Customer customer = customer_DAO.getCustomerByID(Flag.getIdCusForSell_GUI());
+//        Customer customer = customer_DAO.getCustomerByID(Flag.getIdCusForSell_GUI());
+//        System.out.println(jtfTotalAmount.getText().trim().replaceAll("\\ VNĐ", ""));
+        createInvoice("Đã thanh toán");
+
     }//GEN-LAST:event_btnPendingInvoiceActionPerformed
 
     private void btnCreateInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateInvoiceActionPerformed
@@ -916,6 +952,12 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     private void jtfTotalAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfTotalAmountActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfTotalAmountActionPerformed
+
+    private void jtfMoneyReceivedPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jtfMoneyReceivedPropertyChange
+        jtfChangeAmount.setText(TOOL_TIP_TEXT_KEY);
+    }//GEN-LAST:event_jtfMoneyReceivedPropertyChange
+//    Kiểm tra dữ liệu số 
+
     private boolean isNumber(String number) {
         try {
             int num = Integer.parseInt(number);
@@ -925,7 +967,52 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         return false;
     }
 
-    private boolean validator(Customer customer) {
+//    Đổi điểm tích lũy sang tiền
+    private int getPointsToMoney() {
+        int points = 0;
+        int cBBSelectedIndex = cbPonis.getSelectedIndex();
+        switch (cBBSelectedIndex) {
+            case 0:
+                points = 0;
+                break;
+            case 1:
+                points = 10000;
+                break;
+            case 2:
+                points = 20000;
+                break;
+            case 3:
+                points = 30000;
+                break;
+            case 4:
+                points = 40000;
+                break;
+            case 5:
+                points = 50000;
+                break;
+            case 6:
+                points = 60000;
+                break;
+            case 7:
+                points = 70000;
+                break;
+            case 8:
+                points = 80000;
+                break;
+            case 9:
+                points = 90000;
+                break;
+            case 10:
+                points = 100000;
+                break;
+            default:
+                points = 0;
+                break;
+        }
+        return points;
+    }
+
+    private boolean validator(Customer customer, Promotion promotion) {
         int points = 0;
         int cBBSelectedIndex = cbPonis.getSelectedIndex();
 
@@ -982,13 +1069,25 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             if (Double.parseDouble(jtfMoneyReceived.getText().trim()) < 0) {
                 return showERROR(jtfMoneyReceived, "Số tiền nhận phải lớn hơn 0 !");
             }
-            if (Double.parseDouble(jtfMoneyReceived.getText().trim()) < Double.parseDouble(jtfTotalAmount.getText().trim().replaceAll(" VNĐ", ""))) {
+
+//            Lấy tiền giảm khuyến mãi nếu có
+            double promotionMoney = 0;
+            if (promotion != null) {
+                promotionMoney = promotion.getDiscount();
+            }
+//            Tính VAT
+            double vatValue = calculateTotalAmount() * (vat_dao.getVAT() / 100);
+            // Tổng giá trị đơn hàng
+            double total = calculateTotalAmount() + vatValue - getPointsToMoney() - promotionMoney;
+            // Tổng tiền đơn hàng bằng =  tổng tiền sản phẩm + VAT - điểm tích lũy - Khuyến mãi nếu có
+            if (Double.parseDouble(jtfMoneyReceived.getText().trim()) < total) {
                 return showERROR(jtfMoneyReceived, "Số tiền nhận không đủ đề thanh toán vui lòng kiểm tra lại !");
             }
         }
         return true;
     }
 
+    
     private void clearAllInPut() {
         jtfEmail.setText("");
         jtfChangeAmount.setText("");
@@ -1196,22 +1295,31 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     }
 
 //    Tạo hóa đơn
-    private Invoice createInvoice() {
+    private boolean createInvoice(String status) {
 
         String idInvoice = invoice_DAO.createIDInvoice();
         Staff staff = staff_DAO.getStaffByID(Flag.getIdStaff());
         Customer customer = customer_DAO.getCustomerByID(Flag.getIdCusForSell_GUI());
         Promotion promotion = promotion_DAO.getPromotionByID(getPromotionIdFromComboBox());
         String idpromotion = promotion.getIdPromotion();
-
-        if (validator(customer)) {
-            double amountReceived = Double.parseDouble(jtfMoneyReceived.getText().trim()); // tiền nhận
-        }
-
-//        double changeAmount = 100000;// tiền thừa
-//        Invoice invoice = new Invoice(idInvoice, staff, customer, promotion, amountReceived, changeAmount, 100000, LocalDateTime.now(), Invoice.Status.DonCho);
-//        invoice_DAO.createInvoice(invoice);
-        return null;
+        System.out.println(idpromotion);
+//        double amountReceived;
+//        if (validator(customer)) {
+//            amountReceived = Double.parseDouble(jtfMoneyReceived.getText().trim()); // tiền nhận
+//
+//            double totalAmount; // tổng tiền hóa đơn
+//            totalAmount = Double.parseDouble(jtfTotalAmount.getText().trim().replaceAll("\\ VNĐ", ""));
+//            double changeAmount; // tiền thừa
+//            changeAmount = amountReceived - totalAmount;
+//            LocalDateTime dateCreated = LocalDateTime.now();
+//
+//            Invoice invoice = new Invoice(idInvoice, staff, customer, promotion, amountReceived, changeAmount, totalAmount, dateCreated, Invoice.convertStringToStatus(status));
+//            boolean res = invoice_DAO.createInvoice(invoice);
+//            if (res) {
+//                return true;
+//            }
+//        }
+        return false;
 
     }
 
@@ -1257,6 +1365,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     private javax.swing.JLabel jLNameStaff;
     private javax.swing.JLabel jLNameStaffMain;
     private javax.swing.JLabel jLPoints;
+    private javax.swing.JLabel jLTitleVAT;
     private javax.swing.JPanel jP1;
     private javax.swing.JPanel jP2;
     private javax.swing.JPanel jP3;

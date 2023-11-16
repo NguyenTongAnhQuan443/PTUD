@@ -49,6 +49,7 @@ public class Flag {
 
         flagSell_GUI = 0;
         idCusForSell_GUI = "";
+
     }
 
 //

@@ -70,6 +70,8 @@ public class Promotion_GUI extends javax.swing.JPanel {
 
         addProductTypeToModel();
         setIndexFirstCBB(cbProductType, productTypeModel);
+//        cập nhập trạng thái khuyến mãi mỗi lần mở giao diện
+        updateStatusPromotion();
         loadDataPromotion(promotion_DAO.getListPromotion());
         loadDataProduct(product_DAO.getListProductAreTrading());
 
@@ -1029,6 +1031,15 @@ public class Promotion_GUI extends javax.swing.JPanel {
         } catch (NumberFormatException e) {
         }
         return false;
+    }
+
+//    Kiểm tra và cập nhập trạng thái promotion mỗi lần mở giao diện
+    private void updateStatusPromotion() {
+        for (Promotion promotion : promotion_DAO.getListPromotionsByStatus("Còn hạn")) {
+            if (LocalDate.now().isAfter(promotion.getDayEnd())) {
+                promotion_DAO.updatePromotionStatus(promotion.getIdPromotion(), "Hết hạn");
+            }
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

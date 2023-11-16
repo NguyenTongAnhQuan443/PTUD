@@ -39,6 +39,7 @@ public class Menu extends JComponent {
         {"Khách hàng"},
         {"Khuyến mãi"},
         {"Tài khoản", "Thông tin tài khoản", "Đổi mật khẩu"},
+        {"Chức năng khác", "Thay đổi phí VAT"},
         {"Ngôn ngữ", "Tiếng Việt", "English"},
         {"Giúp đỡ", "Hướng dẫn", "Báo lỗi", "Đóng góp ý kiến"},
         {"Thoát"}

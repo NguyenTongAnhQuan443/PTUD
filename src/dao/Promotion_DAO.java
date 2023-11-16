@@ -426,4 +426,20 @@ public class Promotion_DAO extends DAO {
         attachmentBodyPart.setFileName(filePath);
         multipart.addBodyPart(attachmentBodyPart);
     }
+    
+//    Cập nhập trạng thái promotion
+    public boolean updatePromotionStatus(String promotionId, String newStatus) {
+        try {
+            Connection connection = ConnectDB.getConnection();
+            String sql = "UPDATE Promotion SET status = ? WHERE idPromotion = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setString(1, newStatus);
+                preparedStatement.setString(2, promotionId);
+                return preparedStatement.executeUpdate() > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
