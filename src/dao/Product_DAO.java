@@ -16,6 +16,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import entity.Supplier;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Product_DAO {
 //    Thêm một product mới
@@ -213,6 +215,7 @@ public class Product_DAO {
                 String name = resultSet.getString("name");
                 double costPrice = resultSet.getDouble("costPrice");
                 double originalPrice = resultSet.getDouble("originalPrice");
+                double currentPrice = resultSet.getDouble("currentPrice");
                 int quantity = resultSet.getInt("quantity");
                 String status = resultSet.getString("status");
                 String supplier = resultSet.getString("supplier");
@@ -222,7 +225,7 @@ public class Product_DAO {
                 int material = resultSet.getInt("material");
                 String imageProduct = resultSet.getString("imageProduct");
 
-                Product product = new Product(idProduct, name, costPrice, originalPrice, quantity, Product.convertStringToStatus(status), new Supplier(supplier), new ProductType(productType), new ProductColor(color), new ProductSize(size), new ProductMaterial(material), imageProduct);
+                Product product = new Product(idProduct, name, costPrice, originalPrice, currentPrice, quantity, Product.convertStringToStatus(status), new Supplier(supplier), new ProductType(productType), new ProductColor(color), new ProductSize(size), new ProductMaterial(material), imageProduct);
                 return product;
             }
         } catch (Exception e) {
@@ -315,6 +318,35 @@ public class Product_DAO {
             e.printStackTrace();
         }
         return listIDProduct;
+    }
+
+//    Kiểm tra xem sản phẩm có khuyến mãi hay không
+    public Map<String, Double> getDiscountForProduct(String productId) {
+        Map<String, Double> discountInfo = new HashMap<>();
+        try {
+            connectDB.ConnectDB.getInstance();
+            Connection connection = ConnectDB.getConnection();
+
+            String query = "SELECT PM.discount "
+                    + "FROM ProductPromotion PP "
+                    + "INNER JOIN Promotion PM ON PP.idPromotion = PM.idPromotion "
+                    + "WHERE PP.idProduct = ? AND PM.status = N'Còn hạn' AND PM.dayStart <= GETDATE() AND PM.dayEnd >= GETDATE()";
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, productId);
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        double discount = resultSet.getDouble("discount");
+                        discountInfo.put("discountPercentage", discount);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return discountInfo;
     }
 
 }
