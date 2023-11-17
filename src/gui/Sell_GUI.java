@@ -105,6 +105,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             jtfEmail.setText(customer1.getEmail());
             jtfNameCus.setText(customer1.getName());
             jtfPhoneCus.setEditable(false);
+            btnPendingInvoice.setEnabled(true);
 
             btnCreateInvoice.setText("Hủy");
             btnPendingInvoice.setEnabled(true);
@@ -782,6 +783,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                 cbPayments.setEnabled(true);
                 cbPonis.setEnabled(true);
                 cbPromotion.setEnabled(true);
+                btnPendingInvoice.setEnabled(true);
             } else {
                 if (JOptionPane.showConfirmDialog(null, "Khách hàng chưa tồn tại trên hệ thống, vui lòng thêm mới khách hàng !", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     Flag.setFlagSell_GUI(1);
@@ -795,95 +797,104 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     }//GEN-LAST:event_btnSearchPhoneActionPerformed
 
     private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
-        if (cbPayments.getSelectedIndex() == 0) {
-            if (validator()) {
-                updateChangeAmount();
-                double totalAmount = Double.parseDouble(jtfTotalAmount.getText().trim().replaceAll("\\ VNĐ", ""));
-                if (JOptionPane.showConfirmDialog(null, "Tổng tiền khách hàng phải trả là : " + utils.Utils.formatMoney(totalAmount), "Xác nhận thanh toán", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+        if (!jtfTotalAmount.getText().trim().equals("")) {
+            if (cbPayments.getSelectedIndex() == 0) {
+                if (validator()) {
+                    updateChangeAmount();
+                    double totalAmount = Double.parseDouble(jtfTotalAmount.getText().trim().replaceAll("\\ VNĐ", ""));
+                    String str1 = "Tổng tiền hàng phải trả là : ";
+                    String str2 = "Số tiền phải phải trả lại khách hành là : ";
+                    String str3 = jtfChangeAmount.getText().trim().replaceAll("\\ VNĐ", "");
+                    if (JOptionPane.showConfirmDialog(null, str2 + utils.Utils.formatMoney(Double.valueOf(str3)), "Xác nhận thanh toán", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 
+                    }
                 }
-            }
 
-        } else if (cbPayments.getSelectedIndex() == 1) {
-            try {
-                String monney = jtfTotalAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", ""); // truyền số tiền hàng vào đây
-                String str1 = "2|99|0365962232|Nguyen Tong Anh Quan||0|0|";
-                String str2 = "||transfer_myqr";
-                String QrCodeData = str1 + monney + str2;
+            } else if (cbPayments.getSelectedIndex() == 1) {
+                try {
+                    String monney = jtfTotalAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", ""); // truyền số tiền hàng vào đây
+                    String str1 = "2|99|0365962232|Nguyen Tong Anh Quan||0|0|";
+                    String str2 = "||transfer_myqr";
+                    String QrCodeData = str1 + monney + str2;
 //                String projectDir = System.getProperty("user.dir"); // Lấy đường dẫn đến thư mục dự án
-                String fileName = "QRPay.png";
+                    String fileName = "QRPay.png";
 //                String filePath = projectDir + "\\src\\images\\" + fileName; // Sử dụng thư mục "images" trong dự án
-                String filePath = "D:\\FleyShopApp\\QRPay\\" + fileName;
+                    String filePath = "D:\\FleyShopApp\\QRPay\\" + fileName;
 
-                String charset = "UTF-8";
-                Map<EncodeHintType, ErrorCorrectionLevel> hintMap = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
-                hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
-                BitMatrix matrix = new MultiFormatWriter().encode(
-                        new String(QrCodeData.getBytes(charset), charset),
-                        BarcodeFormat.QR_CODE, 242, 242, hintMap);
-                MatrixToImageWriter.writeToFile(matrix, filePath.substring(filePath.lastIndexOf('.') + 1), new File(filePath));
-            } catch (Exception e) {
+                    String charset = "UTF-8";
+                    Map<EncodeHintType, ErrorCorrectionLevel> hintMap = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
+                    hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+                    BitMatrix matrix = new MultiFormatWriter().encode(
+                            new String(QrCodeData.getBytes(charset), charset),
+                            BarcodeFormat.QR_CODE, 242, 242, hintMap);
+                    MatrixToImageWriter.writeToFile(matrix, filePath.substring(filePath.lastIndexOf('.') + 1), new File(filePath));
+                } catch (Exception e) {
+                }
+                Momo_GUI momo_GUI = new Momo_GUI();
+                momo_GUI.setVisible(true);
             }
-            Momo_GUI momo_GUI = new Momo_GUI();
-            momo_GUI.setVisible(true);
-        }
 
 //                if (JOptionPane.showConfirmDialog(null, "Bạn có muốn thanh toán hóa đơn này không ?", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-        //            if (cbPayments.getSelectedIndex() == 0) {
-        //                //              Sự kiện thanh toán thành công và hỏi có in hóa đơn hay không
-        //                if (JOptionPane.showConfirmDialog(null, "Bạn có muốn in hóa đơn không ?", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-        //
-        //                    // In hóa đơn
-        //                    // Truyền dữ liệu vào các trường này
-        //                    Invoice_GUI invoice_GUI = new Invoice_GUI();
-        //                    invoice_GUI.setJlIDInvoiceDetails("Mã hóa đơn 002");
-        //                    invoice_GUI.setJlNameCusDetails("Tên KH");
-        //                    invoice_GUI.setJlDateInvoiceDetails("Ngày tạo");
-        //                    invoice_GUI.setJlNameStaffDetails("Tên nhân viên");
-        //                    //    invoice_GUI.setjTableListProduct(jTableListProduct); // truyền vào dữ liệu table
-        //                    invoice_GUI.setJlTotalDetails("Tổng tiền hàng");
-        //                    // In hóa đơn
-        //
-        //                    // print the panel to pdf
-        //                    Document document = new Document();
-        //                    try {
-        //                        // Đường dẫn tới tệp PDF để lưu hóa đơn
-        //                        String pdfFilePath = "bill.pdf";
-        //                        // Tạo một đối tượng PdfWriter để viết nội dung vào tệp PDF
-        //                        PdfWriter.getInstance(document, new FileOutputStream(pdfFilePath));
-        //                        // Mở tài liệu để bắt đầu viết
-        //                        document.open();
-        //                        // Lấy kích thước của jpMain
-        //                        int width = invoice_GUI.getJpMain().getWidth();
-        //                        int height = invoice_GUI.getJpMain().getHeight();
-        //                        // Tạo một BufferedImage để chứa hình ảnh của jpMain
-        //                        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-        //                        Graphics2D g = image.createGraphics();
-        //
-        //                        invoice_GUI.getJpMain().printAll(g);
-        //                        g.dispose();
-        //                        // Chuyển đổi BufferedImage thành hình ảnh dựng sẵn để chèn vào tài liệu PDF
-        //                        com.itextpdf.text.Image pdfImage = com.itextpdf.text.Image.getInstance(image, null);
-        //                        // Đặt kích thước của hình ảnh trong tài liệu PDF (có thể điều chỉnh kích thước tùy ý)
-        //                        pdfImage.scaleToFit(PageSize.A4.getWidth(), PageSize.A4.getHeight());
-        //                        // Chèn hình ảnh vào tài liệu PDF
-        //                        document.add(pdfImage);
-        //                        // Đóng tài liệu
-        //                        document.close();
-        //                        openPDF(pdfFilePath);
-        //                    } catch (DocumentException | IOException e) {
-        //                        e.printStackTrace();
-        //                        JOptionPane.showMessageDialog(null, "Lỗi khi lưu hóa đơn: " + e.getMessage());
-        //                    }
-        //
-        //                }
+            //            if (cbPayments.getSelectedIndex() == 0) {
+            //                //              Sự kiện thanh toán thành công và hỏi có in hóa đơn hay không
+            //                if (JOptionPane.showConfirmDialog(null, "Bạn có muốn in hóa đơn không ?", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            //
+            //                    // In hóa đơn
+            //                    // Truyền dữ liệu vào các trường này
+            //                    Invoice_GUI invoice_GUI = new Invoice_GUI();
+            //                    invoice_GUI.setJlIDInvoiceDetails("Mã hóa đơn 002");
+            //                    invoice_GUI.setJlNameCusDetails("Tên KH");
+            //                    invoice_GUI.setJlDateInvoiceDetails("Ngày tạo");
+            //                    invoice_GUI.setJlNameStaffDetails("Tên nhân viên");
+            //                    //    invoice_GUI.setjTableListProduct(jTableListProduct); // truyền vào dữ liệu table
+            //                    invoice_GUI.setJlTotalDetails("Tổng tiền hàng");
+            //                    // In hóa đơn
+            //
+            //                    // print the panel to pdf
+            //                    Document document = new Document();
+            //                    try {
+            //                        // Đường dẫn tới tệp PDF để lưu hóa đơn
+            //                        String pdfFilePath = "bill.pdf";
+            //                        // Tạo một đối tượng PdfWriter để viết nội dung vào tệp PDF
+            //                        PdfWriter.getInstance(document, new FileOutputStream(pdfFilePath));
+            //                        // Mở tài liệu để bắt đầu viết
+            //                        document.open();
+            //                        // Lấy kích thước của jpMain
+            //                        int width = invoice_GUI.getJpMain().getWidth();
+            //                        int height = invoice_GUI.getJpMain().getHeight();
+            //                        // Tạo một BufferedImage để chứa hình ảnh của jpMain
+            //                        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+            //                        Graphics2D g = image.createGraphics();
+            //
+            //                        invoice_GUI.getJpMain().printAll(g);
+            //                        g.dispose();
+            //                        // Chuyển đổi BufferedImage thành hình ảnh dựng sẵn để chèn vào tài liệu PDF
+            //                        com.itextpdf.text.Image pdfImage = com.itextpdf.text.Image.getInstance(image, null);
+            //                        // Đặt kích thước của hình ảnh trong tài liệu PDF (có thể điều chỉnh kích thước tùy ý)
+            //                        pdfImage.scaleToFit(PageSize.A4.getWidth(), PageSize.A4.getHeight());
+            //                        // Chèn hình ảnh vào tài liệu PDF
+            //                        document.add(pdfImage);
+            //                        // Đóng tài liệu
+            //                        document.close();
+            //                        openPDF(pdfFilePath);
+            //                    } catch (DocumentException | IOException e) {
+            //                        e.printStackTrace();
+            //                        JOptionPane.showMessageDialog(null, "Lỗi khi lưu hóa đơn: " + e.getMessage());
+            //                    }
+            //
+            //                }
 //                    } else if (cbPayments.getSelectedIndex() == 1) {
 //                    }
 //                }
+        } else {
+            JOptionPane.showMessageDialog(null, "Chưa có sản phẩm nào trong giỏ hàng vui lòng kiểm tra lại");
+            return;
+        }
     }//GEN-LAST:event_btnPayActionPerformed
 
     private void btnPendingInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPendingInvoiceActionPerformed
-        String changeAmount = jtfChangeAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", "");
+        String changeAmount = jtfTotalAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", "");
+        JOptionPane.showMessageDialog(null, changeAmount);
 
     }//GEN-LAST:event_btnPendingInvoiceActionPerformed
 
@@ -891,7 +902,6 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         if (btnCreateInvoice.getText().equals("Tạo hóa đơn")) {
             jtfPhoneCus.setEditable(true);
             btnSearchPhone.setEnabled(true);
-            btnPendingInvoice.setEnabled(true);
             btnCreateInvoice.setText("Hủy");
             jtfMoneyReceived.setEditable(true);
 
@@ -899,17 +909,18 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             jLIDStaffMain.setText(Flag.getIdStaff());
             jLNameStaffMain.setText(staff_DAO.getStaffByID(Flag.getIdStaff()).getName());
 
-        } else if (btnCreateInvoice.getText().equals("Hủy")) {
-            jtfPhoneCus.setEditable(false);
-            btnSearchPhone.setEnabled(false);
-            btnPendingInvoice.setEnabled(false);
-            btnCreateInvoice.setText("Tạo hóa đơn");
-            btnPay.setEnabled(false);
-            jtfMoneyReceived.setEditable(false);
+        } else if (btnCreateInvoice.getText().equals("Hủy") && !jtfPhoneCus.getText().trim().equals("")) {
             if (defaultTableModelCart.getRowCount() != 0) {
                 int option = JOptionPane.showConfirmDialog(null, "Giỏ hàng đang bận bạn có chắc muốn hủy toàn bộ không !", "Xác nhận", JOptionPane.YES_NO_OPTION);
                 if (option == JOptionPane.YES_OPTION) {
                     defaultTableModelCart.setRowCount(0);
+
+                    jtfPhoneCus.setEditable(false);
+                    btnSearchPhone.setEnabled(false);
+                    btnPendingInvoice.setEnabled(false);
+                    btnCreateInvoice.setText("Tạo hóa đơn");
+                    btnPay.setEnabled(false);
+                    jtfMoneyReceived.setEditable(false);
 
                     clearAllInPut();
                     jtfMoneyReceived.setEditable(false);
@@ -923,7 +934,14 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                     cbPonis.setEnabled(false);
                     cbPromotion.setEnabled(false);
                 }
-            } else if (defaultTableModelCart.getRowCount() == 0) {
+            } else {
+                jtfPhoneCus.setEditable(false);
+                btnSearchPhone.setEnabled(false);
+                btnPendingInvoice.setEnabled(false);
+                btnCreateInvoice.setText("Tạo hóa đơn");
+                btnPay.setEnabled(false);
+                jtfMoneyReceived.setEditable(false);
+
                 clearAllInPut();
                 jtfMoneyReceived.setEditable(false);
                 cbPonis.setEditable(false);
@@ -1007,7 +1025,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             String currentPromotionId = getPromotionIdFromComboBox();
 
-            if (!currentPromotionId.equals(previousPromotionId)) {
+            if (currentPromotionId != null && !currentPromotionId.equals(previousPromotionId)) {
                 double promotionMoney = 0;
                 Promotion promotion = promotion_DAO.getPromotionByID(currentPromotionId);
                 if (promotion != null) {
@@ -1046,7 +1064,6 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                 cbPonis.setSelectedIndex(0); // set điểm về 0 để tránh lỗi
             }
         }
-
     }//GEN-LAST:event_cbPromotionItemStateChanged
 
     private void cbPonisItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbPonisItemStateChanged
@@ -1076,7 +1093,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             double totalAmount = Double.parseDouble(jtfTotalAmount.getText().trim().replaceAll("\\ VNĐ", ""));
             double moneyReceived = Double.parseDouble((jtfMoneyReceived.getText().trim()));
             double changeAmount = moneyReceived - totalAmount;
-            jtfChangeAmount.setText(utils.Utils.formatMoney(changeAmount));
+            jtfChangeAmount.setText(changeAmount + " VNĐ");
         }
     }
 //    Kiểm tra dữ liệu số 
@@ -1411,6 +1428,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     private String getPromotionIdFromComboBox() {
         String selectedPromotionName = (String) cbPromotion.getSelectedItem();
         return promotionMap.get(selectedPromotionName);
+
     }
 
     private void cbbIndex0() {
@@ -1433,9 +1451,9 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         double amountReceived;
         amountReceived = Double.parseDouble(jtfMoneyReceived.getText().trim()); // tiền nhận
         double changeAmount; // tiền thừa
-//        changeAmount = Double.parseDouble(jtfChangeAmount.getText().trim().replaceAll("\\ VNĐ", idpromotion))
-//            double totalAmount; // tổng tiền hóa đơn
-//            totalAmount = Double.parseDouble(jtfTotalAmount.getText().trim().replaceAll("\\ VNĐ", ""));
+        changeAmount = Double.parseDouble(jtfChangeAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", ""));
+        double totalAmount; // tổng tiền hóa đơn
+//        totalAmount = Double.parseDouble(jtfTotalAmount.getText().trim().replaceAll("\\ VNĐ", ""));
 
 //            LocalDateTime dateCreated = LocalDateTime.now();
 //
