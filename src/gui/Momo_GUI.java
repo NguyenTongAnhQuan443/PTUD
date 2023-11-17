@@ -19,8 +19,9 @@ public class Momo_GUI extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
 
-        String projectDir = System.getProperty("user.dir"); // Lấy đường dẫn đến thư mục dự án
-        String filePath = projectDir + "\\src\\images\\QRPay.png"; // Sử dụng thư mục "images" trong dự án
+//        String projectDir = System.getProperty("user.dir"); // Lấy đường dẫn đến thư mục dự án
+//        String filePath = projectDir + "\\src\\images\\QRPay.png"; // Sử dụng thư mục "images" trong dự án
+        String filePath = "D:\\FleyShopApp\\QRPay\\QRPay.png";
         File imageFile = new File(filePath);
         jlImgQR.setIcon(new ImageIcon(filePath));
         imageFile.delete();
@@ -38,6 +39,7 @@ public class Momo_GUI extends javax.swing.JFrame {
         btnInBill = new lib2.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Hệ thống thanh toán trực tuyến FleyShop");
 
         jpMain.setBackground(new java.awt.Color(255, 255, 255));
         jpMain.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thanh toán Momo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 14))); // NOI18N
@@ -112,7 +114,7 @@ public class Momo_GUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(btnInBill, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(

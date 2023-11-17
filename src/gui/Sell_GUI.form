@@ -699,7 +699,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="cbVoucher" pref="0" max="32767" attributes="0"/>
+                          <Component id="cbPromotion" pref="0" max="32767" attributes="0"/>
                           <Component id="jtfTotalAmount" max="32767" attributes="0"/>
                           <Component id="jtfMoneyReceived" max="32767" attributes="0"/>
                           <Component id="jtfChangeAmount" max="32767" attributes="0"/>
@@ -727,7 +727,7 @@
                       <Component id="jLTitleVAT" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="cbVoucher" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbPromotion" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jlVoucher" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -815,7 +815,7 @@
                 <Property name="text" type="java.lang.String" value="Ti&#x1ec1;n tr&#x1ea3; l&#x1ea1;i"/>
               </Properties>
             </Component>
-            <Component class="lib2.ComboBoxSuggestion" name="cbVoucher">
+            <Component class="lib2.ComboBoxSuggestion" name="cbPromotion">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
@@ -825,7 +825,7 @@
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
-                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbVoucherItemStateChanged"/>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbPromotionItemStateChanged"/>
               </Events>
             </Component>
             <Component class="lib2.ComboBoxSuggestion" name="cbPayments">
