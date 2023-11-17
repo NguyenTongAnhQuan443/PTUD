@@ -72,6 +72,7 @@ public class Promotion_GUI extends javax.swing.JPanel {
         setIndexFirstCBB(cbProductType, productTypeModel);
 //        cập nhập trạng thái khuyến mãi mỗi lần mở giao diện
         updateStatusPromotion();
+        updateStatusPromotion_2();
         loadDataPromotion(promotion_DAO.getListPromotion());
         loadDataProduct(product_DAO.getListProductAreTrading());
 
@@ -699,6 +700,7 @@ public class Promotion_GUI extends javax.swing.JPanel {
                         jcSelectAll.setState(false);
                         clearInput();
                         offInput();
+                        updateStatusPromotion_2(); // cập nhập lại hạn khuyến mãi nếu được sửa ngày
                         loadDataPromotion(promotion_DAO.getListPromotion());
                         loadDataProduct(product_DAO.getListProductAreTrading());
                         JOptionPane.showMessageDialog(null, "Cập nhập thông tin chương trình khuyến mãi thành công !");
@@ -1038,6 +1040,14 @@ public class Promotion_GUI extends javax.swing.JPanel {
         for (Promotion promotion : promotion_DAO.getListPromotionsByStatus("Còn hạn")) {
             if (LocalDate.now().isAfter(promotion.getDayEnd())) {
                 promotion_DAO.updatePromotionStatus(promotion.getIdPromotion(), "Hết hạn");
+            }
+        }
+    }
+//    Kiểm tra và cập nhập status khuyến mãi mỗi lần cập nhạp thông tin
+    private void updateStatusPromotion_2() {
+        for (Promotion promotion : promotion_DAO.getListPromotionsByStatus("Hết hạn")) {
+            if (LocalDate.now().isBefore(promotion.getDayEnd())) {
+                promotion_DAO.updatePromotionStatus(promotion.getIdPromotion(), "Còn hạn");
             }
         }
     }

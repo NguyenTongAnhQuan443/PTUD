@@ -29,7 +29,6 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -45,10 +44,13 @@ import entity.Customer;
 import entity.InvoiceDetails;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.ItemEvent;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JTable;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableCellRenderer;
 
 public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFactory {
@@ -102,11 +104,14 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             btnPay.setEnabled(true);
             jtfMoneyReceived.setEditable(true);
             jTFPoints.setText(customer1.getRewardPoints() + "");
+
+            cbPayments.setEnabled(true);
             cbPonis.setEnabled(true);
+            cbVoucher.setEnabled(true);
         }
 
         defaultTableModelCart.setRowCount(0); // set cho jtable cart = 0 để table trống lần đầu khởi tạo
-
+// Sự kiện nghe sự thay đổi của jtable
         defaultTableModelCart.addTableModelListener(new TableModelListener() {
             @Override
             public void tableChanged(TableModelEvent e) {
@@ -114,17 +119,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
 
                     // 1) Tính giá trị VAT
                     double vatValue = calculateTotalAmount() * (vat_dao.getVAT() / 100);
-                    // 2) Lấy tiền giảm khuyến mãi nếu có
-                    double promotionMoney = 0;
-                    Promotion promotion = promotion_DAO.getPromotionByID(getPromotionIdFromComboBox());
-                    if (promotion != null) {
-                        promotionMoney = promotion.getDiscount();
-                    }
-                    // 3) trừ điểm tích lũy nếu có 
-                    double pointsMoney = 0;
-                   
-                    // 4) Tổng tiền = Tổng tiền hàng + VAT - khuyến mãi - điểm tích lũy 
-                    double total = calculateTotalAmount() + vatValue - getPointsToMoney() - promotionMoney;
+                    double total = vatValue + calculateTotalAmount();
                     jtfTotalAmount.setText(total + " VNĐ");
 
                     // Tính tiền được áp dụng khuyến mãi
@@ -135,6 +130,22 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             }
         });
 
+//        Sự kiện lắng nghe sự thay đổi của jtfMoneyReceived
+//        jtfMoneyReceived.getDocument().addDocumentListener(new DocumentListener() {
+//            @Override
+//            public void insertUpdate(DocumentEvent e) {
+//                updateChangeAmount();
+//            }
+//
+//            @Override
+//            public void removeUpdate(DocumentEvent e) {
+//                updateChangeAmount();
+//            }
+//
+//            @Override
+//            public void changedUpdate(DocumentEvent e) {
+//            }
+//        });
     }
 
     @SuppressWarnings("unchecked")
@@ -587,14 +598,23 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             }
         });
 
-        jlMoneyReceived.setText("Số tiền nhận:");
+        jlMoneyReceived.setText("Tiền nhận:");
 
         jtfChangeAmount.setEditable(false);
-        jtfChangeAmount.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfChangeAmount.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
 
-        jLChangeAmount.setText("Số tiền còn lại:");
+        jLChangeAmount.setText("Tiền trả lại");
+
+        cbVoucher.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Không áp dụng" }));
+        cbVoucher.setEnabled(false);
+        cbVoucher.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbVoucherItemStateChanged(evt);
+            }
+        });
 
         cbPayments.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tiền mặt", "Momo" }));
+        cbPayments.setEnabled(false);
         cbPayments.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbPaymentsItemStateChanged(evt);
@@ -609,6 +629,12 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         jLMinusPoints.setText("Trừ điểm TL:");
 
         cbPonis.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1.000", "2.000", "3.000", "4.000", "5.000", "6.000", "7.000", "8.000", "9.000", "10.000" }));
+        cbPonis.setEnabled(false);
+        cbPonis.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbPonisItemStateChanged(evt);
+            }
+        });
 
         jLTitleVAT.setText("(Đã bao gồm phí VAT)");
 
@@ -762,6 +788,10 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                 cbPonis.setEnabled(true);
                 Flag.setIdCusForSell_GUI(customer.getIdCustomer().trim());
                 jtfPhoneCus.setEditable(false);
+
+                cbPayments.setEnabled(true);
+                cbPonis.setEnabled(true);
+                cbVoucher.setEnabled(true);
             } else {
                 if (JOptionPane.showConfirmDialog(null, "Khách hàng chưa tồn tại trên hệ thống, vui lòng thêm mới khách hàng !", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     Flag.setFlagSell_GUI(1);
@@ -775,7 +805,8 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     }//GEN-LAST:event_btnSearchPhoneActionPerformed
 
     private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
-        //      nếu thanh toán bằng tiền mặt
+        updateChangeAmount();
+//      nếu thanh toán bằng tiền mặt
         //        if (JOptionPane.showConfirmDialog(null, "Bạn có muốn thanh toán hóa đơn này không ?", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
         //            if (cbPayments.getSelectedIndex() == 0) {
         //                //              Sự kiện thanh toán thành công và hỏi có in hóa đơn hay không
@@ -872,6 +903,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             jLIDInvoiceMain.setText(invoice_DAO.createIDInvoice());
             jLIDStaffMain.setText(Flag.getIdStaff());
             jLNameStaffMain.setText(staff_DAO.getStaffByID(Flag.getIdStaff()).getName());
+
         } else if (btnCreateInvoice.getText().equals("Hủy")) {
             jtfPhoneCus.setEditable(false);
             btnSearchPhone.setEnabled(false);
@@ -883,15 +915,32 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                 int option = JOptionPane.showConfirmDialog(null, "Giỏ hàng đang bận bạn có chắc muốn hủy toàn bộ không !", "Xác nhận", JOptionPane.YES_NO_OPTION);
                 if (option == JOptionPane.YES_OPTION) {
                     defaultTableModelCart.setRowCount(0);
-                }
-            }
-            clearAllInPut();
-            jtfMoneyReceived.setEditable(false);
-            cbPonis.setEditable(false);
 
-            jLIDInvoiceMain.setText("");
-            jLIDStaffMain.setText("");
-            jLNameStaffMain.setText("");
+                    clearAllInPut();
+                    jtfMoneyReceived.setEditable(false);
+                    cbPonis.setEditable(false);
+
+                    jLIDInvoiceMain.setText("");
+                    jLIDStaffMain.setText("");
+                    jLNameStaffMain.setText("");
+
+                    cbPayments.setEnabled(false);
+                    cbPonis.setEnabled(false);
+                    cbVoucher.setEnabled(false);
+                }
+            } else if (defaultTableModelCart.getRowCount() == 0) {
+                clearAllInPut();
+                jtfMoneyReceived.setEditable(false);
+                cbPonis.setEditable(false);
+
+                jLIDInvoiceMain.setText("");
+                jLIDStaffMain.setText("");
+                jLNameStaffMain.setText("");
+
+                cbPayments.setEnabled(false);
+                cbPonis.setEnabled(false);
+                cbVoucher.setEnabled(false);
+            }
         }
     }//GEN-LAST:event_btnCreateInvoiceActionPerformed
 
@@ -938,10 +987,11 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     }//GEN-LAST:event_jTableCartMouseReleased
 
     private void cbPaymentsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbPaymentsItemStateChanged
-        if (cbPayments.getSelectedIndex() == 1) {
-            jtfMoneyReceived.setEditable(false);
-        } else {
+        if (cbPayments.getSelectedIndex() == 0) {
             jtfMoneyReceived.setEditable(true);
+        } else if (cbPayments.getSelectedIndex() == 1) {
+            jtfMoneyReceived.setEditable(false);
+            jtfMoneyReceived.setText("");
         }
     }//GEN-LAST:event_cbPaymentsItemStateChanged
 
@@ -954,8 +1004,45 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     }//GEN-LAST:event_jtfTotalAmountActionPerformed
 
     private void jtfMoneyReceivedPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jtfMoneyReceivedPropertyChange
-        jtfChangeAmount.setText(TOOL_TIP_TEXT_KEY);
+
     }//GEN-LAST:event_jtfMoneyReceivedPropertyChange
+
+    private void cbVoucherItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbVoucherItemStateChanged
+        // 2) Lấy tiền giảm khuyến mãi nếu có
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            String idPromotion = getPromotionIdFromComboBox();
+            double promotionMoney = 0;
+            Promotion promotion = promotion_DAO.getPromotionByID(getPromotionIdFromComboBox());
+            if (promotion != null) {
+                promotionMoney = promotion.getDiscount();
+            }
+            double totalAmount = Double.parseDouble(jtfTotalAmount.getText().trim().replaceAll("\\ VNĐ", ""));
+            jtfTotalAmount.setText(totalAmount - promotionMoney + " VNĐ"); // Tổng tiền = Tổng tiền hàng - khuyến mãi
+        }
+    }//GEN-LAST:event_cbVoucherItemStateChanged
+
+    private void cbPonisItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbPonisItemStateChanged
+        // 3) Cập nhập tổng tiền khi trừ điểm tích lũy
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            String idCustomer = Flag.getIdCusForSell_GUI();
+            Customer customer = customer_DAO.getCustomerByID(idCustomer);
+            if (validator_2(customer) && jTableCart.getRowCount() > 0) {
+                double pointsToMoney = getPointsToMoney();
+                double totalAmount = Double.parseDouble(jtfTotalAmount.getText().trim().replaceAll("\\ VNĐ", ""));
+                jtfTotalAmount.setText(totalAmount - pointsToMoney + " VNĐ"); // Tổng tiền = Tổng tiền hàng - điểm tích lũy
+            }
+        }
+    }//GEN-LAST:event_cbPonisItemStateChanged
+//   Cập nhập giá tiền phải trả lại khách
+
+    private void updateChangeAmount() {
+        if (validator()) {
+            double totalAmount = Double.parseDouble(jtfTotalAmount.getText().trim().replaceAll("\\ VNĐ", ""));
+            double moneyReceived = Double.parseDouble((jtfMoneyReceived.getText().trim()));
+            double changeAmount = moneyReceived - totalAmount;
+            jtfChangeAmount.setText(utils.Utils.formatMoney(totalAmount));
+        }
+    }
 //    Kiểm tra dữ liệu số 
 
     private boolean isNumber(String number) {
@@ -1012,7 +1099,26 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         return points;
     }
 
-    private boolean validator(Customer customer, Promotion promotion) {
+    private boolean validator() {
+        if (cbPayments.getSelectedIndex() == 0) {
+            if (jtfMoneyReceived.getText().trim().equals("")) {
+                return showERROR(jtfMoneyReceived, "Vui lòng nhập số tiền nhận trước khi thanh toán !");
+            }
+            if (!isNumber(jtfMoneyReceived.getText().trim())) {
+                return showERROR(jtfMoneyReceived, "Số tiền nhận vào không chính xác, vui lòng kiểm tra lại");
+            }
+            if (Double.parseDouble(jtfMoneyReceived.getText().trim()) < 0) {
+                return showERROR(jtfMoneyReceived, "Số tiền nhận phải lớn hơn 0 !");
+            }
+            double total = Double.parseDouble(jtfTotalAmount.getText().trim().replaceAll("\\ VNĐ", ""));
+            if (Double.parseDouble(jtfMoneyReceived.getText().trim()) < total) {
+                return showERROR(jtfMoneyReceived, "Số tiền nhận không đủ đề thanh toán vui lòng kiểm tra lại !");
+            }
+        }
+        return true;
+    }
+
+    private boolean validator_2(Customer customer) {
         int points = 0;
         int cBBSelectedIndex = cbPonis.getSelectedIndex();
 
@@ -1057,37 +1163,12 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
 
         if (customer.getRewardPoints() < points) {
             JOptionPane.showMessageDialog(null, "Điểm tích lũy của khách hàng không đủ để trừ vui lòng kiểm tra lại !");
+            cbPonis.setSelectedIndex(0);
             return false;
-        }
-        if (cbPayments.getSelectedIndex() == 0) {
-            if (jtfMoneyReceived.getText().trim().equals("")) {
-                return showERROR(jtfMoneyReceived, "Vui lòng nhập số tiền nhận trước khi thanh toán !");
-            }
-            if (!isNumber(jtfMoneyReceived.getText().trim())) {
-                return showERROR(jtfMoneyReceived, "Số tiền nhận vào không chính xác, vui lòng kiểm tra lại");
-            }
-            if (Double.parseDouble(jtfMoneyReceived.getText().trim()) < 0) {
-                return showERROR(jtfMoneyReceived, "Số tiền nhận phải lớn hơn 0 !");
-            }
-
-//            Lấy tiền giảm khuyến mãi nếu có
-            double promotionMoney = 0;
-            if (promotion != null) {
-                promotionMoney = promotion.getDiscount();
-            }
-//            Tính VAT
-            double vatValue = calculateTotalAmount() * (vat_dao.getVAT() / 100);
-            // Tổng giá trị đơn hàng
-            double total = calculateTotalAmount() + vatValue - getPointsToMoney() - promotionMoney;
-            // Tổng tiền đơn hàng bằng =  tổng tiền sản phẩm + VAT - điểm tích lũy - Khuyến mãi nếu có
-            if (Double.parseDouble(jtfMoneyReceived.getText().trim()) < total) {
-                return showERROR(jtfMoneyReceived, "Số tiền nhận không đủ đề thanh toán vui lòng kiểm tra lại !");
-            }
         }
         return true;
     }
 
-    
     private void clearAllInPut() {
         jtfEmail.setText("");
         jtfChangeAmount.setText("");
@@ -1257,6 +1338,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                         double total = (currentQuantity + 1) * currentPrice;
                         Object[] rowData = {rowCount + 1, product.getIdProduct(), product.getName(), currentQuantity + 1, product.getOriginalPrice() + "đ", currentPrice, total + "đ"};
                         defaultTableModelCart.addRow(rowData);
+                        cbbIndex0(); // đưa các cbb khuyến mãi về 0
                         JOptionPane.showMessageDialog(null, "Đã thêm sản phẩm");
                     }
 
@@ -1283,6 +1365,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                     rowData[5] = "<html><b><font color='BLUE'>" + product.getCurrentPrice() + "</font></b></html>";
                 }
                 defaultTableModelCart.addRow(rowData);
+                cbbIndex0(); // đưa các cbb khuyến mãi về 0
                 JOptionPane.showMessageDialog(null, "Đã thêm sản phẩm");
             }
         }
@@ -1294,7 +1377,12 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         return promotionMap.get(selectedPromotionName);
     }
 
+    private void cbbIndex0() {
+        cbVoucher.setSelectedIndex(0); // mỗi lần thêm sản phẩm mới đưa cbb giảm giá vè 0
+        cbPonis.setSelectedIndex(0); // mỗi lần thêm sản phẩm mới đưa point về 0
+    }
 //    Tạo hóa đơn
+
     private boolean createInvoice(String status) {
 
         String idInvoice = invoice_DAO.createIDInvoice();

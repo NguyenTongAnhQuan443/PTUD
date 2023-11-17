@@ -180,11 +180,11 @@ JOptionPane.showMessageDialog(null, "Chức nưng đang được phát triển")
         jpTopLayout.setHorizontalGroup(
             jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpTopLayout.createSequentialGroup()
-                .addGap(84, 84, 84)
+                .addGap(121, 121, 121)
                 .addComponent(jlLogo)
                 .addGap(18, 18, 18)
                 .addComponent(jlNameShop, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(871, Short.MAX_VALUE))
+                .addContainerGap(834, Short.MAX_VALUE))
         );
         jpTopLayout.setVerticalGroup(
             jpTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,7 +192,7 @@ JOptionPane.showMessageDialog(null, "Chức nưng đang được phát triển")
                 .addComponent(jlLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jpTopLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(15, 15, 15)
                 .addComponent(jlNameShop, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

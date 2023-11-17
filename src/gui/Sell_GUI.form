@@ -799,23 +799,34 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jlMoneyReceived">
               <Properties>
-                <Property name="text" type="java.lang.String" value="S&#x1ed1; ti&#x1ec1;n nh&#x1ead;n:"/>
+                <Property name="text" type="java.lang.String" value="Ti&#x1ec1;n nh&#x1ead;n:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jtfChangeAmount">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="14" style="0"/>
+                  <Font name="Segoe UI" size="14" style="3"/>
                 </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLChangeAmount">
               <Properties>
-                <Property name="text" type="java.lang.String" value="S&#x1ed1; ti&#x1ec1;n c&#xf2;n l&#x1ea1;i:"/>
+                <Property name="text" type="java.lang.String" value="Ti&#x1ec1;n tr&#x1ea3; l&#x1ea1;i"/>
               </Properties>
             </Component>
             <Component class="lib2.ComboBoxSuggestion" name="cbVoucher">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="1">
+                    <StringItem index="0" value="Kh&#xf4;ng &#xe1;p d&#x1ee5;ng"/>
+                  </StringArray>
+                </Property>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbVoucherItemStateChanged"/>
+              </Events>
             </Component>
             <Component class="lib2.ComboBoxSuggestion" name="cbPayments">
               <Properties>
@@ -825,6 +836,7 @@
                     <StringItem index="1" value="Momo"/>
                   </StringArray>
                 </Property>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbPaymentsItemStateChanged"/>
@@ -853,7 +865,11 @@
                     <StringItem index="10" value="10.000"/>
                   </StringArray>
                 </Property>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbPonisItemStateChanged"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLTitleVAT">
               <Properties>
