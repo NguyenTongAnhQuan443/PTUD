@@ -78,6 +78,15 @@ public class InvoiceDetails {
         this.idInvoiceDetails = idInvoiceDetails;
     }
 
+    public InvoiceDetails(String idInvoiceDetails, Invoice invoice, Product product, int quantity, double unitPrice) {
+        super();
+        this.idInvoiceDetails = idInvoiceDetails;
+        this.invoice = invoice;
+        this.product = product;
+        this.quantity = quantity;
+        this.unitPrice = unitPrice;
+    }
+
     public InvoiceDetails(String idInvoiceDetails, Invoice invoice, Product product, int quantity, double unitPrice, int returnQuantity, String returnReason) {
         super();
         this.idInvoiceDetails = idInvoiceDetails;

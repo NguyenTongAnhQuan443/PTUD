@@ -21,7 +21,6 @@ public class Home_GUI extends javax.swing.JFrame {
     private Statistical_Revenue_GUI statistical_Revenue_GUI;
     private Statistical_Product_GUI statistical_Product_GUI;
     private Statistical_Staff_GUI statistical_Staff_GUI;
-    private Sell_GUIXXX sell_GUI;
     private Supplier_GUI supplier_GUI;
     private Staff_GUI staff_GUI;
     private History_GUI history_GUI;

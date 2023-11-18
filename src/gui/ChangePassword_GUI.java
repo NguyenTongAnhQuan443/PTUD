@@ -15,7 +15,6 @@ import javax.swing.SwingUtilities;
 
 public class ChangePassword_GUI extends javax.swing.JPanel {
 
-    private Sell_GUIXXX sell_GUI;
     private Statistical_GUIX statistical_GUI;
     private String captcha;
 

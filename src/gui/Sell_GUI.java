@@ -897,8 +897,6 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     }//GEN-LAST:event_btnPayActionPerformed
 
     private void btnPendingInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPendingInvoiceActionPerformed
-        String changeAmount = jtfTotalAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", "");
-        JOptionPane.showMessageDialog(null, changeAmount);
 
     }//GEN-LAST:event_btnPendingInvoiceActionPerformed
 
@@ -1455,7 +1453,6 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             if (!productExists) {
 
                 double currentPrice = (product.getCurrentPrice() == null || product.getCurrentPrice() == 0) ? product.getOriginalPrice() : product.getCurrentPrice();
-//                double total = (currentQuantity + 1) * product.getOriginalPrice();
                 Object[] rowData = {rowCount + 1, product.getIdProduct(), product.getName(), 1, product.getOriginalPrice() + "đ", currentPrice + "đ", currentPrice + "đ"};
 
                 // Kiểm tra khuyến mãi và đặt màu nếu có
@@ -1507,13 +1504,16 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             minusPointsCustomer(customer);
             //Cộng điểm tích lũy dựa trên tổng tiền hóa đơn
             sumPointsCustomer(customer);
+            //Thêm chi tiết hóa đơn vào hóa đơn
+            processJTableCart(invoice_DAO.getInvoiceById(idInvoice));
+
             return true;
         }
 
         return false;
     }
 
-//    Cập nhập lại số lượng mã giảm giá khi mã giảm giá được sử dụng
+//  Cập nhập lại số lượng mã giảm giá khi mã giảm giá được sử dụng
     private void minusQuantityPromotion(Promotion promotion) {
         if (!cbPromotion.getSelectedItem().toString().equals("Không áp dụng")) {
             promotion = promotion_DAO.getPromotionByID(getPromotionIdFromComboBox());
@@ -1534,7 +1534,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         }
     }
 
-//    Cập nhập lại điểm tích lũy của khách hàng khi khách hàng sử dụng
+//  Cập nhập lại điểm tích lũy của khách hàng khi khách hàng sử dụng
     private void minusPointsCustomer(Customer customer) {
         if (cbPonis.getSelectedIndex() > 0) {
             int pointsToDeduct = Integer.parseInt(cbPonis.getSelectedItem().toString());
@@ -1544,7 +1544,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         }
     }
 
-//    Cộng 1000đ tích lũy cho tối 100K tiền hóa đơn 
+//  Cộng 1000đ tích lũy cho tối 100K tiền hóa đơn 
     private void sumPointsCustomer(Customer customer) {
         double totalAmount = Double.parseDouble(jtfTotalAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", ""));
         int newPoints = (int) (totalAmount / 100);
@@ -1553,28 +1553,54 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         customer_DAO.updateRewordPoints(customer);
     }
 
-    private void createInvoiceDetails(Invoice invoice, Product product) {
-        InvoiceDetails invoiceDetails = new InvoiceDetails();
-        invoiceDetails.setIdInvoiceDetails(invoiceDetails_DAO.createIDInvoiceDetails());
-        invoiceDetails.setInvoice(invoice);
-        invoiceDetails.setProduct(product);
-        invoiceDetails.setQuantity(2);
-        invoiceDetails.setUnitPrice(50.0);
-        invoiceDetails.setReturnQuantity(0);
-        invoiceDetails.setReturnReason("");
+//    Duyệt giỏ hàng để thêm sản phẩm
+    private void processJTableCart(Invoice invoice) {
+        DefaultTableModel model = (DefaultTableModel) jTableCart.getModel();
+        int rowCount = model.getRowCount();
+        for (int i = 0; i < rowCount; i++) {
+            String productId = (String) model.getValueAt(i, 1);
+            int quantity = Integer.parseInt(defaultTableModelCart.getValueAt(i, 3).toString().trim());
 
-        invoiceDetails_DAO.createInvoiceDetails(invoiceDetails);
+            double unitPrice = Double.parseDouble(defaultTableModelCart.getValueAt(i, 5).toString().replaceAll("\\.0", "").replaceAll("\\đ", ""));
+
+            // Sử dụng thông tin để tạo chi tiết hóa đơn
+            Product product = product_DAO.getProductByID(productId);
+            createInvoiceDetails(invoice, product, quantity, unitPrice);
+        }
     }
 
-    private void addListProductToInvoiceDetails(List<Product> listProduct) {
-//        for (Product product : listProduct) {
-//            Invoice invoice
-//                    = InvoiceDetails invoiceDetails = createInvoiceDetails(invoice, product);
-//            if (invoiceDetails == null) {
-//                System.out.println("Không thể thâm sản phẩm");
-//            }
-//        }
+//  Tạo chi tiết hóa đơn
+    private void createInvoiceDetails(Invoice invoice, Product product, int quantity, double unitPrice) {
+        try {
+            // Kiểm tra xem có đủ số lượng sản phẩm để thêm vào chi tiết hóa đơn hay không
+            if (product.getQuantity() >= quantity) {
+                // Cập nhật số lượng sản phẩm trong cơ sở dữ liệu
+                int updatedQuantity = product.getQuantity() - quantity;
+                product.setQuantity(updatedQuantity);
+
+                // Cập nhật số lượng sản phẩm trong bảng Product
+                product_DAO.updateInfoProduct(product);
+
+                // Tạo chi tiết hóa đơn
+                InvoiceDetails invoiceDetails = new InvoiceDetails();
+                invoiceDetails.setIdInvoiceDetails(invoiceDetails_DAO.createIDInvoiceDetails());
+                invoiceDetails.setInvoice(invoice);
+                invoiceDetails.setProduct(product);
+                invoiceDetails.setQuantity(quantity);
+                invoiceDetails.setUnitPrice(unitPrice);
+                invoiceDetails.setReturnQuantity(0); // Số lượng trả
+                invoiceDetails.setReturnReason(""); // Lý do trả
+
+                invoiceDetails_DAO.createInvoiceDetails(invoiceDetails);
+            } else {
+                System.out.println("Không đủ số lượng sản phẩm trong kho!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnCreateInvoice;
     private lib2.Button btnPay;

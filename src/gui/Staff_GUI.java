@@ -73,7 +73,7 @@ public class Staff_GUI extends javax.swing.JPanel {
     private Province_DAO province_DAO = new Province_DAO();
     private District_DAO district_DAO = new District_DAO();
     private Ward_DAO ward_DAO = new Ward_DAO();
-    private Sell_GUIXXX sell_GUI;
+    private Sell_GUI sell_GUI;
     private Staff_InfoStaff_GUI staff_InfoStaff_GUI;
     private Province province;
     private District district;

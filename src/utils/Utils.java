@@ -128,4 +128,10 @@ public class Utils {
         NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
         return format.format(amount);
     }
+    
+    public static double parseMoney(String moneyString) throws ParseException {
+        NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+        Number number = format.parse(moneyString);
+        return number.doubleValue();
+    }
 }

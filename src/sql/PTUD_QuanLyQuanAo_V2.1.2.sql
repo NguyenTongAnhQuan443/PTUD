@@ -22976,11 +22976,9 @@ CREATE TABLE Invoice
 	promotion NVARCHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS,
 	amountReceived FLOAT NOT NULL, -- số tiền nhận
     changeAmount FLOAT, -- số tiền thừa
-	--discountedAmount FLOAT NOT NULL, -- Số tiền được giảm
     totalAmount FLOAT, -- Tổng tiền hóa đơn
     dateCreated DATETIME NOT NULL,
     status NVARCHAR(25) NOT NULL,
-    --deliveryStatus NVARCHAR(25) NOT NULL,
 	FOREIGN KEY (staff) REFERENCES Staff(idStaff),
     FOREIGN KEY (customer) REFERENCES Customer(idCustomer),
 	FOREIGN KEY (promotion) REFERENCES Promotion(idPromotion)
@@ -22990,14 +22988,13 @@ GO
 -- BẢNG CHI TIẾT HÓA ĐƠN
 CREATE TABLE InvoiceDetails 
 (
-    idInvoiceDetails NVARCHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS,
+    idInvoiceDetails NVARCHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS PRIMARY KEy,
 	invoice NVARCHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS NOT NULL,
     product NVARCHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS NOT NULL,
     quantity INT NOT NULL,
     unitPrice FLOAT NOT NULL,
 	returnQuantity INT, -- Số lượng trả
     returnReason NVARCHAR(55), -- Lý do đổi trả
-    PRIMARY KEY (idInvoiceDetails, invoice),
 	FOREIGN KEY (product) REFERENCES Product(idProduct),
 	FOREIGN KEY (invoice) REFERENCES Invoice(idInvoice)
 )
@@ -23010,6 +23007,7 @@ CREATE TABLE VAT
     VAT FLOAT NOT NULL
 )
 GO
+
 -- INSERT phí VAT
 INSERT INTO VAT (VAT) VALUES (8.0);
 GO
@@ -23108,7 +23106,7 @@ GO
 -- Insert dữ liệu Product
 INSERT INTO Product (idProduct, name, costPrice, originalPrice, quantity, status, supplier, productType, color, size, material, imageProduct)
 VALUES 
-('SP0001', N'Quần kaki đen', 100000, 150000, 100, N'Đang kinh doanh', 'NCC0001', 1, 1, 1, 1, ''),
+('SP0001', N'Quần kaki đen', 100000, 150000, 3, N'Đang kinh doanh', 'NCC0001', 1, 1, 1, 1, ''),
 ('SP0002', N'Quần Short cá tính', 150000, 200000, 100, N'Đang kinh doanh', 'NCC0002', 1, 1, 2, 2, ''),
 ('SP0003', N'Áo Cadigan mùa thu', 200000, 300000, 100, N'Đang kinh doanh', 'NCC0004', 3, 1, 4, 3, ''),
 ('SP0004', N'Áo Cadigan thời thượng', 100000, 400000, 100, N'Đang kinh doanh', 'NCC0005', 4, 1, 5, 3, ''),
@@ -23135,3 +23133,4 @@ GO
 --SELECT * FROM promotion WHERE status = N'Còn hạn' AND typePromotion = N'KM theo tổng tiền' AND priceRange >= 1200000
 
 --Update Product set quantity = 1 where idProduct = 'SP0001'
+SELECT * FROM InvoiceDetails

@@ -523,7 +523,6 @@ public class Promotion_GUI extends javax.swing.JPanel {
             cbTypePromotion.setEnabled(true);
             jtfIDPromotion.setText(promotion_DAO.createIDPromotion());
             jtfNamePromotion.setEditable(true);
-//            jtfQuantity.setEditable(true);
             jtfDiscount.setEditable(true);
             jtaDescription.setEditable(true);
             btnSave.setEnabled(true);
@@ -537,7 +536,7 @@ public class Promotion_GUI extends javax.swing.JPanel {
             jtfDiscount.setText("");
             jtfPriceRange.setText("");
             jtaDescription.setText("");
-
+            cbTypePromotion.setSelectedIndex(0);
         } else if (btnAddPromotion.getText().equals("Hủy")) {
             flag = 0;
             clearInput();

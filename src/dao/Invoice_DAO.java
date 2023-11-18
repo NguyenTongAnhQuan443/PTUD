@@ -10,36 +10,20 @@ import entity.InvoiceDetails;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
+import entity.Staff;
+import entity.Customer;
+import entity.Promotion;
+import java.security.Timestamp;
+import java.time.LocalDateTime;
 
 public class Invoice_DAO extends DAO {
 
+    private Staff_DAO staff_DAO = new Staff_DAO();
+    private Customer_DAO customer_DAO = new Customer_DAO();
+    private Promotion_DAO promotion_DAO = new Promotion_DAO();
 //    Tạo hóa đơn
-//    public boolean createInvoice(Invoice invoice) {
-//        try (Connection connection = ConnectDB.getConnection(); PreparedStatement invoiceStatement = connection.prepareStatement(
-//                "INSERT INTO Invoice (idInvoice, staff, customer, promotion, amountReceived, changeAmount, totalAmount, dateCreated, status) "
-//                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
-//
-//            connection.setAutoCommit(false);
-//
-//            invoiceStatement.setString(1, invoice.getIdInvoice());
-//            invoiceStatement.setString(2, invoice.getStaff().getIdStaff());
-//            invoiceStatement.setString(3, invoice.getCustomer().getIdCustomer());
-//            invoiceStatement.setString(4, invoice.getPromotion() != null ? invoice.getPromotion().getIdPromotion() : null);
-//            invoiceStatement.setDouble(5, invoice.getAmountReceived());
-//            invoiceStatement.setDouble(6, invoice.getChangeAmount());
-//            invoiceStatement.setDouble(7, invoice.getTotalAmount());
-//            invoiceStatement.setDate(8, java.sql.Date.valueOf(LocalDate.now()));
-//            invoiceStatement.setString(9, Invoice.convertStatusToString(invoice.getStatus()));
-//            invoiceStatement.executeUpdate();
-//
-//            connection.commit();
-//            return true;
-//        } catch (SQLException ex) {
-//            ex.printStackTrace(); // Thay bằng log hoặc xử lý ngoại lệ một cách chính xác
-//        }
-//        return false;
-//    }
-public boolean createInvoice(Invoice invoice) {
+
+    public boolean createInvoice(Invoice invoice) {
         try {
             Connection connection = ConnectDB.getConnection();
             String sql = "INSERT INTO Invoice (idInvoice, staff, customer, promotion, amountReceived, changeAmount, totalAmount, dateCreated, status) "
@@ -64,6 +48,8 @@ public boolean createInvoice(Invoice invoice) {
         }
         return false;
     }
+
+//    Tạo id hóa đơn
     public String createIDInvoice() {
         try {
             String sql = "SELECT TOP 1 [idInvoice] FROM [dbo].[Invoice] ORDER BY [idInvoice] DESC";
@@ -89,4 +75,46 @@ public boolean createInvoice(Invoice invoice) {
         }
         return null;
     }
+
+// Lấy hóa đơn bằng id hóa đơn
+    public Invoice getInvoiceById(String id) {
+        try {
+            Connection connection = ConnectDB.getConnection();
+            String sql = "SELECT * FROM Invoice WHERE idInvoice = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                String idInvoice = resultSet.getString("idInvoice");
+
+                // Kiểm tra và xử lý null cho staff, customer, và promotion
+                Staff staff = resultSet.getString("staff") != null ? staff_DAO.getStaffByID(resultSet.getString("staff")) : null;
+                Customer customer = resultSet.getString("customer") != null ? customer_DAO.getCustomerByID(resultSet.getString("customer")) : null;
+                Promotion promotion = resultSet.getString("promotion") != null ? promotion_DAO.getPromotionByID(resultSet.getString("promotion")) : null;
+
+                double amountReceived = resultSet.getDouble("amountReceived");
+                double changeAmount = resultSet.getDouble("changeAmount");
+                double totalAmount = resultSet.getDouble("totalAmount");
+
+                java.sql.Timestamp timestamp = resultSet.getTimestamp("dateCreated");
+                LocalDateTime dateCreated = null;
+                if (timestamp != null) {
+                    dateCreated = timestamp.toLocalDateTime();
+                }
+
+                // Kiểm tra và xử lý null cho status
+                String status = resultSet.getString("status");
+                Invoice invoice = new Invoice(idInvoice, staff, customer, promotion, amountReceived, changeAmount, totalAmount, dateCreated, status != null ? Invoice.convertStringToStatus(status) : null);
+
+                return invoice;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(); // Thay bằng log hoặc xử lý ngoại lệ một cách chính xác
+        }
+
+        return null;
+    }
+
 }
