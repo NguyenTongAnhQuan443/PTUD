@@ -34,6 +34,8 @@ public class Flag {
     public static String idCusForSell_GUI;
 //    Lưu ID khách hàng từ nút thêm mới 
 
+    public static String idInvoiceForPrintf;
+
 //    constructor
     public Flag() {
         flagStaffGUI = false;
@@ -50,6 +52,7 @@ public class Flag {
         flagSell_GUI = 0;
         idCusForSell_GUI = "";
 
+        idInvoiceForPrintf = "";
     }
 
 //
@@ -144,6 +147,14 @@ public class Flag {
 
     public static void setIdCusForSell_GUI(String idCusForSell_GUI) {
         Flag.idCusForSell_GUI = idCusForSell_GUI;
+    }
+
+    public static String getIdInvoiceForPrintf() {
+        return idInvoiceForPrintf;
+    }
+
+    public static void setIdInvoiceForPrintf(String idInvoiceForPrintf) {
+        Flag.idInvoiceForPrintf = idInvoiceForPrintf;
     }
 
 }

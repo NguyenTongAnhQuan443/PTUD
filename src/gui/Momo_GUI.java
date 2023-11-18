@@ -1,30 +1,37 @@
 package gui;
 
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.PdfWriter;
-import java.io.FileOutputStream;
+import dao.InvoiceDetails_DAO;
+import dao.Invoice_DAO;
+import entity.Flag;
+import javax.swing.ImageIcon;
 import java.io.File;
+import entity.Invoice;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import javax.swing.JOptionPane;
 import static utils.Utils.openPDF;
 
 public class Momo_GUI extends javax.swing.JFrame {
 
+    private Invoice_DAO invoice_DAO = new Invoice_DAO();
+    private InvoiceDetails_DAO invoiceDetails_DAO = new InvoiceDetails_DAO();
+    private Invoice invoice;
+
     public Momo_GUI() {
         initComponents();
         this.setLocationRelativeTo(null);
-
-//        String projectDir = System.getProperty("user.dir"); // Lấy đường dẫn đến thư mục dự án
-//        String filePath = projectDir + "\\src\\images\\QRPay.png"; // Sử dụng thư mục "images" trong dự án
         String filePath = "D:\\FleyShopApp\\QRPay\\QRPay.png";
         File imageFile = new File(filePath);
         jlImgQR.setIcon(new ImageIcon(filePath));
         imageFile.delete();
+        JOptionPane.showMessageDialog(null, Flag.getIdInvoiceForPrintf());
+        printInvoice(invoice_DAO.getInvoiceById(Flag.getIdInvoiceForPrintf()));
     }
 
     @SuppressWarnings("unchecked")
@@ -136,25 +143,33 @@ public class Momo_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReturnActionPerformed
 
     private void btnInBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInBillActionPerformed
-        if (JOptionPane.showConfirmDialog(null, "Khách hàng đã thanh toán thành công ?", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-// In hóa đơn           
-// Truyền dữ liệu vào các trường này
-            Invoice_GUI invoice_GUI = new Invoice_GUI();
-            invoice_GUI.setJlIDInvoiceDetails("Mã hóa đơn 001");
-            invoice_GUI.setJlNameCusDetails("Tên KH");
-            invoice_GUI.setJlDateInvoiceDetails("Ngày tạo");
-            invoice_GUI.setJlNameStaffDetails("Tên nhân viên");
-//    invoice_GUI.setjTableListProduct(jTableListProduct); // truyền vào dữ liệu table
-            invoice_GUI.setJlTotalDetails("Tổng tiền hàng");
-// In hóa đơn            
+//        printInvoice(invoice_DAO.getInvoiceById(Flag.getIdInvoiceForPrintf()));
+    }//GEN-LAST:event_btnInBillActionPerformed
 
-// print the panel to pdf
-            Document document = new Document();
+    private void btnInBillMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInBillMouseClicked
+
+    }//GEN-LAST:event_btnInBillMouseClicked
+    public void printInvoice(Invoice invoice) {
+        if (JOptionPane.showConfirmDialog(null, "Bạn có muốn in hóa đơn không ?", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            // In hóa đơn
+            Flag.setIdInvoiceForPrintf(invoice.getIdInvoice());
+            Invoice_GUI invoice_GUI = new Invoice_GUI();
+            invoice_GUI.setJlIDInvoiceDetails(invoice.getIdInvoice());
+            invoice_GUI.setJlNameCusDetails(invoice.getCustomer().getName());
+            invoice_GUI.setJlDateInvoiceDetails(invoice.getDateCreated().toLocalDate().toString());
+            invoice_GUI.setJlNameStaffDetails(invoice.getStaff().getName());
+            invoice_GUI.setJlTotalDetails(invoice.getTotalAmount() + "");
+            invoice_GUI.setJlMoneyReceived(invoice.getAmountReceived() + "");
+            invoice_GUI.setJlExcessCash(invoice.getChangeAmount() + "");
+
+            // In hóa đơn
+            // print the panel to pdf
+            Document document = new Document(); // itextPDF
             try {
                 // Đường dẫn tới tệp PDF để lưu hóa đơn
                 String pdfFilePath = "bill.pdf";
                 // Tạo một đối tượng PdfWriter để viết nội dung vào tệp PDF
-                PdfWriter.getInstance(document, new FileOutputStream(pdfFilePath));
+                PdfWriter.getInstance(document, new FileOutputStream(pdfFilePath)); // java io, itextPDF
                 // Mở tài liệu để bắt đầu viết
                 document.open();
                 // Lấy kích thước của jpMain
@@ -162,32 +177,25 @@ public class Momo_GUI extends javax.swing.JFrame {
                 int height = invoice_GUI.getJpMain().getHeight();
                 // Tạo một BufferedImage để chứa hình ảnh của jpMain
                 BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-                Graphics2D g = image.createGraphics();
+                Graphics2D g = image.createGraphics(); // java awt graphic2D
 
                 invoice_GUI.getJpMain().printAll(g);
                 g.dispose();
                 // Chuyển đổi BufferedImage thành hình ảnh dựng sẵn để chèn vào tài liệu PDF
                 com.itextpdf.text.Image pdfImage = com.itextpdf.text.Image.getInstance(image, null);
                 // Đặt kích thước của hình ảnh trong tài liệu PDF (có thể điều chỉnh kích thước tùy ý)
-                pdfImage.scaleToFit(PageSize.A4.getWidth(), PageSize.A4.getHeight());
+                pdfImage.scaleToFit(PageSize.A4.getWidth(), PageSize.A4.getHeight()); // itextPDF
                 // Chèn hình ảnh vào tài liệu PDF
                 document.add(pdfImage);
                 // Đóng tài liệu
                 document.close();
-                JOptionPane.showMessageDialog(null, "Hóa đơn đã được lưu thành công vào tệp PDF: " + pdfFilePath);
-                openPDF(pdfFilePath);
+                openPDF(pdfFilePath); // utils
             } catch (DocumentException | IOException e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Lỗi khi lưu hóa đơn: " + e.getMessage());
             }
         }
-
-    }//GEN-LAST:event_btnInBillActionPerformed
-
-    private void btnInBillMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInBillMouseClicked
-
-    }//GEN-LAST:event_btnInBillMouseClicked
-
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnInBill;
     private lib2.Button btnReturn;

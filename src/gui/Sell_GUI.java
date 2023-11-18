@@ -16,6 +16,10 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.pdf.PdfWriter;
 import dao.Customer_DAO;
 import dao.InvoiceDetails_DAO;
 import dao.Invoice_DAO;
@@ -48,11 +52,16 @@ import entity.Invoice;
 import entity.Staff;
 import entity.Customer;
 import entity.InvoiceDetails;
+import java.awt.Graphics2D;
 import java.awt.event.ItemEvent;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Vector;
+import static utils.Utils.openPDF;
 
 public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFactory {
 
@@ -806,8 +815,9 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                     if (JOptionPane.showConfirmDialog(null, str2 + utils.Utils.formatMoney(Double.valueOf(str3)), "Xác nhận thanh toán", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                         boolean res = createInvoice("Đã thanh toán");
                         if (res) {
-                            clearInfoInvoice();
                             JOptionPane.showMessageDialog(null, "Thanh toán thành công");
+                            printInvoice(invoice_DAO.getInvoiceById(jLIDInvoiceMain.getText()));
+                            clearInfoInvoice();
                         }
                     } else {
                         jtfChangeAmount.setText("");
@@ -820,9 +830,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                     String str1 = "2|99|0365962232|Nguyen Tong Anh Quan||0|0|";
                     String str2 = "||transfer_myqr";
                     String QrCodeData = str1 + monney + str2;
-//                String projectDir = System.getProperty("user.dir"); // Lấy đường dẫn đến thư mục dự án
                     String fileName = "QRPay.png";
-//                String filePath = projectDir + "\\src\\images\\" + fileName; // Sử dụng thư mục "images" trong dự án
                     String filePath = "D:\\FleyShopApp\\QRPay\\" + fileName;
 
                     String charset = "UTF-8";
@@ -837,59 +845,6 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                 Momo_GUI momo_GUI = new Momo_GUI();
                 momo_GUI.setVisible(true);
             }
-
-//                if (JOptionPane.showConfirmDialog(null, "Bạn có muốn thanh toán hóa đơn này không ?", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            //            if (cbPayments.getSelectedIndex() == 0) {
-            //                //              Sự kiện thanh toán thành công và hỏi có in hóa đơn hay không
-            //                if (JOptionPane.showConfirmDialog(null, "Bạn có muốn in hóa đơn không ?", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            //
-            //                    // In hóa đơn
-            //                    // Truyền dữ liệu vào các trường này
-            //                    Invoice_GUI invoice_GUI = new Invoice_GUI();
-            //                    invoice_GUI.setJlIDInvoiceDetails("Mã hóa đơn 002");
-            //                    invoice_GUI.setJlNameCusDetails("Tên KH");
-            //                    invoice_GUI.setJlDateInvoiceDetails("Ngày tạo");
-            //                    invoice_GUI.setJlNameStaffDetails("Tên nhân viên");
-            //                    //    invoice_GUI.setjTableListProduct(jTableListProduct); // truyền vào dữ liệu table
-            //                    invoice_GUI.setJlTotalDetails("Tổng tiền hàng");
-            //                    // In hóa đơn
-            //
-            //                    // print the panel to pdf
-            //                    Document document = new Document();
-            //                    try {
-            //                        // Đường dẫn tới tệp PDF để lưu hóa đơn
-            //                        String pdfFilePath = "bill.pdf";
-            //                        // Tạo một đối tượng PdfWriter để viết nội dung vào tệp PDF
-            //                        PdfWriter.getInstance(document, new FileOutputStream(pdfFilePath));
-            //                        // Mở tài liệu để bắt đầu viết
-            //                        document.open();
-            //                        // Lấy kích thước của jpMain
-            //                        int width = invoice_GUI.getJpMain().getWidth();
-            //                        int height = invoice_GUI.getJpMain().getHeight();
-            //                        // Tạo một BufferedImage để chứa hình ảnh của jpMain
-            //                        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-            //                        Graphics2D g = image.createGraphics();
-            //
-            //                        invoice_GUI.getJpMain().printAll(g);
-            //                        g.dispose();
-            //                        // Chuyển đổi BufferedImage thành hình ảnh dựng sẵn để chèn vào tài liệu PDF
-            //                        com.itextpdf.text.Image pdfImage = com.itextpdf.text.Image.getInstance(image, null);
-            //                        // Đặt kích thước của hình ảnh trong tài liệu PDF (có thể điều chỉnh kích thước tùy ý)
-            //                        pdfImage.scaleToFit(PageSize.A4.getWidth(), PageSize.A4.getHeight());
-            //                        // Chèn hình ảnh vào tài liệu PDF
-            //                        document.add(pdfImage);
-            //                        // Đóng tài liệu
-            //                        document.close();
-            //                        openPDF(pdfFilePath);
-            //                    } catch (DocumentException | IOException e) {
-            //                        e.printStackTrace();
-            //                        JOptionPane.showMessageDialog(null, "Lỗi khi lưu hóa đơn: " + e.getMessage());
-            //                    }
-            //
-            //                }
-//                    } else if (cbPayments.getSelectedIndex() == 1) {
-//                    }
-//                }
         } else {
             JOptionPane.showMessageDialog(null, "Chưa có sản phẩm nào trong giỏ hàng vui lòng kiểm tra lại");
             return;
@@ -910,6 +865,8 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             jLIDInvoiceMain.setText(invoice_DAO.createIDInvoice());
             jLIDStaffMain.setText(Flag.getIdStaff());
             jLNameStaffMain.setText(staff_DAO.getStaffByID(Flag.getIdStaff()).getName());
+            
+            Flag.setIdInvoiceForPrintf(jLIDInvoiceMain.getText()); // lưu id hóa đơn để in hóa đơn
 
         } else if (btnCreateInvoice.getText().equals("Hủy") && !jtfPhoneCus.getText().trim().equals("")) {
             if (defaultTableModelCart.getRowCount() != 0) {
@@ -1410,11 +1367,18 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
 
 //    Thêm sản phẩm vào giỏ hàng
     private void addToCart(String idProduct) {
-
         Product product = product_DAO.getProductByID(idProduct);
 
         // Nếu sản phẩm tồn tại
         if (product != null) {
+            int currentQuantity = 1; // Số lượng mặc định khi thêm mới sản phẩm vào giỏ hàng
+
+            // Kiểm tra số lượng tồn kho
+            if (currentQuantity > product.getQuantity()) {
+                JOptionPane.showMessageDialog(null, "Vượt quá số lượng tồn kho, vui lòng kiểm tra lại");
+                return; // Không thêm sản phẩm vào giỏ hàng nếu vượt quá số lượng tồn kho
+            }
+
             int rowCount = defaultTableModelCart.getRowCount();
             boolean productExists = false;
 
@@ -1424,7 +1388,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                 if (IdProduct.equals(idProduct)) {
                     productExists = true;
 
-                    int currentQuantity = Integer.parseInt(defaultTableModelCart.getValueAt(i, 3).toString());
+                    currentQuantity = Integer.parseInt(defaultTableModelCart.getValueAt(i, 3).toString());
 
                     // Sử dụng thông tin số lượng từ đối tượng sản phẩm đã lấy
                     if (currentQuantity + 1 > product.getQuantity()) {
@@ -1449,11 +1413,10 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                 }
             }
 
-//          Kiểm tra sản phẩm đã có trong giỏ hàng chưa
+            // Kiểm tra sản phẩm đã có trong giỏ hàng chưa
             if (!productExists) {
-
                 double currentPrice = (product.getCurrentPrice() == null || product.getCurrentPrice() == 0) ? product.getOriginalPrice() : product.getCurrentPrice();
-                Object[] rowData = {rowCount + 1, product.getIdProduct(), product.getName(), 1, product.getOriginalPrice() + "đ", currentPrice + "đ", currentPrice + "đ"};
+                Object[] rowData = {rowCount + 1, product.getIdProduct(), product.getName(), currentQuantity, product.getOriginalPrice() + "đ", currentPrice + "đ", currentPrice + "đ"};
 
                 // Kiểm tra khuyến mãi và đặt màu nếu có
                 Map<String, Double> discountInfo = product_DAO.getDiscountForProduct(idProduct);
@@ -1600,6 +1563,52 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         }
     }
 
+    public static void printInvoice(Invoice invoice) {
+        if (JOptionPane.showConfirmDialog(null, "Bạn có muốn in hóa đơn không ?", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            // In hóa đơn
+            Invoice_GUI invoice_GUI = new Invoice_GUI();
+            invoice_GUI.setJlIDInvoiceDetails(invoice.getIdInvoice());
+            invoice_GUI.setJlNameCusDetails(invoice.getCustomer().getName());
+            invoice_GUI.setJlDateInvoiceDetails(invoice.getDateCreated().toLocalDate().toString());
+            invoice_GUI.setJlNameStaffDetails(invoice.getStaff().getName());
+            invoice_GUI.setJlTotalDetails(invoice.getTotalAmount() + "");
+            invoice_GUI.setJlMoneyReceived(invoice.getAmountReceived() + "");
+            invoice_GUI.setJlExcessCash(invoice.getChangeAmount() + "");
+
+            // In hóa đơn
+            // print the panel to pdf
+            Document document = new Document(); // itextPDF
+            try {
+                // Đường dẫn tới tệp PDF để lưu hóa đơn
+                String pdfFilePath = "bill.pdf";
+                // Tạo một đối tượng PdfWriter để viết nội dung vào tệp PDF
+                PdfWriter.getInstance(document, new FileOutputStream(pdfFilePath)); // java io, itextPDF
+                // Mở tài liệu để bắt đầu viết
+                document.open();
+                // Lấy kích thước của jpMain
+                int width = invoice_GUI.getJpMain().getWidth();
+                int height = invoice_GUI.getJpMain().getHeight();
+                // Tạo một BufferedImage để chứa hình ảnh của jpMain
+                BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+                Graphics2D g = image.createGraphics(); // java awt graphic2D
+
+                invoice_GUI.getJpMain().printAll(g);
+                g.dispose();
+                // Chuyển đổi BufferedImage thành hình ảnh dựng sẵn để chèn vào tài liệu PDF
+                com.itextpdf.text.Image pdfImage = com.itextpdf.text.Image.getInstance(image, null);
+                // Đặt kích thước của hình ảnh trong tài liệu PDF (có thể điều chỉnh kích thước tùy ý)
+                pdfImage.scaleToFit(PageSize.A4.getWidth(), PageSize.A4.getHeight()); // itextPDF
+                // Chèn hình ảnh vào tài liệu PDF
+                document.add(pdfImage);
+                // Đóng tài liệu
+                document.close();
+                openPDF(pdfFilePath); // utils
+            } catch (DocumentException | IOException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Lỗi khi lưu hóa đơn: " + e.getMessage());
+            }
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnCreateInvoice;

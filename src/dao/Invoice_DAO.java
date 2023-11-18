@@ -4,16 +4,13 @@ import connectDB.ConnectDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.List;
 import entity.Invoice;
-import entity.InvoiceDetails;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
 import entity.Staff;
 import entity.Customer;
 import entity.Promotion;
-import java.security.Timestamp;
 import java.time.LocalDateTime;
 
 public class Invoice_DAO extends DAO {

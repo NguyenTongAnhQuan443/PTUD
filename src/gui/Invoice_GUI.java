@@ -1,78 +1,81 @@
 package gui;
 
+import dao.InvoiceDetails_DAO;
+import entity.Flag;
+import entity.Invoice;
 import java.util.Date;
+import java.util.Vector;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import entity.InvoiceDetails;
+import java.util.ArrayList;
+import java.util.List;
+import lib2.ModelChart;
 
 public class Invoice_GUI extends javax.swing.JFrame {
+
+    private DefaultTableModel model;
+    private InvoiceDetails invoiceDetails;
+    private InvoiceDetails_DAO invoiceDetails_DAO = new InvoiceDetails_DAO();
+
+    public Invoice_GUI() {
+        initComponents();
+        model = (DefaultTableModel) jTableListProduct.getModel();
+        model.setRowCount(0);
+        for (InvoiceDetails invoiceDetails : invoiceDetails_DAO.getListInvoiceDetailsById(Flag.getIdInvoiceForPrintf())) {
+            String nameProduct = invoiceDetails.getProduct().getName();
+            int quantity = invoiceDetails.getQuantity();
+            double price_1 = invoiceDetails.getProduct().getOriginalPrice();
+            double price_2;
+            if (invoiceDetails.getProduct().getCurrentPrice() == 0 || invoiceDetails.getProduct().getCurrentPrice() == null) {
+                price_2 = price_1;
+            } else {
+                price_2 = invoiceDetails.getProduct().getCurrentPrice();
+            }
+            double total = quantity * price_2;
+            Object[] rowData = {nameProduct, quantity, price_1, price_2, total};
+            model.addRow(rowData);
+        }
+    }
+
+    public void setJlExcessCash(String excessCash) {
+        this.jlExcessCash.setText(excessCash);
+    }
+
+    public void setJlMoneyReceived(String moneyReceived) {
+        this.jlMoneyReceived.setText(moneyReceived);
+    }
 
     public JPanel getJpMain() {
         return jpMain;
     }
-//    Getter and seter
+
     public void setJpMain(JPanel jpMain) {
         this.jpMain = jpMain;
     }
 
-    public JTable getjTableListProduct() {
-        return jTableListProduct;
+    public void setJlDateInvoiceDetails(String dateInvoiceDetails) {
+        this.jlDateInvoiceDetails.setText(dateInvoiceDetails);
     }
 
-    public void setjTableListProduct(JTable jTableListProduct) {
-        this.jTableListProduct = jTableListProduct;
+    public void setJlIDInvoiceDetails(String IDInvoiceDetails) {
+        this.jlIDInvoiceDetails.setText(IDInvoiceDetails);
     }
 
-    public JLabel getJlDateInvoiceDetails() {
-        return jlDateInvoiceDetails;
+    public void setJlNameCusDetails(String nameCusDetails) {
+        this.jlNameCusDetails.setText(nameCusDetails);
     }
 
-    public void setJlDateInvoiceDetails(String jlDateInvoiceDetails) {
-        this.jlDateInvoiceDetails.setText(jlDateInvoiceDetails);
+    public void setJlNameStaffDetails(String nameStaffDetails) {
+        this.jlNameStaffDetails.setText(nameStaffDetails);
     }
 
-    public JLabel getJlIDInvoiceDetails() {
-        return jlIDInvoiceDetails;
-    }
-
-    public void setJlIDInvoiceDetails(String jlIDInvoiceDetails) {
-        this.jlIDInvoiceDetails.setText(jlIDInvoiceDetails);
-    }
-
-    public JLabel getJlNameCusDetails() {
-        return jlNameCusDetails;
-    }
-
-    public void setJlNameCusDetails(String jlNameCusDetails) {
-        this.jlNameCusDetails.setText(jlNameCusDetails);
-    }
-
-    public JLabel getJlNameStaffDetails() {
-        return jlNameStaffDetails;
-    }
-
-    public void setJlNameStaffDetails(String jlNameStaffDetails) {
-        this.jlNameStaffDetails.setText(jlNameStaffDetails);
-    }
-
-    public JLabel getJlTotalDetails() {
-        return jlTotalDetails;
-    }
-
-    public void setJlTotalDetails(String jlTotalDetails) {
-        this.jlTotalDetails.setText(jlTotalDetails);
-    }
-
-    public JScrollPane getJspTableListProduct() {
-        return jspTableListProduct;
-    }
-
-    public void setJspTableListProduct(JScrollPane jspTableListProduct) {
-        this.jspTableListProduct = jspTableListProduct;
-    }
-    public Invoice_GUI() {
-        initComponents();
+    public void setJlTotalDetails(String totalDetails) {
+        this.jlTotalDetails.setText(totalDetails);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -105,6 +108,7 @@ public class Invoice_GUI extends javax.swing.JFrame {
         jlVND1 = new javax.swing.JLabel();
         jlExcessCash = new javax.swing.JLabel();
         jlVND2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -140,27 +144,31 @@ public class Invoice_GUI extends javax.swing.JFrame {
         jlNameStaff.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jlNameStaff.setText("Tên NV :");
 
+        jlIDInvoiceDetails.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         jlIDInvoiceDetails.setText("HD001");
 
+        jlNameCusDetails.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         jlNameCusDetails.setText("Nguyễn Quân");
 
+        jlDateInvoiceDetails.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         jlDateInvoiceDetails.setText("23-10-2023");
 
+        jlNameStaffDetails.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         jlNameStaffDetails.setText("Nguyễn Văn A");
 
         jTableListProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Mã SP", "Tên SP", "SL", "Giá", "Giảm", "Thành tiền"
+                "Tên SP", "SL", "Giá", "Giảm", "Thành tiền"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -200,6 +208,8 @@ public class Invoice_GUI extends javax.swing.JFrame {
         jlVND2.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         jlVND2.setText("VND");
 
+        jLabel3.setText("(Đã bao gồm phí VAT)");
+
         javax.swing.GroupLayout jpMainLayout = new javax.swing.GroupLayout(jpMain);
         jpMain.setLayout(jpMainLayout);
         jpMainLayout.setHorizontalGroup(
@@ -208,10 +218,6 @@ public class Invoice_GUI extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jlTitle)
                 .addGap(104, 104, 104))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpMainLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jlLogo)
-                .addGap(123, 123, 123))
             .addGroup(jpMainLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,6 +274,15 @@ public class Invoice_GUI extends javax.swing.JFrame {
                 .addGap(85, 85, 85)
                 .addComponent(jpThanks)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpMainLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpMainLayout.createSequentialGroup()
+                        .addComponent(jlLogo)
+                        .addGap(123, 123, 123))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpMainLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addContainerGap())))
         );
         jpMainLayout.setVerticalGroup(
             jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -296,12 +311,14 @@ public class Invoice_GUI extends javax.swing.JFrame {
                     .addComponent(jlNameCusDetails)
                     .addComponent(jlNameStaffDetails))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jspTableListProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jspTableListProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
                 .addGroup(jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlTotal)
                     .addComponent(jlVND)
                     .addComponent(jlTotalDetails))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -337,17 +354,10 @@ public class Invoice_GUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Invoice_GUI().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JTable jTableListProduct;
     private javax.swing.JLabel jlAddress;
     private javax.swing.JLabel jlAddressDetails;
