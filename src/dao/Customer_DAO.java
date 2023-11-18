@@ -217,7 +217,7 @@ public class Customer_DAO {
     }
 
 //    lấy danh sách khách hàng tiềm năng (Khách hàng nhận thông tin khuyến mãi)
-     public List<Customer> getListPotentialCustomers() {
+    public List<Customer> getListPotentialCustomers() {
         List<Customer> listCustomers = new ArrayList<Customer>();
         String sql = "SELECT * FROM Customer WHERE totalAmount6months >= 5000000 ORDER BY totalAmount6months DESC;";
         try {
@@ -245,4 +245,19 @@ public class Customer_DAO {
         }
         return listCustomers;
     }
+
+//     Cập nhập điểm tích lũy của khách hàng khi mua hàng 
+    public boolean updateRewordPoints(Customer customer) {
+        String sql = "UPDATE Customer SET rewardPoints = ? WHERE idCustomer = ?";
+        try {
+            PreparedStatement preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
+            preparedStatement.setInt(1, customer.getRewardPoints());
+            preparedStatement.setString(2, customer.getIdCustomer());
+            return preparedStatement.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

@@ -22856,12 +22856,11 @@ CREATE TABLE Promotion
 	typePromotion NVARCHAR(30) NOT NULL, 
 	discount FLOAT NOT NULL,  -- Số tiền giảm hoặc phần trăm giảm
 	priceRange FLOAT, -- khoảng giá áp dụng ví dụ trên 100.000VND
-	quantity INT NOT NULL,
+	quantity INT,
 	dayStart DATE NOT NULL,
 	dayEnd DATE NOT NULL,
 	status NVARCHAR(25),
-	description NVARCHAR(50),
-	--CONSTRAINT CK_Promotion_Date CHECK (dayStart < dayEnd),
+	description NVARCHAR(200),
 	CONSTRAINT CK_Promotion_Status CHECK (status IN (N'Hết hạn', N'Còn hạn')),
 )
 GO
@@ -22968,21 +22967,20 @@ BEGIN
 END
 GO
 
-
 -- TẠO BẢNG HÓA ĐƠN
 CREATE TABLE Invoice
 (
     idInvoice NVARCHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS PRIMARY KEY,	
 	staff NVARCHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS NOT NULL,
 	customer NVARCHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS NOT NULL,
-	promotion NVARCHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS NOT NULL,
+	promotion NVARCHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS,
 	amountReceived FLOAT NOT NULL, -- số tiền nhận
     changeAmount FLOAT, -- số tiền thừa
 	--discountedAmount FLOAT NOT NULL, -- Số tiền được giảm
     totalAmount FLOAT, -- Tổng tiền hóa đơn
     dateCreated DATETIME NOT NULL,
     status NVARCHAR(25) NOT NULL,
-    deliveryStatus NVARCHAR(25) NOT NULL,
+    --deliveryStatus NVARCHAR(25) NOT NULL,
 	FOREIGN KEY (staff) REFERENCES Staff(idStaff),
     FOREIGN KEY (customer) REFERENCES Customer(idCustomer),
 	FOREIGN KEY (promotion) REFERENCES Promotion(idPromotion)
@@ -23005,6 +23003,17 @@ CREATE TABLE InvoiceDetails
 )
 GO
 
+-- TẠO BẢNG LƯU PHÍ VAT
+CREATE TABLE VAT
+(
+    id INT IDENTITY(0,1) PRIMARY KEY,
+    VAT FLOAT NOT NULL
+)
+GO
+-- INSERT phí VAT
+INSERT INTO VAT (VAT) VALUES (8.0);
+GO
+
 -- Insert dữ liệu Supplier
 INSERT INTO Supplier (idSupplier, name, email, phone, status, province, district, ward, address)
 VALUES ('NCC0001', N'Louis Vuitton', 'LouisVuitton@gmail.com','0889051111', N'Đang hợp tác','106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An');
@@ -23022,28 +23031,6 @@ INSERT INTO Supplier (idSupplier, name, email, phone,status, province, district,
 VALUES ('NCC0005', N'Chanel', 'Chanel@gmail.com', '0889055555', N'Ngưng hợp tác', '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An');
 GO
 
--- Insert dữ liệu Promotion 
-/*
-INSERT INTO Promotion (idPromotion, name, typePromotion, discount, dayStart, dayEnd, status, description)
-VALUES ('KM0001', N'Khuyễn mãi chào mừng năm học mới', N'KM theo %', 20.0, '2023-10-18', '2023-12-30', N'Còn hạn', N'Chương trình giảm giá 20% cho HSSV');
-GO
-INSERT INTO Promotion (idPromotion, name, typePromotion, discount, dayStart, dayEnd, status, description)
-VALUES ('KM0002', N'Khuyến mãi chào thu', N'KM theo %', 10.0, '2023-10-18', '2023-12-30', N'Còn hạn', N'Chương trình giảm giá 10% chào thu');
-GO
-INSERT INTO Promotion (idPromotion, name, typePromotion, discount, priceRange, dayStart, dayEnd, status, description)
-VALUES ('KM0003', N'Khuyến mãi vàng', N'KM theo tổng tiền', 50000.0, 500000.0, '2023-10-18', '2023-12-30', N'Còn hạn', N'Giảm 50,000 VND cho đơn hàng từ 500, 000 VND');
-GO
-INSERT INTO Promotion (idPromotion, name, typePromotion, discount, priceRange, dayStart, dayEnd, status, description)
-VALUES ('KM0004', N'Khuyến mãi kim cương', N'KM theo tổng tiền', 100000.0, 500000.0, '2023-10-18', '2023-12-30', N'Còn hạn', N'Giảm 100,000 VND cho đơn hàng từ 500, 000 VND');
-GO
-INSERT INTO Promotion (idPromotion, name, typePromotion, discount, dayStart, dayEnd, status, description)
-VALUES ('KM0005', N'Khuyến mãi mùa hè', N'KM theo %', 20.0, '2023-09-18', '2023-10-17', N'Hết hạn', N'Chương trình giảm giá 20% chào hè');
-GO
-INSERT INTO Promotion (idPromotion, name, typePromotion, discount, priceRange, dayStart, dayEnd, status, description)
-VALUES ('KM0006', N'Khuyến mãi tri ân', N'KM theo tổng tiền', 100000.0, 500000.0, '2023-09-18', '2023-10-17', N'Hết hạn', N'Giảm 100,000 VND cho đơn hàng từ 500, 000 VND');
-GO
-*/
-
 -- Insert dữ liệu Staff
 INSERT INTO Staff (idStaff, name, cic, phone, email,  dayofbirth, sex, province, district, ward, address, rights, status, password)
 VALUES
@@ -23059,10 +23046,10 @@ GO
 -- Insert dữ liệu Customer
 INSERT INTO Customer (idCustomer, name, phone, email, province, district, ward, address, rewardPoints, typeRank, totalAmount6months ,receivePromotions)
 VALUES
-    ('KH0001', N'Nguyễn Thị Hằng', '0123456789', 'hang.nguyen@example.com', '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', 1000, N'Khách hàng bạc', '2000000',1),
-    ('KH0002', N'Trần Văn Minh', '0987654321', 'minh.tran@example.com', '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', 2000, N'Khách hàng bạc', '2000000', 0),
-    ('KH0003', N'Lê Thị Mai', '0123456780', 'mai.le@example.com', '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', 3000, N'Khách hàng kim bạc', '2500000', 1),
-    ('KH0004', N'Hoàng Văn Tú', '0987654322', 'tu.hoang@example.com', '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', 4000, N'Khách hàng bạc', '2000000',0),
+    ('KH0001', N'Nguyễn Thị Hằng', '0123456789', 'ntanhquan.sly@gmail.com', '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', 1000, N'Khách hàng bạc', '2000000',1),
+    ('KH0002', N'Trần Văn Minh', '0987654321', 'meloball.m4v@gmail.com', '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', 2000, N'Khách hàng bạc', '2000000', 0),
+    ('KH0003', N'Lê Thị Mai', '0123456780', 'tuyennguyen224122@gmail.com', '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', 3000, N'Khách hàng kim bạc', '2500000', 1),
+    ('KH0004', N'Hoàng Văn Tú', '0987654322', 'nguyenppnhi.1007@gmail.com', '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', 4000, N'Khách hàng bạc', '2000000',0),
     ('KH0005', N'Nguyễn Thị Trâm', '0123456781', 'tram.nguyen@example.com', '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', 5000, N'Khách hàng bạc', '2000000',1),
 	('KH0006', N'Lê Thị Mai Anh', '0128456780', 'mai.anhle@example.com', '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', 3000, N'Khách hàng kim bạc', '2000000', 1);
 GO
@@ -23127,46 +23114,11 @@ VALUES
 ('SP0004', N'Áo Cadigan thời thượng', 100000, 400000, 100, N'Đang kinh doanh', 'NCC0005', 4, 1, 5, 3, ''),
 ('SP0005', N'Áo polo Nam', 300000, 550000, 100, N'Đang kinh doanh', 'NCC0005', 2, 1, 3, 1, '');
 GO
--- Insert dữ liệu Invoice 
-/*
-INSERT INTO Invoice (idInvoice, staff, customer, promotion, amountReceived, changeAmount, totalAmount, dateCreated, status, deliveryStatus)
-VALUES
-    ('HD0001', 'NV0001', 'KH0001', 'KM0001', 1500.0, 0.0, 1500.0, GETDATE(), N'Đang xử lý', N'Chưa giao'),
-    ('HD0002', 'NV0002', 'KH0002', 'KM0002', 800.0, 200.0, 1000.0, GETDATE(), N'Hoàn thành', N'Đã giao'),
-    ('HD0003', 'NV0001', 'KH0003', 'KM0003', 4500.0, 0.0, 4500.0, GETDATE(), N'Đang xử lý', N'Chưa giao'),
-    ('HD0004', 'NV0002', 'KH0004', 'KM0004', 2500.0, 500.0, 3000.0, GETDATE(), N'Hoàn thành', N'Đã giao'),
-    ('HD0005', 'NV0003', 'KH0005', 'KM0005', 3000.0, 0.0, 3000.0, GETDATE(), N'Đang xử lý', N'Chưa giao');
-GO
-*/
-
--- Insert dữ liệu cho bảng InvoiceDetails
-/*
-INSERT INTO InvoiceDetails (idInvoiceDetails, invoice, product, quantity, unitPrice, returnQuantity, returnReason)
-VALUES
-    ('CTHD0001', 'HD0001', 'SP0001', 5, 100.0, NULL, NULL),
-    ('CTHD0002', 'HD0001', 'SP0002', 3, 120.0, NULL, NULL),
-    ('CTHD0003', 'HD0002', 'SP0003', 2, 140.0, NULL, NULL),
-    ('CTHD0004', 'HD0003', 'SP0004', 1, 160.0, NULL, NULL),
-    ('CTHD0005', 'HD0003', 'SP0005', 4, 180.0, NULL, NULL),
-    ('CTHD0006', 'HD0004', 'SP0001', 2, 100.0, NULL, NULL),
-    ('CTHD0007', 'HD0004', 'SP0002', 3, 120.0, NULL, NULL),
-    ('CTHD0008', 'HD0005', 'SP0003', 1, 140.0, NULL, NULL),
-    ('CTHD0009', 'HD0005', 'SP0004', 5, 160.0, NULL, NULL),
-    ('CTHD0010', 'HD0005', 'SP0005', 2, 180.0, NULL, NULL);
-GO
-*/
-
---INSERT INTO Promotion (idPromotion, name, typePromotion, discount, priceRange, quantity, dayStart, dayEnd, status, description)
---VALUES ('P001', 'Khuyến mãi năm mới', 'Giảm giá', 10, NULL, 0, '2023-01-01', '2023-12-31', N'Còn hạn', 'Khuyến mãi năm mới')
---GO
 
 --Test TRIGGER KHUYẾN MÃI
 --select * from Promotion
 --SELECT dayEnd FROM Promotion WHERE idPromotion = 'KM0001';
 --UPDATE Promotion SET dayEnd = DATEADD(DAY, -1, GETDATE()) WHERE idPromotion = 'KM0001';
-
---select * from Customer
-
 
 --TEST TRIGGER RANK KHÁCH HÀNG
 --UPDATE Customer
@@ -23174,4 +23126,12 @@ GO
 --WHERE idCustomer = 'KH0001';
 
 --select * from Customer
-select * from Product
+--select * from ProductPromotion where idPromotion = 'KM0001';
+--select * from Promotion where idPromotion = 'KM0001'
+
+--select * from Promotion Where  name = N'Khuyến mãi vàng'
+--SELECT * FROM promotion WHERE status = N'Còn hạn' AND typePromotion = N'KM theo tổng tiền'
+--select * from Customer
+--SELECT * FROM promotion WHERE status = N'Còn hạn' AND typePromotion = N'KM theo tổng tiền' AND priceRange >= 1200000
+
+--Update Product set quantity = 1 where idProduct = 'SP0001'

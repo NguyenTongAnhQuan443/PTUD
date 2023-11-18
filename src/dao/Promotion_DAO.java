@@ -241,40 +241,41 @@ public class Promotion_DAO extends DAO {
 
         return listPromotion;
     }
-// Lấy khuyến mãi theo tổng tiền với trạng thái còn hạn, và hóa đơn áp dụng  trên một giá trị cụ thể
+// Lấy khuyến mãi theo tổng tiền với trạng thái còn hạn, và hóa đơn áp dụng  trên một giá trị cụ thể và số lượng KM lớn hơn 0
+
     public List<Promotion> getListPromotionsByStatusAndTypePromotion2(double minPriceRange) {
-    List<Promotion> listPromotion = new ArrayList<>();
-    String sql = "SELECT * FROM promotion WHERE status = N'Còn hạn' AND typePromotion = N'KM theo tổng tiền' AND ? >= priceRange";
+        List<Promotion> listPromotion = new ArrayList<>();
+        String sql = "SELECT * FROM promotion WHERE status = N'Còn hạn' AND typePromotion = N'KM theo tổng tiền' AND quantity > 0 AND ? >= priceRange";
 
-    try {
-        connectDB.ConnectDB.getInstance();
-        Connection connection = ConnectDB.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setDouble(1, minPriceRange);
+        try {
+            connectDB.ConnectDB.getInstance();
+            Connection connection = ConnectDB.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setDouble(1, minPriceRange);
 
-        ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-        while (resultSet.next()) {
-            String idPromotion = resultSet.getString("idPromotion");
-            String name = resultSet.getString("name");
-            String typePromotion = resultSet.getString("typePromotion");
-            float discount = resultSet.getFloat("discount");
-            float priceRange = resultSet.getFloat("priceRange");
-            int quantity = resultSet.getInt("quantity");
-            LocalDate dayStart = resultSet.getDate("dayStart").toLocalDate();
-            LocalDate dayEnd = resultSet.getDate("dayEnd").toLocalDate();
-            String promotionStatus = resultSet.getString("status");
-            String description = resultSet.getString("description");
+            while (resultSet.next()) {
+                String idPromotion = resultSet.getString("idPromotion");
+                String name = resultSet.getString("name");
+                String typePromotion = resultSet.getString("typePromotion");
+                float discount = resultSet.getFloat("discount");
+                float priceRange = resultSet.getFloat("priceRange");
+                int quantity = resultSet.getInt("quantity");
+                LocalDate dayStart = resultSet.getDate("dayStart").toLocalDate();
+                LocalDate dayEnd = resultSet.getDate("dayEnd").toLocalDate();
+                String promotionStatus = resultSet.getString("status");
+                String description = resultSet.getString("description");
 
-            Promotion promotion = new Promotion(idPromotion, name, Promotion.convertStringToTypePromotion(typePromotion), discount, priceRange, quantity, dayStart, dayEnd, Promotion.convertStringToStatus(promotionStatus), description);
-            listPromotion.add(promotion);
+                Promotion promotion = new Promotion(idPromotion, name, Promotion.convertStringToTypePromotion(typePromotion), discount, priceRange, quantity, dayStart, dayEnd, Promotion.convertStringToStatus(promotionStatus), description);
+                listPromotion.add(promotion);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
 
-    return listPromotion;
-}
+        return listPromotion;
+    }
 
 //    Lấy khuyến mãi bằng id
     public Promotion getPromotionByID(String id) {
@@ -426,7 +427,7 @@ public class Promotion_DAO extends DAO {
         attachmentBodyPart.setFileName(filePath);
         multipart.addBodyPart(attachmentBodyPart);
     }
-    
+
 //    Cập nhập trạng thái promotion
     public boolean updatePromotionStatus(String promotionId, String newStatus) {
         try {

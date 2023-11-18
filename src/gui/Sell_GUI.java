@@ -130,10 +130,8 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                     double total = vatValue + calculateTotalAmount();
                     jtfTotalAmount.setText(total + " VNĐ");
 
-                    // Tính tiền được áp dụng khuyến mãi
-                    priceRange = (double) calculateTotalAmount();
                     //        Lấy tổng tiền hóa đon từ đó lấy mã giảm giá hợp lý
-                    loadPromotion(promotion_DAO.getListPromotionsByStatusAndTypePromotion2(priceRange));
+                    loadPromotion(promotion_DAO.getListPromotionsByStatusAndTypePromotion2(total));
                 }
             }
         });
@@ -619,7 +617,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
 
         jLMinusPoints.setText("Trừ điểm TL:");
 
-        cbPonis.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1.000", "2.000", "3.000", "4.000", "5.000", "6.000", "7.000", "8.000", "9.000", "10.000" }));
+        cbPonis.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1000", "2000", "3000", "4000", "5000", "6000", "7000", "8000", "9000", "10000" }));
         cbPonis.setEnabled(false);
         cbPonis.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -806,7 +804,13 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                     String str2 = "Số tiền phải phải trả lại khách hành là : ";
                     String str3 = jtfChangeAmount.getText().trim().replaceAll("\\ VNĐ", "");
                     if (JOptionPane.showConfirmDialog(null, str2 + utils.Utils.formatMoney(Double.valueOf(str3)), "Xác nhận thanh toán", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-
+                        boolean res = createInvoice("Đã thanh toán");
+                        if (res) {
+                            clearInfoInvoice();
+                            JOptionPane.showMessageDialog(null, "Thanh toán thành công");
+                        }
+                    } else {
+                        jtfChangeAmount.setText("");
                     }
                 }
 
@@ -913,26 +917,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             if (defaultTableModelCart.getRowCount() != 0) {
                 int option = JOptionPane.showConfirmDialog(null, "Giỏ hàng đang bận bạn có chắc muốn hủy toàn bộ không !", "Xác nhận", JOptionPane.YES_NO_OPTION);
                 if (option == JOptionPane.YES_OPTION) {
-                    defaultTableModelCart.setRowCount(0);
-
-                    jtfPhoneCus.setEditable(false);
-                    btnSearchPhone.setEnabled(false);
-                    btnPendingInvoice.setEnabled(false);
-                    btnCreateInvoice.setText("Tạo hóa đơn");
-                    btnPay.setEnabled(false);
-                    jtfMoneyReceived.setEditable(false);
-
-                    clearAllInPut();
-                    jtfMoneyReceived.setEditable(false);
-                    cbPonis.setEditable(false);
-
-                    jLIDInvoiceMain.setText("");
-                    jLIDStaffMain.setText("");
-                    jLNameStaffMain.setText("");
-
-                    cbPayments.setEnabled(false);
-                    cbPonis.setEnabled(false);
-                    cbPromotion.setEnabled(false);
+                    clearInfoInvoice();
                 }
             } else {
                 jtfPhoneCus.setEditable(false);
@@ -953,6 +938,33 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                 cbPayments.setEnabled(false);
                 cbPonis.setEnabled(false);
                 cbPromotion.setEnabled(false);
+            }
+        } else if (btnCreateInvoice.getText().equals("Hủy")) {
+            if (defaultTableModelCart.getRowCount() != 0) {
+                int option = JOptionPane.showConfirmDialog(null, "Giỏ hàng đang bận bạn có chắc muốn hủy toàn bộ không !", "Xác nhận", JOptionPane.YES_NO_OPTION);
+                if (option == JOptionPane.YES_OPTION) {
+                    clearInfoInvoice();
+                }
+            } else {
+                jtfPhoneCus.setEditable(false);
+                btnSearchPhone.setEnabled(false);
+                btnPendingInvoice.setEnabled(false);
+                btnCreateInvoice.setText("Tạo hóa đơn");
+                btnPay.setEnabled(false);
+                jtfMoneyReceived.setEditable(false);
+
+                clearAllInPut();
+                jtfMoneyReceived.setEditable(false);
+                cbPonis.setEditable(false);
+
+                jLIDInvoiceMain.setText("");
+                jLIDStaffMain.setText("");
+                jLNameStaffMain.setText("");
+
+                cbPayments.setEnabled(false);
+                cbPonis.setEnabled(false);
+                cbPromotion.setEnabled(false);
+                jtfTotalAmount.setText(""); // khác
             }
         }
     }//GEN-LAST:event_btnCreateInvoiceActionPerformed
@@ -1086,6 +1098,38 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             previousPointsIndex = -1;
         }
     }//GEN-LAST:event_cbPonisItemStateChanged
+// Xóa thông tin chi tiết trên hóa đơn 
+
+    private void clearInfoInvoice() {
+        defaultTableModelCart.setRowCount(0);
+
+        jLIDInvoiceMain.setText("");
+        jLIDStaffMain.setText("");
+        jLNameStaffMain.setText("");
+
+        jtfPhoneCus.setText("");
+        jtfPhoneCus.setEditable(false);
+
+        jtfNameCus.setText("");
+        jtfEmail.setText("");
+        jTFPoints.setText("");
+
+        jtfTotalAmount.setText("");
+        cbPromotion.setSelectedIndex(0);
+        cbPromotion.setEnabled(false);
+        cbPonis.setSelectedItem(0);
+        cbPonis.setEnabled(false);
+        cbPayments.setSelectedIndex(0);
+        cbPayments.setEditable(false);
+
+        jtfMoneyReceived.setText("");
+        jtfMoneyReceived.setEditable(false);
+        jtfChangeAmount.setText("");
+
+        btnCreateInvoice.setText("Tạo hóa đơn");
+        btnPendingInvoice.setEnabled(false);
+        btnPay.setEnabled(false);
+    }
 //   Cập nhập giá tiền phải trả lại khách
 
     private void updateChangeAmount() {
@@ -1096,8 +1140,8 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             jtfChangeAmount.setText(changeAmount + " VNĐ");
         }
     }
-//    Kiểm tra dữ liệu số 
 
+//    Kiểm tra dữ liệu số 
     private boolean isNumber(String number) {
         try {
             int num = Integer.parseInt(number);
@@ -1249,6 +1293,8 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
 
 //    Load thông tin khuyến mãi lên combobox
     private void loadPromotion(List<Promotion> listPromotion) {
+        cbPromotion.removeAllItems();
+        cbPromotion.addItem("Không áp dụng");
         for (Promotion promotion : listPromotion) {
             String promotionName = promotion.getName();
             String promotionId = promotion.getIdPromotion();
@@ -1335,6 +1381,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                 String qrIDProduct = result.getText();
                 if (btnCreateInvoice.getText().equals("Hủy") && !jtfNameCus.getText().equals("")) {
                     addToCart(qrIDProduct);
+                    jtfMoneyReceived.setText(""); // làm mới ô tiền nhận nếu thêm sản phẩm mới vào giỏ
                 } else {
                     JOptionPane.showMessageDialog(null, "Vui lòng thêm khách hàng trước");
                 }
@@ -1438,32 +1485,72 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
 //    Tạo hóa đơn
 
     private boolean createInvoice(String status) {
-
-        String idInvoice = invoice_DAO.createIDInvoice();
-        Staff staff = staff_DAO.getStaffByID(Flag.getIdStaff());
+        String idInvoice = jLIDInvoiceMain.getText().trim();
+        Staff staff = staff_DAO.getStaffByID(jLIDStaffMain.getText().trim());
         Customer customer = customer_DAO.getCustomerByID(Flag.getIdCusForSell_GUI());
         Promotion promotion = null;
-        String idpromotion;
+        String idpromotion = null;
+
+        double amountReceived = Double.parseDouble(jtfMoneyReceived.getText().trim());
+        double changeAmount = Double.parseDouble(jtfChangeAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", ""));
+        double totalAmount = Double.parseDouble(jtfTotalAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", ""));
+        LocalDateTime dateCreated = LocalDateTime.now();
+
+        Invoice invoice = new Invoice(idInvoice, staff, customer, promotion, amountReceived, changeAmount, totalAmount, dateCreated, Invoice.convertStringToStatus(status));
+
+        boolean res = invoice_DAO.createInvoice(invoice);
+
+        if (res) {
+            //Cập nhập lại số lượng mã khuyến mãi
+            minusQuantityPromotion(promotion);
+            //Cập nhập điểm tích lũy
+            minusPointsCustomer(customer);
+            //Cộng điểm tích lũy dựa trên tổng tiền hóa đơn
+            sumPointsCustomer(customer);
+            return true;
+        }
+
+        return false;
+    }
+
+//    Cập nhập lại số lượng mã giảm giá khi mã giảm giá được sử dụng
+    private void minusQuantityPromotion(Promotion promotion) {
         if (!cbPromotion.getSelectedItem().toString().equals("Không áp dụng")) {
             promotion = promotion_DAO.getPromotionByID(getPromotionIdFromComboBox());
-            idpromotion = promotion.getIdPromotion();
+            String idpromotion = promotion.getIdPromotion();
+
+            // Kiểm tra và giảm số lượng khuyến mãi
+            if (promotion.getQuantity() > 0) {
+                promotion.setQuantity(promotion.getQuantity() - 1);
+
+                // Kiểm tra số lượng trước khi cập nhật
+                if (promotion.getQuantity() < 0) {
+//                    System.out.println("Số lượng khuyến mãi không đủ");
+                } else {
+                    // Nếu số lượng không âm, cập nhật thông tin khuyến mãi
+                    promotion_DAO.updateInfoPromotion(promotion);
+                }
+            }
         }
-        double amountReceived;
-        amountReceived = Double.parseDouble(jtfMoneyReceived.getText().trim()); // tiền nhận
-        double changeAmount; // tiền thừa
-        changeAmount = Double.parseDouble(jtfChangeAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", ""));
-        double totalAmount; // tổng tiền hóa đơn
-//        totalAmount = Double.parseDouble(jtfTotalAmount.getText().trim().replaceAll("\\ VNĐ", ""));
+    }
 
-//            LocalDateTime dateCreated = LocalDateTime.now();
-//
-//            Invoice invoice = new Invoice(idInvoice, staff, customer, promotion, amountReceived, changeAmount, totalAmount, dateCreated, Invoice.convertStringToStatus(status));
-//            boolean res = invoice_DAO.createInvoice(invoice);
-//            if (res) {
-//                return true;
-//            }
-        return false;
+//    Cập nhập lại điểm tích lũy của khách hàng khi khách hàng sử dụng
+    private void minusPointsCustomer(Customer customer) {
+        if (cbPonis.getSelectedIndex() > 0) {
+            int pointsToDeduct = Integer.parseInt(cbPonis.getSelectedItem().toString());
+            customer.setRewardPoints(customer.getRewardPoints() - pointsToDeduct);
+            // Cập nhật thông tin khách hàng sau khi trừ điểm
+            customer_DAO.updateRewordPoints(customer);
+        }
+    }
 
+//    Cộng 1000đ tích lũy cho tối 100K tiền hóa đơn 
+    private void sumPointsCustomer(Customer customer) {
+        double totalAmount = Double.parseDouble(jtfTotalAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", ""));
+        int newPoints = (int) (totalAmount / 100);
+        int currentPoints = customer.getRewardPoints();
+        customer.setRewardPoints(currentPoints + newPoints);
+        customer_DAO.updateRewordPoints(customer);
     }
 
     private void createInvoiceDetails(Invoice invoice, Product product) {
