@@ -1,19 +1,33 @@
 package gui;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.PdfWriter;
 import dao.InvoiceDetails_DAO;
 import dao.Invoice_DAO;
+import entity.Customer;
 import entity.Flag;
 import javax.swing.ImageIcon;
 import java.io.File;
 import entity.Invoice;
+import entity.Promotion;
+import static gui.Sell_GUI.printInvoice;
 import java.awt.Graphics2D;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import static utils.Utils.openPDF;
 
@@ -21,8 +35,6 @@ public class Momo_GUI extends javax.swing.JFrame {
 
     private Invoice_DAO invoice_DAO = new Invoice_DAO();
     private InvoiceDetails_DAO invoiceDetails_DAO = new InvoiceDetails_DAO();
-    private Invoice invoice;
-
     public Momo_GUI() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -30,8 +42,14 @@ public class Momo_GUI extends javax.swing.JFrame {
         File imageFile = new File(filePath);
         jlImgQR.setIcon(new ImageIcon(filePath));
         imageFile.delete();
-        JOptionPane.showMessageDialog(null, Flag.getIdInvoiceForPrintf());
-        printInvoice(invoice_DAO.getInvoiceById(Flag.getIdInvoiceForPrintf()));
+        
+//        Sự kiện lắng nghe Jframe momo đóng
+         addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                dispose();
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -143,7 +161,8 @@ public class Momo_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReturnActionPerformed
 
     private void btnInBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInBillActionPerformed
-//        printInvoice(invoice_DAO.getInvoiceById(Flag.getIdInvoiceForPrintf()));
+        Flag.setFlagPayDone(true);
+        dispose();
     }//GEN-LAST:event_btnInBillActionPerformed
 
     private void btnInBillMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInBillMouseClicked
@@ -152,7 +171,6 @@ public class Momo_GUI extends javax.swing.JFrame {
     public void printInvoice(Invoice invoice) {
         if (JOptionPane.showConfirmDialog(null, "Bạn có muốn in hóa đơn không ?", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             // In hóa đơn
-            Flag.setIdInvoiceForPrintf(invoice.getIdInvoice());
             Invoice_GUI invoice_GUI = new Invoice_GUI();
             invoice_GUI.setJlIDInvoiceDetails(invoice.getIdInvoice());
             invoice_GUI.setJlNameCusDetails(invoice.getCustomer().getName());
@@ -196,6 +214,8 @@ public class Momo_GUI extends javax.swing.JFrame {
             }
         }
     }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnInBill;
     private lib2.Button btnReturn;

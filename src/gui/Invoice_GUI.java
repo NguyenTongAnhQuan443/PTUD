@@ -7,14 +7,8 @@ import java.util.Date;
 import java.util.Vector;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import entity.InvoiceDetails;
-import java.util.ArrayList;
-import java.util.List;
-import lib2.ModelChart;
 
 public class Invoice_GUI extends javax.swing.JFrame {
 
@@ -37,7 +31,7 @@ public class Invoice_GUI extends javax.swing.JFrame {
                 price_2 = invoiceDetails.getProduct().getCurrentPrice();
             }
             double total = quantity * price_2;
-            Object[] rowData = {nameProduct, quantity, price_1, price_2, total};
+            Object[] rowData = {nameProduct, quantity, price_2, total};
             model.addRow(rowData);
         }
     }
@@ -156,19 +150,20 @@ public class Invoice_GUI extends javax.swing.JFrame {
         jlNameStaffDetails.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         jlNameStaffDetails.setText("Nguyễn Văn A");
 
+        jTableListProduct.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         jTableListProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Tên SP", "SL", "Giá", "Giảm", "Thành tiền"
+                "Tên SP", "SL", "Đơn giá", "Thành tiền"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

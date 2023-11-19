@@ -11,6 +11,7 @@ import com.google.zxing.MultiFormatReader;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.NotFoundException;
 import com.google.zxing.Result;
+import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
@@ -54,13 +55,18 @@ import entity.Customer;
 import entity.InvoiceDetails;
 import java.awt.Graphics2D;
 import java.awt.event.ItemEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static utils.Utils.openPDF;
 
 public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFactory {
@@ -343,6 +349,15 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         btnPay.setText("Thanh toán");
         btnPay.setEnabled(false);
         btnPay.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnPay.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                btnPayAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         btnPay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPayActionPerformed(evt);
@@ -825,6 +840,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                 }
 
             } else if (cbPayments.getSelectedIndex() == 1) {
+                Flag.setIdInvoiceForPrintf(jLIDInvoiceMain.getText());
                 try {
                     String monney = jtfTotalAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", ""); // truyền số tiền hàng vào đây
                     String str1 = "2|99|0365962232|Nguyen Tong Anh Quan||0|0|";
@@ -832,7 +848,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                     String QrCodeData = str1 + monney + str2;
                     String fileName = "QRPay.png";
                     String filePath = "D:\\FleyShopApp\\QRPay\\" + fileName;
-
+//
                     String charset = "UTF-8";
                     Map<EncodeHintType, ErrorCorrectionLevel> hintMap = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
                     hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
@@ -844,6 +860,21 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                 }
                 Momo_GUI momo_GUI = new Momo_GUI();
                 momo_GUI.setVisible(true);
+
+//                Sự kiện lắng nghe Jframe momo đóng
+                momo_GUI.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        if (Flag.isFlagPayDone()) { // nếu đã thanh toán thành công
+                            boolean res = createInvoice("Đã thanh toán");
+                            if (res) {
+                                JOptionPane.showMessageDialog(null, "Thanh toán thành công");
+                                printInvoice(invoice_DAO.getInvoiceById(jLIDInvoiceMain.getText()));
+                                clearInfoInvoice();
+                            }
+                        }
+                    }
+                });
             }
         } else {
             JOptionPane.showMessageDialog(null, "Chưa có sản phẩm nào trong giỏ hàng vui lòng kiểm tra lại");
@@ -865,7 +896,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             jLIDInvoiceMain.setText(invoice_DAO.createIDInvoice());
             jLIDStaffMain.setText(Flag.getIdStaff());
             jLNameStaffMain.setText(staff_DAO.getStaffByID(Flag.getIdStaff()).getName());
-            
+
             Flag.setIdInvoiceForPrintf(jLIDInvoiceMain.getText()); // lưu id hóa đơn để in hóa đơn
 
         } else if (btnCreateInvoice.getText().equals("Hủy") && !jtfPhoneCus.getText().trim().equals("")) {
@@ -1053,7 +1084,11 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             previousPointsIndex = -1;
         }
     }//GEN-LAST:event_cbPonisItemStateChanged
-// Xóa thông tin chi tiết trên hóa đơn 
+
+    private void btnPayAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_btnPayAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPayAncestorAdded
+// Xóa thông tin chi tiết trên hóa đơn
 
     private void clearInfoInvoice() {
         defaultTableModelCart.setRowCount(0);
@@ -1096,7 +1131,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         }
     }
 
-//    Kiểm tra dữ liệu số 
+//    Kiểm tra dữ liệu số
     private boolean isNumber(String number) {
         try {
             int num = Integer.parseInt(number);
@@ -1444,15 +1479,17 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     }
 //    Tạo hóa đơn
 
-    private boolean createInvoice(String status) {
+    public boolean createInvoice(String status) {
         String idInvoice = jLIDInvoiceMain.getText().trim();
         Staff staff = staff_DAO.getStaffByID(jLIDStaffMain.getText().trim());
         Customer customer = customer_DAO.getCustomerByID(Flag.getIdCusForSell_GUI());
         Promotion promotion = null;
         String idpromotion = null;
 
-        double amountReceived = Double.parseDouble(jtfMoneyReceived.getText().trim());
-        double changeAmount = Double.parseDouble(jtfChangeAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", ""));
+        String amountReceivedSTR = (jtfMoneyReceived.getText().trim() != null && !jtfMoneyReceived.getText().trim().equals("")) ? jtfMoneyReceived.getText().trim() : jtfTotalAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", "");
+        double amountReceived = Double.parseDouble(amountReceivedSTR);
+        String changeAmountSTR = (jtfChangeAmount.getText().trim() != null && !jtfChangeAmount.getText().trim().equals("")) ? jtfChangeAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", "") : "0";
+        double changeAmount = Double.parseDouble(changeAmountSTR);
         double totalAmount = Double.parseDouble(jtfTotalAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", ""));
         LocalDateTime dateCreated = LocalDateTime.now();
 
@@ -1507,7 +1544,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         }
     }
 
-//  Cộng 1000đ tích lũy cho tối 100K tiền hóa đơn 
+//  Cộng 1000đ tích lũy cho tối 100K tiền hóa đơn
     private void sumPointsCustomer(Customer customer) {
         double totalAmount = Double.parseDouble(jtfTotalAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", ""));
         int newPoints = (int) (totalAmount / 100);

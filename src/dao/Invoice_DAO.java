@@ -80,7 +80,6 @@ public class Invoice_DAO extends DAO {
             String sql = "SELECT * FROM Invoice WHERE idInvoice = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, id);
-
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {

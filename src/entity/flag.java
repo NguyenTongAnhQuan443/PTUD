@@ -35,6 +35,7 @@ public class Flag {
 //    Lưu ID khách hàng từ nút thêm mới 
 
     public static String idInvoiceForPrintf;
+    public static boolean flagPayDone; // lưu trạng thái thanh toán momo thành công
 
 //    constructor
     public Flag() {
@@ -53,6 +54,7 @@ public class Flag {
         idCusForSell_GUI = "";
 
         idInvoiceForPrintf = "";
+        flagPayDone = false;
     }
 
 //
@@ -155,6 +157,14 @@ public class Flag {
 
     public static void setIdInvoiceForPrintf(String idInvoiceForPrintf) {
         Flag.idInvoiceForPrintf = idInvoiceForPrintf;
+    }
+
+    public static boolean isFlagPayDone() {
+        return flagPayDone;
+    }
+
+    public static void setFlagPayDone(boolean flagPayDone) {
+        Flag.flagPayDone = flagPayDone;
     }
 
 }
