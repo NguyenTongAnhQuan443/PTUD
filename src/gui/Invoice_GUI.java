@@ -2,10 +2,6 @@ package gui;
 
 import dao.InvoiceDetails_DAO;
 import entity.Flag;
-import entity.Invoice;
-import java.util.Date;
-import java.util.Vector;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import entity.InvoiceDetails;

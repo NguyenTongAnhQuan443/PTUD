@@ -131,8 +131,6 @@ public class Invoice {
         this.status = status;
     }
 
-   
-
 //    Hashcode equals
     @Override
     public int hashCode() {
@@ -157,7 +155,6 @@ public class Invoice {
     }
 
 //    toString
-
     @Override
     public String toString() {
         return "Invoice{" + "idInvoice=" + idInvoice + ", staff=" + staff + ", customer=" + customer + ", promotion=" + promotion + ", amountReceived=" + amountReceived + ", changeAmount=" + changeAmount + ", totalAmount=" + totalAmount + ", dateCreated=" + dateCreated + ", status=" + status + '}';
