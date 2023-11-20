@@ -163,4 +163,22 @@ public class Invoice_DAO extends DAO {
         }
         return false;
     }
+    
+//    Update money pending invoice
+    public boolean updateInvoiceMoney(String idInvoice, double amountReceived, double changeAmount, double totalAmount) {
+    String sql = "UPDATE Invoice SET amountReceived = ?, changeAmount = ?, totalAmount = ? WHERE idInvoice = ?";
+    try {
+        PreparedStatement preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
+        preparedStatement.setDouble(1, amountReceived);
+        preparedStatement.setDouble(2, changeAmount);
+        preparedStatement.setDouble(3, totalAmount);
+        preparedStatement.setString(4, idInvoice);
+
+        return preparedStatement.executeUpdate() > 0;
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return false;
+}
+
 }

@@ -89,16 +89,16 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
 
     private WebcamPanel webcamPanel = null;
     private Webcam webcam = null;
-//    private Executor executor = Executors.newSingleThreadExecutor(this);
-//    Dùng ExecutorService thay vì Executor để gọi được medthod shutdown camera
     private ExecutorService executor = Executors.newSingleThreadExecutor(this);
 
     private double priceRange;
     private Customer customer;
     private Map<String, String> promotionMap = new HashMap<>();
 
-    private String previousPromotionId = ""; // Biến để theo dõi trạng thái trước đó của item CBB Promotion
-    private int previousPointsIndex = -1; // Biến để theo dõi trạng thái trước đó của item CBB Points
+    private String previousPromotionId = "";
+// Biến để theo dõi trạng thái trước đó của item CBB Promotion
+    private int previousPointsIndex = -1;
+// Biến để theo dõi trạng thái trước đó của item CBB Points
     private double originalTotalAmount;
 
     ;
@@ -154,8 +154,6 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                 }
             }
         });
-//        }
-
         loadDataPendingInvoice();
     }
 
@@ -832,7 +830,8 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
     }//GEN-LAST:event_btnSearchPhoneActionPerformed
 
     private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
-        if (btnPendingInvoice.getText().equals("Đơn chờ")) {//            Đang ở trạng thái hóa đơn mới
+        if (btnPendingInvoice.getText().equals("Đơn chờ")) {
+//            Đang ở trạng thái hóa đơn mới
             if (!jtfTotalAmount.getText().trim().equals("")) {
                 if (cbPayments.getSelectedIndex() == 0) {
                     if (validator()) {
@@ -847,7 +846,6 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                                 JOptionPane.showMessageDialog(null, "Thanh toán thành công");
                                 cbPayments.setEnabled(false);
                                 updateQuantityProduct();
-//                                printInvoice(invoice_DAO.getInvoiceById(jLIDInvoiceMain.getText()));
 
                                 String strTotal = jtfTotalAmount.getText().trim().replaceAll("\\ .0", "").replaceAll("\\ VNĐ", "");
                                 double total = Double.parseDouble(strTotal);
@@ -908,7 +906,8 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                 JOptionPane.showMessageDialog(null, "Chưa có sản phẩm nào trong giỏ hàng vui lòng kiểm tra lại");
                 return;
             }
-        } else if (btnPendingInvoice.getText().equals("Hủy")) { // trạng thái đơn chờ
+        } else if (btnPendingInvoice.getText().equals("Hủy")) {
+// trạng thái đơn chờ
             if (!jtfTotalAmount.getText().trim().equals("")) {
                 if (cbPayments.getSelectedIndex() == 0) {
                     if (validator()) {
@@ -919,81 +918,118 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                         String str3 = jtfChangeAmount.getText().trim().replaceAll("\\ VNĐ", "");
                         if (JOptionPane.showConfirmDialog(null, str2 + utils.Utils.formatMoney(Double.valueOf(str3)), "Xác nhận thanh toán", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                             String idInvoice = jLIDInvoiceMain.getText().trim();
+
+                            //Cập nhập chi tiết hóa đơn (cập nhập danh sách sản phẩm)
+                            processJTableCart(invoice_DAO.getInvoiceById(idInvoice));
+
                             boolean res = invoice_DAO.updateInvoiceStatus(idInvoice, "Đã thanh toán");
                             if (res) {
-                                JOptionPane.showMessageDialog(null, "Thanh toán thành công");
-                                updateQuantityProduct();
-                                //Cập nhập lại số lượng mã khuyến mãi
-                                minusQuantityPromotion(promotion_DAO.getPromotionByID(getPromotionIdFromComboBox()));
-                                //Cập nhập điểm tích lũy
-                                Customer customer = customer_DAO.getCustomerByID(Flag.getIdCusForSell_GUI());
-                                minusPointsCustomer(customer);
-                                //Cộng điểm tích lũy dựa trên tổng tiền hóa đơn
-                                sumPointsCustomer(customer);
+                                // cập nhập tiền hóa đơn
+                                boolean res1 = updateMoneyPendingInvoice();
+                                // cập nhập tiền hóa đơn
+                                if (res1) {
 
-                                loadDataPendingInvoice();
-                                defaultTableModelCart.setRowCount(0);
-                                Flag.setIdInvoiceForPrintf(idInvoice); // set idinvoice để in hóa đơn
+                                    JOptionPane.showMessageDialog(null, "Thanh toán thành công");
+                                    updateQuantityProduct();
+                                    //Cập nhập lại số lượng mã khuyến mãi
+                                    minusQuantityPromotion(promotion_DAO.getPromotionByID(getPromotionIdFromComboBox()));
+                                    //Cập nhập điểm tích lũy
+                                    Customer customer = customer_DAO.getCustomerByID(Flag.getIdCusForSell_GUI());
+                                    minusPointsCustomer(customer);
+                                    //Cộng điểm tích lũy dựa trên tổng tiền hóa đơn
+                                    sumPointsCustomer(customer);
+
+                                    loadDataPendingInvoice();
+
+                                    Flag.setIdInvoiceForPrintf(idInvoice); // set idinvoice để in hóa đơn
 //                                printInvoice(invoice_DAO.getInvoiceById(idInvoice));
-                                String strTotal = jtfTotalAmount.getText().trim().replaceAll("\\ .0", "").replaceAll("\\ VNĐ", "");
-                                double total = Double.parseDouble(strTotal);
-                                String strChangeAmount = jtfChangeAmount.getText().trim().replaceAll("\\ .0", "").replaceAll("\\ VNĐ", "");
-                                double changeAmount = Double.parseDouble(strChangeAmount);
-                                String strMoneyReceived = jtfMoneyReceived.getText().trim().replaceAll("\\ .0", "").replaceAll("\\ VNĐ", "");
-                                double moneyReceived = Double.parseDouble(strMoneyReceived);
-                                Invoice invoiceTMP = invoice_DAO.getInvoiceById(jLIDInvoiceMain.getText());
-                                printInvoice(invoiceTMP, totalAmount, moneyReceived, changeAmount);
+                                    String strTotal = jtfTotalAmount.getText().trim().replaceAll("\\ .0", "").replaceAll("\\ VNĐ", "");
+                                    double total = Double.parseDouble(strTotal);
+                                    String strChangeAmount = jtfChangeAmount.getText().trim().replaceAll("\\ .0", "").replaceAll("\\ VNĐ", "");
+                                    double changeAmount = Double.parseDouble(strChangeAmount);
+                                    String strMoneyReceived = jtfMoneyReceived.getText().trim().replaceAll("\\ .0", "").replaceAll("\\ VNĐ", "");
+                                    double moneyReceived = Double.parseDouble(strMoneyReceived);
+                                    Invoice invoiceTMP = invoice_DAO.getInvoiceById(jLIDInvoiceMain.getText());
+                                    printInvoice(invoiceTMP, totalAmount, moneyReceived, changeAmount);
 
-                                btnCreateInvoice.setEnabled(true);
-                                btnPendingInvoice.setText("Đơn chờ");
+                                    btnCreateInvoice.setEnabled(true);
+                                    btnPendingInvoice.setText("Đơn chờ");
 
-                                clearInfoInvoice();
-                                clearAllInPut();
+                                    defaultTableModelCart.setRowCount(0);
+                                    clearInfoInvoice();
+                                    clearAllInPut();
+                                }
                             }
 
                         } else {
                             jtfChangeAmount.setText("");
                         }
                     }
-                }
-//                else if (cbPayments.getSelectedIndex() == 1) {
-//                    Flag.setIdInvoiceForPrintf(jLIDInvoiceMain.getText());
-//                    try {
-//                        String monney = jtfTotalAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", ""); // truyền số tiền hàng vào đây
-//                        String str1 = "2|99|0365962232|Nguyen Tong Anh Quan||0|0|";
-//                        String str2 = "||transfer_myqr";
-//                        String QrCodeData = str1 + monney + str2;
-//                        String fileName = "QRPay.png";
-//                        String filePath = "D:\\FleyShopApp\\QRPay\\" + fileName;
-////
-//                        String charset = "UTF-8";
-//                        Map<EncodeHintType, ErrorCorrectionLevel> hintMap = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
-//                        hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
-//                        BitMatrix matrix = new MultiFormatWriter().encode(
-//                                new String(QrCodeData.getBytes(charset), charset),
-//                                BarcodeFormat.QR_CODE, 242, 242, hintMap);
-//                        MatrixToImageWriter.writeToFile(matrix, filePath.substring(filePath.lastIndexOf('.') + 1), new File(filePath));
-//                    } catch (Exception e) {
-//                    }
-//                    Momo_GUI momo_GUI = new Momo_GUI();
-//                    momo_GUI.setVisible(true);
+                } else if (cbPayments.getSelectedIndex() == 1) {
+                    Flag.setIdInvoiceForPrintf(jLIDInvoiceMain.getText());
+                    try {
+                        String monney = jtfTotalAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", ""); // truyền số tiền hàng vào đây
+                        String str1 = "2|99|0365962232|Nguyen Tong Anh Quan||0|0|";
+                        String str2 = "||transfer_myqr";
+                        String QrCodeData = str1 + monney + str2;
+                        String fileName = "QRPay.png";
+                        String filePath = "D:\\FleyShopApp\\QRPay\\" + fileName;
 //
-////                Sự kiện lắng nghe Jframe momo đóng
-//                    momo_GUI.addWindowListener(new WindowAdapter() {
-//                        @Override
-//                        public void windowClosed(WindowEvent e) {
-//                            if (Flag.isFlagPayDone()) { // nếu đã thanh toán thành công
-//                                boolean res = createInvoice("Đã thanh toán");
-//                                if (res) {
-//                                    JOptionPane.showMessageDialog(null, "Thanh toán thành công");
-//updateQuantityProduct
-//                                    printInvoice(invoice_DAO.getInvoiceById(jLIDInvoiceMain.getText()));
-//                                    clearInfoInvoice();
-//                                }
-//                            }
-//                        }
-//                    });
-//                }
+                        String charset = "UTF-8";
+                        Map<EncodeHintType, ErrorCorrectionLevel> hintMap = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
+                        hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+                        BitMatrix matrix = new MultiFormatWriter().encode(
+                                new String(QrCodeData.getBytes(charset), charset),
+                                BarcodeFormat.QR_CODE, 242, 242, hintMap);
+                        MatrixToImageWriter.writeToFile(matrix, filePath.substring(filePath.lastIndexOf('.') + 1), new File(filePath));
+                    } catch (Exception e) {
+                    }
+                    Momo_GUI momo_GUI = new Momo_GUI();
+                    momo_GUI.setVisible(true);
+
+//                Sự kiện lắng nghe Jframe momo đóng
+                    momo_GUI.addWindowListener(new WindowAdapter() {
+                        @Override
+                        public void windowClosed(WindowEvent e) {
+                            if (Flag.isFlagPayDone()) { // nếu đã thanh toán thành công
+                                boolean res = invoice_DAO.updateInvoiceStatus(Flag.getIdInvoiceForPrintf(), "Đã thanh toán");
+
+                                //Cập nhập chi tiết hóa đơn (cập nhập danh sách sản phẩm)
+                                processJTableCart(invoice_DAO.getInvoiceById(Flag.getIdInvoiceForPrintf()));
+                                if (res) {
+                                    // cập nhập tiền hóa đơn
+                                    boolean res1 = updateMoneyPendingInvoice();
+                                    if (res1) {
+                                        JOptionPane.showMessageDialog(null, "Thanh toán thành công");
+                                        //Cập nhận số lượng sản phẩm
+                                        updateQuantityProduct();
+                                        //Cập nhập lại số lượng mã khuyến mãi
+                                        minusQuantityPromotion(promotion_DAO.getPromotionByID(getPromotionIdFromComboBox()));
+                                        //Cập nhập điểm tích lũy
+                                        Customer customer = customer_DAO.getCustomerByID(Flag.getIdCusForSell_GUI());
+                                        minusPointsCustomer(customer);
+                                        //Cộng điểm tích lũy dựa trên tổng tiền hóa đơn
+                                        sumPointsCustomer(customer);
+
+                                        loadDataPendingInvoice();
+
+                                        String strTotal = jtfTotalAmount.getText().trim().replaceAll("\\ .0", "").replaceAll("\\ VNĐ", "");
+                                        double total = Double.parseDouble(strTotal);
+                                        Invoice invoiceTMP = invoice_DAO.getInvoiceById(jLIDInvoiceMain.getText());
+                                        printInvoice(invoiceTMP, total, total, 0);
+
+                                        btnCreateInvoice.setEnabled(true);
+                                        btnPendingInvoice.setText("Đơn chờ");
+
+                                        defaultTableModelCart.setRowCount(0);
+                                        clearInfoInvoice();
+                                        clearAllInPut();
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Chưa có sản phẩm nào trong giỏ hàng vui lòng kiểm tra lại");
                 return;
@@ -1116,19 +1152,21 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             int selectedRow = jTableCart.getSelectedRow();
             int selectedColumn = jTableCart.getSelectedColumn();
 
-            if (selectedColumn == 3) { // Kiểm tra nếu cột là cột số lượng
+            if (selectedColumn == 3) {
                 String quantitySTR = jTableCart.getValueAt(selectedRow, 3).toString().trim().replaceAll("\\.0", "").replaceAll("đ", "");
                 String priceSTR = jTableCart.getValueAt(selectedRow, 4).toString().trim().replaceAll("\\.0", "").replaceAll("đ", "");
                 int quantity = Integer.parseInt(quantitySTR);
                 double unitPrice = Double.parseDouble(priceSTR);
                 double totalPrice = quantity * unitPrice;
 
-                // Cập nhật giá trị trong JTable
-                jTableCart.setValueAt(totalPrice + "đ", selectedRow, 5);
+                // Cập nhật giá trị thành tiền trong JTable
+                jTableCart.setValueAt(totalPrice + "đ", selectedRow, 6);
 
-                // Bắt buộc JTable cập nhật lại hiển thị cho ô cụ thể đã thay đổi
-                ((AbstractTableModel) jTableCart.getModel()).fireTableCellUpdated(selectedRow, 5);
-                // Tính tổng tiền và đặt vào JTextField
+                // Kiểm tra nếu số lượng <= 0, xóa hàng khỏi bảng
+                if (quantity <= 0) {
+                    DefaultTableModel model = (DefaultTableModel) jTableCart.getModel();
+                    model.removeRow(selectedRow);
+                }
             }
         }
     }//GEN-LAST:event_jTableCartPropertyChange
@@ -1243,9 +1281,18 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
 
     private void jTablePendingInvoiceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePendingInvoiceMouseClicked
         if (evt.getClickCount() == 2 && btnCreateInvoice.getText().equals("Tạo hóa đơn")) {
+            btnPendingInvoice.setEnabled(true);
             int selectedRow = jTablePendingInvoice.getSelectedRow();
             String idInvoice = (String) defaultTableModelPendingInvoice.getValueAt(selectedRow, 1);
             loadListProductPendingInvoice(idInvoice);
+
+            // 1) Tính giá trị VAT
+            String totalSTR = jtfTotalAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", "");
+            double total = Double.parseDouble(totalSTR);
+            double vatValue = total * (vat_dao.getVAT() / 100);
+            double totalNew = vatValue + total;
+            jtfTotalAmount.setText(totalNew + " VNĐ");
+
             Invoice invoiceTMP = invoice_DAO.getInvoiceById(idInvoice);
             Flag.setIdCusForSell_GUI(invoiceTMP.getCustomer().getIdCustomer()); // set id vào cờ để check được điểm tích lũy
         }
@@ -1639,8 +1686,8 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         cbPromotion.setSelectedIndex(0); // mỗi lần thêm sản phẩm mới đưa cbb giảm giá vè 0
         cbPonis.setSelectedIndex(0); // mỗi lần thêm sản phẩm mới đưa point về 0
     }
-//    Tạo hóa đơn
 
+//    Tạo hóa đơn
     public boolean createInvoice(String status) {
         String idInvoice = jLIDInvoiceMain.getText().trim();
         Staff staff = staff_DAO.getStaffByID(jLIDStaffMain.getText().trim());
@@ -1737,9 +1784,9 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                 unitPrice = Double.parseDouble(defaultTableModelCart.getValueAt(i, 5).toString().replaceAll("\\.0", "").replaceAll("\\đ", ""));
             }
 
-            // Sử dụng thông tin để tạo chi tiết hóa đơn
             Product product = product_DAO.getProductByID(productId);
             createInvoiceDetails(invoice, product, quantity, unitPrice);
+
         }
     }
 
@@ -1786,6 +1833,31 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         return false;
     }
 
+//    Update totalAmount, changeAmount, moneyreceived pending invoice
+    public boolean updateMoneyPendingInvoice() {
+        String idInvoice = jLIDInvoiceMain.getText().trim();
+        Staff staff = staff_DAO.getStaffByID(jLIDStaffMain.getText().trim());
+        Customer customer = customer_DAO.getCustomerByID(Flag.getIdCusForSell_GUI());
+        Promotion promotion = null;
+        String idpromotion = null;
+
+        String amountReceivedSTR = (jtfMoneyReceived.getText().trim() != null && !jtfMoneyReceived.getText().trim().equals("")) ? jtfMoneyReceived.getText().trim() : jtfTotalAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", "");
+        double amountReceived = Double.parseDouble(amountReceivedSTR);
+        String changeAmountSTR = (jtfChangeAmount.getText().trim() != null && !jtfChangeAmount.getText().trim().equals("")) ? jtfChangeAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", "") : "0";
+        double changeAmount = Double.parseDouble(changeAmountSTR);
+        double totalAmount = Double.parseDouble(jtfTotalAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", ""));
+        LocalDateTime dateCreated = LocalDateTime.now();
+
+        Invoice invoice = new Invoice(idInvoice, staff, customer, promotion, amountReceived, changeAmount, totalAmount, dateCreated, Invoice.convertStringToStatus("Đã thanh toán"));
+
+        boolean res = invoice_DAO.updateInvoiceMoney(idInvoice, amountReceived, changeAmount, totalAmount);
+
+        if (res) {
+            return true;
+        }
+        return false;
+    }
+
     //    In hóa đơn
     public static void printInvoice(Invoice invoice, double totalAmount, double amountReceived, double changeAmount) {
         if (JOptionPane.showConfirmDialog(null, "Bạn có muốn in hóa đơn không ?", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
@@ -1795,9 +1867,6 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             invoice_GUI.setJlNameCusDetails(invoice.getCustomer().getName());
             invoice_GUI.setJlDateInvoiceDetails(invoice.getDateCreated().toLocalDate().toString());
             invoice_GUI.setJlNameStaffDetails(invoice.getStaff().getName());
-//            invoice_GUI.setJlTotalDetails(invoice.getTotalAmount() + "");
-//            invoice_GUI.setJlMoneyReceived(invoice.getAmountReceived() + "");
-//            invoice_GUI.setJlExcessCash(invoice.getChangeAmount() + "");
             invoice_GUI.setJlTotalDetails(totalAmount + "");
             invoice_GUI.setJlMoneyReceived(amountReceived + "");
             invoice_GUI.setJlExcessCash(changeAmount + "");
@@ -1831,8 +1900,8 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                 document.close();
                 openPDF(pdfFilePath); // utils
             } catch (DocumentException | IOException e) {
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "Lỗi khi lưu hóa đơn: " + e.getMessage());
+                JOptionPane.showMessageDialog(null, "Lỗi khi in hóa đơn vui lòng tắt file hóa đơn cũ trước khi in");
+                return;
             }
         }
     }
@@ -1852,12 +1921,8 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         for (InvoiceDetails invoiceDetails : invoiceDetails_DAO.getListInvoiceDetailsById(idInvoice)) {
             double currentPrice = (invoiceDetails.getProduct().getCurrentPrice() == null || invoiceDetails.getProduct().getCurrentPrice() == 0) ? invoiceDetails.getProduct().getOriginalPrice() : invoiceDetails.getProduct().getCurrentPrice();
             double total = invoiceDetails.getQuantity() * currentPrice;
-            // 1) Tính giá trị VAT
-            double vatValue = total * (vat_dao.getVAT() / 100);
-            double totalNew = vatValue + total;
-            jtfTotalAmount.setText(total + " VNĐ");
 
-            Object[] rowData = {defaultTableModelCart.getRowCount() + 1, invoiceDetails.getProduct().getIdProduct(), invoiceDetails.getProduct().getName(), invoiceDetails.getQuantity(), invoiceDetails.getProduct().getOriginalPrice() + "đ", currentPrice + "đ", totalNew + "đ"};
+            Object[] rowData = {defaultTableModelCart.getRowCount() + 1, invoiceDetails.getProduct().getIdProduct(), invoiceDetails.getProduct().getName(), invoiceDetails.getQuantity(), invoiceDetails.getProduct().getOriginalPrice() + "đ", currentPrice + "đ", total + "đ"};
             defaultTableModelCart.addRow(rowData);
 
             for (int i = 0; i < defaultTableModelCart.getRowCount(); i++) {
