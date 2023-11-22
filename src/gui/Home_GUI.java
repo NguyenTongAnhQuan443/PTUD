@@ -27,7 +27,8 @@ public class Home_GUI extends javax.swing.JFrame {
     private Staff_InfoStaff_GUI staff_InfoStaff_GUI;
     private ChangePassword_GUI changePassword_GUI;
     private Customer_GUI customer_GUI;
-    private Sell_GUI sell_GUI1;
+    private Sell_GUI sell_GUI;
+    private ExchangeProduct_GUI exchangeProduct_GUI;
 
     private Product_GUI product_GUI1;
 
@@ -46,85 +47,108 @@ public class Home_GUI extends javax.swing.JFrame {
             @Override
             public void selected(int index, int subIndex) {
                 if (index == 0 && subIndex == 1) { // sự kiện menu thống kê - doanh thu
-                    stopWebcam();
+                    stopWebcam1();
+                    stopWebcam2();
                     jpCenter.removeAll();
                     statistical_GUI = new Statistical_GUI();
                     statistical_GUI.setJPRevenue();
                     addJPanel(statistical_GUI);
                 } else if (index == 0 && subIndex == 2) { // sự kiện menu thống kê - nhân viên
-                    stopWebcam();
+                    stopWebcam1();
+                    stopWebcam2();
                     jpCenter.removeAll();
                     statistical_GUI = new Statistical_GUI();
                     statistical_GUI.setJPStaff();
                     addJPanel(statistical_GUI);
                 } else if (index == 0 && subIndex == 3) { // sự kiện menu thống kê - sản phẩm
-                    stopWebcam();
+                    stopWebcam1();
+                    stopWebcam2();
                     jpCenter.removeAll();
                     statistical_GUI = new Statistical_GUI();
                     statistical_GUI.setJPProduct();
                     addJPanel(statistical_GUI);
                 } else if (index == 0 && subIndex == 4) { // sự kiện menu thống kê - khách hàng
-                    stopWebcam();
+                    stopWebcam1();
+                    stopWebcam2();
                     jpCenter.removeAll();
                     statistical_GUI = new Statistical_GUI();
                     statistical_GUI.setJPCustomer();
                     addJPanel(statistical_GUI);
                 } else if (index == 1) { // sự kiện menu nhà cung cấp
-                    stopWebcam();
+                    stopWebcam1();
+                    stopWebcam2();
                     jpCenter.removeAll();
                     supplier_GUI = new Supplier_GUI();
                     addJPanel(supplier_GUI);
 
                 } else if (index == 2) { // sự kiện menu sản phẩm
-                    stopWebcam();
+                    stopWebcam1();
+                    stopWebcam2();
                     jpCenter.removeAll();
                     product_GUI1 = new Product_GUI();
                     addJPanel(product_GUI1);
                 } else if (index == 3 && subIndex == 1) { // sự kiện menu nhân viên - danh sách nhân viên
                     Flag.setFlagStaffGUI(true); // mở GUI danh sách nhân viên
-                    stopWebcam();
+                    stopWebcam1();
+                    stopWebcam2();
                     jpCenter.removeAll();
                     staff_GUI = new Staff_GUI();
                     addJPanel(staff_GUI);
                 } else if (index == 3 && subIndex == 2) { // sự kiện menu nhân viên - danh sách thôi việc nhân viên
                     Flag.setFlagStaffGUI(false); // mở GUI danh sách nghỉ việc
-                    stopWebcam();
+                    stopWebcam1();
+                    stopWebcam2();
                     jpCenter.removeAll();
                     staff_GUI = new Staff_GUI();
                     addJPanel(staff_GUI);
-                } else if (index == 4) { // sự kiện memu bán hàng                    
-                    stopWebcam();
-                    jpCenter.removeAll();
-                    sell_GUI1 = new Sell_GUI();
-                    addJPanel(sell_GUI1);
+                } else if (index == 4) {
+                    if (subIndex == 1) {
+                        stopWebcam1();
+                        stopWebcam2();
+                        jpCenter.removeAll();
+                        sell_GUI = new Sell_GUI();
+                        addJPanel(sell_GUI);
+                    } else if (subIndex == 2) {
+                        stopWebcam1();
+                        stopWebcam2();
+                        jpCenter.removeAll();
+                        exchangeProduct_GUI = new ExchangeProduct_GUI();
+                        addJPanel(exchangeProduct_GUI);
+                    }
                 } else if (index == 5) { // sự kiện menu lịch sử bán hàng
-                    stopWebcam();
+                    stopWebcam1();
+                    stopWebcam2();
                     jpCenter.removeAll();
                     history_GUI = new History_GUI();
                     addJPanel(history_GUI);
                 } else if (index == 6) { // sự kiện menu khách hàng
-                    stopWebcam();
+                    stopWebcam1();
+                    stopWebcam2();
                     jpCenter.removeAll();
                     customer_GUI = new Customer_GUI();
                     addJPanel(customer_GUI);
                 } else if (index == 7) { // sự kiện menu khuyễn mãi
-                    stopWebcam();
+                    stopWebcam1();
+                    stopWebcam2();
                     jpCenter.removeAll();
                     Promotion_GUI promotion_GUI = new Promotion_GUI();
                     addJPanel(promotion_GUI);
                 } else if (index == 8 && subIndex == 1) { // sự kiện menu tài khoản - thông tin tài khoản
                     Flag.setFlagStaffInfo(3);
-                    stopWebcam();
+                    stopWebcam1();
+                    stopWebcam2();
                     jpCenter.removeAll();
                     staff_InfoStaff_GUI = new Staff_InfoStaff_GUI();
                     addJPanel(staff_InfoStaff_GUI);
                 } else if (index == 8 && subIndex == 2) { // sự kiện menu tài khoản - đổi mật khẩu
-                    stopWebcam();
+                    stopWebcam1();
+                    stopWebcam2();
                     jpCenter.removeAll();
                     changePassword_GUI = new ChangePassword_GUI();
                     addJPanel(changePassword_GUI);
                 } else if (index == 9 && subIndex == 1) {
-                    stopWebcam();
+                    stopWebcam1();
+                    stopWebcam2();
                     VAT_GUI vat_gui = new VAT_GUI();
                     vat_gui.setVisible(true);
                 } else if (index == 9 && subIndex == 2) {
@@ -211,9 +235,15 @@ public class Home_GUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void stopWebcam() {
-        if (sell_GUI1 != null) {
-            sell_GUI1.stopWebcam();
+    public void stopWebcam1() {
+        if (sell_GUI != null) {
+            sell_GUI.stopWebcam();
+        }
+    }
+
+    public void stopWebcam2() {
+        if (exchangeProduct_GUI != null) {
+            exchangeProduct_GUI.stopWebcam();
         }
     }
 

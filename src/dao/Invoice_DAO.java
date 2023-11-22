@@ -13,6 +13,7 @@ import entity.Customer;
 import entity.Promotion;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Invoice_DAO extends DAO {
@@ -213,5 +214,40 @@ public class Invoice_DAO extends DAO {
         }
 
         return listPendingInvoice;
+    }
+
+//    Lấy danh sách hóa đơn từ ngày X đến ngày Y
+    public List<Invoice> getListInvoiceWithinDateRange(Date startDate, Date endDate) {
+        List<Invoice> listInvoiceWithinDateRange = new ArrayList<Invoice>();
+        String sql = "SELECT * FROM Invoice WHERE dateCreated BETWEEN ? AND ?";
+        try {
+            connectDB.ConnectDB.getInstance();
+            Connection connection = (Connection) ConnectDB.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setDate(1, new java.sql.Date(startDate.getTime()));
+            preparedStatement.setDate(2, new java.sql.Date(endDate.getTime()));
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String idInvoice = resultSet.getString("idInvoice");
+                String staff = resultSet.getString("staff");
+                String customer = resultSet.getString("customer");
+                String promotion = resultSet.getString("promotion");
+                double amountReceived = resultSet.getDouble("amountReceived");
+                double changeAmount = resultSet.getDouble("changeAmount");
+                double totalAmount = resultSet.getDouble("totalAmount");
+                java.sql.Timestamp timestamp = resultSet.getTimestamp("dateCreated");
+                LocalDateTime dateCreated = null;
+                if (timestamp != null) {
+                    dateCreated = timestamp.toLocalDateTime();
+                }
+                String status1 = resultSet.getString("status");
+                Invoice invoice = new Invoice(idInvoice, staff_DAO.getStaffByID(staff), customer_DAO.getCustomerByID(customer), promotion_DAO.getPromotionByID(promotion), amountReceived, changeAmount, totalAmount, dateCreated, Invoice.convertStringToStatus(status1));
+                listInvoiceWithinDateRange.add(invoice);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listInvoiceWithinDateRange;
     }
 }
