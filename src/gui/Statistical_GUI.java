@@ -3,14 +3,14 @@ package gui;
 
 import java.awt.FlowLayout;
 
-public class Statistical_GUI1 extends javax.swing.JPanel {
+public class Statistical_GUI extends javax.swing.JPanel {
 
     private Statistical_Revenue_GUI statistical_Revenue_GUI = new Statistical_Revenue_GUI();
     private Statistical_Product_GUI statistical_Product_GUI = new Statistical_Product_GUI();
     private Statistical_Staff_GUI statistical_Staff_GUI = new Statistical_Staff_GUI();
     private Statistical_Customer_GUI statistical_Customer_GUI = new Statistical_Customer_GUI();
 
-    public Statistical_GUI1() {
+    public Statistical_GUI() {
         initComponents();
     }
 

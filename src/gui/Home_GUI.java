@@ -17,7 +17,7 @@ import lib2.MenuEvent;
 
 public class Home_GUI extends javax.swing.JFrame {
 
-    private Statistical_GUI1 statistical_GUI;
+    private Statistical_GUI statistical_GUI;
     private Statistical_Revenue_GUI statistical_Revenue_GUI;
     private Statistical_Product_GUI statistical_Product_GUI;
     private Statistical_Staff_GUI statistical_Staff_GUI;
@@ -37,7 +37,7 @@ public class Home_GUI extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         jpCenter.removeAll();
-        statistical_GUI = new Statistical_GUI1();
+        statistical_GUI = new Statistical_GUI();
         statistical_GUI.setJPRevenue();
         addJPanel(statistical_GUI);
 
@@ -47,32 +47,28 @@ public class Home_GUI extends javax.swing.JFrame {
             public void selected(int index, int subIndex) {
                 if (index == 0 && subIndex == 1) { // sự kiện menu thống kê - doanh thu
                     stopWebcam();
-//                    jpCenter.removeAll();
-//                    statistical_GUI = new Statistical_GUI1();
-//                    statistical_GUI.setJPRevenue();
-//                    addJPanel(statistical_GUI);
-                    JOptionPane.showMessageDialog(null, "Chức nưng đang được phát triển");
+                    jpCenter.removeAll();
+                    statistical_GUI = new Statistical_GUI();
+                    statistical_GUI.setJPRevenue();
+                    addJPanel(statistical_GUI);
                 } else if (index == 0 && subIndex == 2) { // sự kiện menu thống kê - nhân viên
                     stopWebcam();
-//                    jpCenter.removeAll();
-//                    statistical_GUI = new Statistical_GUI1();
-//                    statistical_GUI.setJPStaff();
-//                    addJPanel(statistical_GUI);
-JOptionPane.showMessageDialog(null, "Chức nưng đang được phát triển");
+                    jpCenter.removeAll();
+                    statistical_GUI = new Statistical_GUI();
+                    statistical_GUI.setJPStaff();
+                    addJPanel(statistical_GUI);
                 } else if (index == 0 && subIndex == 3) { // sự kiện menu thống kê - sản phẩm
                     stopWebcam();
-//                    jpCenter.removeAll();
-//                    statistical_GUI = new Statistical_GUI1();
-//                    statistical_GUI.setJPProduct();
-//                    addJPanel(statistical_GUI);
-JOptionPane.showMessageDialog(null, "Chức nưng đang được phát triển");
+                    jpCenter.removeAll();
+                    statistical_GUI = new Statistical_GUI();
+                    statistical_GUI.setJPProduct();
+                    addJPanel(statistical_GUI);
                 } else if (index == 0 && subIndex == 4) { // sự kiện menu thống kê - khách hàng
                     stopWebcam();
-//                    jpCenter.removeAll();
-//                    statistical_GUI = new Statistical_GUI1();
-//                    statistical_GUI.setJPCustomer();
-//                    addJPanel(statistical_GUI);
-JOptionPane.showMessageDialog(null, "Chức nưng đang được phát triển");
+                    jpCenter.removeAll();
+                    statistical_GUI = new Statistical_GUI();
+                    statistical_GUI.setJPCustomer();
+                    addJPanel(statistical_GUI);
                 } else if (index == 1) { // sự kiện menu nhà cung cấp
                     stopWebcam();
                     jpCenter.removeAll();
@@ -101,17 +97,11 @@ JOptionPane.showMessageDialog(null, "Chức nưng đang được phát triển")
                     jpCenter.removeAll();
                     sell_GUI1 = new Sell_GUI();
                     addJPanel(sell_GUI1);
-                } else if (index == 5 && subIndex == 1) { // sự kiện menu lịch sử bán hàng - danh sách hàng đã giao
+                } else if (index == 5) { // sự kiện menu lịch sử bán hàng
                     stopWebcam();
                     jpCenter.removeAll();
                     history_GUI = new History_GUI();
                     addJPanel(history_GUI);
-                } else if (index == 5 && subIndex == 2) { // sự kiện menu lịch sử bán hàng - danh sách hàng đang giao
-                    stopWebcam();
-                    jpCenter.removeAll();
-//                    history_GUI = new History_GUI();
-//                    addJPanel(history_GUI);
-                    JOptionPane.showMessageDialog(null, "Chức năng này đang được phát triển. Xin cảm ơn !");
                 } else if (index == 6) { // sự kiện menu khách hàng
                     stopWebcam();
                     jpCenter.removeAll();
@@ -137,9 +127,6 @@ JOptionPane.showMessageDialog(null, "Chức nưng đang được phát triển")
                     stopWebcam();
                     VAT_GUI vat_gui = new VAT_GUI();
                     vat_gui.setVisible(true);
-//                    jpCenter.removeAll();
-//                    sell_GUI = new Sell_GUIXXX();
-//                    addJPanel(sell_GUI);
                 } else if (index == 9 && subIndex == 2) {
                     JOptionPane.showMessageDialog(null, "Chức năng đang được phát triển !");
                 }

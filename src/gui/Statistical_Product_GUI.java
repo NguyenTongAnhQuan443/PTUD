@@ -3,6 +3,7 @@
  */
 package gui;
 
+import dao.Statistical_Product_DAO;
 import java.awt.FlowLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
@@ -12,6 +13,7 @@ public class Statistical_Product_GUI extends javax.swing.JPanel {
 
     private Statistical_Product_Table_GUI statistical_Product_Table_GUI;
     private Statistical_Product_Chart_GUI statistical_Product_Chart_GUI;
+    private Statistical_Product_DAO statistical_Product_DAO = new Statistical_Product_DAO();
 
     public Statistical_Product_GUI() {
         initComponents();
@@ -70,8 +72,13 @@ public class Statistical_Product_GUI extends javax.swing.JPanel {
             }
         });
 
-        cbChooserType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tồn kho ít nhất", "Tồn kho nhiều nhất" }));
+        cbChooserType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tồn kho ít nhất", "Tồn kho nhiều nhất", "Bán nhiều nhất", "Bán ít nhất" }));
         cbChooserType.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbChooserType.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbChooserTypeItemStateChanged(evt);
+            }
+        });
 
         jlTitle.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jlTitle.setText("Thống kê sản phẩm");
@@ -165,6 +172,10 @@ public class Statistical_Product_GUI extends javax.swing.JPanel {
         jpRight.revalidate();
         jpRight.repaint();
     }//GEN-LAST:event_jrbChartActionPerformed
+
+    private void cbChooserTypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbChooserTypeItemStateChanged
+        System.out.println(statistical_Product_DAO.getTopSellingProducts());
+    }//GEN-LAST:event_cbChooserTypeItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

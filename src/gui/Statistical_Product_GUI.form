@@ -134,15 +134,20 @@
         <Component class="lib2.ComboBoxSuggestion" name="cbChooserType">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
+              <StringArray count="4">
                 <StringItem index="0" value="T&#x1ed3;n kho &#xed;t nh&#x1ea5;t"/>
                 <StringItem index="1" value="T&#x1ed3;n kho nhi&#x1ec1;u nh&#x1ea5;t"/>
+                <StringItem index="2" value="B&#xe1;n nhi&#x1ec1;u nh&#x1ea5;t"/>
+                <StringItem index="3" value="B&#xe1;n &#xed;t nh&#x1ea5;t"/>
               </StringArray>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbChooserTypeItemStateChanged"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jlTitle">
           <Properties>

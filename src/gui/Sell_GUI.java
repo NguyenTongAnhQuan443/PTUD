@@ -919,11 +919,9 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                         if (JOptionPane.showConfirmDialog(null, str2 + utils.Utils.formatMoney(Double.valueOf(str3)), "Xác nhận thanh toán", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                             String idInvoice = jLIDInvoiceMain.getText().trim();
 
-                            //Cập nhập chi tiết hóa đơn (cập nhập danh sách sản phẩm)
-                            processJTableCart(invoice_DAO.getInvoiceById(idInvoice));
-
                             boolean res = invoice_DAO.updateInvoiceStatus(idInvoice, "Đã thanh toán");
                             if (res) {
+                                UpdateListProductPendingInvoice(invoice_DAO.getInvoiceById(idInvoice));
                                 // cập nhập tiền hóa đơn
                                 boolean res1 = updateMoneyPendingInvoice();
                                 // cập nhập tiền hóa đơn
@@ -942,7 +940,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                                     loadDataPendingInvoice();
 
                                     Flag.setIdInvoiceForPrintf(idInvoice); // set idinvoice để in hóa đơn
-//                                printInvoice(invoice_DAO.getInvoiceById(idInvoice));
+
                                     String strTotal = jtfTotalAmount.getText().trim().replaceAll("\\ .0", "").replaceAll("\\ VNĐ", "");
                                     double total = Double.parseDouble(strTotal);
                                     String strChangeAmount = jtfChangeAmount.getText().trim().replaceAll("\\ .0", "").replaceAll("\\ VNĐ", "");
@@ -994,9 +992,8 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                             if (Flag.isFlagPayDone()) { // nếu đã thanh toán thành công
                                 boolean res = invoice_DAO.updateInvoiceStatus(Flag.getIdInvoiceForPrintf(), "Đã thanh toán");
 
-                                //Cập nhập chi tiết hóa đơn (cập nhập danh sách sản phẩm)
-                                processJTableCart(invoice_DAO.getInvoiceById(Flag.getIdInvoiceForPrintf()));
                                 if (res) {
+                                    UpdateListProductPendingInvoice(invoice_DAO.getInvoiceById(Flag.getIdInvoiceForPrintf()));
                                     // cập nhập tiền hóa đơn
                                     boolean res1 = updateMoneyPendingInvoice();
                                     if (res1) {
@@ -1787,6 +1784,32 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             Product product = product_DAO.getProductByID(productId);
             createInvoiceDetails(invoice, product, quantity, unitPrice);
 
+        }
+    }
+
+//    Update danh sách sản phẩm đơn chờ 
+    private void UpdateListProductPendingInvoice(Invoice invoice) {
+        // xóa danh sách chi tiết sản phẩm cũ
+        invoiceDetails_DAO.deleteInvoiceDetailsByInvoiceId(invoice.getIdInvoice());
+        DefaultTableModel model = (DefaultTableModel) jTableCart.getModel();
+        int rowCount = model.getRowCount();
+        for (int i = 0; i < rowCount; i++) {
+            String productId = (String) model.getValueAt(i, 1);
+            int quantity = Integer.parseInt(defaultTableModelCart.getValueAt(i, 3).toString().trim());
+
+//            Xử lý chuỗi nếu có html
+            double unitPrice;
+            String htmlString = defaultTableModelCart.getValueAt(i, 5).toString().trim();
+            if (BasicHTML.isHTMLString(htmlString)) {
+                org.jsoup.nodes.Document document = Jsoup.parse(htmlString);
+                String textContent = document.text().replaceAll("\\.0", "").replaceAll("\\đ", "");
+                unitPrice = Double.parseDouble(textContent);
+            } else {
+                unitPrice = Double.parseDouble(defaultTableModelCart.getValueAt(i, 5).toString().replaceAll("\\.0", "").replaceAll("\\đ", ""));
+            }
+
+            Product product = product_DAO.getProductByID(productId);
+            createInvoiceDetails(invoice, product, quantity, unitPrice);
         }
     }
 

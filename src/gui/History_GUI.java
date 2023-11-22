@@ -1,5 +1,3 @@
-//1013, 579
-// left 763 right 250
 package gui;
 
 import javax.swing.JOptionPane;
@@ -23,18 +21,9 @@ public class History_GUI extends javax.swing.JPanel {
         jspListInvoice = new javax.swing.JScrollPane();
         jTableListInvoice = new javax.swing.JTable();
         btnReturns = new lib2.Button();
-        btnDelivered = new lib2.Button();
-        jlDay = new javax.swing.JLabel();
-        cbDay = new lib2.ComboBoxSuggestion();
-        jlMonth = new javax.swing.JLabel();
-        cbMonth = new lib2.ComboBoxSuggestion();
-        jlYear = new javax.swing.JLabel();
-        cbYear = new lib2.ComboBoxSuggestion();
         jlSearchID = new javax.swing.JLabel();
         jtfIDInvoice = new javax.swing.JTextField();
         btnSearch = new lib2.Button();
-        jlStatusInvoice = new javax.swing.JLabel();
-        cbStatusInvoice = new lib2.ComboBoxSuggestion();
         btnTransfer = new lib2.Button();
         jpLeftInfoProduct = new javax.swing.JPanel();
         jspInfoProduct = new javax.swing.JScrollPane();
@@ -64,32 +53,25 @@ public class History_GUI extends javax.swing.JPanel {
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.X_AXIS));
 
-        jpLeft.setLayout(new java.awt.GridLayout(2, 1));
+        jpLeft.setLayout(new javax.swing.BoxLayout(jpLeft, javax.swing.BoxLayout.Y_AXIS));
 
         jpLeftListInvoice.setBackground(new java.awt.Color(255, 255, 255));
         jpLeftListInvoice.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách hóa đơn", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 14))); // NOI18N
 
         jTableListInvoice.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã hóa đơn", "Tên nhân viên", "Tên khách hàng", "Ngày tào", "Trạng thái", "Đã giao"
+                "STT", "Mã hóa đơn", "Tên khách hàng", "Tên nhân viên", "Ngày tạo", "Trạng thái"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
-            };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true
+                false, false, false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -109,18 +91,6 @@ public class History_GUI extends javax.swing.JPanel {
             }
         });
 
-        btnDelivered.setBackground(new java.awt.Color(135, 206, 235));
-        btnDelivered.setForeground(new java.awt.Color(255, 255, 255));
-        btnDelivered.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/done24.png"))); // NOI18N
-        btnDelivered.setText("Đã giao hàng");
-        btnDelivered.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-
-        jlDay.setText("Ngày :");
-
-        jlMonth.setText("Tháng :");
-
-        jlYear.setText("Năm :");
-
         jlSearchID.setText("Mã hóa đơn :");
 
         btnSearch.setBackground(new java.awt.Color(135, 206, 235));
@@ -133,8 +103,6 @@ public class History_GUI extends javax.swing.JPanel {
                 btnSearchActionPerformed(evt);
             }
         });
-
-        jlStatusInvoice.setText("Trạng thái :");
 
         btnTransfer.setBackground(new java.awt.Color(135, 206, 235));
         btnTransfer.setForeground(new java.awt.Color(255, 255, 255));
@@ -151,62 +119,34 @@ public class History_GUI extends javax.swing.JPanel {
         jpLeftListInvoice.setLayout(jpLeftListInvoiceLayout);
         jpLeftListInvoiceLayout.setHorizontalGroup(
             jpLeftListInvoiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jspListInvoice, javax.swing.GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
             .addGroup(jpLeftListInvoiceLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpLeftListInvoiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpLeftListInvoiceLayout.createSequentialGroup()
-                        .addComponent(jlDay)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbDay, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jlMonth)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jlYear)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbYear, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jlSearchID)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jtfIDInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpLeftListInvoiceLayout.createSequentialGroup()
-                        .addComponent(jlStatusInvoice)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbStatusInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnDelivered, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnTransfer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnReturns, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jlSearchID)
+                .addGap(18, 18, 18)
+                .addComponent(jtfIDInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnTransfer, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnReturns, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(jpLeftListInvoiceLayout.createSequentialGroup()
+                .addComponent(jspListInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 1036, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jpLeftListInvoiceLayout.setVerticalGroup(
             jpLeftListInvoiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpLeftListInvoiceLayout.createSequentialGroup()
+                .addComponent(jspListInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpLeftListInvoiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlDay)
-                    .addComponent(jlMonth)
-                    .addComponent(cbMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlYear)
-                    .addComponent(cbYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnReturns, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTransfer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfIDInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlSearchID)
                     .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jspListInvoice, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpLeftListInvoiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDelivered, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnReturns, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlStatusInvoice)
-                    .addComponent(cbStatusInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTransfer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         jpLeft.add(jpLeftListInvoice);
@@ -216,17 +156,17 @@ public class History_GUI extends javax.swing.JPanel {
 
         jTableInfoProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã SP", "Tên SP", "Số lượng", "SL Trả", "Đơn giá", "Giảm giá", "Thành tiền", "Trạng thái", "Lý do Đổi/Trả"
+                "Mã SP", "Tên SP", "Số lượng", "Giá gốc", "Giá giảm", "Thành tiền", "Trạng thái", "Lý do Đổi/Trả"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -239,13 +179,11 @@ public class History_GUI extends javax.swing.JPanel {
         jpLeftInfoProduct.setLayout(jpLeftInfoProductLayout);
         jpLeftInfoProductLayout.setHorizontalGroup(
             jpLeftInfoProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jspInfoProduct, javax.swing.GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
+            .addComponent(jspInfoProduct, javax.swing.GroupLayout.DEFAULT_SIZE, 1036, Short.MAX_VALUE)
         );
         jpLeftInfoProductLayout.setVerticalGroup(
             jpLeftInfoProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpLeftInfoProductLayout.createSequentialGroup()
-                .addComponent(jspInfoProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jspInfoProduct, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
         );
 
         jpLeft.add(jpLeftInfoProduct);
@@ -311,33 +249,35 @@ public class History_GUI extends javax.swing.JPanel {
         jpRightLayout.setHorizontalGroup(
             jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpRightLayout.createSequentialGroup()
-                .addComponent(jlReasonCancel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jspReasonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-            .addGroup(jpRightLayout.createSequentialGroup()
-                .addComponent(jlIDInvoice)
-                .addGap(29, 29, 29)
-                .addComponent(jtfIDInvoiceDetails))
-            .addGroup(jpRightLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlNameStaff)
-                    .addComponent(jlIDStaff)
-                    .addComponent(jlNameCus)
-                    .addComponent(jlPhoneCus)
-                    .addComponent(jlAddress)
-                    .addComponent(jlTotal)
-                    .addComponent(jlDateCreate)
-                    .addComponent(jlStatus))
-                .addGap(12, 12, 12)
-                .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtfStatusDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-                    .addComponent(jtfDateCreate)
-                    .addComponent(jtfTotal)
-                    .addComponent(jtfAddress)
-                    .addComponent(jtfPhoneCus)
-                    .addComponent(jtfNameCus)
-                    .addComponent(jtfIDStaff)
-                    .addComponent(jtfNameStaff)))
+                    .addGroup(jpRightLayout.createSequentialGroup()
+                        .addComponent(jlIDInvoice)
+                        .addGap(27, 27, 27)
+                        .addComponent(jtfIDInvoiceDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))
+                    .addGroup(jpRightLayout.createSequentialGroup()
+                        .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlIDStaff)
+                            .addComponent(jlNameStaff)
+                            .addComponent(jlNameCus)
+                            .addComponent(jlPhoneCus)
+                            .addComponent(jlAddress)
+                            .addComponent(jlTotal)
+                            .addComponent(jlDateCreate)
+                            .addComponent(jlStatus)
+                            .addComponent(jlReasonCancel))
+                        .addGap(12, 12, 12)
+                        .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtfStatusDetails, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jtfDateCreate, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jtfTotal, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jtfIDStaff, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jtfNameStaff, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jtfAddress, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jtfPhoneCus, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jtfNameCus)
+                            .addComponent(jspReasonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         jpRightLayout.setVerticalGroup(
             jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -382,7 +322,7 @@ public class History_GUI extends javax.swing.JPanel {
                 .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlReasonCancel)
                     .addComponent(jspReasonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addContainerGap(245, Short.MAX_VALUE))
         );
 
         add(jpRight);
@@ -391,10 +331,6 @@ public class History_GUI extends javax.swing.JPanel {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSearchActionPerformed
-
-    private void jtfNameCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNameCusActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfNameCusActionPerformed
 
     private void btnReturnsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnsActionPerformed
         String[] options = {"Toàn phần", "Một phần"};
@@ -420,33 +356,28 @@ public class History_GUI extends javax.swing.JPanel {
         transferProduct_GUI.setVisible(true);
     }//GEN-LAST:event_btnTransferActionPerformed
 
+    private void jtfNameCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNameCusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfNameCusActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private lib2.Button btnDelivered;
     private lib2.Button btnReturns;
     private lib2.Button btnSearch;
     private lib2.Button btnTransfer;
-    private lib2.ComboBoxSuggestion cbDay;
-    private lib2.ComboBoxSuggestion cbMonth;
-    private lib2.ComboBoxSuggestion cbStatusInvoice;
-    private lib2.ComboBoxSuggestion cbYear;
     private javax.swing.JTable jTableInfoProduct;
     private javax.swing.JTable jTableListInvoice;
     private javax.swing.JLabel jlAddress;
     private javax.swing.JLabel jlDateCreate;
-    private javax.swing.JLabel jlDay;
     private javax.swing.JLabel jlIDInvoice;
     private javax.swing.JLabel jlIDStaff;
-    private javax.swing.JLabel jlMonth;
     private javax.swing.JLabel jlNameCus;
     private javax.swing.JLabel jlNameStaff;
     private javax.swing.JLabel jlPhoneCus;
     private javax.swing.JLabel jlReasonCancel;
     private javax.swing.JLabel jlSearchID;
     private javax.swing.JLabel jlStatus;
-    private javax.swing.JLabel jlStatusInvoice;
     private javax.swing.JLabel jlTotal;
-    private javax.swing.JLabel jlYear;
     private javax.swing.JPanel jpLeft;
     private javax.swing.JPanel jpLeftInfoProduct;
     private javax.swing.JPanel jpLeftListInvoice;

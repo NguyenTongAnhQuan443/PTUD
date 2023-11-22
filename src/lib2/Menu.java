@@ -35,7 +35,7 @@ public class Menu extends JComponent {
         {"Sản phẩm"},
         {"Nhân viên", "Danh sách nhân viên", "Danh sách thôi việc"},
         {"Bán hàng"},
-        {"Lịch sử bán hàng", "Danh sách hàng đã giao", "Danh sách hàng đang giao"},
+        {"Lịch sử bán hàng"},
         {"Khách hàng"},
         {"Khuyến mãi"},
         {"Tài khoản", "Thông tin tài khoản", "Đổi mật khẩu"},
