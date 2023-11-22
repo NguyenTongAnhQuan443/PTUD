@@ -1,15 +1,39 @@
 package gui;
 
+import dao.InvoiceDetails_DAO;
+import dao.Invoice_DAO;
+import dao.Product_DAO;
+import entity.Invoice;
+import entity.InvoiceDetails;
+import java.util.Map;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
 import lib2.TableCustom;
 
 public class History_GUI extends javax.swing.JPanel {
 
+    private DefaultTableModel defaultTableModelListInvoice;
+    private DefaultTableModel defaultTableModelListProduct;
     private TransferProduct_GUI transferProduct_GUI;
+
+    private Invoice_DAO invoice_DAO = new Invoice_DAO();
+    private Product_DAO product_DAO = new Product_DAO();
+    private InvoiceDetails_DAO invoiceDetails_DAO = new InvoiceDetails_DAO();
+
     public History_GUI() {
         initComponents();
         TableCustom.apply(jspListInvoice, TableCustom.TableType.DEFAULT);
-        TableCustom.apply(jspInfoProduct, TableCustom.TableType.DEFAULT);
+        defaultTableModelListInvoice = (DefaultTableModel) jTableListInvoice.getModel();
+        ListSelectionModel selectionModel_1 = jTableListInvoice.getSelectionModel();
+        selectionModel_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        TableCustom.apply(jspListProduct, TableCustom.TableType.DEFAULT);
+        defaultTableModelListProduct = (DefaultTableModel) jTableListProduct.getModel();
+        ListSelectionModel selectionModel_2 = jTableListProduct.getSelectionModel();
+        selectionModel_2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        loadListInvoice();
     }
 
     @SuppressWarnings("unchecked")
@@ -26,8 +50,8 @@ public class History_GUI extends javax.swing.JPanel {
         btnSearch = new lib2.Button();
         btnTransfer = new lib2.Button();
         jpLeftInfoProduct = new javax.swing.JPanel();
-        jspInfoProduct = new javax.swing.JScrollPane();
-        jTableInfoProduct = new javax.swing.JTable();
+        jspListProduct = new javax.swing.JScrollPane();
+        jTableListProduct = new javax.swing.JTable();
         jpRight = new javax.swing.JPanel();
         jlNameCus = new javax.swing.JLabel();
         jlIDStaff = new javax.swing.JLabel();
@@ -78,6 +102,11 @@ public class History_GUI extends javax.swing.JPanel {
             }
         });
         jTableListInvoice.setToolTipText("");
+        jTableListInvoice.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableListInvoiceMouseClicked(evt);
+            }
+        });
         jspListInvoice.setViewportView(jTableListInvoice);
 
         btnReturns.setBackground(new java.awt.Color(135, 206, 235));
@@ -154,7 +183,7 @@ public class History_GUI extends javax.swing.JPanel {
         jpLeftInfoProduct.setBackground(new java.awt.Color(255, 255, 255));
         jpLeftInfoProduct.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin sản phẩm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 14))); // NOI18N
 
-        jTableInfoProduct.setModel(new javax.swing.table.DefaultTableModel(
+        jTableListProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -173,17 +202,17 @@ public class History_GUI extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jspInfoProduct.setViewportView(jTableInfoProduct);
+        jspListProduct.setViewportView(jTableListProduct);
 
         javax.swing.GroupLayout jpLeftInfoProductLayout = new javax.swing.GroupLayout(jpLeftInfoProduct);
         jpLeftInfoProduct.setLayout(jpLeftInfoProductLayout);
         jpLeftInfoProductLayout.setHorizontalGroup(
             jpLeftInfoProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jspInfoProduct, javax.swing.GroupLayout.DEFAULT_SIZE, 1036, Short.MAX_VALUE)
+            .addComponent(jspListProduct, javax.swing.GroupLayout.DEFAULT_SIZE, 1036, Short.MAX_VALUE)
         );
         jpLeftInfoProductLayout.setVerticalGroup(
             jpLeftInfoProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jspInfoProduct, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+            .addComponent(jspListProduct, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
         );
 
         jpLeft.add(jpLeftInfoProduct);
@@ -334,21 +363,21 @@ public class History_GUI extends javax.swing.JPanel {
 
     private void btnReturnsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnsActionPerformed
         String[] options = {"Toàn phần", "Một phần"};
-            int choice = JOptionPane.showOptionDialog(
-                    null,
-                    "Bạn muốn hoàn trả toàn phần hay hoàn trả một phần:",
-                    "Lựa chọn",
-                    JOptionPane.DEFAULT_OPTION,
-                    JOptionPane.QUESTION_MESSAGE,
-                    null,
-                    options,
-                    options[0]);
+        int choice = JOptionPane.showOptionDialog(
+                null,
+                "Bạn muốn hoàn trả toàn phần hay hoàn trả một phần:",
+                "Lựa chọn",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]);
 
-            if (choice == 0) {
+        if (choice == 0) {
 //                Sự kiện toàn phần
-            } else if (choice == 1) {
+        } else if (choice == 1) {
 //                Sự kiện một phần
-            }
+        }
     }//GEN-LAST:event_btnReturnsActionPerformed
 
     private void btnTransferActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferActionPerformed
@@ -360,13 +389,54 @@ public class History_GUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfNameCusActionPerformed
 
+    private void jTableListInvoiceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListInvoiceMouseClicked
+        if(evt.getClickCount() == 2){
+            int selectedRow = jTableListInvoice.getSelectedRow();
+            String idInvoice = (String) defaultTableModelListInvoice.getValueAt(selectedRow, 1);
+            loadListProductInvoice(idInvoice);
+        }
+    }//GEN-LAST:event_jTableListInvoiceMouseClicked
 
+//    Load list data invoice
+    public void loadListInvoice() {
+        defaultTableModelListInvoice.setRowCount(0);
+        for (Invoice invoice : invoice_DAO.getListInvoice()) {
+            int numberOrder = defaultTableModelListInvoice.getRowCount() + 1;
+            String status = Invoice.convertStatusToString(invoice.getStatus());
+            Object[] rowData = {numberOrder, invoice.getIdInvoice(), invoice.getCustomer().getName(), invoice.getStaff().getName(), invoice.getDateCreated().toLocalDate(), status};
+            defaultTableModelListInvoice.addRow(rowData);
+        }
+    }
+    
+//    Load list produt of invoice
+    public void loadListProductInvoice(String idInvoice) {
+        defaultTableModelListProduct.setRowCount(0);
+        for (InvoiceDetails invoiceDetails : invoiceDetails_DAO.getListInvoiceDetailsById(idInvoice)) {
+            double currentPrice = (invoiceDetails.getProduct().getCurrentPrice() == null || invoiceDetails.getProduct().getCurrentPrice() == 0) ? invoiceDetails.getProduct().getOriginalPrice() : invoiceDetails.getProduct().getCurrentPrice();
+            double total = invoiceDetails.getQuantity() * currentPrice;
+
+            Object[] rowData = {invoiceDetails.getProduct().getIdProduct(), invoiceDetails.getProduct().getName(), invoiceDetails.getQuantity(), invoiceDetails.getProduct().getOriginalPrice() + "đ", currentPrice + "đ", total + "đ", Invoice.convertStatusToString(invoiceDetails.getInvoice().getStatus()), "Lý do đổi trả"};
+            defaultTableModelListProduct.addRow(rowData);
+
+//            for (int i = 0; i < defaultTableModelCart.getRowCount(); i++) {
+//                // Kiểm tra khuyến mãi và đặt màu nếu có
+//                Map<String, Double> discountInfo = product_DAO.getDiscountForProduct(invoiceDetails.getProduct().getIdProduct());
+//                if (!discountInfo.isEmpty()) {
+//                    defaultTableModelCart.setValueAt("<html><b><font color='BLUE'>" + invoiceDetails.getProduct().getName() + "</font></b></html>", i, 2);
+//                    defaultTableModelCart.setValueAt("<html><b><font color='BLUE'>" + invoiceDetails.getProduct().getCurrentPrice() + "đ" + "</font></b></html>", i, 5);
+//                }
+//            }
+//        }
+//        getInfoInvoiceDetailsToGUI(invoice_DAO.getInvoiceById(idInvoice));
+//        String pricePromotionSTR = jtfTotalAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", "");
+    }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnReturns;
     private lib2.Button btnSearch;
     private lib2.Button btnTransfer;
-    private javax.swing.JTable jTableInfoProduct;
     private javax.swing.JTable jTableListInvoice;
+    private javax.swing.JTable jTableListProduct;
     private javax.swing.JLabel jlAddress;
     private javax.swing.JLabel jlDateCreate;
     private javax.swing.JLabel jlIDInvoice;
@@ -382,8 +452,8 @@ public class History_GUI extends javax.swing.JPanel {
     private javax.swing.JPanel jpLeftInfoProduct;
     private javax.swing.JPanel jpLeftListInvoice;
     private javax.swing.JPanel jpRight;
-    private javax.swing.JScrollPane jspInfoProduct;
     private javax.swing.JScrollPane jspListInvoice;
+    private javax.swing.JScrollPane jspListProduct;
     private javax.swing.JScrollPane jspReasonCancel;
     private javax.swing.JTextArea jtaReasonCancel;
     private javax.swing.JTextField jtfAddress;

@@ -163,22 +163,55 @@ public class Invoice_DAO extends DAO {
         }
         return false;
     }
-    
+
 //    Update money pending invoice
     public boolean updateInvoiceMoney(String idInvoice, double amountReceived, double changeAmount, double totalAmount) {
-    String sql = "UPDATE Invoice SET amountReceived = ?, changeAmount = ?, totalAmount = ? WHERE idInvoice = ?";
-    try {
-        PreparedStatement preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
-        preparedStatement.setDouble(1, amountReceived);
-        preparedStatement.setDouble(2, changeAmount);
-        preparedStatement.setDouble(3, totalAmount);
-        preparedStatement.setString(4, idInvoice);
+        String sql = "UPDATE Invoice SET amountReceived = ?, changeAmount = ?, totalAmount = ? WHERE idInvoice = ?";
+        try {
+            PreparedStatement preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
+            preparedStatement.setDouble(1, amountReceived);
+            preparedStatement.setDouble(2, changeAmount);
+            preparedStatement.setDouble(3, totalAmount);
+            preparedStatement.setString(4, idInvoice);
 
-        return preparedStatement.executeUpdate() > 0;
-    } catch (Exception e) {
-        e.printStackTrace();
+            return preparedStatement.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
-    return false;
-}
+//    Load list data invoice
 
+    public List<Invoice> getListInvoice() {
+        List<Invoice> listPendingInvoice = new ArrayList<Invoice>();
+        String sql = "select * from Invoice";
+        try {
+            connectDB.ConnectDB.getInstance();
+            Connection connection = (Connection) ConnectDB.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String idInvoice = resultSet.getString("idInvoice");
+                String staff = resultSet.getString("staff");
+                String customer = resultSet.getString("customer");
+                String promotion = resultSet.getString("promotion");
+                double amountReceived = resultSet.getDouble("amountReceived");
+                double changeAmount = resultSet.getDouble("changeAmount");
+                double totalAmount = resultSet.getDouble("totalAmount");
+                java.sql.Timestamp timestamp = resultSet.getTimestamp("dateCreated");
+                LocalDateTime dateCreated = null;
+                if (timestamp != null) {
+                    dateCreated = timestamp.toLocalDateTime();
+                }
+                String status1 = resultSet.getString("status");
+                Invoice invoice = new Invoice(idInvoice, staff_DAO.getStaffByID(staff), customer_DAO.getCustomerByID(customer), promotion_DAO.getPromotionByID(promotion), amountReceived, changeAmount, totalAmount, dateCreated, Invoice.convertStringToStatus(status1));
+                listPendingInvoice.add(invoice);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listPendingInvoice;
+    }
 }

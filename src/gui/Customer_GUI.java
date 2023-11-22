@@ -40,7 +40,6 @@ import utils.Utils;
 public class Customer_GUI extends javax.swing.JPanel {
 
     private DefaultTableModel defaultTableModel;
-    private PurchaseHistory_GUI purchaseHistory_GUI;
     private Customer_DAO customer_DAO = new Customer_DAO();
     private Province_DAO province_DAO = new Province_DAO();
     private District_DAO district_DAO = new District_DAO();
@@ -94,7 +93,6 @@ public class Customer_GUI extends javax.swing.JPanel {
         jlFilterPhone = new javax.swing.JLabel();
         jtfFilterPhone = new javax.swing.JTextField();
         btnFilter = new lib2.Button();
-        jButton1 = new javax.swing.JButton();
         btnFilter2 = new lib2.Button();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -376,14 +374,6 @@ public class Customer_GUI extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(204, 204, 255));
-        jButton1.setText("Test lịch sử GD");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         btnFilter2.setBackground(new java.awt.Color(135, 206, 235));
         btnFilter2.setForeground(new java.awt.Color(255, 255, 255));
         btnFilter2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/outputfile24.png"))); // NOI18N
@@ -406,9 +396,7 @@ public class Customer_GUI extends javax.swing.JPanel {
                 .addComponent(jtfFilterPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 544, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 754, Short.MAX_VALUE)
                 .addComponent(btnFilter2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addComponent(jspTableCus)
@@ -420,7 +408,6 @@ public class Customer_GUI extends javax.swing.JPanel {
                 .addGap(5, 5, 5)
                 .addGroup(jpTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
                     .addComponent(jlFilterPhone)
-                    .addComponent(jButton1)
                     .addComponent(jtfFilterPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFilter2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -469,11 +456,6 @@ public class Customer_GUI extends javax.swing.JPanel {
         clearInput();
         JOptionPane.showMessageDialog(null, "Danh sách khách hàng đã được làm mới ");
     }//GEN-LAST:event_btnReloadActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        purchaseHistory_GUI = new PurchaseHistory_GUI();
-        purchaseHistory_GUI.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cbDistrictActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDistrictActionPerformed
         // TODO add your handling code here:
@@ -1133,7 +1115,6 @@ public class Customer_GUI extends javax.swing.JPanel {
     private lib2.ComboBoxSuggestion cbDistrict;
     private lib2.ComboBoxSuggestion cbProvince;
     private lib2.ComboBoxSuggestion cbWard;
-    private javax.swing.JButton jButton1;
     private javax.swing.JTable jTableCus;
     private javax.swing.JCheckBox jcReceivePromotion;
     private javax.swing.JLabel jlAddress;
