@@ -85,7 +85,7 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
     private Invoice_DAO invoice_DAO = new Invoice_DAO();
 //    private Staff_DAO staff_DAO = new Staff_DAO();
     private InvoiceDetails_DAO invoiceDetails_DAO = new InvoiceDetails_DAO();
-//    private VAT_DAO vat_dao = new VAT_DAO();
+    private VAT_DAO vat_dao = new VAT_DAO();
 //
     private WebcamPanel webcamPanel = null;
     private Webcam webcam = null;
@@ -140,23 +140,25 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
 //        }
 //
 //        defaultTableModelCart.setRowCount(0); // set cho jtable cart = 0 để table trống lần đầu khởi tạo
-//// Sự kiện nghe sự thay đổi của jtable
-//        defaultTableModelCart.addTableModelListener(new TableModelListener() {
-//            @Override
-//            public void tableChanged(TableModelEvent e) {
-//                if (e.getType() == TableModelEvent.INSERT || e.getType() == TableModelEvent.UPDATE || e.getType() == TableModelEvent.DELETE) {
-//
-//                    // 1) Tính giá trị VAT
-//                    double vatValue = calculateTotalAmount() * (vat_dao.getVAT() / 100);
-//                    double total = vatValue + calculateTotalAmount();
-//                    jtfTotalAmount.setText(total + " VNĐ");
-//
-//                    //        Lấy tổng tiền hóa đon từ đó lấy mã giảm giá hợp lý
-//                    loadPromotion(promotion_DAO.getListPromotionsByStatusAndTypePromotion2(total));
-//                }
-//            }
-//        });
-//        loadDataPendingInvoice();
+// Sự kiện nghe sự thay đổi của jtable
+        defaultTableModelCart.addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                if (e.getType() == TableModelEvent.INSERT || e.getType() == TableModelEvent.UPDATE || e.getType() == TableModelEvent.DELETE) {
+
+                    // 1) Tính giá trị VAT
+                    double vatValue = calculateTotalAmount() * (vat_dao.getVAT() / 100);
+                    double total = vatValue + calculateTotalAmount();
+                    jtfTotalAfter.setText(total + "");
+
+                    // 2) Tính số tiền mới khi sản phẩm được thêm vào giỏ hàng
+                    double moneyBefore = Double.parseDouble(jtfTotalBefore.getText());
+                    double moneyAfter = Double.parseDouble(jtfTotalAfter.getText());
+                    calculateTotalBeforeAfter(moneyBefore, moneyAfter);
+
+                }
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -205,6 +207,7 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
         jLChangeAmount = new javax.swing.JLabel();
         jtfChangeAmount = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
+        jLTitleVAT = new javax.swing.JLabel();
         iP3_1 = new javax.swing.JPanel();
         JLIDInvoice = new javax.swing.JLabel();
         JTFIDInvoice = new javax.swing.JTextField();
@@ -237,6 +240,9 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
         jTableListInvoice.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableListInvoiceMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jTableListInvoiceMouseEntered(evt);
             }
         });
         jSPListInvoice.setViewportView(jTableListInvoice);
@@ -344,7 +350,7 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
         );
         jP2Layout.setVerticalGroup(
             jP2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSPCart)
+            .addComponent(jSPCart, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
         );
 
         jP3.setBackground(new java.awt.Color(255, 255, 255));
@@ -493,8 +499,8 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
         jlTotalAfter.setText("Tổng tiền sau: ");
 
         jtfTotalAfter.setEditable(false);
-        jtfTotalAfter.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        jtfTotalAfter.setForeground(new java.awt.Color(255, 51, 51));
+        jtfTotalAfter.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jtfTotalAfter.setForeground(new java.awt.Color(0, 153, 255));
         jtfTotalAfter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfTotalAfterActionPerformed(evt);
@@ -510,7 +516,7 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
         jlAmountNeeded.setText("KH trả thêm:");
 
         jtfAmountNeeded.setEditable(false);
-        jtfAmountNeeded.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfAmountNeeded.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         jtfAmountNeeded.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfAmountNeededActionPerformed(evt);
@@ -580,6 +586,8 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
         jLabel6.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jLabel6.setText("VNĐ");
 
+        jLTitleVAT.setText("(Đã bao gồm phí VAT)");
+
         javax.swing.GroupLayout jP_3_3Layout = new javax.swing.GroupLayout(jP_3_3);
         jP_3_3.setLayout(jP_3_3Layout);
         jP_3_3Layout.setHorizontalGroup(
@@ -587,25 +595,6 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
             .addGroup(jP_3_3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jP_3_3Layout.createSequentialGroup()
-                        .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlTotalBefore)
-                            .addComponent(jlTotalAfter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jlAmountNeeded))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jP_3_3Layout.createSequentialGroup()
-                                .addComponent(jtfAmountNeeded, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3))
-                            .addGroup(jP_3_3Layout.createSequentialGroup()
-                                .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtfTotalAfter, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-                                    .addComponent(jtfTotalBefore))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jP_3_3Layout.createSequentialGroup()
                         .addComponent(jlGiveBack, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -633,7 +622,31 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
                                     .addComponent(jtfMoneyReceived, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cbPayments, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel5)))))
+                                .addComponent(jLabel5))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jP_3_3Layout.createSequentialGroup()
+                        .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jP_3_3Layout.createSequentialGroup()
+                                .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jlTotalBefore)
+                                    .addComponent(jlTotalAfter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(jP_3_3Layout.createSequentialGroup()
+                                .addComponent(jlAmountNeeded)
+                                .addGap(27, 27, 27)))
+                        .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jP_3_3Layout.createSequentialGroup()
+                                .addComponent(jtfAmountNeeded, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3))
+                            .addComponent(jLTitleVAT)
+                            .addGroup(jP_3_3Layout.createSequentialGroup()
+                                .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jtfTotalAfter, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                                    .addComponent(jtfTotalBefore))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap())
         );
         jP_3_3Layout.setVerticalGroup(
@@ -649,7 +662,9 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
                     .addComponent(jtfTotalAfter, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlTotalAfter)
                     .addComponent(jLabel2))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLTitleVAT)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jP_3_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfAmountNeeded, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlAmountNeeded)
@@ -677,7 +692,7 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
                     .addComponent(jtfChangeAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLChangeAmount)
                     .addComponent(jLabel6))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         iP3_1.setBackground(new java.awt.Color(255, 255, 255));
@@ -828,213 +843,47 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
     }//GEN-LAST:event_btnSearchIDInvoiceActionPerformed
 
     private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
-//        if (btnPendingInvoice.getText().equals("Đơn chờ")) {
-////            Đang ở trạng thái hóa đơn mới
-//            if (!jtfTotalAmount.getText().trim().equals("")) {
-//                if (cbPayments.getSelectedIndex() == 0) {
-//                    if (validator()) {
-//                        updateChangeAmount();
-//                        double totalAmount = Double.parseDouble(jtfTotalAmount.getText().trim().replaceAll("\\ VNĐ", ""));
-//                        String str1 = "Tổng tiền hàng phải trả là : ";
-//                        String str2 = "Số tiền phải phải trả lại khách hành là : ";
-//                        String str3 = jtfChangeAmount.getText().trim().replaceAll("\\ VNĐ", "");
-//                        if (JOptionPane.showConfirmDialog(null, str2 + utils.Utils.formatMoney(Double.valueOf(str3)), "Xác nhận thanh toán", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-//                            boolean res = createInvoice("Đã thanh toán");
-//                            if (res) {
-//                                JOptionPane.showMessageDialog(null, "Thanh toán thành công");
-//                                cbPayments.setEnabled(false);
-//                                updateQuantityProduct();
-//
-//                                String strTotal = jtfTotalAmount.getText().trim().replaceAll("\\ .0", "").replaceAll("\\ VNĐ", "");
-//                                double total = Double.parseDouble(strTotal);
-//                                String strChangeAmount = jtfChangeAmount.getText().trim().replaceAll("\\ .0", "").replaceAll("\\ VNĐ", "");
-//                                double changeAmount = Double.parseDouble(strChangeAmount);
-//                                String strMoneyReceived = jtfMoneyReceived.getText().trim().replaceAll("\\ .0", "").replaceAll("\\ VNĐ", "");
-//                                double moneyReceived = Double.parseDouble(strMoneyReceived);
-//                                Invoice invoiceTMP = invoice_DAO.getInvoiceById(jLIDInvoiceMain.getText());
-//                                printInvoice(invoiceTMP, total, moneyReceived, changeAmount);
-//                                clearInfoInvoice();
-//                            }
-//                        } else {
-//                            jtfChangeAmount.setText("");
-//                        }
-//                    }
-//                } else if (cbPayments.getSelectedIndex() == 1) {
-//                    Flag.setIdInvoiceForPrintf(jLIDInvoiceMain.getText());
-//                    try {
-//                        String monney = jtfTotalAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", ""); // truyền số tiền hàng vào đây
-//                        String str1 = "2|99|0365962232|Nguyen Tong Anh Quan||0|0|";
-//                        String str2 = "||transfer_myqr";
-//                        String QrCodeData = str1 + monney + str2;
-//                        String fileName = "QRPay.png";
-//                        String filePath = "D:\\FleyShopApp\\QRPay\\" + fileName;
-////
-//                        String charset = "UTF-8";
-//                        Map<EncodeHintType, ErrorCorrectionLevel> hintMap = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
-//                        hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
-//                        BitMatrix matrix = new MultiFormatWriter().encode(
-//                                new String(QrCodeData.getBytes(charset), charset),
-//                                BarcodeFormat.QR_CODE, 242, 242, hintMap);
-//                        MatrixToImageWriter.writeToFile(matrix, filePath.substring(filePath.lastIndexOf('.') + 1), new File(filePath));
-//                    } catch (Exception e) {
-//                    }
-//                    Momo_GUI momo_GUI = new Momo_GUI();
-//                    momo_GUI.setVisible(true);
-//
-////                Sự kiện lắng nghe Jframe momo đóng
-//                    momo_GUI.addWindowListener(new WindowAdapter() {
-//                        @Override
-//                        public void windowClosed(WindowEvent e) {
-//                            if (Flag.isFlagPayDone()) { // nếu đã thanh toán thành công
-//                                boolean res = createInvoice("Đã thanh toán");
-//                                if (res) {
-//                                    JOptionPane.showMessageDialog(null, "Thanh toán thành công");
-//                                    updateQuantityProduct();
-//                                    String strTotal = jtfTotalAmount.getText().trim().replaceAll("\\ .0", "").replaceAll("\\ VNĐ", "");
-//                                    double total = Double.parseDouble(strTotal);
-//                                    Invoice invoiceTMP = invoice_DAO.getInvoiceById(jLIDInvoiceMain.getText());
-//                                    printInvoice(invoiceTMP, total, total, 0);
-//                                    clearInfoInvoice();
-//                                }
-//                            }
-//                        }
-//                    });
-//                }
-//            } else {
-//                JOptionPane.showMessageDialog(null, "Chưa có sản phẩm nào trong giỏ hàng vui lòng kiểm tra lại");
-//                return;
-//            }
-//        } else if (btnPendingInvoice.getText().equals("Hủy")) {
-//// trạng thái đơn chờ
-//            if (!jtfTotalAmount.getText().trim().equals("")) {
-//                if (cbPayments.getSelectedIndex() == 0) {
-//                    if (validator()) {
-//                        updateChangeAmount();
-//                        double totalAmount = Double.parseDouble(jtfTotalAmount.getText().trim().replaceAll("\\ VNĐ", ""));
-//                        String str1 = "Tổng tiền hàng phải trả là : ";
-//                        String str2 = "Số tiền phải phải trả lại khách hành là : ";
-//                        String str3 = jtfChangeAmount.getText().trim().replaceAll("\\ VNĐ", "");
-//                        if (JOptionPane.showConfirmDialog(null, str2 + utils.Utils.formatMoney(Double.valueOf(str3)), "Xác nhận thanh toán", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-//                            String idInvoice = jLIDInvoiceMain.getText().trim();
-//
-//                            boolean res = invoice_DAO.updateInvoiceStatus(idInvoice, "Đã thanh toán");
-//                            if (res) {
-//                                UpdateListProductPendingInvoice(invoice_DAO.getInvoiceById(idInvoice));
-//                                // cập nhập tiền hóa đơn
-//                                boolean res1 = updateMoneyPendingInvoice();
-//                                // cập nhập tiền hóa đơn
-//                                if (res1) {
-//
-//                                    JOptionPane.showMessageDialog(null, "Thanh toán thành công");
-//                                    updateQuantityProduct();
-//                                    //Cập nhập lại số lượng mã khuyến mãi
-//                                    minusQuantityPromotion(promotion_DAO.getPromotionByID(getPromotionIdFromComboBox()));
-//                                    //Cập nhập điểm tích lũy
-//                                    Customer customer = customer_DAO.getCustomerByID(Flag.getIdCusForSell_GUI());
-//                                    minusPointsCustomer(customer);
-//                                    //Cộng điểm tích lũy dựa trên tổng tiền hóa đơn
-//                                    sumPointsCustomer(customer);
-//
-//                                    loadDataPendingInvoice();
-//
-//                                    Flag.setIdInvoiceForPrintf(idInvoice); // set idinvoice để in hóa đơn
-//
-//                                    String strTotal = jtfTotalAmount.getText().trim().replaceAll("\\ .0", "").replaceAll("\\ VNĐ", "");
-//                                    double total = Double.parseDouble(strTotal);
-//                                    String strChangeAmount = jtfChangeAmount.getText().trim().replaceAll("\\ .0", "").replaceAll("\\ VNĐ", "");
-//                                    double changeAmount = Double.parseDouble(strChangeAmount);
-//                                    String strMoneyReceived = jtfMoneyReceived.getText().trim().replaceAll("\\ .0", "").replaceAll("\\ VNĐ", "");
-//                                    double moneyReceived = Double.parseDouble(strMoneyReceived);
-//                                    Invoice invoiceTMP = invoice_DAO.getInvoiceById(jLIDInvoiceMain.getText());
-//                                    printInvoice(invoiceTMP, totalAmount, moneyReceived, changeAmount);
-//
-//                                    btnCreateInvoice.setEnabled(true);
-//                                    btnPendingInvoice.setText("Đơn chờ");
-//
-//                                    defaultTableModelCart.setRowCount(0);
-//                                    clearInfoInvoice();
-//                                    clearAllInPut();
-//                                }
-//                            }
-//
-//                        } else {
-//                            jtfChangeAmount.setText("");
-//                        }
-//                    }
-//                } else if (cbPayments.getSelectedIndex() == 1) {
-//                    Flag.setIdInvoiceForPrintf(jLIDInvoiceMain.getText());
-//                    try {
-//                        String monney = jtfTotalAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", ""); // truyền số tiền hàng vào đây
-//                        String str1 = "2|99|0365962232|Nguyen Tong Anh Quan||0|0|";
-//                        String str2 = "||transfer_myqr";
-//                        String QrCodeData = str1 + monney + str2;
-//                        String fileName = "QRPay.png";
-//                        String filePath = "D:\\FleyShopApp\\QRPay\\" + fileName;
-////
-//                        String charset = "UTF-8";
-//                        Map<EncodeHintType, ErrorCorrectionLevel> hintMap = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
-//                        hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
-//                        BitMatrix matrix = new MultiFormatWriter().encode(
-//                                new String(QrCodeData.getBytes(charset), charset),
-//                                BarcodeFormat.QR_CODE, 242, 242, hintMap);
-//                        MatrixToImageWriter.writeToFile(matrix, filePath.substring(filePath.lastIndexOf('.') + 1), new File(filePath));
-//                    } catch (Exception e) {
-//                    }
-//                    Momo_GUI momo_GUI = new Momo_GUI();
-//                    momo_GUI.setVisible(true);
-//
-////                Sự kiện lắng nghe Jframe momo đóng
-//                    momo_GUI.addWindowListener(new WindowAdapter() {
-//                        @Override
-//                        public void windowClosed(WindowEvent e) {
-//                            if (Flag.isFlagPayDone()) { // nếu đã thanh toán thành công
-//                                boolean res = invoice_DAO.updateInvoiceStatus(Flag.getIdInvoiceForPrintf(), "Đã thanh toán");
-//
-//                                if (res) {
-//                                    UpdateListProductPendingInvoice(invoice_DAO.getInvoiceById(Flag.getIdInvoiceForPrintf()));
-//                                    // cập nhập tiền hóa đơn
-//                                    boolean res1 = updateMoneyPendingInvoice();
-//                                    if (res1) {
-//                                        JOptionPane.showMessageDialog(null, "Thanh toán thành công");
-//                                        //Cập nhận số lượng sản phẩm
-//                                        updateQuantityProduct();
-//                                        //Cập nhập lại số lượng mã khuyến mãi
-//                                        minusQuantityPromotion(promotion_DAO.getPromotionByID(getPromotionIdFromComboBox()));
-//                                        //Cập nhập điểm tích lũy
-//                                        Customer customer = customer_DAO.getCustomerByID(Flag.getIdCusForSell_GUI());
-//                                        minusPointsCustomer(customer);
-//                                        //Cộng điểm tích lũy dựa trên tổng tiền hóa đơn
-//                                        sumPointsCustomer(customer);
-//
-//                                        loadDataPendingInvoice();
-//
-//                                        String strTotal = jtfTotalAmount.getText().trim().replaceAll("\\ .0", "").replaceAll("\\ VNĐ", "");
-//                                        double total = Double.parseDouble(strTotal);
-//                                        Invoice invoiceTMP = invoice_DAO.getInvoiceById(jLIDInvoiceMain.getText());
-//                                        printInvoice(invoiceTMP, total, total, 0);
-//
-//                                        btnCreateInvoice.setEnabled(true);
-//                                        btnPendingInvoice.setText("Đơn chờ");
-//
-//                                        defaultTableModelCart.setRowCount(0);
-//                                        clearInfoInvoice();
-//                                        clearAllInPut();
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    });
-//                }
-//            } else {
-//                JOptionPane.showMessageDialog(null, "Chưa có sản phẩm nào trong giỏ hàng vui lòng kiểm tra lại");
-//                return;
-//            }
-//        }
+        String idInvoice = JTFIDInvoice.getText().trim();
+        String moneyBeforeSTR = jtfTotalBefore.getText().trim().replaceAll("\\.0", "");
+        String moneyAfterSTR = jtfTotalAfter.getText().trim().replaceAll("\\.0", "");
+        double moneyBefore = Double.parseDouble(moneyBeforeSTR);
+        double moneyAfter = Double.parseDouble(moneyAfterSTR);
+        double totalAmount = 0;
+
+        String title_1 = "Số tiền phải trả lại khách hàng là: ";
+        String title_2 = "Số tiền khách hàng phải trả thêm là: ";
+        if (cbPayments.getSelectedIndex() == 0) {
+
+            if (moneyBefore - moneyAfter > 0) {
+                jtfMoneyReceived.setEditable(false);
+                cbPayments.setEnabled(true);
+
+                totalAmount = moneyBefore - moneyAfter;
+                JOptionPane.showMessageDialog(null, title_1 + utils.Utils.formatMoney(totalAmount));
+                boolean res = invoice_DAO.updateInvoiceMoney(idInvoice, moneyBefore, moneyBefore - moneyAfter, moneyAfter);
+                if (res) {
+                    // trừ số lượng sản phẩm 
+                    // cộng số lượng sản phẩm
+                    // cập nhập chi tiết hóa đơn
+                    clearInput();
+                    btnPay.setEnabled(false);
+                    btnCancel.setEnabled(false);
+                    JOptionPane.showMessageDialog(null, "Đổi trả hàng thành công !");
+                }
+            } else if (cbPayments.getSelectedIndex() == 1) {
+
+            }
+
+        }
     }//GEN-LAST:event_btnPayActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         clearInput();
         btnCancel.setEnabled(false);
+        defaultTableModelCart.setRowCount(0);
+        btnPay.setEnabled(false);
+        cbPayments.setEnabled(false);
+        jtfMoneyReceived.setEditable(false);
 //        if (btnPendingInvoice.getText().equals("Đơn chờ") && defaultTableModelCart.getRowCount() > 0) {
 //            if (JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn đặt trạng thái chờ cho đơn hàng không ?", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 //                boolean res = createInvoice("Đơn chờ");
@@ -1145,27 +994,31 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
     }//GEN-LAST:event_jTableCartMouseClicked
 
     private void jTableCartPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTableCartPropertyChange
-//        if ("tableCellEditor".equals(evt.getPropertyName())) {
-//            int selectedRow = jTableCart.getSelectedRow();
-//            int selectedColumn = jTableCart.getSelectedColumn();
-//
-//            if (selectedColumn == 3) {
-//                String quantitySTR = jTableCart.getValueAt(selectedRow, 3).toString().trim().replaceAll("\\.0", "").replaceAll("đ", "");
-//                String priceSTR = jTableCart.getValueAt(selectedRow, 4).toString().trim().replaceAll("\\.0", "").replaceAll("đ", "");
-//                int quantity = Integer.parseInt(quantitySTR);
-//                double unitPrice = Double.parseDouble(priceSTR);
-//                double totalPrice = quantity * unitPrice;
-//
-//                // Cập nhật giá trị thành tiền trong JTable
-//                jTableCart.setValueAt(totalPrice + "đ", selectedRow, 6);
-//
-//                // Kiểm tra nếu số lượng <= 0, xóa hàng khỏi bảng
-//                if (quantity <= 0) {
-//                    DefaultTableModel model = (DefaultTableModel) jTableCart.getModel();
-//                    model.removeRow(selectedRow);
-//                }
-//            }
-//        }
+        if ("tableCellEditor".equals(evt.getPropertyName())) {
+            int selectedRow = jTableCart.getSelectedRow();
+            int selectedColumn = jTableCart.getSelectedColumn();
+            // kiểm tra sự kiện sửa ở cột số lượng
+            if (selectedColumn == 3) {
+                String quantitySTR = jTableCart.getValueAt(selectedRow, 3).toString().trim().replaceAll("\\.0", "").replaceAll("đ", "");
+                String priceSTR = jTableCart.getValueAt(selectedRow, 5).toString().trim().replaceAll("\\.0", "").replaceAll("đ", "");
+                int quantity = Integer.parseInt(quantitySTR);
+                double unitPrice = Double.parseDouble(priceSTR);
+                double totalPrice = quantity * unitPrice;
+
+                // Cập nhật giá trị thành tiền trong JTable
+                jTableCart.setValueAt(totalPrice + "đ", selectedRow, 6);
+
+                // Kiểm tra nếu số lượng <= 0, xóa hàng khỏi bảng
+                if (quantity <= 0) {
+                    DefaultTableModel model = (DefaultTableModel) jTableCart.getModel();
+                    model.removeRow(selectedRow);
+                }
+            }
+            // cập nhập số tiền KH phải trả thêm hoặc số tiền phải trả lại KH khi table có sự thay đổi
+            double moneyBefore = Double.parseDouble(jtfTotalBefore.getText());
+            double moneyAfter = Double.parseDouble(jtfTotalAfter.getText());
+            calculateTotalBeforeAfter(moneyBefore, moneyAfter);
+        }
     }//GEN-LAST:event_jTableCartPropertyChange
 
     private void jTableCartVetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_jTableCartVetoableChange
@@ -1185,12 +1038,12 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
     }//GEN-LAST:event_jTableCartMouseReleased
 
     private void cbPaymentsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbPaymentsItemStateChanged
-//        if (cbPayments.getSelectedIndex() == 0) {
-//            jtfMoneyReceived.setEditable(true);
-//        } else if (cbPayments.getSelectedIndex() == 1) {
-//            jtfMoneyReceived.setEditable(false);
-//            jtfMoneyReceived.setText("");
-//        }
+        if (cbPayments.getSelectedIndex() == 0) {
+            jtfMoneyReceived.setEditable(true);
+        } else if (cbPayments.getSelectedIndex() == 1) {
+            jtfMoneyReceived.setEditable(false);
+            jtfMoneyReceived.setText("");
+        }
     }//GEN-LAST:event_cbPaymentsItemStateChanged
 
     private void jtfNameCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNameCusActionPerformed
@@ -1236,6 +1089,9 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
             JTFIDInvoice.setEditable(false);
             btnSearchIDInvoice.setEnabled(false);
             btnCancel.setEnabled(true);
+            btnPay.setEnabled(true);
+            cbPayments.setEnabled(true);
+            jtfMoneyReceived.setEditable(true);
         }
     }//GEN-LAST:event_jTableListInvoiceMouseClicked
 
@@ -1250,38 +1106,11 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
     private void jtfMoneyReceivedPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jtfMoneyReceivedPropertyChange
 
     }//GEN-LAST:event_jtfMoneyReceivedPropertyChange
-//// Xóa thông tin chi tiết trên hóa đơn
-//
-//    private void clearInfoInvoice() {
-//        defaultTableModelCart.setRowCount(0);
-//
-//        jLIDInvoiceMain.setText("");
-//        jLIDStaffMain.setText("");
-//        jLNameStaffMain.setText("");
-//
-//        JTFIDInvoice.setText("");
-//        JTFIDInvoice.setEditable(false);
-//
-//        jtfNameCus.setText("");
-//        jtfEmail.setText("");
-//        jTFPoints.setText("");
-//
-//        jtfTotalAmount.setText("");
-//        cbPromotion.setSelectedIndex(0);
-//        cbPromotion.setEnabled(false);
-//        cbPonis.setSelectedItem(0);
-//        cbPonis.setEnabled(false);
-//        cbPayments.setSelectedIndex(0);
-//        cbPayments.setEditable(false);
-//
-//        jtfMoneyReceived.setText("");
-//        jtfMoneyReceived.setEditable(false);
-//        jtfChangeAmount.setText("");
-//
-//        btnCreateInvoice.setText("Tạo hóa đơn");
-//        btnPendingInvoice.setEnabled(false);
-//        btnPay.setEnabled(false);
-//    }
+
+    private void jTableListInvoiceMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListInvoiceMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTableListInvoiceMouseEntered
+
 ////   Cập nhập giá tiền phải trả lại khách
 //
 //    private void updateChangeAmount() {
@@ -1291,186 +1120,6 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
 //            double changeAmount = moneyReceived - totalAmount;
 //            jtfChangeAmount.setText(changeAmount + " VNĐ");
 //        }
-//    }
-//
-////    Kiểm tra dữ liệu số
-//    private boolean isNumber(String number) {
-//        try {
-//            int num = Integer.parseInt(number);
-//            return true;
-//        } catch (NumberFormatException e) {
-//        }
-//        return false;
-//    }
-//
-////    Đổi điểm tích lũy sang tiền
-//    private int getPointsToMoney() {
-//        int points = 0;
-//        int cBBSelectedIndex = cbPonis.getSelectedIndex();
-//        switch (cBBSelectedIndex) {
-//            case 0:
-//                points = 0;
-//                break;
-//            case 1:
-//                points = 10000;
-//                break;
-//            case 2:
-//                points = 20000;
-//                break;
-//            case 3:
-//                points = 30000;
-//                break;
-//            case 4:
-//                points = 40000;
-//                break;
-//            case 5:
-//                points = 50000;
-//                break;
-//            case 6:
-//                points = 60000;
-//                break;
-//            case 7:
-//                points = 70000;
-//                break;
-//            case 8:
-//                points = 80000;
-//                break;
-//            case 9:
-//                points = 90000;
-//                break;
-//            case 10:
-//                points = 100000;
-//                break;
-//            default:
-//                points = 0;
-//                break;
-//        }
-//        return points;
-//    }
-//
-//    private boolean validator() {
-//        if (cbPayments.getSelectedIndex() == 0) {
-//            if (jtfMoneyReceived.getText().trim().equals("")) {
-//                return showERROR(jtfMoneyReceived, "Vui lòng nhập số tiền nhận trước khi thanh toán !");
-//            }
-//            if (!isNumber(jtfMoneyReceived.getText().trim())) {
-//                return showERROR(jtfMoneyReceived, "Số tiền nhận vào không chính xác, vui lòng kiểm tra lại");
-//            }
-//            if (Double.parseDouble(jtfMoneyReceived.getText().trim()) < 0) {
-//                return showERROR(jtfMoneyReceived, "Số tiền nhận phải lớn hơn 0 !");
-//            }
-//            double total = Double.parseDouble(jtfTotalAmount.getText().trim().replaceAll("\\ VNĐ", ""));
-//            if (Double.parseDouble(jtfMoneyReceived.getText().trim()) < total) {
-//                return showERROR(jtfMoneyReceived, "Số tiền nhận không đủ đề thanh toán vui lòng kiểm tra lại !");
-//            }
-//        }
-//        return true;
-//    }
-//
-//    private boolean validator_2(Customer customer) {
-//        int points = 0;
-//        int cBBSelectedIndex = cbPonis.getSelectedIndex();
-//
-//        switch (cBBSelectedIndex) {
-//            case 0:
-//                points = 0;
-//                break;
-//            case 1:
-//                points = 1000;
-//                break;
-//            case 2:
-//                points = 2000;
-//                break;
-//            case 3:
-//                points = 3000;
-//                break;
-//            case 4:
-//                points = 4000;
-//                break;
-//            case 5:
-//                points = 5000;
-//                break;
-//            case 6:
-//                points = 6000;
-//                break;
-//            case 7:
-//                points = 7000;
-//                break;
-//            case 8:
-//                points = 8000;
-//                break;
-//            case 9:
-//                points = 9000;
-//                break;
-//            case 10:
-//                points = 10000;
-//                break;
-//            default:
-//                points = 0;
-//                break;
-//        }
-//
-//        if (customer.getRewardPoints() < points) {
-//            JOptionPane.showMessageDialog(null, "Điểm tích lũy của khách hàng không đủ để trừ vui lòng kiểm tra lại !");
-//            cbPonis.setSelectedIndex(0);
-//            return false;
-//        }
-//        return true;
-//    }
-//
-//    private void clearAllInPut() {
-//        jtfEmail.setText("");
-//        jtfChangeAmount.setText("");
-//        jtfMoneyReceived.setText("");
-//        jtfNameCus.setText("");
-//        JTFIDInvoice.setText("");
-//        jtfTotalAmount.setText("");
-//        cbPonis.setSelectedIndex(0);
-//        jTFPoints.setText("");
-//        cbPayments.setSelectedIndex(0);
-//        cbPromotion.setSelectedItem("");
-//    }
-//
-//// Hàm tính tổng tiền từ cột "thành tiền" của JTable
-//    private double calculateTotalAmount() {
-//        double totalAmount = 0;
-//        int rowCount = jTableCart.getRowCount();
-//        for (int i = 0; i < rowCount; i++) {
-//            String value = jTableCart.getValueAt(i, 6).toString().trim().replaceAll("\\.0", "").replaceAll("đ", "");
-//            double total = Double.parseDouble(value);
-//            totalAmount += total;
-//        }
-//        return totalAmount;
-//    }
-//
-////    Load thông tin khuyến mãi lên combobox
-//    private void loadPromotion(List<Promotion> listPromotion) {
-//        cbPromotion.removeAllItems();
-//        cbPromotion.addItem("Không áp dụng");
-//        for (Promotion promotion : listPromotion) {
-//            String promotionName = promotion.getName();
-//            String promotionId = promotion.getIdPromotion();
-//
-//            cbPromotion.addItem(promotionName);
-//            promotionMap.put(promotionName, promotionId);
-//        }
-//    }
-//
-////    Đi đến trang customer_GUI
-//    public void toCustomerGUI() {
-//        JPanel parent = (JPanel) this.getParent();
-//        parent.remove(this);
-//        parent.add(new Customer_GUI()); // Thay "JPanel1()" bằng cách khởi tạo đúng của JPanel 1
-//        parent.revalidate();
-//        parent.repaint();
-//
-//    }
-//
-//    private boolean showERROR(JTextField jtf, String mess) {
-//        jtf.selectAll();
-//        jtf.requestFocus();
-//        JOptionPane.showMessageDialog(null, mess);
-//        return false;
 //    }
 //
 //    private boolean checkRegex(String input, String regex) {
@@ -1483,7 +1132,6 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
 //        }
 //    }
 //
-
     private void initWebcam() {
         Dimension size = WebcamResolution.VGA.getSize();
 
@@ -1534,8 +1182,7 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
                 String qrIDProduct = result.getText();
                 String idInvoice = JTFIDInvoice.getText().trim();
                 if (!JTFIDInvoice.getText().trim().equals("") && invoice_DAO.getInvoiceById(idInvoice) != null) {
-//                    addToCart(qrIDProduct);
-                    jtfAmountNeeded.setText(""); // làm mới ô tiền nhận nếu thêm sản phẩm mới vào giỏ
+                    addToCart(qrIDProduct);
                 } else {
                     JOptionPane.showMessageDialog(null, "Vui lòng thêm hóa đơn cần đổi trả trước trước khi thực hiện thao tác !");
                 }
@@ -1563,84 +1210,7 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
             executor.shutdownNow();
         }
     }
-//
-////    Thêm sản phẩm vào giỏ hàng
-//    private void addToCart(String idProduct) {
-//        Product product = product_DAO.getProductByID(idProduct);
-//
-//        // Nếu sản phẩm tồn tại
-//        if (product != null) {
-//            int currentQuantity = 1; // Số lượng mặc định khi thêm mới sản phẩm vào giỏ hàng
-//
-//            // Kiểm tra số lượng tồn kho
-//            if (currentQuantity > product.getQuantity()) {
-//                JOptionPane.showMessageDialog(null, "Vượt quá số lượng tồn kho, vui lòng kiểm tra lại");
-//                return; // Không thêm sản phẩm vào giỏ hàng nếu vượt quá số lượng tồn kho
-//            }
-//
-//            int rowCount = defaultTableModelCart.getRowCount();
-//            boolean productExists = false;
-//
-//            for (int i = 0; i < rowCount; i++) {
-//                String IdProduct = defaultTableModelCart.getValueAt(i, 1).toString();
-//
-//                if (IdProduct.equals(idProduct)) {
-//                    productExists = true;
-//
-//                    currentQuantity = Integer.parseInt(defaultTableModelCart.getValueAt(i, 3).toString());
-//
-//                    // Sử dụng thông tin số lượng từ đối tượng sản phẩm đã lấy
-//                    if (currentQuantity + 1 > product.getQuantity()) {
-//                        JOptionPane.showMessageDialog(null, "Vượt quá số lượng tồn kho, vui lòng kiểm tra lại");
-//                    } else {
-//                        defaultTableModelCart.removeRow(i);  // Xóa hàng cũ
-//
-//                        double currentPrice = (product.getCurrentPrice() == null || product.getCurrentPrice() == 0) ? product.getOriginalPrice() : product.getCurrentPrice();
-//                        double total = (currentQuantity + 1) * currentPrice;
-//                        Object[] rowData = {rowCount + 1, product.getIdProduct(), product.getName(), currentQuantity + 1, product.getOriginalPrice() + "đ", currentPrice, total + "đ"};
-//                        defaultTableModelCart.addRow(rowData);
-//                        cbbIndex0(); // đưa các cbb khuyến mãi về 0
-//                        JOptionPane.showMessageDialog(null, "Đã thêm sản phẩm");
-//                    }
-//
-//                    // Kiểm tra khuyến mãi và đặt màu nếu có
-//                    Map<String, Double> discountInfo = product_DAO.getDiscountForProduct(idProduct);
-//                    if (!discountInfo.isEmpty()) {
-//                        defaultTableModelCart.setValueAt("<html><b><font color='BLUE'>" + product.getName() + "</font></b></html>", i, 2);
-//                        defaultTableModelCart.setValueAt("<html><b><font color='BLUE'>" + product.getCurrentPrice() + "đ" + "</font></b></html>", i, 5);
-//                    }
-//                }
-//            }
-//
-//            // Kiểm tra sản phẩm đã có trong giỏ hàng chưa
-//            if (!productExists) {
-//                double currentPrice = (product.getCurrentPrice() == null || product.getCurrentPrice() == 0) ? product.getOriginalPrice() : product.getCurrentPrice();
-//                Object[] rowData = {rowCount + 1, product.getIdProduct(), product.getName(), currentQuantity, product.getOriginalPrice() + "đ", currentPrice + "đ", currentPrice + "đ"};
-//
-////                // Kiểm tra khuyến mãi và đặt màu nếu có
-//                Map<String, Double> discountInfo = product_DAO.getDiscountForProduct(idProduct);
-//                if (!discountInfo.isEmpty()) {
-//                    rowData[2] = "<html><b><font color='BLUE'>" + product.getName() + "</font></b></html>";
-//                    rowData[5] = "<html><b><font color='BLUE'>" + product.getCurrentPrice() + "</font></b></html>";
-//                }
-//                defaultTableModelCart.addRow(rowData);
-//                cbbIndex0(); // đưa các cbb khuyến mãi về 0
-//                JOptionPane.showMessageDialog(null, "Đã thêm sản phẩm");
-//            }
-//        }
-//    }
-//
-//    // Lấy id của promotion từ tên promotion được chọn
-//    private String getPromotionIdFromComboBox() {
-//        String selectedPromotionName = (String) cbPromotion.getSelectedItem();
-//        return promotionMap.get(selectedPromotionName);
-//
-//    }
-//
-//    private void cbbIndex0() {
-//        cbPromotion.setSelectedIndex(0); // mỗi lần thêm sản phẩm mới đưa cbb giảm giá vè 0
-//        cbPonis.setSelectedIndex(0); // mỗi lần thêm sản phẩm mới đưa point về 0
-//    }
+
 //
 ////    Tạo hóa đơn
 //    public boolean createInvoice(String status) {
@@ -1679,46 +1249,6 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
 //        return false;
 //    }
 //
-////  Cập nhập lại số lượng mã giảm giá khi mã giảm giá được sử dụng
-//    private void minusQuantityPromotion(Promotion promotion) {
-//        if (!cbPromotion.getSelectedItem().toString().equals("Không áp dụng")) {
-//            promotion = promotion_DAO.getPromotionByID(getPromotionIdFromComboBox());
-//            String idpromotion = promotion.getIdPromotion();
-//
-//            // Kiểm tra và giảm số lượng khuyến mãi
-//            if (promotion.getQuantity() > 0) {
-//                promotion.setQuantity(promotion.getQuantity() - 1);
-//
-//                // Kiểm tra số lượng trước khi cập nhật
-//                if (promotion.getQuantity() < 0) {
-////                    System.out.println("Số lượng khuyến mãi không đủ");
-//                } else {
-//                    // Nếu số lượng không âm, cập nhật thông tin khuyến mãi
-//                    promotion_DAO.updateInfoPromotion(promotion);
-//                }
-//            }
-//        }
-//    }
-//
-////  Cập nhập lại điểm tích lũy của khách hàng khi khách hàng sử dụng
-//    private void minusPointsCustomer(Customer customer) {
-//        if (cbPonis.getSelectedIndex() > 0) {
-//            int pointsToDeduct = Integer.parseInt(cbPonis.getSelectedItem().toString());
-//            customer.setRewardPoints(customer.getRewardPoints() - pointsToDeduct);
-//            // Cập nhật thông tin khách hàng sau khi trừ điểm
-//            customer_DAO.updateRewordPoints(customer);
-//        }
-//    }
-//
-////  Cộng 1000đ tích lũy cho tối 100K tiền hóa đơn
-//    private void sumPointsCustomer(Customer customer) {
-//        double totalAmount = Double.parseDouble(jtfTotalAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", ""));
-//        int newPoints = (int) (totalAmount / 1000);
-//        // 100TR = 100đ
-//        int currentPoints = customer.getRewardPoints();
-//        customer.setRewardPoints(currentPoints + newPoints);
-//        customer_DAO.updateRewordPoints(customer);
-//    }
 //
 ////    Duyệt giỏ hàng để thêm sản phẩm
 //    private void processJTableCart(Invoice invoice) {
@@ -1887,46 +1417,10 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
 //        }
 //    }
 //
-////    Load list data pending invoice
-//    public void loadDataPendingInvoice() {
-//        defaultTableModelPendingInvoice.setRowCount(0);
-//        for (Invoice invoice : invoice_DAO.getListPendingInvoice("Đơn chờ")) {
-//            Object[] rowData = {defaultTableModelPendingInvoice.getRowCount() + 1, invoice.getIdInvoice(), invoice.getCustomer().getName(), invoice.getStaff().getName(), invoice.getDateCreated().toLocalDate(), Invoice.convertStatusToString(invoice.getStatus())};
-//            defaultTableModelPendingInvoice.addRow(rowData);
-//        }
-//    }
-//
-
-//
-////    lấy thông tin hóa đơn hiển thị lên gui
-//    private void getInfoInvoiceDetailsToGUI(Invoice invoice) {
-//        jLIDInvoiceMain.setText(invoice.getIdInvoice().trim());
-//        jLIDStaffMain.setText(invoice.getStaff().getIdStaff().trim());
-//        jLNameStaffMain.setText(invoice.getStaff().getName().trim());
-//
-//        JTFIDInvoice.setText(invoice.getCustomer().getPhone().trim());
-//        jtfNameCus.setText(invoice.getCustomer().getName().trim());
-//        jtfEmail.setText(invoice.getCustomer().getEmail().trim());
-//        jTFPoints.setText(invoice.getCustomer().getRewardPoints() + "");
-//
-//        jtfTotalAmount.setText(calculateTotalAmount() + " VNĐ");
-//
-//        cbPromotion.setEnabled(true);
-//        cbPonis.setEnabled(true);
-//        cbPayments.setEnabled(true);
-//        jtfMoneyReceived.setEditable(true);
-//
-//        btnCreateInvoice.setEnabled(false);
-//        btnPendingInvoice.setText("Hủy");
-//        btnPendingInvoice.setEnabled(true);
-//        btnPay.setEnabled(true);
-//        repaint();
-//        revalidate();
-//    }
 //    Load list invoice
     private void loadListInvoice() {
         defaultTableModelListInvoice.setRowCount(0);
-        for (Invoice invoice : invoice_DAO.getListInvoice()) {
+        for (Invoice invoice : invoice_DAO.getListPendingInvoice("Đã thanh toán")) {
             int numberOrder = defaultTableModelListInvoice.getRowCount() + 1;
             String status = Invoice.convertStatusToString(invoice.getStatus());
             Object[] rowData = {numberOrder, invoice.getIdInvoice(), invoice.getCustomer().getName(), invoice.getStaff().getName(), invoice.getDateCreated().toLocalDate(), status};
@@ -1940,6 +1434,7 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
         jtfNameCus.setText(invoice.getCustomer().getName());
         jtfDateCreate.setText(invoice.getDateCreated().toLocalDate() + "");
         jtfTotalBefore.setText(invoice.getTotalAmount() + "");
+        jtfTotalAfter.setText(invoice.getTotalAmount() + "");
     }
 
 //    Clear panel right
@@ -1962,14 +1457,127 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
     //    Load list product of invoice
     public void loadListProductOfInvoice(String idInvoice) {
         defaultTableModelCart.setRowCount(0);
+        int selectedRow = defaultTableModelCart.getRowCount();
         for (InvoiceDetails invoiceDetails : invoiceDetails_DAO.getListInvoiceDetailsById(idInvoice)) {
-            double currentPrice = (invoiceDetails.getProduct().getCurrentPrice() == null || invoiceDetails.getProduct().getCurrentPrice() == 0) ? invoiceDetails.getProduct().getOriginalPrice() : invoiceDetails.getProduct().getCurrentPrice();
-            double total = invoiceDetails.getQuantity() * currentPrice;
-
-            Object[] rowData = {defaultTableModelCart.getRowCount() + 1, invoiceDetails.getProduct().getIdProduct(), invoiceDetails.getProduct().getName(), invoiceDetails.getQuantity(), invoiceDetails.getProduct().getOriginalPrice() + "đ", invoiceDetails.getUnitPrice() + "đ", invoice_DAO.getInvoiceById(idInvoice).getTotalAmount() + "đ"};
+            Object[] rowData = {defaultTableModelCart.getRowCount() + 1, invoiceDetails.getProduct().getIdProduct(), invoiceDetails.getProduct().getName(), invoiceDetails.getQuantity(), invoiceDetails.getProduct().getOriginalPrice() + "đ", invoiceDetails.getUnitPrice() + "đ", invoiceDetails.getQuantity() * invoiceDetails.getUnitPrice() + "đ"};
             defaultTableModelCart.addRow(rowData);
         }
     }
+
+    //    Thêm sản phẩm vào giỏ hàng
+    private void addToCart(String idProduct) {
+        Product product = product_DAO.getProductByID(idProduct);
+
+        // Nếu sản phẩm tồn tại
+        if (product != null) {
+            int currentQuantity = 1; // Số lượng mặc định khi thêm mới sản phẩm vào giỏ hàng
+
+            // Kiểm tra số lượng tồn kho
+            if (currentQuantity > product.getQuantity()) {
+                JOptionPane.showMessageDialog(null, "Vượt quá số lượng tồn kho, vui lòng kiểm tra lại");
+                return; // Không thêm sản phẩm vào giỏ hàng nếu vượt quá số lượng tồn kho
+            }
+
+            int rowCount = defaultTableModelCart.getRowCount();
+            boolean productExists = false;
+
+            for (int i = 0; i < rowCount; i++) {
+                String IdProduct = defaultTableModelCart.getValueAt(i, 1).toString();
+
+                if (IdProduct.equals(idProduct)) {
+                    productExists = true;
+
+                    currentQuantity = Integer.parseInt(defaultTableModelCart.getValueAt(i, 3).toString());
+
+                    // Sử dụng thông tin số lượng từ đối tượng sản phẩm đã lấy
+                    if (currentQuantity + 1 > product.getQuantity()) {
+                        JOptionPane.showMessageDialog(null, "Vượt quá số lượng tồn kho, vui lòng kiểm tra lại");
+                    } else {
+                        defaultTableModelCart.removeRow(i);  // Xóa hàng cũ
+
+                        double currentPrice = (product.getCurrentPrice() == null || product.getCurrentPrice() == 0) ? product.getOriginalPrice() : product.getCurrentPrice();
+                        double total = (currentQuantity + 1) * currentPrice;
+                        Object[] rowData = {defaultTableModelCart.getRowCount() + 1, product.getIdProduct(), product.getName(), currentQuantity + 1, product.getOriginalPrice() + "đ", currentPrice, total + "đ"};
+                        defaultTableModelCart.addRow(rowData);
+                        JOptionPane.showMessageDialog(null, "Đã thêm sản phẩm");
+                    }
+                }
+            }
+
+            // Kiểm tra sản phẩm đã có trong giỏ hàng chưa
+            if (!productExists) {
+                double currentPrice = (product.getCurrentPrice() == null || product.getCurrentPrice() == 0) ? product.getOriginalPrice() : product.getCurrentPrice();
+                Object[] rowData = {defaultTableModelCart.getRowCount() + 1, product.getIdProduct(), product.getName(), currentQuantity, product.getOriginalPrice() + "đ", currentPrice + "đ", currentPrice + "đ"};
+                defaultTableModelCart.addRow(rowData);
+                JOptionPane.showMessageDialog(null, "Đã thêm sản phẩm");
+            }
+        }
+    }
+
+    // Hàm tính tổng tiền từ cột "thành tiền" của JTable
+    private double calculateTotalAmount() {
+        double totalAmount = 0;
+        int rowCount = jTableCart.getRowCount();
+        for (int i = 0; i < rowCount; i++) {
+            String value = jTableCart.getValueAt(i, 6).toString().trim().replaceAll("\\.0", "").replaceAll("đ", "");
+            double total = Double.parseDouble(value);
+            totalAmount += total;
+        }
+        return totalAmount;
+    }
+
+    // Hàm tính tổng tiền trước và sau của hóa đơn
+    private void calculateTotalBeforeAfter(double moneyBefore, double moneyAfter) {
+        double totalAmount = 0;
+
+        if (moneyBefore - moneyAfter > 0) {
+            totalAmount = moneyBefore - moneyAfter;
+            jtfGiveBack.setText(Double.toString(totalAmount));
+            jtfAmountNeeded.setText("0");
+        } else if (moneyBefore - moneyAfter <= 0) {
+            totalAmount = moneyAfter - moneyBefore;
+            jtfAmountNeeded.setText(Double.toString(totalAmount));
+            jtfGiveBack.setText("0");
+        }
+    }
+
+//    Kiểm tra dữ liệu số
+    private boolean isNumber(String number) {
+        try {
+            int num = Integer.parseInt(number);
+            return true;
+        } catch (NumberFormatException e) {
+        }
+        return false;
+    }
+
+//    Show ERROR
+    private boolean showERROR(JTextField jtf, String mess) {
+        jtf.selectAll();
+        jtf.requestFocus();
+        JOptionPane.showMessageDialog(null, mess);
+        return false;
+    }
+
+//    Validator
+//    private boolean validator() {
+//        if (cbPayments.getSelectedIndex() == 0) {
+//            if (jtfMoneyReceived.getText().trim().equals("")) {
+//                return showERROR(jtfMoneyReceived, "Vui lòng nhập số tiền nhận trước khi thanh toán !");
+//            }
+//            if (!isNumber(jtfMoneyReceived.getText().trim())) {
+//                return showERROR(jtfMoneyReceived, "Số tiền nhận vào không chính xác, vui lòng kiểm tra lại");
+//            }
+//            if (Double.parseDouble(jtfMoneyReceived.getText().trim()) < 0) {
+//                return showERROR(jtfMoneyReceived, "Số tiền nhận phải lớn hơn 0 !");
+//            }
+//            double total = Double.parseDouble(jtfTotalAmount.getText().trim().replaceAll("\\.0", ""));
+//            if (Double.parseDouble(jtfMoneyReceived.getText().trim()) < total) {
+//                return showERROR(jtfMoneyReceived, "Số tiền nhận không đủ đề thanh toán vui lòng kiểm tra lại !");
+//            }
+//        }
+//        return true;
+//    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLIDInvoice;
     private javax.swing.JTextField JTFIDInvoice;
@@ -1981,6 +1589,7 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
     private javax.swing.JPanel iP3_1;
     private javax.swing.JPanel iP3_4;
     private javax.swing.JLabel jLChangeAmount;
+    private javax.swing.JLabel jLTitleVAT;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

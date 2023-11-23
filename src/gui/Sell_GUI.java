@@ -838,7 +838,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                         updateChangeAmount();
                         double totalAmount = Double.parseDouble(jtfTotalAmount.getText().trim().replaceAll("\\ VNĐ", ""));
                         String str1 = "Tổng tiền hàng phải trả là : ";
-                        String str2 = "Số tiền phải phải trả lại khách hành là : ";
+                        String str2 = "Số tiền phải phải trả lại khách hàng là : ";
                         String str3 = jtfChangeAmount.getText().trim().replaceAll("\\ VNĐ", "");
                         if (JOptionPane.showConfirmDialog(null, str2 + utils.Utils.formatMoney(Double.valueOf(str3)), "Xác nhận thanh toán", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                             boolean res = createInvoice("Đã thanh toán");
@@ -914,7 +914,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
                         updateChangeAmount();
                         double totalAmount = Double.parseDouble(jtfTotalAmount.getText().trim().replaceAll("\\ VNĐ", ""));
                         String str1 = "Tổng tiền hàng phải trả là : ";
-                        String str2 = "Số tiền phải phải trả lại khách hành là : ";
+                        String str2 = "Số tiền phải phải trả lại khách hàng là : ";
                         String str3 = jtfChangeAmount.getText().trim().replaceAll("\\ VNĐ", "");
                         if (JOptionPane.showConfirmDialog(null, str2 + utils.Utils.formatMoney(Double.valueOf(str3)), "Xác nhận thanh toán", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                             String idInvoice = jLIDInvoiceMain.getText().trim();
@@ -1151,9 +1151,19 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
 
             if (selectedColumn == 3) {
                 String quantitySTR = jTableCart.getValueAt(selectedRow, 3).toString().trim().replaceAll("\\.0", "").replaceAll("đ", "");
-                String priceSTR = jTableCart.getValueAt(selectedRow, 4).toString().trim().replaceAll("\\.0", "").replaceAll("đ", "");
+//                String priceSTR = jTableCart.getValueAt(selectedRow, 5).toString().trim().replaceAll("\\.0", "").replaceAll("đ", "");
                 int quantity = Integer.parseInt(quantitySTR);
-                double unitPrice = Double.parseDouble(priceSTR);
+//                double unitPrice = Double.parseDouble(priceSTR);
+//            Xử lý chuỗi nếu có html
+                double unitPrice;
+                String htmlString = jTableCart.getValueAt(selectedRow, 5).toString().trim();
+                if (BasicHTML.isHTMLString(htmlString)) {
+                    org.jsoup.nodes.Document document = Jsoup.parse(htmlString);
+                    String textContent = document.text().replaceAll("\\.0", "").replaceAll("\\đ", "");
+                    unitPrice = Double.parseDouble(textContent);
+                } else {
+                    unitPrice = Double.parseDouble(jTableCart.getValueAt(selectedRow, 5).toString().trim().replaceAll("\\.0", "").replaceAll("đ", ""));
+                }
                 double totalPrice = quantity * unitPrice;
 
                 // Cập nhật giá trị thành tiền trong JTable
@@ -1639,7 +1649,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
 
                         double currentPrice = (product.getCurrentPrice() == null || product.getCurrentPrice() == 0) ? product.getOriginalPrice() : product.getCurrentPrice();
                         double total = (currentQuantity + 1) * currentPrice;
-                        Object[] rowData = {rowCount + 1, product.getIdProduct(), product.getName(), currentQuantity + 1, product.getOriginalPrice() + "đ", currentPrice, total + "đ"};
+                        Object[] rowData = {defaultTableModelCart.getRowCount() + 1, product.getIdProduct(), product.getName(), currentQuantity + 1, product.getOriginalPrice() + "đ", currentPrice, total + "đ"};
                         defaultTableModelCart.addRow(rowData);
                         cbbIndex0(); // đưa các cbb khuyến mãi về 0
                         JOptionPane.showMessageDialog(null, "Đã thêm sản phẩm");
@@ -1657,7 +1667,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             // Kiểm tra sản phẩm đã có trong giỏ hàng chưa
             if (!productExists) {
                 double currentPrice = (product.getCurrentPrice() == null || product.getCurrentPrice() == 0) ? product.getOriginalPrice() : product.getCurrentPrice();
-                Object[] rowData = {rowCount + 1, product.getIdProduct(), product.getName(), currentQuantity, product.getOriginalPrice() + "đ", currentPrice + "đ", currentPrice + "đ"};
+                Object[] rowData = {defaultTableModelCart.getRowCount() + 1, product.getIdProduct(), product.getName(), currentQuantity, product.getOriginalPrice() + "đ", currentPrice + "đ", currentPrice + "đ"};
 
 //                // Kiểm tra khuyến mãi và đặt màu nếu có
                 Map<String, Double> discountInfo = product_DAO.getDiscountForProduct(idProduct);
@@ -1838,7 +1848,8 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         int rowCount = model.getRowCount();
         for (int i = 0; i < rowCount; i++) {
             String id = (String) defaultTableModelCart.getValueAt(i, 1);
-            int quantity = (int) defaultTableModelCart.getValueAt(i, 3);
+            String quantitySTR = defaultTableModelCart.getValueAt(i, 3).toString().trim();
+            int quantity = Integer.parseInt(quantitySTR);
 
             Product product = product_DAO.getProductByID(id);
 
