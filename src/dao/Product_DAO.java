@@ -349,4 +349,20 @@ public class Product_DAO {
         return discountInfo;
     }
 
+    //    Cập nhập số lượng sản phẩm
+    public void updateQuantityInDatabase(String productId, int updatedQuantity, boolean increase) {
+        String sql = "UPDATE Product SET quantity = quantity " + (increase ? "+" : "-") + " ? WHERE idProduct = ?";
+        try {
+            connectDB.ConnectDB.getInstance();
+            Connection connection = ConnectDB.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setInt(1, updatedQuantity);
+            preparedStatement.setString(2, productId);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

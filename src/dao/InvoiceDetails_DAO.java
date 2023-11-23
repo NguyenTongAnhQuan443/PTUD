@@ -106,23 +106,4 @@ public class InvoiceDetails_DAO extends DAO {
         }
         return false;
     }
-//    Cập nhập chi tiết hóa đơn => thêm sản phẩm vào đơn chờ
-//    public boolean updateInvoiceDetails(InvoiceDetails invoiceDetails) {
-//        String sql = "UPDATE InvoiceDetails SET product = ?, quantity = ?, unitPrice = ?, returnQuantity = ?, returnReason = ? WHERE idInvoiceDetails = ?";
-//        try {
-//            PreparedStatement preparedStatement = ConnectDB.getConnection().prepareStatement(sql);
-//            preparedStatement.setString(1, invoiceDetails.getProduct().getIdProduct());
-//            preparedStatement.setInt(2, invoiceDetails.getQuantity());
-//            preparedStatement.setDouble(3, invoiceDetails.getUnitPrice());
-//            preparedStatement.setInt(4, invoiceDetails.getReturnQuantity());
-//            preparedStatement.setString(5, invoiceDetails.getReturnReason());
-//            preparedStatement.setString(6, invoiceDetails.getIdInvoiceDetails());
-//            preparedStatement.executeUpdate();
-//            
-//            return preparedStatement.executeUpdate() > 0;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return false;
-//    }
 }
