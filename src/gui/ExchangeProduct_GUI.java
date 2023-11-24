@@ -24,12 +24,9 @@ import dao.Customer_DAO;
 import dao.InvoiceDetails_DAO;
 import dao.Invoice_DAO;
 import dao.Product_DAO;
-import dao.Promotion_DAO;
-import dao.Staff_DAO;
 import dao.VAT_DAO;
 import entity.Flag;
 import entity.Product;
-import entity.Promotion;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.util.List;
@@ -37,72 +34,40 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import lib2.TableCustom;
 import entity.Invoice;
-import entity.Staff;
-import entity.Customer;
 import entity.InvoiceDetails;
-import java.awt.Font;
 import java.awt.Graphics2D;
-import java.awt.event.ItemEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.SwingUtilities;
-import javax.swing.plaf.basic.BasicHTML;
 import static utils.Utils.openPDF;
-import org.jsoup.Jsoup;
 
 public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable, ThreadFactory {
-
-//    private ProductAddToCart_GUI productAddToCart_GUI;
+    
     private DefaultTableModel defaultTableModelListInvoice;
     private DefaultTableModel defaultTableModelCart;
-
-//    private Promotion_DAO promotion_DAO = new Promotion_DAO();
-//    private Customer_DAO customer_DAO = new Customer_DAO();
+    
     private Product_DAO product_DAO = new Product_DAO();
     private Invoice_DAO invoice_DAO = new Invoice_DAO();
-//    private Staff_DAO staff_DAO = new Staff_DAO();
     private InvoiceDetails_DAO invoiceDetails_DAO = new InvoiceDetails_DAO();
     private VAT_DAO vat_dao = new VAT_DAO();
-//
+    
     private WebcamPanel webcamPanel = null;
     private Webcam webcam = null;
     private ExecutorService executor = Executors.newSingleThreadExecutor(this);
-//
-//    private double priceRange;
-//    private Customer customer;
-//    private Map<String, String> promotionMap = new HashMap<>();
-//
-//    private String previousPromotionId = "";
-//// Biến để theo dõi trạng thái trước đó của item CBB Promotion
-//    private int previousPointsIndex = -1;
-//// Biến để theo dõi trạng thái trước đó của item CBB Points
-//    private double originalTotalAmount;
-//
-//    ;
-
+    
     public ExchangeProduct_GUI() {
         initComponents();
         TableCustom.apply(jSPListInvoice, TableCustom.TableType.DEFAULT);
@@ -119,28 +84,7 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
         initWebcam();
         
         loadListInvoice();
-
-//        if (Flag.getFlagSell_GUI() == 1) { // nếu GUI mở từ Customer_GUI
-//            Customer customer1 = customer_DAO.getCustomerByID(Flag.getIdCusForSell_GUI());
-//            JTFIDInvoice.setText(customer1.getPhone());
-//            jtfEmail.setText(customer1.getEmail());
-//            jtfNameCus.setText(customer1.getName());
-//            JTFIDInvoice.setEditable(false);
-//            btnPendingInvoice.setEnabled(true);
-//
-//            btnCreateInvoice.setText("Hủy");
-//            btnPendingInvoice.setEnabled(true);
-//            btnPay.setEnabled(true);
-//            jtfMoneyReceived.setEditable(true);
-//            jTFPoints.setText(customer1.getRewardPoints() + "");
-//
-//            cbPayments.setEnabled(true);
-//            cbPonis.setEnabled(true);
-//            cbPromotion.setEnabled(true);
-//        }
-//
-//        defaultTableModelCart.setRowCount(0); // set cho jtable cart = 0 để table trống lần đầu khởi tạo
-// Sự kiện nghe sự thay đổi của jtable
+        
         defaultTableModelCart.addTableModelListener(new TableModelListener() {
             @Override
             public void tableChanged(TableModelEvent e) {
@@ -178,7 +122,7 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
         iP3_4 = new javax.swing.JPanel();
         btnPay = new lib2.Button();
         btnCancel = new lib2.Button();
-        btnCreateInvoice = new lib2.Button();
+        btnRefresh = new lib2.Button();
         jP3_2 = new javax.swing.JPanel();
         jlNameCus = new javax.swing.JLabel();
         jtfNameCus = new javax.swing.JTextField();
@@ -392,14 +336,14 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
             }
         });
 
-        btnCreateInvoice.setBackground(new java.awt.Color(135, 206, 235));
-        btnCreateInvoice.setForeground(new java.awt.Color(255, 255, 255));
-        btnCreateInvoice.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/create24.png"))); // NOI18N
-        btnCreateInvoice.setText("Tạo hóa đơn");
-        btnCreateInvoice.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnCreateInvoice.addActionListener(new java.awt.event.ActionListener() {
+        btnRefresh.setBackground(new java.awt.Color(135, 206, 235));
+        btnRefresh.setForeground(new java.awt.Color(255, 255, 255));
+        btnRefresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/refresh24.png"))); // NOI18N
+        btnRefresh.setText("Làm mới");
+        btnRefresh.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCreateInvoiceActionPerformed(evt);
+                btnRefreshActionPerformed(evt);
             }
         });
 
@@ -410,20 +354,20 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
             .addGroup(iP3_4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(iP3_4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnPay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPay, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
                     .addGroup(iP3_4Layout.createSequentialGroup()
-                        .addComponent(btnCreateInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         iP3_4Layout.setVerticalGroup(
             iP3_4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(iP3_4Layout.createSequentialGroup()
-                .addGap(4, 4, 4)
+                .addContainerGap()
                 .addGroup(iP3_4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCreateInvoice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE))
+                    .addComponent(btnRefresh, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                    .addComponent(btnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPay, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -804,41 +748,20 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
     }//GEN-LAST:event_cbPaymentsActionPerformed
 
     private void btnSearchIDInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchIDInvoiceActionPerformed
-//        if (jtfNameCus.getText().equals("")) {
-//            String phone = jtfPhoneCus.getText().trim();
-//            if (phone.length() <= 0) {
-//                showERROR(jtfPhoneCus, "Vui lòng nhập số điện thoại của khách hàng !");
-//                return;
-//            }
-//            if (checkRegex(phone, "^0\\d{9}$") == false) {
-//                showERROR(jtfPhoneCus, "Số điện thoại không đúng định dạng 0xx.xxxx.xxx vui lòng kiểm tra lại");
-//                return;
-//            }
-//            Customer customer = customer_DAO.getCustomerByPhone(phone);
-//            if (customer != null) {
-//                jtfEmail.setText(customer.getEmail());
-//                jtfNameCus.setText(customer.getName());
-//                btnPay.setEnabled(true);
-//                jTFPoints.setText(customer.getRewardPoints() + "");
-//                cbPonis.setEnabled(true);
-//                Flag.setIdCusForSell_GUI(customer.getIdCustomer().trim());
-//                jtfPhoneCus.setEditable(false);
-//
-//                cbPayments.setEnabled(true);
-//                cbPonis.setEnabled(true);
-//                cbPromotion.setEnabled(true);
-//                btnPendingInvoice.setEnabled(true);
-//                jtfMoneyReceived.setEditable(true);
-//            } else {
-//                if (JOptionPane.showConfirmDialog(null, "Khách hàng chưa tồn tại trên hệ thống, vui lòng thêm mới khách hàng !", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-//                    Flag.setFlagSell_GUI(1);
-//                    stopWebcam();
-//                    toCustomerGUI();
-//                }
-//            }
-//        } else {
-//            JOptionPane.showMessageDialog(null, "Đã có thông tin khách hàng cho hóa đơn !");
-//        }
+        String idInvoice = JTFIDInvoice.getText().trim();        
+        if (idInvoice.equals("")) {
+            JOptionPane.showMessageDialog(null, "Vui lòng nhập mã hóa đơn trước khi tìm kiếm !");
+        } else {
+            if (invoice_DAO.getInvoiceById(idInvoice) == null) {
+                JOptionPane.showMessageDialog(null, "Không tìm thấy hóa đơn có mã: " + idInvoice);
+            } else {
+                JTFIDInvoice.setEditable(false);
+                btnSearchIDInvoice.setEnabled(false);
+                btnCancel.setEnabled(true);
+                loadInvoiceSearch(invoice_DAO.getInvoiceById(idInvoice));
+                btnRefresh.setEnabled(false);
+            }
+        }
     }//GEN-LAST:event_btnSearchIDInvoiceActionPerformed
 
     private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
@@ -869,8 +792,10 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
                         
                         btnPay.setEnabled(false);
                         btnCancel.setEnabled(false);
+                        
+                        Flag.setIdInvoiceForPrintf(idInvoice);
+                        printInvoice(invoice_DAO.getInvoiceById(idInvoice), moneyAfter, moneyBefore, moneyBefore - moneyAfter);
                         clearInput();
-                        JOptionPane.showMessageDialog(null, "Đổi trả hàng thành công !");
                     } else {
                         JOptionPane.showMessageDialog(null, "Đổi trả hàng thất bại !");
                     }
@@ -886,14 +811,16 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
                         double changeAmount = moneyReceived - total;
                         boolean res = invoice_DAO.updateInvoiceMoney(idInvoice, moneyReceived, changeAmount, total);
                         if (res) {
-                            JOptionPane.showMessageDialog(null, title_1 + utils.Utils.formatMoney(changeAmount));
+                            JOptionPane.showMessageDialog(null, title_2 + utils.Utils.formatMoney(changeAmount));
                             updateQuantityProduct(idInvoice);
                             UpdateListInvoiceDetails(invoice_DAO.getInvoiceById(idInvoice));
                             
                             btnPay.setEnabled(false);
                             btnCancel.setEnabled(false);
+                            
+                            Flag.setIdInvoiceForPrintf(idInvoice);
+                            printInvoice(invoice_DAO.getInvoiceById(idInvoice), total, moneyReceived, changeAmount);
                             clearInput();
-                            JOptionPane.showMessageDialog(null, "Đổi trả hàng thành công !");
                         } else {
                             JOptionPane.showMessageDialog(null, "Đổi trả hàng thất bại !");
                         }
@@ -903,87 +830,70 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
                 JOptionPane.showMessageDialog(null, "Hóa đơn này không có sự thay đổi nên không cần cập nhập lại thông tin hóa đơn !");
                 return;
             }
+        } else if (cbPayments.getSelectedIndex() == 1 && Double.parseDouble(jtfAmountNeeded.getText()) > 0) {
+            Flag.setIdInvoiceForPrintf(idInvoice);
+            jtfMoneyReceived.setEditable(false);
+            cbPayments.setEnabled(false);
+            try {
+                String monney = jtfAmountNeeded.getText().trim().replaceAll("\\.0", "");
+                String str1 = "2|99|0365962232|Nguyen Tong Anh Quan||0|0|";
+                String str2 = "||transfer_myqr";
+                String QrCodeData = str1 + monney + str2;
+                String fileName = "QRPay.png";
+                String filePath = "D:\\FleyShopApp\\QRPay\\" + fileName;
+//
+                String charset = "UTF-8";
+                Map<EncodeHintType, ErrorCorrectionLevel> hintMap = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
+                hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+                BitMatrix matrix = new MultiFormatWriter().encode(
+                        new String(QrCodeData.getBytes(charset), charset),
+                        BarcodeFormat.QR_CODE, 242, 242, hintMap);
+                MatrixToImageWriter.writeToFile(matrix, filePath.substring(filePath.lastIndexOf('.') + 1), new File(filePath));
+            } catch (Exception e) {
+            }
+            Momo_GUI momo_GUI = new Momo_GUI();
+            momo_GUI.setVisible(true);
+
+//                Sự kiện lắng nghe Jframe momo đóng
+            momo_GUI.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    if (Flag.isFlagPayDone()) { // nếu đã thanh toán thành công
+                        double received = Double.parseDouble(jtfAmountNeeded.getText().trim().replaceAll("\\.0", ""));
+                        double total = Double.parseDouble(jtfTotalAfter.getText().trim().replaceAll("\\.0", ""));
+                        double moneyReceived = moneyBefore + received;
+                        double changeAmount = moneyReceived - total;
+                        boolean res = invoice_DAO.updateInvoiceMoney(idInvoice, moneyReceived, changeAmount, total);
+                        if (res) {
+                            updateQuantityProduct(idInvoice);
+                            UpdateListInvoiceDetails(invoice_DAO.getInvoiceById(idInvoice));
+                            
+                            printInvoice(invoice_DAO.getInvoiceById(idInvoice), total, moneyReceived, changeAmount);
+                            clearInput();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Đổi trả hàng thất bại !");
+                        }
+                    }
+                }
+            });
         }
     }//GEN-LAST:event_btnPayActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        clearInput();
+                JTFIDInvoice.setEditable(true);
+        btnSearchIDInvoice.setEnabled(true);
+        loadListInvoice();
+        JTFIDInvoice.setText("");
         btnCancel.setEnabled(false);
         defaultTableModelCart.setRowCount(0);
         btnPay.setEnabled(false);
         cbPayments.setEnabled(false);
         jtfMoneyReceived.setEditable(false);
-    }//GEN-LAST:event_btnCancelActionPerformed
+        btnRefresh.setEnabled(true);
+        btnRefresh.setEnabled(true);
 
-    private void btnCreateInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateInvoiceActionPerformed
-//        if (btnCreateInvoice.getText().equals("Tạo hóa đơn")) {
-//            defaultTableModelCart.setRowCount(0);
-//            JTFIDInvoice.setEditable(true);
-//            btnSearchIDInvoice.setEnabled(true);
-//            btnCreateInvoice.setText("Hủy");
-//            jtfMoneyReceived.setEditable(false);
-//
-//            jLIDInvoiceMain.setText(invoice_DAO.createIDInvoice());
-//            jLIDStaffMain.setText(Flag.getIdStaff());
-//            jLNameStaffMain.setText(staff_DAO.getStaffByID(Flag.getIdStaff()).getName());
-//
-//            Flag.setIdInvoiceForPrintf(jLIDInvoiceMain.getText()); // lưu id hóa đơn để in hóa đơn
-//
-//        } else if (btnCreateInvoice.getText().equals("Hủy") && !JTFIDInvoice.getText().trim().equals("")) {
-//            if (defaultTableModelCart.getRowCount() != 0) {
-//                int option = JOptionPane.showConfirmDialog(null, "Giỏ hàng đang bận bạn có chắc muốn hủy toàn bộ không !", "Xác nhận", JOptionPane.YES_NO_OPTION);
-//                if (option == JOptionPane.YES_OPTION) {
-//                    clearInfoInvoice();
-//                }
-//            } else {
-//                JTFIDInvoice.setEditable(false);
-//                btnSearchIDInvoice.setEnabled(false);
-//                btnPendingInvoice.setEnabled(false);
-//                btnCreateInvoice.setText("Tạo hóa đơn");
-//                btnPay.setEnabled(false);
-//                jtfMoneyReceived.setEditable(false);
-//
-//                clearAllInPut();
-//                jtfMoneyReceived.setEditable(false);
-//                cbPonis.setEditable(false);
-//
-//                jLIDInvoiceMain.setText("");
-//                jLIDStaffMain.setText("");
-//                jLNameStaffMain.setText("");
-//
-//                cbPayments.setEnabled(false);
-//                cbPonis.setEnabled(false);
-//                cbPromotion.setEnabled(false);
-//            }
-//        } else if (btnCreateInvoice.getText().equals("Hủy")) {
-//            if (defaultTableModelCart.getRowCount() != 0) {
-//                int option = JOptionPane.showConfirmDialog(null, "Giỏ hàng đang bận bạn có chắc muốn hủy toàn bộ không !", "Xác nhận", JOptionPane.YES_NO_OPTION);
-//                if (option == JOptionPane.YES_OPTION) {
-//                    clearInfoInvoice();
-//                }
-//            } else {
-//                JTFIDInvoice.setEditable(false);
-//                btnSearchIDInvoice.setEnabled(false);
-//                btnPendingInvoice.setEnabled(false);
-//                btnCreateInvoice.setText("Tạo hóa đơn");
-//                btnPay.setEnabled(false);
-//                jtfMoneyReceived.setEditable(false);
-//
-//                clearAllInPut();
-//                jtfMoneyReceived.setEditable(false);
-//                cbPonis.setEditable(false);
-//
-//                jLIDInvoiceMain.setText("");
-//                jLIDStaffMain.setText("");
-//                jLNameStaffMain.setText("");
-//
-//                cbPayments.setEnabled(false);
-//                cbPonis.setEnabled(false);
-//                cbPromotion.setEnabled(false);
-//                jtfTotalAmount.setText(""); // khác
-//            }
-//        }
-    }//GEN-LAST:event_btnCreateInvoiceActionPerformed
+        clearInput();
+    }//GEN-LAST:event_btnCancelActionPerformed
 
     private void jTableCartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCartMouseClicked
 
@@ -1090,6 +1000,7 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
             btnSearchIDInvoice.setEnabled(false);
             btnCancel.setEnabled(true);
             btnPay.setEnabled(true);
+            btnRefresh.setEnabled(false);
         }
     }//GEN-LAST:event_jTableListInvoiceMouseClicked
 
@@ -1109,27 +1020,12 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
         // TODO add your handling code here:
     }//GEN-LAST:event_jTableListInvoiceMouseEntered
 
-////   Cập nhập giá tiền phải trả lại khách
-//
-//    private void updateChangeAmount() {
-//        if (validator()) {
-//            double totalAmount = Double.parseDouble(jtfTotalAmount.getText().trim().replaceAll("\\ VNĐ", ""));
-//            double moneyReceived = Double.parseDouble((jtfMoneyReceived.getText().trim()));
-//            double changeAmount = moneyReceived - totalAmount;
-//            jtfChangeAmount.setText(changeAmount + " VNĐ");
-//        }
-//    }
-//
-//    private boolean checkRegex(String input, String regex) {
-//        Pattern pattern = Pattern.compile(regex);
-//        Matcher matcher = pattern.matcher(input);
-//        if (matcher.matches()) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
-//
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        loadListInvoice();
+        JOptionPane.showMessageDialog(null, "Danh sách hóa đơn đã được làm mới");
+        clearInput();
+    }//GEN-LAST:event_btnRefreshActionPerformed
+    
     private void initWebcam() {
         Dimension size = WebcamResolution.VGA.getSize();
 
@@ -1209,147 +1105,6 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
         }
     }
 
-//
-////    Tạo hóa đơn
-//    public boolean createInvoice(String status) {
-//        String idInvoice = jLIDInvoiceMain.getText().trim();
-//        Staff staff = staff_DAO.getStaffByID(jLIDStaffMain.getText().trim());
-//        Customer customer = customer_DAO.getCustomerByID(Flag.getIdCusForSell_GUI());
-//        Promotion promotion = null;
-//        String idpromotion = null;
-//
-//        String amountReceivedSTR = (jtfMoneyReceived.getText().trim() != null && !jtfMoneyReceived.getText().trim().equals("")) ? jtfMoneyReceived.getText().trim() : jtfTotalAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", "");
-//        double amountReceived = Double.parseDouble(amountReceivedSTR);
-//        String changeAmountSTR = (jtfChangeAmount.getText().trim() != null && !jtfChangeAmount.getText().trim().equals("")) ? jtfChangeAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", "") : "0";
-//        double changeAmount = Double.parseDouble(changeAmountSTR);
-//        double totalAmount = Double.parseDouble(jtfTotalAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", ""));
-//        LocalDateTime dateCreated = LocalDateTime.now();
-//
-//        Invoice invoice = new Invoice(idInvoice, staff, customer, promotion, amountReceived, changeAmount, totalAmount, dateCreated, Invoice.convertStringToStatus(status));
-//
-//        boolean res = invoice_DAO.createInvoice(invoice);
-//
-//        if (res) {
-//            if (status.equals("Đã thanh toán")) {
-//                //Cập nhập lại số lượng mã khuyến mãi
-//                minusQuantityPromotion(promotion);
-//                //Cập nhập điểm tích lũy
-//                minusPointsCustomer(customer);
-//                //Cộng điểm tích lũy dựa trên tổng tiền hóa đơn
-//                sumPointsCustomer(customer);
-//            }// chỉ khi thanh toán thành công mới thực hiện những việc này
-//
-//            //Thêm chi tiết hóa đơn vào hóa đơn
-//            processJTableCart(invoice_DAO.getInvoiceById(idInvoice));
-//            return true;
-//        }
-//
-//        return false;
-//    }
-//
-//
-//
-////    Update danh sách sản phẩm đơn chờ
-//    private void UpdateListProductPendingInvoice(Invoice invoice) {
-//        // xóa danh sách chi tiết sản phẩm cũ
-//        invoiceDetails_DAO.deleteInvoiceDetailsByInvoiceId(invoice.getIdInvoice());
-//        DefaultTableModel model = (DefaultTableModel) jTableCart.getModel();
-//        int rowCount = model.getRowCount();
-//        for (int i = 0; i < rowCount; i++) {
-//            String productId = (String) model.getValueAt(i, 1);
-//            int quantity = Integer.parseInt(defaultTableModelCart.getValueAt(i, 3).toString().trim());
-//
-////            Xử lý chuỗi nếu có html
-//            double unitPrice;
-//            String htmlString = defaultTableModelCart.getValueAt(i, 5).toString().trim();
-//            if (BasicHTML.isHTMLString(htmlString)) {
-//                org.jsoup.nodes.Document document = Jsoup.parse(htmlString);
-//                String textContent = document.text().replaceAll("\\.0", "").replaceAll("\\đ", "");
-//                unitPrice = Double.parseDouble(textContent);
-//            } else {
-//                unitPrice = Double.parseDouble(defaultTableModelCart.getValueAt(i, 5).toString().replaceAll("\\.0", "").replaceAll("\\đ", ""));
-//            }
-//
-//            Product product = product_DAO.getProductByID(productId);
-//            createInvoiceDetails(invoice, product, quantity, unitPrice);
-//        }
-//    }
-//
-//
-//
-////    Update totalAmount, changeAmount, moneyreceived pending invoice
-//    public boolean updateMoneyPendingInvoice() {
-//        String idInvoice = jLIDInvoiceMain.getText().trim();
-//        Staff staff = staff_DAO.getStaffByID(jLIDStaffMain.getText().trim());
-//        Customer customer = customer_DAO.getCustomerByID(Flag.getIdCusForSell_GUI());
-//        Promotion promotion = null;
-//        String idpromotion = null;
-//
-//        String amountReceivedSTR = (jtfMoneyReceived.getText().trim() != null && !jtfMoneyReceived.getText().trim().equals("")) ? jtfMoneyReceived.getText().trim() : jtfTotalAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", "");
-//        double amountReceived = Double.parseDouble(amountReceivedSTR);
-//        String changeAmountSTR = (jtfChangeAmount.getText().trim() != null && !jtfChangeAmount.getText().trim().equals("")) ? jtfChangeAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", "") : "0";
-//        double changeAmount = Double.parseDouble(changeAmountSTR);
-//        double totalAmount = Double.parseDouble(jtfTotalAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", ""));
-//        LocalDateTime dateCreated = LocalDateTime.now();
-//
-//        Invoice invoice = new Invoice(idInvoice, staff, customer, promotion, amountReceived, changeAmount, totalAmount, dateCreated, Invoice.convertStringToStatus("Đã thanh toán"));
-//
-//        boolean res = invoice_DAO.updateInvoiceMoney(idInvoice, amountReceived, changeAmount, totalAmount);
-//
-//        if (res) {
-//            return true;
-//        }
-//        return false;
-//    }
-//
-//    //    In hóa đơn
-//    public static void printInvoice(Invoice invoice, double totalAmount, double amountReceived, double changeAmount) {
-//        if (JOptionPane.showConfirmDialog(null, "Bạn có muốn in hóa đơn không ?", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-//            // In hóa đơn
-//            Invoice_GUI invoice_GUI = new Invoice_GUI();
-//            invoice_GUI.setJlIDInvoiceDetails(invoice.getIdInvoice());
-//            invoice_GUI.setJlNameCusDetails(invoice.getCustomer().getName());
-//            invoice_GUI.setJlDateInvoiceDetails(invoice.getDateCreated().toLocalDate().toString());
-//            invoice_GUI.setJlNameStaffDetails(invoice.getStaff().getName());
-//            invoice_GUI.setJlTotalDetails(totalAmount + "");
-//            invoice_GUI.setJlMoneyReceived(amountReceived + "");
-//            invoice_GUI.setJlExcessCash(changeAmount + "");
-//
-//            // In hóa đơn
-//            // print the panel to pdf
-//            Document document = new Document(); // itextPDF
-//            try {
-//                // Đường dẫn tới tệp PDF để lưu hóa đơn
-//                String pdfFilePath = "bill.pdf";
-//                // Tạo một đối tượng PdfWriter để viết nội dung vào tệp PDF
-//                PdfWriter.getInstance(document, new FileOutputStream(pdfFilePath)); // java io, itextPDF
-//                // Mở tài liệu để bắt đầu viết
-//                document.open();
-//                // Lấy kích thước của jpMain
-//                int width = invoice_GUI.getJpMain().getWidth();
-//                int height = invoice_GUI.getJpMain().getHeight();
-//                // Tạo một BufferedImage để chứa hình ảnh của jpMain
-//                BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-//                Graphics2D g = image.createGraphics(); // java awt graphic2D
-//
-//                invoice_GUI.getJpMain().printAll(g);
-//                g.dispose();
-//                // Chuyển đổi BufferedImage thành hình ảnh dựng sẵn để chèn vào tài liệu PDF
-//                com.itextpdf.text.Image pdfImage = com.itextpdf.text.Image.getInstance(image, null);
-//                // Đặt kích thước của hình ảnh trong tài liệu PDF (có thể điều chỉnh kích thước tùy ý)
-//                pdfImage.scaleToFit(PageSize.A4.getWidth(), PageSize.A4.getHeight()); // itextPDF
-//                // Chèn hình ảnh vào tài liệu PDF
-//                document.add(pdfImage);
-//                // Đóng tài liệu
-//                document.close();
-//                openPDF(pdfFilePath); // utils
-//            } catch (DocumentException | IOException e) {
-//                JOptionPane.showMessageDialog(null, "Lỗi khi in hóa đơn vui lòng tắt file hóa đơn cũ trước khi in");
-//                return;
-//            }
-//        }
-//    }
-//
 //    Load list invoice
     private void loadListInvoice() {
         defaultTableModelListInvoice.setRowCount(0);
@@ -1641,12 +1396,67 @@ public class ExchangeProduct_GUI extends javax.swing.JPanel implements Runnable,
         }
         return true;
     }
+
+    //    In hóa đơn
+    public static void printInvoice(Invoice invoice, double totalAmount, double amountReceived, double changeAmount) {
+        if (JOptionPane.showConfirmDialog(null, "Đổi trả hành thành công bạn có muốn in hóa đơn không ?", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            // In hóa đơn
+            Invoice_GUI invoice_GUI = new Invoice_GUI();
+            invoice_GUI.setJlIDInvoiceDetails(invoice.getIdInvoice());
+            invoice_GUI.setJlNameCusDetails(invoice.getCustomer().getName());
+            invoice_GUI.setJlDateInvoiceDetails(invoice.getDateCreated().toLocalDate().toString());
+            invoice_GUI.setJlNameStaffDetails(invoice.getStaff().getName());
+            invoice_GUI.setJlTotalDetails(totalAmount + "");
+            invoice_GUI.setJlMoneyReceived(amountReceived + "");
+            invoice_GUI.setJlExcessCash(changeAmount + "");
+
+            // In hóa đơn
+            Document document = new Document(); // itextPDF
+            try {
+                // Đường dẫn tới tệp PDF để lưu hóa đơn
+                String pdfFilePath = "bill.pdf";
+                // Tạo một đối tượng PdfWriter để viết nội dung vào tệp PDF
+                PdfWriter.getInstance(document, new FileOutputStream(pdfFilePath)); // java io, itextPDF
+                // Mở tài liệu để bắt đầu viết
+                document.open();
+                // Lấy kích thước của jpMain
+                int width = invoice_GUI.getJpMain().getWidth();
+                int height = invoice_GUI.getJpMain().getHeight();
+                // Tạo một BufferedImage để chứa hình ảnh của jpMain
+                BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+                Graphics2D g = image.createGraphics(); // java awt graphic2D
+
+                invoice_GUI.getJpMain().printAll(g);
+                g.dispose();
+                // Chuyển đổi BufferedImage thành hình ảnh dựng sẵn để chèn vào tài liệu PDF
+                com.itextpdf.text.Image pdfImage = com.itextpdf.text.Image.getInstance(image, null);
+                // Đặt kích thước của hình ảnh trong tài liệu PDF (có thể điều chỉnh kích thước tùy ý)
+                pdfImage.scaleToFit(PageSize.A4.getWidth(), PageSize.A4.getHeight()); // itextPDF
+                // Chèn hình ảnh vào tài liệu PDF
+                document.add(pdfImage);
+                // Đóng tài liệu
+                document.close();
+                openPDF(pdfFilePath); // utils
+            } catch (DocumentException | IOException e) {
+                JOptionPane.showMessageDialog(null, "Lỗi khi in hóa đơn vui lòng tắt file hóa đơn cũ trước khi in");
+                return;
+            }
+        }
+    }
+
+    //    Load data search ID Invoice
+    public void loadInvoiceSearch(Invoice invoice) {
+        defaultTableModelListInvoice.setRowCount(0);
+        String status = Invoice.convertStatusToString(invoice.getStatus());
+        Object[] rowData = {defaultTableModelListInvoice.getRowCount() + 1, invoice.getIdInvoice(), invoice.getCustomer().getName(), invoice.getStaff().getName(), invoice.getDateCreated().toLocalDate(), status};
+        defaultTableModelListInvoice.addRow(rowData);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLIDInvoice;
     private javax.swing.JTextField JTFIDInvoice;
     private lib2.Button btnCancel;
-    private lib2.Button btnCreateInvoice;
     private lib2.Button btnPay;
+    private lib2.Button btnRefresh;
     private lib2.Button btnSearchIDInvoice;
     private lib2.ComboBoxSuggestion cbPayments;
     private javax.swing.JPanel iP3_1;

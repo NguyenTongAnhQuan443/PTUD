@@ -22919,6 +22919,7 @@ CREATE TABLE Staff
 	rights NVARCHAR(25) NOT NULL,
 	status NVARCHAR(25) NOT NULL,
 	password VARCHAR(40) NOT NULL,
+	managementCode NVARCHAR(4),
 	CONSTRAINT FK_Staff_Province FOREIGN KEY (province) REFERENCES Province(id),
 	CONSTRAINT FK_Staff_District FOREIGN KEY (district) REFERENCES District(id),
 	CONSTRAINT FK_Staff_Ward FOREIGN KEY (ward) REFERENCES Ward(id)
@@ -23110,8 +23111,14 @@ VALUES
 ('SP0002', N'Quần Short cá tính', 150000, 200000, 100, N'Đang kinh doanh', 'NCC0002', 1, 1, 2, 2, ''),
 ('SP0003', N'Áo Cadigan mùa thu', 200000, 300000, 100, N'Đang kinh doanh', 'NCC0004', 3, 1, 4, 3, ''),
 ('SP0004', N'Áo Cadigan thời thượng', 100000, 400000, 100, N'Đang kinh doanh', 'NCC0005', 4, 1, 5, 3, ''),
-('SP0005', N'Áo polo Nam', 300000, 550000, 100, N'Đang kinh doanh', 'NCC0005', 2, 1, 3, 1, '');
+('SP0005', N'Áo polo Nam', 300000, 550000, 100, N'Đang kinh doanh', 'NCC0005', 2, 1, 3, 1, ''),
+('SP0006', N'Áo sơ mi Nam', 200000, 590000, 100, N'Đang kinh doanh', 'NCC0005', 2, 1, 3, 1, ''),
+('SP0007', N'Áo thun tay lỡ', 300000, 450000, 100, N'Đang kinh doanh', 'NCC0002', 2, 1, 3, 1, ''),
+('SP0008', N'Áo bóng đá', 40000, 90000, 100, N'Đang kinh doanh', 'NCC0001', 2, 1, 3, 1, ''),
+('SP0009', N'Áo hoodie', 200000, 340000, 100, N'Đang kinh doanh', 'NCC0004', 2, 1, 3, 1, '');
 GO
+
+-- INSERT dữ liệu khuyến mãi 
 
 --Test TRIGGER KHUYẾN MÃI
 --select * from Promotion
@@ -23134,3 +23141,9 @@ GO
 
 --Update Product set quantity = 1 where idProduct = 'SP0001'
 SELECT * FROM InvoiceDetails
+select * from Invoice
+select * from product
+
+
+--delete from InvoiceDetails
+--delete from Invoice
