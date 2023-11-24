@@ -1,8 +1,21 @@
 package gui;
+
+import dao.Revenue_Statistics_DAO;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+
 public class Revenue_Statistics_GUI extends javax.swing.JPanel {
-    public Revenue_Statistics_GUI() {
+
+    private Revenue_Statistics_DAO revenue_Statistics_DAO = new Revenue_Statistics_DAO();
+
+    public Revenue_Statistics_GUI() throws SQLException {
         initComponents();
+
+        String startDate = LocalDateTime.now() + "";
+        String endDate = LocalDateTime.now() + "";
+        jlNumOrder.setText(revenue_Statistics_DAO.countInvoicesForDateRange(startDate, endDate) + "");
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

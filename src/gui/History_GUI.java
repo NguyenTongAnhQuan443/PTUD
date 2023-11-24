@@ -94,7 +94,7 @@ public class History_GUI extends javax.swing.JPanel {
         jtfStatusDetails = new javax.swing.JTextField();
         button1 = new lib2.Button();
 
-        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.X_AXIS));
+        setLayout(new java.awt.GridLayout());
 
         jpLeft.setLayout(new javax.swing.BoxLayout(jpLeft, javax.swing.BoxLayout.Y_AXIS));
 
@@ -187,7 +187,7 @@ public class History_GUI extends javax.swing.JPanel {
                 .addContainerGap())
             .addGroup(jpLeftListInvoiceLayout.createSequentialGroup()
                 .addComponent(jspListInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 1036, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 2, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jpLeftListInvoiceLayout.setVerticalGroup(
             jpLeftListInvoiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,7 +239,7 @@ public class History_GUI extends javax.swing.JPanel {
         jpLeftInfoProduct.setLayout(jpLeftInfoProductLayout);
         jpLeftInfoProductLayout.setHorizontalGroup(
             jpLeftInfoProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jspListProduct, javax.swing.GroupLayout.DEFAULT_SIZE, 1038, Short.MAX_VALUE)
+            .addComponent(jspListProduct, javax.swing.GroupLayout.DEFAULT_SIZE, 1036, Short.MAX_VALUE)
         );
         jpLeftInfoProductLayout.setVerticalGroup(
             jpLeftInfoProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -312,7 +312,7 @@ public class History_GUI extends javax.swing.JPanel {
                     .addGroup(jpRightLayout.createSequentialGroup()
                         .addComponent(jlIDInvoice)
                         .addGap(27, 27, 27)
-                        .addComponent(jtfIDInvoice, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
+                        .addComponent(jtfIDInvoice, javax.swing.GroupLayout.DEFAULT_SIZE, 924, Short.MAX_VALUE))
                     .addGroup(jpRightLayout.createSequentialGroup()
                         .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlIDStaff)
