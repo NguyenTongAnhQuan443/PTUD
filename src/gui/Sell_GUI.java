@@ -135,7 +135,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
             cbPayments.setEnabled(true);
             cbPonis.setEnabled(true);
             cbPromotion.setEnabled(true);
-            
+
             jLIDInvoiceMain.setText(invoice_DAO.createIDInvoice());
             jLIDStaffMain.setText(Flag.getIdStaff());
             jLNameStaffMain.setText(staff_DAO.getStaffByID(Flag.getIdStaff()).getName());
@@ -1155,8 +1155,20 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
 
             if (selectedColumn == 3) {
                 String quantitySTR = jTableCart.getValueAt(selectedRow, 3).toString().trim().replaceAll("\\.0", "").replaceAll("đ", "");
-                int quantity = Integer.parseInt(quantitySTR);
-                
+                int quantity = 0;
+                if (quantitySTR.equals("")) {
+                    JOptionPane.showMessageDialog(null, "Vui lòng nhập số lượng sản phẩm");
+                    defaultTableModelCart.setValueAt(1, selectedRow, 3);
+                    return;
+                } else {
+                    if (!isNumber(quantitySTR)) {
+                        JOptionPane.showMessageDialog(null, "Số lượng sản phẩm bị sai vui lòng kiểm tra lại !");
+                        defaultTableModelCart.setValueAt(1, selectedRow, 3);
+                        return;
+                    } else {
+                        quantity = Integer.parseInt(quantitySTR);
+                    }
+                }
 //            Xử lý chuỗi nếu có html
                 double unitPrice;
                 String htmlString = jTableCart.getValueAt(selectedRow, 5).toString().trim();
