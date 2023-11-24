@@ -22919,7 +22919,6 @@ CREATE TABLE Staff
 	rights NVARCHAR(25) NOT NULL,
 	status NVARCHAR(25) NOT NULL,
 	password VARCHAR(40) NOT NULL,
-	managementCode NVARCHAR(4),
 	CONSTRAINT FK_Staff_Province FOREIGN KEY (province) REFERENCES Province(id),
 	CONSTRAINT FK_Staff_District FOREIGN KEY (district) REFERENCES District(id),
 	CONSTRAINT FK_Staff_Ward FOREIGN KEY (ward) REFERENCES Ward(id)

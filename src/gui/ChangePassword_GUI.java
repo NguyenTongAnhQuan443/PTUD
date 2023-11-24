@@ -8,14 +8,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 
 public class ChangePassword_GUI extends javax.swing.JPanel {
 
-    private Statistical_GUIX statistical_GUI;
     private String captcha;
 
     public ChangePassword_GUI() {

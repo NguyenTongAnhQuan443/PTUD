@@ -1,26 +1,13 @@
 package gui;
 
-import dao.Province_DAO;
-import dao.Staff_DAO;
 import entity.Flag;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.GraphicsDevice;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import lib2.MenuEvent;
 
 public class Home_GUI extends javax.swing.JFrame {
 
-    private Statistical_GUI statistical_GUI;
-    private Statistical_Revenue_GUI statistical_Revenue_GUI;
-    private Statistical_Product_GUI statistical_Product_GUI;
-    private Statistical_Staff_GUI statistical_Staff_GUI;
     private Supplier_GUI supplier_GUI;
     private Staff_GUI staff_GUI;
     private History_GUI history_GUI;
@@ -30,18 +17,21 @@ public class Home_GUI extends javax.swing.JFrame {
     private Sell_GUI sell_GUI;
     private ExchangeProduct_GUI exchangeProduct_GUI;
 
-    private Product_GUI product_GUI1;
+    private Revenue_Statistics_GUI revenueStatistics_GUI;
+    private Product_Statistics_GUI product_Statistics_GUI;
+    private Staff_Statistics_GUI staff_Statistics_GUI;
+    private Customer_Statistics_GUI customer_Statistics_GUI;
+    private Product_GUI product_GUI;
 
     public Home_GUI() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        jpCenter.removeAll();
-        statistical_GUI = new Statistical_GUI();
-        statistical_GUI.setJPRevenue();
-        addJPanel(statistical_GUI);
-
+//        jpCenter.removeAll();
+//        statistical_GUI = new Statistical_GUI();
+//        statistical_GUI.setJPRevenue();
+//        addJPanel(statistical_GUI);
 // Sụ kiện mở các menu
         menu1.setEvent(new MenuEvent() {
             @Override
@@ -50,30 +40,26 @@ public class Home_GUI extends javax.swing.JFrame {
                     stopWebcam1();
                     stopWebcam2();
                     jpCenter.removeAll();
-                    statistical_GUI = new Statistical_GUI();
-                    statistical_GUI.setJPRevenue();
-                    addJPanel(statistical_GUI);
+                    revenueStatistics_GUI = new Revenue_Statistics_GUI();
+                    addJPanel(revenueStatistics_GUI);
                 } else if (index == 0 && subIndex == 2) { // sự kiện menu thống kê - nhân viên
                     stopWebcam1();
                     stopWebcam2();
                     jpCenter.removeAll();
-                    statistical_GUI = new Statistical_GUI();
-                    statistical_GUI.setJPStaff();
-                    addJPanel(statistical_GUI);
+                    staff_Statistics_GUI = new Staff_Statistics_GUI();
+                    addJPanel(staff_Statistics_GUI);
                 } else if (index == 0 && subIndex == 3) { // sự kiện menu thống kê - sản phẩm
                     stopWebcam1();
                     stopWebcam2();
                     jpCenter.removeAll();
-                    statistical_GUI = new Statistical_GUI();
-                    statistical_GUI.setJPProduct();
-                    addJPanel(statistical_GUI);
+                    product_Statistics_GUI = new Product_Statistics_GUI();
+                    addJPanel(product_Statistics_GUI);
                 } else if (index == 0 && subIndex == 4) { // sự kiện menu thống kê - khách hàng
                     stopWebcam1();
                     stopWebcam2();
                     jpCenter.removeAll();
-                    statistical_GUI = new Statistical_GUI();
-                    statistical_GUI.setJPCustomer();
-                    addJPanel(statistical_GUI);
+                    customer_Statistics_GUI = new Customer_Statistics_GUI();
+                    addJPanel(customer_Statistics_GUI);
                 } else if (index == 1) { // sự kiện menu nhà cung cấp
                     stopWebcam1();
                     stopWebcam2();
@@ -85,8 +71,8 @@ public class Home_GUI extends javax.swing.JFrame {
                     stopWebcam1();
                     stopWebcam2();
                     jpCenter.removeAll();
-                    product_GUI1 = new Product_GUI();
-                    addJPanel(product_GUI1);
+                    product_GUI = new Product_GUI();
+                    addJPanel(product_GUI);
                 } else if (index == 3 && subIndex == 1) { // sự kiện menu nhân viên - danh sách nhân viên
                     Flag.setFlagStaffGUI(true); // mở GUI danh sách nhân viên
                     stopWebcam1();
