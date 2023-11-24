@@ -20,6 +20,8 @@ import javax.swing.table.DefaultTableModel;
 import lib2.TableCustom;
 import entity.Flag;
 import entity.Staff;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 public class History_GUI extends javax.swing.JPanel {
 
@@ -94,7 +96,7 @@ public class History_GUI extends javax.swing.JPanel {
         jtfStatusDetails = new javax.swing.JTextField();
         button1 = new lib2.Button();
 
-        setLayout(new java.awt.GridLayout());
+        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
         jpLeft.setLayout(new javax.swing.BoxLayout(jpLeft, javax.swing.BoxLayout.Y_AXIS));
 

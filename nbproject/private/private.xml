@@ -12,10 +12,10 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/dao/Promotion_DAO.java</file>
+            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/gui/Supplier_GUI.java</file>
+            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/gui/Home_GUI.java</file>
             <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/gui/History_GUI.java</file>
             <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/dao/Revenue_Statistics_DAO.java</file>
-            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/gui/Revenue_Statistics_GUI.java</file>
         </group>
     </open-files>
 </project-private>

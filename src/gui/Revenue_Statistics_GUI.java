@@ -8,12 +8,12 @@ public class Revenue_Statistics_GUI extends javax.swing.JPanel {
 
     private Revenue_Statistics_DAO revenue_Statistics_DAO = new Revenue_Statistics_DAO();
 
-    public Revenue_Statistics_GUI() throws SQLException {
+    public Revenue_Statistics_GUI(){
         initComponents();
 
         String startDate = LocalDateTime.now() + "";
         String endDate = LocalDateTime.now() + "";
-        jlNumOrder.setText(revenue_Statistics_DAO.countInvoicesForDateRange(startDate, endDate) + "");
+//        jlNumOrder.setText(revenue_Statistics_DAO.countInvoicesForDateRange(startDate, endDate) + "");
     }
 
     @SuppressWarnings("unchecked")
