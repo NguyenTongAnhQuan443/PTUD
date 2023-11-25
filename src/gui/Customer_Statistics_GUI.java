@@ -1,8 +1,30 @@
 package gui;
+
+import dao.Customer_Statistics_DAO;
+import entity.Customer_Statistics;
+import entity.Invoice;
+import java.awt.Color;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
+import lib2.ModelChart;
+import lib2.TableCustom;
+
 public class Customer_Statistics_GUI extends javax.swing.JPanel {
+
+    private Customer_Statistics_DAO customer_Statistics_DAO = new Customer_Statistics_DAO();
+    private DefaultTableModel defaultTableModel;
+
     public Customer_Statistics_GUI() {
         initComponents();
+
+        TableCustom.apply(jspTable, TableCustom.TableType.DEFAULT);
+        defaultTableModel = (DefaultTableModel) jTable.getModel();
+        ListSelectionModel selectionModel = jTable.getSelectionModel();
+        selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        setAllYearToCBB();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -33,17 +55,17 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jlTitle3 = new javax.swing.JLabel();
         jlChooserType1 = new javax.swing.JLabel();
-        cbChooserType1 = new lib2.ComboBoxSuggestion();
+        cbChooserChart = new lib2.ComboBoxSuggestion();
         jPanel4 = new javax.swing.JPanel();
         jpChart = new lib2.Chart();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
-        cbChooserType2 = new lib2.ComboBoxSuggestion();
+        cbChooserTypeTable = new lib2.ComboBoxSuggestion();
         jlChooserType2 = new javax.swing.JLabel();
         jlTitle4 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jspTable = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new java.awt.BorderLayout());
@@ -57,7 +79,7 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
         jlCard1Title.setBackground(new java.awt.Color(255, 255, 255));
         jlCard1Title.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jlCard1Title.setForeground(new java.awt.Color(255, 255, 255));
-        jlCard1Title.setText("Tổng số nhân viên");
+        jlCard1Title.setText("Tổng số khách hàng");
 
         jlNumOrder.setBackground(new java.awt.Color(255, 255, 255));
         jlNumOrder.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
@@ -67,9 +89,9 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
         jlCard1Unit.setBackground(new java.awt.Color(255, 255, 255));
         jlCard1Unit.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jlCard1Unit.setForeground(new java.awt.Color(255, 255, 255));
-        jlCard1Unit.setText("Nhân viên");
+        jlCard1Unit.setText("Khách hàng");
 
-        jlIconOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/market64.png"))); // NOI18N
+        jlIconOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/Customer64.png"))); // NOI18N
 
         javax.swing.GroupLayout jpCard1Layout = new javax.swing.GroupLayout(jpCard1);
         jpCard1.setLayout(jpCard1Layout);
@@ -80,7 +102,7 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
                 .addGroup(jpCard1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpCard1Layout.createSequentialGroup()
                         .addComponent(jlCard1Title)
-                        .addGap(0, 63, Short.MAX_VALUE))
+                        .addGap(0, 60, Short.MAX_VALUE))
                     .addGroup(jpCard1Layout.createSequentialGroup()
                         .addComponent(jlNumOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -109,12 +131,12 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
 
         jpCard2.setBackground(new java.awt.Color(255, 204, 255));
 
-        jlIconMoneyDay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/day64.png"))); // NOI18N
+        jlIconMoneyDay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/Customer64.png"))); // NOI18N
 
         jlCard2Title.setBackground(new java.awt.Color(255, 255, 255));
         jlCard2Title.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jlCard2Title.setForeground(new java.awt.Color(255, 255, 255));
-        jlCard2Title.setText("Nhân viên đang làm");
+        jlCard2Title.setText("Số khách hàng mới hôm nay");
 
         jlMoneyDay.setBackground(new java.awt.Color(255, 255, 255));
         jlMoneyDay.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
@@ -124,7 +146,7 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
         jlCard2Unit.setBackground(new java.awt.Color(255, 255, 255));
         jlCard2Unit.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jlCard2Unit.setForeground(new java.awt.Color(255, 255, 255));
-        jlCard2Unit.setText("Nhân viên");
+        jlCard2Unit.setText("Khách hàng");
 
         javax.swing.GroupLayout jpCard2Layout = new javax.swing.GroupLayout(jpCard2);
         jpCard2.setLayout(jpCard2Layout);
@@ -133,7 +155,7 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
             .addGroup(jpCard2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpCard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlCard2Title, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                    .addComponent(jlCard2Title, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
                     .addGroup(jpCard2Layout.createSequentialGroup()
                         .addComponent(jlMoneyDay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -163,12 +185,12 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
 
         jpCard3.setBackground(new java.awt.Color(153, 204, 255));
 
-        jlIconMoneyMonth.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/mounth64.png"))); // NOI18N
+        jlIconMoneyMonth.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/Customer64.png"))); // NOI18N
 
         jlCard3Title.setBackground(new java.awt.Color(255, 255, 255));
         jlCard3Title.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jlCard3Title.setForeground(new java.awt.Color(255, 255, 255));
-        jlCard3Title.setText("Nhân viên nghỉ việc");
+        jlCard3Title.setText("Số khách hàng mới tháng này");
 
         jlMoneyMonth.setBackground(new java.awt.Color(255, 255, 255));
         jlMoneyMonth.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
@@ -178,7 +200,7 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
         jlCard3Unit.setBackground(new java.awt.Color(255, 255, 255));
         jlCard3Unit.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jlCard3Unit.setForeground(new java.awt.Color(255, 255, 255));
-        jlCard3Unit.setText("Nhân viên");
+        jlCard3Unit.setText("Khách hàng");
 
         javax.swing.GroupLayout jpCard3Layout = new javax.swing.GroupLayout(jpCard3);
         jpCard3.setLayout(jpCard3Layout);
@@ -189,7 +211,7 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
                 .addGroup(jpCard3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpCard3Layout.createSequentialGroup()
                         .addComponent(jlCard3Title)
-                        .addGap(0, 59, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jpCard3Layout.createSequentialGroup()
                         .addComponent(jlMoneyMonth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -220,17 +242,17 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
 
         jpCard4.setBackground(new java.awt.Color(0, 204, 204));
 
-        jlIconMoneyYear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/year64.png"))); // NOI18N
+        jlIconMoneyYear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/Customer64.png"))); // NOI18N
 
         jlCard14Title.setBackground(new java.awt.Color(255, 255, 255));
         jlCard14Title.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jlCard14Title.setForeground(new java.awt.Color(255, 255, 255));
-        jlCard14Title.setText("Tổng doanh thu năm nay");
+        jlCard14Title.setText("Tổng số khách hàng năm nay");
 
         jlCard4Unit.setBackground(new java.awt.Color(255, 255, 255));
         jlCard4Unit.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jlCard4Unit.setForeground(new java.awt.Color(255, 255, 255));
-        jlCard4Unit.setText("VND");
+        jlCard4Unit.setText("Khách hàng");
 
         jlMoneyYear.setBackground(new java.awt.Color(255, 255, 255));
         jlMoneyYear.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
@@ -246,7 +268,7 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
                 .addGroup(jpCard4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpCard4Layout.createSequentialGroup()
                         .addComponent(jlCard14Title)
-                        .addGap(0, 55, Short.MAX_VALUE))
+                        .addGap(0, 13, Short.MAX_VALUE))
                     .addGroup(jpCard4Layout.createSequentialGroup()
                         .addComponent(jlMoneyYear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -285,13 +307,17 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jlTitle3.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jlTitle3.setText("Doanh thu nhân viên");
+        jlTitle3.setText("Thống kê khách hàng");
 
         jlChooserType1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jlChooserType1.setText("Hãy chọn kiểu thống kê");
 
-        cbChooserType1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ngày", "Tháng", "Năm" }));
-        cbChooserType1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbChooserChart.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbChooserChart.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbChooserChartItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -303,7 +329,7 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
                         .addContainerGap()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlChooserType1)
-                            .addComponent(cbChooserType1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cbChooserChart, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jlTitle3)))
@@ -317,8 +343,8 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jlChooserType1)
                 .addGap(18, 18, 18)
-                .addComponent(cbChooserType1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addComponent(cbChooserChart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(128, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -328,7 +354,7 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 762, Short.MAX_VALUE)
+            .addGap(0, 788, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addContainerGap()
@@ -373,14 +399,18 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        cbChooserType2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ngày", "Tháng", "Năm" }));
-        cbChooserType2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbChooserTypeTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbChooserTypeTable.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbChooserTypeTableItemStateChanged(evt);
+            }
+        });
 
         jlChooserType2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jlChooserType2.setText("Hãy chọn kiểu thống kê");
+        jlChooserType2.setText("Hãy chọn năm muốn thống kê");
 
         jlTitle4.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jlTitle4.setText("Doanh thu nhân viên");
+        jlTitle4.setText("Thống kê khách hàng");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -392,7 +422,7 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
                         .addContainerGap()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlChooserType2)
-                            .addComponent(cbChooserType2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cbChooserTypeTable, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jlTitle4)))
@@ -406,14 +436,14 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jlChooserType2)
                 .addGap(18, 18, 18)
-                .addComponent(cbChooserType2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addComponent(cbChooserTypeTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(128, Short.MAX_VALUE))
         );
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -432,13 +462,13 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jspTable.setViewportView(jTable1);
+        jspTable.setViewportView(jTable);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 762, Short.MAX_VALUE)
+            .addGap(0, 788, Short.MAX_VALUE)
             .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel7Layout.createSequentialGroup()
                     .addContainerGap()
@@ -481,10 +511,40 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
         add(jTabbedPaneMain, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cbChooserTypeTableItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbChooserTypeTableItemStateChanged
+        int year = Integer.parseInt(cbChooserTypeTable.getSelectedItem().toString());
+        defaultTableModel.setRowCount(0);
+        for (Customer_Statistics customer_Statistics : customer_Statistics_DAO.getListCustomer_Statistics(year)) {
+            Object[] data = {customer_Statistics.getMonthNumber(), customer_Statistics.getCustomerCount(), customer_Statistics.getTotalQuantitySold(), utils.Utils.formatMoney(customer_Statistics.getTotalRevenue())};
+            defaultTableModel.addRow(data);
+        }
+    }//GEN-LAST:event_cbChooserTypeTableItemStateChanged
+
+    private void cbChooserChartItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbChooserChartItemStateChanged
+        int year = Integer.parseInt(cbChooserChart.getSelectedItem().toString());
+        loadDataToChart(year);
+    }//GEN-LAST:event_cbChooserChartItemStateChanged
+
+//    get all year invoice
+    private void setAllYearToCBB() {
+        for (Integer year : customer_Statistics_DAO.getAllInvoiceYears()) {
+            cbChooserTypeTable.setSelectedItem(year);
+            cbChooserChart.setSelectedItem(year);
+        }
+    }
+
+//    load data to chart
+    private void loadDataToChart(int year) {
+        jpChart.addLegend("Số lượng khách", new Color(245, 189, 135));
+        jpChart.addLegend("Số sản phẩm bán được", new Color(135, 189, 245));
+        for (Customer_Statistics customer_Statistics : customer_Statistics_DAO.getListCustomer_Statistics(year)) {
+            jpChart.addData(new ModelChart("Tháng " + customer_Statistics.getMonthNumber(), new double[]{customer_Statistics.getCustomerCount(), customer_Statistics.getTotalQuantitySold()}));
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private lib2.ComboBoxSuggestion cbChooserType1;
-    private lib2.ComboBoxSuggestion cbChooserType2;
+    private lib2.ComboBoxSuggestion cbChooserChart;
+    private lib2.ComboBoxSuggestion cbChooserTypeTable;
     private javax.swing.JPanel jPTop;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -493,7 +553,7 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JTabbedPane jTabbedPaneMain;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable;
     private javax.swing.JLabel jlCard14Title;
     private javax.swing.JLabel jlCard1Title;
     private javax.swing.JLabel jlCard1Unit;

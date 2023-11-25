@@ -269,7 +269,7 @@ public class Product_Statistics_GUI extends javax.swing.JPanel {
         jlCard14Title.setBackground(new java.awt.Color(255, 255, 255));
         jlCard14Title.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jlCard14Title.setForeground(new java.awt.Color(255, 255, 255));
-        jlCard14Title.setText("Số sản phẩm bán năm này");
+        jlCard14Title.setText("Tổng sản phẩm bán năm nay");
 
         jlCard4Unit.setBackground(new java.awt.Color(255, 255, 255));
         jlCard4Unit.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
@@ -290,7 +290,7 @@ public class Product_Statistics_GUI extends javax.swing.JPanel {
                 .addGroup(jpCard4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpCard4Layout.createSequentialGroup()
                         .addComponent(jlCard14Title)
-                        .addGap(0, 16, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jpCard4Layout.createSequentialGroup()
                         .addComponent(jLNumProductsSoldYear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -376,7 +376,7 @@ public class Product_Statistics_GUI extends javax.swing.JPanel {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 762, Short.MAX_VALUE)
+            .addGap(0, 768, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addContainerGap()
@@ -490,7 +490,7 @@ public class Product_Statistics_GUI extends javax.swing.JPanel {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 762, Short.MAX_VALUE)
+            .addGap(0, 768, Short.MAX_VALUE)
             .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel7Layout.createSequentialGroup()
                     .addContainerGap()
