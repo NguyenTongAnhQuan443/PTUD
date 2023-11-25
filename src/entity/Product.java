@@ -36,6 +36,8 @@ public class Product {
     private ProductSize productSize;
     private ProductMaterial productMaterial;
     private String pathImageProduct;
+    
+    private int sellNumber;
 
 //    Get set
     public String getIdProduct() {
@@ -141,7 +143,16 @@ public class Product {
     public void setPathImageProduct(String pathImageProduct) {
         this.pathImageProduct = pathImageProduct;
     }
+//get set số lượng bán
 
+    public int getSellNumber() {
+        return sellNumber;
+    }
+
+    public void setSellNumber(int sellNumber) {
+        this.sellNumber = sellNumber;
+    }
+    
 //    Constructor
     public Product() {
     }
@@ -176,8 +187,25 @@ public class Product {
         this.productSize = productSize;
         this.productMaterial = productMaterial;
         this.pathImageProduct = pathImageProduct;
-    }
+    } // có tham số currentPrice
 
+    public Product(String idProduct, String name, Double costPrice, Double originalPrice, int quantity, Status status, Supplier supplier, ProductType productType, ProductColor productColor, ProductSize productSize, ProductMaterial productMaterial, String pathImageProduct, int sellNumber) {
+        super();
+        this.idProduct = idProduct;
+        this.name = name;
+        this.costPrice = costPrice;
+        this.originalPrice = originalPrice;
+        this.quantity = quantity;
+        this.status = status;
+        this.supplier = supplier;
+        this.productType = productType;
+        this.productColor = productColor;
+        this.productSize = productSize;
+        this.productMaterial = productMaterial;
+        this.pathImageProduct = pathImageProduct;
+        this.sellNumber = sellNumber;
+    } // lấy được số lượng bán - không có curentPrice
+    
 //    Hashcode equals
     @Override
     public int hashCode() {

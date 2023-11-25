@@ -55,6 +55,15 @@ public class Chart extends javax.swing.JPanel {
         }
     }
 
+    public void clearData() {
+        legends.clear();
+        model.clear();
+        panelLegend.removeAll();
+        panelLegend.repaint();
+        panelLegend.revalidate();
+        blankPlotChart.reset();
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

@@ -51,10 +51,10 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="jlCard1Title" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="27" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="24" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="jlNumOrder" max="32767" attributes="0"/>
+                              <Component id="jLQuantityProduct" max="32767" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jlCard1Unit" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -72,7 +72,7 @@
                       <Component id="jlCard1Title" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jlNumOrder" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLQuantityProduct" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jlCard1Unit" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -100,7 +100,7 @@
                 <Property name="text" type="java.lang.String" value="T&#x1ed5;ng s&#x1ed1; s&#x1ea3;n ph&#x1ea9;m t&#x1ed3;n kho"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jlNumOrder">
+            <Component class="javax.swing.JLabel" name="jLQuantityProduct">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -131,7 +131,7 @@
             <Component class="javax.swing.JLabel" name="jlIconOrder">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/images/icons/market64.png"/>
+                  <Image iconType="3" name="/images/icons/shirt64.png"/>
                 </Property>
               </Properties>
             </Component>
@@ -150,13 +150,17 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jlCard2Title" pref="244" max="32767" attributes="0"/>
+                          <Component id="jlCard2Title" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Component id="jlMoneyDay" max="32767" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jlCard2Unit" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jlIconMoneyDay" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLNumProductsSoldToDay" min="-2" pref="74" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
+                                      <Component id="jlIconMoneyDay" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jlCard2Unit" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -171,7 +175,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jlMoneyDay" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLNumProductsSoldToDay" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jlCard2Unit" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -190,7 +194,7 @@
             <Component class="javax.swing.JLabel" name="jlIconMoneyDay">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/images/icons/day64.png"/>
+                  <Image iconType="3" name="/images/icons/shirt64.png"/>
                 </Property>
               </Properties>
             </Component>
@@ -208,7 +212,7 @@
                 <Property name="text" type="java.lang.String" value="S&#x1ed1; s&#x1ea3;n ph&#x1ea9;m b&#xe1;n h&#xf4;m nay"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jlMoneyDay">
+            <Component class="javax.swing.JLabel" name="jLNumProductsSoldToDay">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -253,10 +257,10 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jlCard3Title" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="23" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="20" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jlMoneyMonth" max="32767" attributes="0"/>
+                              <Component id="jLNumProductsSoldMonth" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jlCard3Unit" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -276,7 +280,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jlMoneyMonth" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLNumProductsSoldMonth" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jlCard3Unit" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
@@ -295,7 +299,7 @@
             <Component class="javax.swing.JLabel" name="jlIconMoneyMonth">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/images/icons/mounth64.png"/>
+                  <Image iconType="3" name="/images/icons/shirt64.png"/>
                 </Property>
               </Properties>
             </Component>
@@ -313,7 +317,7 @@
                 <Property name="text" type="java.lang.String" value="S&#x1ed1; s&#x1ea3;n ph&#x1ea9;m b&#xe1;n th&#xe1;ng n&#xe0;y"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jlMoneyMonth">
+            <Component class="javax.swing.JLabel" name="jLNumProductsSoldMonth">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -358,10 +362,10 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jlCard14Title" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="19" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="16" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jlMoneyYear" max="32767" attributes="0"/>
+                              <Component id="jLNumProductsSoldYear" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jlCard4Unit" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -381,7 +385,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jlMoneyYear" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLNumProductsSoldYear" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jlCard4Unit" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
@@ -400,7 +404,7 @@
             <Component class="javax.swing.JLabel" name="jlIconMoneyYear">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/images/icons/year64.png"/>
+                  <Image iconType="3" name="/images/icons/shirt64.png"/>
                 </Property>
               </Properties>
             </Component>
@@ -432,7 +436,7 @@
                 <Property name="text" type="java.lang.String" value="S&#x1ea3;n ph&#x1ea9;m"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jlMoneyYear">
+            <Component class="javax.swing.JLabel" name="jLNumProductsSoldYear">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -689,7 +693,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jlChooserType1" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbChooserType1" alignment="0" min="-2" pref="232" max="-2" attributes="0"/>
+                              <Component id="cbChooserTypeTable" alignment="0" min="-2" pref="232" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="18" max="32767" attributes="0"/>
                       </Group>
@@ -708,14 +712,14 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jlChooserType1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="cbChooserType1" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbChooserTypeTable" min="-2" max="-2" attributes="0"/>
                           <EmptySpace pref="130" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="lib2.ComboBoxSuggestion" name="cbChooserType1">
+                <Component class="lib2.ComboBoxSuggestion" name="cbChooserTypeTable">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="4">
@@ -730,7 +734,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbChooserType1ItemStateChanged"/>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbChooserTypeTableItemStateChanged"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jlChooserType1">
@@ -797,7 +801,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="jTable1">
+                    <Component class="javax.swing.JTable" name="jTable">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="8" rowCount="4">
@@ -808,7 +812,7 @@
                             <Column editable="false" title="M&#xe0;u s&#x1eaf;c" type="java.lang.Object"/>
                             <Column editable="false" title="K&#xed;ch th&#x1b0;&#x1edb;c" type="java.lang.Object"/>
                             <Column editable="false" title="S&#x1ed1; l&#x1b0;&#x1ee3;ng" type="java.lang.Object"/>
-                            <Column editable="false" title="SL b&#xe1;n" type="java.lang.Object"/>
+                            <Column editable="false" title="&#x110;&#xe3; b&#xe1;n" type="java.lang.Object"/>
                           </Table>
                         </Property>
                       </Properties>

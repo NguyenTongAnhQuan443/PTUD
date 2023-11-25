@@ -1,8 +1,50 @@
 package gui;
+
+import dao.ProductProperties_DAO;
+import dao.Supplier_DAO;
+import entity.Product;
+import dao.Product_Statistics_DAO;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
+import lib2.ModelChart;
+import lib2.TableCustom;
+import utils.Utils;
+
 public class Product_Statistics_GUI extends javax.swing.JPanel {
+
+    private Product_Statistics_DAO product_Statistics_DAO = new Product_Statistics_DAO();
+    private Supplier_DAO supplier_DAO = new Supplier_DAO();
+    private ProductProperties_DAO productProperties_DAO = new ProductProperties_DAO();
+    private DefaultTableModel defaultTableModel;
+    private DefaultListModel<String> listModel;
+
     public Product_Statistics_GUI() {
         initComponents();
+
+        TableCustom.apply(jspTable, TableCustom.TableType.DEFAULT);
+        defaultTableModel = (DefaultTableModel) jTable.getModel();
+        ListSelectionModel selectionModel = jTable.getSelectionModel();
+        selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        // load data to panel
+        loadData();
+
+        // data table default
+        List<Product> listProduct = new ArrayList<>();
+        listProduct = product_Statistics_DAO.getLowStockProducts();
+        loadDataProduct(listProduct);
+
+        // data chart default
+        loadDataToChart(product_Statistics_DAO.getLowStockProducts(), new Color(245, 189, 135), new Color(135, 189, 245));
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -10,24 +52,24 @@ public class Product_Statistics_GUI extends javax.swing.JPanel {
         jPTop = new javax.swing.JPanel();
         jpCard1 = new javax.swing.JPanel();
         jlCard1Title = new javax.swing.JLabel();
-        jlNumOrder = new javax.swing.JLabel();
+        jLQuantityProduct = new javax.swing.JLabel();
         jlCard1Unit = new javax.swing.JLabel();
         jlIconOrder = new javax.swing.JLabel();
         jpCard2 = new javax.swing.JPanel();
         jlIconMoneyDay = new javax.swing.JLabel();
         jlCard2Title = new javax.swing.JLabel();
-        jlMoneyDay = new javax.swing.JLabel();
+        jLNumProductsSoldToDay = new javax.swing.JLabel();
         jlCard2Unit = new javax.swing.JLabel();
         jpCard3 = new javax.swing.JPanel();
         jlIconMoneyMonth = new javax.swing.JLabel();
         jlCard3Title = new javax.swing.JLabel();
-        jlMoneyMonth = new javax.swing.JLabel();
+        jLNumProductsSoldMonth = new javax.swing.JLabel();
         jlCard3Unit = new javax.swing.JLabel();
         jpCard4 = new javax.swing.JPanel();
         jlIconMoneyYear = new javax.swing.JLabel();
         jlCard14Title = new javax.swing.JLabel();
         jlCard4Unit = new javax.swing.JLabel();
-        jlMoneyYear = new javax.swing.JLabel();
+        jLNumProductsSoldYear = new javax.swing.JLabel();
         jTabbedPaneMain = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -38,12 +80,12 @@ public class Product_Statistics_GUI extends javax.swing.JPanel {
         jpChart = new lib2.Chart();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
-        cbChooserType1 = new lib2.ComboBoxSuggestion();
+        cbChooserTypeTable = new lib2.ComboBoxSuggestion();
         jlChooserType1 = new javax.swing.JLabel();
         jlTitle1 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jspTable = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new java.awt.BorderLayout());
@@ -59,17 +101,17 @@ public class Product_Statistics_GUI extends javax.swing.JPanel {
         jlCard1Title.setForeground(new java.awt.Color(255, 255, 255));
         jlCard1Title.setText("Tổng số sản phẩm tồn kho");
 
-        jlNumOrder.setBackground(new java.awt.Color(255, 255, 255));
-        jlNumOrder.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jlNumOrder.setForeground(new java.awt.Color(255, 255, 255));
-        jlNumOrder.setText("0");
+        jLQuantityProduct.setBackground(new java.awt.Color(255, 255, 255));
+        jLQuantityProduct.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLQuantityProduct.setForeground(new java.awt.Color(255, 255, 255));
+        jLQuantityProduct.setText("0");
 
         jlCard1Unit.setBackground(new java.awt.Color(255, 255, 255));
         jlCard1Unit.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jlCard1Unit.setForeground(new java.awt.Color(255, 255, 255));
         jlCard1Unit.setText("Sản phẩm");
 
-        jlIconOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/market64.png"))); // NOI18N
+        jlIconOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/shirt64.png"))); // NOI18N
 
         javax.swing.GroupLayout jpCard1Layout = new javax.swing.GroupLayout(jpCard1);
         jpCard1.setLayout(jpCard1Layout);
@@ -80,9 +122,9 @@ public class Product_Statistics_GUI extends javax.swing.JPanel {
                 .addGroup(jpCard1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpCard1Layout.createSequentialGroup()
                         .addComponent(jlCard1Title)
-                        .addGap(0, 27, Short.MAX_VALUE))
+                        .addGap(0, 24, Short.MAX_VALUE))
                     .addGroup(jpCard1Layout.createSequentialGroup()
-                        .addComponent(jlNumOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLQuantityProduct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jlCard1Unit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -96,7 +138,7 @@ public class Product_Statistics_GUI extends javax.swing.JPanel {
                 .addComponent(jlCard1Title)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpCard1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlNumOrder)
+                    .addComponent(jLQuantityProduct)
                     .addComponent(jlCard1Unit))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCard1Layout.createSequentialGroup()
@@ -109,17 +151,17 @@ public class Product_Statistics_GUI extends javax.swing.JPanel {
 
         jpCard2.setBackground(new java.awt.Color(255, 204, 255));
 
-        jlIconMoneyDay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/day64.png"))); // NOI18N
+        jlIconMoneyDay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/shirt64.png"))); // NOI18N
 
         jlCard2Title.setBackground(new java.awt.Color(255, 255, 255));
         jlCard2Title.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jlCard2Title.setForeground(new java.awt.Color(255, 255, 255));
         jlCard2Title.setText("Số sản phẩm bán hôm nay");
 
-        jlMoneyDay.setBackground(new java.awt.Color(255, 255, 255));
-        jlMoneyDay.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jlMoneyDay.setForeground(new java.awt.Color(255, 255, 255));
-        jlMoneyDay.setText("0");
+        jLNumProductsSoldToDay.setBackground(new java.awt.Color(255, 255, 255));
+        jLNumProductsSoldToDay.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLNumProductsSoldToDay.setForeground(new java.awt.Color(255, 255, 255));
+        jLNumProductsSoldToDay.setText("0");
 
         jlCard2Unit.setBackground(new java.awt.Color(255, 255, 255));
         jlCard2Unit.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
@@ -133,13 +175,15 @@ public class Product_Statistics_GUI extends javax.swing.JPanel {
             .addGroup(jpCard2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpCard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlCard2Title, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                    .addComponent(jlCard2Title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jpCard2Layout.createSequentialGroup()
-                        .addComponent(jlMoneyDay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jlCard2Unit)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jlIconMoneyDay)
+                        .addComponent(jLNumProductsSoldToDay, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jpCard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpCard2Layout.createSequentialGroup()
+                                .addGap(105, 105, 105)
+                                .addComponent(jlIconMoneyDay))
+                            .addComponent(jlCard2Unit))
                         .addContainerGap())))
         );
         jpCard2Layout.setVerticalGroup(
@@ -150,7 +194,7 @@ public class Product_Statistics_GUI extends javax.swing.JPanel {
                 .addGroup(jpCard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpCard2Layout.createSequentialGroup()
                         .addGroup(jpCard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlMoneyDay)
+                            .addComponent(jLNumProductsSoldToDay)
                             .addComponent(jlCard2Unit))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jpCard2Layout.createSequentialGroup()
@@ -163,17 +207,17 @@ public class Product_Statistics_GUI extends javax.swing.JPanel {
 
         jpCard3.setBackground(new java.awt.Color(153, 204, 255));
 
-        jlIconMoneyMonth.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/mounth64.png"))); // NOI18N
+        jlIconMoneyMonth.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/shirt64.png"))); // NOI18N
 
         jlCard3Title.setBackground(new java.awt.Color(255, 255, 255));
         jlCard3Title.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jlCard3Title.setForeground(new java.awt.Color(255, 255, 255));
         jlCard3Title.setText("Số sản phẩm bán tháng này");
 
-        jlMoneyMonth.setBackground(new java.awt.Color(255, 255, 255));
-        jlMoneyMonth.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jlMoneyMonth.setForeground(new java.awt.Color(255, 255, 255));
-        jlMoneyMonth.setText("0");
+        jLNumProductsSoldMonth.setBackground(new java.awt.Color(255, 255, 255));
+        jLNumProductsSoldMonth.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLNumProductsSoldMonth.setForeground(new java.awt.Color(255, 255, 255));
+        jLNumProductsSoldMonth.setText("0");
 
         jlCard3Unit.setBackground(new java.awt.Color(255, 255, 255));
         jlCard3Unit.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
@@ -189,9 +233,9 @@ public class Product_Statistics_GUI extends javax.swing.JPanel {
                 .addGroup(jpCard3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpCard3Layout.createSequentialGroup()
                         .addComponent(jlCard3Title)
-                        .addGap(0, 23, Short.MAX_VALUE))
+                        .addGap(0, 20, Short.MAX_VALUE))
                     .addGroup(jpCard3Layout.createSequentialGroup()
-                        .addComponent(jlMoneyMonth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLNumProductsSoldMonth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jlCard3Unit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -207,7 +251,7 @@ public class Product_Statistics_GUI extends javax.swing.JPanel {
                     .addGroup(jpCard3Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jpCard3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlMoneyMonth)
+                            .addComponent(jLNumProductsSoldMonth)
                             .addComponent(jlCard3Unit))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCard3Layout.createSequentialGroup()
@@ -220,7 +264,7 @@ public class Product_Statistics_GUI extends javax.swing.JPanel {
 
         jpCard4.setBackground(new java.awt.Color(0, 204, 204));
 
-        jlIconMoneyYear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/year64.png"))); // NOI18N
+        jlIconMoneyYear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/shirt64.png"))); // NOI18N
 
         jlCard14Title.setBackground(new java.awt.Color(255, 255, 255));
         jlCard14Title.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -232,10 +276,10 @@ public class Product_Statistics_GUI extends javax.swing.JPanel {
         jlCard4Unit.setForeground(new java.awt.Color(255, 255, 255));
         jlCard4Unit.setText("Sản phẩm");
 
-        jlMoneyYear.setBackground(new java.awt.Color(255, 255, 255));
-        jlMoneyYear.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jlMoneyYear.setForeground(new java.awt.Color(255, 255, 255));
-        jlMoneyYear.setText("0");
+        jLNumProductsSoldYear.setBackground(new java.awt.Color(255, 255, 255));
+        jLNumProductsSoldYear.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLNumProductsSoldYear.setForeground(new java.awt.Color(255, 255, 255));
+        jLNumProductsSoldYear.setText("0");
 
         javax.swing.GroupLayout jpCard4Layout = new javax.swing.GroupLayout(jpCard4);
         jpCard4.setLayout(jpCard4Layout);
@@ -246,9 +290,9 @@ public class Product_Statistics_GUI extends javax.swing.JPanel {
                 .addGroup(jpCard4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpCard4Layout.createSequentialGroup()
                         .addComponent(jlCard14Title)
-                        .addGap(0, 19, Short.MAX_VALUE))
+                        .addGap(0, 16, Short.MAX_VALUE))
                     .addGroup(jpCard4Layout.createSequentialGroup()
-                        .addComponent(jlMoneyYear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLNumProductsSoldYear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jlCard4Unit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -264,7 +308,7 @@ public class Product_Statistics_GUI extends javax.swing.JPanel {
                     .addGroup(jpCard4Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jpCard4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlMoneyYear)
+                            .addComponent(jLNumProductsSoldYear)
                             .addComponent(jlCard4Unit))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCard4Layout.createSequentialGroup()
@@ -377,11 +421,11 @@ public class Product_Statistics_GUI extends javax.swing.JPanel {
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        cbChooserType1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tồn kho ít nhất", "Tồn kho nhiều nhất", "Bán nhiều nhất", "Bán ít nhất" }));
-        cbChooserType1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbChooserType1.addItemListener(new java.awt.event.ItemListener() {
+        cbChooserTypeTable.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tồn kho ít nhất", "Tồn kho nhiều nhất", "Bán nhiều nhất", "Bán ít nhất" }));
+        cbChooserTypeTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbChooserTypeTable.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbChooserType1ItemStateChanged(evt);
+                cbChooserTypeTableItemStateChanged(evt);
             }
         });
 
@@ -399,7 +443,7 @@ public class Product_Statistics_GUI extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlChooserType1)
-                    .addComponent(cbChooserType1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbChooserTypeTable, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -414,14 +458,14 @@ public class Product_Statistics_GUI extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jlChooserType1)
                 .addGap(18, 18, 18)
-                .addComponent(cbChooserType1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbChooserTypeTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(130, Short.MAX_VALUE))
         );
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -429,7 +473,7 @@ public class Product_Statistics_GUI extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã SP", "Tên SP", "Chất liệu", "Màu sắc", "Kích thước", "Số lượng", "SL bán"
+                "STT", "Mã SP", "Tên SP", "Chất liệu", "Màu sắc", "Kích thước", "Số lượng", "Đã bán"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -440,7 +484,7 @@ public class Product_Statistics_GUI extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jspTable.setViewportView(jTable1);
+        jspTable.setViewportView(jTable);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -490,17 +534,77 @@ public class Product_Statistics_GUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbChooserTypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbChooserTypeItemStateChanged
-
+        if (cbChooserType.getSelectedIndex() == 0) {
+            loadDataToChart(product_Statistics_DAO.getLowStockProducts(), new Color(245, 189, 135), new Color(135, 189, 245));
+        } else if (cbChooserType.getSelectedIndex() == 1) {
+            loadDataToChart(product_Statistics_DAO.getHighStockProducts(), new Color(189, 135, 245), new Color(139, 229, 222));
+        } else if (cbChooserType.getSelectedIndex() == 2) {
+            loadDataToChart(product_Statistics_DAO.getTop10SellingProducts(), new Color(139, 229, 222), new Color(245, 189, 135));
+        } else if (cbChooserType.getSelectedIndex() == 3) {
+            loadDataToChart(product_Statistics_DAO.getTop10LowestSellingProducts(), new Color(135, 189, 245), new Color(189, 135, 245));
+        }
     }//GEN-LAST:event_cbChooserTypeItemStateChanged
 
-    private void cbChooserType1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbChooserType1ItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbChooserType1ItemStateChanged
+    private void cbChooserTypeTableItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbChooserTypeTableItemStateChanged
+        if (cbChooserTypeTable.getSelectedIndex() == 0) {
+            List<Product> listProduct = new ArrayList<>();
+            listProduct = product_Statistics_DAO.getLowStockProducts();
+            loadDataProduct(listProduct);
+        } else if (cbChooserTypeTable.getSelectedIndex() == 1) {
+            List<Product> listProduct = new ArrayList<>();
+            listProduct = product_Statistics_DAO.getHighStockProducts();
+            loadDataProduct(listProduct);
+        } else if (cbChooserTypeTable.getSelectedIndex() == 2) {
+            List<Product> listProduct = new ArrayList<>();
+            listProduct = product_Statistics_DAO.getTop10SellingProducts();
+            loadDataProduct(listProduct);
+        } else if (cbChooserTypeTable.getSelectedIndex() == 3) {
+            List<Product> listProduct = new ArrayList<>();
+            listProduct = product_Statistics_DAO.getTop10LowestSellingProducts();
+            loadDataProduct(listProduct);
+        }
+    }//GEN-LAST:event_cbChooserTypeTableItemStateChanged
 
+//    Load data to 4 panel
+    private void loadData() {
+        jLQuantityProduct.setText(product_Statistics_DAO.calculateTotalQuantity() + "");
+        jLNumProductsSoldToDay.setText(product_Statistics_DAO.calculateTotalSalesToday() + "");
+        jLNumProductsSoldMonth.setText(product_Statistics_DAO.calculateTotalSalesThisMonth() + "");
+        jLNumProductsSoldYear.setText(product_Statistics_DAO.calculateTotalSalesThisYear() + "");
+    }
+
+//    load data product
+    private void loadDataProduct(List<Product> listProduct) {
+        defaultTableModel.setRowCount(0);
+        for (Product product : listProduct) {
+            String idProduct = product.getIdProduct().trim();
+            String name = product.getName();
+            int quantity = product.getQuantity();
+            String color = productProperties_DAO.getProductColorByID(product.getProductColor().getIdColor() + "").getName().toString().trim();
+            String size = productProperties_DAO.getProductSizeByID(product.getProductSize().getIdSize() + "").getName().toString().trim();
+            String material = productProperties_DAO.getProductMaterialByID(product.getProductMaterial().getIdMaterial() + "").getName().toString().trim();
+            Object[] rowData = {defaultTableModel.getRowCount() + 1, idProduct, name, material, color, size, quantity, product.getSellNumber()};
+            defaultTableModel.addRow(rowData);
+        }
+    }
+
+//    load data to chart
+    private void loadDataToChart(List<Product> listProduct, Color color1, Color color2) {
+        jpChart.clearData();
+        jpChart.addLegend("Số lượng tồn kho", color1);
+        jpChart.addLegend("Số lượng bán", color2);
+        for (Product product : listProduct) {
+            jpChart.addData(new ModelChart(product.getName(), new double[]{product.getQuantity(), product.getSellNumber()}));
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.ComboBoxSuggestion cbChooserType;
-    private lib2.ComboBoxSuggestion cbChooserType1;
+    private lib2.ComboBoxSuggestion cbChooserTypeTable;
+    private javax.swing.JLabel jLNumProductsSoldMonth;
+    private javax.swing.JLabel jLNumProductsSoldToDay;
+    private javax.swing.JLabel jLNumProductsSoldYear;
+    private javax.swing.JLabel jLQuantityProduct;
     private javax.swing.JPanel jPTop;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -509,7 +613,7 @@ public class Product_Statistics_GUI extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JTabbedPane jTabbedPaneMain;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable;
     private javax.swing.JLabel jlCard14Title;
     private javax.swing.JLabel jlCard1Title;
     private javax.swing.JLabel jlCard1Unit;
@@ -524,10 +628,6 @@ public class Product_Statistics_GUI extends javax.swing.JPanel {
     private javax.swing.JLabel jlIconMoneyMonth;
     private javax.swing.JLabel jlIconMoneyYear;
     private javax.swing.JLabel jlIconOrder;
-    private javax.swing.JLabel jlMoneyDay;
-    private javax.swing.JLabel jlMoneyMonth;
-    private javax.swing.JLabel jlMoneyYear;
-    private javax.swing.JLabel jlNumOrder;
     private javax.swing.JLabel jlTitle;
     private javax.swing.JLabel jlTitle1;
     private javax.swing.JPanel jpCard1;

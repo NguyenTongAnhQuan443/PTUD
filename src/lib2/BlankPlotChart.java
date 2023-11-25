@@ -198,7 +198,7 @@ public class BlankPlotChart extends JComponent {
 
     public SeriesSize getRectangle(int index, double height, double space, double startX, double startY) {
         double x = startX + space * index;
-        SeriesSize size = new SeriesSize(x, startY+1, space, height);
+        SeriesSize size = new SeriesSize(x, startY + 1, space, height);
         return size;
     }
 
@@ -206,5 +206,10 @@ public class BlankPlotChart extends JComponent {
         double max = niceScale.getTickSpacing() * niceScale.getMaxTicks();
         double percentValues = values * 100d / max;
         return height * percentValues / 100d;
+    }
+
+    public void reset() {
+        initValues(0, 10);
+        repaint();
     }
 }

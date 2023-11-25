@@ -57,10 +57,12 @@ public class Supplier_GUI extends javax.swing.JPanel {
 
     public Supplier_GUI() {
         initComponents();
+        
         TableCustom.apply(jspTableSupplier, TableCustom.TableType.DEFAULT);
         defaultTableModel = (DefaultTableModel) jTableSupplier.getModel();
         ListSelectionModel selectionModel = jTableSupplier.getSelectionModel();
         selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        
         setProvinceToComboBox();
         offInput();
         loadData();
