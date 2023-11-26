@@ -1,5 +1,7 @@
 package lib2;
 
+import dao.Staff_DAO;
+import entity.Flag;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
@@ -19,6 +21,7 @@ public class Menu extends JComponent {
     private MenuItem currentSubMenu;
     private MenuItem previousSubMenu;
 
+    private Staff_DAO staff_DAO = new Staff_DAO();
     public MenuEvent getEvent() {
         return event;
     }
@@ -40,7 +43,16 @@ public class Menu extends JComponent {
         {"Khuyến mãi"},
         {"Tài khoản", "Thông tin tài khoản", "Đổi mật khẩu"},
         {"Chức năng khác", "Thay đổi phí VAT"},
-        {"Ngôn ngữ", "Tiếng Việt", "English"},
+        {"Giúp đỡ", "Hướng dẫn", "Báo lỗi", "Đóng góp ý kiến"},
+        {"Thoát"}
+    };
+    
+     private String[][] menuItems_2 = new String[][]{
+        {"Sản phẩm"},
+        {"Chức năng bán hàng", "Bán hàng"},
+        {"Lịch sử bán hàng"},
+        {"Khách hàng"},
+        {"Tài khoản", "Thông tin tài khoản", "Đổi mật khẩu"},
         {"Giúp đỡ", "Hướng dẫn", "Báo lỗi", "Đóng góp ý kiến"},
         {"Thoát"}
     };

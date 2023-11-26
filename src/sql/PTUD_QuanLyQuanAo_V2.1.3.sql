@@ -22973,15 +22973,13 @@ CREATE TABLE Invoice
     idInvoice NVARCHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS PRIMARY KEY,	
 	staff NVARCHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS NOT NULL,
 	customer NVARCHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS NOT NULL,
-	promotion NVARCHAR(15) COLLATE SQL_Latin1_General_CP1_CS_AS,
 	amountReceived FLOAT NOT NULL, -- số tiền nhận
     changeAmount FLOAT, -- số tiền thừa
     totalAmount FLOAT, -- Tổng tiền hóa đơn
     dateCreated DATETIME NOT NULL,
     status NVARCHAR(25) NOT NULL,
 	FOREIGN KEY (staff) REFERENCES Staff(idStaff),
-    FOREIGN KEY (customer) REFERENCES Customer(idCustomer),
-	FOREIGN KEY (promotion) REFERENCES Promotion(idPromotion)
+    FOREIGN KEY (customer) REFERENCES Customer(idCustomer)
 )
 GO
 
@@ -23008,6 +23006,8 @@ CREATE TABLE VAT
 )
 GO
 
+-----------------------------------------------------INSERT DỮ LIỆU-------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------
 -- INSERT phí VAT
 INSERT INTO VAT (VAT) VALUES (8.0);
 GO
@@ -23033,11 +23033,11 @@ GO
 INSERT INTO Staff (idStaff, name, cic, phone, email,  dayofbirth, sex, province, district, ward, address, rights, status, password)
 VALUES
     ('NV0001', N'Nguyễn Tống Anh Quân', '123456789011', '0123456789', 'meloball.m4v@gmail.com','2003-04-04', 1, '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', N'Nhân viên quản lý', N'Đang làm', '04042003'),
-	('NV0002', N'Bùi Đình Quang', '123456789012', '0123456788', 'buidinhquang.m4v@gmail.com', '2003-04-03', 1, '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', N'Nhân viên bán hàng', N'Đang làm', '04042004'),
-	('NV0003', N'Nguyễn Xuân Bảo', '123456789010', '0123456780', 'nguỹenuanbao.m4v@gmail.com', '2003-04-02', 0, '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', N'Nhân viên quản lý', N'Nghỉ làm', '04042003'),
+	('NV0002', N'Bùi Đình Quang', '123456789012', '0123456788', 'buidinhquang.m4v@gmail.com', '2003-04-03', 1, '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', N'Nhân viên bán hàng', N'Đang làm', '04042003'),
+	('NV0003', N'Nguyễn Xuân Bảo', '123456789010', '0123456780', 'nguỹenuanbao.m4v@gmail.com', '2003-04-02', 0, '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', N'Nhân viên bán hàng', N'Nghỉ làm', '04042003'),
 	('NV0004', N'Nguyễn Xuân An', '113456789010', '0113456780', 'xuantocdo@gmail.com', '1999-04-02', 0, '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', N'Nhân viên quản lý', N'Nghỉ làm', '04042003'),
 	('NV0005', N'Nguyễn Xuân Sang', '123454789010', '0128456780', 'xuanden@gmail.com', '2002-02-02', 0, '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', N'Nhân viên quản lý', N'Nghỉ làm', '04042003'),
-	('NV0006', N'Ngô Đình Nam', '123459089012', '0123456778', 'dinhnam@gmail.com', '2003-12-30', 1, '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', N'Nhân viên bán hàng', N'Đang làm', '04042004');
+	('NV0006', N'Ngô Đình Nam', '123459089012', '0123456778', 'dinhnam@gmail.com', '2003-12-30', 1, '106008781098622', '106281379506480', '106756471969301', N'Huỳnh Khương An', N'Nhân viên bán hàng', N'Đang làm', '04042003');
 	
 GO
 
@@ -23117,32 +23117,19 @@ VALUES
 ('SP0009', N'Áo hoodie', 200000, 340000, 100, N'Đang kinh doanh', 'NCC0004', 2, 1, 3, 1, '');
 GO
 
--- INSERT dữ liệu khuyến mãi 
-
 --Test TRIGGER KHUYẾN MÃI
 --select * from Promotion
 --SELECT dayEnd FROM Promotion WHERE idPromotion = 'KM0001';
 --UPDATE Promotion SET dayEnd = DATEADD(DAY, -1, GETDATE()) WHERE idPromotion = 'KM0001';
+--select * from ProductPromotion where idPromotion = 'KM0001';
+--select * from Promotion where idPromotion = 'KM0001'
 
 --TEST TRIGGER RANK KHÁCH HÀNG
 --UPDATE Customer
 --SET totalAmount6months = 35000000
 --WHERE idCustomer = 'KH0001';
-
 --select * from Customer
---select * from ProductPromotion where idPromotion = 'KM0001';
---select * from Promotion where idPromotion = 'KM0001'
 
---select * from Promotion Where  name = N'Khuyến mãi vàng'
---SELECT * FROM promotion WHERE status = N'Còn hạn' AND typePromotion = N'KM theo tổng tiền'
---select * from Customer
---SELECT * FROM promotion WHERE status = N'Còn hạn' AND typePromotion = N'KM theo tổng tiền' AND priceRange >= 1200000
-
+-- CẬP NHẬP SL SP
 --Update Product set quantity = 1 where idProduct = 'SP0001'
-SELECT * FROM InvoiceDetails
-select * from Invoice
-select * from product
 
-
---delete from InvoiceDetails
---delete from Invoice

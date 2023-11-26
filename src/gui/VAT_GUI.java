@@ -35,7 +35,7 @@ public class VAT_GUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cập nhập thuế VAT");
+        setTitle("Cập nhập phí VAT");
         setResizable(false);
 
         JPMain.setBackground(new java.awt.Color(255, 255, 255));
@@ -57,7 +57,7 @@ public class VAT_GUI extends javax.swing.JFrame {
                 .addComponent(jlLogo)
                 .addGap(18, 18, 18)
                 .addComponent(jlNameShop, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(175, 175, 175))
+                .addGap(210, 210, 210))
         );
         JPLogoLayout.setVerticalGroup(
             JPLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

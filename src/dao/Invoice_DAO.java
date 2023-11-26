@@ -26,20 +26,19 @@ public class Invoice_DAO extends DAO {
     public boolean createInvoice(Invoice invoice) {
         try {
             Connection connection = ConnectDB.getConnection();
-            String sql = "INSERT INTO Invoice (idInvoice, staff, customer, promotion, amountReceived, changeAmount, totalAmount, dateCreated, status) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Invoice (idInvoice, staff, customer, amountReceived, changeAmount, totalAmount, dateCreated, status) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             preparedStatement.setString(1, invoice.getIdInvoice());
             preparedStatement.setString(2, invoice.getStaff().getIdStaff());
             preparedStatement.setString(3, invoice.getCustomer().getIdCustomer());
-            preparedStatement.setString(4, invoice.getPromotion() != null ? invoice.getPromotion().getIdPromotion() : null);
-            preparedStatement.setDouble(5, invoice.getAmountReceived());
-            preparedStatement.setDouble(6, invoice.getChangeAmount());
-            preparedStatement.setDouble(7, invoice.getTotalAmount());
-            preparedStatement.setDate(8, java.sql.Date.valueOf(LocalDate.now()));
-            preparedStatement.setString(9, Invoice.convertStatusToString(invoice.getStatus()));
+            preparedStatement.setDouble(4, invoice.getAmountReceived());
+            preparedStatement.setDouble(5, invoice.getChangeAmount());
+            preparedStatement.setDouble(6, invoice.getTotalAmount());
+            preparedStatement.setDate(7, java.sql.Date.valueOf(LocalDate.now()));
+            preparedStatement.setString(8, Invoice.convertStatusToString(invoice.getStatus()));
             preparedStatement.executeUpdate();
 
             return true;
@@ -91,7 +90,6 @@ public class Invoice_DAO extends DAO {
                 // Kiểm tra và xử lý null cho staff, customer, và promotion
                 Staff staff = resultSet.getString("staff") != null ? staff_DAO.getStaffByID(resultSet.getString("staff")) : null;
                 Customer customer = resultSet.getString("customer") != null ? customer_DAO.getCustomerByID(resultSet.getString("customer")) : null;
-                Promotion promotion = resultSet.getString("promotion") != null ? promotion_DAO.getPromotionByID(resultSet.getString("promotion")) : null;
 
                 double amountReceived = resultSet.getDouble("amountReceived");
                 double changeAmount = resultSet.getDouble("changeAmount");
@@ -105,7 +103,7 @@ public class Invoice_DAO extends DAO {
 
                 // Kiểm tra và xử lý null cho status
                 String status = resultSet.getString("status");
-                Invoice invoice = new Invoice(idInvoice, staff, customer, promotion, amountReceived, changeAmount, totalAmount, dateCreated, status != null ? Invoice.convertStringToStatus(status) : null);
+                Invoice invoice = new Invoice(idInvoice, staff, customer, amountReceived, changeAmount, totalAmount, dateCreated, status != null ? Invoice.convertStringToStatus(status) : null);
 
                 return invoice;
             }
@@ -131,7 +129,6 @@ public class Invoice_DAO extends DAO {
                 String idInvoice = resultSet.getString("idInvoice");
                 String staff = resultSet.getString("staff");
                 String customer = resultSet.getString("customer");
-                String promotion = resultSet.getString("promotion");
                 double amountReceived = resultSet.getDouble("amountReceived");
                 double changeAmount = resultSet.getDouble("changeAmount");
                 double totalAmount = resultSet.getDouble("totalAmount");
@@ -141,7 +138,7 @@ public class Invoice_DAO extends DAO {
                     dateCreated = timestamp.toLocalDateTime();
                 }
                 String status1 = resultSet.getString("status");
-                Invoice invoice = new Invoice(idInvoice, staff_DAO.getStaffByID(staff), customer_DAO.getCustomerByID(customer), promotion_DAO.getPromotionByID(promotion), amountReceived, changeAmount, totalAmount, dateCreated, Invoice.convertStringToStatus(status1));
+                Invoice invoice = new Invoice(idInvoice, staff_DAO.getStaffByID(staff), customer_DAO.getCustomerByID(customer), amountReceived, changeAmount, totalAmount, dateCreated, Invoice.convertStringToStatus(status1));
                 listPendingInvoice.add(invoice);
             }
         } catch (Exception e) {
@@ -196,7 +193,6 @@ public class Invoice_DAO extends DAO {
                 String idInvoice = resultSet.getString("idInvoice");
                 String staff = resultSet.getString("staff");
                 String customer = resultSet.getString("customer");
-                String promotion = resultSet.getString("promotion");
                 double amountReceived = resultSet.getDouble("amountReceived");
                 double changeAmount = resultSet.getDouble("changeAmount");
                 double totalAmount = resultSet.getDouble("totalAmount");
@@ -206,7 +202,7 @@ public class Invoice_DAO extends DAO {
                     dateCreated = timestamp.toLocalDateTime();
                 }
                 String status1 = resultSet.getString("status");
-                Invoice invoice = new Invoice(idInvoice, staff_DAO.getStaffByID(staff), customer_DAO.getCustomerByID(customer), promotion_DAO.getPromotionByID(promotion), amountReceived, changeAmount, totalAmount, dateCreated, Invoice.convertStringToStatus(status1));
+                Invoice invoice = new Invoice(idInvoice, staff_DAO.getStaffByID(staff), customer_DAO.getCustomerByID(customer), amountReceived, changeAmount, totalAmount, dateCreated, Invoice.convertStringToStatus(status1));
                 listPendingInvoice.add(invoice);
             }
         } catch (Exception e) {
@@ -232,7 +228,6 @@ public class Invoice_DAO extends DAO {
                 String idInvoice = resultSet.getString("idInvoice");
                 String staff = resultSet.getString("staff");
                 String customer = resultSet.getString("customer");
-                String promotion = resultSet.getString("promotion");
                 double amountReceived = resultSet.getDouble("amountReceived");
                 double changeAmount = resultSet.getDouble("changeAmount");
                 double totalAmount = resultSet.getDouble("totalAmount");
@@ -242,7 +237,7 @@ public class Invoice_DAO extends DAO {
                     dateCreated = timestamp.toLocalDateTime();
                 }
                 String status1 = resultSet.getString("status");
-                Invoice invoice = new Invoice(idInvoice, staff_DAO.getStaffByID(staff), customer_DAO.getCustomerByID(customer), promotion_DAO.getPromotionByID(promotion), amountReceived, changeAmount, totalAmount, dateCreated, Invoice.convertStringToStatus(status1));
+                Invoice invoice = new Invoice(idInvoice, staff_DAO.getStaffByID(staff), customer_DAO.getCustomerByID(customer), amountReceived, changeAmount, totalAmount, dateCreated, Invoice.convertStringToStatus(status1));
                 listInvoiceWithinDateRange.add(invoice);
             }
         } catch (Exception e) {

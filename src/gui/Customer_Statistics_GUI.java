@@ -525,6 +525,10 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
         loadDataToChart(year);
     }//GEN-LAST:event_cbChooserChartItemStateChanged
 
+//    load data to panel
+    private void loadDataToPanle(){
+        
+    }
 //    get all year invoice
     private void setAllYearToCBB() {
         for (Integer year : customer_Statistics_DAO.getAllInvoiceYears()) {

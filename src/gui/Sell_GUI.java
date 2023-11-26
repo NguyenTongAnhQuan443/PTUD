@@ -1724,7 +1724,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         double totalAmount = Double.parseDouble(jtfTotalAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", ""));
         LocalDateTime dateCreated = LocalDateTime.now();
 
-        Invoice invoice = new Invoice(idInvoice, staff, customer, promotion, amountReceived, changeAmount, totalAmount, dateCreated, Invoice.convertStringToStatus(status));
+        Invoice invoice = new Invoice(idInvoice, staff, customer, amountReceived, changeAmount, totalAmount, dateCreated, Invoice.convertStringToStatus(status));
 
         boolean res = invoice_DAO.createInvoice(invoice);
 
@@ -1897,7 +1897,7 @@ public class Sell_GUI extends javax.swing.JPanel implements Runnable, ThreadFact
         double totalAmount = Double.parseDouble(jtfTotalAmount.getText().trim().replaceAll("\\.0", "").replaceAll("\\ VNĐ", ""));
         LocalDateTime dateCreated = LocalDateTime.now();
 
-        Invoice invoice = new Invoice(idInvoice, staff, customer, promotion, amountReceived, changeAmount, totalAmount, dateCreated, Invoice.convertStringToStatus("Đã thanh toán"));
+        Invoice invoice = new Invoice(idInvoice, staff, customer, amountReceived, changeAmount, totalAmount, dateCreated, Invoice.convertStringToStatus("Đã thanh toán"));
 
         boolean res = invoice_DAO.updateInvoiceMoney(idInvoice, amountReceived, changeAmount, totalAmount);
 

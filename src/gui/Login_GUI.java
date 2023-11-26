@@ -238,8 +238,7 @@ public class Login_GUI extends javax.swing.JFrame {
             char[] passwordChars = jpfPass.getPassword();
             String password = new String(passwordChars);
             boolean checkAccount = staff_DAO.isAccount(id, password);
-            boolean checkRights = staff_DAO.checkRightsAccount(id);
-            if (checkAccount == true && checkRights == true) { // đăng nhập bằng quyền nhân viên quản lý
+            if (checkAccount == true) {
                 this.dispose();
                 String nameStaff = staff_DAO.getNameAccount(id);
                 

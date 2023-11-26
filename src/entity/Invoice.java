@@ -28,7 +28,6 @@ public class Invoice {
     private String idInvoice;
     private Staff staff;
     private Customer customer;
-    private Promotion promotion;
     private double amountReceived;
     private double changeAmount;
     private double totalAmount;
@@ -58,14 +57,6 @@ public class Invoice {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
-    }
-
-    public Promotion getPromotion() {
-        return promotion;
-    }
-
-    public void setPromotion(Promotion promotion) {
-        this.promotion = promotion;
     }
 
     public double getAmountReceived() {
@@ -119,11 +110,11 @@ public class Invoice {
         this.idInvoice = idInvoice;
     }
 
-    public Invoice(String idInvoice, Staff staff, Customer customer, Promotion promotion, double amountReceived, double changeAmount, double totalAmount, LocalDateTime dateCreated, Status status) {
+    public Invoice(String idInvoice, Staff staff, Customer customer, double amountReceived, double changeAmount, double totalAmount, LocalDateTime dateCreated, Status status) {
+        super();
         this.idInvoice = idInvoice;
         this.staff = staff;
         this.customer = customer;
-        this.promotion = promotion;
         this.amountReceived = amountReceived;
         this.changeAmount = changeAmount;
         this.totalAmount = totalAmount;
@@ -155,9 +146,11 @@ public class Invoice {
     }
 
 //    toString
+
     @Override
     public String toString() {
-        return "Invoice{" + "idInvoice=" + idInvoice + ", staff=" + staff + ", customer=" + customer + ", promotion=" + promotion + ", amountReceived=" + amountReceived + ", changeAmount=" + changeAmount + ", totalAmount=" + totalAmount + ", dateCreated=" + dateCreated + ", status=" + status + '}';
+        return "Invoice{" + "idInvoice=" + idInvoice + ", staff=" + staff + ", customer=" + customer + ", amountReceived=" + amountReceived + ", changeAmount=" + changeAmount + ", totalAmount=" + totalAmount + ", dateCreated=" + dateCreated + ", status=" + status + '}';
     }
+
     
 }
