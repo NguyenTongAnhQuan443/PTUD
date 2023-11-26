@@ -1,11 +1,15 @@
 package gui;
 
+import dao.Customer_Statistics_DAO;
 import dao.Staff_Statistics_DAO;
+import entity.Customer_Statistics;
 import entity.Staff_Statistics;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import lib2.ModelChart;
 import lib2.TableCustom;
 
 public class Staff_Statistics_GUI extends javax.swing.JPanel {
@@ -23,6 +27,12 @@ public class Staff_Statistics_GUI extends javax.swing.JPanel {
 
 //        load data to panel
         loadDataToPanel();
+
+//        load data to table
+        List<Staff_Statistics> listStaffStatistics = new ArrayList<>();
+        listStaffStatistics = staff_Statistics_DAO.getTop10RevenueCurrentMonth();
+        loadDataToTable(listStaffStatistics);
+        loadDataToChart(listStaffStatistics);
     }
 
     @SuppressWarnings("unchecked")
@@ -50,7 +60,7 @@ public class Staff_Statistics_GUI extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jlTitle3 = new javax.swing.JLabel();
         jlChooserType1 = new javax.swing.JLabel();
-        cbChooserType1 = new lib2.ComboBoxSuggestion();
+        cbChooserChart = new lib2.ComboBoxSuggestion();
         jPanel4 = new javax.swing.JPanel();
         jpChart = new lib2.Chart();
         jPanel5 = new javax.swing.JPanel();
@@ -259,8 +269,13 @@ public class Staff_Statistics_GUI extends javax.swing.JPanel {
         jlChooserType1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jlChooserType1.setText("Hãy chọn kiểu thống kê");
 
-        cbChooserType1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ngày", "Tháng", "Năm" }));
-        cbChooserType1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbChooserChart.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Doanh thu cao nhất tháng", "Doanh thu thấp nhất tháng", "Doanh thu cao nhất năm", "Doanh thu thấp nhất năm" }));
+        cbChooserChart.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbChooserChart.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbChooserChartItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -271,7 +286,7 @@ public class Staff_Statistics_GUI extends javax.swing.JPanel {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbChooserType1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbChooserChart, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlChooserType1)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(34, 34, 34)
@@ -286,7 +301,7 @@ public class Staff_Statistics_GUI extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jlChooserType1)
                 .addGap(18, 18, 18)
-                .addComponent(cbChooserType1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbChooserChart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(130, Short.MAX_VALUE))
         );
 
@@ -342,7 +357,7 @@ public class Staff_Statistics_GUI extends javax.swing.JPanel {
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        cbChooserTable.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tổng danh thu cao nhất", "Tổng doanh thu thấp nhất", "Top doanh thu cao nhất tháng", "Top doanh thu cao nhất năm", "Doanh thu thấp nhất tháng", "Doanh thu thấp nhất năm" }));
+        cbChooserTable.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Doanh thu cao nhất tháng", "Doanh thu thấp nhất tháng", "Doanh thu cao nhất năm", "Doanh thu thấp nhất năm" }));
         cbChooserTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbChooserTable.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -457,21 +472,43 @@ public class Staff_Statistics_GUI extends javax.swing.JPanel {
 
     private void cbChooserTableItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbChooserTableItemStateChanged
         if (cbChooserTable.getSelectedIndex() == 0) {
-
+            List<Staff_Statistics> listStaffStatistics = new ArrayList<>();
+            listStaffStatistics = staff_Statistics_DAO.getTop10RevenueCurrentMonth();
+            loadDataToTable(listStaffStatistics);
         } else if (cbChooserTable.getSelectedIndex() == 1) {
-
+            List<Staff_Statistics> listStaffStatistics = new ArrayList<>();
+            listStaffStatistics = staff_Statistics_DAO.getTop10LowestRevenueMonth();
+            loadDataToTable(listStaffStatistics);
         } else if (cbChooserTable.getSelectedIndex() == 2) {
-
-        } else if (cbChooserTable.getSelectedIndex() == 3) {
             List<Staff_Statistics> listStaffStatistics = new ArrayList<>();
             listStaffStatistics = staff_Statistics_DAO.getTop10RevenueYear();
             loadDataToTable(listStaffStatistics);
-        } else if (cbChooserTable.getSelectedIndex() == 4) {
-
-        } else if (cbChooserTable.getSelectedIndex() == 5) {
-
+        } else if (cbChooserTable.getSelectedIndex() == 3) {
+            List<Staff_Statistics> listStaffStatistics = new ArrayList<>();
+            listStaffStatistics = staff_Statistics_DAO.getTop10LowestRevenueYear();
+            loadDataToTable(listStaffStatistics);
         }
     }//GEN-LAST:event_cbChooserTableItemStateChanged
+
+    private void cbChooserChartItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbChooserChartItemStateChanged
+        if (cbChooserChart.getSelectedIndex() == 0) {
+            List<Staff_Statistics> listStaffStatistics = new ArrayList<>();
+            listStaffStatistics = staff_Statistics_DAO.getTop10RevenueCurrentMonth();
+            loadDataToChart(listStaffStatistics);
+        } else if (cbChooserChart.getSelectedIndex() == 1) {
+            List<Staff_Statistics> listStaffStatistics = new ArrayList<>();
+            listStaffStatistics = staff_Statistics_DAO.getTop10LowestRevenueMonth();
+            loadDataToChart(listStaffStatistics);
+        } else if (cbChooserChart.getSelectedIndex() == 2) {
+            List<Staff_Statistics> listStaffStatistics = new ArrayList<>();
+            listStaffStatistics = staff_Statistics_DAO.getTop10RevenueYear();
+            loadDataToChart(listStaffStatistics);
+        } else if (cbChooserChart.getSelectedIndex() == 3) {
+            List<Staff_Statistics> listStaffStatistics = new ArrayList<>();
+            listStaffStatistics = staff_Statistics_DAO.getTop10LowestRevenueYear();
+            loadDataToChart(listStaffStatistics);
+        }
+    }//GEN-LAST:event_cbChooserChartItemStateChanged
 
 //    load data to panel
     private void loadDataToPanel() {
@@ -484,14 +521,24 @@ public class Staff_Statistics_GUI extends javax.swing.JPanel {
     private void loadDataToTable(List<Staff_Statistics> listStaffStatistics) {
         defaultTableModel.setRowCount(0);
         for (Staff_Statistics staff_Statistics : listStaffStatistics) {
-            Object[] data = {defaultTableModel.getRowCount()+1, staff_Statistics.getIdStaff(), staff_Statistics.getName(), staff_Statistics.getNumberOfInvoices(), utils.Utils.formatMoney(staff_Statistics.getTotalRevenue())};
+            Object[] data = {defaultTableModel.getRowCount() + 1, staff_Statistics.getIdStaff(), staff_Statistics.getName(), staff_Statistics.getNumberOfInvoices(), utils.Utils.formatMoney(staff_Statistics.getTotalRevenue())};
             defaultTableModel.addRow(data);
         }
     }
 
+//    laod data to chart
+    private void loadDataToChart(List<Staff_Statistics> list) {
+        jpChart.clearData();
+        jpChart.addLegend("Doanh thu nhân viên", new Color(189, 135, 245));
+
+        for (Staff_Statistics staff_Statistics : list) {
+            jpChart.addData(new ModelChart(staff_Statistics.getName(), new double[]{ staff_Statistics.getTotalRevenue()}));
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private lib2.ComboBoxSuggestion cbChooserChart;
     private lib2.ComboBoxSuggestion cbChooserTable;
-    private lib2.ComboBoxSuggestion cbChooserType1;
     private javax.swing.JLabel jLNumStaff;
     private javax.swing.JLabel jLNumStaffOfWorking;
     private javax.swing.JLabel jLNumStaffWorking;

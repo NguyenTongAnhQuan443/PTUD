@@ -535,6 +535,7 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
 
 //    load data to chart
     private void loadDataToChart(int year) {
+        jpChart.clearData();
         jpChart.addLegend("Số lượng khách", new Color(245, 189, 135));
         jpChart.addLegend("Số sản phẩm bán được", new Color(135, 189, 245));
         for (Customer_Statistics customer_Statistics : customer_Statistics_DAO.getListCustomer_Statistics(year)) {

@@ -13,7 +13,8 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/gui/Staff_Statistics_GUI.java</file>
-            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/entity/Staff_Statistics.java</file>
+            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/dao/Staff_Statistics_DAO.java</file>
+            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/gui/Customer_Statistics_GUI.java</file>
             <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/gui/Product_Statistics_GUI.java</file>
         </group>
     </open-files>

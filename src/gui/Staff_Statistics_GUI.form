@@ -437,7 +437,7 @@
                               <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="cbChooserType1" alignment="0" min="-2" pref="232" max="-2" attributes="0"/>
+                                      <Component id="cbChooserChart" alignment="0" min="-2" pref="232" max="-2" attributes="0"/>
                                       <Component id="jlChooserType1" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -458,7 +458,7 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jlChooserType1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="cbChooserType1" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbChooserChart" min="-2" max="-2" attributes="0"/>
                           <EmptySpace pref="130" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -481,19 +481,23 @@
                     <Property name="text" type="java.lang.String" value="H&#xe3;y ch&#x1ecd;n ki&#x1ec3;u th&#x1ed1;ng k&#xea;"/>
                   </Properties>
                 </Component>
-                <Component class="lib2.ComboBoxSuggestion" name="cbChooserType1">
+                <Component class="lib2.ComboBoxSuggestion" name="cbChooserChart">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="3">
-                        <StringItem index="0" value="Ng&#xe0;y"/>
-                        <StringItem index="1" value="Th&#xe1;ng"/>
-                        <StringItem index="2" value="N&#x103;m"/>
+                      <StringArray count="4">
+                        <StringItem index="0" value="Doanh thu cao nh&#x1ea5;t th&#xe1;ng"/>
+                        <StringItem index="1" value="Doanh thu th&#x1ea5;p nh&#x1ea5;t th&#xe1;ng"/>
+                        <StringItem index="2" value="Doanh thu cao nh&#x1ea5;t n&#x103;m"/>
+                        <StringItem index="3" value="Doanh thu th&#x1ea5;p nh&#x1ea5;t n&#x103;m"/>
                       </StringArray>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="14" style="0"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbChooserChartItemStateChanged"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -633,13 +637,11 @@
                 <Component class="lib2.ComboBoxSuggestion" name="cbChooserTable">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="6">
-                        <StringItem index="0" value="T&#x1ed5;ng danh thu cao nh&#x1ea5;t"/>
-                        <StringItem index="1" value="T&#x1ed5;ng doanh thu th&#x1ea5;p nh&#x1ea5;t"/>
-                        <StringItem index="2" value="Top doanh thu cao nh&#x1ea5;t th&#xe1;ng"/>
-                        <StringItem index="3" value="Top doanh thu cao nh&#x1ea5;t n&#x103;m"/>
-                        <StringItem index="4" value="Doanh thu th&#x1ea5;p nh&#x1ea5;t th&#xe1;ng"/>
-                        <StringItem index="5" value="Doanh thu th&#x1ea5;p nh&#x1ea5;t n&#x103;m"/>
+                      <StringArray count="4">
+                        <StringItem index="0" value="Doanh thu cao nh&#x1ea5;t th&#xe1;ng"/>
+                        <StringItem index="1" value="Doanh thu th&#x1ea5;p nh&#x1ea5;t th&#xe1;ng"/>
+                        <StringItem index="2" value="Doanh thu cao nh&#x1ea5;t n&#x103;m"/>
+                        <StringItem index="3" value="Doanh thu th&#x1ea5;p nh&#x1ea5;t n&#x103;m"/>
                       </StringArray>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">

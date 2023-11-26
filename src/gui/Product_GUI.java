@@ -198,7 +198,7 @@ public class Product_GUI extends javax.swing.JPanel {
         jrbType.setSelected(true);
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
+        setLayout(new java.awt.GridLayout());
 
         jTabbedPaneMain.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPaneMain.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -426,7 +426,7 @@ public class Product_GUI extends javax.swing.JPanel {
         );
         jPProductTypeLayout.setVerticalGroup(
             jPProductTypeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSPProductType, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
+            .addComponent(jSPProductType, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
         );
 
         jTabbedPaneChild.addTab("Loại sản phẩm", jPProductType);
@@ -465,7 +465,7 @@ public class Product_GUI extends javax.swing.JPanel {
         );
         jPProductSizeLayout.setVerticalGroup(
             jPProductSizeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSPProductSize, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
+            .addComponent(jSPProductSize, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
         );
 
         jTabbedPaneChild.addTab("Kích thước", jPProductSize);
@@ -504,7 +504,7 @@ public class Product_GUI extends javax.swing.JPanel {
         );
         jPProductColorLayout.setVerticalGroup(
             jPProductColorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSPProductColor, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
+            .addComponent(jSPProductColor, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
         );
 
         jTabbedPaneChild.addTab("Màu sắc", jPProductColor);
@@ -543,7 +543,7 @@ public class Product_GUI extends javax.swing.JPanel {
         );
         jPProductMaterialLayout.setVerticalGroup(
             jPProductMaterialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSPProductMaterial, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
+            .addComponent(jSPProductMaterial, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
         );
 
         jTabbedPaneChild.addTab("Chất liệu", jPProductMaterial);
@@ -760,7 +760,7 @@ public class Product_GUI extends javax.swing.JPanel {
                                 .addComponent(btnReloadProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnIMGProduct, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                            .addComponent(btnIMGProduct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPIMGProduct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
         );
@@ -794,7 +794,7 @@ public class Product_GUI extends javax.swing.JPanel {
                         .addComponent(btnReloadProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jcStopBusiness)
-                .addGap(0, 22, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         JP2.add(jPTop);
