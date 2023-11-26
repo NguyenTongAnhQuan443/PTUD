@@ -1,8 +1,30 @@
 package gui;
+
+import dao.Staff_Statistics_DAO;
+import entity.Staff_Statistics;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
+import lib2.TableCustom;
+
 public class Staff_Statistics_GUI extends javax.swing.JPanel {
+
+    private Staff_Statistics_DAO staff_Statistics_DAO = new Staff_Statistics_DAO();
+    private DefaultTableModel defaultTableModel;
+
     public Staff_Statistics_GUI() {
         initComponents();
+
+        TableCustom.apply(jspTable, TableCustom.TableType.DEFAULT);
+        defaultTableModel = (DefaultTableModel) jTable.getModel();
+        ListSelectionModel selectionModel = jTable.getSelectionModel();
+        selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+//        load data to panel
+        loadDataToPanel();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -10,24 +32,19 @@ public class Staff_Statistics_GUI extends javax.swing.JPanel {
         jPTop = new javax.swing.JPanel();
         jpCard1 = new javax.swing.JPanel();
         jlCard1Title = new javax.swing.JLabel();
-        jlNumOrder = new javax.swing.JLabel();
+        jLNumStaff = new javax.swing.JLabel();
         jlCard1Unit = new javax.swing.JLabel();
         jlIconOrder = new javax.swing.JLabel();
         jpCard2 = new javax.swing.JPanel();
         jlIconMoneyDay = new javax.swing.JLabel();
         jlCard2Title = new javax.swing.JLabel();
-        jlMoneyDay = new javax.swing.JLabel();
+        jLNumStaffWorking = new javax.swing.JLabel();
         jlCard2Unit = new javax.swing.JLabel();
         jpCard3 = new javax.swing.JPanel();
         jlIconMoneyMonth = new javax.swing.JLabel();
         jlCard3Title = new javax.swing.JLabel();
-        jlMoneyMonth = new javax.swing.JLabel();
+        jLNumStaffOfWorking = new javax.swing.JLabel();
         jlCard3Unit = new javax.swing.JLabel();
-        jpCard4 = new javax.swing.JPanel();
-        jlIconMoneyYear = new javax.swing.JLabel();
-        jlCard14Title = new javax.swing.JLabel();
-        jlCard4Unit = new javax.swing.JLabel();
-        jlMoneyYear = new javax.swing.JLabel();
         jTabbedPaneMain = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -38,7 +55,7 @@ public class Staff_Statistics_GUI extends javax.swing.JPanel {
         jpChart = new lib2.Chart();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
-        cbChooserType2 = new lib2.ComboBoxSuggestion();
+        cbChooserTable = new lib2.ComboBoxSuggestion();
         jlChooserType2 = new javax.swing.JLabel();
         jlTitle4 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
@@ -59,17 +76,17 @@ public class Staff_Statistics_GUI extends javax.swing.JPanel {
         jlCard1Title.setForeground(new java.awt.Color(255, 255, 255));
         jlCard1Title.setText("Tổng số nhân viên");
 
-        jlNumOrder.setBackground(new java.awt.Color(255, 255, 255));
-        jlNumOrder.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jlNumOrder.setForeground(new java.awt.Color(255, 255, 255));
-        jlNumOrder.setText("0");
+        jLNumStaff.setBackground(new java.awt.Color(255, 255, 255));
+        jLNumStaff.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLNumStaff.setForeground(new java.awt.Color(255, 255, 255));
+        jLNumStaff.setText("0");
 
         jlCard1Unit.setBackground(new java.awt.Color(255, 255, 255));
         jlCard1Unit.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jlCard1Unit.setForeground(new java.awt.Color(255, 255, 255));
         jlCard1Unit.setText("Nhân viên");
 
-        jlIconOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/market64.png"))); // NOI18N
+        jlIconOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/employee64.png"))); // NOI18N
 
         javax.swing.GroupLayout jpCard1Layout = new javax.swing.GroupLayout(jpCard1);
         jpCard1.setLayout(jpCard1Layout);
@@ -80,13 +97,16 @@ public class Staff_Statistics_GUI extends javax.swing.JPanel {
                 .addGroup(jpCard1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpCard1Layout.createSequentialGroup()
                         .addComponent(jlCard1Title)
-                        .addGap(0, 63, Short.MAX_VALUE))
+                        .addGap(0, 162, Short.MAX_VALUE))
                     .addGroup(jpCard1Layout.createSequentialGroup()
-                        .addComponent(jlNumOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jlCard1Unit)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jlIconOrder)))
+                        .addComponent(jLNumStaff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jpCard1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpCard1Layout.createSequentialGroup()
+                                .addGap(107, 107, 107)
+                                .addComponent(jlIconOrder))
+                            .addGroup(jpCard1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jlCard1Unit)))))
                 .addContainerGap())
         );
         jpCard1Layout.setVerticalGroup(
@@ -96,7 +116,7 @@ public class Staff_Statistics_GUI extends javax.swing.JPanel {
                 .addComponent(jlCard1Title)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpCard1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlNumOrder)
+                    .addComponent(jLNumStaff)
                     .addComponent(jlCard1Unit))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCard1Layout.createSequentialGroup()
@@ -109,17 +129,17 @@ public class Staff_Statistics_GUI extends javax.swing.JPanel {
 
         jpCard2.setBackground(new java.awt.Color(255, 204, 255));
 
-        jlIconMoneyDay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/day64.png"))); // NOI18N
+        jlIconMoneyDay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/employee64.png"))); // NOI18N
 
         jlCard2Title.setBackground(new java.awt.Color(255, 255, 255));
         jlCard2Title.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jlCard2Title.setForeground(new java.awt.Color(255, 255, 255));
         jlCard2Title.setText("Nhân viên đang làm");
 
-        jlMoneyDay.setBackground(new java.awt.Color(255, 255, 255));
-        jlMoneyDay.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jlMoneyDay.setForeground(new java.awt.Color(255, 255, 255));
-        jlMoneyDay.setText("0");
+        jLNumStaffWorking.setBackground(new java.awt.Color(255, 255, 255));
+        jLNumStaffWorking.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLNumStaffWorking.setForeground(new java.awt.Color(255, 255, 255));
+        jLNumStaffWorking.setText("0");
 
         jlCard2Unit.setBackground(new java.awt.Color(255, 255, 255));
         jlCard2Unit.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
@@ -133,13 +153,16 @@ public class Staff_Statistics_GUI extends javax.swing.JPanel {
             .addGroup(jpCard2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpCard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlCard2Title, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                    .addComponent(jlCard2Title, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
                     .addGroup(jpCard2Layout.createSequentialGroup()
-                        .addComponent(jlMoneyDay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jlCard2Unit)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jlIconMoneyDay)
+                        .addComponent(jLNumStaffWorking, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jpCard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpCard2Layout.createSequentialGroup()
+                                .addGap(107, 107, 107)
+                                .addComponent(jlIconMoneyDay))
+                            .addGroup(jpCard2Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jlCard2Unit)))
                         .addContainerGap())))
         );
         jpCard2Layout.setVerticalGroup(
@@ -150,7 +173,7 @@ public class Staff_Statistics_GUI extends javax.swing.JPanel {
                 .addGroup(jpCard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpCard2Layout.createSequentialGroup()
                         .addGroup(jpCard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlMoneyDay)
+                            .addComponent(jLNumStaffWorking)
                             .addComponent(jlCard2Unit))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jpCard2Layout.createSequentialGroup()
@@ -163,17 +186,17 @@ public class Staff_Statistics_GUI extends javax.swing.JPanel {
 
         jpCard3.setBackground(new java.awt.Color(153, 204, 255));
 
-        jlIconMoneyMonth.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/mounth64.png"))); // NOI18N
+        jlIconMoneyMonth.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/employee64.png"))); // NOI18N
 
         jlCard3Title.setBackground(new java.awt.Color(255, 255, 255));
         jlCard3Title.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jlCard3Title.setForeground(new java.awt.Color(255, 255, 255));
-        jlCard3Title.setText("Nhân viên nghỉ việc");
+        jlCard3Title.setText("Nhân viên đã nghỉ");
 
-        jlMoneyMonth.setBackground(new java.awt.Color(255, 255, 255));
-        jlMoneyMonth.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jlMoneyMonth.setForeground(new java.awt.Color(255, 255, 255));
-        jlMoneyMonth.setText("0");
+        jLNumStaffOfWorking.setBackground(new java.awt.Color(255, 255, 255));
+        jLNumStaffOfWorking.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLNumStaffOfWorking.setForeground(new java.awt.Color(255, 255, 255));
+        jLNumStaffOfWorking.setText("0");
 
         jlCard3Unit.setBackground(new java.awt.Color(255, 255, 255));
         jlCard3Unit.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
@@ -189,13 +212,16 @@ public class Staff_Statistics_GUI extends javax.swing.JPanel {
                 .addGroup(jpCard3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpCard3Layout.createSequentialGroup()
                         .addComponent(jlCard3Title)
-                        .addGap(0, 59, Short.MAX_VALUE))
+                        .addGap(0, 158, Short.MAX_VALUE))
                     .addGroup(jpCard3Layout.createSequentialGroup()
-                        .addComponent(jlMoneyMonth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jlCard3Unit)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jlIconMoneyMonth)))
+                        .addComponent(jLNumStaffOfWorking, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jpCard3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpCard3Layout.createSequentialGroup()
+                                .addGap(101, 101, 101)
+                                .addComponent(jlIconMoneyMonth))
+                            .addGroup(jpCard3Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jlCard3Unit)))))
                 .addContainerGap())
         );
         jpCard3Layout.setVerticalGroup(
@@ -207,7 +233,7 @@ public class Staff_Statistics_GUI extends javax.swing.JPanel {
                     .addGroup(jpCard3Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jpCard3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlMoneyMonth)
+                            .addComponent(jLNumStaffOfWorking)
                             .addComponent(jlCard3Unit))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCard3Layout.createSequentialGroup()
@@ -217,63 +243,6 @@ public class Staff_Statistics_GUI extends javax.swing.JPanel {
         );
 
         jPTop.add(jpCard3);
-
-        jpCard4.setBackground(new java.awt.Color(0, 204, 204));
-
-        jlIconMoneyYear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/year64.png"))); // NOI18N
-
-        jlCard14Title.setBackground(new java.awt.Color(255, 255, 255));
-        jlCard14Title.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jlCard14Title.setForeground(new java.awt.Color(255, 255, 255));
-        jlCard14Title.setText("Tổng doanh thu năm nay");
-
-        jlCard4Unit.setBackground(new java.awt.Color(255, 255, 255));
-        jlCard4Unit.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jlCard4Unit.setForeground(new java.awt.Color(255, 255, 255));
-        jlCard4Unit.setText("VND");
-
-        jlMoneyYear.setBackground(new java.awt.Color(255, 255, 255));
-        jlMoneyYear.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jlMoneyYear.setForeground(new java.awt.Color(255, 255, 255));
-        jlMoneyYear.setText("0");
-
-        javax.swing.GroupLayout jpCard4Layout = new javax.swing.GroupLayout(jpCard4);
-        jpCard4.setLayout(jpCard4Layout);
-        jpCard4Layout.setHorizontalGroup(
-            jpCard4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpCard4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpCard4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpCard4Layout.createSequentialGroup()
-                        .addComponent(jlCard14Title)
-                        .addGap(0, 55, Short.MAX_VALUE))
-                    .addGroup(jpCard4Layout.createSequentialGroup()
-                        .addComponent(jlMoneyYear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jlCard4Unit)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jlIconMoneyYear)))
-                .addContainerGap())
-        );
-        jpCard4Layout.setVerticalGroup(
-            jpCard4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCard4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jlCard14Title)
-                .addGroup(jpCard4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpCard4Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jpCard4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlMoneyYear)
-                            .addComponent(jlCard4Unit))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCard4Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                        .addComponent(jlIconMoneyYear)
-                        .addContainerGap())))
-        );
-
-        jPTop.add(jpCard4);
 
         add(jPTop, java.awt.BorderLayout.PAGE_START);
 
@@ -373,11 +342,16 @@ public class Staff_Statistics_GUI extends javax.swing.JPanel {
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        cbChooserType2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ngày", "Tháng", "Năm" }));
-        cbChooserType2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbChooserTable.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tổng danh thu cao nhất", "Tổng doanh thu thấp nhất", "Top doanh thu cao nhất tháng", "Top doanh thu cao nhất năm", "Doanh thu thấp nhất tháng", "Doanh thu thấp nhất năm" }));
+        cbChooserTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbChooserTable.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbChooserTableItemStateChanged(evt);
+            }
+        });
 
         jlChooserType2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jlChooserType2.setText("Hãy chọn kiểu thống kê");
+        jlChooserType2.setText("Hãy chọn tiêu chí kiểu thống kê");
 
         jlTitle4.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jlTitle4.setText("Doanh thu nhân viên");
@@ -391,7 +365,7 @@ public class Staff_Statistics_GUI extends javax.swing.JPanel {
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbChooserType2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbChooserTable, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlChooserType2)))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(34, 34, 34)
@@ -406,7 +380,7 @@ public class Staff_Statistics_GUI extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jlChooserType2)
                 .addGap(18, 18, 18)
-                .addComponent(cbChooserType2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbChooserTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(130, Short.MAX_VALUE))
         );
 
@@ -415,17 +389,17 @@ public class Staff_Statistics_GUI extends javax.swing.JPanel {
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã NV", "Tên NV", "Số điện thoại", "SL đơn hàng", "Doanh thu"
+                "STT", "Mã NV", "Tên NV", "SL đơn hàng", "Doanh thu"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -481,10 +455,46 @@ public class Staff_Statistics_GUI extends javax.swing.JPanel {
         add(jTabbedPaneMain, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cbChooserTableItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbChooserTableItemStateChanged
+        if (cbChooserTable.getSelectedIndex() == 0) {
+
+        } else if (cbChooserTable.getSelectedIndex() == 1) {
+
+        } else if (cbChooserTable.getSelectedIndex() == 2) {
+
+        } else if (cbChooserTable.getSelectedIndex() == 3) {
+            List<Staff_Statistics> listStaffStatistics = new ArrayList<>();
+            listStaffStatistics = staff_Statistics_DAO.getTop10RevenueYear();
+            loadDataToTable(listStaffStatistics);
+        } else if (cbChooserTable.getSelectedIndex() == 4) {
+
+        } else if (cbChooserTable.getSelectedIndex() == 5) {
+
+        }
+    }//GEN-LAST:event_cbChooserTableItemStateChanged
+
+//    load data to panel
+    private void loadDataToPanel() {
+        jLNumStaff.setText(staff_Statistics_DAO.calculateTotalQuantityStaff() + "");
+        jLNumStaffWorking.setText(staff_Statistics_DAO.calculateTotalQuantityStaffWithStatus("Đang làm") + "");
+        jLNumStaffOfWorking.setText(staff_Statistics_DAO.calculateTotalQuantityStaffWithStatus("Nghỉ làm") + "");
+    }
+
+//    load data to table
+    private void loadDataToTable(List<Staff_Statistics> listStaffStatistics) {
+        defaultTableModel.setRowCount(0);
+        for (Staff_Statistics staff_Statistics : listStaffStatistics) {
+            Object[] data = {defaultTableModel.getRowCount()+1, staff_Statistics.getIdStaff(), staff_Statistics.getName(), staff_Statistics.getNumberOfInvoices(), utils.Utils.formatMoney(staff_Statistics.getTotalRevenue())};
+            defaultTableModel.addRow(data);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private lib2.ComboBoxSuggestion cbChooserTable;
     private lib2.ComboBoxSuggestion cbChooserType1;
-    private lib2.ComboBoxSuggestion cbChooserType2;
+    private javax.swing.JLabel jLNumStaff;
+    private javax.swing.JLabel jLNumStaffOfWorking;
+    private javax.swing.JLabel jLNumStaffWorking;
     private javax.swing.JPanel jPTop;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -494,30 +504,22 @@ public class Staff_Statistics_GUI extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JTabbedPane jTabbedPaneMain;
     private javax.swing.JTable jTable;
-    private javax.swing.JLabel jlCard14Title;
     private javax.swing.JLabel jlCard1Title;
     private javax.swing.JLabel jlCard1Unit;
     private javax.swing.JLabel jlCard2Title;
     private javax.swing.JLabel jlCard2Unit;
     private javax.swing.JLabel jlCard3Title;
     private javax.swing.JLabel jlCard3Unit;
-    private javax.swing.JLabel jlCard4Unit;
     private javax.swing.JLabel jlChooserType1;
     private javax.swing.JLabel jlChooserType2;
     private javax.swing.JLabel jlIconMoneyDay;
     private javax.swing.JLabel jlIconMoneyMonth;
-    private javax.swing.JLabel jlIconMoneyYear;
     private javax.swing.JLabel jlIconOrder;
-    private javax.swing.JLabel jlMoneyDay;
-    private javax.swing.JLabel jlMoneyMonth;
-    private javax.swing.JLabel jlMoneyYear;
-    private javax.swing.JLabel jlNumOrder;
     private javax.swing.JLabel jlTitle3;
     private javax.swing.JLabel jlTitle4;
     private javax.swing.JPanel jpCard1;
     private javax.swing.JPanel jpCard2;
     private javax.swing.JPanel jpCard3;
-    private javax.swing.JPanel jpCard4;
     private lib2.Chart jpChart;
     private javax.swing.JScrollPane jspTable;
     // End of variables declaration//GEN-END:variables

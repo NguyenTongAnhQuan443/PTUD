@@ -198,6 +198,7 @@ public class Product_GUI extends javax.swing.JPanel {
         jrbType.setSelected(true);
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
         jTabbedPaneMain.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPaneMain.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -208,6 +209,7 @@ public class Product_GUI extends javax.swing.JPanel {
         });
 
         JP1.setBackground(new java.awt.Color(255, 255, 255));
+        JP1.setLayout(new javax.swing.BoxLayout(JP1, javax.swing.BoxLayout.LINE_AXIS));
 
         JP1_Main.setBackground(new java.awt.Color(255, 255, 255));
         JP1_Main.setLayout(new javax.swing.BoxLayout(JP1_Main, javax.swing.BoxLayout.Y_AXIS));
@@ -548,16 +550,7 @@ public class Product_GUI extends javax.swing.JPanel {
 
         JP1_Main.add(jTabbedPaneChild);
 
-        javax.swing.GroupLayout JP1Layout = new javax.swing.GroupLayout(JP1);
-        JP1.setLayout(JP1Layout);
-        JP1Layout.setHorizontalGroup(
-            JP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(JP1_Main, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        JP1Layout.setVerticalGroup(
-            JP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(JP1_Main, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        JP1.add(JP1_Main);
 
         jTabbedPaneMain.addTab("Thuộc tính sản phẩm", JP1);
 
@@ -918,17 +911,7 @@ public class Product_GUI extends javax.swing.JPanel {
 
         jTabbedPaneMain.addTab("Danh sách sản phẩm", JP2);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPaneMain)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPaneMain)
-        );
-
+        add(jTabbedPaneMain);
         jTabbedPaneMain.getAccessibleContext().setAccessibleName("Thuộc tính sản phẩm");
     }// </editor-fold>//GEN-END:initComponents
 
