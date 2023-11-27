@@ -479,6 +479,7 @@ public class Revenue_Statistics_GUI extends javax.swing.JPanel {
             cbChooserChart.setSelectedItem(year);
         }
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.ComboBoxSuggestion cbChooserChart;

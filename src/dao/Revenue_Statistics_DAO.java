@@ -1,6 +1,7 @@
 package dao;
 
 import connectDB.ConnectDB;
+import entity.Revenue_Statistics;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
@@ -115,7 +116,7 @@ public class Revenue_Statistics_DAO {
 
         return revenue;
     }
-    
+
     //    get All Invoice Years
     public List<Integer> getAllInvoiceYears() {
         List<Integer> years = new ArrayList<>();
@@ -135,4 +136,55 @@ public class Revenue_Statistics_DAO {
 
         return years;
     }
+
+//    get list revenue month (1-12)
+    public List<Revenue_Statistics> getListRevenueMonth(int year) {
+        List<Revenue_Statistics> list = new ArrayList<>();
+        String sql = "SELECT "
+                + "Months.Month, "
+                + "COALESCE(SUM(id.quantity * id.unitPrice), 0) AS TotalSales, "
+                + "COALESCE(SUM(id.quantity * p.costPrice), 0) AS TotalCost, "
+                + "COALESCE(SUM(id.quantity * id.unitPrice) - SUM(id.quantity * p.costPrice), 0) AS Revenue "
+                + "FROM ( "
+                + "    SELECT 1 AS Month "
+                + "    UNION SELECT 2 "
+                + "    UNION SELECT 3 "
+                + "    UNION SELECT 4 "
+                + "    UNION SELECT 5 "
+                + "    UNION SELECT 6 "
+                + "    UNION SELECT 7 "
+                + "    UNION SELECT 8 "
+                + "    UNION SELECT 9 "
+                + "    UNION SELECT 10 "
+                + "    UNION SELECT 11 "
+                + "    UNION SELECT 12 "
+                + ") Months "
+                + "LEFT JOIN Invoice i ON Months.Month = MONTH(i.dateCreated) AND YEAR(i.dateCreated) = ? "
+                + "LEFT JOIN InvoiceDetails id ON i.idInvoice = id.invoice "
+                + "LEFT JOIN Product p ON id.product = p.idProduct "
+                + "GROUP BY Months.Month "
+                + "ORDER BY Months.Month";
+
+        try {
+            Connection connection = ConnectDB.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                int month = resultSet.getInt("Month");
+                double totalSales = resultSet.getDouble("TotalSales");
+                double totalCost = resultSet.getDouble("TotalCost");
+                double revenue = resultSet.getDouble("Revenue");
+
+                Revenue_Statistics revenue_Statistics = new Revenue_Statistics(month, totalSales, totalCost, revenue);
+                list.add(revenue_Statistics);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
 }
