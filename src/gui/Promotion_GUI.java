@@ -23,6 +23,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import entity.Customer;
+import entity.Flag;
 import java.io.File;
 import java.net.URL;
 import javax.swing.JFileChooser;
@@ -75,6 +76,11 @@ public class Promotion_GUI extends javax.swing.JPanel {
         updateStatusPromotion_2();
         loadDataPromotion(promotion_DAO.getListPromotion());
         loadDataProduct(product_DAO.getListProductAreTrading());
+        
+        if(!Flag.isStaffManagerment()){
+            btnAddPromotion.setEnabled(false);
+            btnEdit.setEnabled(false);
+        }
     }
 
     @SuppressWarnings("unchecked")

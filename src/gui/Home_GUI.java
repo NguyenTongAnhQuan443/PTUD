@@ -152,6 +152,11 @@ public class Home_GUI extends javax.swing.JFrame {
                         } else if (subIndex == 3) {
                             openBrowser("https://www.youtobe.com");
                         }
+                    }else if(index == 11){
+                        int option = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn thoát không !", "Xác nhận kết thúc phiên làm vi", JOptionPane.YES_NO_OPTION);
+                        if(option == JOptionPane.YES_OPTION){
+                            System.exit(0);
+                        }
                     }
                 }
             });

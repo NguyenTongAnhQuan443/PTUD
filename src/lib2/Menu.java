@@ -22,6 +22,7 @@ public class Menu extends JComponent {
     private MenuItem previousSubMenu;
 
     private Staff_DAO staff_DAO = new Staff_DAO();
+
     public MenuEvent getEvent() {
         return event;
     }
@@ -37,22 +38,12 @@ public class Menu extends JComponent {
         {"Nhà cung cấp"},
         {"Sản phẩm"},
         {"Nhân viên", "Danh sách nhân viên", "Danh sách thôi việc"},
-        {"Chức năng bán hàng", "Bán hàng","Đổi trả hàng"},
+        {"Chức năng bán hàng", "Bán hàng", "Đổi trả hàng"},
         {"Lịch sử bán hàng"},
         {"Khách hàng"},
         {"Khuyến mãi"},
         {"Tài khoản", "Thông tin tài khoản", "Đổi mật khẩu"},
         {"Chức năng khác", "Thay đổi phí VAT"},
-        {"Giúp đỡ", "Hướng dẫn", "Báo lỗi", "Đóng góp ý kiến"},
-        {"Thoát"}
-    };
-    
-     private String[][] menuItems_2 = new String[][]{
-        {"Sản phẩm"},
-        {"Chức năng bán hàng", "Bán hàng"},
-        {"Lịch sử bán hàng"},
-        {"Khách hàng"},
-        {"Tài khoản", "Thông tin tài khoản", "Đổi mật khẩu"},
         {"Giúp đỡ", "Hướng dẫn", "Báo lỗi", "Đóng góp ý kiến"},
         {"Thoát"}
     };
@@ -87,6 +78,7 @@ public class Menu extends JComponent {
         if (icon != null) {
             item.setIcon(icon);
         }
+
         item.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -177,5 +169,4 @@ public class Menu extends JComponent {
         g2.fill(new Rectangle2D.Double(0, 0, getWidth(), getHeight()));
         super.paintComponent(grphcs);
     }
-
 }

@@ -37,6 +37,7 @@ public class Flag {
     public static String idInvoiceForPrintf;
     public static boolean flagPayDone; // lưu trạng thái thanh toán momo thành công
 
+    public static boolean staffManagerment;
 //    constructor
     public Flag() {
         flagStaffGUI = false;
@@ -55,6 +56,7 @@ public class Flag {
 
         idInvoiceForPrintf = "";
         flagPayDone = false;
+        staffManagerment = false;
     }
 
 //
@@ -165,6 +167,14 @@ public class Flag {
 
     public static void setFlagPayDone(boolean flagPayDone) {
         Flag.flagPayDone = flagPayDone;
+    }
+
+    public static boolean isStaffManagerment() {
+        return staffManagerment;
+    }
+
+    public static void setStaffManagerment(boolean staffManagerment) {
+        Flag.staffManagerment = staffManagerment;
     }
 
 }
