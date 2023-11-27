@@ -10,22 +10,22 @@ import lib2.ModelChart;
 import lib2.TableCustom;
 
 public class Customer_Statistics_GUI extends javax.swing.JPanel {
-
+    
     private Customer_Statistics_DAO customer_Statistics_DAO = new Customer_Statistics_DAO();
     private DefaultTableModel defaultTableModel;
-
+    
     public Customer_Statistics_GUI() {
         initComponents();
-
+        
         TableCustom.apply(jspTable, TableCustom.TableType.DEFAULT);
         defaultTableModel = (DefaultTableModel) jTable.getModel();
         ListSelectionModel selectionModel = jTable.getSelectionModel();
         selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
+        
         setAllYearToCBB();
         loadDataToPanle();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -531,11 +531,14 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
     }//GEN-LAST:event_cbChooserChartItemStateChanged
 
 //    load data to panel
-    private void loadDataToPanle(){
-        jlNumCus.setText(customer_Statistics_DAO.calculateTotalCustomer()+"");
-        jlTotalCusYear.setText(customer_Statistics_DAO.calculateTotalCustomerThisYear()+"");
+    private void loadDataToPanle() {
+        jlNumCus.setText(customer_Statistics_DAO.calculateTotalCustomer() + "");
+        jlTotalCusMonth.setText(customer_Statistics_DAO.calculateTotalCustomerThisMonth() + "");
+        jlTotalCusToday.setText(customer_Statistics_DAO.calculateTotalCustomerToday() + "");
+        jlTotalCusYear.setText(customer_Statistics_DAO.calculateTotalCustomerThisYear() + "");
     }
 //    get all year invoice
+
     private void setAllYearToCBB() {
         for (Integer year : customer_Statistics_DAO.getAllInvoiceYears()) {
             cbChooserTypeTable.setSelectedItem(year);

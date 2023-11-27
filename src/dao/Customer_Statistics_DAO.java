@@ -14,7 +14,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class Customer_Statistics_DAO {
-    
+
 // get total number customer
     public int calculateTotalCustomer() {
         int totalQuantity = 0;
@@ -37,10 +37,50 @@ public class Customer_Statistics_DAO {
 //    get number customer this year
     public int calculateTotalCustomerThisYear() {
         int totalCustomers = 0;
-        String sql = "SELECT COUNT(DISTINCT c.idCustomer) AS TotalCustomers " +
-                     "FROM Customer c " +
-                     "JOIN Invoice i ON c.idCustomer = i.customer " +
-                     "WHERE YEAR(i.dateCreated) = YEAR(GETDATE())";
+        String sql = "SELECT COUNT(DISTINCT c.idCustomer) AS TotalCustomers "
+                + "FROM Customer c "
+                + "JOIN Invoice i ON c.idCustomer = i.customer "
+                + "WHERE YEAR(i.dateCreated) = YEAR(GETDATE())";
+        try {
+            Connection connection = ConnectDB.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                totalCustomers = resultSet.getInt("TotalCustomers");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalCustomers;
+    }
+
+//    get number customer this month
+    public int calculateTotalCustomerThisMonth() {
+        int totalCustomers = 0;
+        String sql = "SELECT COUNT(DISTINCT c.idCustomer) AS TotalCustomers "
+                + "FROM Customer c "
+                + "JOIN Invoice i ON c.idCustomer = i.customer "
+                + "WHERE YEAR(i.dateCreated) = YEAR(GETDATE()) AND MONTH(i.dateCreated) = MONTH(GETDATE())";
+        try {
+            Connection connection = ConnectDB.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                totalCustomers = resultSet.getInt("TotalCustomers");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalCustomers;
+    }
+
+//     get tumber customer today
+    public int calculateTotalCustomerToday() {
+        int totalCustomers = 0;
+        String sql = "SELECT COUNT(DISTINCT c.idCustomer) AS TotalCustomers "
+                + "FROM Customer c "
+                + "JOIN Invoice i ON c.idCustomer = i.customer "
+                + "WHERE CONVERT(DATE, i.dateCreated) = CONVERT(DATE, GETDATE())";
         try {
             Connection connection = ConnectDB.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
