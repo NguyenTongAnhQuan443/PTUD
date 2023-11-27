@@ -11,8 +11,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Customer_Statistics_DAO {
+// get number customer
 
+    public int calculateTotalCustomer() {
+        int totalQuantity = 0;
+        String sql = "SELECT COUNT(*) AS TotalCount FROM Customer";
+        try {
+            Connection connection = ConnectDB.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                totalQuantity = resultSet.getInt("TotalCount");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return totalQuantity;
+    }
 //    get All Invoice Years
+
     public List<Integer> getAllInvoiceYears() {
         List<Integer> years = new ArrayList<>();
         String sql = "SELECT DISTINCT YEAR(dateCreated) AS InvoiceYear FROM Invoice";

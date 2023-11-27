@@ -23,6 +23,7 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
         selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         setAllYearToCBB();
+        loadDataToPanle();
     }
 
     @SuppressWarnings("unchecked")
@@ -32,7 +33,7 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
         jPTop = new javax.swing.JPanel();
         jpCard1 = new javax.swing.JPanel();
         jlCard1Title = new javax.swing.JLabel();
-        jlNumOrder = new javax.swing.JLabel();
+        jlNumCus = new javax.swing.JLabel();
         jlCard1Unit = new javax.swing.JLabel();
         jlIconOrder = new javax.swing.JLabel();
         jpCard2 = new javax.swing.JPanel();
@@ -81,10 +82,10 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
         jlCard1Title.setForeground(new java.awt.Color(255, 255, 255));
         jlCard1Title.setText("Tổng số khách hàng");
 
-        jlNumOrder.setBackground(new java.awt.Color(255, 255, 255));
-        jlNumOrder.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jlNumOrder.setForeground(new java.awt.Color(255, 255, 255));
-        jlNumOrder.setText("0");
+        jlNumCus.setBackground(new java.awt.Color(255, 255, 255));
+        jlNumCus.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jlNumCus.setForeground(new java.awt.Color(255, 255, 255));
+        jlNumCus.setText("0");
 
         jlCard1Unit.setBackground(new java.awt.Color(255, 255, 255));
         jlCard1Unit.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
@@ -102,13 +103,17 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
                 .addGroup(jpCard1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpCard1Layout.createSequentialGroup()
                         .addComponent(jlCard1Title)
-                        .addGap(0, 60, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jpCard1Layout.createSequentialGroup()
-                        .addComponent(jlNumOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jlCard1Unit)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jlIconOrder)))
+                        .addComponent(jlNumCus, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jpCard1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpCard1Layout.createSequentialGroup()
+                                .addGap(122, 122, 122)
+                                .addComponent(jlIconOrder))
+                            .addGroup(jpCard1Layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(jlCard1Unit)))))
                 .addContainerGap())
         );
         jpCard1Layout.setVerticalGroup(
@@ -118,7 +123,7 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
                 .addComponent(jlCard1Title)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpCard1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlNumOrder)
+                    .addComponent(jlNumCus)
                     .addComponent(jlCard1Unit))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCard1Layout.createSequentialGroup()
@@ -155,7 +160,7 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
             .addGroup(jpCard2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpCard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlCard2Title, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                    .addComponent(jlCard2Title, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
                     .addGroup(jpCard2Layout.createSequentialGroup()
                         .addComponent(jlMoneyDay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -268,7 +273,7 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
                 .addGroup(jpCard4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpCard4Layout.createSequentialGroup()
                         .addComponent(jlCard14Title)
-                        .addGap(0, 13, Short.MAX_VALUE))
+                        .addGap(0, 9, Short.MAX_VALUE))
                     .addGroup(jpCard4Layout.createSequentialGroup()
                         .addComponent(jlMoneyYear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -527,7 +532,7 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
 
 //    load data to panel
     private void loadDataToPanle(){
-        
+        jlNumCus.setText(customer_Statistics_DAO.calculateTotalCustomer()+"");
     }
 //    get all year invoice
     private void setAllYearToCBB() {
@@ -576,7 +581,7 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
     private javax.swing.JLabel jlMoneyDay;
     private javax.swing.JLabel jlMoneyMonth;
     private javax.swing.JLabel jlMoneyYear;
-    private javax.swing.JLabel jlNumOrder;
+    private javax.swing.JLabel jlNumCus;
     private javax.swing.JLabel jlTitle3;
     private javax.swing.JLabel jlTitle4;
     private javax.swing.JPanel jpCard1;
