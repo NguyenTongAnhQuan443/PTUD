@@ -1010,7 +1010,7 @@ public class Promotion_GUI extends javax.swing.JPanel {
             }
 
             if (!isNumber(jtfPriceRange.getText().trim())) {
-                return showERROR(jtfPriceRange, "Kiểu dữ liệu Tổng tiền hóa đơn được phép áp chụng chưa đúng vui lòng kiểm tra lại");
+                return showERROR(jtfPriceRange, "Tổng tiền hóa đơn được phép áp dụng chưa đúng vui lòng kiểm tra lại");
             } else {
                 double priceRange = Double.parseDouble(jtfPriceRange.getText().trim());
                 if (priceRange < 1) {

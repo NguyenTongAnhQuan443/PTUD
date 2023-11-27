@@ -238,9 +238,14 @@ public class Login_GUI extends javax.swing.JFrame {
             char[] passwordChars = jpfPass.getPassword();
             String password = new String(passwordChars);
             boolean checkAccount = staff_DAO.isAccount(id, password);
-//            Check account còn làm việc 
-//            check chức vụ
+            boolean checkStatus ;
+            if(staff_DAO.getStaffByID(id).getStatus().equals(Staff.convertStringToStatus("Đang làm"))){
+                checkStatus = true;
+            }else{
+                checkStatus = false;
+            }
             if (checkAccount == true) {
+                if(checkStatus == true){
                 this.dispose();
                 String nameStaff = staff_DAO.getNameAccount(id);
                 
@@ -251,6 +256,10 @@ public class Login_GUI extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Nhân viên : " + nameStaff + " đã nhập vào hệ thống !");
                 Home_GUI home_GUI = new Home_GUI();
                 home_GUI.setVisible(true);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Bạn không còn là nhân viên của cửa hàng !");
+                    return;
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Tài khoản hoặc mật khẩu không chính xác vui lòng thử lại");
             }
