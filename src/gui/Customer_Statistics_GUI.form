@@ -159,7 +159,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jlCard2Title" pref="266" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Component id="jlMoneyDay" max="32767" attributes="0"/>
+                              <Component id="jlTotalCusToday" max="32767" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jlCard2Unit" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -178,7 +178,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jlMoneyDay" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jlTotalCusToday" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jlCard2Unit" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -215,7 +215,7 @@
                 <Property name="text" type="java.lang.String" value="S&#x1ed1; kh&#xe1;ch h&#xe0;ng m&#x1edb;i h&#xf4;m nay"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jlMoneyDay">
+            <Component class="javax.swing.JLabel" name="jlTotalCusToday">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -263,7 +263,7 @@
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jlMoneyMonth" max="32767" attributes="0"/>
+                              <Component id="jlTotalCusMonth" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jlCard3Unit" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -283,7 +283,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jlMoneyMonth" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jlTotalCusMonth" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jlCard3Unit" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
@@ -320,7 +320,7 @@
                 <Property name="text" type="java.lang.String" value="S&#x1ed1; kh&#xe1;ch h&#xe0;ng m&#x1edb;i th&#xe1;ng n&#xe0;y"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jlMoneyMonth">
+            <Component class="javax.swing.JLabel" name="jlTotalCusMonth">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -368,7 +368,7 @@
                               <EmptySpace min="0" pref="9" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jlMoneyYear" max="32767" attributes="0"/>
+                              <Component id="jlTotalCusYear" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jlCard4Unit" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -388,7 +388,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jlMoneyYear" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jlTotalCusYear" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jlCard4Unit" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
@@ -439,7 +439,7 @@
                 <Property name="text" type="java.lang.String" value="Kh&#xe1;ch h&#xe0;ng"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jlMoneyYear">
+            <Component class="javax.swing.JLabel" name="jlTotalCusYear">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>

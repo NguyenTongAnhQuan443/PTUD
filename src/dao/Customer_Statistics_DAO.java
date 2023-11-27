@@ -7,12 +7,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class Customer_Statistics_DAO {
-// get number customer
-
+    
+// get total number customer
     public int calculateTotalCustomer() {
         int totalQuantity = 0;
         String sql = "SELECT COUNT(*) AS TotalCount FROM Customer";
@@ -30,24 +33,25 @@ public class Customer_Statistics_DAO {
 
         return totalQuantity;
     }
-    
+
 //    get number customer this year
     public int calculateTotalCustomerThisYear() {
-//        int totalQuantity = 0;
-//        String sql = "SELECT COUNT(*) AS TotalCount FROM Customer";
-//        try {
-//            Connection connection = ConnectDB.getConnection();
-//            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-//            ResultSet resultSet = preparedStatement.executeQuery();
-//            if (resultSet.next()) {
-//                totalQuantity = resultSet.getInt("TotalCount");
-//            }
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return totalQuantity;
+        int totalCustomers = 0;
+        String sql = "SELECT COUNT(DISTINCT c.idCustomer) AS TotalCustomers " +
+                     "FROM Customer c " +
+                     "JOIN Invoice i ON c.idCustomer = i.customer " +
+                     "WHERE YEAR(i.dateCreated) = YEAR(GETDATE())";
+        try {
+            Connection connection = ConnectDB.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                totalCustomers = resultSet.getInt("TotalCustomers");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalCustomers;
     }
 //    get All Invoice Years
 

@@ -39,18 +39,18 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
         jpCard2 = new javax.swing.JPanel();
         jlIconMoneyDay = new javax.swing.JLabel();
         jlCard2Title = new javax.swing.JLabel();
-        jlMoneyDay = new javax.swing.JLabel();
+        jlTotalCusToday = new javax.swing.JLabel();
         jlCard2Unit = new javax.swing.JLabel();
         jpCard3 = new javax.swing.JPanel();
         jlIconMoneyMonth = new javax.swing.JLabel();
         jlCard3Title = new javax.swing.JLabel();
-        jlMoneyMonth = new javax.swing.JLabel();
+        jlTotalCusMonth = new javax.swing.JLabel();
         jlCard3Unit = new javax.swing.JLabel();
         jpCard4 = new javax.swing.JPanel();
         jlIconMoneyYear = new javax.swing.JLabel();
         jlCard14Title = new javax.swing.JLabel();
         jlCard4Unit = new javax.swing.JLabel();
-        jlMoneyYear = new javax.swing.JLabel();
+        jlTotalCusYear = new javax.swing.JLabel();
         jTabbedPaneMain = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -143,10 +143,10 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
         jlCard2Title.setForeground(new java.awt.Color(255, 255, 255));
         jlCard2Title.setText("Số khách hàng mới hôm nay");
 
-        jlMoneyDay.setBackground(new java.awt.Color(255, 255, 255));
-        jlMoneyDay.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jlMoneyDay.setForeground(new java.awt.Color(255, 255, 255));
-        jlMoneyDay.setText("0");
+        jlTotalCusToday.setBackground(new java.awt.Color(255, 255, 255));
+        jlTotalCusToday.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jlTotalCusToday.setForeground(new java.awt.Color(255, 255, 255));
+        jlTotalCusToday.setText("0");
 
         jlCard2Unit.setBackground(new java.awt.Color(255, 255, 255));
         jlCard2Unit.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
@@ -162,7 +162,7 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
                 .addGroup(jpCard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlCard2Title, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
                     .addGroup(jpCard2Layout.createSequentialGroup()
-                        .addComponent(jlMoneyDay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jlTotalCusToday, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jlCard2Unit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -177,7 +177,7 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
                 .addGroup(jpCard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpCard2Layout.createSequentialGroup()
                         .addGroup(jpCard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlMoneyDay)
+                            .addComponent(jlTotalCusToday)
                             .addComponent(jlCard2Unit))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jpCard2Layout.createSequentialGroup()
@@ -197,10 +197,10 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
         jlCard3Title.setForeground(new java.awt.Color(255, 255, 255));
         jlCard3Title.setText("Số khách hàng mới tháng này");
 
-        jlMoneyMonth.setBackground(new java.awt.Color(255, 255, 255));
-        jlMoneyMonth.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jlMoneyMonth.setForeground(new java.awt.Color(255, 255, 255));
-        jlMoneyMonth.setText("0");
+        jlTotalCusMonth.setBackground(new java.awt.Color(255, 255, 255));
+        jlTotalCusMonth.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jlTotalCusMonth.setForeground(new java.awt.Color(255, 255, 255));
+        jlTotalCusMonth.setText("0");
 
         jlCard3Unit.setBackground(new java.awt.Color(255, 255, 255));
         jlCard3Unit.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
@@ -218,7 +218,7 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
                         .addComponent(jlCard3Title)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jpCard3Layout.createSequentialGroup()
-                        .addComponent(jlMoneyMonth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jlTotalCusMonth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jlCard3Unit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -234,7 +234,7 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
                     .addGroup(jpCard3Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jpCard3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlMoneyMonth)
+                            .addComponent(jlTotalCusMonth)
                             .addComponent(jlCard3Unit))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCard3Layout.createSequentialGroup()
@@ -259,10 +259,10 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
         jlCard4Unit.setForeground(new java.awt.Color(255, 255, 255));
         jlCard4Unit.setText("Khách hàng");
 
-        jlMoneyYear.setBackground(new java.awt.Color(255, 255, 255));
-        jlMoneyYear.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jlMoneyYear.setForeground(new java.awt.Color(255, 255, 255));
-        jlMoneyYear.setText("0");
+        jlTotalCusYear.setBackground(new java.awt.Color(255, 255, 255));
+        jlTotalCusYear.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jlTotalCusYear.setForeground(new java.awt.Color(255, 255, 255));
+        jlTotalCusYear.setText("0");
 
         javax.swing.GroupLayout jpCard4Layout = new javax.swing.GroupLayout(jpCard4);
         jpCard4.setLayout(jpCard4Layout);
@@ -275,7 +275,7 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
                         .addComponent(jlCard14Title)
                         .addGap(0, 9, Short.MAX_VALUE))
                     .addGroup(jpCard4Layout.createSequentialGroup()
-                        .addComponent(jlMoneyYear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jlTotalCusYear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jlCard4Unit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -291,7 +291,7 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
                     .addGroup(jpCard4Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jpCard4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlMoneyYear)
+                            .addComponent(jlTotalCusYear)
                             .addComponent(jlCard4Unit))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCard4Layout.createSequentialGroup()
@@ -533,6 +533,7 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
 //    load data to panel
     private void loadDataToPanle(){
         jlNumCus.setText(customer_Statistics_DAO.calculateTotalCustomer()+"");
+        jlTotalCusYear.setText(customer_Statistics_DAO.calculateTotalCustomerThisYear()+"");
     }
 //    get all year invoice
     private void setAllYearToCBB() {
@@ -578,12 +579,12 @@ public class Customer_Statistics_GUI extends javax.swing.JPanel {
     private javax.swing.JLabel jlIconMoneyMonth;
     private javax.swing.JLabel jlIconMoneyYear;
     private javax.swing.JLabel jlIconOrder;
-    private javax.swing.JLabel jlMoneyDay;
-    private javax.swing.JLabel jlMoneyMonth;
-    private javax.swing.JLabel jlMoneyYear;
     private javax.swing.JLabel jlNumCus;
     private javax.swing.JLabel jlTitle3;
     private javax.swing.JLabel jlTitle4;
+    private javax.swing.JLabel jlTotalCusMonth;
+    private javax.swing.JLabel jlTotalCusToday;
+    private javax.swing.JLabel jlTotalCusYear;
     private javax.swing.JPanel jpCard1;
     private javax.swing.JPanel jpCard2;
     private javax.swing.JPanel jpCard3;
