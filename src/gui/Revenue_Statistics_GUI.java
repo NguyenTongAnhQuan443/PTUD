@@ -1,10 +1,15 @@
 package gui;
 
 import dao.Revenue_Statistics_DAO;
+import entity.Product;
+import entity.Revenue_Statistics;
+import java.awt.Color;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.List;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import lib2.ModelChart;
 import lib2.TableCustom;
 
 public class Revenue_Statistics_GUI extends javax.swing.JPanel {
@@ -22,6 +27,9 @@ public class Revenue_Statistics_GUI extends javax.swing.JPanel {
 //        load data to panel
         loadDataToPanel();
         setAllYearToCBB();
+        
+        int year = Integer.parseInt(cbChooserTable.getSelectedItem().toString());
+        loadDataToTable(year);
     }
 
     @SuppressWarnings("unchecked")
@@ -278,6 +286,11 @@ public class Revenue_Statistics_GUI extends javax.swing.JPanel {
         jlChooserYear.setText("Hãy chọn năm muốn thống kê");
 
         cbChooserChart.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbChooserChart.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbChooserChartItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -359,6 +372,11 @@ public class Revenue_Statistics_GUI extends javax.swing.JPanel {
         jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         cbChooserTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbChooserTable.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbChooserTableItemStateChanged(evt);
+            }
+        });
 
         jlChooserYear2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jlChooserYear2.setText("Hãy chọn năm muốn thống kê");
@@ -398,17 +416,17 @@ public class Revenue_Statistics_GUI extends javax.swing.JPanel {
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Tháng", "SL sản phẩm bán", "Tổng giá bán", "Tổng giá giảm", "Doanh thu"
+                "Tháng", "Tổng giá bán", "Tổng giá gốc", "Doanh thu"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -464,6 +482,16 @@ public class Revenue_Statistics_GUI extends javax.swing.JPanel {
         add(jTabbedPaneMain, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cbChooserTableItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbChooserTableItemStateChanged
+        int year = Integer.parseInt(cbChooserTable.getSelectedItem().toString());
+        loadDataToTable(year);
+    }//GEN-LAST:event_cbChooserTableItemStateChanged
+
+    private void cbChooserChartItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbChooserChartItemStateChanged
+        int year = Integer.parseInt(cbChooserTable.getSelectedItem().toString());
+        loadDataToChart(year);
+    }//GEN-LAST:event_cbChooserChartItemStateChanged
+
 //    load data to panel
     private void loadDataToPanel() {
         jlNumOrder.setText(revenue_Statistics_DAO.countInvoicesCreatedToday() + "");
@@ -479,8 +507,24 @@ public class Revenue_Statistics_GUI extends javax.swing.JPanel {
             cbChooserChart.setSelectedItem(year);
         }
     }
-    
 
+//  load data to table
+private void loadDataToTable(int year){
+        defaultTableModel.setRowCount(0);
+        for (Revenue_Statistics revenue_Statistics : revenue_Statistics_DAO.getListRevenueMonth(year)) {
+            Object[] data = {revenue_Statistics.getMonth(), utils.Utils.formatMoney(revenue_Statistics.getTotalSales()), utils.Utils.formatMoney(revenue_Statistics.getTotalCost()), utils.Utils.formatMoney(revenue_Statistics.getRevenue())};
+            defaultTableModel.addRow(data);
+        }
+}    
+
+//    load data to chart
+        private void loadDataToChart(int year) {
+        jpChart.clearData();
+        jpChart.addLegend("Doanh thu", new Color(139, 229, 222));
+        for (Revenue_Statistics revenue_Statistics : revenue_Statistics_DAO.getListRevenueMonth(year)) {
+            jpChart.addData(new ModelChart("Tháng " + revenue_Statistics.getMonth(), new double[]{revenue_Statistics.getRevenue()}));
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.ComboBoxSuggestion cbChooserChart;
     private lib2.ComboBoxSuggestion cbChooserTable;

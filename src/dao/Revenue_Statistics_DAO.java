@@ -167,8 +167,9 @@ public class Revenue_Statistics_DAO {
 
         try {
             Connection connection = ConnectDB.getConnection();
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, year);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 int month = resultSet.getInt("Month");
