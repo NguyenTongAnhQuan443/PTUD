@@ -561,7 +561,6 @@ public class Promotion_GUI extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAddPromotionActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-
         int selectRow = jTableListPromotion.getSelectedRow();
         if (selectRow == -1) {
             JOptionPane.showMessageDialog(null, "Bạn chưa chọn khuyến mãi muốn cập nhập thông tin !");
@@ -666,7 +665,7 @@ public class Promotion_GUI extends javax.swing.JPanel {
 
                     // Kiểm tra xem sản phẩm đã nằm trong chương trình khuyến mãi nào chưa
                     if (existingPromotionID != null) {
-                        canAddProduct = false;
+                        canAddProduct = true;
                         IDproductDuplicate = productID;
                         break;
                     }
