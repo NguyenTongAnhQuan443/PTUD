@@ -677,8 +677,14 @@ public class Customer_GUI extends javax.swing.JPanel {
                     String phone = jtfPhoneCus.getText().trim();
                     String email = jtfEmail.getText().trim();
                     String address = jtfAddressDetails.getText().trim();
-                    if (jtfNameCus.getText().trim().equals("")) {
-                        name = "Khách  hàng tạm";
+
+                    if (name.equals("")) {
+                        name = "Khách hàng tạm";
+                        // Check if the phone number already exists for "Khách hàng tạm"
+                        if (customer_DAO.checkPhoneExist(phone) && !phone.equals("")) {
+                            showERROR(jtfPhoneCus, "Số điện thoại này đã được sử dụng cho Khách hàng tạm trên hệ thống !");
+                            return; // Return here to stop further execution
+                        }
                     }
                     Customer customer = new Customer(idCustomer, name, phone, email, province, district, ward, address, 0, Customer.convertStringToTypeRank("Khách hàng bạc"), 0, jcReceivePromotion.isSelected());
                     boolean res = customer_DAO.addCustomer(customer);
@@ -695,8 +701,8 @@ public class Customer_GUI extends javax.swing.JPanel {
                     } else {
                         JOptionPane.showMessageDialog(null, "Thêm khách hàng thất bại !");
                     }
-                    
-                    if(Flag.getFlagSell_GUI() == 1){ // nếu thêm khách hầng từ Sell_GUI thì quay lại Sell_GUI
+
+                    if (Flag.getFlagSell_GUI() == 1) { // nếu thêm khách hầng từ Sell_GUI thì quay lại Sell_GUI
                         Flag.setIdCusForSell_GUI(idCustomer);
                         backToSellGUI();
                     }
@@ -1098,6 +1104,7 @@ public class Customer_GUI extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
+
     public void backToSellGUI() {
         JPanel parent = (JPanel) this.getParent();
         parent.remove(this);
