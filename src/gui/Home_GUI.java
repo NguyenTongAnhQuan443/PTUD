@@ -188,7 +188,7 @@ public class Home_GUI extends javax.swing.JFrame {
                     if (subIndex == 1) {
                         openBrowser("https://liervelom.github.io/fleyshop/?fbclid=IwAR3Bn_71JpRWeLEBn7PdKmYpuytazFd2BVrjC5FyElE1v-sU9ykGc4L0W_8");
                     } else if (subIndex == 2) {
-                        openBrowser("https://www.facebook.com");
+                        openBrowser("https://docs.google.com/forms/d/e/1FAIpQLSdqCpcxAROtlgcah8yHmY0S5Z-AVXkCLqE9MIeEUYbu520-_Q/viewform?usp=sf_link");
                     } else if (subIndex == 3) {
                         openBrowser("https://docs.google.com/forms/d/e/1FAIpQLSdSJpgi-xc76dEk7EiiSf8Zn3ooNhD8CZFW_dkaguxAJjVK5Q/viewform?usp=sf_link");
                     }
