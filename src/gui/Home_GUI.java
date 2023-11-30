@@ -186,6 +186,7 @@ public class Home_GUI extends javax.swing.JFrame {
                 } else if (index == 10) {
                     // Sự kiện mở menu giúp đỡ
                     if (subIndex == 1) {
+                        openBrowser("https://liervelom.github.io/fleyshop/?fbclid=IwAR3Bn_71JpRWeLEBn7PdKmYpuytazFd2BVrjC5FyElE1v-sU9ykGc4L0W_8");
                     } else if (subIndex == 2) {
                         openBrowser("https://www.facebook.com");
                     } else if (subIndex == 3) {
