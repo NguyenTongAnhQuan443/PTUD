@@ -190,7 +190,7 @@ public class Home_GUI extends javax.swing.JFrame {
                     } else if (subIndex == 2) {
                         openBrowser("https://www.facebook.com");
                     } else if (subIndex == 3) {
-                        openBrowser("https://www.youtobe.com");
+                        openBrowser("https://forms.gle/CFSQv3XkKaAGAAXBA");
                     }
                 } else if (index == 11) {
                     // sự kiện menu thoát
