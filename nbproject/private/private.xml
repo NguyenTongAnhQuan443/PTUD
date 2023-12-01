@@ -1,25 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
-        <file>
-            <url>src/dao/Staff_DAO.java</url>
-            <bookmark id="1">
-                <name/>
-                <line>397</line>
-                <key/>
-            </bookmark>
-        </file>
-    </editor-bookmarks>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-<<<<<<< HEAD
-            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/gui/Home_GUI.java</file>
-            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/gui/Login_GUI.java</file>
-=======
-            <file>file:/C:/Users/ASUS/Desktop/App%20(1)/PTUD/src/gui/Starting.java</file>
-            <file>file:/C:/Users/ASUS/Desktop/App%20(1)/PTUD/src/connectDB/ConnectDB.java</file>
-            <file>file:/C:/Users/ASUS/Desktop/App%20(1)/PTUD/src/gui/Home_GUI.java</file>
->>>>>>> 252529e226ccdd7f9f62a05680684957ef0b6a2c
-        </group>
-    </open-files>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
 </project-private>
