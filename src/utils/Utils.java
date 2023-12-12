@@ -63,7 +63,7 @@ public class Utils {
             if (pdfFile.exists()) {
                 Desktop.getDesktop().open(pdfFile);
             } else {
-                System.out.println("Tệp không tồn tại hayx kiểm tra lại ! ");
+                System.out.println("Tệp không tồn tại hãy kiểm tra lại ! ");
             }
         } catch (IOException e) {
             e.printStackTrace();

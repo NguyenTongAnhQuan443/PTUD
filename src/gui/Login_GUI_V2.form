@@ -160,7 +160,7 @@
                   <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jpFormLogin" max="32767" attributes="0"/>
-                      <Component id="textField1" max="32767" attributes="0"/>
+                      <Component id="jtfLicenseKey" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="68" max="32767" attributes="0"/>
               </Group>
@@ -172,7 +172,7 @@
                   <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
                   <Component id="jpFormLogin" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="textField1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtfLicenseKey" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -285,7 +285,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="lib2.TextField" name="textField1">
+        <Component class="lib2.TextField" name="jtfLicenseKey">
           <Properties>
             <Property name="labelText" type="java.lang.String" value="KEY b&#x1ea3;n quy&#x1ec1;n"/>
           </Properties>

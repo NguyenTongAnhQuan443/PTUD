@@ -9,6 +9,9 @@ import entity.Staff;
 import java.util.ArrayList;
 import java.util.List;
 import lib2.Menu;
+import dao.Firebase_DAO;
+import entity.LicenseKey;
+import java.time.LocalDate;
 
 public class Login_GUI_V2 extends javax.swing.JFrame {
 
@@ -16,6 +19,7 @@ public class Login_GUI_V2 extends javax.swing.JFrame {
     private Staff staff = new Staff();
 
     public Login_GUI_V2() {
+        connectDB.ConnectFirebase.ConnectarFirebase();
 //        connectDB
         try {
             new ConnectDB().connect();
@@ -28,6 +32,8 @@ public class Login_GUI_V2 extends javax.swing.JFrame {
 //        Account default
         jtfUser.setText("NV0001");
         jpfPass.setText("04042003");
+
+        jtfLicenseKey.setText("FleyShopApp2024");
     }
 
     @SuppressWarnings("unchecked")
@@ -46,7 +52,7 @@ public class Login_GUI_V2 extends javax.swing.JFrame {
         jtfUser = new lib2.TextField();
         jlTitle = new javax.swing.JLabel();
         jlForgotPass = new javax.swing.JLabel();
-        textField1 = new lib2.TextField();
+        jtfLicenseKey = new lib2.TextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -183,7 +189,7 @@ public class Login_GUI_V2 extends javax.swing.JFrame {
                 .addGap(9, 9, 9))
         );
 
-        textField1.setLabelText("KEY bản quyền");
+        jtfLicenseKey.setLabelText("KEY bản quyền");
 
         javax.swing.GroupLayout jpRightLayout = new javax.swing.GroupLayout(jpRight);
         jpRight.setLayout(jpRightLayout);
@@ -193,7 +199,7 @@ public class Login_GUI_V2 extends javax.swing.JFrame {
                 .addGap(84, 84, 84)
                 .addGroup(jpRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jpFormLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jtfLicenseKey, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(68, Short.MAX_VALUE))
         );
         jpRightLayout.setVerticalGroup(
@@ -202,7 +208,7 @@ public class Login_GUI_V2 extends javax.swing.JFrame {
                 .addGap(101, 101, 101)
                 .addComponent(jpFormLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtfLicenseKey, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -225,61 +231,65 @@ public class Login_GUI_V2 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-
-        boolean userEmpty = jtfUser.getText().trim().isEmpty();
-        boolean passEmpty = jpfPass.getText().isEmpty();
-        if (userEmpty) {
-            jtfUser.setHelperText("Hãy nhập tài khoản của bạn");
-            jtfUser.grabFocus();
-        }
-        if (passEmpty) {
-            jpfPass.setHelperText("Hãy nhập mật khẩu của bạn");
-            if (!userEmpty) {
-                jpfPass.grabFocus();
+//      Load data fire base
+        if (checkLicenseKey() == true) {
+            boolean userEmpty = jtfUser.getText().trim().isEmpty();
+            boolean passEmpty = jpfPass.getText().isEmpty();
+            if (userEmpty) {
+                jtfUser.setHelperText("Hãy nhập tài khoản của bạn");
+                jtfUser.grabFocus();
             }
-        }
-        if (!userEmpty && !passEmpty) {
-            jtfUser.setHelperText(null);
-            jpfPass.setHelperText(null);
-
-            staff_DAO = new Staff_DAO();
-            String id = jtfUser.getText().trim();
-            char[] passwordChars = jpfPass.getPassword();
-            String password = new String(passwordChars);
-            boolean checkAccount = staff_DAO.isAccount(id, password);
-            boolean checkStatus;
-            if (staff_DAO.getStaffByID(id).getStatus().equals(Staff.convertStringToStatus("Đang làm"))) {
-                checkStatus = true;
-
-            } else {
-                checkStatus = false;
-
-            }
-            boolean checkRights;
-            if (staff_DAO.getStaffByID(id).getRights().equals(Staff.convertStringToRights("Nhân viên quản lý"))) {
-                Flag.setStaffManagerment(true);
-            } else {
-                Flag.setStaffManagerment(false);
-            }
-            if (checkAccount == true) {
-                if (checkStatus == true) {
-                    this.dispose();
-                    String nameStaff = staff_DAO.getNameAccount(id);
-
-                    // lưu tài khoản đăng nhập
-                    Flag.setIdStaff(id);
-                    Flag.setPassStaff(password);
-
-                    JOptionPane.showMessageDialog(this, "Nhân viên : " + nameStaff + " đã nhập vào hệ thống !");
-                    Home_GUI home_GUI = new Home_GUI();
-                    home_GUI.setVisible(true);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Bạn không còn là nhân viên của cửa hàng !");
-                    return;
+            if (passEmpty) {
+                jpfPass.setHelperText("Hãy nhập mật khẩu của bạn");
+                if (!userEmpty) {
+                    jpfPass.grabFocus();
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "Tài khoản hoặc mật khẩu không chính xác vui lòng thử lại");
             }
+            if (!userEmpty && !passEmpty) {
+                jtfUser.setHelperText(null);
+                jpfPass.setHelperText(null);
+
+                staff_DAO = new Staff_DAO();
+                String id = jtfUser.getText().trim();
+                char[] passwordChars = jpfPass.getPassword();
+                String password = new String(passwordChars);
+                boolean checkAccount = staff_DAO.isAccount(id, password);
+                boolean checkStatus;
+                if (staff_DAO.getStaffByID(id).getStatus().equals(Staff.convertStringToStatus("Đang làm"))) {
+                    checkStatus = true;
+
+                } else {
+                    checkStatus = false;
+
+                }
+                boolean checkRights;
+                if (staff_DAO.getStaffByID(id).getRights().equals(Staff.convertStringToRights("Nhân viên quản lý"))) {
+                    Flag.setStaffManagerment(true);
+                } else {
+                    Flag.setStaffManagerment(false);
+                }
+                if (checkAccount == true) {
+                    if (checkStatus == true) {
+                        this.dispose();
+                        String nameStaff = staff_DAO.getNameAccount(id);
+
+                        // lưu tài khoản đăng nhập
+                        Flag.setIdStaff(id);
+                        Flag.setPassStaff(password);
+
+                        JOptionPane.showMessageDialog(this, "Nhân viên : " + nameStaff + " đã nhập vào hệ thống !");
+                        Home_GUI home_GUI = new Home_GUI();
+                        home_GUI.setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Bạn không còn là nhân viên của cửa hàng !");
+                        return;
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Tài khoản hoặc mật khẩu không chính xác vui lòng thử lại");
+                }
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Phiên bản của bạn đã hết hạn vui lòng liên hệ nhà cung cấp để được hỗ trợ !");
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
@@ -303,6 +313,22 @@ public class Login_GUI_V2 extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jlForgotPassMouseClicked
 
+    private boolean checkLicenseKey() {
+        String idApp = "26857";
+        String Key = jtfLicenseKey.getText().trim();
+
+        LocalDate dayEnd = utils.Utils.getLocalDate("01/01/1979");
+        for (LicenseKey licenseKey : Firebase_DAO.loadData()) {
+            if (licenseKey.getId().equals(idApp)) {
+                dayEnd = licenseKey.getDayEnd();
+            }
+        }
+
+        if (dayEnd.isAfter(LocalDate.now())) {
+            return true;
+        }
+        return false;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnLogin;
     private javax.swing.JLabel jlContent1;
@@ -315,7 +341,7 @@ public class Login_GUI_V2 extends javax.swing.JFrame {
     private javax.swing.JPanel jpLeft;
     private javax.swing.JPanel jpRight;
     private lib2.PasswordField jpfPass;
+    private lib2.TextField jtfLicenseKey;
     private lib2.TextField jtfUser;
-    private lib2.TextField textField1;
     // End of variables declaration//GEN-END:variables
 }
