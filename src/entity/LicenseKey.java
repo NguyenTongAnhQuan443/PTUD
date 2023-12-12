@@ -6,7 +6,7 @@ public class LicenseKey {
     private String id;
     private LocalDate dateStart, dayEnd;
     private String decription;
-
+    private String key;
     public String getId() {
         return id;
     }
@@ -39,12 +39,20 @@ public class LicenseKey {
         this.decription = decription;
     }
 
-    public LicenseKey(String id, LocalDate dateStart, LocalDate dayEnd, String decription) {
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public LicenseKey(String id, LocalDate dateStart, LocalDate dayEnd, String decription, String key) {
         this.id = id;
         this.dateStart = dateStart;
         this.dayEnd = dayEnd;
         this.decription = decription;
+        this.key = key;
     }
-    
-    
+
 }

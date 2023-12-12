@@ -288,8 +288,8 @@ public class Login_GUI_V2 extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Tài khoản hoặc mật khẩu không chính xác vui lòng thử lại");
                 }
             }
-        }else{
-            JOptionPane.showMessageDialog(null, "Phiên bản của bạn đã hết hạn vui lòng liên hệ nhà cung cấp để được hỗ trợ !");
+        } else {
+            JOptionPane.showMessageDialog(null, "Key bản quyền không đúng hoặc đã hết hạn vui lòng liên hệ nhà cung cấp để được hỗ trợ !");
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
@@ -315,19 +315,26 @@ public class Login_GUI_V2 extends javax.swing.JFrame {
 
     private boolean checkLicenseKey() {
         String idApp = "26857";
-        String Key = jtfLicenseKey.getText().trim();
+        String keyApp = jtfLicenseKey.getText().trim();
+        String keyServer = "";
 
         LocalDate dayEnd = utils.Utils.getLocalDate("01/01/1979");
         for (LicenseKey licenseKey : Firebase_DAO.loadData()) {
             if (licenseKey.getId().equals(idApp)) {
+                keyServer = licenseKey.getKey();
                 dayEnd = licenseKey.getDayEnd();
+
+                if (!keyServer.equals(keyApp)) {
+                    return false;
+                } else {
+                    if (dayEnd.isBefore(LocalDate.now())) {
+                        return false;
+                    }
+                }
+
             }
         }
-
-        if (dayEnd.isAfter(LocalDate.now())) {
-            return true;
-        }
-        return false;
+        return true;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private lib2.Button btnLogin;

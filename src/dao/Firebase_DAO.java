@@ -84,7 +84,7 @@ public class Firebase_DAO {
                     String dayStart = document.getString("dayStart");
                     String dayEnd = document.getString("dayEnd");
                     String decription = document.getString("decription");
-                LicenseKey licenseKey = new LicenseKey(id, utils.Utils.getLocalDate(dayStart), utils.Utils.getLocalDate(dayEnd), decription);
+                LicenseKey licenseKey = new LicenseKey(id, utils.Utils.getLocalDate(dayStart), utils.Utils.getLocalDate(dayEnd), decription, key);
                 listKey.add(licenseKey);
             }
         } catch (Exception e) {

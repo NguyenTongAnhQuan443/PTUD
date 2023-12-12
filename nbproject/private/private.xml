@@ -2,6 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/entity/LicenseKey.java</file>
+            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/gui/Starting.java</file>
+            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/dao/Firebase_DAO.java</file>
+            <file>file:/D:/NguyenQuan_Code/Code_Nam_3/PTUD/src/gui/Login_GUI_V2.java</file>
+        </group>
     </open-files>
 </project-private>
